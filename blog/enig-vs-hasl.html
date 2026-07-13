@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENIG vs HASL vs OSP: How to Choose the Right PCB Surface Finish | Huaxing PCBA</title>
+<meta name="description" content="ENIG, HASL, OSP, Immersion Silver, Immersion Tin, ENEPIG — which surface finish is right for your application? Compare cost, shelf life, solderability, and reliability across 7 finishes with real manufacturing data.">
+<meta property="og:title" content="ENIG vs HASL vs OSP: How to Choose the Right PCB Surface Finish">
+<meta property="og:description" content="Compare 7 PCB surface finishes with real data — cost, shelf life, flatness, wire bondability. Make the right choice for your application.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/enig-vs-hasl.html">
+<link rel="stylesheet" href="../design-tokens.css">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+  .article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-md)}
+  .article h2{font-weight:200;margin:var(--space-xl) 0 var(--space-md);font-size:var(--text-3xl)}
+  .article h3{font-weight:300;margin:var(--space-lg) 0 var(--space-sm);font-size:var(--text-xl);color:var(--accent)}
+  .article p{color:var(--text-secondary);margin-bottom:var(--space-md);line-height:1.85}
+  .article ul,.article ol{margin-bottom:var(--space-md);padding-left:1.5rem}
+  .article li{color:var(--text-secondary);margin-bottom:var(--space-xs);line-height:1.7}
+  .article .highlight-box{background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--space-lg);margin:var(--space-lg) 0}
+  .article .highlight-box p{color:var(--text-primary);margin-bottom:0}
+  .article .highlight-box strong{color:var(--accent)}
+  .article-img{width:100%;max-width:85%;margin:var(--space-lg) auto;display:block;border-radius:var(--radius-lg)}
+  .finish-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .finish-table th,.finish-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .finish-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .finish-table td{color:var(--text-secondary)}
+  .finish-table tr:nth-child(even){background:var(--bg-secondary)}
+  @media(max-width:768px){.finish-table{font-size:var(--text-xs)}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Home</a><a href="/capabilities/">Capabilities</a><a href="/quote/">Quick Quote</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/blog/" class="active">Blog</a>
+      <a href="#inquiry" class="nav-cta" onclick="openModal();return false">Get Quote</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/blog-cover-enig.webp" alt="" loading="eager"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Materials Guide</p>
+      <h1 class="reveal">ENIG vs HASL vs OSP:<br><em>Choosing the Right PCB Surface Finish</em></h1>
+      <p class="reveal">One finish can make or break your board. Here's how to pick.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Surface Finish Guide</span></div>
+
+  <p>The surface finish on a PCB is its interface to the world. It determines solderability, shelf life, contact resistance, wire bondability, and assembly yield. Yet it's often selected by habit — "I've always used ENIG" or "HASL is cheaper" — without considering the application's actual requirements.</p>
+
+  <p>At Huaxing PCBA, we process all seven major surface finishes in-house. Here's a data-driven comparison to help you choose the right one — not the one you've always used.</p>
+
+  <img src="../generated/blog-enig-cross-section.webp" alt="ENIG vs HASL cross-section" loading="lazy" class="article-img">
+
+  <h2>The Seven Finishes at a Glance</h2>
+
+  <div style="overflow-x:auto">
+  <table class="finish-table">
+    <thead>
+      <tr><th>Finish</th><th>Thickness</th><th>Shelf Life</th><th>Relative Cost</th><th>Flatness</th><th>Wire Bond</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="color:var(--text-primary)">HASL (Lead-Free)</td><td>1–40μm</td><td>12 months</td><td>1.0× (baseline)</td><td>Poor</td><td>No</td></tr>
+      <tr><td style="color:var(--text-primary)">ENIG</td><td>Au 0.05–0.12μm / Ni 3–6μm</td><td>12 months</td><td>1.2×</td><td>Excellent</td><td>Al/Au</td></tr>
+      <tr><td style="color:var(--text-primary)">OSP</td><td>0.2–0.5μm</td><td>6 months</td><td>0.95×</td><td>Excellent</td><td>No</td></tr>
+      <tr><td style="color:var(--text-primary)">Immersion Silver</td><td>0.15–0.5μm</td><td>6–12 months</td><td>1.1×</td><td>Excellent</td><td>Al</td></tr>
+      <tr><td style="color:var(--text-primary)">Immersion Tin</td><td>0.8–1.2μm</td><td>6 months</td><td>1.1×</td><td>Excellent</td><td>No</td></tr>
+      <tr><td style="color:var(--text-primary)">ENEPIG</td><td>Au 0.05–0.15μm / Pd 0.05–0.1μm / Ni 3–6μm</td><td>12+ months</td><td>1.5×</td><td>Excellent</td><td>Al/Au/Cu</td></tr>
+      <tr><td style="color:var(--text-primary)">Hard Gold</td><td>Au 0.5–2.0μm / Ni 3–6μm</td><td>24+ months</td><td>1.8×</td><td>Excellent</td><td>Al/Au</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <img src="../generated/blog-finish-comparison-all.webp" alt="Six PCB surface finishes compared side by side" loading="lazy" class="article-img">
+
+  <h2>ENIG: The Gold Standard (Literally)</h2>
+
+  <p>Electroless Nickel Immersion Gold (ENIG) is the most widely specified finish for high-reliability applications — and for good reason. The nickel layer (3–6μm) provides a hard, flat surface that's ideal for fine-pitch components down to 0.3mm BGA pitch, while the thin gold layer (0.05–0.12μm) prevents oxidation and ensures excellent solderability for the full 12-month shelf life.</p>
+
+  <p><strong>ENIG's real advantage</strong> is surface planarity. Unlike HASL, which leaves a slightly domed surface, ENIG is flat to within ±2μm — critical for QFN packages where coplanarity directly affects yield. Our factory data shows ENIG boards have a 0.4% lower defect rate on QFN soldering compared to HASL.</p>
+
+  <p><strong>Black pad risk:</strong> ENIG's well-known failure mode — black pad (hyper-corrosion of the nickel layer causing brittle solder joints) — is almost entirely a process control problem, not an inherent finish defect. At Huaxing, our ENIG line maintains phosphorus content in the nickel at 7–9% (the safe zone), and every batch undergoes solderability testing. We haven't seen a black pad failure in over three years.</p>
+
+  <h2>HASL: Still Relevant, Despite Its Age</h2>
+
+  <p>Hot Air Solder Leveling is the oldest surface finish still in mainstream use. Modern HASL is lead-free (SAC305 alloy), environmentally compliant, and remains the most cost-effective finish for through-hole and coarse-pitch SMT boards. The thick solder coating (1–40μm) provides excellent solderability and is visually easy to inspect.</p>
+
+  <p><strong>Where HASL fails:</strong> Fine-pitch components below 0.5mm. The uneven surface creates coplanarity issues, and the thick coating can bridge fine-pitch pads. If your design uses 0.5mm pitch or finer components, HASL is not recommended regardless of cost savings.</p>
+
+  <h2>OSP: The Underrated Workhorse</h2>
+
+  <p>Organic Solderability Preservative (OSP) is a thin (0.2–0.5μm) organic coating that prevents copper oxidation. It's the lowest-cost flat finish and the default choice for high-volume consumer electronics where boards are assembled within weeks, not months.</p>
+
+  <p><strong>OSP's limitation:</strong> Shelf life. The organic coating degrades after 6 months and cannot withstand multiple reflow cycles (the coating burns off during the first reflow). For double-sided assembly, the second side must be assembled within 24 hours of the first reflow. It's also not inspectable — you can't visually verify the coating is intact — which rules it out for high-reliability applications.</p>
+
+  <h2>Immersion Silver: High-Frequency Hero</h2>
+
+  <p>Immersion silver (0.15–0.5μm) has gained adoption in RF and high-speed digital applications because silver has the highest electrical conductivity of any metal. At microwave frequencies, the skin effect means most current flows in the outermost 0.5–2μm — exactly where the silver sits. This translates to measurably lower insertion loss compared to ENIG at frequencies above 10GHz.</p>
+
+  <p><strong>The creep corrosion caveat:</strong> Silver is susceptible to creep corrosion in high-sulfur environments. If the board will operate in industrial settings with sulfur-containing atmospheres, specify immersion silver with an anti-tarnish coating, or switch to ENIG.</p>
+
+  <img src="../generated/blog-immersion-silver.webp" alt="Immersion silver finish on high-frequency PCB pads" loading="lazy" class="article-img">
+
+  <h2>ENEPIG: When One Gold Layer Isn't Enough</h2>
+
+  <p>Electroless Nickel Electroless Palladium Immersion Gold adds a palladium barrier layer (0.05–0.1μm) between the nickel and gold. This eliminates the black-pad failure mechanism entirely and enables all three major wire bonding types: aluminum, gold, and copper. ENEPIG is the go-to finish for mixed-technology boards that combine SMT assembly with wire-bonded bare die — common in RF modules, sensors, and advanced packaging.</p>
+
+  <p>The cost premium over ENIG is approximately 25%, but for wire-bonded applications, ENEPIG's triple bond capability eliminates the need for selective plating (which costs far more).</p>
+
+  <h2>Hard Gold: Not for Soldering</h2>
+
+  <p>Hard gold (0.5–2.0μm, with cobalt or nickel hardeners) is an edge connector and keypad contact finish, not a soldering finish. The thick gold layer dissolves into solder joints and causes gold embrittlement — a brittle intermetallic that fails under thermal cycling. Use hard gold selectively (plated on edge connectors only) and specify a different finish for SMD pads. Selective hard gold adds approximately $3–6 per board depending on the plated area.</p>
+
+  <img src="../generated/blog-hard-gold-edge.webp" alt="Gold-plated edge connector fingers on PCB" loading="lazy" class="article-img">
+
+  <h2>Decision Matrix</h2>
+
+  <div class="highlight-box">
+    <p><strong>Choose HASL</strong> if: through-hole dominant, pitch >0.5mm, cost is primary driver, assembly within 6 months.</p>
+    <p><strong>Choose ENIG</strong> if: fine-pitch (<0.5mm), BGAs present, flatness required, 12-month shelf life needed, Al or Au wire bonding.</p>
+    <p><strong>Choose OSP</strong> if: high-volume consumer, single-sided SMT, assembly within 4 weeks, lowest cost flat finish.</p>
+    <p><strong>Choose Immersion Silver</strong> if: RF/microwave (>10GHz), low insertion loss critical, assembly within 6 months, non-sulfur environment.</p>
+    <p><strong>Choose ENEPIG</strong> if: mixed SMT + wire bond, triple bond type needed, zero black-pad risk tolerance.</p>
+    <p><strong>Choose Hard Gold</strong> if: edge connectors, mechanical contact surfaces, >1000 mating cycles required.</p>
+  </div>
+
+  <h2>The Bottom Line</h2>
+  <p>Surface finish selection is an engineering decision, not a default. The right finish depends on your component mix, assembly timeline, operating environment, and reliability requirements. At Huaxing PCBA, we provide surface finish recommendations as part of our free DFM review — not based on what's easiest for us, but what delivers the best outcome for your specific application. All seven finishes are processed in-house with the same quality standards.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/cta-bg-capabilities.webp)">
+      <h2>Not Sure Which Finish You Need?</h2>
+      <p>Send us your design. We'll recommend the optimal surface finish based on your application — not our convenience.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Expert Advice <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a><a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Start Your Project</h2>
+    <p style="color:var(--text-secondary);font-size:var(--text-sm);margin-bottom:var(--space-lg)">We'll respond within 24 hours.</p>
+    <form action="https://formsubmit.co/sales@huaxingpcba.com" method="POST">
+      <input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+      <div class="form-group"><label>Name</label><input type="text" name="name" required placeholder="Your full name"></div>
+      <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="your@email.com"></div>
+      <div class="form-group"><label>Message</label><textarea name="message" required placeholder="Tell us about your project..."></textarea></div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Send Inquiry</button>
+    </form>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+</body>
+</html>

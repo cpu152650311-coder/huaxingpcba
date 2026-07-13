@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Quick Quote — Instant Price Estimation | Huaxing PCBA</title>
+<meta name="description" content="Get an instant PCB manufacturing cost estimate. Select your specs — layers, dimensions, material, quantity — and see estimated pricing. Free, no registration required.">
+<meta property="og:title" content="PCB Quick Quote | Huaxing PCBA">
+<meta property="og:description" content="Instant PCB price estimation — layers, dimensions, material, finish. Free and no registration.">
+<link rel="stylesheet" href="../design-tokens.css">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+  .quote-section{padding:var(--space-2xl) 0}
+  .quote-layout{display:grid;grid-template-columns:1fr 380px;gap:var(--space-xl);align-items:start}
+  .quote-summary{
+    position:sticky;top:calc(var(--header-h) + var(--space-md));
+    background:var(--bg-elevated);
+    border:1px solid var(--border);
+    border-radius:var(--radius-xl);
+    padding:var(--space-xl);
+  }
+  .price-display{
+    text-align:center;padding-bottom:var(--space-lg);
+    border-bottom:1px solid var(--border);
+    margin-bottom:var(--space-lg);
+  }
+  .price-total{
+    font-size:clamp(2rem,4vw,var(--text-4xl));
+    font-weight:200;color:var(--accent);
+    line-height:1;margin-bottom:var(--space-xs);
+  }
+  .price-total .per{font-size:var(--text-sm);color:var(--text-muted);font-weight:300}
+  .price-range{font-size:var(--text-sm);color:var(--text-secondary)}
+  .option-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:var(--space-sm) 0;
+    border-bottom:1px solid var(--border);
+    font-size:var(--text-sm);
+  }
+  .option-row .key{color:var(--text-muted)}
+  .option-row .val{color:var(--text-primary);font-weight:300}
+  .spec-pills{display:flex;flex-wrap:wrap;gap:0.5rem}
+  .spec-pill{
+    padding:0.5rem 1rem;font-size:var(--text-sm);font-weight:300;
+    background:var(--bg-secondary);border:1px solid var(--border);
+    border-radius:var(--radius-md);cursor:pointer;
+    transition:all var(--duration) var(--ease);
+    color:var(--text-secondary);
+  }
+  .spec-pill:hover{border-color:var(--accent-25);color:var(--text-primary)}
+  .spec-pill.selected{background:var(--accent-subtle);border-color:var(--accent);color:var(--accent)}
+  .spec-group{margin-bottom:var(--space-xl)}
+  .spec-group-label{
+    font-size:var(--text-xs);font-weight:400;
+    color:var(--text-muted);text-transform:uppercase;
+    letter-spacing:0.06em;margin-bottom:var(--space-sm);
+    display:flex;align-items:center;gap:var(--space-sm);
+  }
+  .spec-group-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .dim-inputs{display:flex;gap:var(--space-sm);align-items:center}
+  .dim-inputs input{
+    width:100px;padding:0.6rem 0.75rem;
+    background:var(--bg-secondary);border:1px solid var(--border);
+    border-radius:var(--radius-md);font-size:var(--text-sm);
+    color:var(--text-primary);font-weight:300;text-align:center;
+  }
+  .dim-inputs input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-10)}
+  .dim-inputs span{color:var(--text-muted);font-size:var(--text-sm)}
+  @media(max-width:768px){
+    .quote-layout{grid-template-columns:1fr}
+    .quote-summary{position:static}
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG Sprite -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-calculator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h0M8 14h0M8 18h0M12 10h0M12 14h0M12 18h0M16 10h0M16 14h0M16 18h0"/></symbol>
+  <symbol id="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></symbol>
+</svg>
+
+<!-- Header -->
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/capabilities/">Capabilities</a>
+      <a href="/quote/" class="active">Quick Quote</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/blog/">Blog</a>
+      <a href="#inquiry" class="nav-cta" onclick="openModal();return false">Get Quote</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Sub Hero -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/sub-hero-quote.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Quick Quote</p>
+      <h1 class="reveal">PCB <em>Cost Estimator</em></h1>
+      <p class="reveal">Select your specifications below for an instant estimate. All prices are indicative — final quote confirmed by our engineering team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quote Estimator -->
+<section class="section" style="position:relative">
+  <div style="position:absolute;inset:0;background:url(../generated/geometric-tech-texture.webp) center/cover no-repeat;opacity:.06;pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="quote-layout reveal">
+      <!-- Options -->
+      <div class="quote-form-wrap">
+        <!-- Layer Count -->
+        <div class="spec-group">
+          <div class="spec-group-label">Layer Count</div>
+          <div class="spec-pills" data-param="layers">
+            <button class="spec-pill" data-val="2">2 Layer</button>
+            <button class="spec-pill selected" data-val="4">4 Layer</button>
+            <button class="spec-pill" data-val="6">6 Layer</button>
+            <button class="spec-pill" data-val="8">8 Layer</button>
+            <button class="spec-pill" data-val="10">10 Layer</button>
+            <button class="spec-pill" data-val="12">12 Layer</button>
+            <button class="spec-pill" data-val="16">16 Layer</button>
+            <button class="spec-pill" data-val="20">20 Layer</button>
+            <button class="spec-pill" data-val="24">24 Layer</button>
+            <button class="spec-pill" data-val="32">32 Layer</button>
+          </div>
+        </div>
+
+        <!-- Board Dimensions -->
+        <div class="spec-group">
+          <div class="spec-group-label">Board Dimensions (mm)</div>
+          <div class="dim-inputs">
+            <input type="number" id="dimW" value="100" min="10" max="600" step="1" onchange="updateQuote()">
+            <span>&times;</span>
+            <input type="number" id="dimH" value="100" min="10" max="800" step="1" onchange="updateQuote()">
+            <span>mm</span>
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="spec-group">
+          <div class="spec-group-label">Order Quantity</div>
+          <div class="spec-pills" data-param="quantity">
+            <button class="spec-pill" data-val="5">5 pcs (Proto)</button>
+            <button class="spec-pill selected" data-val="10">10 pcs</button>
+            <button class="spec-pill" data-val="50">50 pcs</button>
+            <button class="spec-pill" data-val="100">100 pcs</button>
+            <button class="spec-pill" data-val="500">500 pcs</button>
+            <button class="spec-pill" data-val="1000">1,000 pcs</button>
+            <button class="spec-pill" data-val="5000">5,000 pcs</button>
+            <button class="spec-pill" data-val="10000">10,000 pcs</button>
+          </div>
+        </div>
+
+        <!-- Material -->
+        <div class="spec-group">
+          <div class="spec-group-label">Base Material</div>
+          <div class="spec-pills" data-param="material">
+            <button class="spec-pill selected" data-val="fr4">FR-4</button>
+            <button class="spec-pill" data-val="high-tg">High-Tg FR-4</button>
+            <button class="spec-pill" data-val="rogers">Rogers 4350B</button>
+            <button class="spec-pill" data-val="aluminum">Aluminum</button>
+            <button class="spec-pill" data-val="ceramic">Ceramic (Al₂O₃)</button>
+            <button class="spec-pill" data-val="ptfe">PTFE (Taconic)</button>
+            <button class="spec-pill" data-val="polyimide">Polyimide (Flex)</button>
+          </div>
+        </div>
+
+        <!-- Copper Weight -->
+        <div class="spec-group">
+          <div class="spec-group-label">Copper Weight</div>
+          <div class="spec-pills" data-param="copper">
+            <button class="spec-pill selected" data-val="1">1 oz (35μm)</button>
+            <button class="spec-pill" data-val="2">2 oz (70μm)</button>
+            <button class="spec-pill" data-val="3">3 oz (105μm)</button>
+            <button class="spec-pill" data-val="4">4 oz (140μm)</button>
+            <button class="spec-pill" data-val="6">6 oz (210μm)</button>
+          </div>
+        </div>
+
+        <!-- Surface Finish -->
+        <div class="spec-group">
+          <div class="spec-group-label">Surface Finish</div>
+          <div class="spec-pills" data-param="finish">
+            <button class="spec-pill" data-val="hasl">HASL (Lead-free)</button>
+            <button class="spec-pill selected" data-val="enig">ENIG (Gold)</button>
+            <button class="spec-pill" data-val="osp">OSP</button>
+            <button class="spec-pill" data-val="imm-ag">Immersion Silver</button>
+            <button class="spec-pill" data-val="imm-sn">Immersion Tin</button>
+            <button class="spec-pill" data-val="enepig">ENEPIG</button>
+            <button class="spec-pill" data-val="hard-gold">Hard Gold</button>
+          </div>
+        </div>
+
+        <!-- Solder Mask Color -->
+        <div class="spec-group">
+          <div class="spec-group-label">Solder Mask Color</div>
+          <div class="spec-pills" data-param="mask-color">
+            <button class="spec-pill selected" data-val="green">Green</button>
+            <button class="spec-pill" data-val="blue">Blue</button>
+            <button class="spec-pill" data-val="black">Black</button>
+            <button class="spec-pill" data-val="white">White</button>
+            <button class="spec-pill" data-val="red">Red</button>
+            <button class="spec-pill" data-val="yellow">Yellow</button>
+          </div>
+        </div>
+
+        <!-- Min Trace/Space -->
+        <div class="spec-group">
+          <div class="spec-group-label">Min Trace / Space</div>
+          <div class="spec-pills" data-param="trace">
+            <button class="spec-pill" data-val="6">6/6mil (Standard)</button>
+            <button class="spec-pill selected" data-val="5">5/5mil</button>
+            <button class="spec-pill" data-val="4">4/4mil (Fine)</button>
+            <button class="spec-pill" data-val="3">3/3mil (Ultra-Fine)</button>
+          </div>
+        </div>
+
+        <!-- Turnaround -->
+        <div class="spec-group">
+          <div class="spec-group-label">Turnaround Time</div>
+          <div class="spec-pills" data-param="turnaround">
+            <button class="spec-pill" data-val="24h">24h Rush</button>
+            <button class="spec-pill" data-val="3d">3 Days</button>
+            <button class="spec-pill selected" data-val="5d">5 Days (Standard)</button>
+            <button class="spec-pill" data-val="7d">7 Days</button>
+            <button class="spec-pill" data-val="10d">10 Days</button>
+          </div>
+        </div>
+
+        <button class="btn btn-ghost btn-sm" onclick="resetQuote()" style="margin-top:var(--space-md)">
+          <svg width="14" height="14"><use href="#icon-refresh"/></svg> Reset All
+        </button>
+      </div>
+
+      <!-- Summary Panel -->
+      <div class="quote-summary">
+        <div class="price-display">
+          <div style="font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-sm)">Estimated Total</div>
+          <div class="price-total" id="totalPrice">$248</div>
+          <div class="price-range" id="priceRange">$198 – $310 per batch</div>
+        </div>
+        <div style="font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-sm)">Your Configuration</div>
+        <div id="summaryOptions"></div>
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:var(--space-lg)" onclick="openModal()">
+          Get Firm Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg>
+        </button>
+        <p style="text-align:center;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-sm)">Prices are estimates. Final price confirmed after engineering review.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/cta-bg-capabilities.webp)">
+      <h2>Need a Precise Quote?</h2>
+      <p>Upload your Gerber files and BOM. Our engineers will review and return a detailed quotation within 24 hours.</p>
+      <div style="display:flex;gap:var(--space-sm);justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary btn-lg" onclick="openModal()">Upload Files & Get Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/">PCB Fabrication</a>
+        <a href="/capabilities/">SMT Assembly</a>
+        <a href="/capabilities/">Box-Build</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/about/">Certifications</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a>
+	        <a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Huaxing PCBA. All rights reserved.</span>
+      <span>Precision Without Compromise</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Start Your Project</h2>
+    <p style="color:var(--text-secondary);font-size:var(--text-sm);margin-bottom:var(--space-lg)">Tell us about your requirements. We'll respond within 24 hours.</p>
+    <form action="https://formsubmit.co/sales@huaxingpcba.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <div class="form-group"><label>Name</label><input type="text" name="name" required placeholder="Your full name"></div>
+      <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="your@email.com"></div>
+      <div class="form-group"><label>Message</label><textarea name="message" required placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Send Inquiry</button>
+    </form>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+/* ---- Quote Estimator Logic ---- */
+const SPEC_LABELS = {
+  layers:{2:'2 Layer',4:'4 Layer',6:'6 Layer',8:'8 Layer',10:'10 Layer',12:'12 Layer',16:'16 Layer',20:'20 Layer',24:'24 Layer',32:'32 Layer'},
+  material:{'fr4':'FR-4','high-tg':'High-Tg FR-4','rogers':'Rogers 4350B','aluminum':'Aluminum','ceramic':'Ceramic','ptfe':'PTFE','polyimide':'Polyimide'},
+  copper:{1:'1 oz',2:'2 oz',3:'3 oz',4:'4 oz',6:'6 oz'},
+  finish:{'hasl':'HASL LF','enig':'ENIG','osp':'OSP','imm-ag':'Imm. Silver','imm-sn':'Imm. Tin','enepig':'ENEPIG','hard-gold':'Hard Gold'},
+  'mask-color':{'green':'Green','blue':'Blue','black':'Black','white':'White','red':'Red','yellow':'Yellow'},
+  trace:{6:'6/6mil',5:'5/5mil',4:'4/4mil',3:'3/3mil'},
+  turnaround:{'24h':'24h Rush','3d':'3 Days','5d':'5 Days','7d':'7 Days','10d':'10 Days'},
+  quantity:{5:'5 pcs',10:'10 pcs',50:'50 pcs',100:'100 pcs',500:'500 pcs',1000:'1,000 pcs',5000:'5,000 pcs',10000:'10,000 pcs'}
+};
+
+function getState(){
+  const s = {};
+  document.querySelectorAll('.spec-pills').forEach(group => {
+    const param = group.dataset.param;
+    const sel = group.querySelector('.selected');
+    if (sel) s[param] = sel.dataset.val;
+  });
+  s.w = parseInt(document.getElementById('dimW').value) || 100;
+  s.h = parseInt(document.getElementById('dimH').value) || 100;
+  return s;
+}
+
+function calcPrice(state){
+  const area = (state.w * state.h) / 10000; // cm²
+  let base = 0;
+  const l = parseInt(state.layers) || 4;
+
+  // Layer multiplier
+  if (l <= 2) base = area * 0.08;
+  else if (l <= 4) base = area * 0.12;
+  else if (l <= 6) base = area * 0.18;
+  else if (l <= 8) base = area * 0.25;
+  else if (l <= 12) base = area * 0.40;
+  else if (l <= 16) base = area * 0.60;
+  else if (l <= 20) base = area * 0.85;
+  else if (l <= 24) base = area * 1.15;
+  else base = area * 1.60;
+
+  // Material multiplier
+  const matMul = {'fr4':1,'high-tg':1.2,'rogers':3.5,'aluminum':1.6,'ceramic':5,'ptfe':4,'polyimide':2.5};
+  base *= (matMul[state.material] || 1);
+
+  // Copper
+  const cuMul = {1:1,2:1.15,3:1.35,4:1.6,6:2.2};
+  base *= (cuMul[state.copper] || 1);
+
+  // Finish
+  const finMul = {'hasl':1,'enig':1.2,'osp':0.95,'imm-ag':1.1,'imm-sn':1.1,'enepig':1.5,'hard-gold':1.8};
+  base *= (finMul[state.finish] || 1);
+
+  // Trace/Space
+  const trMul = {6:1,5:1.1,4:1.3,3:1.8};
+  base *= (trMul[state.trace] || 1);
+
+  // Turnaround
+  const taMul = {'24h':2.5,'3d':1.8,'5d':1,'7d':0.85,'10d':0.75};
+  base *= (taMul[state.turnaround] || 1);
+
+  // Quantity
+  const qty = parseInt(state.quantity) || 10;
+  let unitPrice = base;
+  const qtyDisc = {5:1,10:0.85,50:0.55,100:0.40,500:0.25,1000:0.18,5000:0.12,10000:0.09};
+  unitPrice *= (qtyDisc[state.quantity] || 1);
+
+  const total = Math.round(unitPrice * qty);
+  const low = Math.round(total * 0.8);
+  const high = Math.round(total * 1.25);
+  return {total, low, high, unitPrice: Math.round(unitPrice * 100) / 100};
+}
+
+function updateQuote(){
+  const state = getState();
+  const price = calcPrice(state);
+
+  document.getElementById('totalPrice').textContent = '$' + price.total.toLocaleString();
+  document.getElementById('priceRange').textContent = '$' + price.low.toLocaleString() + ' – $' + price.high.toLocaleString() + ' per batch';
+
+  // Build summary
+  let html = '';
+  html += '<div class="option-row"><span class="key">Layers</span><span class="val">'+SPEC_LABELS.layers[state.layers]+'</span></div>';
+  html += '<div class="option-row"><span class="key">Dimensions</span><span class="val">'+state.w+'×'+state.h+' mm</span></div>';
+  html += '<div class="option-row"><span class="key">Quantity</span><span class="val">'+SPEC_LABELS.quantity[state.quantity]+'</span></div>';
+  html += '<div class="option-row"><span class="key">Material</span><span class="val">'+SPEC_LABELS.material[state.material]+'</span></div>';
+  html += '<div class="option-row"><span class="key">Copper</span><span class="val">'+SPEC_LABELS.copper[state.copper]+'</span></div>';
+  html += '<div class="option-row"><span class="key">Finish</span><span class="val">'+SPEC_LABELS.finish[state.finish]+'</span></div>';
+  html += '<div class="option-row"><span class="key">Trace/Space</span><span class="val">'+SPEC_LABELS.trace[state.trace]+'</span></div>';
+  html += '<div class="option-row"><span class="key">Turnaround</span><span class="val">'+SPEC_LABELS.turnaround[state.turnaround]+'</span></div>';
+  html += '<div class="option-row"><span class="key">Unit Price</span><span class="val">$'+price.unitPrice+'/pc</span></div>';
+  document.getElementById('summaryOptions').innerHTML = html;
+}
+
+function resetQuote(){
+  document.querySelectorAll('.spec-pills').forEach(g => {
+    const def = g.querySelector('[data-val]');
+    if (def) {
+      g.querySelectorAll('.spec-pill').forEach(b => b.classList.remove('selected'));
+      const defaultVal = g.dataset.param === 'layers' ? '4' :
+        g.dataset.param === 'material' ? 'fr4' :
+        g.dataset.param === 'copper' ? '1' :
+        g.dataset.param === 'finish' ? 'enig' :
+        g.dataset.param === 'mask-color' ? 'green' :
+        g.dataset.param === 'trace' ? '5' :
+        g.dataset.param === 'turnaround' ? '5d' :
+        g.dataset.param === 'quantity' ? '10' : null;
+      const target = g.querySelector('[data-val="'+defaultVal+'"]');
+      if (target) target.classList.add('selected');
+    }
+  });
+  document.getElementById('dimW').value = 100;
+  document.getElementById('dimH').value = 100;
+  updateQuote();
+}
+
+// Pill clicks
+document.querySelectorAll('.spec-pills').forEach(group => {
+  group.addEventListener('click', e => {
+    const pill = e.target.closest('.spec-pill');
+    if (!pill) return;
+    group.querySelectorAll('.spec-pill').forEach(b => b.classList.remove('selected'));
+    pill.classList.add('selected');
+    updateQuote();
+  });
+});
+
+updateQuote();
+
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+</body>
+</html>

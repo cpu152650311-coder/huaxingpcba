@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Brief — Huaxing PCBA</title>
+<style>
+  body{font-family:system-ui,sans-serif;background:#0a0a0b;color:#e8e8ec;padding:2rem;max-width:1200px;margin:0 auto}
+  h1{font-weight:200;color:#d4a843;margin-bottom:1rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem}
+  .card{background:#16161d;border:1px solid #252530;border-radius:12px;padding:1.25rem}
+  .card .id{font-size:.75rem;color:#686878;text-transform:uppercase;letter-spacing:.08em}
+  .card .role{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:4px;background:rgba(200,150,62,.15);color:#c8963e;margin-bottom:.5rem}
+  .card .page{font-size:.75rem;color:#9898a8;margin-bottom:.5rem}
+  .card .prompt{font-size:.8rem;color:#e8e8ec;line-height:1.5;font-weight:300}
+  .card .display{font-size:.7rem;color:#686878;margin-top:.5rem;font-style:italic}
+</style>
+</head>
+<body>
+<h1>📸 Huaxing PCBA — Image Brief (30 images)</h1>
+<p style="color:#9898a8;margin-bottom:2rem">All 1024×1024 WebP · Dark + Gold-Copper · Low quality (¥0.006/ea) · Total: ¥0.18</p>
+<div class="grid" id="grid"></div>
+<script>
+fetch('image-strategy.json').then(r=>r.json()).then(data=>{
+  document.getElementById('grid').innerHTML=data.images.map(img=>`
+    <div class="card">
+      <div class="id">${img.id}</div>
+      <span class="role">${img.role}</span>
+      <div class="page">📍 ${img.page}</div>
+      <div class="prompt">${img.prompt}</div>
+      <div class="display">Display: ${img.display}</div>
+    </div>
+  `).join('')
+})
+</script>
+</body>
+</html>
