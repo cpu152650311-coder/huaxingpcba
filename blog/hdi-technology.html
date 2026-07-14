@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HDI PCB Technology: When to Upgrade from Standard to Microvia Design | Huaxing PCBA</title>
+<meta name="description" content="High-Density Interconnect PCB technology explained: microvias, any-layer HDI, laser drilling, and when the cost of HDI is justified by board space savings. Real data from 32-layer production.">
+<meta property="og:title" content="HDI PCB Technology: When to Upgrade from Standard to Microvia Design">
+<meta property="og:description" content="HDI explained from a manufacturer's perspective: microvia structures, any-layer interconnection, and how to decide when HDI is worth the investment.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/hdi-technology.html">
+<link rel="stylesheet" href="../design-tokens.css?v=6">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+  .article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-md)}
+  .article h2{font-weight:200;margin:var(--space-xl) 0 var(--space-md);font-size:var(--text-3xl)}
+  .article h3{font-weight:300;margin:var(--space-lg) 0 var(--space-sm);font-size:var(--text-xl);color:var(--accent)}
+  .article p{color:var(--text-secondary);margin-bottom:var(--space-md);line-height:1.85}
+  .article ul,.article ol{margin-bottom:var(--space-md);padding-left:1.5rem}
+  .article li{color:var(--text-secondary);margin-bottom:var(--space-xs);line-height:1.7}
+  .article .highlight-box{background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--space-lg);margin:var(--space-lg) 0}
+  .article .highlight-box p{color:var(--text-primary);margin-bottom:0}
+  .article .highlight-box strong{color:var(--accent)}
+  .article-img{width:100%;max-width:85%;margin:var(--space-lg) auto;display:block;border-radius:var(--radius-lg)}
+  .article .data-point{font-size:var(--text-2xl);font-weight:200;color:var(--accent);display:block;line-height:1}
+  .breadcrumb{margin-bottom:var(--space-lg)}
+  @media(max-width:768px){.article h2{font-size:var(--text-2xl)}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/capabilities/">Capabilities</a>
+      <a href="/quote/">Quick Quote</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="#inquiry" class="nav-cta" onclick="openModal();return false">Get Quote</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/pcb-multilayer-showcase.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">HDI Technology</p>
+      <h1 class="reveal">HDI PCB Technology:<br><em>When to Upgrade to Microvia Design</em></h1>
+      <p class="reveal">Not every board needs HDI. Here's how to decide — with real cost and layer-count data from 32-layer production.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>HDI Technology</span></div>
+
+  <p>HDI — High-Density Interconnect — is not a single technology. It is a family of PCB fabrication methods that use microvias (laser-drilled holes under 0.15mm), buried vias, and sequential lamination to pack more interconnections into less board area. At Huaxing PCBA, we manufacture HDI boards from simple 1+N+1 structures up to any-layer (every layer pair connected by microvias) on boards with 32 layers. But the engineering question most designers face is simpler: <em>"Is this board dense enough to justify HDI?"</em></p>
+
+  <div class="highlight-box">
+    <p><strong>Decision threshold:</strong> If your board design has more than 0.4 BGA components per square centimeter or requires trace widths below 4 mils to fit routing, HDI is almost certainly justified. Below that threshold, a standard through-hole design on the same layer count almost always costs less.</p>
+  </div>
+
+  <h2>Microvias vs Through-Holes: The Physics of Density</h2>
+
+  <p>A standard through-hole via goes all the way through the board — every layer, top to bottom. On a 12-layer board, that via occupies real estate on all 12 layers, even if it only connects layers 1 and 2. On a dense BGA breakout, those wasted pads on layers 3–12 block routing channels that you cannot afford to lose.</p>
+
+  <p>A microvia solves this. Laser-drilled from the outer layer to the layer directly beneath it, a microvia occupies space on exactly two layers — the ones it connects. Layers below remain untouched, free for routing. The result: on a board with a 0.8mm pitch BGA, moving from through-hole vias to microvias typically frees 30–40% of routing channels on internal layers.</p>
+
+  <img src="../generated/pcb-stackup-diagram.webp" alt="PCB stackup diagram showing microvia structures across multiple layers" loading="lazy" class="article-img">
+
+  <p><span class="data-point">0.15mm</span></p>
+  <p><strong>Minimum mechanical drill diameter</strong> for standard through-hole vias. Below this, you need laser-drilled microvias — typically 0.075mm to 0.1mm. The transition from mechanical to laser drilling is the engineering boundary between standard and HDI fabrication.</p>
+
+  <h2>HDI Structures: 1+N+1 to Any-Layer</h2>
+
+  <p>HDI complexity is defined by the number of sequential lamination cycles and microvia layers. The notation is standard across the industry:</p>
+
+  <h3>1+N+1 (One Build-Up Layer)</h3>
+  <p>One microvia layer on top, one on bottom, with a standard core of N layers in between. The microvias connect the outer layers to the first inner layer beneath them. This is the most common HDI structure — used in smartphones, tablets, and automotive ADAS modules where board space is constrained but not extreme. At Huaxing, a 1+6+1 board (8 layers total) adds roughly 15–20% to the fabrication cost compared to a standard 8-layer through-hole board.</p>
+
+  <h3>2+N+2 (Two Build-Up Layers)</h3>
+  <p>Two stacked microvia layers on each side, enabling blind connections from the surface to the second internal layer. Common in high-performance computing modules, FPGA carrier boards, and aerospace where multiple BGA packages with different pin densities share the same board. The sequential lamination adds a second press cycle, which increases lead time by 3–5 business days and fabrication cost by 30–40% over a 1+N+1 structure.</p>
+
+  <h3>Any-Layer HDI</h3>
+  <p>Every layer pair is connected by microvias. There are no through-hole vias, no mechanical drills — every interconnection is laser-formed. On a 10-layer any-layer board, that means 9 microvia layers. This is the highest-density HDI structure, used in premium smartphones, military radar modules, and medical implantables. The process requires a separate lamination cycle per layer pair, which pushes lead time to 15–20 business days and fabrication cost to 2–3× that of an equivalent-layer-count standard board.</p>
+
+  <img src="../generated/pcba-process-diagram.webp" alt="PCB manufacturing process flow showing sequential lamination steps" loading="lazy" class="article-img">
+
+  <p><span class="data-point">+15–20%</span></p>
+  <p><strong>Typical cost adder for 1+N+1 HDI</strong> over standard through-hole on the same layer count. For 2+N+2, the adder is 30–40%. For any-layer, it is 100–200%. The decision to use HDI should be driven by whether the board area savings or performance gains justify that premium — not by default.</p>
+
+  <h2>When HDI Is Worth the Cost</h2>
+
+  <p>HDI is not always the right choice, even when a board has high component density. The economics depend on what the denser routing actually achieves:</p>
+
+  <h3>Board Area Reduction That Eliminates a Layer Pair</h3>
+  <p>The most common justification: a 10-layer standard board can be reduced to an 8-layer 1+N+1 HDI board because the microvias free enough routing space to eliminate two internal signal layers. Removing two layers reduces raw material cost, lamination cycles, and drilling time — partially offsetting the HDI premium. The net cost difference is often under 10%, and the thinner board improves thermal performance and reduces weight.</p>
+
+  <h3>BGA Escape Where Standard Vias Fail</h3>
+  <p>When a BGA package drops below 0.8mm pitch, standard through-hole vias between pads become geometrically impossible — the annular ring requirements consume the available space between pads. At 0.5mm pitch and below, microvias are not a choice; they are the only routing option. The cost question is moot because the alternative is an unmanufacturable board.</p>
+
+  <h3>Signal Integrity at Speed</h3>
+  <p>Through-hole vias create stubs — unused portions of the via barrel that extend past the signal layer. At frequencies above 5 GHz, these stubs become quarter-wave resonators that degrade signal integrity. Microvias eliminate stubs entirely because they only span the layers they connect. For high-speed digital designs — DDR5 memory interfaces, PCIe Gen 5, 100G Ethernet — microvias improve eye diagram opening by 15–25% compared to back-drilled through-hole vias on the same stackup.</p>
+
+  <h2>Huaxing HDI Capability: What We Actually Ship</h2>
+
+  <p>Our HDI line in Shenzhen handles 1+N+1 through any-layer on boards up to 32 layers and 600×800mm panel size. Here are the specs our engineering team works to daily:</p>
+
+  <div class="highlight-box">
+    <p><strong>Laser microvia diameter:</strong> 0.075mm minimum (3 mil)<br>
+    <strong>Microvia aspect ratio:</strong> 1:1 (depth = diameter)<br>
+    <strong>Stacked microvia reliability:</strong> Passes 6× reflow at 260°C with IST (Interconnect Stress Testing) to 150°C<br>
+    <strong>Registration tolerance:</strong> ±0.05mm layer-to-layer — critical for stacked microvias where each laser drill must land precisely on the pad below</p>
+  </div>
+
+  <p>For designers evaluating HDI for the first time, we provide a pre-production stackup review that models the cost and lead-time impact of each HDI structure against the board's routing requirements. Often we find that a 1+N+1 structure with slightly relaxed design rules achieves 90% of the density benefit at 60% of the cost of a 2+N+2 approach.</p>
+
+  <h2>Conclusion: Let Density Drive the Decision</h2>
+
+  <p>HDI is a precision tool, not a default setting. When board density genuinely requires microvias to escape BGA packages or meet layer-count constraints, HDI pays for itself in board area savings, layer reduction, and signal integrity. When a standard through-hole design fits the routing comfortably, adding HDI adds cost without adding value. The best designs apply HDI surgically — a 1+N+1 structure where needed, keeping the rest of the board standard — rather than committing to any-layer across the entire stackup.</p>
+
+  <p>If you are working on a design that is pushing the limits of standard via routing, send us your stackup. Our engineering team will review it and return a specific recommendation — which HDI structure, which layer count, and what the cost and lead-time impact will be — within 48 hours. No commitment, just data.</p>
+
+</article>
+
+<div class="modal-overlay" id="inquiryModal">
+  <div class="modal-container">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">9 SMT Lines · 58 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <h2>Start Your Project</h2>
+      <p class="mf-subtitle">Upload your Gerber files and BOM. We'll respond within 24 hours with a detailed quote and free DFM review.</p>
+      <form action="https://formsubmit.co/sales@huaxingpcba.com" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="box">
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+</body>
+</html>
