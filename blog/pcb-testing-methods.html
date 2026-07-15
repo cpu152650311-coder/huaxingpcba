@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Testing Methods Explained — AOI, X-Ray, Flying Probe, ICT, and Functional Test Compared | Huaxing PCBA</title>
+<meta name="description" content="Complete comparison of PCB testing methods: AOI vs X-Ray vs Flying Probe vs ICT vs Functional Test. What each method catches, what it misses, when to use each, and cost trade-offs. From a manufacturer with in-house all five.">
+<meta property="og:title" content="PCB Testing Methods Explained — AOI, X-Ray, Flying Probe, ICT, FCT Compared">
+<meta property="og:description" content="Every PCB testing method explained: what defects each catches, what each misses, and when to use each. AOI, X-ray, flying probe, ICT, and functional test — from a factory that uses all five.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-testing-methods.html">
+<link rel="stylesheet" href="../design-tokens.css?v=6">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+  .article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-md)}
+  .article h2{font-weight:200;margin:var(--space-xl) 0 var(--space-md);font-size:var(--text-3xl)}
+  .article h3{font-weight:300;margin:var(--space-lg) 0 var(--space-sm);font-size:var(--text-xl);color:var(--accent)}
+  .article p{color:var(--text-secondary);margin-bottom:var(--space-md);line-height:1.85}
+  .article ul,.article ol{margin-bottom:var(--space-md);padding-left:1.5rem}
+  .article li{color:var(--text-secondary);margin-bottom:var(--space-xs);line-height:1.7}
+  .article .highlight-box{background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--space-lg);margin:var(--space-lg) 0}
+  .article .highlight-box p{color:var(--text-primary);margin-bottom:0}
+  .article .highlight-box strong{color:var(--accent)}
+  .article-img{width:100%;max-width:85%;margin:var(--space-lg) auto;display:block;border-radius:var(--radius-lg)}
+  .article .data-point{font-size:var(--text-2xl);font-weight:200;color:var(--accent);display:block;line-height:1}
+  .article .compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)}
+  .article .compare-table th{background:var(--bg-surface);color:var(--accent);font-weight:400;text-align:left;padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border)}
+  .article .compare-table td{color:var(--text-secondary);padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);line-height:1.6}
+  .article .compare-table tr:hover td{background:var(--bg-surface)}
+  .breadcrumb{margin-bottom:var(--space-lg)}
+  @media(max-width:768px){.article h2{font-size:var(--text-2xl)}.compare-table{display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/capabilities/">Capabilities</a>
+      <a href="/quote/">Quick Quote</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="#inquiry" class="nav-cta" onclick="openModal();return false">Get Quote</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-testing.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Quality Assurance</p>
+      <h1 class="reveal">PCB Testing Methods Explained:<br><em>AOI, X-Ray, Flying Probe, ICT, and Functional Test Compared</em></h1>
+      <p class="reveal">What each test actually catches, what each misses, and when you need all five.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Testing Methods</span></div>
+
+  <p>If there's one area where PCB buyers are systematically underserved, it's testing. Most procurement professionals know they need "AOI and electrical test." But they can't tell you what an AOI machine actually finds, what a flying probe tester measures that AOI doesn't, or why X-ray inspection exists as a separate category from both. The result: boards that pass all "standard testing" still fail in the field — because the wrong test was specified for the wrong defect type.</p>
+
+  <p>This guide covers the five testing methods used in professional PCB assembly — what each one detects, what each one misses, what they cost, and when you need which combination. We run all five in-house across our 15,000㎡ Shenzhen facility, so the data below comes from real experience, not datasheets.</p>
+
+  <div class="highlight-box">
+    <p><strong>The fundamental insight:</strong> No single test method catches everything. AOI sees surface defects but not hidden joints. X-ray sees hidden joints but not electrical opens. ICT catches electrical faults but not marginal solder joints. Functional test catches system-level issues but misses individual component defects. You need a <em>test strategy</em> — a combination of methods chosen for your specific board's failure modes — not a single test.</p>
+  </div>
+
+  <h2>The Five Methods at a Glance</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Method</th><th>What It Detects</th><th>What It Misses</th><th>Cost per Board</th><th>Best For</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AOI</strong></td><td>Solder joint defects, missing/shifted components, bridging, insufficient solder</td><td>Hidden joints (BGA/QFN), electrical opens, component authenticity</td><td>$0.05-0.20</td><td>All production volumes; first-pass quality screening</td></tr>
+      <tr><td><strong>X-Ray</strong></td><td>BGA/QFN voids, bridging under packages, head-in-pillow</td><td>Electrical opens, component value errors, firmware issues</td><td>$0.10-0.50</td><td>BGA/QFN assemblies; failure analysis</td></tr>
+      <tr><td><strong>Flying Probe</strong></td><td>Opens, shorts, wrong-value passives, diode orientation, basic IC test</td><td>Marginal joints (passes electrically now, fails after thermal cycling)</td><td>$0.50-3.00</td><td>Prototypes, low volume, high mix</td></tr>
+      <tr><td><strong>ICT</strong></td><td>Same as flying probe but faster; also powered analog measurements</td><td>Same blind spots as flying probe; fixture development cost</td><td>$0.10-0.30 (after fixture)</td><td>Production volumes >500 pcs</td></tr>
+      <tr><td><strong>FCT</strong></td><td>System-level function: power sequencing, firmware boot, communication, analog signals</td><td>Individual component tolerances; intermittent faults not triggered during test</td><td>$1.00-10.00+</td><td>Turnkey PCBA; safety-critical applications</td></tr>
+    </tbody>
+  </table>
+
+  <h2>1. Automated Optical Inspection (AOI)</h2>
+
+  <img src="../generated/blog-testing-aoi.webp" alt="Automated Optical Inspection machine scanning PCB" loading="lazy" class="article-img">
+
+  <p>AOI is the first line of defense after reflow soldering — and for many manufacturers, the only line. High-resolution cameras (typically 10-25 megapixel) capture images of every solder joint at multiple angles and lighting conditions. The system compares each image against a "golden board" reference or CAD data, flagging deviations in solder volume, shape, position, and color.</p>
+
+  <p><strong>What AOI excels at:</strong> Surface-level defects that are geometrically obvious. Tombstoned components (standing on end). Bridging between adjacent pins. Insufficient or excessive solder on visible joints. Missing or shifted components. Wrong component orientation (polarity markings, pin 1 indicators). These defects account for roughly 70% of all SMT assembly failures — which is why AOI is the standard first-pass inspection method.</p>
+
+  <p><strong>What AOI cannot see:</strong> Anything underneath a component body. The solder joints under a BGA — the most critical connections on many modern boards — are completely invisible to AOI. The thermal pad under a QFN is invisible. Solder joints inside plated through-holes are difficult for AOI to evaluate. A board can pass AOI with zero flags and still have a catastrophic BGA void that will fail after 50 thermal cycles.</p>
+
+  <div class="highlight-box">
+    <p><strong>AOI limitations by package type:</strong> QFP and SOIC joints: fully inspectable. Chip components (0201-1206): fully inspectable. BGA: 0% inspectable (must use X-ray). QFN thermal pad: 0% inspectable. LGA (land grid array): 0% inspectable. Connectors with hidden-row pins: limited inspectability.</p>
+  </div>
+
+  <p>On our lines, AOI flags approximately 3-7% of boards for operator review. Of those flagged, roughly 15-25% are confirmed defects requiring rework. The rest are false positives — acceptable joints that the algorithm flagged as marginal. This ratio is normal and expected; tuning the algorithm for zero false positives means accepting real defects.</p>
+
+  <h2>2. X-Ray Inspection</h2>
+
+  <img src="../generated/blog-testing-xray-bga.webp" alt="X-ray image of BGA solder joints showing voids" loading="lazy" class="article-img">
+
+  <p>X-ray inspection exists because BGAs and QFNs exist. These packages hide their most critical connections underneath the component body, where no camera — optical or otherwise — can see them. X-rays penetrate the component and the PCB, producing a 2D or 3D image of the solder joints based on material density: solder (dense) appears darker, voids (air gaps) appear lighter, and the silicon die and substrate appear at intermediate densities.</p>
+
+  <p><strong>What X-ray detects:</strong></p>
+  <ul>
+    <li><strong>Voids:</strong> Gas pockets trapped in the solder joint during reflow. IPC-A-610 Class 3 allows a maximum void size of 20% of the ball diameter. A void reduces the joint's mechanical strength and thermal conductivity — a BGA ball with a 35% void may pass electrical test today and crack after 200 thermal cycles.</li>
+    <li><strong>Bridging:</strong> Solder connecting two adjacent BGA balls that should be separate. At 0.4mm pitch, the gap between balls is ~0.2mm — a single solder bridge can short power to ground and destroy the board on first power-up.</li>
+    <li><strong>Head-in-Pillow (HIP):</strong> The BGA ball and the solder paste deposit make physical contact but don't fuse. The joint looks connected in X-ray (the ball and paste are touching) but has no metallic bond. HIP defects are notoriously intermittent — they pass electrical test at room temperature and fail when the board heats up and thermal expansion separates the joint.</li>
+    <li><strong>Insufficient solder:</strong> The joint has less solder than specified, typically due to stencil aperture issues or paste printing defects.</li>
+  </ul>
+
+  <p><span class="data-point">2D vs 3D</span></p>
+  <p><strong>2D vs 3D X-ray:</strong> 2D X-ray (transmission) produces a single image from above. It can detect bridging and major voids but struggles with multi-row BGAs where joints overlap in the image. 3D X-ray (computed tomography / laminography) reconstructs cross-sectional "slices" through the joint layer, revealing individual ball quality in even the densest packages. 3D is standard for aerospace, medical, and automotive Class 3 assemblies. 2D is adequate for Class 2 commercial products.</p>
+
+  <div class="highlight-box">
+    <p><strong>At Huaxing:</strong> We X-ray 100% of BGA and QFN assemblies. For boards without hidden-package components, X-ray sampling is performed at a rate determined by product risk classification. Our X-ray systems can resolve voids down to 5µm — well below the threshold that affects joint reliability.</p>
+  </div>
+
+  <h2>3. Flying Probe Testing</h2>
+
+  <img src="../generated/blog-testing-flying-probe.webp" alt="Flying probe tester with multiple probes moving across PCB" loading="lazy" class="article-img">
+
+  <p>Flying probe testing is electrical validation without a custom fixture. Two to six robotic probes move independently across the board, touching test points — component pads, vias, dedicated test pads — in a programmed sequence. At each contact, the system measures resistance between points (to detect opens and shorts), capacitance and inductance (to verify passive component values), and diode characteristics (to verify orientation and functionality).</p>
+
+  <p><strong>The key advantage over ICT:</strong> No fixture cost. A flying probe program is generated directly from your CAD data — Gerber files, netlist, and BOM. This makes flying probe the default choice for prototypes (where fixture cost can't be amortized), low-volume production (under 500 pieces), and high-mix environments (where you'd need a different ICT fixture for every design).</p>
+
+  <p><strong>The trade-off:</strong> Speed. A flying probe test takes 1-5 minutes per board depending on net count and test coverage. An ICT machine with a bed-of-nails fixture tests the same board in 5-15 seconds. For a 10-board prototype order, the 10-minute difference is irrelevant. For a 10,000-board production order, it's the difference between a 3-hour test run and a 3-day test run.</p>
+
+  <p><strong>What flying probe can and can't do:</strong> It detects opens on any net it can access (high coverage with good test point design). It detects shorts between nets that should be isolated. It measures passive component values — resistors within 1-5%, capacitors within 5-10% — and flags components that are wrong-value, wrong-tolerance, or missing entirely. It can verify basic semiconductor function: diode polarity and forward voltage, transistor type, and simple IC presence (by detecting protection diodes on I/O pins).</p>
+
+  <p>What it cannot do: powered functional testing (the board is unpowered during flying probe test). Marginal joint detection (a cracked solder joint may measure 0.1Ω today and open-circuit after vibration). High-frequency measurements above a few MHz.</p>
+
+  <h2>4. In-Circuit Testing (ICT)</h2>
+
+  <p>ICT is flying probe's older, faster sibling. A bed-of-nails fixture — a custom-machined plate with spring-loaded pogo pins precisely positioned at every test point — makes simultaneous contact with hundreds of points across the board. The test system then runs through a programmed sequence of measurements in rapid succession.</p>
+
+  <p><strong>When ICT makes economic sense:</strong> The fixture costs $1,000-5,000 depending on complexity (number of test points, double-sided access, fine-pitch probing). At 500 pieces, that's $2-10 per board in amortized fixture cost — typically less than the cost of flying probe test time for the same coverage. At 10,000 pieces, fixture cost per board is negligible.</p>
+
+  <p><strong>ICT capabilities beyond flying probe:</strong> Powered testing — the fixture can apply power to the board and measure voltages at test points, verifying power supply regulation, voltage dividers, and reference voltages. Guarding — isolating a component from surrounding circuitry for accurate measurement by driving guard points to the same potential. And, critically, throughput: ICT tests a board in seconds where flying probe takes minutes.</p>
+
+  <div class="highlight-box">
+    <p><strong>Fixture design matters:</strong> A poorly designed ICT fixture probes at angles that damage pads, applies excessive force that flexes the board, or skips test points on fine-pitch components where probe access is tight. A well-designed fixture includes the right probe tip geometry for each pad type, controlled-force mechanisms, and registration pins that ensure repeatable alignment across thousands of cycles. The fixture cost goes into the engineering, not the metal.</p>
+  </div>
+
+  <h2>5. Functional Testing (FCT)</h2>
+
+  <img src="../generated/blog-testing-fct-station.webp" alt="Functional test station with PCB under test" loading="lazy" class="article-img">
+
+  <p>Functional testing is the final quality gate — and the most application-specific. Unlike the first four methods, which test electrical connectivity and component presence, FCT tests whether the board <em>does what it's supposed to do</em> in conditions that simulate its operating environment.</p>
+
+  <p>A functional test typically powers up the board, loads firmware (if applicable), and exercises the board's interfaces: applying input signals and measuring output responses, communicating over UART/SPI/I2C/CAN buses, cycling relays and measuring contact resistance, verifying analog signal paths with known test waveforms. The test fixture may include load simulators, communication interfaces, signal generators, and measurement instruments — all controlled by a test executive that sequences through the test plan and logs results.</p>
+
+  <p><strong>What FCT catches that nothing else does:</strong></p>
+  <ul>
+    <li><strong>Integration defects:</strong> A correctly-soldered component with the wrong firmware revision passes AOI, X-ray, and ICT — but fails FCT when the firmware can't communicate with the peripheral it was compiled for.</li>
+    <li><strong>Timing issues:</strong> Power sequencing violations, bus timing violations, and race conditions that don't manifest as hard electrical faults but cause intermittent system failures.</li>
+    <li><strong>Analog performance:</strong> A DAC that outputs the correct voltage but has 5× the specified noise. A filter stage that attenuates 3dB more than designed. These pass digital tests but fail analog functional tests.</li>
+  </ul>
+
+  <p><span class="data-point">$1-10K</span></p>
+  <p><strong>FCT development cost:</strong> A functional test fixture typically costs $1,000-10,000+ to develop, depending on the number of interfaces, the complexity of the test executive, and whether the customer provides existing test infrastructure. For safety-critical products (automotive ECUs, medical devices), FCT is non-negotiable — the cost of a field failure dwarfs the fixture investment by orders of magnitude.</p>
+
+  <h2>Choosing the Right Test Strategy</h2>
+
+  <p>The optimal test strategy depends on five factors: board complexity, production volume, package types used, end-application criticality, and acceptable defect escape rate.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Product Profile</th><th>Recommended Strategy</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Simple 2-layer, no BGA, low volume (<100)</td><td>AOI + flying probe</td></tr>
+      <tr><td>Medium complexity, QFN only, mid volume (100-1000)</td><td>AOI + flying probe + X-ray sampling</td></tr>
+      <tr><td>BGA design, production volume (1000+)</td><td>AOI + 100% X-ray + ICT</td></tr>
+      <tr><td>Automotive/medical, any volume</td><td>AOI + 100% 3D X-ray + ICT + FCT</td></tr>
+      <tr><td>Turnkey PCBA (customer needs finished, tested product)</td><td>AOI + X-ray + flying probe/ICT + full FCT</td></tr>
+      <tr><td>Aerospace/defense, any volume</td><td>All five, 100% coverage, + environmental stress screening</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>The golden rule:</strong> The cost of catching a defect increases by roughly 10× at each stage. A solder paste defect caught at SPI costs ~$0.01 to fix (clean and reprint). The same defect caught at AOI costs ~$0.10 (rework one joint). Caught at ICT costs ~$1 (diagnose and rework). Caught at FCT costs ~$10 (diagnose complex system failure). Caught in the field costs ~$100-1,000+ (RMA, investigation, customer impact). Invest in earlier-stage testing.</p>
+  </div>
+
+  <h2>What We Actually Do</h2>
+
+  <p>At Huaxing PCBA, our standard test flow for production orders is:</p>
+
+  <ol>
+    <li><strong>SPI (Solder Paste Inspection)</strong> — 100% of boards, before component placement. Catches the defects that would cause the most expensive downstream failures.</li>
+    <li><strong>AOI</strong> — 100% of boards after reflow. First-pass screening for visible defects.</li>
+    <li><strong>X-Ray</strong> — 100% for BGA/QFN boards; sampling for other designs. Hidden joint verification.</li>
+    <li><strong>Flying Probe or ICT</strong> — 100% of boards. Electrical validation. Flying probe for prototypes and low volume; ICT for production volumes >500.</li>
+    <li><strong>Functional Test</strong> — Per customer specification. Custom fixture and test executive developed in-house or to customer-provided test protocol.</li>
+  </ol>
+
+  <p><span class="data-point">99.7%</span></p>
+  <p>This five-stage test flow achieves a field defect rate under 0.3% across all product categories — meaning fewer than 3 boards per 1,000 shipped require rework or return. For context, the industry average for PCB assembly defect escape rate is 1-3%. The difference is entirely in the testing strategy — not in having better machines, but in using them comprehensively.</p>
+
+  <h2>Questions to Ask Your Manufacturer</h2>
+
+  <p>When evaluating a PCB assembly supplier, don't ask "do you test your boards?" — every manufacturer says yes. Ask these instead:</p>
+
+  <ul>
+    <li>"What percentage of boards get X-ray inspection? If it's not 100% for BGA boards, what's your sampling plan?"</li>
+    <li>"Do you run AOI and electrical test on every board, or do you sample?"</li>
+    <li>"Do you have SPI (solder paste inspection) on your SMT lines?"</li>
+    <li>"Can you provide test data reports — AOI images, X-ray void analysis, ICT/flying probe pass/fail logs — with every shipment?"</li>
+    <li>"What's your documented field defect rate for products similar to ours?"</li>
+  </ul>
+
+  <p>A manufacturer who answers these questions with specific numbers, percentages, and documentation references is running a real quality operation. One who answers with "we test everything, don't worry" is not — and your boards will prove it.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/cta-bg-capabilities.webp)">
+      <h2>Get a Quote with Full Test Coverage</h2>
+      <p>Send us your Gerber files and BOM. We'll specify the test strategy for your product and include it in the quote — AOI, X-ray, flying probe, and functional test as needed.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a><a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">9 SMT Lines · 58 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <h2>Start Your Project</h2>
+      <p class="mf-subtitle">Upload your Gerber files and BOM. We'll respond within 24 hours with a detailed quote and free DFM review.</p>
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>
