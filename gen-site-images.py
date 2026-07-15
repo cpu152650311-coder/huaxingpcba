@@ -106,7 +106,12 @@ def main():
         try:
             image_bytes = generate_image(img['prompt'], api_key, args.quality)
             out_file.write_bytes(image_bytes)
-            file_size = len(image_bytes)
+            # Compress with cwebp for web optimization
+            import subprocess
+            subprocess.run(['cwebp', '-q', '75', '-m', '6', str(out_file), '-o', str(out_file) + '.tmp'],
+                          capture_output=True, timeout=30)
+            subprocess.run(['mv', str(out_file) + '.tmp', str(out_file)], capture_output=True)
+            file_size = len(out_file.read_bytes())
             print(f"OK ({file_size:,} bytes)")
 
             manifest[img_id] = {
