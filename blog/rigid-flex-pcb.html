@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rigid-Flex PCB Manufacturing Guide — Design Rules, Materials & Cost Factors | Huaxing PCBA</title>
+<meta name="description" content="Complete rigid-flex PCB manufacturing guide: design rules for bend radius, material selection (polyimide vs LCP), layer stack-up strategies, and real cost data from Shenzhen production. Covers IPC-6013 Class 3 requirements.">
+<meta property="og:title" content="Rigid-Flex PCB Manufacturing Guide — Design Rules, Materials & Cost Factors">
+<meta property="og:description" content="Rigid-flex PCBs eliminate connectors, reduce weight by 60%, and improve reliability in dynamic flex applications. Here's everything you need to know about design rules, materials, and cost — from a factory that builds them daily.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/rigid-flex-pcb.html">
+<link rel="stylesheet" href="../design-tokens.css?v=6">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+  .article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-md)}
+  .article h2{font-weight:200;margin:var(--space-xl) 0 var(--space-md);font-size:var(--text-3xl)}
+  .article h3{font-weight:300;margin:var(--space-lg) 0 var(--space-sm);font-size:var(--text-xl);color:var(--accent)}
+  .article p{color:var(--text-secondary);margin-bottom:var(--space-md);line-height:1.85}
+  .article ul,.article ol{margin-bottom:var(--space-md);padding-left:1.5rem}
+  .article li{color:var(--text-secondary);margin-bottom:var(--space-xs);line-height:1.7}
+  .article .highlight-box{background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--space-lg);margin:var(--space-lg) 0}
+  .article .highlight-box p{color:var(--text-primary);margin-bottom:0}
+  .article .highlight-box strong{color:var(--accent)}
+  .article-img{width:100%;max-width:85%;margin:var(--space-lg) auto;display:block;border-radius:var(--radius-lg)}
+  .article .data-point{font-size:var(--text-2xl);font-weight:200;color:var(--accent);display:block;line-height:1}
+  .article .checklist-item{display:flex;gap:var(--space-md);padding:var(--space-md) 0;border-bottom:1px solid var(--border)}
+  .article .checklist-item:last-child{border-bottom:none}
+  .article .checklist-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--text-sm)}
+  .article .checklist-content h4{margin:0 0 var(--space-xs) 0;font-weight:400;color:var(--text-primary)}
+  .article .checklist-content p{font-size:var(--text-sm);margin-bottom:0}
+  .breadcrumb{margin-bottom:var(--space-lg)}
+  @media(max-width:768px){.article h2{font-size:var(--text-2xl)}.checklist-item{flex-direction:column;gap:var(--space-sm)}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/capabilities/">Capabilities</a>
+      <a href="/quote/">Quick Quote</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="#inquiry" class="nav-cta" onclick="openModal();return false">Get Quote</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-rigid-flex.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">Rigid-Flex PCB Manufacturing Guide:<br><em>Design Rules, Materials & Cost Factors</em></h1>
+      <p class="reveal">When a connector costs more than the board it connects — the case for rigid-flex in modern electronics.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Rigid-Flex PCB Manufacturing</span></div>
+
+  <p>A rigid-flex PCB is not a flex circuit glued to a rigid board. It's a single, unified structure where rigid and flexible regions share continuous copper layers across the transition zone — no connectors, no solder joints, no potential points of mechanical failure between the rigid and flex sections. This single fact explains why rigid-flex dominates in applications where a connector failure is measured in millions of dollars (aerospace), human lives (medical implants), or warranty claims (automotive).</p>
+
+  <p>The global rigid-flex PCB market is projected to reach <span class="data-point">$5.8B</span> by 2028, growing at 6.8% CAGR, driven by wearable electronics, EV battery management systems, and minimally invasive medical devices. At Huaxing PCBA, we manufacture rigid-flex boards from 2-32 layers with polyimide and LCP flex materials, using materials including Rogers, High-Tg FR-4, and PTFE for the rigid sections, with full IPC-6013 Class 3 capability. Our facility handles the full rigid-flex stack from <a href="/blog/pcb-materials-guide.html">laminate selection</a> through assembly and test.</p>
+
+  <img class="article-img" src="../generated/blog-rigid-flex-structure.webp" alt="Cross-section diagram of a rigid-flex PCB showing rigid-to-flex transition zone with continuous copper layers" loading="lazy">
+
+  <h2>Rigid-Flex vs. Flex vs. Rigid: When Each Makes Sense</h2>
+
+  <p>Not every design that bends needs rigid-flex. The decision tree is straightforward once you understand what each technology optimizes for:</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)">
+    <thead>
+      <tr style="border-bottom:2px solid var(--accent)">
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Characteristic</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Rigid-Flex</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Flex Circuit</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Rigid + Connectors</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Typical layers</td><td style="padding:var(--space-sm);color:var(--accent)">4-20 total</td><td style="padding:var(--space-sm);color:var(--text-secondary)">1-8 flex layers</td><td style="padding:var(--space-sm);color:var(--text-secondary)">2-32 per board</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Weight (relative)</td><td style="padding:var(--space-sm);color:var(--accent)">60% lighter</td><td style="padding:var(--space-sm);color:var(--text-secondary)">75% lighter</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Baseline (100%)</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Interconnect points</td><td style="padding:var(--space-sm);color:var(--accent)">0 connectors</td><td style="padding:var(--space-sm);color:var(--text-secondary)">ZIF/tab connectors</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Board-to-board connectors</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Relative cost (prototype)</td><td style="padding:var(--space-sm);color:var(--accent)">3-5× rigid</td><td style="padding:var(--space-sm);color:var(--text-secondary)">2-4× rigid</td><td style="padding:var(--space-sm);color:var(--text-secondary)">1× (baseline)</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Relative cost (10k+ volume)</td><td style="padding:var(--space-sm);color:var(--accent)">1.5-2.5× rigid</td><td style="padding:var(--space-sm);color:var(--text-secondary)">1.2-2× rigid</td><td style="padding:var(--space-sm);color:var(--text-secondary)">1× + connector cost</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Dynamic flex cycles</td><td style="padding:var(--space-sm);color:var(--accent)">10⁵-10⁷ cycles</td><td style="padding:var(--space-sm);color:var(--text-secondary)">10⁶-10⁸ cycles</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Varies by connector</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Component mounting</td><td style="padding:var(--space-sm);color:var(--accent)">Rigid sections only</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Stiffener required</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Anywhere on rigid board</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Decision Rule:</strong> Use rigid-flex when your design has ≥2 rigid sections that need to fold into a 3D enclosure. Use flex circuits when the entire assembly must flex dynamically (printer head cables, robotic joints). Use rigid boards with connectors when cost is the primary constraint and assembly space is not. The crossover point where rigid-flex becomes cheaper than rigid+connectors is typically <span class="data-point">5,000-10,000</span> units — below that volume, connector cost dominates; above it, rigid-flex's elimination of connector assembly labor pays back.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-rigid-flex-3d-fold.webp" alt="3D folding demonstration of a rigid-flex PCB showing how rigid sections fold into a compact enclosure" loading="lazy">
+
+  <h2>Material Selection: The Foundation of Rigid-Flex Reliability</h2>
+
+  <p>Material selection in rigid-flex design is not a single choice — it's a system of interdependent decisions where each material constrains the others. The three primary material domains are:</p>
+
+  <h3>1. Flex Dielectric: Polyimide vs. LCP vs. PTFE</h3>
+
+  <p><strong>Polyimide (PI)</strong> is the workhorse flex material for 90% of rigid-flex designs. It offers excellent thermal stability (Tg >250°C), chemical resistance to soldering temperatures, and proven reliability across decades of use. Standard thicknesses: 25µm (1 mil) and 50µm (2 mil). At Huaxing PCBA, we stock both in volume for <span class="data-point">2-32 layer</span> rigid-flex builds.</p>
+
+  <p><strong>Liquid Crystal Polymer (LCP)</strong> is gaining ground for high-frequency applications above 10 GHz. Its dielectric constant (Dk ~2.9 vs. polyimide's 3.4) and lower moisture absorption (0.04% vs. polyimide's 1.8%) make it the preferred choice for millimeter-wave rigid-flex in 5G and automotive radar. The trade-off: LCP costs roughly <span class="data-point">2-3×</span> more than polyimide and requires specialized lamination processes that fewer factories offer.</p>
+
+  <p><strong>PTFE-based flex</strong> is used almost exclusively for microwave applications above 20 GHz. The material is expensive (5-10× polyimide) and challenging to process (requires plasma treatment for through-hole plating adhesion), but when signal loss at 28 GHz is the design constraint, no other flex material approaches its performance. See our <a href="/blog/impedance-control.html">impedance control guide</a> for how material Dk/Df affects signal integrity in rigid-flex designs.</p>
+
+  <h3>2. Rigid Dielectric: FR-4, High-Tg, or RF Laminates</h3>
+
+  <p>The rigid sections of a rigid-flex board use standard PCB laminates — but the choice is constrained by the flex lamination process. Because rigid and flex layers are laminated together in a single press cycle, the rigid material's cure temperature must be compatible with the flex material's thermal budget. Standard FR-4 with Tg 130°C laminates at ~180°C, which is well within polyimide's tolerance. Rogers 4350B laminates at ~190°C, also compatible. However, some ceramic-filled hydrocarbon laminates require 210°C+ cure, which can degrade polyimide adhesion if not carefully profiled.</p>
+
+  <p>For most designs, <strong>High-Tg FR-4 (Tg 170-180°C)</strong> in the rigid sections provides an excellent balance of cost and thermal compatibility with polyimide flex layers. Our manufacturing process uses matched CTE materials across rigid-flex transitions to minimize warpage during reflow — a common failure mode in poorly designed rigid-flex stacks. Read our <a href="/blog/pcb-materials-guide.html">materials guide</a> for a full comparison of rigid laminate options.</p>
+
+  <h3>3. Coverlay vs. Soldermask on Flex Sections</h3>
+
+  <p>Flex sections cannot use traditional liquid photoimageable soldermask — it cracks under bending. Instead, a polyimide coverlay film (typically 25µm or 50µm) is laminated over the flex copper layers, with openings laser-cut for component pads and vias. The coverlay adhesive choice matters: acrylic adhesive is standard, but epoxy adhesive offers better chemical resistance for harsh environments. For dynamic flex applications, the coverlay opening must include a <span class="data-point">0.5-1.0mm</span> fillet radius at pad transitions to prevent stress concentration.</p>
+
+  <img class="article-img" src="../generated/blog-rigid-flex-materials.webp" alt="Material layer comparison: polyimide vs LCP vs PTFE flex dielectrics for rigid-flex PCBs" loading="lazy">
+
+  <h2>Design Rules That Prevent Field Failures</h2>
+
+  <p>Rigid-flex design rules are not suggestions — they are physics. Violating them produces boards that pass electrical test but fail after 100 flex cycles in the field. Here are the rules that matter:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Bend Radius: Minimum 10× Flex Thickness (Static), 20× (Dynamic)</h4>
+      <p>For a 2-layer flex section with 25µm polyimide between 18µm copper layers (total flex thickness ~0.15mm), the minimum static bend radius is 1.5mm and dynamic is 3.0mm. Tighter bends induce copper work-hardening and eventual cracking. The bend radius is measured to the inside surface of the flex — not the centerline. IPC-2223 provides detailed guidelines; we apply Class 3 criteria (more conservative than Class 2) for all <a href="/blog/automotive-pcb-requirements.html">automotive</a> and medical rigid-flex builds.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Trace Routing in Flex: Cross the Bend Perpendicular, Not Parallel</h4>
+      <p>Copper traces crossing the bend zone should run perpendicular to the bend axis, not parallel. Parallel traces experience maximum tensile/compressive strain across their entire length. Perpendicular traces experience strain only at the transition points. Where traces must run parallel to the bend (unavoidable in some designs), stagger them across multiple flex layers rather than concentrating them on one — and never place a via within <span class="data-point">1.5mm</span> of the bend zone.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Rigid-to-Flex Transition: Tapered Stiffener, Not Abrupt Edge</h4>
+      <p>The boundary where rigid FR-4 meets flexible polyimide is the highest-stress region in any rigid-flex design. An abrupt 90° transition concentrates all bending stress at a single line. A tapered transition (rigid thickness ramps down over 1.5-3.0mm) distributes stress over a larger area. For designs exceeding 500 flex cycles, we add a bead of flexible epoxy at the transition edge as a strain relief — a technique validated across our <span class="data-point">150+</span> rigid-flex customers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Copper Pattern: Hatched Ground Planes, Not Solid</h4>
+      <p>Solid copper planes in flex sections severely restrict bendability. Use cross-hatched copper patterns (typically 60-70% copper coverage) for ground and power planes in flex areas. The hatch angle should be 45° to the bend axis for maximum flexibility. For controlled-impedance flex sections, the hatch pattern must be modeled in a 3D EM simulator — a solid-plane assumption will underestimate impedance by 5-15%. Our <a href="/blog/impedance-control.html">impedance control guide</a> covers modeling for flex geometries.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Via Placement: No Vias in Flex Zone, Minimum 1mm from Transition</h4>
+      <p>Plated through-holes in the flex zone create stress risers that initiate copper cracking within 50-100 flex cycles. Keep all vias in rigid sections. If a via must be placed near the transition, use teardrop pad shapes (not circular pads) and extend the annular ring by 0.15mm minimum. Via-in-pad with filled and capped microvias in rigid sections is acceptable — see our <a href="/blog/hdi-technology.html">HDI technology guide</a> for via type selection by layer stack.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-rigid-flex-design-rules.webp" alt="Visual guide showing rigid-flex PCB design rules: bend radius, trace routing, transition zone, and via placement" loading="lazy">
+
+  <h2>Layer Stack-Up Configurations</h2>
+
+  <p>Rigid-flex stack-up design is where the cost-performance trade-off is decided. The most common configurations, from simplest to most complex:</p>
+
+  <p><strong>Type 1 — Single flex layer between rigid sections (4-layer equivalent):</strong> The simplest and cheapest rigid-flex configuration. One polyimide core with copper on both sides, bonded between two rigid FR-4 sections. Total layer count: typically 4-6 (2 rigid + 1 flex + 1 rigid, with inner copper layers). Use case: simple bend-to-fit applications where the flex doesn't carry controlled-impedance signals. Cost: approximately <span class="data-point">2-3×</span> an equivalent rigid 4-layer board.</p>
+
+  <p><strong>Type 2 — Multi-layer flex with blind/buried vias (8-12 layer equivalent):</strong> Two or more flex layers with plated through-holes connecting them, embedded between rigid sections. Enables controlled-impedance differential pairs in the flex section. This is the most common configuration for products requiring signal integrity across the bend — smartphone hinges, laptop display connections, medical ultrasound probes. Cost: <span class="data-point">3-5×</span> rigid equivalent.</p>
+
+  <p><strong>Type 3 — Asymmetric rigid-flex (different layer counts on each rigid side):</strong> One rigid section might be 8 layers (dense BGA processor board) and the other 4 layers (connector/power board), connected by a 2-layer flex. This is the most cost-efficient configuration because it doesn't waste rigid layers where they aren't needed. The stack-up symmetry requirement is more complex — the manufacturer must balance the layer stack to prevent warpage while accommodating different rigid layer counts.</p>
+
+  <p><strong>Type 4 — Multiple flex sections with bookbinding:</strong> A single rigid-flex board with 3+ rigid sections connected by multiple flex arms, folded into a compact volume (like pages in a book). Used in aerospace and medical implant applications where volume is the primary constraint. These are the most expensive rigid-flex designs — <span class="data-point">5-8×</span> rigid equivalent — but when the alternative is a custom multi-board connector assembly that doesn't fit the enclosure, rigid-flex is the only viable solution.</p>
+
+  <img class="article-img" src="../generated/blog-rigid-flex-stackup.webp" alt="Rigid-flex PCB layer stack-up diagrams showing Type 1 through Type 4 configurations" loading="lazy">
+
+  <h2>Cost Drivers in Rigid-Flex Manufacturing</h2>
+
+  <p>Rigid-flex costs 2-8× more than equivalent rigid PCBs. Understanding why enables smarter design decisions that reduce cost without compromising reliability:</p>
+
+  <p><strong>1. Material waste (30-40% of cost premium):</strong> Rigid-flex panels have lower utilization than rigid panels because flex sections create irregular panel shapes. A rigid 18×24" panel might yield 80% board area. A rigid-flex panel of the same size typically yields 50-65%. Our <a href="/blog/dfm-tips.html">DFM guide</a> includes panelization strategies that recover 10-15% of this loss through optimized nesting.</p>
+
+  <p><strong>2. Process steps (25-35% of cost premium):</strong> A rigid-flex board goes through roughly 50% more process steps than an equivalent rigid board. Each flex layer requires separate imaging, etching, coverlay lamination, and laser cutting — before the rigid-flex lamination even begins. The rigid-flex lamination itself is a multi-stage process with controlled cooling to prevent warpage from CTE mismatch.</p>
+
+  <p><strong>3. Yield loss (15-25% of cost premium):</strong> First-pass yield for rigid-flex is typically 85-92% vs. 95-98% for rigid boards. The most common yield killers: delamination at the rigid-flex interface (CTE mismatch during reflow), coverlay registration errors, and copper cracking at bend zones found during final electrical test. A manufacturer's rigid-flex yield rate is the single best predictor of final cost — ask for this number during <a href="/blog/pcb-supplier-audit.html">supplier qualification</a>.</p>
+
+  <p><strong>4. NRE and tooling (10-15% of cost premium):</strong> Rigid-flex requires custom lamination fixtures, laser-cut coverlay openings, and specialized test fixtures that accommodate the 3D folded form factor. Typical rigid-flex NRE runs <span class="data-point">$2,000-8,000</span> vs. $500-2,000 for rigid boards of equivalent complexity. At volumes above 5,000 units, NRE amortization becomes negligible.</p>
+
+  <div class="highlight-box">
+    <p><strong>Design-to-Cost Rule:</strong> Every rigid-flex section adds roughly 30% to the manufacturing cost. A design with 2 rigid + 1 flex sections costs ~2.5× rigid equivalent. A design with 4 rigid + 3 flex sections costs ~5×. Minimize the number of rigid-flex transitions — not the number of layers — for the biggest cost impact.</p>
+  </div>
+
+  <h2>IPC-6013 Qualification: What Class 3 Really Requires</h2>
+
+  <p>IPC-6013 is the performance specification for flex and rigid-flex printed boards. Class 3 (High Reliability Electronics) is the standard for automotive, medical, and aerospace rigid-flex — and the requirements go well beyond what Class 2 demands:</p>
+
+  <ul>
+    <li><strong>Plated through-hole voids:</strong> Class 2 allows 1 void per hole; Class 3 allows zero. For rigid-flex, this is harder than it sounds — the different thermal expansion rates of rigid and flex materials during lamination create stress at the hole wall that can initiate void formation during thermal cycling.</li>
+    <li><strong>Coverlay adhesion:</strong> Class 3 requires peel strength testing after thermal stress (288°C solder float for 10 seconds). Polyimide coverlay on polyimide flex dielectric typically achieves peel strengths of <span class="data-point">0.8-1.2 N/mm</span> — well above the Class 3 minimum of 0.5 N/mm.</li>
+    <li><strong>Flexural endurance:</strong> Class 3 requires the flex section to survive the specified number of bend cycles without electrical discontinuity exceeding 10Ω. The test method is defined in IPC-TM-650 2.4.3.1. Our in-house testing validates flex cycle life at <span class="data-point">10⁵</span> cycles minimum for static applications and 10⁶ cycles for dynamic.</li>
+    <li><strong>Dimensional stability:</strong> After thermal stress, rigid-flex boards must maintain dimensional change within 0.05% for rigid sections and 0.10% for flex sections. This requires matched CTE materials and controlled lamination profiles — a manufacturing capability, not a design specification.</li>
+  </ul>
+
+  <p>For medical and <a href="/blog/automotive-pcb-requirements.html">automotive applications</a>, we recommend specifying IPC-6013 Class 3 at the RFQ stage. The manufacturing cost premium is 15-25% over Class 2, but the reliability improvement — particularly in thermal cycling and flex endurance — is 3-5×.</p>
+
+  <h2>Getting a Rigid-Flex Quote: What to Prepare</h2>
+
+  <p>A rigid-flex RFQ requires more information than a rigid PCB RFQ. Missing any of these items will generate a quote with wide error bars:</p>
+
+  <ol>
+    <li><strong>Complete stack-up drawing:</strong> Layer-by-layer specification including material types, thicknesses, copper weights, and which layers are rigid vs. flex. A verbal description ("4 rigid layers + 2 flex layers") is not enough — the manufacturer needs to know which specific layers are flex.</li>
+    <li><strong>Bend requirements:</strong> Static (bend-to-install) or dynamic (repeated flexing)? Minimum bend radius? Number of flex cycles expected over product life? This determines material selection and coverlay opening geometry.</li>
+    <li><strong>IPC class and any special testing:</strong> Class 2 or Class 3? Microsection reports required? Flex cycle testing with electrical continuity monitoring? Thermal cycling profile?</li>
+    <li><strong>3D mechanical model (STEP or IGES):</strong> For designs with complex folding, the 3D model enables the manufacturer to verify that the designed bend radius is achievable with the specified flex thickness — before committing to tooling.</li>
+  </ol>
+
+  <p>Huaxing PCBA responds to rigid-flex RFQs within <span class="data-point">48 hours</span> with a detailed quote, DFM review covering all five design rules above, and process engineer consultation on material selection and stack-up optimization. Our facility has produced rigid-flex boards for applications ranging from wearable medical monitors (20,000 flex cycles validated) to EV battery interconnects (IPC-6013 Class 3, 2,000 thermal cycles from -40°C to +125°C).</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-rigid-flex.webp)">
+      <h2>Start Your Rigid-Flex Project</h2>
+      <p>Send your stack-up drawing, bend requirements, and volume target. You'll receive a detailed rigid-flex manufacturing quote within 48 hours, plus a free DFM review covering bend radius, material selection, and transition zone design.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Rigid-Flex Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a><a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">9 SMT Lines · 58 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <h2>Start Your Project</h2>
+      <p class="mf-subtitle">Upload your Gerber files and BOM. We'll respond within 24 hours with a detailed quote and free DFM review.</p>
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>

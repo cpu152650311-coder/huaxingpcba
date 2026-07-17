@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automotive PCB Design Requirements — IATF 16949 Compliance & Reliability Testing | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to automotive PCB requirements: IATF 16949 certification, AEC-Q100 reliability testing, thermal management for ADAS/BMS, and IPC Class 3 manufacturing standards. From a certified automotive PCB manufacturer in Shenzhen.">
+<meta property="og:title" content="Automotive PCB Design Requirements — IATF 16949 Compliance & Reliability Testing">
+<meta property="og:description" content="What automotive OEMs actually require from PCB suppliers: IATF 16949 audit trail, thermal cycling, CAF resistance, and zero-defect manufacturing. Practical checklist for procurement teams.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/automotive-pcb-requirements.html">
+<link rel="stylesheet" href="../design-tokens.css?v=6">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+  .article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-md)}
+  .article h2{font-weight:200;margin:var(--space-xl) 0 var(--space-md);font-size:var(--text-3xl)}
+  .article h3{font-weight:300;margin:var(--space-lg) 0 var(--space-sm);font-size:var(--text-xl);color:var(--accent)}
+  .article p{color:var(--text-secondary);margin-bottom:var(--space-md);line-height:1.85}
+  .article ul,.article ol{margin-bottom:var(--space-md);padding-left:1.5rem}
+  .article li{color:var(--text-secondary);margin-bottom:var(--space-xs);line-height:1.7}
+  .article .highlight-box{background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--space-lg);margin:var(--space-lg) 0}
+  .article .highlight-box p{color:var(--text-primary);margin-bottom:0}
+  .article .highlight-box strong{color:var(--accent)}
+  .article-img{width:100%;max-width:85%;margin:var(--space-lg) auto;display:block;border-radius:var(--radius-lg)}
+  .article .data-point{font-size:var(--text-2xl);font-weight:200;color:var(--accent);display:block;line-height:1}
+  .article .checklist-item{display:flex;gap:var(--space-md);padding:var(--space-md) 0;border-bottom:1px solid var(--border)}
+  .article .checklist-item:last-child{border-bottom:none}
+  .article .checklist-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--text-sm)}
+  .article .checklist-content h4{margin:0 0 var(--space-xs) 0;font-weight:400;color:var(--text-primary)}
+  .article .checklist-content p{font-size:var(--text-sm);margin-bottom:0}
+  .breadcrumb{margin-bottom:var(--space-lg)}
+  @media(max-width:768px){.article h2{font-size:var(--text-2xl)}.checklist-item{flex-direction:column;gap:var(--space-sm)}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/capabilities/">Capabilities</a>
+      <a href="/quote/">Quick Quote</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="#inquiry" class="nav-cta" onclick="openModal();return false">Get Quote</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-automotive.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Automotive Electronics</p>
+      <h1 class="reveal">Automotive PCB Design Requirements:<br><em>IATF 16949, Reliability Testing & Zero-Defect Manufacturing</em></h1>
+      <p class="reveal">What automotive Tier-1 suppliers and OEMs actually require from their PCB manufacturers — beyond the certification paperwork.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Automotive PCB Requirements</span></div>
+
+  <p>The automotive electronics market is projected to reach $420 billion by 2028, driven by ADAS, electrification, and autonomous driving. But automotive PCBs are not just "regular PCBs with a certification." They operate in environments where failure means more than a product return — it means safety recalls, regulatory penalties, and liability exposure measured in millions.</p>
+
+  <p>At Huaxing PCBA, our <span class="data-point">IATF 16949:2016</span> certified facility produces automotive-grade PCBs for ADAS controllers, battery management systems, and infotainment platforms. This guide covers what buyers and engineers need to know before selecting an automotive PCB supplier.</p>
+
+  <h2>Why Automotive PCBs Are Fundamentally Different</h2>
+
+  <p>A consumer electronics PCB operates at room temperature for 2-3 years. An automotive PCB must survive -40°C cold starts, 150°C under-hood temperatures, 85°C/85% RH humidity exposure, and continuous vibration — for 15 years. These differences cascade into every manufacturing decision:</p>
+
+  <img class="article-img" src="../generated/blog-automotive-hero.webp" alt="Automotive PCB cross-section showing multi-layer structure with thermal vias" loading="lazy">
+
+  <div class="highlight-box">
+    <p><strong>Key Difference:</strong> Automotive PCB qualification is not a "test at the end" process. It requires documented process control at every manufacturing step — material traceability, SPC on every critical dimension, and full PPAP (Production Part Approval Process) documentation. A single unqualified process change can invalidate years of qualification data.</p>
+  </div>
+
+  <h2>IATF 16949: What It Actually Requires from PCB Manufacturers</h2>
+
+  <p>IATF 16949 is not just ISO 9001 with automotive branding. It adds specific requirements for defect prevention, supply chain risk management, and continuous improvement that directly affect PCB quality:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Full Material Traceability — Lot to PCB</h4>
+      <p>Every laminate lot, copper foil batch, and solder mask drum must be traceable to the finished PCB through the entire manufacturing process. In our facility, this is enforced via barcode scanning at each process step with full ERP integration.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Statistical Process Control (SPC) on Critical Dimensions</h4>
+      <p>Trace width, dielectric thickness, and hole registration must be monitored with SPC charts — not just final inspection sampling. Our production lines log real-time measurements at each imaging and lamination stage, with automatic alerts when any parameter drifts beyond ±3σ.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>PPAP Level 3 Documentation</h4>
+      <p>Full PPAP submission includes Design FMEA, Process FMEA, Control Plan, Measurement System Analysis (MSA), and capability studies (Cpk ≥ 1.67) for all critical characteristics. This is a 40+ page package per part number — not a one-page certificate.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Annual Layout Re-qualification</h4>
+      <p>IATF 16949 requires annual re-validation of the manufacturing process for each PCB design. Changes in laminate supplier, plating chemistry, or equipment require re-qualification before production resumes. See our <a href="/blog/pcb-supplier-audit.html">supplier audit checklist</a> for the 5 questions that reveal whether a factory actually does this.</p>
+    </div>
+  </div>
+
+  <h2>Automotive-Grade Materials: Beyond Standard FR-4</h2>
+
+  <p>Standard FR-4 (Tg 130-140°C) is not rated for automotive under-hood applications. The material stack-up must be engineered for the specific thermal environment:</p>
+
+  <img class="article-img" src="../generated/blog-automotive-layers.webp" alt="Automotive PCB material stack-up comparison: FR-4 vs High-Tg vs Rogers for different temperature zones" loading="lazy">
+
+  <table style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)">
+    <thead>
+      <tr style="border-bottom:2px solid var(--accent)">
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Application Zone</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Temperature Range</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Recommended Material</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Tg / Td</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Cabin electronics (infotainment, body control)</td><td style="padding:var(--space-sm);color:var(--text-secondary)">-40°C to +85°C</td><td style="padding:var(--space-sm);color:var(--accent)">High-Tg FR-4</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Tg 170-180°C</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Engine bay (ECU, sensors)</td><td style="padding:var(--space-sm);color:var(--text-secondary)">-40°C to +150°C</td><td style="padding:var(--space-sm);color:var(--accent)">High-Tg FR-4 / Polyimide</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Tg 180-200°C</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Radar/LiDAR (77GHz RF)</td><td style="padding:var(--space-sm);color:var(--text-secondary)">-40°C to +125°C</td><td style="padding:var(--space-sm);color:var(--accent)">Rogers 4350B / PTFE</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Tg 280°C</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Battery pack (BMS, cell monitoring)</td><td style="padding:var(--space-sm);color:var(--text-secondary)">-40°C to +125°C</td><td style="padding:var(--space-sm);color:var(--accent)">High-Tg FR-4 + heavy copper</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Tg 170-180°C, Cu 3-6oz</td></tr>
+    </tbody>
+  </table>
+
+  <p>Our <a href="/blog/pcb-materials-guide.html">complete PCB materials guide</a> covers the full range of high-frequency and high-temperature laminates, including Rogers, ceramic-filled PTFE, and polyimide options available in our supply chain.</p>
+
+  <h2>Reliability Testing: The 5 Tests That Separate Automotive from Commercial</h2>
+
+  <p>IPC Class 2 (commercial electronics) and IPC Class 3 (automotive/aerospace) differ in three core areas: plating thickness (25μm vs 20μm minimum in barrel), annular ring requirements, and acceptance criteria for voids and delamination. But automotive qualification goes further with environmental stress testing:</p>
+
+  <img class="article-img" src="../generated/blog-automotive-testing.webp" alt="Automotive PCB reliability testing: thermal shock chamber, HAST testing, and microsection analysis" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Thermal Shock / Thermal Cycling (AEC-Q100)</h4>
+      <p>1000 cycles from -40°C to +125°C (or -55°C to +150°C for Grade 0). PCBs are tested post-cycling for interconnect resistance change ≤ 10% and no evidence of barrel cracking or pad lifting in microsection analysis. This simulates 15 years of engine start-stop cycles.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>CAF (Conductive Anodic Filament) Resistance</h4>
+      <p>85°C / 85% RH with 100V DC bias for 1000 hours. Measures insulation resistance between adjacent vias and traces. CAF failure — where copper ions migrate along glass fibers forming a conductive path — is the #1 field failure mechanism in high-density automotive PCBs. Our HDI process (<a href="/blog/hdi-technology.html">detailed here</a>) uses laser-drilled microvias specifically to avoid CAF-prone glass bundle interfaces.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>IST (Interconnect Stress Testing)</h4>
+      <p>Powered thermal cycling at the coupon level — the industry's fastest method for detecting weak interconnects. IST cycles to 150°C in under 3 minutes, identifying plating voids and poor barrel quality that take weeks to appear in air-to-air cycling. We perform IST on every new automotive design qualification.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Highly Accelerated Stress Test (HAST)</h4>
+      <p>130°C / 85% RH at elevated pressure for 96 hours. Accelerates moisture-induced failure mechanisms including delamination, CAF, and electrochemical migration. Our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> covers the full test suite we perform in-house.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Solder Joint Reliability — Thermal Drop Shock</h4>
+      <p>For BGA and QFN packages common in ADAS processors, thermal drop shock testing simulates the rapid temperature change when a vehicle moves from a heated garage to -30°C ambient. Solder joint cracks under BGA corners are the primary failure mode. Our X-ray inspection and cross-section analysis (<a href="/blog/pcb-assembly-process.html">PCBA process details</a>) verify joint integrity at 100% for automotive builds.</p>
+    </div>
+  </div>
+
+  <h2>Thermal Management for Power Electronics</h2>
+
+  <p>Automotive power PCBs — motor controllers, DC-DC converters, on-board chargers — carry 50A to 400A through copper planes. Thermal management isn't optional; it's engineered into the stack-up:</p>
+
+  <img class="article-img" src="../generated/blog-automotive-thermal.webp" alt="Cross-section of automotive power PCB showing heavy copper layers and thermal via array" loading="lazy">
+
+  <ul>
+    <li><strong>Heavy copper:</strong> 3oz, 4oz, and 6oz copper weights for current-carrying layers. Combined with multiple parallel layers, this achieves the ampacity needed for 400A traction inverters.</li>
+    <li><strong>Thermal via arrays:</strong> Copper-filled or conductive-epoxy-filled vias under power components create a low-resistance thermal path from the component junction to the heatsink plane. Our 0.15mm mechanical drilling capability enables dense thermal via patterns under QFN and TOLL packages.</li>
+    <li><strong>Metal-core PCBs (IMS):</strong> Aluminum or copper base substrates for LED lighting and low-power ECUs. Dielectric layer thermal conductivity of 1.0-3.0 W/m·K vs 0.3 W/m·K for standard FR-4.</li>
+    <li><strong>Embedded copper coin:</strong> For high-power IGBT modules, a solid copper coin is embedded in the PCB directly under the die attach area — reducing junction-to-case thermal resistance by 60% compared to thermal vias alone.</li>
+  </ul>
+
+  <p>For controlled-impedance designs common in high-speed ADAS applications, our <a href="/blog/impedance-control.html">impedance control guide</a> explains how we maintain ±5% tolerance on differential pairs even through the thermal management stack-up.</p>
+
+  <h2>Zero-Defect Manufacturing: What IPC Class 3 Actually Means</h2>
+
+  <p>IPC-A-610 Class 3 acceptance criteria are not "tighter tolerances." They represent a fundamentally different manufacturing philosophy — every PCB must perform in an environment where failure is unacceptable:</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)">
+    <thead>
+      <tr style="border-bottom:2px solid var(--accent)">
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Criterion</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Class 2 (Commercial)</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--accent)">Class 3 (Automotive)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Plating thickness (via barrel)</td><td style="padding:var(--space-sm);color:var(--text-secondary)">20μm avg</td><td style="padding:var(--space-sm);color:var(--accent)">25μm min</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Annular ring (external)</td><td style="padding:var(--space-sm);color:var(--text-secondary)">90° breakout allowed</td><td style="padding:var(--space-sm);color:var(--accent)">0.05mm min annular ring</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Solder mask registration</td><td style="padding:var(--space-sm);color:var(--text-secondary)">±75μm</td><td style="padding:var(--space-sm);color:var(--accent)">±50μm</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Void acceptance (plated holes)</td><td style="padding:var(--space-sm);color:var(--text-secondary)">≤1 void, ≤5% of length</td><td style="padding:var(--space-sm);color:var(--accent)">No voids allowed</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Inspection sampling</td><td style="padding:var(--space-sm);color:var(--text-secondary)">AQL 1.0 sampling</td><td style="padding:var(--space-sm);color:var(--accent)">100% AOI + AVI</td></tr>
+    </tbody>
+  </table>
+
+  <p>In our facility, Class 3 is not an "upgrade option." It's the default manufacturing standard on all 8 SMT lines. 100% Automated Optical Inspection (AOI) is followed by X-ray for all BGA and QFN components. Every lot ships with a Certificate of Conformance including measured Cpk values for critical dimensions.</p>
+
+  <img class="article-img" src="../generated/blog-automotive-adas.webp" alt="Automotive PCB in ADAS camera module with gold-plated connectors" loading="lazy">
+
+  <h2>How to Qualify an Automotive PCB Supplier: 5 Verification Questions</h2>
+
+  <p>When evaluating a potential automotive PCB partner, documentation review isn't enough. These five questions — asked during a factory visit — quickly separate qualified suppliers from those with a certificate and a prayer:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>"Show me your PPAP documentation for your most recent new part introduction."</h4>
+      <p>A genuine automotive supplier can produce this in under 5 minutes. If they need to "check with engineering" or produce a one-page summary, they're not running a real IATF 16949 quality system. Full PPAP includes PFMEA, Control Plan, MSA, initial capability studies, and PSW (Part Submission Warrant) — typically 40-80 pages.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>"What is your current Cpk for plated hole diameter on your highest-volume automotive part?"</h4>
+      <p>An acceptable answer includes both the actual Cpk number (≥1.67) and the measurement method (cross-section or non-destructive). If they respond with "we inspect 100%," that's detection, not capability. Capability means the process itself produces in-spec results.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>"How do you manage laminate batch changes without triggering full re-qualification?"</h4>
+      <p>The correct answer involves an approved equivalent material list with pre-qualified alternates, documented in the Control Plan. If they say "we use the same material from the same supplier" — that's a single point of failure, not supply chain resilience.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>"What is your CAF test protocol and when was the last failure?"</h4>
+      <p>A supplier that has never seen a CAF failure hasn't tested enough. The question is how they responded: documented root cause, corrective action, and design rule updates. For a deeper procurement evaluation framework, see our <a href="/blog/pcb-supplier-audit.html">10-point supplier audit checklist</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>"Walk me through your thermal management design review for a 6-layer 3oz copper board."</h4>
+      <p>A capable engineering team will discuss dielectric selection (thermal conductivity), via aspect ratio constraints with thick copper, and the risk of barrel cracking under thermal cycling. If the answer is "we can build whatever you send" — they don't have an engineering review process.</p>
+    </div>
+  </div>
+
+  <h2>Your Automotive PCB Roadmap</h2>
+
+  <p>Selecting an automotive PCB supplier is a 3-6 month qualification process, not a price comparison exercise. The cost of a field failure — measured in warranty claims, recall logistics, and brand damage — dwarfs any per-unit PCB cost savings. We recommend this sequencing:</p>
+
+  <ol>
+    <li><strong>Pre-qualification (Week 1-2):</strong> Send your target PCB stack-up and design rules. We'll respond with a DFM review identifying any manufacturing constraints — <a href="/blog/dfm-tips.html">our DFM guide</a> covers the common issues we flag at this stage.</li>
+    <li><strong>Process capability study (Week 3-4):</strong> We manufacture 50 test coupons across your critical features. You receive microsection reports, Cpk data, and TDR impedance measurements for each coupon.</li>
+    <li><strong>PPAP submission (Week 5-8):</strong> Full PPAP Level 3 package including PFMEA, Control Plan, MSA, and initial process capability study on production tooling.</li>
+    <li><strong>First article inspection (Week 9-10):</strong> Production-intent parts with full dimensional report, microsection analysis, and reliability test coupons for your independent verification.</li>
+  </ol>
+
+  <p>Our facility in Bao'an, Shenzhen runs 8 SMT lines and delivers 80,000㎡ of PCB monthly — with 98.7% first-pass yield and 99.2% on-time delivery across 150+ active accounts in 30+ countries. For automotive customers, we maintain dedicated production cells with segregated material handling and IATF 16949-compliant traceability from receiving to shipment.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-automotive.webp)">
+      <h2>Start Your Automotive PCB Qualification</h2>
+      <p>Send us your stack-up and design rules. We'll respond within 24 hours with a DFM review, process capability proposal, and PPAP timeline — from a certified IATF 16949 manufacturer with real automotive production experience.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Begin Qualification <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a><a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">9 SMT Lines · 58 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <h2>Start Your Project</h2>
+      <p class="mf-subtitle">Upload your Gerber files and BOM. We'll respond within 24 hours with a detailed quote and free DFM review.</p>
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>
