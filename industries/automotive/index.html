@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automotive PCB Manufacturer — IATF 16949 Certified, ADAS/BMS/ECU | Huaxing PCBA</title>
+<meta name="description" content="IATF 16949 certified automotive PCB manufacturer in Shenzhen: ADAS controllers, BMS, ECU, infotainment. 2-32 layers, IPC Class 3, 100% AOI+X-Ray, PPAP Level 3, zero field failures across 2M+ shipped units.">
+<meta property="og:title" content="Automotive PCB & PCBA — IATF 16949 Certified | Huaxing PCBA">
+<meta property="og:description" content="IATF 16949 certified automotive PCB manufacturer. PPAP Level 3, 100% AOI+X-Ray, zero-defect manufacturing for ADAS, BMS, ECU. Serving Tier-1 suppliers in 30+ countries.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huaxingpcba.com/industries/automotive/">
+<link rel="canonical" href="https://huaxingpcba.com/industries/automotive/">
+<link rel="stylesheet" href="../../design-tokens.css?v=6">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Automotive PCB & PCBA Manufacturing",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "description": "IATF 16949 certified automotive PCB manufacturer. PPAP Level 3, 100% AOI+X-Ray, zero-defect. ADAS, BMS, ECU, infotainment.",
+  "areaServed": {"@type": "Continent", "name": "Worldwide"}
+}
+</script>
+<style>
+/* ===== LANDING PAGE STYLES ===== */
+:root {
+  --section-gap: 6rem;
+}
+.container-wide { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-lg); }
+
+/* ── Hero ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.4)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(200,150,62,0.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(200,150,62,0.06) 0%,transparent 50%)}
+/* Geometric accent lines */
+.hero-geo{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.15}
+.hero-geo::before{content:'';position:absolute;top:15%;left:-5%;width:40%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-12deg)}
+.hero-geo::after{content:'';position:absolute;bottom:25%;right:-5%;width:35%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg)}
+.hero-grid{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:linear-gradient(rgba(200,150,62,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(200,150,62,.3) 1px,transparent 1px);background-size:80px 80px}
+.hero-content{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:var(--space-3xl) var(--space-lg)}
+.hero-eyebrow{display:inline-block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);border:1px solid rgba(200,150,62,.3);padding:.4em 1.2em;border-radius:2px;margin-bottom:var(--space-xl)}
+.hero h1{font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:200;line-height:1.1;margin-bottom:var(--space-lg);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-lead{font-size:var(--text-lg);color:var(--text-secondary);max-width:680px;line-height:1.7;margin-bottom:var(--space-2xl)}
+/* Hero stat counters */
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);margin-bottom:var(--space-2xl)}
+.hero-stat{text-align:center;padding:var(--space-lg) var(--space-md);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-lg);backdrop-filter:blur(8px)}
+.hero-stat .val{display:block;font-size:var(--text-4xl);font-weight:200;color:var(--accent);line-height:1.1;font-family:'JetBrains Mono','Consolas',monospace;letter-spacing:-.03em}
+.hero-stat .lbl{display:block;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.1em}
+.hero-actions{display:flex;gap:var(--space-md);flex-wrap:wrap}
+
+/* ── Trust Strip ── */
+/* ── Nav Dropdown ── */
+.nav-dropdown{position:relative;display:inline-flex}
+.nav-dropdown-trigger{display:flex;align-items:center;gap:4px;cursor:pointer}
+.nav-dropdown-trigger svg{width:12px;height:12px;transition:transform .25s}
+.nav-dropdown:hover .nav-dropdown-trigger svg{transform:rotate(180deg)}
+.nav-dropdown-panel{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-sm);min-width:220px;opacity:0;visibility:hidden;transition:all .25s;box-shadow:0 20px 48px rgba(0,0,0,.5),0 0 0 1px rgba(200,150,62,.08) inset;z-index:100}
+.nav-dropdown:hover .nav-dropdown-panel,.nav-dropdown.open .nav-dropdown-panel{opacity:1;visibility:visible;transform:translateX(-50%) translateY(4px)}
+.nav-dropdown-panel a{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);color:var(--text-secondary);font-size:var(--text-sm);border-radius:var(--radius-md);transition:all .2s;text-decoration:none;white-space:nowrap}
+.nav-dropdown-panel a:hover{color:var(--accent);background:var(--accent-subtle)}
+.nav-dropdown-panel a .dd-icon{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.6}
+.nav-dropdown-panel .dd-divider{height:1px;background:var(--border);margin:var(--space-xs) 0}
+@media(max-width:1024px){.nav-dropdown-panel{position:static;transform:none;opacity:1;visibility:visible;background:transparent;border:none;box-shadow:none;padding-left:var(--space-lg)}.nav-dropdown-trigger svg{display:none}}
+/* ── Trust Strip ── */
+.trust-strip{padding:var(--space-lg) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-secondary)}
+.trust-items{display:flex;justify-content:center;align-items:center;gap:var(--space-2xl) var(--space-xl);flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:var(--space-sm);color:var(--text-muted);font-size:var(--text-sm)}
+.trust-item svg{flex-shrink:0;opacity:.6}
+
+/* ── Capability Cards Grid ── */
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+.cap-card{position:relative;padding:var(--space-2xl) var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);transition:border-color .3s,transform .3s;overflow:hidden}
+.cap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.cap-card:hover{border-color:var(--accent-subtle);transform:translateY(-4px)}
+.cap-card:hover::before{opacity:1}
+.cap-card .cap-icon{width:48px;height:48px;border-radius:var(--radius-md);background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-lg)}
+.cap-card .cap-icon svg{width:22px;height:22px;stroke:var(--accent)}
+.cap-card .cap-metric{font-size:var(--text-2xl);font-weight:200;color:var(--accent);line-height:1;margin-bottom:var(--space-xs);font-family:'JetBrains Mono','Consolas',monospace}
+.cap-card h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm) 0}
+.cap-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Split Sections ── */
+.split-section{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center;min-height:500px}
+.split-section.reverse{direction:rtl}
+.split-section.reverse .split-content{direction:ltr}
+.split-content{padding:var(--space-2xl) 0}
+.split-content .section-eyebrow{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:var(--space-md)}
+.split-content h2{font-size:var(--text-3xl);font-weight:200;margin:0 0 var(--space-lg) 0;line-height:1.2}
+.split-content p{color:var(--text-secondary);line-height:1.85;margin-bottom:var(--space-md)}
+.split-content ul{margin-bottom:var(--space-md);padding-left:1.2rem}
+.split-content li{color:var(--text-secondary);margin-bottom:var(--space-sm);line-height:1.7}
+.split-visual{position:relative;height:100%;min-height:420px;border-radius:var(--radius-xl);overflow:hidden}
+.split-visual img{width:100%;height:100%;object-fit:cover}
+.split-visual .visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.4) 0%,transparent 50%)}
+/* Decorative element on visual */
+.split-visual::after{content:'';position:absolute;top:var(--space-xl);right:var(--space-xl);width:60px;height:60px;border:1px solid rgba(200,150,62,.2);border-radius:50%;pointer-events:none}
+.split-visual::before{content:'';position:absolute;bottom:var(--space-xl);left:var(--space-xl);width:100px;height:1px;background:rgba(200,150,62,.3);pointer-events:none}
+
+/* ── Data Table ── */
+.data-table-section{padding:var(--space-3xl) 0}
+.data-table-section h2{font-size:var(--text-3xl);font-weight:200;text-align:center;margin-bottom:var(--space-2xl)}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--text-sm)}
+.data-table thead tr{border-bottom:2px solid var(--accent)}
+.data-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs)}
+.data-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.data-table tbody tr{transition:background .2s}
+.data-table tbody tr:hover{background:rgba(200,150,62,.03)}
+
+/* ── Process Timeline ── */
+.process-section{padding:var(--space-3xl) 0;background:var(--bg-secondary)}
+.process-section h2{font-size:var(--text-3xl);font-weight:200;text-align:center;margin-bottom:var(--space-2xl)}
+.process-timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-md);position:relative}
+.process-timeline::before{content:'';position:absolute;top:32px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.3}
+.process-step{text-align:center;position:relative;z-index:1}
+.process-step .step-num{width:64px;height:64px;border-radius:50%;background:var(--bg-surface);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-lg);font-size:var(--text-xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace}
+.process-step h4{font-weight:400;color:var(--text-primary);margin-bottom:var(--space-xs);font-size:var(--text-base)}
+.process-step p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.6}
+
+/* ── Checklist ── */
+.checklist-section h2{font-size:var(--text-3xl);font-weight:200;text-align:center;margin-bottom:var(--space-2xl)}
+.checklist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-lg)}
+.checklist-card{display:flex;gap:var(--space-lg);padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color .3s}
+.checklist-card:hover{border-color:var(--accent-subtle)}
+.checklist-card .cl-num{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--text-base)}
+.checklist-card .cl-body h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0}
+.checklist-card .cl-body p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Image Gallery Strip ── */
+.gallery-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md)}
+.gallery-strip .gallery-item{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;position:relative}
+.gallery-strip .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-strip .gallery-item:hover img{transform:scale(1.05)}
+.gallery-strip .gallery-item .gallery-label{position:absolute;bottom:0;left:0;right:0;padding:var(--space-md);background:linear-gradient(transparent,rgba(8,8,11,.9));color:var(--text-primary);font-size:var(--text-sm);font-weight:400}
+
+/* ── Cert Wall ── */
+.cert-wall{padding:var(--space-2xl) 0;text-align:center}
+.cert-wall h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)}
+.cert-grid{display:flex;gap:var(--space-lg);justify-content:center;flex-wrap:wrap}
+.cert-badge{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-md) var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);font-size:var(--text-sm);color:var(--text-primary);transition:border-color .3s}
+.cert-badge:hover{border-color:var(--accent-subtle)}
+.cert-badge svg{width:18px;height:18px;flex-shrink:0}
+
+/* ── CTA ── */
+.cta-section{padding:var(--space-3xl) 0;background:var(--bg-secondary)}
+.cta-card{position:relative;padding:var(--space-3xl);border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+.cta-card .cta-actions{display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap}
+
+/* ── Responsive ── */
+@media(max-width:1024px){
+  .cap-grid{grid-template-columns:repeat(2,1fr)}
+  .split-section{grid-template-columns:1fr;gap:var(--space-xl)}
+  .split-section .split-visual{min-height:300px;order:-1}
+  .split-section.reverse{direction:ltr}
+  .process-timeline{grid-template-columns:repeat(3,1fr)}
+  .process-timeline::before{display:none}
+  .checklist-grid{grid-template-columns:1fr}
+  .gallery-strip{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .hero h1{font-size:var(--text-3xl)}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .cap-grid{grid-template-columns:1fr}
+  .data-table{font-size:var(--text-xs)}
+  .data-table th,.data-table td{padding:var(--space-sm)}
+  .process-timeline{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .hero-stats{grid-template-columns:1fr}
+  .process-timeline{grid-template-columns:1fr}
+  .gallery-strip{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M20 9h3M1 15h3M20 15h3"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 22 8.5 12 15 2 8.5 12 2"/><polyline points="2 15.5 12 22 22 15.5"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></symbol>
+  <symbol id="icon-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></symbol>
+  <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+  <symbol id="icon-radio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12a4 4 0 018 0"/><circle cx="12" cy="12" r="1.5"/></symbol>
+  <symbol id="icon-cog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="icon-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/capabilities/">Capabilities</a>
+            <div class="nav-dropdown" id="industriesDropdown">
+        <span class="nav-dropdown-trigger">Industries <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+        <div class="nav-dropdown-panel">
+          <a href="/industries/automotive/"><span class="dd-icon"></span>Automotive</a>
+          <a href="/industries/medical/"><span class="dd-icon"></span>Medical</a>
+          <a href="/industries/industrial/"><span class="dd-icon"></span>Industrial</a>
+          <a href="/industries/iot/"><span class="dd-icon"></span>IoT</a>
+          <a href="/industries/telecom/"><span class="dd-icon"></span>Telecom & 5G</a>
+          <a href="/industries/energy/"><span class="dd-icon"></span>New Energy</a>
+          <a href="/industries/consumer/"><span class="dd-icon"></span>Consumer</a>
+        </div>
+      </div>
+      <a href="/quote/">Quick Quote</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/blog/">Blog</a>
+      <a href="#inquiry" class="nav-cta" onclick="openModal();return false">Get Quote</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg"><img src="../../generated/blog-cover-automotive.webp" alt="Automotive PCB manufacturing" loading="eager"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-geo"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal">Industries / Automotive Electronics</p>
+    <h1 class="reveal">Zero-Defect PCBs for<br><em>Tomorrow's Vehicles</em></h1>
+    <p class="hero-lead reveal">IATF 16949 certified automotive PCB manufacturer. From ADAS radar to 800V BMS, from ECU to infotainment — 2 million+ units shipped with zero field failures. PPAP Level 3 documentation. IPC Class 3 assembly. 100% AOI + X-Ray on every board.</p>
+    <div class="hero-stats reveal">
+      <div class="hero-stat"><span class="val">2M+</span><span class="lbl">Units Shipped</span></div>
+      <div class="hero-stat"><span class="val">0 ppm</span><span class="lbl">Field Failures</span></div>
+      <div class="hero-stat"><span class="val">32 L</span><span class="lbl">Max Layers</span></div>
+      <div class="hero-stat"><span class="val">24h</span><span class="lbl">Rush Turn</span></div>
+    </div>
+    <div class="hero-actions reveal">
+      <a href="#inquiry" class="btn btn-primary btn-lg" onclick="openModal();return false">Start Qualification <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></a>
+      <a href="#capabilities" class="btn btn-ghost btn-lg">Explore Capabilities</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TRUST STRIP ═══════════ -->
+<div class="trust-strip">
+  <div class="container-wide">
+    <div class="trust-items">
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-shield"/></svg> IATF 16949 Certified</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> ISO 9001:2015</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-doc"/></svg> PPAP Level 3</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-eye"/></svg> 100% AOI + X-Ray</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-truck"/></svg> 99.2% On-Time Delivery</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> IPC-A-610 Class 3</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CAPABILITY CARDS ═══════════ -->
+<section class="section" id="capabilities">
+  <div class="container-wide">
+    <p class="section-label reveal" style="text-align:center">Manufacturing Excellence</p>
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Built for Automotive. Tested to Zero Defects.</h2>
+    <div class="cap-grid">
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-layers"/></svg></div>
+        <div class="cap-metric">2–32</div>
+        <h3>Layer Range</h3>
+        <p>Single-sided to 32-layer HDI — from simple LED drivers to complex ADAS controller backplanes with blind/buried vias and any-layer microvia stacking.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-cpu"/></svg></div>
+        <div class="cap-metric">3/3 mil</div>
+        <h3>Trace &amp; Space</h3>
+        <p>Ultra-fine line capability for high-density automotive ECUs and camera modules. Laser-drilled 75µm microvias on any-layer HDI builds.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-thermometer"/></svg></div>
+        <div class="cap-metric">-40/+150°C</div>
+        <h3>Operating Range</h3>
+        <p>High-Tg FR-4, polyimide, and metal-core laminates qualified for under-hood, brake-system, and engine-bay thermal environments with 3000+ thermal cycles.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-eye"/></svg></div>
+        <div class="cap-metric">100%</div>
+        <h3>AOI + X-Ray Inspection</h3>
+        <p>Every single board passes automated optical inspection and BGA/joint X-ray verification. No sampling — 100% coverage. Data logged per serial number.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-radio"/></svg></div>
+        <div class="cap-metric">±5%</div>
+        <h3>Impedance Control</h3>
+        <p>TDR-verified on every production panel. Critical for ADAS radar (77GHz), high-speed camera links (GMSL/FPD-Link), and automotive Ethernet (1000BASE-T1).</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-shield"/></svg></div>
+        <div class="cap-metric">0 ppm</div>
+        <h3>Field Failure Rate</h3>
+        <p>Across 2M+ automotive PCBs shipped since 2018. Process FMEA, SPC on critical dimensions, and PPAP Level 3 documentation support zero-defect manufacturing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SPLIT: IATF 16949 ═══════════ -->
+<section class="section">
+  <div class="container-wide">
+    <div class="split-section">
+      <div class="split-content reveal">
+        <p class="section-eyebrow">Why IATF 16949 Matters</p>
+        <h2>Not Just a Certificate.<br>It's a Manufacturing Philosophy.</h2>
+        <p>IATF 16949 adds 37 specific requirements on top of ISO 9001 — all focused on defect prevention, supply chain traceability, and continuous improvement in automotive production. Every process change triggers a documented risk assessment. Every component is lot-tracked from receiving to shipping. Every defect gets a root-cause analysis with corrective action within 48 hours.</p>
+        <ul>
+          <li><strong>PFMEA</strong> on every production process, reviewed quarterly with cross-functional team sign-off</li>
+          <li><strong>SPC</strong> on 14 critical dimensions — CpK ≥1.67 for all controlled characteristics</li>
+          <li><strong>Full lot traceability</strong> — component reel → placement → reflow → test → ship, forward and backward</li>
+          <li><strong>PPAP Level 3</strong> documentation package on every new product introduction</li>
+        </ul>
+      </div>
+      <div class="split-visual reveal">
+        <img src="../../generated/blog-automotive-hero.webp" alt="IATF 16949 automotive PCB manufacturing quality control" loading="lazy">
+        <div class="visual-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SPLIT: Materials (reverse) ═══════════ -->
+<section class="section">
+  <div class="container-wide">
+    <div class="split-section reverse">
+      <div class="split-content reveal">
+        <p class="section-eyebrow">Materials & Reliability</p>
+        <h2>Engineered for 15-Year<br>Vehicle Lifecycles</h2>
+        <p>Automotive PCBs must survive 15+ years of thermal cycling, vibration, humidity, and chemical exposure — without a single failure. Standard FR-4 doesn't cut it. We select laminates, surface finishes, and via structures based on the specific environmental profile of each application.</p>
+        <ul>
+          <li><strong>High-Tg FR-4 (Tg 170°C+)</strong> — standard for all automotive builds</li>
+          <li><strong>Polyimide (Tg 250°C+)</strong> — for engine-bay and brake-system applications</li>
+          <li><strong>Metal-core &amp; thick copper (4-10oz)</strong> — BMS, inverter, and power-distribution boards</li>
+          <li><strong>ENIG / ENEPIG / Immersion Silver</strong> — application-matched surface finishes for reliability</li>
+        </ul>
+      </div>
+      <div class="split-visual reveal">
+        <img src="../../generated/blog-automotive-thermal.webp" alt="High-reliability automotive PCB cross-section with multiple copper layers" loading="lazy">
+        <div class="visual-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ APPLICATION MATRIX ═══════════ -->
+<section class="data-table-section">
+  <div class="container-wide">
+    <h2 class="reveal">Automotive Applications & Requirements</h2>
+    <div style="overflow-x:auto">
+    <table class="data-table reveal">
+      <thead><tr><th>Application</th><th>Key PCB Requirements</th><th>Huaxing Capability</th><th>Quality Level</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:500">ADAS / Autonomous</td><td>77GHz radar, HDI, impedance ±5%, 0.3mm BGA</td><td>Rogers/PTFE hybrid, any-layer HDI, 75µm µvias</td><td>IPC Class 3</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Battery Management</td><td>800V isolation, 6-10oz copper, 4kV HiPot</td><td>12oz copper, 4kV HiPot, metal-core thermal</td><td>IPC Class 3</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Engine Control Unit</td><td>-40°C to +150°C, vibration, 15yr life</td><td>Polyimide, high-Tg FR-4, IPC Class 3</td><td>IPC Class 3</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Infotainment</td><td>8+ layer HDI, 0.4mm BGA, ENIG finish</td><td>Any-layer HDI, impedance ±7%, ENIG</td><td>IPC Class 2+</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Body Electronics</td><td>4-8 layers, cost-optimized, high volume</td><td>Automated SMT, panel-optimized, 8M placements/day</td><td>IPC Class 2+</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">EV Power Inverter</td><td>Heavy copper, IGBT/SiC thermal, HV isolation</td><td>10oz copper, buried coin, 4kV HiPot, metal-core</td><td>IPC Class 3</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROCESS TIMELINE ═══════════ -->
+<section class="process-section">
+  <div class="container-wide">
+    <h2 class="reveal">Automotive PCB Production Flow</h2>
+    <div class="process-timeline">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <h4>DFM & Risk Review</h4>
+        <p>PFMEA before production. Material selection based on environmental profile. PPAP documentation plan.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02</div>
+        <h4>Controlled Fab</h4>
+        <p>SPC-monitored etching, drilling, plating. Impedance coupons on every panel. AOI on inner layers.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03</div>
+        <h4>SMT & Inspection</h4>
+        <p>SPI before reflow. 100% AOI post-reflow. X-Ray on every BGA/QFN. ICT on every board.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">04</div>
+        <h4>Reliability Test</h4>
+        <p>Thermal cycling, vibration, HiPot. Lot-based reliability audit. Data included in PPAP package.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">05</div>
+        <h4>PPAP Shipment</h4>
+        <p>Full DHR, CoC, SPC reports, test data. Barcode-level traceability. 99.2% on-time delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SPLIT: Testing ═══════════ -->
+<section class="section">
+  <div class="container-wide">
+    <div class="split-section">
+      <div class="split-content reveal">
+        <p class="section-eyebrow">Testing & Validation</p>
+        <h2>Five Layers of Defect Detection.<br>Zero Escapes.</h2>
+        <p>Automotive PCB failure isn't a warranty claim — it's a recall, a safety risk, and a supplier disqualification. Our five-layer inspection strategy catches defects at every stage so they never reach your assembly line.</p>
+        <ul>
+          <li><strong>SPI (Solder Paste Inspection)</strong> — 3D paste measurement on 100% of pads. Volume, area, height, registration. CpK ≥1.67.</li>
+          <li><strong>AOI (Automated Optical)</strong> — Multi-angle cameras with AI classification. Missing, tombstoned, bridged, insufficient. &lt;0.5% false positive rate.</li>
+          <li><strong>X-Ray (BGA/QFN)</strong> — Void detection (&gt;25% void = reject), bridging, head-in-pillow, insufficient ball collapse. 100% of hidden-joint packages.</li>
+          <li><strong>ICT (In-Circuit Test)</strong> — Component value verification, short/open detection, diode/transistor polarity. Flying-probe for prototypes; bed-of-nails for volume.</li>
+          <li><strong>FCT (Functional Test)</strong> — Application-specific functional validation at operating voltage, temperature, and load. Custom test fixtures per product.</li>
+        </ul>
+      </div>
+      <div class="split-visual reveal">
+        <img src="../../generated/blog-automotive-testing.webp" alt="Automotive PCB automated optical inspection and X-ray testing" loading="lazy">
+        <div class="visual-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section class="section">
+  <div class="container-wide">
+    <p class="section-label reveal" style="text-align:center">Inside the Factory</p>
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Automotive-Grade Manufacturing Facility</h2>
+    <div class="gallery-strip">
+      <div class="gallery-item reveal">
+        <img src="../../generated/blog-automotive-thermal.webp" alt="Thermal management solutions for automotive power PCBs" loading="lazy">
+        <div class="gallery-label">Thermal Management</div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="../../generated/blog-automotive-adas.webp" alt="ADAS and autonomous driving PCB with HDI microvias" loading="lazy">
+        <div class="gallery-label">ADAS HDI Technology</div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="../../generated/blog-automotive-hero.webp" alt="Automotive production SMT line with SPI and AOI" loading="lazy">
+        <div class="gallery-label">SMT Production Line</div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="../../generated/blog-automotive-testing.webp" alt="X-Ray and ICT testing for automotive electronics" loading="lazy">
+        <div class="gallery-label">Testing & Validation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BUYER CHECKLIST ═══════════ -->
+<section class="checklist-section section">
+  <div class="container-wide">
+    <h2 class="reveal">Supplier Audit: 6 Questions for Automotive PCB Partners</h2>
+    <div class="checklist-grid">
+      <div class="checklist-card reveal">
+        <div class="cl-num">1</div>
+        <div class="cl-body"><h4>"Show me your latest IATF 16949 surveillance audit report — not just the certificate."</h4><p>Certificates are renewed every 3 years. The surveillance audits in between tell the real story: how many non-conformances, how quickly closed, any repeat findings. A clean certificate with repeat NCs in surveillance audits means the system exists on paper, not in practice.</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">2</div>
+        <div class="cl-body"><h4>"How do you handle a process change that could affect our approved PPAP?"</h4><p>Any change to material, process, equipment, or location must trigger a customer notification per PPAP requirements. The supplier should describe a documented change-management workflow — not "we'd let you know."</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">3</div>
+        <div class="cl-body"><h4>"What's your containment process when a defect is found at final inspection?"</h4><p>Automotive-grade answer: immediate quarantine, 48-hour root cause analysis, lot traceability to identify all affected boards, customer notification within 24 hours, corrective action with effectiveness verification. Not "we rework it."</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">4</div>
+        <div class="cl-body"><h4>"Do you do X-Ray on every BGA, or on a sample?"</h4><p>For automotive, the answer must be every BGA on every board. Sampling-based X-Ray is a consumer-electronics practice. Hidden-joint defects (head-in-pillow, insufficient collapse) pass electrical test and fail in the field after thermal cycling.</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">5</div>
+        <div class="cl-body"><h4>"How do you ensure components stay available for a 10-15 year vehicle program?"</h4><p>Component lifecycle database, EOL monitoring with 12-month advance notice, last-time-buy execution, pre-validated alternate sources. Without this, your ECU gets redesigned mid-program because a $0.50 LDO went obsolete.</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">6</div>
+        <div class="cl-body"><h4>"Show me your SPC data for the line that will build our boards — live, not a PDF from last quarter."</h4><p>Real-time SPC on critical dimensions demonstrates process control. A manufacturer that can show live CpK data during your audit is genuinely running SPC. One that needs "a few days to prepare the reports" is running inspection, not control.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CERT WALL ═══════════ -->
+<section class="cert-wall section">
+  <div class="container-wide">
+    <h2 class="reveal">Certifications & Compliance</h2>
+    <div class="cert-grid reveal">
+      <div class="cert-badge"><svg><use href="#icon-shield"/></svg> IATF 16949:2016</div>
+      <div class="cert-badge"><svg><use href="#icon-check"/></svg> ISO 9001:2015</div>
+      <div class="cert-badge"><svg><use href="#icon-doc"/></svg> ISO 14001:2015</div>
+      <div class="cert-badge"><svg><use href="#icon-shield"/></svg> UL Certified (E354321)</div>
+      <div class="cert-badge"><svg><use href="#icon-eye"/></svg> IPC-A-610 Class 3</div>
+      <div class="cert-badge"><svg><use href="#icon-cog"/></svg> IPC-6012 Class 3</div>
+      <div class="cert-badge"><svg><use href="#icon-zap"/></svg> ANSI/ESD S20.20</div>
+      <div class="cert-badge"><svg><use href="#icon-check"/></svg> RoHS 3.0 / REACH</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section">
+  <div class="container-wide">
+    <div class="cta-card reveal" style="background-image:url(../../generated/blog-cta-automotive.webp)">
+      <h2>Ready to Qualify Your Automotive PCB Supplier?</h2>
+      <p>Send us your design files and PPAP requirements. We'll respond within 24 hours with a DFM analysis, PFMEA draft, and qualification timeline — from an IATF 16949 certified manufacturer with zero automotive field failures.</p>
+      <div class="cta-actions">
+        <button class="btn btn-primary btn-lg" onclick="openModal()">Start Qualification <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+        <a href="/blog/automotive-pcb-requirements.html" class="btn btn-ghost btn-lg">Read Full Automotive PCB Guide</a>
+        <a href="/capabilities/" class="btn btn-ghost btn-lg">View All Capabilities</a>
+        <a href="/capabilities/" class="btn btn-outline btn-lg">Download Capabilities PDF</a>
+        <a href="/contact/" class="btn btn-outline btn-lg">Schedule Factory Audit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving automotive Tier-1 suppliers in 30+ countries.</p>
+      </div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════ MODAL ═══════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">IATF 16949 · PPAP Level 3 · <strong>Zero Field Failures</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <h2>Start Your Automotive PCB Qualification</h2>
+      <p class="mf-subtitle">Upload your Gerber files and PPAP requirements. We'll respond within 24 hours with DFM review, PFMEA draft, and qualification timeline.</p>
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your automotive project — application, volume, PPAP level, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../reveal.js"></script>
+<script>function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+document.addEventListener('click',function(e){var dd=document.getElementById('industriesDropdown');if(!dd.contains(e.target))dd.classList.remove('open')});
+document.getElementById('industriesDropdown').querySelector('.nav-dropdown-trigger').addEventListener('click',function(e){e.preventDefault();this.parentElement.classList.toggle('open')});
+</script>
+<script src="../../inquiry-handler.js"></script>
+</body>
+</html>
