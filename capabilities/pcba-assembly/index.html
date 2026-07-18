@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Assembly (PCBA) — SMT, THT, Box-Build | Huaxing PCBA</title>
+<meta name="description" content="Full-spectrum PCB assembly in Shenzhen: 8 SMT lines, 01005–BGA capability, 0.25mm BGA pitch, 200K CPH per line. Conformal coating, ICT/FCT testing, box-build. IPC-A-610 Class 2/3. IATF 16949 certified. Free assembly DFM review.">
+<meta property="og:title" content="PCB Assembly (PCBA) — SMT, THT, Box-Build | Huaxing PCBA">
+<meta property="og:description" content="8 SMT lines, 01005–BGA, 200K CPH/line. IPC-A-610 Class 3, IATF 16949 certified. Conformal coating, ICT/FCT, box-build. Free assembly DFM.">
+<link rel="stylesheet" href="../../design-tokens.css?v=7">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="canonical" href="https://huaxingpcba.com/capabilities/pcba-assembly/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "PCB Assembly (PCBA)",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "description": "Full-spectrum PCBA: SMT, THT, mixed-technology, box-build. 8 SMT lines, 01005–BGA, IPC-A-610 Class 3, IATF 16949 certified.",
+  "areaServed": {"@type": "Continent", "name": "Worldwide"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Capabilities", "item": "https://huaxingpcba.com/capabilities/"},
+    {"@type": "ListItem", "position": 3, "name": "PCBA Assembly", "item": "https://huaxingpcba.com/capabilities/pcba-assembly/"}
+  ]
+}
+</script>
+<style>
+:root{--section-gap:6rem}
+.container-wide{max-width:1280px;margin:0 auto;padding:0 var(--space-lg)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.4)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(200,150,62,0.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(200,150,62,0.06) 0%,transparent 50%)}
+.hero-grid{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:linear-gradient(rgba(200,150,62,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(200,150,62,.3) 1px,transparent 1px);background-size:80px 80px}
+.hero-geo{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.15}
+.hero-geo::before{content:'';position:absolute;top:15%;left:-5%;width:40%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-12deg)}
+.hero-geo::after{content:'';position:absolute;bottom:25%;right:-5%;width:35%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-8deg)}
+.hero-content{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:var(--space-3xl) var(--space-lg)}
+.hero-eyebrow{display:inline-block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);border:1px solid rgba(200,150,62,.3);padding:.4em 1.2em;border-radius:2px;margin-bottom:var(--space-xl)}
+.hero h1{font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:200;line-height:1.1;margin-bottom:var(--space-lg);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-lead{font-size:var(--text-lg);color:var(--text-secondary);max-width:680px;line-height:1.7;margin-bottom:var(--space-2xl)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);margin-bottom:var(--space-2xl)}
+.hero-stat{text-align:center;padding:var(--space-lg) var(--space-md);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-lg);backdrop-filter:blur(8px)}
+.hero-stat .val{display:block;font-size:var(--text-4xl);font-weight:200;color:var(--accent);line-height:1.1;font-family:'JetBrains Mono','Consolas',monospace;letter-spacing:-.03em}
+.hero-stat .lbl{display:block;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.1em}
+.hero-actions{display:flex;gap:var(--space-md);flex-wrap:wrap}
+.trust-strip{padding:var(--space-lg) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-secondary)}
+.trust-items{display:flex;justify-content:center;align-items:center;gap:var(--space-2xl) var(--space-xl);flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:var(--space-sm);color:var(--text-muted);font-size:var(--text-sm)}
+.trust-item svg{flex-shrink:0;opacity:.6}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+.cap-card{position:relative;padding:var(--space-2xl) var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);transition:border-color .3s,transform .3s;overflow:hidden}
+.cap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.cap-card:hover{border-color:var(--accent-subtle);transform:translateY(-4px)}
+.cap-card:hover::before{opacity:1}
+.cap-card .cap-icon{width:48px;height:48px;border-radius:var(--radius-md);background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-lg)}
+.cap-card .cap-icon svg{width:22px;height:22px;stroke:var(--accent)}
+.cap-card .cap-metric{font-size:var(--text-2xl);font-weight:200;color:var(--accent);line-height:1;margin-bottom:var(--space-xs);font-family:'JetBrains Mono','Consolas',monospace}
+.cap-card h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm) 0}
+.cap-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+.split-section{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center;min-height:500px}
+.split-section.reverse{direction:rtl}
+.split-section.reverse .split-content{direction:ltr}
+.split-content{padding:var(--space-2xl) 0}
+.split-content .section-eyebrow{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:var(--space-md)}
+.split-content h2{font-size:var(--text-3xl);font-weight:200;margin:0 0 var(--space-lg) 0;line-height:1.2}
+.split-content p{color:var(--text-secondary);line-height:1.85;margin-bottom:var(--space-md)}
+.split-content ul{margin-bottom:var(--space-md);padding-left:1.2rem}
+.split-content li{color:var(--text-secondary);margin-bottom:var(--space-sm);line-height:1.7}
+.split-visual{position:relative;height:100%;min-height:420px;border-radius:var(--radius-xl);overflow:hidden}
+.split-visual img{width:100%;height:100%;object-fit:cover}
+.split-visual .visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.4) 0%,transparent 50%)}
+.split-visual::after{content:'';position:absolute;top:var(--space-xl);right:var(--space-xl);width:60px;height:60px;border:1px solid rgba(200,150,62,.2);border-radius:50%;pointer-events:none}
+.split-visual::before{content:'';position:absolute;bottom:var(--space-xl);left:var(--space-xl);width:100px;height:1px;background:rgba(200,150,62,.3);pointer-events:none}
+.data-table-section{padding:var(--space-3xl) 0}
+.data-table-section h2{font-size:var(--text-3xl);font-weight:200;text-align:center;margin-bottom:var(--space-2xl)}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--text-sm)}
+.data-table thead tr{border-bottom:2px solid var(--accent)}
+.data-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs)}
+.data-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.data-table tbody tr{transition:background .2s}
+.data-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-md);position:relative}
+.process-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);z-index:0}
+.process-step{text-align:center;position:relative;z-index:1}
+.process-step .ps-num{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:var(--bg-secondary);border:2px solid var(--accent);color:var(--accent);font-weight:600;font-size:var(--text-base);margin:0 auto var(--space-md)}
+.process-step h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.process-step p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+.checklist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-lg)}
+.checklist-card{display:flex;gap:var(--space-lg);padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color .3s}
+.checklist-card:hover{border-color:var(--accent-subtle)}
+.checklist-card .cl-num{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--text-base)}
+.checklist-card .cl-body h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0}
+.checklist-card .cl-body p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+.test-card{padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);text-align:center}
+.test-card h3{font-weight:400;color:var(--accent);margin:0 0 var(--space-sm) 0;font-size:var(--text-lg)}
+.test-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+.cta-section{padding:var(--space-3xl) 0;background:var(--bg-secondary)}
+.cta-card{position:relative;padding:var(--space-3xl);border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+@media(max-width:1024px){
+  .cap-grid{grid-template-columns:repeat(2,1fr)}
+  .split-section{grid-template-columns:1fr;gap:var(--space-xl)}
+  .split-section .split-visual{min-height:300px;order:-1}
+  .split-section.reverse{direction:ltr}
+  .checklist-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:repeat(3,1fr)}
+  .process-steps::before{display:none}
+  .test-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){.hero h1{font-size:var(--text-3xl)}.hero-stats{grid-template-columns:repeat(2,1fr)}.cap-grid{grid-template-columns:1fr}.data-table{font-size:var(--text-xs)}.data-table th,.data-table td{padding:var(--space-sm)}.process-steps{grid-template-columns:repeat(2,1fr)}.test-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.hero-stats{grid-template-columns:1fr}.process-steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 22 8.5 12 15 2 8.5 12 2"/><polyline points="2 15.5 12 22 22 15.5"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M20 9h3M1 15h3M20 15h3"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="icon-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></symbol>
+  <symbol id="icon-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=3"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg"><img src="../../generated/smt-line-showcase.webp" alt="SMT assembly line" loading="eager"></div>
+  <div class="hero-grid"></div><div class="hero-geo"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal">Capabilities / PCBA Assembly</p>
+    <h1 class="reveal">Full-Spectrum PCB Assembly —<br><em>SMT, THT &amp; Box-Build</em></h1>
+    <p class="hero-lead reveal">8 high-speed SMT lines running 24/6. 01005 passives through BGA/QFN. IPC-A-610 Class 2/3. IATF 16949 &amp; ISO 13485 certified. Free assembly DFM review — we validate your BOM, placement, and paste stencil before the first component is placed.</p>
+    <div class="hero-stats reveal">
+      <div class="hero-stat"><span class="val">8</span><span class="lbl">SMT Lines</span></div>
+      <div class="hero-stat"><span class="val">200K</span><span class="lbl">CPH Per Line</span></div>
+      <div class="hero-stat"><span class="val">01005</span><span class="lbl">Smallest Component</span></div>
+      <div class="hero-stat"><span class="val">0.25mm</span><span class="lbl">BGA Pitch</span></div>
+    </div>
+    <div class="hero-actions reveal">
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request PCBA Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+      <a href="/quote/" class="btn btn-ghost btn-lg">Online BOM Estimator</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TRUST STRIP ═══════════ -->
+<div class="trust-strip">
+  <div class="container-wide">
+    <div class="trust-items">
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-shield"/></svg> IATF 16949</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> ISO 13485 Medical</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> ISO 9001:2015</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> IPC-A-610 Class 2/3</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-eye"/></svg> 100% AOI + X-Ray</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> Free DFM Review</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ KEY METRICS ═══════════ -->
+<section class="section">
+  <div class="container-wide">
+    <p class="section-label reveal" style="text-align:center">Core Specifications</p>
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Every Process. <em>Every Package.</em></h2>
+    <div class="cap-grid">
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-cpu"/></svg></div>
+        <div class="cap-metric">01005–BGA</div>
+        <h3>Component Range</h3>
+        <p>From 01005 (0.4×0.2mm) chip components to large BGAs (>55mm), QFNs, CSPs, LGAs, and PoP (Package-on-Package). Fine-pitch down to 0.25mm BGA and 0.3mm QFP. Connectors, relays, transformers, and shielded modules.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-zap"/></svg></div>
+        <div class="cap-metric">200K CPH/Line</div>
+        <h3>Placement Speed</h3>
+        <p>High-speed modular SMT lines with dual-lane capability. Up to 200,000 components per hour per line. Automatic changeover reduces downtime between batches. Suitable for both high-mix low-volume and mass production runs.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-layers"/></svg></div>
+        <div class="cap-metric">1,200×510</div>
+        <h3>Max Board Size (mm)</h3>
+        <p>Standard PCB size up to 510×460mm. Extended rail up to 1,200×510mm for LED strips and backplanes. Board thickness 0.3mm–6.0mm. Panel up to 600×800mm with fixture support for over-sized assemblies.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-droplet"/></svg></div>
+        <div class="cap-metric">3</div>
+        <h3>Soldering Technologies</h3>
+        <p><strong>SMT reflow</strong> — 10-zone oven, N₂ atmosphere, ±1.5°C profile control. <strong>Wave soldering</strong> — dual-wave for mixed-technology boards. <strong>Selective soldering</strong> — nozzle-based for through-hole on double-sided SMT. Lead-free (SAC305) or leaded (Sn63Pb37).</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-package"/></svg></div>
+        <div class="cap-metric">IPC Class 3</div>
+        <h3>Workmanship Standard</h3>
+        <p>IPC-A-610 Class 2 as standard for commercial/industrial products. Class 3 for <a href="/industries/aerospace/" style="color:inherit;text-decoration:underline;text-underline-offset:3px">aerospace</a>, <a href="/industries/medical/" style="color:inherit;text-decoration:underline;text-underline-offset:3px">medical</a>, and <a href="/industries/automotive/" style="color:inherit;text-decoration:underline;text-underline-offset:3px">automotive</a>. IPC J-STD-001 for soldering process. ANSI/ESD S20.20 ESD control.</p>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon"><svg><use href="#icon-file"/></svg></div>
+        <div class="cap-metric">Free</div>
+        <h3>DFM &amp; BOM Validation</h3>
+        <p>Every order includes a free assembly DFM review. We validate footprint-to-package match, paste stencil aperture, polarity/orientation, component spacing, and BOM part number cross-reference before production start.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ASSEMBLY PROCESS ═══════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container-wide">
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-3xl)" class="reveal">Assembly Process Flow</h2>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="ps-num">1</div>
+        <h4>Solder Paste Printing</h4>
+        <p>Laser-cut stencil (0.08–0.2mm). Automatic paste inspection (SPI). 100% area coverage check per pad.</p>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">2</div>
+        <h4>Pick &amp; Place</h4>
+        <p>High-speed &amp; fine-pitch placement. Vision alignment. Real-time component verification. Feeder and reel traceability.</p>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">3</div>
+        <h4>Reflow Soldering</h4>
+        <p>10-zone profile. N₂ atmosphere. ±1.5°C per zone. Ramp-soak-spike to J-STD-020. Post-reflow cooling control.</p>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">4</div>
+        <h4>AOI Inspection</h4>
+        <p>3D AOI on every board after reflow. Solder joint quality, bridging, tombstoning, lifted leads. Automatic pass/fail.</p>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">5</div>
+        <h4>Test &amp; Conformal Coating</h4>
+        <p>ICT, FCT, flying probe. X-Ray for BGA/QFN. Conformal coating. Final QA before packaging.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TABLE: ASSEMBLY SPECS ═══════════ -->
+<section class="data-table-section">
+  <div class="container-wide">
+    <h2 class="reveal">Complete Assembly Specifications</h2>
+    <div style="overflow-x:auto">
+    <table class="data-table reveal">
+      <thead><tr><th>Parameter</th><th>Standard</th><th>Advanced</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:500">SMT Lines</td><td>8 high-speed lines</td><td>Dedicated NPI line for prototypes</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Placement Speed</td><td>Up to 200,000 CPH / line</td><td>Dual-lane, concurrent placement</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Smallest Component</td><td>0201 (0.6×0.3mm)</td><td>01005 (0.4×0.2mm)</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Largest Component</td><td>55×55mm BGA</td><td>On request</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Fine-Pitch BGA</td><td colspan="2">0.25mm pitch minimum</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Fine-Pitch QFP/QFN</td><td colspan="2">0.3mm pitch minimum</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Board Size</td><td>50×50mm–510×460mm</td><td>Up to 1,200×510mm (extended rail)</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Board Thickness</td><td>0.8mm–3.2mm</td><td>0.3mm–6.0mm</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Solder Type</td><td colspan="2">SAC305 (Pb-free), Sn63Pb37 (leaded)</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Stencil Thickness</td><td>0.1–0.15mm laser-cut SS</td><td>0.08–0.2mm, stepped stencils</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Reflow Zones</td><td colspan="2">10-zone, N₂ atmosphere</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Wave Soldering</td><td colspan="2">Dual-wave, lead-free</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Selective Soldering</td><td colspan="2">Nozzle-based, programmed per board</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Conformal Coating</td><td colspan="2">Acrylic, silicone, polyurethane. Selective spray + manual touch-up</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Potting / Encapsulation</td><td colspan="2">Epoxy, silicone, polyurethane. Vacuum degas available.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Workmanship</td><td>IPC-A-610 Class 2</td><td>IPC-A-610 Class 3 / J-STD-001 Space</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">ESD Control</td><td colspan="2">ANSI/ESD S20.20, full ESD flooring &amp; grounding</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTING ═══════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container-wide">
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Inspection &amp; Testing</h2>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <h3>SPI</h3>
+        <p>Solder Paste Inspection on every print. 3D volumetric measurement. 100% pad coverage. Catch stencil issues before placement — no rework downstream.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>3D AOI</h3>
+        <p>Automatic Optical Inspection on every board after reflow. 3D solder joint profiling. Bridging, tombstoning, lifted leads, missing components. Automatic pass/fail with human review on borderline cases.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>X-Ray</h3>
+        <p>2D/3D X-Ray for BGA, QFN, and hidden joints. Void detection, solder ball integrity, bridging under packages. Mandatory for Class 3 assemblies. Programmable inspection paths per board design.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>ICT</h3>
+        <p>In-Circuit Test — bed-of-nails fixture per design. Component value verification, open/short detection, polarity check. Fixture design and fabrication in-house. Flying probe available for low-volume / prototype.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>FCT</h3>
+        <p>Functional Circuit Test — powered-on board exercising real operating conditions. Custom test jig per product. Firmware flashing, calibration, and burn-in available. Full test report with every shipment.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>Micro-Section</h3>
+        <p>Cross-section analysis for process validation and failure analysis. Microscope to 500×. Solder joint IMC layer verification. Included with NPI runs. On-demand for production QA sampling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SPLIT: BOX-BUILD ═══════════ -->
+<section class="section">
+  <div class="container-wide">
+    <div class="split-section reverse">
+      <div class="split-content reveal">
+        <p class="section-eyebrow">Box-Build Integration</p>
+        <h2>From PCB to Packaged Product</h2>
+        <p>Assembly doesn't stop at the board. Our box-build service integrates PCBA into enclosures, cable harnesses, and finished products — tested, labeled, and retail-ready. We manage the full assembly chain, so you receive a product that's ready to ship to your customer or warehouse.</p>
+        <ul>
+          <li><strong>Enclosure assembly</strong> — mechanical integration into your custom or off-the-shelf enclosure</li>
+          <li><strong>Wire harness &amp; cable assembly</strong> — crimped, soldered, and labeled to your wiring schedule</li>
+          <li><strong>Firmware flashing &amp; provisioning</strong> — programmed per device with unique IDs / MACs / keys</li>
+          <li><strong>Functional test &amp; burn-in</strong> — powered-on testing per your test plan, burn-in cycles optional</li>
+          <li><strong>Labeling, serialization &amp; packaging</strong> — barcode/QR, retail packaging, drop-ship ready</li>
+        </ul>
+      </div>
+      <div class="split-visual reveal">
+        <img src="../../generated/box-build-showcase.webp" alt="Box-build assembly" loading="lazy">
+        <div class="visual-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONFORMAL COATING CHECKLIST ═══════════ -->
+<section class="section checklist-section" style="background:var(--bg-secondary)">
+  <div class="container-wide">
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Conformal Coating &amp; Protection</h2>
+    <div class="checklist-grid">
+      <div class="checklist-card reveal">
+        <div class="cl-num">01</div>
+        <div class="cl-body"><h4>Acrylic (AR)</h4><p>General-purpose. Good moisture &amp; fungus resistance. Easy rework. Widely used in consumer, industrial, and <a href="/industries/iot/" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT</a> products.</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">02</div>
+        <div class="cl-body"><h4>Silicone (SR)</h4><p>Wide temperature range (-65 to +200°C). Excellent for <a href="/industries/automotive/" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">automotive</a> under-hood and <a href="/industries/aerospace/" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">aerospace</a> high-temp environments.</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">03</div>
+        <div class="cl-body"><h4>Polyurethane (UR)</h4><p>Excellent chemical &amp; abrasion resistance. <a href="/industries/energy/" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Fuel</a> and solvent resistant. Common in <a href="/industries/industrial/" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">industrial</a> and harsh environments.</p></div>
+      </div>
+      <div class="checklist-card reveal">
+        <div class="cl-num">04</div>
+        <div class="cl-body"><h4>Parylene (XY)</h4><p>Vapor-deposited nano-coating. Ultrathin (0.1–25µm), pinhole-free. The gold standard for <a href="/industries/medical/" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">medical</a> implants and mil/aero electronics.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SPLIT: SMT EQUIPMENT ═══════════ -->
+<section class="data-table-section">
+  <div class="container-wide">
+    <h2 class="reveal">SMT Line Configuration</h2>
+    <div style="overflow-x:auto">
+    <table class="data-table reveal">
+      <thead><tr><th>Station</th><th>Equipment</th><th>Capability</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:500">Solder Paste Printer</td><td>DEK Horizon 03iX / EKRA X5</td><td>±12.5µm alignment @ 2 Cpk. 2D + 3D SPI integration. Automatic stencil cleaning.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">High-Speed Placer</td><td>Yamaha YSM40R / ASM SIPLACE TX2</td><td>Chip shooter: 01005–1005 at 200K CPH. 8× vision alignment. Dual-lane parallel placement.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Fine-Pitch Placer</td><td>Yamaha YSM20WR / ASM SIPLACE SX2</td><td>IC placer: BGA, QFP, QFN, CSP. 0.25mm BGA pitch. POP capable. ±15µm placement accuracy.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Reflow Oven</td><td>Heller 1913 Mk5 / ERSA Hotflow 3/20</td><td>10 zones, N₂ atmosphere. ±1.5°C ΔT. Dual-lane capable. Vacuum soldering option for void reduction.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">AOI</td><td>Koh Young Zenith 2 / Mirtec MV-6</td><td>3D AOI with AI classification. 100% coverage in 4 angles. 25µm resolution. Real-time SPC.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">X-Ray</td><td>Nikon XT V 160 / Nordson Dage Quadra 5</td><td>2D/3D X-Ray. Automatic void analysis. BGA/QFN/LGA inspection. 0.5µm feature detection.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Conformal Coating</td><td>Nordson Asymtek Select Coat SC-350</td><td>Selective spray + needle dispense. Programmable per-board. UV-cure option.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section">
+  <div class="container-wide">
+    <div class="cta-card reveal" style="background-image:url(../../generated/cta-bg-capabilities.webp)">
+      <h2>Send Your BOM &amp; Gerber Files for a Free Assembly DFM Review</h2>
+      <p>Upload your BOM (Excel or CSV), Gerber files, and assembly drawing. We'll return a full DFM report — component availability check, footprint validation, and placement feasibility — all within 24 hours.</p>
+      <div class="cta-actions">
+        <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Assembly Files <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB &amp; PCBA manufacturing from Shenzhen. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 01005–BGA · <strong>IATF 16949</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <h2>Start Your Assembly Project</h2>
+      <p class="mf-subtitle">Upload BOM and Gerber files. Free review in 24 hours.</p>
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="PCBA specs — batch size, component types, BGA pitch, testing needs, box-build?"></textarea></div>
+        <div class="form-group"><label>Attach Files</label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../reveal.js"></script>
+<script>function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}</script>
+<script src="../../inquiry-handler.js"></script></body>
+</html>

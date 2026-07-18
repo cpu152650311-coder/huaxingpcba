@@ -102,7 +102,14 @@
 
   nav.innerHTML =
     '<a href="/"' + active('/') + '>Home</a>' +
-    '<a href="/capabilities/"' + active('/capabilities/') + '>Capabilities</a>' +
+    '<div class="nav-dropdown" id="capabilitiesDropdown">' +
+      '<span class="nav-dropdown-trigger">Capabilities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
+      '<div class="nav-dropdown-panel">' +
+        '<a href="/capabilities/pcb-fabrication/"><span class="dd-icon"></span>PCB Fabrication</a>' +
+        '<a href="/capabilities/pcba-assembly/"><span class="dd-icon"></span>PCBA Assembly</a>' +
+        '<a href="/capabilities/components-sourcing/"><span class="dd-icon"></span>Components Sourcing</a>' +
+      '</div>' +
+    '</div>' +
     '<div class="nav-dropdown" id="industriesDropdown">' +
       '<span class="nav-dropdown-trigger">Industries <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
       '<div class="nav-dropdown-panel">' +
@@ -113,6 +120,7 @@
         '<a href="/industries/telecom/"><span class="dd-icon"></span>Telecom &amp; 5G</a>' +
         '<a href="/industries/energy/"><span class="dd-icon"></span>New Energy</a>' +
         '<a href="/industries/consumer/"><span class="dd-icon"></span>Consumer</a>' +
+        '<a href="/industries/aerospace/"><span class="dd-icon"></span>Aerospace &amp; Defense</a>' +
       '</div>' +
     '</div>' +
     '<a href="/quote/"' + active('/quote/') + '>Quick Quote</a>' +
@@ -121,15 +129,19 @@
     '<a href="/blog/"' + active('/blog/') + '>Blog</a>' +
     '<a href="#inquiry" class="nav-cta" onclick="if(typeof openModal==\'function\')openModal();return false">Get Quote</a>';
 
-  // 3. Dropdown toggle (click to open/close on mobile + desktop)
-  var dd = document.getElementById('industriesDropdown');
-  if (dd) {
+  // 3. Dropdown toggles (click to open/close on mobile + desktop)
+  ['industriesDropdown', 'capabilitiesDropdown'].forEach(function(id) {
+    var dd = document.getElementById(id);
+    if (!dd) return;
     document.addEventListener('click', function(e) {
       if (!dd.contains(e.target)) dd.classList.remove('open');
     });
-    dd.querySelector('.nav-dropdown-trigger').addEventListener('click', function(e) {
-      e.preventDefault();
-      dd.classList.toggle('open');
-    });
-  }
+    var trigger = dd.querySelector('.nav-dropdown-trigger');
+    if (trigger) {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        dd.classList.toggle('open');
+      });
+    }
+  });
 })();
