@@ -75,6 +75,7 @@
       'white-space:nowrap!important;text-decoration:none!important' +
     '}' +
     '.nav-flyout-trigger:hover{color:#e8e8ec!important;background:rgba(200,150,62,.08)!important}' +
+    '.nav-flyout-trigger>a{color:inherit!important;text-decoration:none!important;flex:1}' +
     '.nav-flyout-trigger .ft-arrow{width:12px;height:12px;flex-shrink:0;color:#666}' +
     '.nav-flyout-trigger:hover .ft-arrow{color:#c8963e}' +
     /* Flyout sub-panel — slides out to the RIGHT */
@@ -151,8 +152,8 @@
       '<span class="nav-dropdown-trigger">Capabilities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
       '<div class="nav-dropdown-panel">' +
         /* PCB Types — flyout trigger */
-        '<a href="/capabilities/pcb-types/" class="nav-flyout-trigger" id="pcbTypesFlyout">' +
-          'PCB Types' +
+        '<span class="nav-flyout-trigger" id="pcbTypesFlyout">' +
+          '<a href="/capabilities/pcb-types/">PCB Types</a>' +
           '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
           '<div class="nav-flyout-panel">' +
             '<a href="/capabilities/pcb-types/hdi/">HDI · Any-Layer</a>' +
@@ -164,7 +165,7 @@
             '<a href="/capabilities/pcb-types/aluminum/">Aluminum MCPCB</a>' +
             '<a href="/capabilities/pcb-types/ceramic/">Ceramic · Al₂O₃ / AlN</a>' +
           '</div>' +
-        '</a>' +
+        '</span>' +
         '<a href="/capabilities/advanced-pcb/">Advanced PCB</a>' +
         '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
         '<a href="/capabilities/pcba-assembly/">PCBA Assembly</a>' +
