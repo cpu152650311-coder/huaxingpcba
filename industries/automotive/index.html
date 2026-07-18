@@ -54,18 +54,6 @@
 .hero-actions{display:flex;gap:var(--space-md);flex-wrap:wrap}
 
 /* ── Trust Strip ── */
-/* ── Nav Dropdown ── */
-.nav-dropdown{position:relative;display:inline-flex}
-.nav-dropdown-trigger{display:flex;align-items:center;gap:4px;cursor:pointer}
-.nav-dropdown-trigger svg{width:12px;height:12px;transition:transform .25s}
-.nav-dropdown:hover .nav-dropdown-trigger svg{transform:rotate(180deg)}
-.nav-dropdown-panel{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-sm);min-width:220px;opacity:0;visibility:hidden;transition:all .25s;box-shadow:0 20px 48px rgba(0,0,0,.5),0 0 0 1px rgba(200,150,62,.08) inset;z-index:100}
-.nav-dropdown:hover .nav-dropdown-panel,.nav-dropdown.open .nav-dropdown-panel{opacity:1;visibility:visible;transform:translateX(-50%) translateY(4px)}
-.nav-dropdown-panel a{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);color:var(--text-secondary);font-size:var(--text-sm);border-radius:var(--radius-md);transition:all .2s;text-decoration:none;white-space:nowrap}
-.nav-dropdown-panel a:hover{color:var(--accent);background:var(--accent-subtle)}
-.nav-dropdown-panel a .dd-icon{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.6}
-.nav-dropdown-panel .dd-divider{height:1px;background:var(--border);margin:var(--space-xs) 0}
-@media(max-width:1024px){.nav-dropdown-panel{position:static;transform:none;opacity:1;visibility:visible;background:transparent;border:none;box-shadow:none;padding-left:var(--space-lg)}.nav-dropdown-trigger svg{display:none}}
 /* ── Trust Strip ── */
 .trust-strip{padding:var(--space-lg) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-secondary)}
 .trust-items{display:flex;justify-content:center;align-items:center;gap:var(--space-2xl) var(--space-xl);flex-wrap:wrap}
@@ -572,9 +560,8 @@
 
 <script src="../../reveal.js"></script>
 <script>function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-document.addEventListener('click',function(e){var dd=document.getElementById('industriesDropdown');if(!dd.contains(e.target))dd.classList.remove('open')});
-document.getElementById('industriesDropdown').querySelector('.nav-dropdown-trigger').addEventListener('click',function(e){e.preventDefault();this.parentElement.classList.toggle('open')});
 </script>
 <script src="../../inquiry-handler.js"></script>
+<script src="/nav.js"></script>
 </body>
 </html>
