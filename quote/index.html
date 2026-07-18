@@ -164,7 +164,7 @@
 <!-- Sub Hero -->
 <section class="sub-hero">
   <div class="sub-hero-bg">
-    <img src="../generated/sub-hero-quote.webp" alt="" loading="eager">
+    <img src="../generated/factory-pcb-line.webp" alt="" loading="eager" style="object-position:center 40%">
   </div>
   <div class="sub-hero-overlay"></div>
   <div class="sub-hero-content">
@@ -603,7 +603,7 @@
       <form onsubmit="return handleInquiry(event)" novalidate>
         <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
         <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Project Details <span style="color:var(--accent);font-weight:300;text-transform:none;letter-spacing:0">— auto-filled from your quote</span></label><textarea name="message" id="modalMessage" rows="8" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
         <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
         <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
       </form>
@@ -971,8 +971,50 @@ function toggleAdvanced() {
   toggle.classList.toggle('open');
 }
 
-// Modal
+// Modal — pre-fill with current quote configuration
 function openModal() {
+  var state = getState();
+  var price = calcPrice(state);
+
+  // Build a clean spec summary
+  var dimW = state.w.toFixed(1);
+  var dimH = state.h.toFixed(1);
+  var lines = [];
+  lines.push('PCB QUOTE CONFIGURATION');
+  lines.push('─────────────────────────');
+  lines.push('Layers: ' + (SPEC_LABELS.layers[state.layers] || state.layers));
+  lines.push('Dimensions: ' + dimW + ' × ' + dimH + ' mm');
+  lines.push('Quantity: ' + (SPEC_LABELS.quantity[state.quantity] || state.quantity));
+  lines.push('Material: ' + (SPEC_LABELS.material[state.material] || state.material));
+  lines.push('Thickness: ' + (SPEC_LABELS.thickness[state.thickness] || state.thickness));
+  lines.push('Copper: ' + (SPEC_LABELS.copper[state.copper] || state.copper));
+  lines.push('Surface Finish: ' + (SPEC_LABELS.finish[state.finish] || state.finish));
+  lines.push('Solder Mask: ' + (SPEC_LABELS['mask-color'][state['mask-color']] || state['mask-color']));
+  lines.push('Silkscreen: ' + (SPEC_LABELS.silkscreen[state.silkscreen] || state.silkscreen));
+  lines.push('Trace/Space: ' + (SPEC_LABELS.trace[state.trace] || state.trace));
+  lines.push('Min Drill: ' + (SPEC_LABELS.drill[state.drill] || state.drill));
+  lines.push('Via Process: ' + (SPEC_LABELS.via[state.via] || state.via));
+  lines.push('IPC Class: ' + (SPEC_LABELS['ipc-class'][state['ipc-class']] || 'Class 2'));
+  lines.push('E-Test: ' + (SPEC_LABELS.etest[state.etest] || 'Flying Probe'));
+  lines.push('Turnaround: ' + (SPEC_LABELS.turnaround[state.turnaround] || state.turnaround));
+
+  // Special requirements
+  var specNames = {'impedance':'Impedance Control','gold-fingers':'Gold Fingers','edge-plating':'Edge Plating','blind-buried':'Blind/Buried Vias','peelable-mask':'Peelable Mask','carbon-ink':'Carbon Ink','countersink':'Countersink Holes','controlled-depth':'Controlled Depth Drill'};
+  var specials = Object.keys(state.special);
+  if (specials.length > 0) {
+    lines.push('');
+    lines.push('Special Requirements:');
+    specials.forEach(function(k) { lines.push('  • ' + (specNames[k] || k) + ' (+$' + state.special[k] + ')'); });
+  }
+
+  lines.push('');
+  lines.push('─────────────────────────');
+  lines.push('Estimated Total: $' + price.subtotal.toLocaleString() + ' (Unit: $' + price.unitPrice.toFixed(2) + '/pc × ' + price.qty + ')');
+
+  lines.push('');
+  lines.push('Please provide your detailed quotation and lead time for the above specifications.');
+
+  document.getElementById('modalMessage').value = lines.join('\n');
   document.getElementById('inquiryModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
