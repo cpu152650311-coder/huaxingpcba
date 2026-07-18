@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PCB Manufacturing Types — HDI, Flex, Rigid-Flex, RF, Aluminum, Heavy Copper | Huaxing PCBA</title>
-<meta name="description" content="Complete PCB manufacturing capability by type: HDI any-layer, flexible circuits, rigid-flex, RF/microwave Rogers PTFE, aluminum MCPCB, heavy copper up to 12oz, ceramic substrates. IATF 16949 certified.">
-<meta property="og:title" content="PCB Manufacturing Types — HDI, Flex, Rigid-Flex, RF | Huaxing PCBA">
-<meta property="og:description" content="Comprehensive PCB type capabilities: HDI any-layer, flex, rigid-flex, Rogers/PTFE RF, aluminum metal-core, heavy copper 12oz, ceramic. IPC Class 3, IATF 16949 certified manufacturer.">
-<link rel="stylesheet" href="../../design-tokens.css?v=7">
+<title>PCB Manufacturing Types — HDI, Flex, Rigid-Flex, RF, Aluminum, Heavy Copper, High-Speed | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB manufacturing capability by type: HDI any-layer, flexible circuits, rigid-flex, RF/microwave Rogers PTFE, aluminum MCPCB, heavy copper up to 12oz, high-speed digital, ceramic substrates. IATF 16949 certified.">
+<meta property="og:title" content="PCB Manufacturing Types — 24 Types Across 7 Categories | Huaxing PCBA">
+<meta property="og:description" content="Comprehensive PCB type capabilities: HDI any-layer, flex, rigid-flex, Rogers/PTFE RF, aluminum metal-core, heavy copper 12oz, high-speed digital, ceramic. IPC Class 3, IATF 16949 certified manufacturer.">
+<link rel="stylesheet" href="/design-tokens.css?v=7">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "PCB Manufacturing Types",
-  "description": "PCB types we manufacture: HDI, Flex, Rigid-Flex, RF/Microwave, Aluminum MCPCB, Heavy Copper, Ceramic, and more.",
+  "description": "24 PCB types across 7 categories we manufacture: HDI, Flex, Rigid-Flex, RF/Microwave, Aluminum MCPCB, Heavy Copper, High-Speed Digital, Ceramic, and more.",
   "provider": {"@type": "Organization", "name": "Huaxing PCBA"}
 }
 </script>
@@ -65,21 +65,24 @@
 /* Type grid */
 .type-grid-section{padding:var(--space-2xl) 0 var(--space-3xl)}
 .type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:var(--space-xl)}
-.type-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color .3s,transform .3s}
+.type-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color .3s,transform .3s;display:flex;flex-direction:column}
 .type-card:hover{border-color:rgba(200,150,62,.25);transform:translateY(-2px)}
-.tc-img{position:relative;height:220px;overflow:hidden;background:#0d0d14}
+.tc-img{position:relative;height:280px;overflow:hidden;background:#0d0d14}
 .tc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .type-card:hover .tc-img img{transform:scale(1.04)}
 .tc-img .tc-badge{position:absolute;top:12px;left:12px;padding:.25em .8em;border-radius:3px;font-size:var(--text-xs);font-weight:500;letter-spacing:.04em;background:rgba(200,150,62,.18);color:var(--accent);border:1px solid rgba(200,150,62,.3);backdrop-filter:blur(4px)}
-.tc-body{padding:var(--space-lg)}
+.tc-body{padding:var(--space-lg);display:flex;flex-direction:column;flex:1}
 .tc-body h3{font-size:var(--text-lg);font-weight:300;margin:0 0 var(--space-md) 0;color:var(--text-primary)}
 .tc-specs{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xs) var(--space-md);margin-bottom:var(--space-md)}
 .tc-spec{font-size:var(--text-xs);color:var(--text-muted)}
 .tc-spec strong{color:var(--accent);font-weight:500}
 .tc-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:var(--space-md)}
 .tc-tags span{padding:.2em .7em;font-size:.7rem;border-radius:3px;background:rgba(255,255,255,.04);color:var(--text-muted);border:1px solid rgba(255,255,255,.06);letter-spacing:.03em}
-.tc-link{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-sm);color:var(--accent);text-decoration:none;font-weight:400;transition:gap .2s}
-.tc-link:hover{gap:10px}
+.tc-actions{display:flex;gap:var(--space-sm);margin-top:auto;padding-top:var(--space-md);border-top:1px solid var(--border)}
+.tc-inquire{padding:.5em 1.2em;font-size:var(--text-xs);color:var(--accent);background:transparent;border:1px solid rgba(200,150,62,.3);border-radius:100px;cursor:pointer;transition:all .2s;font-family:inherit;letter-spacing:.03em;white-space:nowrap}
+.tc-inquire:hover{background:rgba(200,150,62,.1);border-color:var(--accent)}
+.tc-link{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--text-muted);text-decoration:none;font-weight:400;transition:gap .2s,gap .2s}
+.tc-link:hover{gap:10px;color:var(--accent)}
 
 /* Split sections */
 .split-section{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center;min-height:480px}
@@ -104,7 +107,7 @@
 
 @media(max-width:1024px){.split-section{grid-template-columns:1fr;gap:var(--space-xl)}.split-section .split-visual{min-height:300px;order:-1}.split-section.reverse{direction:ltr}}
 @media(max-width:768px){.hero h1{font-size:var(--text-3xl)}.hero-stats{grid-template-columns:repeat(2,1fr)}.type-grid{grid-template-columns:1fr}}
-@media(max-width:480px){.hero-stats{grid-template-columns:1fr}.tc-specs{grid-template-columns:1fr}}
+@media(max-width:480px){.hero-stats{grid-template-columns:1fr}.tc-specs{grid-template-columns:1fr}.tc-actions{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -112,6 +115,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
   <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
   <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></symbol>
 </svg>
 
 <header class="site-header" id="header">
@@ -124,16 +128,16 @@
 </header>
 
 <section class="hero">
-  <div class="hero-bg"><img src="../../generated/cap-pcb-types-hero.webp" alt="PCB manufacturing types overview" loading="eager"></div>
+  <div class="hero-bg"><img src="/generated/cap-pcb-types-hero.webp" alt="PCB manufacturing types overview" loading="eager"></div>
   <div class="hero-grid"></div><div class="hero-geo"></div>
   <div class="hero-content">
     <p class="hero-eyebrow reveal">Capabilities / PCB Types</p>
     <h1 class="reveal">Every PCB Type.<br><em>One Manufacturing</em> Partner.</h1>
-    <p class="hero-lead reveal">From standard FR-4 multi-layer to advanced any-layer HDI, flexible polyimide circuits, Rogers RF laminates, aluminum MCPCBs, and heavy copper power boards — we manufacture the full spectrum of PCB technologies under one roof. Select a type below to view detailed capability specs.</p>
+    <p class="hero-lead reveal">From standard FR-4 multi-layer to advanced any-layer HDI, flexible polyimide circuits, Rogers RF laminates, aluminum MCPCBs, high-speed digital, and heavy copper power boards — we manufacture 24 PCB types across 7 categories under one roof.</p>
     <div class="hero-stats reveal">
-      <div class="hero-stat"><span class="val">12+</span><span class="lbl">PCB Types</span></div>
+      <div class="hero-stat"><span class="val">24</span><span class="lbl">PCB Types</span></div>
       <div class="hero-stat"><span class="val">3/3mil</span><span class="lbl">Finest Trace</span></div>
-      <div class="hero-stat"><span class="val">24L</span><span class="lbl">Max Layers</span></div>
+      <div class="hero-stat"><span class="val">40L</span><span class="lbl">Max Layers</span></div>
       <div class="hero-stat"><span class="val">IPC 3</span><span class="lbl">Class Standard</span></div>
     </div>
     <div class="hero-actions reveal">
@@ -150,6 +154,7 @@
       <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> HDI Any-Layer</div>
       <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> Flex & Rigid-Flex</div>
       <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> Rogers / PTFE RF</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> High-Speed Digital</div>
       <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> Aluminum MCPCB</div>
       <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> Heavy Copper 12oz</div>
     </div>
@@ -164,18 +169,19 @@
   <button class="tab-btn" onclick="filterTypes('rf',this)">RF / High-Frequency</button>
   <button class="tab-btn" onclick="filterTypes('metal',this)">Metal-Core / Thermal</button>
   <button class="tab-btn" onclick="filterTypes('heavy',this)">Heavy Copper</button>
+  <button class="tab-btn" onclick="filterTypes('highspeed',this)">High-Speed Digital</button>
   <button class="tab-btn" onclick="filterTypes('advanced',this)">Advanced &amp; Specialty</button>
 </div>
 
-<!-- Type Grid -->
+<!-- Type Grid — 24 cards, each with a unique image + inquiry button -->
 <section class="type-grid-section">
   <div class="container-wide">
     <div class="type-grid reveal" id="typeGrid">
 
-      <!-- === HDI === -->
+      <!-- ============ HDI (3 cards) ============ -->
       <div class="type-card" data-cat="hdi">
         <div class="tc-img">
-          <img src="../../generated/cap-pcb-types-hdi.webp" alt="HDI PCB microvia detail" loading="lazy">
+          <img src="/generated/cap-pcb-types-hdi.webp" alt="HDI PCB microvia detail" loading="lazy">
           <span class="tc-badge">HDI</span>
         </div>
         <div class="tc-body">
@@ -187,12 +193,18 @@
             <div class="tc-spec">BGA: <strong>0.3mm pitch</strong></div>
           </div>
           <div class="tc-tags"><span>1+N+1</span><span>2+N+2</span><span>Any-Layer</span><span>VIP</span><span>Copper-Fill</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Full HDI specs <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Full HDI specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="hdi">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-icsubstrate.webp" alt="IC Substrate / Carrier PCB" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-icsubstrate.webp" alt="IC Substrate carrier PCB" loading="lazy">
+          <span class="tc-badge">HDI</span>
+        </div>
         <div class="tc-body">
           <h3>IC Substrate &amp; Carrier PCB</h3>
           <div class="tc-specs">
@@ -202,12 +214,18 @@
             <div class="tc-spec">Thickness: <strong>0.1–0.3mm</strong></div>
           </div>
           <div class="tc-tags"><span>BT Resin</span><span>ABF</span><span>Fine-Line</span><span>Flip-Chip</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Inquire about IC substrates <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">IC substrate specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="hdi">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-flex.webp" alt="Semi-Flex / Bend-to-Install PCB" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-semiflex.webp" alt="Semi-Flex bend-to-install PCB" loading="lazy">
+          <span class="tc-badge">HDI</span>
+        </div>
         <div class="tc-body">
           <h3>Semi-Flex PCB</h3>
           <div class="tc-specs">
@@ -217,14 +235,17 @@
             <div class="tc-spec">Cost: <strong>vs rigid-flex</strong></div>
           </div>
           <div class="tc-tags"><span>Cost-Saving</span><span>Bend-to-Install</span><span>FR-4 Based</span></div>
-          <a href="/quote/" class="tc-link">Request quote <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/quote/" class="tc-link">Request quote <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- === Flex & Rigid-Flex === -->
+      <!-- ============ Flex & Rigid-Flex (3 cards) ============ -->
       <div class="type-card" data-cat="flex">
         <div class="tc-img">
-          <img src="../../generated/cap-pcb-types-flex.webp" alt="Flexible PCB with polyimide coverlay" loading="lazy">
+          <img src="/generated/cap-pcb-types-flex.webp" alt="Flexible PCB polyimide coverlay" loading="lazy">
           <span class="tc-badge">Flex</span>
         </div>
         <div class="tc-body">
@@ -236,12 +257,18 @@
             <div class="tc-spec">Stiffener: <strong>FR-4/PI/SS</strong></div>
           </div>
           <div class="tc-tags"><span>Adhesiveless</span><span>Sculptured</span><span>Dynamic Flex</span><span>LCP Option</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Flex manufacturing specs <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Flex specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="flex">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-hdi.webp" alt="Rigid-Flex Hybrid Assembly" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-rigidflex.webp" alt="Rigid-Flex hybrid PCB" loading="lazy">
+          <span class="tc-badge">Flex</span>
+        </div>
         <div class="tc-body">
           <h3>Rigid-Flex PCB — Hybrid Construction</h3>
           <div class="tc-specs">
@@ -251,12 +278,18 @@
             <div class="tc-spec">Bonding: <strong>No-flow PP</strong></div>
           </div>
           <div class="tc-tags"><span>2R+2F to 10R+4F</span><span>Bookbinder</span><span>Air-Gap</span><span>ZIF Tail</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Rigid-flex details <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Rigid-flex details <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="flex">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-flex.webp" alt="FPC with EMI Shielding" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-fpc.webp" alt="FPC with EMI shielding" loading="lazy">
+          <span class="tc-badge">Flex</span>
+        </div>
         <div class="tc-body">
           <h3>FPC — Flexible Printed Circuit</h3>
           <div class="tc-specs">
@@ -266,14 +299,17 @@
             <div class="tc-spec">Shield: <strong>Silver ink / film</strong></div>
           </div>
           <div class="tc-tags"><span>Connector Replacement</span><span>EMI Shield</span><span>ZIF Contact</span></div>
-          <a href="/quote/" class="tc-link">Submit FPC design <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/quote/" class="tc-link">Submit FPC design <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- === RF / High-Frequency === -->
+      <!-- ============ RF / High-Frequency (3 cards) ============ -->
       <div class="type-card" data-cat="rf">
         <div class="tc-img">
-          <img src="../../generated/cap-pcb-types-rf.webp" alt="RF PCB with precision impedance traces" loading="lazy">
+          <img src="/generated/cap-pcb-types-rf.webp" alt="RF PCB precision impedance traces" loading="lazy">
           <span class="tc-badge">RF</span>
         </div>
         <div class="tc-body">
@@ -285,12 +321,18 @@
             <div class="tc-spec">Frequency: <strong>Up to 77GHz</strong></div>
           </div>
           <div class="tc-tags"><span>4350B/4003C</span><span>RT/duroid 5880</span><span>Hybrid Stackup</span><span>ENIG/Imm Ag</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">RF capability details <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">RF capability details <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="rf">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-rf.webp" alt="Mixed-Signal RF + Digital Hybrid" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-hybridrf.webp" alt="Hybrid RF-digital PCB" loading="lazy">
+          <span class="tc-badge">RF</span>
+        </div>
         <div class="tc-body">
           <h3>Hybrid RF-Digital PCB</h3>
           <div class="tc-specs">
@@ -300,12 +342,18 @@
             <div class="tc-spec">Cost: <strong>vs all-RF laminate</strong></div>
           </div>
           <div class="tc-tags"><span>Mixed-Signal</span><span>Cost-Optimized</span><span>Antenna + Digital</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Hybrid RF stackup <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Hybrid RF stackup <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="rf">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-rf.webp" alt="mmWave Antenna Array PCB" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-mmwave.webp" alt="mmWave antenna array PCB" loading="lazy">
+          <span class="tc-badge">RF</span>
+        </div>
         <div class="tc-body">
           <h3>mmWave Antenna PCB</h3>
           <div class="tc-specs">
@@ -315,13 +363,19 @@
             <div class="tc-spec">Array: <strong>Up to 256 elements</strong></div>
           </div>
           <div class="tc-tags"><span>5G AAU</span><span>77GHz Radar</span><span>Beamforming</span><span>Patch Array</span></div>
-          <a href="/industries/telecom/" class="tc-link">Telecom applications <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/industries/telecom/" class="tc-link">Telecom applications <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- === Metal-Core / Thermal === -->
+      <!-- ============ Metal-Core / Thermal (3 cards) ============ -->
       <div class="type-card" data-cat="metal">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-metalcore.webp" alt="Aluminum MCPCB — LED / Power" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-metalcore.webp" alt="Aluminum MCPCB LED power" loading="lazy">
+          <span class="tc-badge">Thermal</span>
+        </div>
         <div class="tc-body">
           <h3>Aluminum MCPCB — Metal-Core</h3>
           <div class="tc-specs">
@@ -331,12 +385,18 @@
             <div class="tc-spec">Dielectric: <strong>75–150µm</strong></div>
           </div>
           <div class="tc-tags"><span>LED Lighting</span><span>Power Supply</span><span>Automotive HID</span><span>COB</span></div>
-          <a href="/capabilities/pcb-fabrication/" class="tc-link">MCPCB capability specs <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/pcb-fabrication/" class="tc-link">MCPCB specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="metal">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-metalcore.webp" alt="Copper-Core — Extreme Thermal" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-coppercore.webp" alt="Copper-core extreme thermal PCB" loading="lazy">
+          <span class="tc-badge">Thermal</span>
+        </div>
         <div class="tc-body">
           <h3>Copper-Core PCB</h3>
           <div class="tc-specs">
@@ -346,12 +406,18 @@
             <div class="tc-spec">Application: <strong>Extreme heat</strong></div>
           </div>
           <div class="tc-tags"><span>High-Power LED</span><span>Laser Diode</span><span>IGBT Module</span></div>
-          <a href="/capabilities/pcb-fabrication/" class="tc-link">Copper-core inquiry <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/pcb-fabrication/" class="tc-link">Copper-core inquiry <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="metal">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-ceramic.webp" alt="Ceramic Substrate — Al₂O₃ / AlN" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-ceramic.webp" alt="Ceramic substrate Al2O3 AlN" loading="lazy">
+          <span class="tc-badge">Thermal</span>
+        </div>
         <div class="tc-body">
           <h3>Ceramic PCB — Al₂O₃ &amp; AlN</h3>
           <div class="tc-specs">
@@ -361,13 +427,19 @@
             <div class="tc-spec">Thickness: <strong>0.25–1.0mm</strong></div>
           </div>
           <div class="tc-tags"><span>UV LED</span><span>Power Module</span><span>Hermetic</span><span>High-Temp</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Ceramic PCB specs <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Ceramic PCB specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- === Heavy Copper === -->
+      <!-- ============ Heavy Copper (3 cards) ============ -->
       <div class="type-card" data-cat="heavy">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-heavycopper.webp" alt="Heavy Copper 12oz — Power Electronics" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-heavycopper.webp" alt="Heavy copper 12oz power electronics PCB" loading="lazy">
+          <span class="tc-badge">Power</span>
+        </div>
         <div class="tc-body">
           <h3>Heavy Copper PCB — Up to 12oz</h3>
           <div class="tc-specs">
@@ -377,12 +449,18 @@
             <div class="tc-spec">Mask: <strong>Double-coat above 4oz</strong></div>
           </div>
           <div class="tc-tags"><span>BMS</span><span>EV Charger</span><span>Welding Inverter</span><span>VRM</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Heavy copper capability <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Heavy copper specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="heavy">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-heavycopper.webp" alt="Thick Copper Bus Bar PCB" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-busbar.webp" alt="Embedded copper bus bar PCB" loading="lazy">
+          <span class="tc-badge">Power</span>
+        </div>
         <div class="tc-body">
           <h3>Bus Bar PCB — Embedded Copper</h3>
           <div class="tc-specs">
@@ -392,12 +470,18 @@
             <div class="tc-spec">Process: <strong>Laminated bus bar</strong></div>
           </div>
           <div class="tc-tags"><span>Power Distribution</span><span>UPS</span><span>Motor Drive</span></div>
-          <a href="/quote/" class="tc-link">Custom bus bar inquiry <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/quote/" class="tc-link">Custom bus bar inquiry <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="heavy">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-heavycopper.webp" alt="Multilayer Power — Mixed Weights" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-mixedweight.webp" alt="Mixed-weight copper PCB" loading="lazy">
+          <span class="tc-badge">Power</span>
+        </div>
         <div class="tc-body">
           <h3>Mixed-Weight Copper PCB</h3>
           <div class="tc-specs">
@@ -407,13 +491,83 @@
             <div class="tc-spec">Control: <strong>Impedance ±5%</strong></div>
           </div>
           <div class="tc-tags"><span>Server VRM</span><span>Motor Controller</span><span>Power + Logic</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Mixed-weight stackup <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Mixed-weight stackup <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- === Advanced & Specialty === -->
+      <!-- ============ High-Speed Digital (3 cards) — NEW ============ -->
+      <div class="type-card" data-cat="highspeed">
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-highspeed.webp" alt="High-speed digital PCB Megtron 6" loading="lazy">
+          <span class="tc-badge">HSD</span>
+        </div>
+        <div class="tc-body">
+          <h3>High-Speed Digital PCB</h3>
+          <div class="tc-specs">
+            <div class="tc-spec">Material: <strong>Megtron 6/7/8</strong></div>
+            <div class="tc-spec">Data Rate: <strong>Up to 112Gbps PAM4</strong></div>
+            <div class="tc-spec">Layers: <strong>8–40+</strong></div>
+            <div class="tc-spec">Skew: <strong>±1ps intra-pair</strong></div>
+          </div>
+          <div class="tc-tags"><span>400G/800G</span><span>PCIe 5.0/6.0</span><span>Backplane</span><span>SerDes</span></div>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">High-speed specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-card" data-cat="highspeed">
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-lowloss.webp" alt="Low-loss high-frequency PCB Tachyon-100G" loading="lazy">
+          <span class="tc-badge">HSD</span>
+        </div>
+        <div class="tc-body">
+          <h3>Low-Loss RF/Microwave PCB</h3>
+          <div class="tc-specs">
+            <div class="tc-spec">Material: <strong>Tachyon-100G / I-Tera MT40</strong></div>
+            <div class="tc-spec">Df @10GHz: <strong>≤0.002</strong></div>
+            <div class="tc-spec">Copper: <strong>Ultra-smooth HVLP</strong></div>
+            <div class="tc-spec">Application: <strong>5G / Data Center</strong></div>
+          </div>
+          <div class="tc-tags"><span>112G</span><span>5G NR</span><span>mmWave</span><span>Satcom</span></div>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/industries/telecom/" class="tc-link">Telecom applications <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-card" data-cat="highspeed">
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-embedpassive.webp" alt="Embedded passives PCB" loading="lazy">
+          <span class="tc-badge">HSD</span>
+        </div>
+        <div class="tc-body">
+          <h3>Embedded Passives PCB</h3>
+          <div class="tc-specs">
+            <div class="tc-spec">Technology: <strong>Planar capacitance / buried R</strong></div>
+            <div class="tc-spec">Cap density: <strong>Up to 5nF/cm²</strong></div>
+            <div class="tc-spec">Layers: <strong>6–24</strong></div>
+            <div class="tc-spec">Benefit: <strong>Reduced BOM count</strong></div>
+          </div>
+          <div class="tc-tags"><span>PDN Optimization</span><span>Miniaturization</span><span>ZBC</span><span>Ohmega-Ply</span></div>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Embedded passives <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ Advanced & Specialty (6 cards) ============ -->
       <div class="type-card" data-cat="advanced">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-specialty.webp" alt="Back-Drill / High-Speed Digital" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-backdrill.webp" alt="Back-drill PCB signal integrity" loading="lazy">
+          <span class="tc-badge">Specialty</span>
+        </div>
         <div class="tc-body">
           <h3>Back-Drill PCB — Signal Integrity</h3>
           <div class="tc-specs">
@@ -423,12 +577,18 @@
             <div class="tc-spec">Rate: <strong>Up to 56Gbps PAM4</strong></div>
           </div>
           <div class="tc-tags"><span>Backplane</span><span>Server</span><span>112G</span><span>Low-Loss</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Back-drill capability <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Back-drill specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="advanced">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-specialty.webp" alt="Edge-Plated / Castellation PCB" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-edgeplate.webp" alt="Edge-plated castellated PCB" loading="lazy">
+          <span class="tc-badge">Specialty</span>
+        </div>
         <div class="tc-body">
           <h3>Edge-Plated &amp; Castellated PCB</h3>
           <div class="tc-specs">
@@ -438,12 +598,18 @@
             <div class="tc-spec">Application: <strong>Module carrier</strong></div>
           </div>
           <div class="tc-tags"><span>IoT Module</span><span>Bluetooth/WiFi</span><span>Shield Can</span></div>
-          <a href="/quote/" class="tc-link">Edge-plating inquiry <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/quote/" class="tc-link">Edge-plating inquiry <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="advanced">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-specialty.webp" alt="Ultra-Thin / Wearable PCB" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-ultrathin.webp" alt="Ultra-thin wearable PCB" loading="lazy">
+          <span class="tc-badge">Specialty</span>
+        </div>
         <div class="tc-body">
           <h3>Ultra-Thin PCB</h3>
           <div class="tc-specs">
@@ -453,12 +619,18 @@
             <div class="tc-spec">Stiffener: <strong>Optional PI/FR-4</strong></div>
           </div>
           <div class="tc-tags"><span>Wearable</span><span>Smart Card</span><span>Medical Patch</span><span>Sensor</span></div>
-          <a href="/industries/consumer/" class="tc-link">Consumer applications <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/industries/consumer/" class="tc-link">Consumer applications <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="advanced">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-specialty.webp" alt="Gold Finger / Edge Connector" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-goldfinger.webp" alt="Gold finger edge connector PCB" loading="lazy">
+          <span class="tc-badge">Specialty</span>
+        </div>
         <div class="tc-body">
           <h3>Gold Finger PCB</h3>
           <div class="tc-specs">
@@ -468,12 +640,18 @@
             <div class="tc-spec">Application: <strong>PCIe / DIMM / mezzanine</strong></div>
           </div>
           <div class="tc-tags"><span>PCIe Card</span><span>Memory Module</span><span>Backplane</span><span>Daughter Card</span></div>
-          <a href="/capabilities/pcb-fabrication/" class="tc-link">Gold finger specs <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/pcb-fabrication/" class="tc-link">Gold finger specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="advanced">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-specialty.webp" alt="Cavity / Stepped Stagger PCB" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-cavity.webp" alt="Cavity PCB embedded component" loading="lazy">
+          <span class="tc-badge">Specialty</span>
+        </div>
         <div class="tc-body">
           <h3>Cavity PCB — Embedded Component</h3>
           <div class="tc-specs">
@@ -483,12 +661,18 @@
             <div class="tc-spec">Application: <strong>Chip embedding / RF</strong></div>
           </div>
           <div class="tc-tags"><span>Die Cavity</span><span>RF Shield</span><span>Component Embed</span></div>
-          <a href="/capabilities/advanced-pcb/" class="tc-link">Cavity PCB inquiry <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/advanced-pcb/" class="tc-link">Cavity PCB inquiry <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
       <div class="type-card" data-cat="advanced">
-        <div class="tc-img"><img src="/generated/cap-pcb-types-standard.webp" alt="Multilayer — Standard FR-4" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="tc-img">
+          <img src="/generated/cap-pcb-types-standard.webp" alt="Standard multilayer FR-4 PCB" loading="lazy">
+          <span class="tc-badge">Specialty</span>
+        </div>
         <div class="tc-body">
           <h3>Standard Multilayer PCB — FR-4</h3>
           <div class="tc-specs">
@@ -498,7 +682,10 @@
             <div class="tc-spec">Finish: <strong>ENIG / HASL / OSP / Imm Ag</strong></div>
           </div>
           <div class="tc-tags"><span>General Purpose</span><span>Consumer</span><span>Industrial</span><span>Automotive</span></div>
-          <a href="/capabilities/pcb-fabrication/" class="tc-link">Standard PCB specs <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
+          <div class="tc-actions">
+            <button class="tc-inquire" onclick="openModal()"><svg width="12" height="12"><use href="#icon-mail"/></svg> Inquire</button>
+            <a href="/capabilities/pcb-fabrication/" class="tc-link">Standard PCB specs <svg width="12" height="12"><use href="#icon-arrow-right"/></svg></a>
+          </div>
         </div>
       </div>
 
@@ -506,24 +693,24 @@
   </div>
 </section>
 
-<!-- Split Showcase: HDI close-up -->
+<!-- Split Showcase: High-Speed Digital close-up -->
 <section class="section" style="background:var(--bg-secondary)">
   <div class="container-wide">
     <div class="split-section">
       <div class="split-content reveal">
-        <p class="section-eyebrow">HDI — High Density Interconnect</p>
-        <h2>Any-Layer Microvia.<br>Maximum Routing Freedom.</h2>
-        <p>HDI PCBs use laser-drilled microvias as small as 75µm to achieve connection densities impossible with traditional through-hole technology. Our any-layer HDI (ELIC) process allows any copper layer to connect directly to any other — critical for compact wearable, smartphone, and advanced medical designs.</p>
+        <p class="section-eyebrow">High-Speed Digital — 112Gbps Ready</p>
+        <h2>Signal Integrity.<br>Beyond 100 Gigabits.</h2>
+        <p>High-speed digital PCBs demand ultra-low-loss laminates, precision impedance control, and back-drilling to remove via stubs. Our Megtron 6/Tachyon-100G stackups support 112Gbps PAM4 signaling with intra-pair skew under ±1ps — ready for 800G data center, 5G infrastructure, and AI accelerator designs.</p>
         <ul>
-          <li><strong>Build-up types:</strong> 1+N+1, 2+N+2, 3+N+3, any-layer (ELIC)</li>
-          <li><strong>Laser via:</strong> 75µm CO₂ / 50µm UV depending on dielectric</li>
-          <li><strong>Via fill:</strong> Copper-filled &amp; planarized for via-in-pad (0.3mm BGA pitch)</li>
-          <li><strong>Max configuration:</strong> 24-layer with 6-order any-layer interconnection</li>
+          <li><strong>Materials:</strong> Megtron 6/7/8, Tachyon-100G, I-Tera MT40, RO4835</li>
+          <li><strong>Copper:</strong> Ultra-smooth HVLP (Rz ≤ 1.5µm) for reduced skin-effect loss</li>
+          <li><strong>Back-drill:</strong> Stub removal ≤10mil, depth tolerance ±2mil</li>
+          <li><strong>Testing:</strong> TDR impedance verification, VNA S-parameter to 50GHz</li>
         </ul>
-        <a href="/capabilities/advanced-pcb/" class="btn btn-ghost">View HDI Capability Specs <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></a>
+        <button class="btn btn-ghost" onclick="openModal()">Inquire About High-Speed PCBs <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
       </div>
       <div class="split-visual reveal">
-        <img src="../../generated/cap-pcb-types-hdi.webp" alt="HDI PCB microvia detail" loading="lazy">
+        <img src="/generated/cap-pcb-types-highspeed.webp" alt="High-speed digital PCB differential pair routing" loading="lazy">
         <div class="visual-overlay"></div>
       </div>
     </div>
@@ -533,7 +720,7 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="container-wide">
-    <div class="cta-card reveal" style="background-image:url(../../generated/cta-bg-capabilities.webp)">
+    <div class="cta-card reveal" style="background-image:url(/generated/cta-bg-capabilities.webp)">
       <h2>Don't See Your PCB Type? We Engineer Custom Solutions.</h2>
       <p>Specialty laminates, unusual stackups, tight tolerances — our engineering team reviews every project individually. Send your specs and we'll respond with a detailed manufacturing assessment within 24 hours.</p>
       <div class="cta-actions">
@@ -548,11 +735,33 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-        <p>Premium PCB &amp; PCBA manufacturing from Shenzhen. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+        <p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
       </div>
-      <div class="footer-col"><h4>Services</h4><a href="/capabilities/pcb-fabrication/">PCB Fabrication</a><a href="/capabilities/pcba-assembly/">SMT Assembly</a><a href="/capabilities/components-sourcing/">Components Sourcing</a><a href="/quote/">Quick Quote</a></div>
-      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a></div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>
+        <a href="/capabilities/pcba-assembly/">SMT Assembly</a>
+        <a href="/capabilities/components-sourcing/">Box-Build</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="/industries/automotive/">Automotive</a>
+        <a href="/industries/medical/">Medical</a>
+        <a href="/industries/industrial/">Industrial</a>
+        <a href="/industries/iot/">IoT</a>
+        <a href="/industries/telecom/">Telecom &amp; 5G</a>
+        <a href="/industries/energy/">New Energy</a>
+        <a href="/industries/consumer/">Consumer</a>
+        <a href="/industries/aerospace/">Aerospace &amp; Defense</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a>
+      </div>
     </div>
     <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
   </div>
@@ -564,7 +773,7 @@
     <div class="modal-image-panel">
       <img src="/generated/modal-pcba-showcase.webp" alt="">
       <div class="modal-image-overlay"></div>
-      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">12+ PCB Types · <strong>IPC Class 3</strong> · IATF 16949</div></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">24 PCB Types · <strong>IPC Class 3</strong> · IATF 16949</div></div>
     </div>
     <div class="modal-form-panel">
       <h2>Start Your PCB Project</h2>
@@ -580,17 +789,17 @@
   </div>
 </div>
 
-<script src="../../reveal.js"></script>
+<script src="/reveal.js"></script>
 <script>
 function filterTypes(cat,btn){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.type-card').forEach(c=>{
-    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none'
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'flex':'none'
   })
 }
 function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
 </script>
-<script src="../../inquiry-handler.js"></script></body>
+<script src="/inquiry-handler.js"></script></body>
 </html>
