@@ -3,75 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PCB Quick Quote — Instant Price Estimation | Huaxing PCBA</title>
-<meta name="description" content="Get an instant PCB manufacturing cost estimate. Select your specs — layers, dimensions, material, quantity — and see estimated pricing. Free, no registration required.">
-<meta property="og:title" content="PCB Quick Quote | Huaxing PCBA">
-<meta property="og:description" content="Instant PCB price estimation — layers, dimensions, material, finish. Free and no registration.">
+<title>PCB Instant Quote — Online Price Calculator | Huaxing PCBA</title>
+<meta name="description" content="Get an instant PCB manufacturing price. Configure layers, dimensions, material, finish & quantity — see real-time pricing. Free, no registration.">
+<meta property="og:title" content="PCB Instant Quote | Huaxing PCBA">
+<meta property="og:description" content="Real-time PCB price calculator — layers, material, finish, quantity. Free and instant.">
 <link rel="stylesheet" href="../design-tokens.css?v=7">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
 <style>
-  .quote-section{padding:var(--space-2xl) 0}
-  .quote-layout{display:grid;grid-template-columns:1fr 380px;gap:var(--space-xl);align-items:start}
-  .quote-summary{
-    position:sticky;top:calc(var(--header-h) + var(--space-md));
-    background:var(--bg-elevated);
-    border:1px solid var(--border);
-    border-radius:var(--radius-xl);
-    padding:var(--space-xl);
-  }
-  .price-display{
-    text-align:center;padding-bottom:var(--space-lg);
-    border-bottom:1px solid var(--border);
-    margin-bottom:var(--space-lg);
-  }
-  .price-total{
-    font-size:clamp(2rem,4vw,var(--text-4xl));
-    font-weight:200;color:var(--accent);
-    line-height:1;margin-bottom:var(--space-xs);
-  }
-  .price-total .per{font-size:var(--text-sm);color:var(--text-muted);font-weight:300}
-  .price-range{font-size:var(--text-sm);color:var(--text-secondary)}
-  .option-row{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:var(--space-sm) 0;
-    border-bottom:1px solid var(--border);
-    font-size:var(--text-sm);
-  }
-  .option-row .key{color:var(--text-muted)}
-  .option-row .val{color:var(--text-primary);font-weight:300}
-  .spec-pills{display:flex;flex-wrap:wrap;gap:0.5rem}
-  .spec-pill{
-    padding:0.5rem 1rem;font-size:var(--text-sm);font-weight:300;
-    background:var(--bg-secondary);border:1px solid var(--border);
-    border-radius:var(--radius-md);cursor:pointer;
-    transition:all var(--duration) var(--ease);
-    color:var(--text-secondary);
-  }
-  .spec-pill:hover{border-color:var(--accent-25);color:var(--text-primary)}
-  .spec-pill.selected{background:var(--accent-subtle);border-color:var(--accent);color:var(--accent)}
-  .spec-group{margin-bottom:var(--space-xl)}
-  .spec-group-label{
-    font-size:var(--text-xs);font-weight:400;
-    color:var(--text-muted);text-transform:uppercase;
-    letter-spacing:0.06em;margin-bottom:var(--space-sm);
-    display:flex;align-items:center;gap:var(--space-sm);
-  }
-  .spec-group-label::after{content:'';flex:1;height:1px;background:var(--border)}
-  .dim-inputs{display:flex;gap:var(--space-sm);align-items:center}
-  .dim-inputs input{
-    width:100px;padding:0.6rem 0.75rem;
-    background:var(--bg-secondary);border:1px solid var(--border);
-    border-radius:var(--radius-md);font-size:var(--text-sm);
-    color:var(--text-primary);font-weight:300;text-align:center;
-  }
-  .dim-inputs input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-10)}
-  .dim-inputs span{color:var(--text-muted);font-size:var(--text-sm)}
-  @media(max-width:768px){
-    .quote-layout{grid-template-columns:1fr}
-    .quote-summary{position:static}
-  }
+/* ── Quote Page Layout ── */
+.quote-section{padding:var(--space-2xl) 0}
+.quote-layout{display:grid;grid-template-columns:1fr 400px;gap:var(--space-xl);align-items:start}
+
+/* ── PCB Type Tabs ── */
+.pcb-type-tabs{display:flex;gap:2px;margin-bottom:var(--space-xl);background:var(--bg-secondary);border-radius:var(--radius-md);padding:4px;border:1px solid var(--border)}
+.pcb-type-tab{flex:1;padding:10px 16px;text-align:center;font-size:var(--text-sm);font-weight:300;color:var(--text-secondary);border-radius:6px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.pcb-type-tab:hover{color:var(--text-primary)}
+.pcb-type-tab.active{background:var(--bg-elevated);color:var(--accent);font-weight:400;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+
+/* ── Form Card ── */
+.quote-form-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-xl) var(--space-xl) var(--space-lg);position:relative;overflow:hidden}
+.quote-form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-25),transparent)}
+
+/* ── Spec Groups ── */
+.spec-group{margin-bottom:var(--space-lg)}
+.spec-group:last-child{margin-bottom:0}
+.spec-group-label{font-size:var(--text-xs);font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;display:flex;align-items:center;gap:var(--space-sm)}
+.spec-group-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── Spec Pills ── */
+.spec-pills{display:flex;flex-wrap:wrap;gap:8px}
+.spec-pill{padding:8px 16px;font-size:var(--text-sm);font-weight:300;background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .18s;color:var(--text-secondary);line-height:1.4}
+.spec-pill:hover{border-color:var(--accent-25);color:var(--text-primary);background:var(--bg-elevated)}
+.spec-pill.selected{background:var(--accent-subtle);border-color:var(--accent);color:var(--accent-light);font-weight:400}
+
+/* Color swatch inside pill */
+.swatch{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:middle;margin-right:6px;border:1px solid rgba(255,255,255,.15);position:relative;top:-1px}
+.swatch.green{background:#1a6e35}
+.swatch.blue{background:#1a4f8a}
+.swatch.black{background:#1a1a1a}
+.swatch.white{background:#e8e8e8}
+.swatch.red{background:#8b1a1a}
+.swatch.yellow{background:#8a7a1a}
+
+/* ── Dimensions Input ── */
+.dim-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.dim-input-group{display:flex;align-items:center;gap:8px}
+.dim-input-group label{font-size:var(--text-xs);color:var(--text-muted);white-space:nowrap}
+.dim-input-group input{width:96px;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;font-size:var(--text-sm);color:var(--text-primary);font-weight:300;text-align:center;transition:border-color .2s}
+.dim-input-group input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-10);outline:none}
+.dim-sep{color:var(--text-muted);font-size:var(--text-lg);font-weight:200}
+.dim-unit-toggle{display:flex;gap:0;border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.dim-unit-toggle button{padding:6px 14px;font-size:var(--text-xs);font-weight:400;color:var(--text-muted);background:var(--bg-secondary);cursor:pointer;transition:all .15s}
+.dim-unit-toggle button.active{background:var(--accent);color:#0a0a0b}
+
+/* ── Special Requirements (Check Toggles) ── */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .18s;user-select:none}
+.check-item:hover{border-color:var(--accent-25)}
+.check-item.checked{border-color:var(--accent);background:var(--accent-subtle)}
+.check-box{width:18px;height:18px;border:1.5px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.check-item.checked .check-box{background:var(--accent);border-color:var(--accent)}
+.check-box svg{width:12px;height:12px;stroke:#0a0a0b;opacity:0;transition:opacity .15s}
+.check-item.checked .check-box svg{opacity:1}
+.check-label{font-size:var(--text-sm);font-weight:300;color:var(--text-secondary);transition:color .15s}
+.check-item.checked .check-label{color:var(--text-primary)}
+.check-price{font-size:var(--text-xs);color:var(--text-muted);margin-left:auto}
+.check-item.checked .check-price{color:var(--accent)}
+
+/* ── Right Summary Panel ── */
+.quote-summary{position:sticky;top:calc(var(--header-h) + var(--space-md))}
+.summary-card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden}
+.summary-header{background:linear-gradient(135deg,rgba(200,150,62,.08) 0%,transparent 100%);padding:var(--space-lg) var(--space-lg) var(--space-md);text-align:center;border-bottom:1px solid var(--border)}
+.summary-header .sh-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:4px}
+.summary-header .sh-total{font-size:clamp(2rem,3.5vw,var(--text-4xl));font-weight:200;color:var(--accent);line-height:1;margin-bottom:4px}
+.summary-header .sh-range{font-size:var(--text-xs);color:var(--text-secondary)}
+.summary-body{padding:var(--space-md) var(--space-lg)}
+.summary-body .sb-label{font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-sm);font-weight:400}
+
+/* Breakdown rows */
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:var(--text-sm)}
+.price-row .pr-key{color:var(--text-muted)}
+.price-row .pr-val{color:var(--text-primary);font-weight:300;text-align:right}
+.price-row.pr-subtotal{border-top:1px solid var(--border);margin-top:6px;padding-top:12px}
+.price-row.pr-subtotal .pr-key{color:var(--text-primary);font-weight:400}
+.price-row.pr-subtotal .pr-val{color:var(--accent);font-weight:400;font-size:var(--text-lg)}
+.price-row.pr-unit{border-top:1px solid var(--border);margin-top:6px;padding-top:12px}
+.price-row.pr-unit .pr-val{color:var(--accent-light)}
+
+/* Spec summary rows */
+.config-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:var(--text-xs);border-bottom:1px solid var(--border)}
+.config-row .cr-key{color:var(--text-muted);flex-shrink:0;margin-right:var(--space-sm)}
+.config-row .cr-val{color:var(--text-secondary);text-align:right;font-weight:300}
+
+.summary-actions{padding:0 var(--space-lg) var(--space-lg)}
+.summary-actions .btn{width:100%;justify-content:center;margin-bottom:8px}
+.summary-note{text-align:center;font-size:var(--text-xs);color:var(--text-muted);line-height:1.4}
+
+/* Reset button */
+.btn-reset{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:var(--text-xs);font-weight:300;color:var(--text-muted);border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all .2s;margin-top:var(--space-lg);background:transparent}
+.btn-reset:hover{border-color:var(--accent-25);color:var(--text-primary)}
+
+/* Feature badges below tabs */
+.feat-strip{display:flex;gap:var(--space-md);margin-bottom:var(--space-lg);flex-wrap:wrap}
+.feat-badge{display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--text-muted)}
+.feat-badge svg{color:var(--accent);flex-shrink:0}
+
+/* ── Advanced Options Collapse ── */
+.adv-toggle{display:flex;align-items:center;gap:8px;padding:10px 0;margin-bottom:var(--space-md);cursor:pointer;font-size:var(--text-sm);color:var(--text-muted);transition:color .2s;user-select:none;background:none;border:none;width:auto}
+.adv-toggle:hover{color:var(--text-primary)}
+.adv-toggle svg{transition:transform .25s}
+.adv-toggle.open svg{transform:rotate(180deg)}
+.adv-panel{display:none}
+.adv-panel.open{display:block}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .quote-layout{grid-template-columns:1fr}
+  .quote-summary{position:static}
+  .pcb-type-tabs{flex-wrap:wrap}
+  .pcb-type-tab{flex:1 1 auto;min-width:80px;font-size:var(--text-xs);padding:8px 10px}
+  .check-grid{grid-template-columns:1fr}
+  .dim-row{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:600px){
+  .quote-form-card{padding:var(--space-md)}
+  .spec-pill{padding:6px 12px;font-size:var(--text-xs)}
+  .summary-body,.summary-actions{padding-left:var(--space-md);padding-right:var(--space-md)}
+}
 </style>
 </head>
 <body>
@@ -79,16 +139,21 @@
 <!-- SVG Sprite -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
   <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-  <symbol id="icon-calculator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h0M8 14h0M8 18h0M12 10h0M12 14h0M12 18h0M16 10h0M16 14h0M16 18h0"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></symbol>
   <symbol id="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></symbol>
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
 </svg>
 
 <!-- Header -->
 <header class="site-header" id="header">
   <div class="container">
     <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    <nav class="nav-links" id="navLinks">
-    </nav>
+    <nav class="nav-links" id="navLinks"></nav>
     <script src="/nav.js?v=7"></script>
     <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
       <span></span><span></span><span></span>
@@ -104,170 +169,371 @@
   <div class="sub-hero-overlay"></div>
   <div class="sub-hero-content">
     <div class="container">
-      <p class="section-label reveal">Quick Quote</p>
-      <h1 class="reveal">PCB <em>Cost Estimator</em></h1>
-      <p class="reveal">Select your specifications below for an instant estimate. All prices are indicative — final quote confirmed by our engineering team.</p>
+      <p class="section-label reveal">Online Calculator</p>
+      <h1 class="reveal">PCB <em>Instant Quote</em></h1>
+      <p class="reveal">Configure your PCB specifications below — real-time pricing updates as you change options.</p>
     </div>
   </div>
 </section>
 
 <!-- Quote Estimator -->
-<section class="section" style="position:relative">
-  <div style="position:absolute;inset:0;background:url(../generated/geometric-tech-texture.webp) center/cover no-repeat;opacity:.06;pointer-events:none"></div>
+<section class="quote-section" style="position:relative">
+  <div style="position:absolute;inset:0;background:url(../generated/geometric-tech-texture.webp) center/cover no-repeat;opacity:.04;pointer-events:none"></div>
   <div class="container" style="position:relative;z-index:1">
     <div class="quote-layout reveal">
-      <!-- Options -->
-      <div class="quote-form-wrap">
-        <!-- Layer Count -->
-        <div class="spec-group">
-          <div class="spec-group-label">Layer Count</div>
-          <div class="spec-pills" data-param="layers">
-            <button class="spec-pill" data-val="2">2 Layer</button>
-            <button class="spec-pill selected" data-val="4">4 Layer</button>
-            <button class="spec-pill" data-val="6">6 Layer</button>
-            <button class="spec-pill" data-val="8">8 Layer</button>
-            <button class="spec-pill" data-val="10">10 Layer</button>
-            <button class="spec-pill" data-val="12">12 Layer</button>
-            <button class="spec-pill" data-val="16">16 Layer</button>
-            <button class="spec-pill" data-val="20">20 Layer</button>
-            <button class="spec-pill" data-val="24">24 Layer</button>
-            <button class="spec-pill" data-val="32">32 Layer</button>
-          </div>
+      <!-- LEFT: Spec Options -->
+      <div>
+        <!-- Trust badges -->
+        <div class="feat-strip">
+          <span class="feat-badge"><svg width="14" height="14"><use href="#icon-shield"/></svg> ISO 9001 &amp; UL Certified</span>
+          <span class="feat-badge"><svg width="14" height="14"><use href="#icon-truck"/></svg> Global Shipping</span>
+          <span class="feat-badge"><svg width="14" height="14"><use href="#icon-file"/></svg> Free DFM Review</span>
         </div>
 
-        <!-- Board Dimensions -->
-        <div class="spec-group">
-          <div class="spec-group-label">Board Dimensions (mm)</div>
-          <div class="dim-inputs">
-            <input type="number" id="dimW" value="100" min="10" max="600" step="1" onchange="updateQuote()">
-            <span>&times;</span>
-            <input type="number" id="dimH" value="100" min="10" max="800" step="1" onchange="updateQuote()">
-            <span>mm</span>
-          </div>
+        <!-- PCB Type Tabs -->
+        <div class="pcb-type-tabs" id="pcbTypeTabs">
+          <button class="pcb-type-tab active" data-type="standard">Standard PCB</button>
+          <button class="pcb-type-tab" data-type="advanced">Advanced PCB</button>
+          <button class="pcb-type-tab" data-type="flex">Flex PCB</button>
+          <button class="pcb-type-tab" data-type="rf">RF / Microwave</button>
+          <button class="pcb-type-tab" data-type="metal">Metal-Core / Ceramic</button>
         </div>
 
-        <!-- Quantity -->
-        <div class="spec-group">
-          <div class="spec-group-label">Order Quantity</div>
-          <div class="spec-pills" data-param="quantity">
-            <button class="spec-pill" data-val="5">5 pcs (Proto)</button>
-            <button class="spec-pill selected" data-val="10">10 pcs</button>
-            <button class="spec-pill" data-val="50">50 pcs</button>
-            <button class="spec-pill" data-val="100">100 pcs</button>
-            <button class="spec-pill" data-val="500">500 pcs</button>
-            <button class="spec-pill" data-val="1000">1,000 pcs</button>
-            <button class="spec-pill" data-val="5000">5,000 pcs</button>
-            <button class="spec-pill" data-val="10000">10,000 pcs</button>
-          </div>
-        </div>
+        <div class="quote-form-card">
 
-        <!-- Material -->
-        <div class="spec-group">
-          <div class="spec-group-label">Base Material</div>
-          <div class="spec-pills" data-param="material">
-            <button class="spec-pill selected" data-val="fr4">FR-4</button>
-            <button class="spec-pill" data-val="high-tg">High-Tg FR-4</button>
-            <button class="spec-pill" data-val="rogers">Rogers 4350B</button>
-            <button class="spec-pill" data-val="aluminum">Aluminum</button>
-            <button class="spec-pill" data-val="ceramic">Ceramic (Al₂O₃)</button>
-            <button class="spec-pill" data-val="ptfe">PTFE (Taconic)</button>
-            <button class="spec-pill" data-val="polyimide">Polyimide (Flex)</button>
+          <!-- Layer Count -->
+          <div class="spec-group">
+            <div class="spec-group-label">Layer Count</div>
+            <div class="spec-pills" data-param="layers">
+              <button class="spec-pill" data-val="1">1 Layer</button>
+              <button class="spec-pill" data-val="2">2 Layer</button>
+              <button class="spec-pill selected" data-val="4">4 Layer</button>
+              <button class="spec-pill" data-val="6">6 Layer</button>
+              <button class="spec-pill" data-val="8">8 Layer</button>
+              <button class="spec-pill" data-val="10">10 Layer</button>
+              <button class="spec-pill" data-val="12">12 Layer</button>
+              <button class="spec-pill" data-val="14">14 Layer</button>
+              <button class="spec-pill" data-val="16">16 Layer</button>
+              <button class="spec-pill" data-val="20">20 Layer</button>
+              <button class="spec-pill" data-val="24">24 Layer</button>
+              <button class="spec-pill" data-val="28">28 Layer</button>
+              <button class="spec-pill" data-val="32">32 Layer</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Copper Weight -->
-        <div class="spec-group">
-          <div class="spec-group-label">Copper Weight</div>
-          <div class="spec-pills" data-param="copper">
-            <button class="spec-pill selected" data-val="1">1 oz (35μm)</button>
-            <button class="spec-pill" data-val="2">2 oz (70μm)</button>
-            <button class="spec-pill" data-val="3">3 oz (105μm)</button>
-            <button class="spec-pill" data-val="4">4 oz (140μm)</button>
-            <button class="spec-pill" data-val="6">6 oz (210μm)</button>
+          <!-- Board Dimensions -->
+          <div class="spec-group">
+            <div class="spec-group-label">Board Dimensions</div>
+            <div class="dim-row">
+              <div class="dim-input-group">
+                <label>Width</label>
+                <input type="number" id="dimW" value="100" min="5" max="600" step="1">
+              </div>
+              <span class="dim-sep">×</span>
+              <div class="dim-input-group">
+                <label>Height</label>
+                <input type="number" id="dimH" value="100" min="5" max="800" step="1">
+              </div>
+              <div class="dim-unit-toggle" id="dimUnitToggle">
+                <button class="active" data-unit="mm">mm</button>
+                <button data-unit="mil">mil</button>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- Surface Finish -->
-        <div class="spec-group">
-          <div class="spec-group-label">Surface Finish</div>
-          <div class="spec-pills" data-param="finish">
-            <button class="spec-pill" data-val="hasl">HASL (Lead-free)</button>
-            <button class="spec-pill selected" data-val="enig">ENIG (Gold)</button>
-            <button class="spec-pill" data-val="osp">OSP</button>
-            <button class="spec-pill" data-val="imm-ag">Immersion Silver</button>
-            <button class="spec-pill" data-val="imm-sn">Immersion Tin</button>
-            <button class="spec-pill" data-val="enepig">ENEPIG</button>
-            <button class="spec-pill" data-val="hard-gold">Hard Gold</button>
+          <!-- Order Quantity -->
+          <div class="spec-group">
+            <div class="spec-group-label">Order Quantity</div>
+            <div class="spec-pills" data-param="quantity">
+              <button class="spec-pill" data-val="5">5 <span style="color:var(--text-muted)">Proto</span></button>
+              <button class="spec-pill selected" data-val="10">10</button>
+              <button class="spec-pill" data-val="30">30</button>
+              <button class="spec-pill" data-val="50">50</button>
+              <button class="spec-pill" data-val="100">100</button>
+              <button class="spec-pill" data-val="300">300</button>
+              <button class="spec-pill" data-val="500">500</button>
+              <button class="spec-pill" data-val="1000">1,000</button>
+              <button class="spec-pill" data-val="3000">3,000</button>
+              <button class="spec-pill" data-val="5000">5,000</button>
+              <button class="spec-pill" data-val="10000">10,000</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Solder Mask Color -->
-        <div class="spec-group">
-          <div class="spec-group-label">Solder Mask Color</div>
-          <div class="spec-pills" data-param="mask-color">
-            <button class="spec-pill selected" data-val="green">Green</button>
-            <button class="spec-pill" data-val="blue">Blue</button>
-            <button class="spec-pill" data-val="black">Black</button>
-            <button class="spec-pill" data-val="white">White</button>
-            <button class="spec-pill" data-val="red">Red</button>
-            <button class="spec-pill" data-val="yellow">Yellow</button>
+          <!-- Board Thickness -->
+          <div class="spec-group">
+            <div class="spec-group-label">Board Thickness</div>
+            <div class="spec-pills" data-param="thickness">
+              <button class="spec-pill" data-val="0.4">0.4 mm</button>
+              <button class="spec-pill" data-val="0.6">0.6 mm</button>
+              <button class="spec-pill" data-val="0.8">0.8 mm</button>
+              <button class="spec-pill" data-val="1.0">1.0 mm</button>
+              <button class="spec-pill selected" data-val="1.6">1.6 mm</button>
+              <button class="spec-pill" data-val="2.0">2.0 mm</button>
+              <button class="spec-pill" data-val="2.4">2.4 mm</button>
+              <button class="spec-pill" data-val="3.2">3.2 mm</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Min Trace/Space -->
-        <div class="spec-group">
-          <div class="spec-group-label">Min Trace / Space</div>
-          <div class="spec-pills" data-param="trace">
-            <button class="spec-pill" data-val="6">6/6mil (Standard)</button>
-            <button class="spec-pill selected" data-val="5">5/5mil</button>
-            <button class="spec-pill" data-val="4">4/4mil (Fine)</button>
-            <button class="spec-pill" data-val="3">3/3mil (Ultra-Fine)</button>
+          <!-- Base Material -->
+          <div class="spec-group">
+            <div class="spec-group-label">Base Material</div>
+            <div class="spec-pills" data-param="material">
+              <button class="spec-pill selected" data-val="fr4">FR-4 (Tg 135°C)</button>
+              <button class="spec-pill" data-val="high-tg">High-Tg FR-4 (Tg 170°C)</button>
+              <button class="spec-pill" data-val="halogen-free">Halogen-Free FR-4</button>
+              <button class="spec-pill" data-val="high-speed-a" data-cat="advanced rf">Megtron 6 / M6</button>
+              <button class="spec-pill" data-val="rogers" data-cat="advanced rf">Rogers 4350B</button>
+              <button class="spec-pill" data-val="rogers3003" data-cat="rf">Rogers 3003</button>
+              <button class="spec-pill" data-val="ptfe" data-cat="rf">PTFE (Taconic)</button>
+              <button class="spec-pill" data-val="polyimide" data-cat="flex">Polyimide (Flex)</button>
+              <button class="spec-pill" data-val="aluminum" data-cat="metal">Aluminum MCPCB</button>
+              <button class="spec-pill" data-val="copper-core" data-cat="metal">Copper-Core</button>
+              <button class="spec-pill" data-val="ceramic-al2o3" data-cat="metal">Al₂O₃ Ceramic</button>
+              <button class="spec-pill" data-val="ceramic-aln" data-cat="metal">AlN Ceramic</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Turnaround -->
-        <div class="spec-group">
-          <div class="spec-group-label">Turnaround Time</div>
-          <div class="spec-pills" data-param="turnaround">
-            <button class="spec-pill" data-val="24h">24h Rush</button>
-            <button class="spec-pill" data-val="3d">3 Days</button>
-            <button class="spec-pill selected" data-val="5d">5 Days (Standard)</button>
-            <button class="spec-pill" data-val="7d">7 Days</button>
-            <button class="spec-pill" data-val="10d">10 Days</button>
+          <!-- Copper Weight -->
+          <div class="spec-group">
+            <div class="spec-group-label">Copper Weight (Outer/Inner)</div>
+            <div class="spec-pills" data-param="copper">
+              <button class="spec-pill selected" data-val="1">1 oz / 35μm</button>
+              <button class="spec-pill" data-val="1.5">1.5 oz / 52μm</button>
+              <button class="spec-pill" data-val="2">2 oz / 70μm</button>
+              <button class="spec-pill" data-val="3">3 oz / 105μm</button>
+              <button class="spec-pill" data-val="4">4 oz / 140μm</button>
+              <button class="spec-pill" data-val="6">6 oz / 210μm</button>
+              <button class="spec-pill" data-val="8">8 oz / 280μm</button>
+              <button class="spec-pill" data-val="10">10 oz / 350μm</button>
+              <button class="spec-pill" data-val="12">12 oz / 420μm</button>
+            </div>
           </div>
-        </div>
 
-        <button class="btn btn-ghost btn-sm" onclick="resetQuote()" style="margin-top:var(--space-md)">
-          <svg width="14" height="14"><use href="#icon-refresh"/></svg> Reset All
-        </button>
+          <!-- Surface Finish -->
+          <div class="spec-group">
+            <div class="spec-group-label">Surface Finish</div>
+            <div class="spec-pills" data-param="finish">
+              <button class="spec-pill" data-val="hasl">HASL Lead-Free</button>
+              <button class="spec-pill selected" data-val="enig">ENIG (Au/Ni)</button>
+              <button class="spec-pill" data-val="enepig">ENEPIG</button>
+              <button class="spec-pill" data-val="osp">OSP</button>
+              <button class="spec-pill" data-val="imm-ag">Immersion Silver</button>
+              <button class="spec-pill" data-val="imm-sn">Immersion Tin</button>
+              <button class="spec-pill" data-val="hard-gold">Hard Gold (Edge Conn.)</button>
+            </div>
+          </div>
+
+          <!-- Solder Mask -->
+          <div class="spec-group">
+            <div class="spec-group-label">Solder Mask</div>
+            <div class="spec-pills" data-param="mask-color">
+              <button class="spec-pill selected" data-val="green"><span class="swatch green"></span>Green</button>
+              <button class="spec-pill" data-val="blue"><span class="swatch blue"></span>Blue</button>
+              <button class="spec-pill" data-val="black"><span class="swatch black"></span>Black</button>
+              <button class="spec-pill" data-val="white"><span class="swatch white"></span>White</button>
+              <button class="spec-pill" data-val="red"><span class="swatch red"></span>Red</button>
+              <button class="spec-pill" data-val="yellow"><span class="swatch yellow"></span>Yellow</button>
+              <button class="spec-pill" data-val="matte-black">Matte Black</button>
+              <button class="spec-pill" data-val="matte-green">Matte Green</button>
+            </div>
+          </div>
+
+          <!-- Silkscreen -->
+          <div class="spec-group">
+            <div class="spec-group-label">Silkscreen Legend</div>
+            <div class="spec-pills" data-param="silkscreen">
+              <button class="spec-pill selected" data-val="white">White</button>
+              <button class="spec-pill" data-val="black">Black</button>
+              <button class="spec-pill" data-val="yellow">Yellow</button>
+              <button class="spec-pill" data-val="none">None</button>
+            </div>
+          </div>
+
+          <!-- Min Trace/Space -->
+          <div class="spec-group">
+            <div class="spec-group-label">Min Trace / Space</div>
+            <div class="spec-pills" data-param="trace">
+              <button class="spec-pill" data-val="8">8/8 mil</button>
+              <button class="spec-pill" data-val="6">6/6 mil</button>
+              <button class="spec-pill selected" data-val="5">5/5 mil</button>
+              <button class="spec-pill" data-val="4">4/4 mil</button>
+              <button class="spec-pill" data-val="3.5">3.5/3.5 mil</button>
+              <button class="spec-pill" data-val="3">3/3 mil</button>
+            </div>
+          </div>
+
+          <!-- Min Drill -->
+          <div class="spec-group">
+            <div class="spec-group-label">Min Drill Hole</div>
+            <div class="spec-pills" data-param="drill">
+              <button class="spec-pill" data-val="0.5">0.50 mm</button>
+              <button class="spec-pill" data-val="0.4">0.40 mm</button>
+              <button class="spec-pill selected" data-val="0.3">0.30 mm</button>
+              <button class="spec-pill" data-val="0.25">0.25 mm</button>
+              <button class="spec-pill" data-val="0.2">0.20 mm</button>
+              <button class="spec-pill" data-val="0.15">0.15 mm</button>
+            </div>
+          </div>
+
+          <!-- Via Process -->
+          <div class="spec-group">
+            <div class="spec-group-label">Via Process</div>
+            <div class="spec-pills" data-param="via">
+              <button class="spec-pill selected" data-val="tenting">Tenting Vias</button>
+              <button class="spec-pill" data-val="plugged">Plugged Vias</button>
+              <button class="spec-pill" data-val="via-in-pad">Via-in-Pad (VIP)</button>
+              <button class="spec-pill" data-val="filled">Filled &amp; Capped</button>
+            </div>
+          </div>
+
+          <!-- Turnaround -->
+          <div class="spec-group">
+            <div class="spec-group-label">Turnaround Time</div>
+            <div class="spec-pills" data-param="turnaround">
+              <button class="spec-pill" data-val="24h">24h Rush</button>
+              <button class="spec-pill" data-val="48h">48h Rush</button>
+              <button class="spec-pill" data-val="3d">3 Days</button>
+              <button class="spec-pill" data-val="4d">4 Days</button>
+              <button class="spec-pill selected" data-val="5d">5 Days</button>
+              <button class="spec-pill" data-val="7d">7 Days</button>
+              <button class="spec-pill" data-val="10d">10 Days</button>
+              <button class="spec-pill" data-val="14d">14 Days</button>
+            </div>
+          </div>
+
+          <!-- Advanced Options Toggle -->
+          <button class="adv-toggle" id="advToggle" onclick="toggleAdvanced()">
+            <svg width="14" height="14"><use href="#icon-chevron-down"/></svg>
+            Advanced Options
+          </button>
+
+          <div class="adv-panel" id="advPanel">
+            <!-- Special Requirements -->
+            <div class="spec-group">
+              <div class="spec-group-label">Special Requirements</div>
+              <div class="check-grid" id="specialReqs">
+                <label class="check-item" data-param="impedance" data-cost="45">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Impedance Control</span>
+                  <span class="check-price">+$45</span>
+                </label>
+                <label class="check-item" data-param="gold-fingers" data-cost="38">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Gold Fingers</span>
+                  <span class="check-price">+$38</span>
+                </label>
+                <label class="check-item" data-param="edge-plating" data-cost="28">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Edge Plating</span>
+                  <span class="check-price">+$28</span>
+                </label>
+                <label class="check-item" data-param="blind-buried" data-cost="120">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Blind / Buried Vias</span>
+                  <span class="check-price">+$120</span>
+                </label>
+                <label class="check-item" data-param="peelable-mask" data-cost="22">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Peelable Solder Mask</span>
+                  <span class="check-price">+$22</span>
+                </label>
+                <label class="check-item" data-param="carbon-ink" data-cost="18">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Carbon Ink (Keypads)</span>
+                  <span class="check-price">+$18</span>
+                </label>
+                <label class="check-item" data-param="countersink" data-cost="15">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Countersink Holes</span>
+                  <span class="check-price">+$15</span>
+                </label>
+                <label class="check-item" data-param="controlled-depth" data-cost="32">
+                  <span class="check-box"><svg width="12" height="12"><use href="#icon-check"/></svg></span>
+                  <span class="check-label">Controlled Depth Drill</span>
+                  <span class="check-price">+$32</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- PCB Color / Silkscreen customization for advanced -->
+            <div class="spec-group">
+              <div class="spec-group-label">IPC Class</div>
+              <div class="spec-pills" data-param="ipc-class">
+                <button class="spec-pill selected" data-val="2">IPC Class 2</button>
+                <button class="spec-pill" data-val="3">IPC Class 3</button>
+              </div>
+            </div>
+
+            <!-- E-Test -->
+            <div class="spec-group">
+              <div class="spec-group-label">Electrical Test</div>
+              <div class="spec-pills" data-param="etest">
+                <button class="spec-pill selected" data-val="flying-probe">Flying Probe</button>
+                <button class="spec-pill" data-val="fixture">Test Fixture</button>
+                <button class="spec-pill" data-val="none">No Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reset -->
+          <button class="btn-reset" onclick="resetQuote()">
+            <svg width="14" height="14"><use href="#icon-refresh"/></svg> Reset to Defaults
+          </button>
+        </div>
       </div>
 
-      <!-- Summary Panel -->
+      <!-- RIGHT: Price Summary Panel -->
       <div class="quote-summary">
-        <div class="price-display">
-          <div style="font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-sm)">Estimated Total</div>
-          <div class="price-total" id="totalPrice">$248</div>
-          <div class="price-range" id="priceRange">$198 – $310 per batch</div>
+        <div class="summary-card">
+          <div class="summary-header">
+            <div class="sh-label">Estimated Total</div>
+            <div class="sh-total" id="totalPrice">$312</div>
+            <div class="sh-range" id="priceRange">$250 – $390 estimated range</div>
+          </div>
+
+          <!-- Price Breakdown -->
+          <div class="summary-body">
+            <div class="sb-label">Price Breakdown</div>
+            <div class="price-row"><span class="pr-key">Unit Price</span><span class="pr-val" id="unitPrice">$10.40</span></div>
+            <div class="price-row"><span class="pr-key">Engineering / NRE</span><span class="pr-val" id="nreFee">$68</span></div>
+            <div class="price-row"><span class="pr-key">Setup Fee</span><span class="pr-val" id="setupFee">$45</span></div>
+            <div class="price-row"><span class="pr-key">Quantity</span><span class="pr-val" id="qtyDisplay">× 30 pcs</span></div>
+            <div class="price-row pr-subtotal"><span class="pr-key">Subtotal</span><span class="pr-val" id="subtotal">$312</span></div>
+            <div class="price-row"><span class="pr-key">Shipping Est.</span><span class="pr-val" style="color:var(--text-muted)">TBD</span></div>
+          </div>
+
+          <div class="summary-body" style="border-top:1px solid var(--border);padding-top:var(--space-sm)">
+            <div class="sb-label">Your Configuration</div>
+            <div id="configSummary"></div>
+          </div>
+
+          <!-- Actions -->
+          <div class="summary-actions">
+            <button class="btn btn-primary btn-lg" onclick="openModal()">
+              <svg width="16" height="16"><use href="#icon-upload"/></svg> Upload Files &amp; Get Quote
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="openModal()" style="width:100%;justify-content:center">
+              Save &amp; Send for Review
+            </button>
+            <p class="summary-note">Instant estimate. Final pricing confirmed after DFM review by our engineering team.</p>
+          </div>
         </div>
-        <div style="font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--space-sm)">Your Configuration</div>
-        <div id="summaryOptions"></div>
-        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:var(--space-lg)" onclick="openModal()">
-          Get Firm Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg>
-        </button>
-        <p style="text-align:center;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-sm)">Prices are estimates. Final price confirmed after engineering review.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="section" style="background:var(--bg-secondary)">
+<!-- Upload CTA -->
+<section class="section" style="background:var(--bg-secondary);padding-top:0">
   <div class="container">
     <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-rigid-flex.webp)">
-      <h2>Need a Precise Quote?</h2>
-      <p>Upload your Gerber files and BOM. Our engineers will review and return a detailed quotation within 24 hours.</p>
+      <h2>Ready to Order?</h2>
+      <p>Upload your Gerber files and BOM. Our engineers will complete a free DFM review and return a binding quotation within 24 hours.</p>
       <div style="display:flex;gap:var(--space-sm);justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-primary btn-lg" onclick="openModal()">Upload Files & Get Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+        <button class="btn btn-primary btn-lg" onclick="openModal()">
+          <svg width="16" height="16"><use href="#icon-upload"/></svg> Upload &amp; Get Firm Quote
+        </button>
+        <a href="/contact/" class="btn btn-ghost btn-lg">Contact Sales</a>
       </div>
     </div>
   </div>
@@ -279,7 +545,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+        <p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
@@ -296,7 +562,8 @@
         <a href="/industries/iot/">IoT</a>
         <a href="/industries/telecom/">Telecom &amp; 5G</a>
         <a href="/industries/energy/">New Energy</a>
-        <a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a>
+        <a href="/industries/consumer/">Consumer</a>
+        <a href="/industries/aerospace/">Aerospace &amp; Defense</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -306,8 +573,9 @@
         <a href="/contact/">Contact</a>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a>
-	        <a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a>
+        <h4>Contact</h4>
+        <a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a>
+        <a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -317,7 +585,7 @@
   </div>
 </footer>
 
-<!-- Modal -->
+<!-- Inquiry Modal -->
 <div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
   <div class="modal-dialog">
     <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -345,120 +613,254 @@
 
 <script src="../reveal.js"></script>
 <script>
-/* ---- Quote Estimator Logic ---- */
+/* ── Quote Estimator Engine ── */
 const SPEC_LABELS = {
-  layers:{2:'2 Layer',4:'4 Layer',6:'6 Layer',8:'8 Layer',10:'10 Layer',12:'12 Layer',16:'16 Layer',20:'20 Layer',24:'24 Layer',32:'32 Layer'},
-  material:{'fr4':'FR-4','high-tg':'High-Tg FR-4','rogers':'Rogers 4350B','aluminum':'Aluminum','ceramic':'Ceramic','ptfe':'PTFE','polyimide':'Polyimide'},
-  copper:{1:'1 oz',2:'2 oz',3:'3 oz',4:'4 oz',6:'6 oz'},
-  finish:{'hasl':'HASL LF','enig':'ENIG','osp':'OSP','imm-ag':'Imm. Silver','imm-sn':'Imm. Tin','enepig':'ENEPIG','hard-gold':'Hard Gold'},
-  'mask-color':{'green':'Green','blue':'Blue','black':'Black','white':'White','red':'Red','yellow':'Yellow'},
-  trace:{6:'6/6mil',5:'5/5mil',4:'4/4mil',3:'3/3mil'},
-  turnaround:{'24h':'24h Rush','3d':'3 Days','5d':'5 Days','7d':'7 Days','10d':'10 Days'},
-  quantity:{5:'5 pcs',10:'10 pcs',50:'50 pcs',100:'100 pcs',500:'500 pcs',1000:'1,000 pcs',5000:'5,000 pcs',10000:'10,000 pcs'}
+  layers:{1:'1 Layer',2:'2 Layer',4:'4 Layer',6:'6 Layer',8:'8 Layer',10:'10 Layer',12:'12 Layer',14:'14 Layer',16:'16 Layer',20:'20 Layer',24:'24 Layer',28:'28 Layer',32:'32 Layer'},
+  material:{'fr4':'FR-4','high-tg':'High-Tg FR-4','halogen-free':'Halogen-Free FR-4','high-speed-a':'Megtron 6','rogers':'Rogers 4350B','rogers3003':'Rogers 3003','ptfe':'PTFE','polyimide':'Polyimide','aluminum':'Aluminum MCPCB','copper-core':'Copper-Core','ceramic-al2o3':'Al₂O₃ Ceramic','ceramic-aln':'AlN Ceramic'},
+  copper:{1:'1 oz',1.5:'1.5 oz',2:'2 oz',3:'3 oz',4:'4 oz',6:'6 oz',8:'8 oz',10:'10 oz',12:'12 oz'},
+  finish:{'hasl':'HASL LF','enig':'ENIG','enepig':'ENEPIG','osp':'OSP','imm-ag':'Imm. Silver','imm-sn':'Imm. Tin','hard-gold':'Hard Gold'},
+  'mask-color':{'green':'Green','blue':'Blue','black':'Black','white':'White','red':'Red','yellow':'Yellow','matte-black':'Matte Black','matte-green':'Matte Green'},
+  silkscreen:{'white':'White','black':'Black','yellow':'Yellow','none':'None'},
+  thickness:{0.4:'0.4 mm',0.6:'0.6 mm',0.8:'0.8 mm',1.0:'1.0 mm',1.6:'1.6 mm',2.0:'2.0 mm',2.4:'2.4 mm',3.2:'3.2 mm'},
+  trace:{8:'8/8 mil',6:'6/6 mil',5:'5/5 mil',4:'4/4 mil',3.5:'3.5/3.5 mil',3:'3/3 mil'},
+  drill:{0.5:'0.50 mm',0.4:'0.40 mm',0.3:'0.30 mm',0.25:'0.25 mm',0.2:'0.20 mm',0.15:'0.15 mm'},
+  via:{'tenting':'Tenting','plugged':'Plugged','via-in-pad':'Via-in-Pad','filled':'Filled & Capped'},
+  turnaround:{'24h':'24h Rush','48h':'48h Rush','3d':'3 Days','4d':'4 Days','5d':'5 Days','7d':'7 Days','10d':'10 Days','14d':'14 Days'},
+  quantity:{5:'5 pcs',10:'10 pcs',30:'30 pcs',50:'50 pcs',100:'100 pcs',300:'300 pcs',500:'500 pcs',1000:'1,000 pcs',3000:'3,000 pcs',5000:'5,000 pcs',10000:'10,000 pcs'},
+  'ipc-class':{2:'IPC Class 2',3:'IPC Class 3'},
+  etest:{'flying-probe':'Flying Probe','fixture':'Test Fixture','none':'No Test'}
 };
 
-function getState(){
+let currentUnit = 'mm';
+
+function getState() {
   const s = {};
+  // Pill selections
   document.querySelectorAll('.spec-pills').forEach(group => {
     const param = group.dataset.param;
     const sel = group.querySelector('.selected');
-    if (sel) s[param] = sel.dataset.val;
+    if (sel) {
+      let val = sel.dataset.val;
+      // Parse numeric values
+      if (val && !isNaN(parseFloat(val))) val = parseFloat(val);
+      s[param] = val;
+    }
   });
-  s.w = parseInt(document.getElementById('dimW').value) || 100;
-  s.h = parseInt(document.getElementById('dimH').value) || 100;
+  // Dimensions
+  s.w = parseFloat(document.getElementById('dimW').value) || 100;
+  s.h = parseFloat(document.getElementById('dimH').value) || 100;
+  // Unit conversion
+  if (currentUnit === 'mil') { s.w = s.w * 0.0254; s.h = s.h * 0.0254; }
+  // Special checkboxes
+  s.special = {};
+  document.querySelectorAll('#specialReqs .check-item.checked').forEach(el => {
+    const p = el.dataset.param;
+    const c = parseFloat(el.dataset.cost) || 0;
+    s.special[p] = c;
+  });
   return s;
 }
 
-function calcPrice(state){
-  const area = (state.w * state.h) / 10000; // cm²
-  let base = 0;
-  const l = parseInt(state.layers) || 4;
+function calcPrice(state) {
+  const area = Math.max((state.w * state.h) / 100, 1); // cm² (min 1)
+  const l = parseFloat(state.layers) || 4;
 
-  // Layer multiplier
-  if (l <= 2) base = area * 0.08;
-  else if (l <= 4) base = area * 0.12;
-  else if (l <= 6) base = area * 0.18;
-  else if (l <= 8) base = area * 0.25;
-  else if (l <= 12) base = area * 0.40;
-  else if (l <= 16) base = area * 0.60;
-  else if (l <= 20) base = area * 0.85;
-  else if (l <= 24) base = area * 1.15;
-  else base = area * 1.60;
+  // Base unit price by layer count
+  let base;
+  if (l <= 1) base = area * 0.06;
+  else if (l <= 2) base = area * 0.09;
+  else if (l <= 4) base = area * 0.14;
+  else if (l <= 6) base = area * 0.21;
+  else if (l <= 8) base = area * 0.29;
+  else if (l <= 10) base = area * 0.38;
+  else if (l <= 12) base = area * 0.48;
+  else if (l <= 14) base = area * 0.59;
+  else if (l <= 16) base = area * 0.72;
+  else if (l <= 20) base = area * 1.00;
+  else if (l <= 24) base = area * 1.35;
+  else if (l <= 28) base = area * 1.80;
+  else base = area * 2.40;
 
   // Material multiplier
-  const matMul = {'fr4':1,'high-tg':1.2,'rogers':3.5,'aluminum':1.6,'ceramic':5,'ptfe':4,'polyimide':2.5};
+  const matMul = {
+    'fr4':1, 'high-tg':1.18, 'halogen-free':1.25,
+    'high-speed-a':3.2, 'rogers':3.8, 'rogers3003':4.5, 'ptfe':4.2,
+    'polyimide':2.6,
+    'aluminum':1.55, 'copper-core':1.8,
+    'ceramic-al2o3':5.5, 'ceramic-aln':8
+  };
   base *= (matMul[state.material] || 1);
 
-  // Copper
-  const cuMul = {1:1,2:1.15,3:1.35,4:1.6,6:2.2};
+  // Copper multiplier
+  const cu = parseFloat(state.copper) || 1;
+  const cuMul = {1:1, 1.5:1.12, 2:1.22, 3:1.42, 4:1.68, 6:2.3, 8:3.0, 10:3.8, 12:4.8};
   base *= (cuMul[state.copper] || 1);
 
-  // Finish
-  const finMul = {'hasl':1,'enig':1.2,'osp':0.95,'imm-ag':1.1,'imm-sn':1.1,'enepig':1.5,'hard-gold':1.8};
+  // Finish multiplier
+  const finMul = {'hasl':1, 'enig':1.22, 'enepig':1.55, 'osp':0.94, 'imm-ag':1.12, 'imm-sn':1.10, 'hard-gold':1.85};
   base *= (finMul[state.finish] || 1);
 
-  // Trace/Space
-  const trMul = {6:1,5:1.1,4:1.3,3:1.8};
+  // Solder mask (matte is premium)
+  const maskMul = {'green':1, 'blue':1, 'black':1.05, 'white':1.05, 'red':1.05, 'yellow':1.02, 'matte-black':1.15, 'matte-green':1.12};
+  base *= (maskMul[state['mask-color']] || 1);
+
+  // Trace/Space premium
+  const tr = parseFloat(state.trace) || 5;
+  const trMul = {8:1, 6:1.05, 5:1.12, 4:1.30, 3.5:1.55, 3:1.85};
   base *= (trMul[state.trace] || 1);
 
-  // Turnaround
-  const taMul = {'24h':2.5,'3d':1.8,'5d':1,'7d':0.85,'10d':0.75};
+  // Drill size premium
+  const d = parseFloat(state.drill) || 0.3;
+  const drMul = {0.5:1, 0.4:1.05, 0.3:1.10, 0.25:1.22, 0.2:1.40, 0.15:1.65};
+  base *= (drMul[state.drill] || 1);
+
+  // Via process premium
+  const viaMul = {'tenting':1, 'plugged':1.08, 'via-in-pad':1.35, 'filled':1.22};
+  base *= (viaMul[state.via] || 1);
+
+  // IPC Class
+  const ipcMul = {2:1, 3:1.25};
+  base *= (ipcMul[state['ipc-class']] || 1);
+
+  // E-Test
+  const etestMul = {'flying-probe':1, 'fixture':1.08, 'none':0.92};
+  base *= (etestMul[state.etest] || 1);
+
+  // Thickness adjustment
+  const thMul = {0.4:0.92, 0.6:0.95, 0.8:0.97, 1.0:0.98, 1.6:1, 2.0:1.05, 2.4:1.12, 3.2:1.22};
+  base *= (thMul[state.thickness] || 1);
+
+  // Turnaround multiplier
+  const taMul = {'24h':2.8, '48h':2.2, '3d':1.75, '4d':1.35, '5d':1, '7d':0.82, '10d':0.72, '14d':0.62};
   base *= (taMul[state.turnaround] || 1);
 
-  // Quantity
+  // Quantity discount
   const qty = parseInt(state.quantity) || 10;
-  let unitPrice = base;
-  const qtyDisc = {5:1,10:0.85,50:0.55,100:0.40,500:0.25,1000:0.18,5000:0.12,10000:0.09};
-  unitPrice *= (qtyDisc[state.quantity] || 1);
+  const qtyDisc = {5:1, 10:0.82, 30:0.55, 50:0.42, 100:0.32, 300:0.21, 500:0.16, 1000:0.12, 3000:0.09, 5000:0.07, 10000:0.055};
+  let unitPrice = base * (qtyDisc[state.quantity] || 1);
 
-  const total = Math.round(unitPrice * qty);
-  const low = Math.round(total * 0.8);
-  const high = Math.round(total * 1.25);
-  return {total, low, high, unitPrice: Math.round(unitPrice * 100) / 100};
+  // Engineering / NRE (one-time, decreases per-unit with volume)
+  const nreBase = l <= 4 ? 68 : l <= 8 ? 95 : l <= 16 ? 145 : l <= 24 ? 210 : 320;
+  const nre = Math.round(nreBase * (matMul[state.material] || 1));
+
+  // Setup fee
+  const setupBase = l <= 4 ? 35 : l <= 8 ? 55 : l <= 16 ? 80 : 120;
+  const setup = Math.round(setupBase);
+
+  // Add special requirements costs to NRE
+  let specialNRE = 0;
+  Object.values(state.special).forEach(c => { specialNRE += c; });
+
+  const totalNRE = nre + specialNRE;
+  const totalSetup = setup;
+  const subtotal = Math.round(unitPrice * qty + totalNRE + totalSetup);
+  const low = Math.round(subtotal * 0.78);
+  const high = Math.round(subtotal * 1.28);
+
+  return {
+    unitPrice: Math.round(unitPrice * 100) / 100,
+    nre: totalNRE,
+    setup: totalSetup,
+    qty,
+    subtotal,
+    low,
+    high
+  };
 }
 
-function updateQuote(){
+function updateQuote() {
   const state = getState();
   const price = calcPrice(state);
 
-  document.getElementById('totalPrice').textContent = '$' + price.total.toLocaleString();
-  document.getElementById('priceRange').textContent = '$' + price.low.toLocaleString() + ' – $' + price.high.toLocaleString() + ' per batch';
+  // Main total
+  document.getElementById('totalPrice').textContent = '$' + price.subtotal.toLocaleString();
+  document.getElementById('priceRange').textContent = '$' + price.low.toLocaleString() + ' – $' + price.high.toLocaleString() + ' estimated range';
 
-  // Build summary
+  // Breakdown
+  document.getElementById('unitPrice').textContent = '$' + price.unitPrice.toFixed(2) + ' /pc';
+  document.getElementById('nreFee').textContent = '$' + price.nre;
+  document.getElementById('setupFee').textContent = '$' + price.setup;
+  document.getElementById('qtyDisplay').textContent = '× ' + price.qty + ' pcs';
+  document.getElementById('subtotal').textContent = '$' + price.subtotal.toLocaleString();
+
+  // Config summary
   let html = '';
-  html += '<div class="option-row"><span class="key">Layers</span><span class="val">'+SPEC_LABELS.layers[state.layers]+'</span></div>';
-  html += '<div class="option-row"><span class="key">Dimensions</span><span class="val">'+state.w+'×'+state.h+' mm</span></div>';
-  html += '<div class="option-row"><span class="key">Quantity</span><span class="val">'+SPEC_LABELS.quantity[state.quantity]+'</span></div>';
-  html += '<div class="option-row"><span class="key">Material</span><span class="val">'+SPEC_LABELS.material[state.material]+'</span></div>';
-  html += '<div class="option-row"><span class="key">Copper</span><span class="val">'+SPEC_LABELS.copper[state.copper]+'</span></div>';
-  html += '<div class="option-row"><span class="key">Finish</span><span class="val">'+SPEC_LABELS.finish[state.finish]+'</span></div>';
-  html += '<div class="option-row"><span class="key">Trace/Space</span><span class="val">'+SPEC_LABELS.trace[state.trace]+'</span></div>';
-  html += '<div class="option-row"><span class="key">Turnaround</span><span class="val">'+SPEC_LABELS.turnaround[state.turnaround]+'</span></div>';
-  html += '<div class="option-row"><span class="key">Unit Price</span><span class="val">$'+price.unitPrice+'/pc</span></div>';
-  document.getElementById('summaryOptions').innerHTML = html;
+  const rows = [
+    ['Layers', SPEC_LABELS.layers[state.layers] || state.layers],
+    ['Size', (state.w * (currentUnit === 'mil' ? 39.37 : 1)).toFixed(currentUnit === 'mil' ? 0 : 1) + ' × ' + (state.h * (currentUnit === 'mil' ? 39.37 : 1)).toFixed(currentUnit === 'mil' ? 0 : 1) + ' ' + currentUnit],
+    ['Material', SPEC_LABELS.material[state.material] || state.material],
+    ['Thickness', SPEC_LABELS.thickness[state.thickness] || state.thickness],
+    ['Copper', SPEC_LABELS.copper[state.copper] || state.copper],
+    ['Finish', SPEC_LABELS.finish[state.finish] || state.finish],
+    ['Solder Mask', SPEC_LABELS['mask-color'][state['mask-color']] || state['mask-color']],
+    ['Silkscreen', SPEC_LABELS.silkscreen[state.silkscreen] || state.silkscreen],
+    ['Trace/Space', SPEC_LABELS.trace[state.trace] || state.trace],
+    ['Min Drill', SPEC_LABELS.drill[state.drill] || state.drill],
+    ['Vias', SPEC_LABELS.via[state.via] || state.via],
+    ['Class', SPEC_LABELS['ipc-class'][state['ipc-class']] || 'IPC Class 2'],
+    ['Turnaround', SPEC_LABELS.turnaround[state.turnaround] || state.turnaround],
+    ['Quantity', SPEC_LABELS.quantity[state.quantity] || state.quantity]
+  ];
+  rows.forEach(([k, v]) => {
+    html += '<div class="config-row"><span class="cr-key">' + k + '</span><span class="cr-val">' + v + '</span></div>';
+  });
+
+  // Special reqs
+  if (Object.keys(state.special).length > 0) {
+    const specNames = {
+      'impedance':'Impedance Control','gold-fingers':'Gold Fingers','edge-plating':'Edge Plating',
+      'blind-buried':'Blind/Buried Vias','peelable-mask':'Peelable Mask','carbon-ink':'Carbon Ink',
+      'countersink':'Countersink','controlled-depth':'Controlled Depth'
+    };
+    Object.keys(state.special).forEach(k => {
+      html += '<div class="config-row"><span class="cr-key" style="color:var(--accent)">+ ' + (specNames[k] || k) + '</span><span class="cr-val" style="color:var(--accent)">$' + state.special[k] + '</span></div>';
+    });
+  }
+  document.getElementById('configSummary').innerHTML = html;
 }
 
-function resetQuote(){
+function resetQuote() {
+  const defaults = {
+    layers: '4', material: 'fr4', copper: '1', finish: 'enig',
+    'mask-color': 'green', silkscreen: 'white', thickness: '1.6',
+    trace: '5', drill: '0.3', via: 'tenting',
+    turnaround: '5d', quantity: '10', 'ipc-class': '2', etest: 'flying-probe'
+  };
+
   document.querySelectorAll('.spec-pills').forEach(g => {
-    const def = g.querySelector('[data-val]');
-    if (def) {
-      g.querySelectorAll('.spec-pill').forEach(b => b.classList.remove('selected'));
-      const defaultVal = g.dataset.param === 'layers' ? '4' :
-        g.dataset.param === 'material' ? 'fr4' :
-        g.dataset.param === 'copper' ? '1' :
-        g.dataset.param === 'finish' ? 'enig' :
-        g.dataset.param === 'mask-color' ? 'green' :
-        g.dataset.param === 'trace' ? '5' :
-        g.dataset.param === 'turnaround' ? '5d' :
-        g.dataset.param === 'quantity' ? '10' : null;
-      const target = g.querySelector('[data-val="'+defaultVal+'"]');
+    const param = g.dataset.param;
+    const defVal = defaults[param];
+    g.querySelectorAll('.spec-pill').forEach(b => b.classList.remove('selected'));
+    if (defVal !== undefined) {
+      const target = g.querySelector('[data-val="' + defVal + '"]');
       if (target) target.classList.add('selected');
     }
   });
+
   document.getElementById('dimW').value = 100;
   document.getElementById('dimH').value = 100;
+
+  // Reset unit toggle
+  currentUnit = 'mm';
+  document.querySelectorAll('#dimUnitToggle button').forEach(b => b.classList.remove('active'));
+  document.querySelector('#dimUnitToggle button[data-unit="mm"]').classList.add('active');
+
+  // Reset special reqs
+  document.querySelectorAll('#specialReqs .check-item.checked').forEach(el => el.classList.remove('checked'));
+
+  // Reset advanced panel
+  document.getElementById('advPanel').classList.remove('open');
+  document.getElementById('advToggle').classList.remove('open');
+
+  // Reset PCB type tabs
+  document.querySelectorAll('#pcbTypeTabs .pcb-type-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('#pcbTypeTabs .pcb-type-tab[data-type="standard"]').classList.add('active');
+  filterMaterials('standard');
+
   updateQuote();
 }
+
+// ── Event Handlers ──
 
 // Pill clicks
 document.querySelectorAll('.spec-pills').forEach(group => {
@@ -471,10 +873,117 @@ document.querySelectorAll('.spec-pills').forEach(group => {
   });
 });
 
-updateQuote();
+// Dimension inputs
+['dimW', 'dimH'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateQuote);
+});
 
-function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+// Unit toggle
+document.querySelectorAll('#dimUnitToggle button').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const newUnit = this.dataset.unit;
+    if (newUnit === currentUnit) return;
+    const wInput = document.getElementById('dimW');
+    const hInput = document.getElementById('dimH');
+    let w = parseFloat(wInput.value) || 100;
+    let h = parseFloat(hInput.value) || 100;
+
+    if (currentUnit === 'mm' && newUnit === 'mil') {
+      w = Math.round(w / 0.0254);
+      h = Math.round(h / 0.0254);
+    } else if (currentUnit === 'mil' && newUnit === 'mm') {
+      w = Math.round(w * 0.0254 * 100) / 100;
+      h = Math.round(h * 0.0254 * 100) / 100;
+    }
+
+    wInput.value = w;
+    hInput.value = h;
+    currentUnit = newUnit;
+
+    document.querySelectorAll('#dimUnitToggle button').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    updateQuote();
+  });
+});
+
+// Special requirement checkboxes
+document.querySelectorAll('#specialReqs .check-item').forEach(item => {
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+    this.classList.toggle('checked');
+    updateQuote();
+  });
+});
+
+// PCB Type Tabs — filter materials
+function filterMaterials(type) {
+  document.querySelectorAll('.spec-pills[data-param="material"] .spec-pill').forEach(pill => {
+    const cat = pill.dataset.cat;
+    if (!cat) {
+      // "General" materials show on Standard and Advanced
+      pill.style.display = (type === 'standard' || type === 'advanced') ? '' : 'none';
+    } else {
+      const cats = cat.split(' ');
+      pill.style.display = cats.includes(type) ? '' : 'none';
+    }
+    // Auto-deselect if hidden
+    if (pill.style.display === 'none' && pill.classList.contains('selected')) {
+      pill.classList.remove('selected');
+      // Select first visible material
+      const firstVisible = document.querySelector('.spec-pills[data-param="material"] .spec-pill[style=""]');
+      if (firstVisible) firstVisible.classList.add('selected');
+    }
+  });
+
+  // Auto-adjust layers based on type
+  const layerPills = document.querySelectorAll('.spec-pills[data-param="layers"] .spec-pill');
+  if (type === 'flex') {
+    // Flex typically 1-8 layers
+    layerPills.forEach(p => {
+      const v = parseInt(p.dataset.val);
+      p.style.display = (v <= 8) ? '' : 'none';
+    });
+  } else if (type === 'metal') {
+    // Metal-core typically 1-4 layers
+    layerPills.forEach(p => {
+      const v = parseInt(p.dataset.val);
+      p.style.display = (v <= 4) ? '' : 'none';
+    });
+  } else {
+    layerPills.forEach(p => { p.style.display = ''; });
+  }
+}
+
+document.querySelectorAll('#pcbTypeTabs .pcb-type-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('#pcbTypeTabs .pcb-type-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    filterMaterials(this.dataset.type);
+    updateQuote();
+  });
+});
+
+// Advanced options toggle
+function toggleAdvanced() {
+  const panel = document.getElementById('advPanel');
+  const toggle = document.getElementById('advToggle');
+  panel.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+// Modal
+function openModal() {
+  document.getElementById('inquiryModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('inquiryModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Initialize
+updateQuote();
 </script>
-<script src="../inquiry-handler.js"></script></body>
+<script src="../inquiry-handler.js"></script>
+</body>
 </html>
