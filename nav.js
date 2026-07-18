@@ -105,6 +105,8 @@
     '<div class="nav-dropdown" id="capabilitiesDropdown">' +
       '<span class="nav-dropdown-trigger">Capabilities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
       '<div class="nav-dropdown-panel">' +
+        '<a href="/capabilities/pcb-products/"><span class="dd-icon"></span>PCB Products</a>' +
+        '<a href="/capabilities/advanced-pcb/"><span class="dd-icon"></span>Advanced PCB</a>' +
         '<a href="/capabilities/pcb-fabrication/"><span class="dd-icon"></span>PCB Fabrication</a>' +
         '<a href="/capabilities/pcba-assembly/"><span class="dd-icon"></span>PCBA Assembly</a>' +
         '<a href="/capabilities/components-sourcing/"><span class="dd-icon"></span>Components Sourcing</a>' +
