@@ -47,7 +47,7 @@
       'position:absolute;top:100%;left:50%;' +
       'transform:translateX(-50%) translateY(8px);' +
       'background:#16161d;border:1px solid #252530;' +
-      'border-radius:8px;padding:8px;min-width:220px;' +
+      'border-radius:8px;padding:8px;min-width:260px;' +
       'opacity:0;visibility:hidden;' +
       'transition:opacity .25s,visibility .25s,transform .25s;' +
       'box-shadow:0 20px 48px rgba(0,0,0,.5);z-index:100' +
@@ -67,6 +67,10 @@
       'width:6px;height:6px;border-radius:50%;' +
       'background:#c8963e;flex-shrink:0;opacity:.6' +
     '}' +
+    /* Sub-items (PCB types under PCB Types) */
+    '.nav-dropdown-panel a.dd-sub{padding-left:28px;font-size:13px;color:#7a7a88}' +
+    '.nav-dropdown-panel a.dd-sub:hover{color:#c8963e}' +
+    '.dd-sep{height:1px;background:#1e1e28;margin:4px 8px}' +
     /* Mobile responsive */
     '@media(max-width:1024px){' +
       '.nav-links{display:none;flex-direction:column;' +
@@ -86,6 +90,7 @@
         'padding:0 0 0 24px;min-width:0' +
       '}' +
       '.nav-dropdown-panel a{padding:10px 0;font-size:14px;color:#b0b0b8}' +
+      '.nav-dropdown-panel a.dd-sub{padding:6px 0 6px 16px;font-size:13px;color:#7a7a88}' +
       '.nav-dropdown-trigger svg{display:none}' +
       '.nav-dropdown:hover>.nav-dropdown-trigger svg{transform:none}' +
       '.nav-dropdown:hover>.nav-dropdown-panel{transform:none}' +
@@ -105,7 +110,17 @@
     '<div class="nav-dropdown" id="capabilitiesDropdown">' +
       '<span class="nav-dropdown-trigger">Capabilities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
       '<div class="nav-dropdown-panel">' +
-        '<a href="/capabilities/pcb-types/"><span class="dd-icon"></span>PCB Types</a>' +
+        '<a href="/capabilities/pcb-types/"><span class="dd-icon"></span>PCB Types — All 24 Types</a>' +
+        '<div class="dd-sep"></div>' +
+        '<a href="/capabilities/pcb-types/hdi/" class="dd-sub">HDI · Any-Layer Microvia</a>' +
+        '<a href="/capabilities/pcb-types/flex/" class="dd-sub">Flex · Polyimide Circuits</a>' +
+        '<a href="/capabilities/pcb-types/rigid-flex/" class="dd-sub">Rigid-Flex · Hybrid</a>' +
+        '<a href="/capabilities/pcb-types/rf/" class="dd-sub">RF / Microwave · Rogers PTFE</a>' +
+        '<a href="/capabilities/pcb-types/high-speed/" class="dd-sub">High-Speed · 112Gbps PAM4</a>' +
+        '<a href="/capabilities/pcb-types/heavy-copper/" class="dd-sub">Heavy Copper · Up to 12oz</a>' +
+        '<a href="/capabilities/pcb-types/aluminum/" class="dd-sub">Aluminum MCPCB · Thermal</a>' +
+        '<a href="/capabilities/pcb-types/ceramic/" class="dd-sub">Ceramic · Al₂O₃ / AlN</a>' +
+        '<div class="dd-sep"></div>' +
         '<a href="/capabilities/advanced-pcb/"><span class="dd-icon"></span>Advanced PCB</a>' +
         '<a href="/capabilities/pcb-fabrication/"><span class="dd-icon"></span>PCB Fabrication</a>' +
         '<a href="/capabilities/pcba-assembly/"><span class="dd-icon"></span>PCBA Assembly</a>' +
