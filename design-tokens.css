@@ -382,8 +382,8 @@ h6{font-size:var(--text-lg)}
   opacity:0;transition:opacity var(--duration-slow) var(--ease);
 }
 .card:hover::before{opacity:1}
-.card-cert-img{width:100%;aspect-ratio:3/2;margin-bottom:var(--space-md);border-radius:var(--radius-md);overflow:hidden;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
-.card-cert-img img{width:100%;height:100%;object-fit:contain;padding:var(--space-sm)}
+.card-cert-img{width:100%;margin-bottom:var(--space-md);border-radius:var(--radius-md);overflow:hidden;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+.card-cert-img img{width:100%;height:auto;display:block;object-fit:cover}
 .card-icon{
   width:48px;height:48px;display:flex;align-items:center;justify-content:center;
   border-radius:var(--radius-md);
@@ -758,9 +758,13 @@ h6{font-size:var(--text-lg)}
 /* ---- Partner Logo Strip ---- */
 .partner-strip{padding:var(--space-2xl) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .partner-strip-label{text-align:center;font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:var(--space-xl)}
-.partner-logo-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--space-lg) var(--space-2xl)}
-.partner-logo-grid img{height:32px;width:auto;max-width:140px;object-fit:contain;filter:grayscale(1) brightness(2.5);opacity:.45;transition:all var(--duration)}
-.partner-logo-grid img:hover{filter:grayscale(0) brightness(1);opacity:.85}
+.partner-logo-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--space-md) var(--space-lg);align-items:center;max-width:1000px;margin:0 auto}
+.partner-logo-grid .plogo{display:flex;align-items:center;justify-content:center;padding:var(--space-md);background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-md);aspect-ratio:3/2}
+.partner-logo-grid .plogo img{max-width:85%;max-height:50%;object-fit:contain;filter:grayscale(1) brightness(2.5);opacity:.5;transition:all var(--duration)}
+.partner-logo-grid .plogo:hover{border-color:rgba(200,150,62,.2);background:rgba(255,255,255,.04)}
+.partner-logo-grid .plogo:hover img{filter:grayscale(0) brightness(1);opacity:.85}
+@media(max-width:768px){.partner-logo-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.partner-logo-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* ---- Breadcrumb ---- */
 .breadcrumb{
