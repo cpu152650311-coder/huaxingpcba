@@ -67,9 +67,9 @@
 .type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:var(--space-xl)}
 .type-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color .3s,transform .3s;display:flex;flex-direction:column}
 .type-card:hover{border-color:rgba(200,150,62,.25);transform:translateY(-2px)}
-.tc-img{overflow:hidden;text-align:center}
-.tc-img img{max-width:100%;height:auto;display:block;margin:0 auto;transition:transform .3s}
-.type-card:hover .tc-img img{transform:scale(1.02)}
+.tc-img{position:relative;height:160px;overflow:hidden;background:#0d0d14}
+.tc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.type-card:hover .tc-img img{transform:scale(1.04)}
 .tc-img .tc-badge{position:absolute;top:12px;left:12px;padding:.25em .8em;border-radius:3px;font-size:var(--text-xs);font-weight:500;letter-spacing:.04em;background:rgba(200,150,62,.18);color:var(--accent);border:1px solid rgba(200,150,62,.3);backdrop-filter:blur(4px)}
 .tc-body{padding:var(--space-lg);display:flex;flex-direction:column;flex:1}
 .tc-body h3{font-size:var(--text-lg);font-weight:300;margin:0 0 var(--space-md) 0;color:var(--text-primary)}
@@ -94,8 +94,8 @@
 .split-content p{color:var(--text-secondary);line-height:1.85;margin-bottom:var(--space-md)}
 .split-content ul{margin-bottom:var(--space-md);padding-left:1.2rem}
 .split-content li{color:var(--text-secondary);margin-bottom:var(--space-sm);line-height:1.7}
-.split-visual{border-radius:var(--radius-xl);overflow:hidden;text-align:center}
-.split-visual img{max-width:100%;height:auto;display:block;margin:0 auto}
+.split-visual{position:relative;height:100%;min-height:400px;border-radius:var(--radius-xl);overflow:hidden}
+.split-visual img{width:100%;height:100%;object-fit:cover}
 .split-visual .visual-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.4) 0%,transparent 50%)}
 
 .cta-section{padding:var(--space-3xl) 0;background:var(--bg-secondary)}
