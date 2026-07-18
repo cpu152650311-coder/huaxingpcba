@@ -151,7 +151,7 @@
       '<span class="nav-dropdown-trigger">Capabilities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
       '<div class="nav-dropdown-panel">' +
         /* PCB Types — flyout trigger */
-        '<span class="nav-flyout-trigger" id="pcbTypesFlyout">' +
+        '<a href="/capabilities/pcb-types/" class="nav-flyout-trigger" id="pcbTypesFlyout">' +
           'PCB Types' +
           '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
           '<div class="nav-flyout-panel">' +
@@ -163,9 +163,8 @@
             '<a href="/capabilities/pcb-types/heavy-copper/">Heavy Copper · 12oz</a>' +
             '<a href="/capabilities/pcb-types/aluminum/">Aluminum MCPCB</a>' +
             '<a href="/capabilities/pcb-types/ceramic/">Ceramic · Al₂O₃ / AlN</a>' +
-            '<a href="/capabilities/pcb-types/" style="border-top:1px solid #252530;margin-top:4px;padding-top:10px;border-radius:0 0 6px 6px">All 24 PCB Types →</a>' +
           '</div>' +
-        '</span>' +
+        '</a>' +
         '<a href="/capabilities/advanced-pcb/">Advanced PCB</a>' +
         '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
         '<a href="/capabilities/pcba-assembly/">PCBA Assembly</a>' +
