@@ -7,22 +7,6 @@
   var nav = document.getElementById('navLinks');
   if (!nav) return;
 
-  // SVG icons for dropdown items — thin stroke, theme gold via currentColor
-  var ICONS = {
-    board:   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="1.5"/></svg>',
-    chip:    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M12 4v16M4 12h16"/></svg>',
-    fab:     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12h2l3-8h2l3 8h2M5 12v8M12 12v8M19 12v8"/><circle cx="7" cy="10" r="1"/><circle cx="14" cy="10" r="1"/></svg>',
-    smt:     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><rect x="7" y="7" width="4" height="4" rx=".5"/><rect x="13" y="7" width="4" height="4" rx=".5"/><rect x="7" y="13" width="4" height="4" rx=".5"/><rect x="13" y="13" width="4" height="4" rx=".5"/></svg>',
-    box:     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><polyline points="8 7 8 3 16 3 16 7"/></svg>',
-    hdi:     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="10"/></svg>',
-    flex:    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6c0-2 1-3 3-3h10c2 0 3 1 3 3s-1 2-3 2H7c-2 0-3-1-3-2zm0 6c0-2 1-3 3-3h10c2 0 3 1 3 3s-1 2-3 2H7c-2 0-3-1-3-2zm0 6c0-2 1-3 3-3h10c2 0 3 1 3 3s-1 2-3 2H7c-2 0-3-1-3-2z"/></svg>',
-    rf:      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17c2-2 4-2 6 0M9 13c2-2 4-2 6 0M13 9c2-2 4-2 6 0"/><circle cx="20" cy="5" r="1"/></svg>',
-    heavy:   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="8" rx="1"/><rect x="6" y="5" width="12" height="3"/><rect x="6" y="16" width="12" height="4"/></svg>',
-    speed:   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>',
-    metal:   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 3l9 9-9 9M21 3l-9 9 9 9"/></svg>',
-    ceramic: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M5 12c0-4 1.5-7 3.5-8.5"/><path d="M7 16.5c2 2 4.5 1.5 6.5 2.5"/></svg>',
-  };
-
   // 1. Inject critical nav CSS
   var style = document.createElement('style');
   style.textContent =
@@ -79,13 +63,7 @@
       'text-decoration:none;white-space:nowrap' +
     '}' +
     '.nav-dropdown-panel a:hover{color:#e8e8ec;background:rgba(200,150,62,.08)}' +
-    '.nav-dropdown-panel a .ni-icon{' +
-      'width:14px;height:14px;flex-shrink:0;' +
-      'display:flex;align-items:center;justify-content:center;' +
-      'color:#c8963e;opacity:.8' +
-    '}' +
-    '.nav-dropdown-panel a:hover .ni-icon{opacity:1}' +
-    /* Flyout container — "PCB Types" item with right-arrow */
+    /* Flyout trigger — "PCB Types" with right-arrow */
     '.nav-flyout-trigger{' +
       'position:relative;' +
       'display:flex!important;align-items:center!important;' +
@@ -97,7 +75,6 @@
       'white-space:nowrap!important;text-decoration:none!important' +
     '}' +
     '.nav-flyout-trigger:hover{color:#e8e8ec!important;background:rgba(200,150,62,.08)!important}' +
-    '.nav-flyout-trigger .ft-label{display:flex;align-items:center;gap:10px}' +
     '.nav-flyout-trigger .ft-arrow{width:12px;height:12px;flex-shrink:0;color:#666}' +
     '.nav-flyout-trigger:hover .ft-arrow{color:#c8963e}' +
     /* Flyout sub-panel — slides out to the RIGHT */
@@ -175,37 +152,37 @@
       '<div class="nav-dropdown-panel">' +
         /* PCB Types — flyout trigger */
         '<span class="nav-flyout-trigger" id="pcbTypesFlyout">' +
-          '<span class="ft-label"><span class="ni-icon">' + ICONS.board + '</span>PCB Types</span>' +
+          'PCB Types' +
           '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
           '<div class="nav-flyout-panel">' +
-            '<a href="/capabilities/pcb-types/hdi/"><span class="ni-icon">' + ICONS.hdi + '</span>HDI · Any-Layer</a>' +
-            '<a href="/capabilities/pcb-types/flex/"><span class="ni-icon">' + ICONS.flex + '</span>Flex · Polyimide</a>' +
-            '<a href="/capabilities/pcb-types/rigid-flex/"><span class="ni-icon">' + ICONS.flex + '</span>Rigid-Flex · Hybrid</a>' +
-            '<a href="/capabilities/pcb-types/rf/"><span class="ni-icon">' + ICONS.rf + '</span>RF / Microwave · Rogers</a>' +
-            '<a href="/capabilities/pcb-types/high-speed/"><span class="ni-icon">' + ICONS.speed + '</span>High-Speed · 112Gbps</a>' +
-            '<a href="/capabilities/pcb-types/heavy-copper/"><span class="ni-icon">' + ICONS.heavy + '</span>Heavy Copper · 12oz</a>' +
-            '<a href="/capabilities/pcb-types/aluminum/"><span class="ni-icon">' + ICONS.metal + '</span>Aluminum MCPCB</a>' +
-            '<a href="/capabilities/pcb-types/ceramic/"><span class="ni-icon">' + ICONS.ceramic + '</span>Ceramic · Al₂O₃ / AlN</a>' +
+            '<a href="/capabilities/pcb-types/hdi/">HDI · Any-Layer</a>' +
+            '<a href="/capabilities/pcb-types/flex/">Flex · Polyimide</a>' +
+            '<a href="/capabilities/pcb-types/rigid-flex/">Rigid-Flex · Hybrid</a>' +
+            '<a href="/capabilities/pcb-types/rf/">RF / Microwave · Rogers</a>' +
+            '<a href="/capabilities/pcb-types/high-speed/">High-Speed · 112Gbps</a>' +
+            '<a href="/capabilities/pcb-types/heavy-copper/">Heavy Copper · 12oz</a>' +
+            '<a href="/capabilities/pcb-types/aluminum/">Aluminum MCPCB</a>' +
+            '<a href="/capabilities/pcb-types/ceramic/">Ceramic · Al₂O₃ / AlN</a>' +
             '<a href="/capabilities/pcb-types/" style="border-top:1px solid #252530;margin-top:4px;padding-top:10px;border-radius:0 0 6px 6px">All 24 PCB Types →</a>' +
           '</div>' +
         '</span>' +
-        '<a href="/capabilities/advanced-pcb/"><span class="ni-icon">' + ICONS.chip + '</span>Advanced PCB</a>' +
-        '<a href="/capabilities/pcb-fabrication/"><span class="ni-icon">' + ICONS.fab + '</span>PCB Fabrication</a>' +
-        '<a href="/capabilities/pcba-assembly/"><span class="ni-icon">' + ICONS.smt + '</span>PCBA Assembly</a>' +
-        '<a href="/capabilities/components-sourcing/"><span class="ni-icon">' + ICONS.box + '</span>Components Sourcing</a>' +
+        '<a href="/capabilities/advanced-pcb/">Advanced PCB</a>' +
+        '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
+        '<a href="/capabilities/pcba-assembly/">PCBA Assembly</a>' +
+        '<a href="/capabilities/components-sourcing/">Components Sourcing</a>' +
       '</div>' +
     '</div>' +
     '<div class="nav-dropdown" id="industriesDropdown">' +
       '<span class="nav-dropdown-trigger">Industries <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
       '<div class="nav-dropdown-panel">' +
-        '<a href="/industries/automotive/"><span class="ni-icon">' + ICONS.fab + '</span>Automotive</a>' +
-        '<a href="/industries/medical/"><span class="ni-icon">' + ICONS.metal + '</span>Medical</a>' +
-        '<a href="/industries/industrial/"><span class="ni-icon">' + ICONS.heavy + '</span>Industrial</a>' +
-        '<a href="/industries/iot/"><span class="ni-icon">' + ICONS.chip + '</span>IoT</a>' +
-        '<a href="/industries/telecom/"><span class="ni-icon">' + ICONS.rf + '</span>Telecom &amp; 5G</a>' +
-        '<a href="/industries/energy/"><span class="ni-icon">' + ICONS.speed + '</span>New Energy</a>' +
-        '<a href="/industries/consumer/"><span class="ni-icon">' + ICONS.box + '</span>Consumer</a>' +
-        '<a href="/industries/aerospace/"><span class="ni-icon">' + ICONS.ceramic + '</span>Aerospace &amp; Defense</a>' +
+        '<a href="/industries/automotive/">Automotive</a>' +
+        '<a href="/industries/medical/">Medical</a>' +
+        '<a href="/industries/industrial/">Industrial</a>' +
+        '<a href="/industries/iot/">IoT</a>' +
+        '<a href="/industries/telecom/">Telecom &amp; 5G</a>' +
+        '<a href="/industries/energy/">New Energy</a>' +
+        '<a href="/industries/consumer/">Consumer</a>' +
+        '<a href="/industries/aerospace/">Aerospace &amp; Defense</a>' +
       '</div>' +
     '</div>' +
     '<a href="/quote/"' + active('/quote/') + '>Quick Quote</a>' +
