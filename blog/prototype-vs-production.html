@@ -1,186 +1,188 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PCB Prototype vs Mass Production: The Real Cost Breakdown (2026 Data) | Huaxing PCBA</title>
-<meta name="description" content="Real cost breakdown of PCB prototyping vs mass production. How quantity, panel utilization, NRE amortization, and yield affect per-unit cost. See the math — not marketing claims.">
-<meta property="og:title" content="PCB Prototype vs Mass Production: The Real Cost Breakdown (2026 Data)">
-<meta property="og:description" content="Real cost data: how quantity, panel utilization, NRE, and yield affect per-unit PCB pricing. From 5 prototypes to 100,000-unit production.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://huaxingpcba.com/blog/prototype-vs-production.html">
-    <link rel="canonical" href="https://huaxingpcba.com/blog/prototype-vs-production.html">
-<link rel="stylesheet" href="../design-tokens.css?v=20">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-<link rel="stylesheet" href="../blog.css?v=1">
-
-</head>
-<body>
-
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
-  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-</svg>
-
-<header class="site-header" id="header">
-  <div class="container">
-    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    <nav class="nav-links" id="navLinks">
-    </nav>
-    <script src="/nav.js?v=13"></script>
-    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
-  </div>
-</header>
-
-<section class="sub-hero">
-  <div class="sub-hero-bg"><img src="../generated/blog-cover-cost.webp" alt="" loading="eager"></div>
-  <div class="sub-hero-overlay"></div>
-  <div class="sub-hero-content">
-    <div class="container">
-      <p class="section-label reveal">Procurement Guide</p>
-      <h1 class="reveal">PCB Prototype vs Mass Production:<br><em>The Real Cost Breakdown</em></h1>
-      <p class="reveal">Why 10 prototypes cost 50× more per board than 10,000 production units — and where the money goes.</p>
-    </div>
-  </div>
-</section>
-
-<article class="article reveal">
-  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Cost Breakdown</span></div>
-
-  <p>You just received a quote for 10 prototype PCBs at $240. That same board, quoted at 10,000 units, comes in at $4.70 each. The math doesn't seem to add up — 10,000 × $4.70 = $47,000 versus 10 × $24 = $240. Why is the prototype 5× more expensive per unit? And where does all that production cost savings actually come from?</p>
-
-  <p>This article breaks down exactly where the money goes at each quantity tier, using real 2026 manufacturing cost data from our Shenzhen facility. No marketing percentages — actual cost line items.</p>
-
-  <h2>The Prototype Cost Stack (5–10 Pieces)</h2>
-
-  <p>For a typical 4-layer PCB, 100×100mm, ENIG finish, standard FR-4, 5-day turnaround, here's where your $24/board goes:</p>
-
-  <div class="highlight-box">
-    <p><strong>Setup & Tooling (NRE): ~$120 total</strong><br>
-    CAM engineering (1.5 hours): $45<br>
-    Photoplot film / LDI setup: $25<br>
-    Drill program + tooling: $20<br>
-    Electrical test fixture setup: $20<br>
-    First-article inspection: $10</p>
-    <p style="margin-top:var(--space-sm)"><strong>Per-Board Cost: ~$12</strong><br>
-    Raw material (laminate, prepreg, copper): $3.20<br>
-    Processing (drill, plate, etch, solder mask, silkscreen, ENIG): $5.80<br>
-    Electrical test + AOI: $1.80<br>
-    Routing/scoring + packaging: $1.20</p>
-  </div>
-
-  <p><strong>Total: $120 (NRE) + 10 × $12 = $240, or $24/board.</strong> The NRE accounts for 50% of the total cost. This is the fundamental economic reality of prototyping: the setup costs are fixed, and the per-board processing cost is relatively modest. The small quantity means setup dominates.</p>
-
-  <img src="../generated/blog-nre-breakdown.webp" alt="NRE cost breakdown by category" loading="lazy" class="article-img">
-
-  <img src="../generated/blog-cost-chart.webp" alt="Cost per unit chart" loading="lazy" class="article-img">
-
-  <h2>The Production Cost Stack (10,000 Pieces)</h2>
-
-  <p>Same board, 10,000 units. The NRE is amortized across 1,000× the volume, and the per-board processing cost drops through panel optimization:</p>
-
-  <div class="highlight-box">
-    <p><strong>Amortized NRE: ~$0.012/board</strong><br>
-    Same $120 setup, divided by 10,000 boards. Effectively zero.</p>
-    <p style="margin-top:var(--space-sm)"><strong>Per-Board Cost: ~$3.50</strong><br>
-    Raw material (panel-optimized): $1.10<br>
-    Processing (volume-optimized, panel-level): $1.60<br>
-    Electrical test (flying probe, panel-level): $0.45<br>
-    Routing + packaging (panel-level): $0.35</p>
-    <p style="margin-top:var(--space-sm)"><strong>Panel Utilization Bonus: ~$1.20/board saved</strong><br>
-    At prototype quantity, we fit 6 boards per panel (70% utilization). At 10,000 units, we optimize the panel for 12 boards (92% utilization). That's 2× the boards per panel cycle for roughly the same processing cost.</p>
-  </div>
-
-  <p><strong>Total: $120 (NRE) + 10,000 × $3.50 = $35,120, or $3.51/board</strong> — before the panel utilization bonus. Actual cost with optimized panelization: approximately <strong>$4.70/board</strong> (the $3.51 base plus $1.19 in yield management, extra testing, and logistics).</p>
-
-  <img src="../generated/blog-cost-panel.webp" alt="PCB production panel" loading="lazy" class="article-img">
-
-  <h2>Where the 5× Cost Multiplier Actually Lives</h2>
-
-  <p><span class="data-point">5×</span></p>
-  <p>The per-unit cost difference between prototype and production is driven by four factors, weighted by impact:</p>
-
-  <p><strong>1. NRE Amortization (35% of the gap).</strong> The $120 setup cost on 10 boards is $12/board; on 10,000 boards it's $0.012. This alone accounts for a 5× difference in per-unit cost. The fix: aggregate multiple prototype designs into a single panel. If you have three different prototype designs on one panel, you split the NRE three ways. We offer this as a standard option — it adds 1–2 days to CAM engineering but typically saves 30–40% on prototype NRE.</p>
-
-  <p><strong>2. Panel Utilization (30% of the gap).</strong> Prototype panels run at 60–75% utilization because we prioritize quick-turnover over perfect nesting. Production panels run at 85–95% utilization with optimized CAM nesting. On a $150 panel processing cycle, going from 6 to 12 boards per panel halves the per-board processing cost. This is the single largest lever in production pricing and the one most buyers don't understand.</p>
-
-  <p><strong>3. Process Efficiency (25% of the gap).</strong> A prototype panel goes through the same 20+ process steps as a production panel — but it's processed individually or in small batches. A production run processes 100+ panels simultaneously through each step. The drill machine, plating tank, and etch line cost the same to run whether they're processing one panel or one hundred. The per-panel processing cost drops by roughly 60% when equipment is fully loaded.</p>
-
-  <p><strong>4. Yield Management (10% of the gap).</strong> Prototypes target 90–95% yield (some scrap is acceptable; we overbuild by 10–15% to compensate). Production targets 97–99.5% yield because scrap at volume is expensive. The tighter process controls required for high yield add about 5–8% to per-board cost at volume — but the scrap savings more than offset it.</p>
-
-  <img src="../generated/blog-process-efficiency.webp" alt="Processing cost per unit at different production volumes" loading="lazy" class="article-img">
-
-  <h2>The 500-Piece Sweet Spot</h2>
-
-  <p>There's a compelling economic argument for ordering 500 pieces even when you only need 200. At 500 units, the NRE becomes negligible ($0.24/board), panel utilization improves to ~80%, and process efficiency starts to kick in. The per-unit cost at 500 pieces is typically 40–55% lower than at 50 pieces, and 65–75% lower than at 10 pieces.</p>
-
-  <p>If your product has predictable demand, the 500-piece prototype-to-pilot transition order is the sweet spot: you get most of the production cost benefit, you have enough units for beta testing and early customers, and you avoid the cash outlay of a 10,000-piece production run before market validation. We recommend this bridge quantity to startups and new product introduction teams regularly.</p>
-
-  <h2>When to Go Direct to Production</h2>
-
-  <p>Skip the prototype phase entirely when: (a) you've built this exact board before (minor revision of an existing design), (b) the design uses all standard materials and processes we stock daily (FR-4, 1oz, ENIG, 5/5mil), and (c) your BOM has no allocation or long-lead-time components. In these cases, a 1,000-piece pilot run can replace both prototype and initial production, saving 2–3 weeks and roughly $500–1,000 in combined NRE.</p>
-
-  <h2>The Bottom Line</h2>
-  <p>PCB cost follows a classic fixed-cost + variable-cost structure, where the fixed cost (NRE + setup) dominates at low quantities and the variable cost (material + processing + yield) determines pricing at volume. The key numbers to remember: NRE is typically $100–200 for a 4-layer board, panel utilization improvement from prototype to production saves 20–30% on processing cost, and the 500-piece bridge quantity captures 60–70% of the volume cost benefit without committing to a full production run. At Huaxing PCBA, we provide transparent cost breakdowns at every quantity tier — use our online estimator at /quote/ to see how your specific design scales.</p>
-
-</article>
-
-<section class="section" style="background:var(--bg-secondary)">
-  <div class="container">
-    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-rigid-flex.webp)">
-      <h2>Ready to Cost Your Design?</h2>
-      <p>Use our online PCB estimator to see real pricing at every quantity tier — from 5 prototypes to 100,000 production units.</p>
-      <div style="display:flex;gap:var(--space-sm);justify-content:center;flex-wrap:wrap">
-        <a href="/quote/" class="btn btn-primary btn-lg">Try Online Estimator <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></a>
-        <button class="btn btn-ghost btn-lg" onclick="openModal()">Send Gerbers for Quote</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China.</p></div>
-      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
-    </div>
-    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
-  </div>
-</footer>
-
-<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-dialog">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div class="modal-image-panel">
-      <img src="/generated/modal-pcba-showcase.webp" alt="">
-      <div class="modal-image-overlay"></div>
-      <div class="modal-image-top">
-        <h2 class="mi-heading">Start Your Project</h2>
-        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
-      </div>
-      <div class="modal-image-text">
-        <div class="mi-label">HUAXING PCBA</div>
-        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
-      </div>
-    </div>
-    <div class="modal-form-panel">
-      <form onsubmit="return handleInquiry(event)" novalidate>
-        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
-        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
-        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
-        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script src="../reveal.js"></script>
-<script>
-function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-</script>
-<script src="../inquiry-handler.js"></script></body>
-</html>
+     1|<!DOCTYPE html>
+     2|<html lang="en">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>PCB Prototype vs Mass Production: The Real Cost Breakdown (2026 Data) | Huaxing PCBA</title>
+     7|<meta name="description" content="Real cost breakdown of PCB prototyping vs mass production. How quantity, panel utilization, NRE amortization, and yield affect per-unit cost. See the math — not marketing claims.">
+     8|<meta property="og:title" content="PCB Prototype vs Mass Production: The Real Cost Breakdown (2026 Data)">
+     9|<meta property="og:description" content="Real cost data: how quantity, panel utilization, NRE, and yield affect per-unit PCB pricing. From 5 prototypes to 100,000-unit production.">
+    10|<meta property="og:type" content="article">
+    11|<meta property="og:url" content="https://huaxingpcba.com/blog/prototype-vs-production.html">
+    12|    <link rel="canonical" href="https://huaxingpcba.com/blog/prototype-vs-production.html">
+    13|<link rel="stylesheet" href="../design-tokens.css?v=20">
+    14|<link rel="icon" type="image/x-icon" href="/favicon.ico">
+    15|<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    16|<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+    17|<link rel="stylesheet" href="../blog.css?v=1">
+    18|
+    19|</head>
+    20|<body>
+    21|
+    22|<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+    23|  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    24|</svg>
+    25|
+    26|<header class="site-header" id="header">
+    27|  <div class="container">
+    28|    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    29|    <nav class="nav-links" id="navLinks">
+    30|    </nav>
+    31|    <script src="/nav.js?v=13"></script>
+    32|    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+    33|  </div>
+    34|</header>
+    35|
+    36|<section class="sub-hero">
+    37|  <div class="sub-hero-bg"><img src="../generated/blog-cover-cost.webp" alt="" loading="eager"></div>
+    38|  <div class="sub-hero-overlay"></div>
+    39|  <div class="sub-hero-content">
+    40|    <div class="container">
+    41|      <p class="section-label reveal">Procurement Guide</p>
+    42|      <h1 class="reveal">PCB Prototype vs Mass Production:<br><em>The Real Cost Breakdown</em></h1>
+    43|      <p class="reveal">Why 10 prototypes cost 50× more per board than 10,000 production units — and where the money goes.</p>
+    44|    </div>
+    45|  </div>
+    46|</section>
+    47|
+    48|<article class="article reveal">
+    49|  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Cost Breakdown</span></div>
+    50|
+    51|  <p>You just received a quote for 10 prototype PCBs at $240. That same board, quoted at 10,000 units, comes in at $4.70 each. The math doesn't seem to add up — 10,000 × $4.70 = $47,000 versus 10 × $24 = $240. Why is the prototype 5× more expensive per unit? And where does all that production cost savings actually come from?</p>
+    52|
+    53|  <p>This article breaks down exactly where the money goes at each quantity tier, using real 2026 manufacturing cost data from our Shenzhen facility. No marketing percentages — actual cost line items.</p>
+    54|
+    55|  <h2>The Prototype Cost Stack (5–10 Pieces)</h2>
+    56|
+    57|  <p>For a typical 4-layer PCB, 100×100mm, ENIG finish, standard FR-4, 5-day turnaround, here's where your $24/board goes:</p>
+    58|
+    59|  <div class="highlight-box">
+    60|    <p><strong>Setup & Tooling (NRE): ~$120 total</strong><br>
+    61|    CAM engineering (1.5 hours): $45<br>
+    62|    Photoplot film / LDI setup: $25<br>
+    63|    Drill program + tooling: $20<br>
+    64|    Electrical test fixture setup: $20<br>
+    65|    First-article inspection: $10</p>
+    66|    <p style="margin-top:var(--space-sm)"><strong>Per-Board Cost: ~$12</strong><br>
+    67|    Raw material (laminate, prepreg, copper): $3.20<br>
+    68|    Processing (drill, plate, etch, solder mask, silkscreen, ENIG): $5.80<br>
+    69|    Electrical test + AOI: $1.80<br>
+    70|    Routing/scoring + packaging: $1.20</p>
+    71|  </div>
+    72|
+    73|  <p><strong>Total: $120 (NRE) + 10 × $12 = $240, or $24/board.</strong> The NRE accounts for 50% of the total cost. This is the fundamental economic reality of prototyping: the setup costs are fixed, and the per-board processing cost is relatively modest. The small quantity means setup dominates.</p>
+    74|
+    75|  <img src="../generated/blog-nre-breakdown.webp" alt="NRE cost breakdown by category" loading="lazy" class="article-img">
+    76|
+    77|  <img src="../generated/blog-cost-chart.webp" alt="Cost per unit chart" loading="lazy" class="article-img">
+    78|
+    79|  <h2>The Production Cost Stack (10,000 Pieces)</h2>
+    80|
+    81|  <p>Same board, 10,000 units. The NRE is amortized across 1,000× the volume, and the per-board processing cost drops through panel optimization:</p>
+    82|
+    83|  <div class="highlight-box">
+    84|    <p><strong>Amortized NRE: ~$0.012/board</strong><br>
+    85|    Same $120 setup, divided by 10,000 boards. Effectively zero.</p>
+    86|    <p style="margin-top:var(--space-sm)"><strong>Per-Board Cost: ~$3.50</strong><br>
+    87|    Raw material (panel-optimized): $1.10<br>
+    88|    Processing (volume-optimized, panel-level): $1.60<br>
+    89|    Electrical test (flying probe, panel-level): $0.45<br>
+    90|    Routing + packaging (panel-level): $0.35</p>
+    91|    <p style="margin-top:var(--space-sm)"><strong>Panel Utilization Bonus: ~$1.20/board saved</strong><br>
+    92|    At prototype quantity, we fit 6 boards per panel (70% utilization). At 10,000 units, we optimize the panel for 12 boards (92% utilization). That's 2× the boards per panel cycle for roughly the same processing cost.</p>
+    93|  </div>
+    94|
+    95|  <p><strong>Total: $120 (NRE) + 10,000 × $3.50 = $35,120, or $3.51/board</strong> — before the panel utilization bonus. Actual cost with optimized panelization: approximately <strong>$4.70/board</strong> (the $3.51 base plus $1.19 in yield management, extra testing, and logistics).</p>
+    96|
+    97|  <img src="../generated/blog-cost-panel.webp" alt="PCB production panel" loading="lazy" class="article-img">
+    98|
+    99|  <h2>Where the 5× Cost Multiplier Actually Lives</h2>
+   100|
+   101|  <p><span class="data-point">5×</span></p>
+   102|  <p>The per-unit cost difference between prototype and production is driven by four factors, weighted by impact:</p>
+   103|
+   104|  <p><strong>1. NRE Amortization (35% of the gap).</strong> The $120 setup cost on 10 boards is $12/board; on 10,000 boards it's $0.012. This alone accounts for a 5× difference in per-unit cost. The fix: aggregate multiple prototype designs into a single panel. If you have three different prototype designs on one panel, you split the NRE three ways. We offer this as a standard option — it adds 1–2 days to CAM engineering but typically saves 30–40% on prototype NRE.</p>
+   105|
+   106|  <p><strong>2. Panel Utilization (30% of the gap).</strong> Prototype panels run at 60–75% utilization because we prioritize quick-turnover over perfect nesting. Production panels run at 85–95% utilization with optimized CAM nesting. On a $150 panel processing cycle, going from 6 to 12 boards per panel halves the per-board processing cost. This is the single largest lever in production pricing and the one most buyers don't understand.</p>
+   107|
+   108|  <p><strong>3. Process Efficiency (25% of the gap).</strong> A prototype panel goes through the same 20+ process steps as a production panel — but it's processed individually or in small batches. A production run processes 100+ panels simultaneously through each step. The drill machine, plating tank, and etch line cost the same to run whether they're processing one panel or one hundred. The per-panel processing cost drops by roughly 60% when equipment is fully loaded.</p>
+   109|
+   110|  <p><strong>4. Yield Management (10% of the gap).</strong> Prototypes target 90–95% yield (some scrap is acceptable; we overbuild by 10–15% to compensate). Production targets 97–99.5% yield because scrap at volume is expensive. The tighter process controls required for high yield add about 5–8% to per-board cost at volume — but the scrap savings more than offset it.</p>
+   111|
+   112|  <img src="../generated/blog-process-efficiency.webp" alt="Processing cost per unit at different production volumes" loading="lazy" class="article-img">
+   113|
+   114|  <h2>The 500-Piece Sweet Spot</h2>
+   115|
+   116|  <p>There's a compelling economic argument for ordering 500 pieces even when you only need 200. At 500 units, the NRE becomes negligible ($0.24/board), panel utilization improves to ~80%, and process efficiency starts to kick in. The per-unit cost at 500 pieces is typically 40–55% lower than at 50 pieces, and 65–75% lower than at 10 pieces.</p>
+   117|
+   118|  <p>If your product has predictable demand, the 500-piece prototype-to-pilot transition order is the sweet spot: you get most of the production cost benefit, you have enough units for beta testing and early customers, and you avoid the cash outlay of a 10,000-piece production run before market validation. We recommend this bridge quantity to startups and new product introduction teams regularly.</p>
+   119|
+   120|  <h2>When to Go Direct to Production</h2>
+   121|
+   122|  <p>Skip the prototype phase entirely when: (a) you've built this exact board before (minor revision of an existing design), (b) the design uses all standard materials and processes we stock daily (FR-4, 1oz, ENIG, 5/5mil), and (c) your BOM has no allocation or long-lead-time components. In these cases, a 1,000-piece pilot run can replace both prototype and initial production, saving 2–3 weeks and roughly $500–1,000 in combined NRE.</p>
+   123|
+   124|  <h2>The Bottom Line</h2>
+   125|  <p>PCB cost follows a classic fixed-cost + variable-cost structure, where the fixed cost (NRE + setup) dominates at low quantities and the variable cost (material + processing + yield) determines pricing at volume. The key numbers to remember: NRE is typically $100–200 for a 4-layer board, panel utilization improvement from prototype to production saves 20–30% on processing cost, and the 500-piece bridge quantity captures 60–70% of the volume cost benefit without committing to a full production run. At Huaxing PCBA, we provide transparent cost breakdowns at every quantity tier — use our online estimator at /quote/ to see how your specific design scales.</p>
+   126|
+   127|</article>
+   128|
+   129|<section class="section" style="background:var(--bg-secondary)">
+   130|  <div class="container">
+   131|    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-rigid-flex.webp)">
+   132|      <h2>Ready to Cost Your Design?</h2>
+   133|      <p>Use our online PCB estimator to see real pricing at every quantity tier — from 5 prototypes to 100,000 production units.</p>
+   134|      <div style="display:flex;gap:var(--space-sm);justify-content:center;flex-wrap:wrap">
+   135|        <a href="/quote/" class="btn btn-primary btn-lg">Try Online Estimator <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></a>
+   136|        <button class="btn btn-ghost btn-lg" onclick="openModal()">Send Gerbers for Quote</button>
+   137|      </div>
+   138|    </div>
+   139|  </div>
+   140|</section>
+   141|
+   142|<footer class="site-footer">
+   143|  <div class="container">
+   144|    <div class="footer-grid">
+   145|      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China.</p></div>
+   146|      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+   147|            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+   148|    </div>
+   149|    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+   150|  </div>
+   151|</footer>
+   152|
+   153|<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+   154|  <div class="modal-dialog">
+   155|    <button class="modal-close" onclick="closeModal()">&times;</button>
+   156|    <div class="modal-image-panel">
+   157|      <img src="/generated/modal-pcba-showcase.webp" alt="">
+   158|      <div class="modal-image-overlay"></div>
+   159|      <div class="modal-image-top">
+   160|        <h2 class="mi-heading">Start Your Project</h2>
+   161|        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+   162|      </div>
+   163|      <div class="modal-image-text">
+   164|        <div class="mi-label">HUAXING PCBA</div>
+   165|        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+   166|      </div>
+   167|    </div>
+   168|    <div class="modal-form-panel">
+   169|      <form onsubmit="return handleInquiry(event)" novalidate>
+   170|        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+   171|        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+   172|        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+   173|        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+   174|        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+   175|      </form>
+   176|    </div>
+   177|  </div>
+   178|</div>
+   179|
+   180|<script src="../reveal.js"></script>
+   181|<script>
+   182|function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+   183|function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+   184|</script>
+   185|<script src="../inquiry-handler.js"></script></body>
+   186|</html>
+   187|

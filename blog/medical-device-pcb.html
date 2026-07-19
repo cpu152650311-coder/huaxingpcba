@@ -1,282 +1,284 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medical Device PCB Manufacturing Guide — IPC Class 3, ISO 13485 Compliance & Reliability Validation | Huaxing PCBA</title>
-<meta name="description" content="Complete guide to medical device PCB requirements: IPC Class 3 manufacturing, ISO 13485 documentation, biocompatible materials, sterilization compatibility, and traceability. From a certified medical PCB manufacturer in Shenzhen.">
-<meta property="og:title" content="Medical Device PCB Manufacturing Guide — IPC Class 3, ISO 13485 Compliance & Reliability Validation">
-<meta property="og:description" content="What medical device OEMs require from PCB suppliers: IPC Class 3 workmanship, full lot traceability, sterilization-compatible materials, and validated manufacturing processes. Practical guide for R&D and procurement.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://huaxingpcba.com/blog/medical-device-pcb.html">
-    <link rel="canonical" href="https://huaxingpcba.com/blog/medical-device-pcb.html">
-<link rel="stylesheet" href="../design-tokens.css?v=20">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-<link rel="stylesheet" href="../blog.css?v=1">
-
-</head>
-<body>
-
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
-  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
-</svg>
-
-<header class="site-header" id="header">
-  <div class="container">
-    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    <nav class="nav-links" id="navLinks">
-    </nav>
-    <script src="/nav.js?v=13"></script>
-    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</header>
-
-<section class="sub-hero">
-  <div class="sub-hero-bg"><img src="../generated/blog-cover-medical.webp" alt="" loading="eager"></div>
-  <div class="sub-hero-overlay"></div>
-  <div class="sub-hero-content">
-    <div class="container">
-      <p class="section-label reveal">Medical Electronics</p>
-      <h1 class="reveal">Medical Device PCB Manufacturing:<br><em>IPC Class 3, Reliability & Compliance</em></h1>
-      <p class="reveal">When failure is not an option, your PCB supplier must meet a different standard.</p>
-    </div>
-  </div>
-</section>
-
-<article class="article reveal">
-  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Medical Device PCB</span></div>
-
-  <p>A PCB inside a patient monitor, an infusion pump, or an implantable cardiac device carries a different burden than a PCB in a consumer product. The requirement is not "works most of the time" — it is "cannot fail, ever, under any specified condition." Medical device PCBs are manufactured to IPC Class 3, the highest workmanship classification in the electronics industry, and are subject to regulatory frameworks — ISO 13485, FDA 21 CFR Part 820, and EU MDR — that extend deep into the supply chain.</p>
-
-  <p>At Huaxing PCBA, we manufacture medical-grade PCBs under IPC-A-610 Class 3 acceptance criteria with full lot-level traceability. This guide covers what medical device OEMs need to know before selecting a PCB supplier: the standards, the materials, the validation, and the questions that separate a capable manufacturer from a risk.</p>
-
-  <img src="../generated/blog-medical-class3.webp" alt="Medical-grade PCB with IPC Class 3 gold-plated pads and precision traces under inspection lighting" loading="lazy" class="article-img">
-
-  <h2>What Makes Medical PCBs Different from Commercial Boards</h2>
-
-  <p>The difference between a commercial-grade PCB and a medical-grade PCB is not the substrate or the copper — it is the <em>margin for error</em>. IPC-A-610 defines three classes:</p>
-
-  <div style="overflow-x:auto">
-  <table class="spec-table">
-    <thead>
-      <tr><th>Class</th><th>Target</th><th>Defect Tolerance</th><th>Example Application</th></tr>
-    </thead>
-    <tbody>
-      <tr><td style="color:var(--text-primary)">Class 1</td><td>General electronic products</td><td>Functional failure only</td><td>Consumer toys, disposable gadgets</td></tr>
-      <tr><td style="color:var(--accent)">Class 2</td><td>Dedicated service products</td><td>Intermittent failure acceptable if not safety-critical</td><td>Laptops, telecom equipment, industrial controls</td></tr>
-      <tr><td style="color:var(--accent);font-weight:600">Class 3</td><td>High-performance / life-support</td><td><strong>Zero defect tolerance</strong> — no condition that could cause failure</td><td>Pacemakers, ventilators, surgical instruments, diagnostic imaging</td></tr>
-    </tbody>
-  </table>
-  </div>
-
-  <p>In practice, this means a Class 3 board cannot have: barrel fill below 75% in any plated through-hole, annular ring breakout exceeding 90° of the hole circumference, solder wicking that reduces conductor spacing, or lifted lands on any pad — conditions that would be acceptable in Class 2 and routine in Class 1. A 32-layer medical imaging board at Huaxing undergoes <span class="data-point">3× more</span> AOI inspection passes than an equivalent industrial board, because the acceptance window is tighter at every station.</p>
-
-  <h2>IPC Class 3: The Medical-Grade Manufacturing Standard</h2>
-
-  <p>IPC Class 3 is not just a tighter version of Class 2. It changes the manufacturing process at a structural level:</p>
-
-  <h3>Plated Through-Hole Requirements</h3>
-  <p>Class 3 mandates minimum barrel copper thickness of <span class="data-point">25 μm</span> (1 mil) with no more than one void per hole and no void exceeding 5% of the barrel length. This is tested on microsections from every production panel, not sampled. For medical devices that undergo thermal sterilization (steam autoclave at 121–134°C, EtO gas exposure, or gamma irradiation), through-hole reliability after thermal cycling is the primary failure mode — and the one Class 3 directly addresses.</p>
-
-  <h3>Annular Ring and Breakout</h3>
-  <p>Class 3 requires a minimum annular ring of <span class="data-point">50 μm</span> (2 mil) on external layers and <span class="data-point">25 μm</span> (1 mil) on internal layers. At Huaxing, we design for a minimum 75 μm external annular ring to provide margin against drill wander on high-layer-count boards. This is especially critical for <a href="/blog/hdi-technology.html">HDI designs with microvias</a>, where a 50 μm annular ring on a 100 μm laser-drilled via leaves zero room for misregistration.</p>
-
-  <img src="../generated/blog-medical-materials.webp" alt="Photorealistic cross-section of medical-grade multilayer PCB showing gold surface finish and precision layer alignment" loading="lazy" class="article-img">
-
-  <h2>Material Selection for Medical Device PCBs</h2>
-
-  <p>Medical PCBs face conditions that standard <a href="/blog/pcb-materials-guide.html">FR-4 substrates</a> were never designed to handle. Material selection must account for the device's sterilization method, operating environment, and regulatory classification:</p>
-
-  <div style="overflow-x:auto">
-  <table class="spec-table">
-    <thead>
-      <tr><th>Sterilization Method</th><th>Temperature / Exposure</th><th>Recommended Substrate</th><th>Why</th></tr>
-    </thead>
-    <tbody>
-      <tr><td style="color:var(--text-primary)">Steam Autoclave</td><td>121–134°C, saturated steam, 15–30 min</td><td>High-Tg FR-4 (≥170°C) or Polyimide</td><td>Standard FR-4 Tg of 130°C is too close to sterilization temperature; Z-axis expansion destroys vias</td></tr>
-      <tr><td style="color:var(--text-primary)">EtO Gas</td><td>37–63°C, humidity, 2–6 hours</td><td>High-Tg FR-4 with ENIG finish</td><td>OSP and immersion silver oxidize under extended humidity exposure</td></tr>
-      <tr><td style="color:var(--text-primary)">Gamma Radiation</td><td>25–40 kGy cumulative dose</td><td>Polyimide or Ceramic</td><td>FR-4 epoxy embrittles under gamma; polyimide maintains flexibility past 50 kGy</td></tr>
-      <tr><td style="color:var(--text-primary)">Hydrogen Peroxide Plasma</td><td>45–55°C, low-pressure plasma</td><td>High-Tg FR-4 or Rogers</td><td>Plasma can etch exposed copper if solder mask coverage is incomplete</td></tr>
-    </tbody>
-  </table>
-  </div>
-
-  <p><strong>Surface finish matters.</strong> ENIG (electroless nickel immersion gold) is the dominant finish for medical PCBs because it provides a flat, oxidation-resistant surface with excellent wire bondability — important for implantable sensors and MEMS devices. For <a href="/blog/enig-vs-hasl.html">ENIG vs alternative finishes</a>, immersion silver offers a lower-cost option but has a shorter shelf life and is incompatible with sulfur-rich sterilization environments.</p>
-
-  <p><strong>Implantable devices</strong> add biocompatibility requirements. While the PCB itself is typically encapsulated, any leachable materials from the substrate, solder mask, or surface finish must be characterized. Polyimide substrates are preferred for flexible implantable circuits because they pass ISO 10993 cytotoxicity testing — a requirement that standard FR-4 cannot meet without hermetic encapsulation. For <a href="/blog/rigid-flex-pcb.html">rigid-flex designs in wearable medical devices</a>, the adhesive systems in the flex layers must also be biocompatibility-tested.</p>
-
-  <h2>Cleanliness, Contamination Control & Biocompatibility</h2>
-
-  <p>Ionic contamination on a medical PCB is not just a reliability problem — it is a patient safety problem. Residual flux, plating salts, or handling contaminants can cause:</p>
-
-  <ul>
-    <li><strong>Dendritic growth</strong> under bias voltage in humid environments (e.g., inside a ventilator's humidified air path), creating intermittent shorts that are nearly impossible to diagnose in the field</li>
-    <li><strong>Electrochemical migration</strong> that degrades high-impedance sensor inputs, producing drift in diagnostic readings — a failure mode that can go undetected until the device produces clinically incorrect data</li>
-    <li><strong>Corrosion of wire bonds</strong> in implantable sensor packages, where even nanometer-scale corrosion changes electrical characteristics</li>
-  </ul>
-
-  <img src="../generated/blog-medical-cleanroom.webp" alt="PCB inspection under bright controlled lighting in a clean manufacturing environment with precision measurement equipment" loading="lazy" class="article-img">
-
-  <p>Huaxing's medical PCB line enforces ionic contamination limits of <span class="data-point">&lt;1.56 μg/cm²</span> NaCl equivalent — the IPC-6012 Class 3 requirement — verified by resistivity of solvent extract (ROSE) testing on every production lot. Boards are processed in a dedicated clean zone with HEPA-filtered air, ESD-controlled workstations, and DI water final rinse (resistivity ≥18 MΩ·cm). Operators wear full cleanroom garments and gloves; bare-hand contact with any board surface is prohibited after copper etch.</p>
-
-  <div class="highlight-box">
-    <p><strong>Key question for your supplier:</strong> "What is your ionic contamination limit for medical-grade PCBs, and do you test every lot or sample?" If the answer is anything above 1.56 μg/cm² or "we test per batch," the supplier is running a commercial line dressed as a medical line.</p>
-  </div>
-
-  <h2>Traceability & Documentation: The Paper Trail That Proves Compliance</h2>
-
-  <p>What separates medical PCB manufacturing from commercial manufacturing is not the equipment — it is the documentation. A Class 3 medical board must be traceable from finished assembly back to the raw laminate lot, including every process step, every inspection result, and every operator who touched it.</p>
-
-  <p>At Huaxing, each medical PCB lot receives:</p>
-  <ul>
-    <li><strong>Unique lot number</strong> laser-marked on the board or panel frame, linked to a digital manufacturing record</li>
-    <li><strong>Material certifications</strong> for substrate lot, copper foil lot, solder mask batch, and surface finish chemistry — retained for 10 years minimum (per ISO 13485:2016, §7.5.3.2.2)</li>
-    <li><strong>Process traveler</strong> documenting every station: drill, PTH, pattern plate, etch, solder mask, surface finish, electrical test, AOI, final inspection — with timestamps and operator IDs</li>
-    <li><strong>Microsection reports</strong> from coupon coupons on every panel, with photomicrographs of plated through-hole cross-sections at 200× magnification</li>
-    <li><strong>Certificate of Conformance (CoC)</strong> referencing the applicable IPC-6012 Class 3 performance specification and any customer-specific requirements (CSR)</li>
-  </ul>
-
-  <p>This documentation is not bureaucratic overhead — it is a regulatory requirement. FDA 21 CFR Part 820.80 requires device manufacturers to maintain "device history records" that demonstrate each unit was manufactured in accordance with the device master record. If your PCB supplier cannot provide full lot traceability, your own FDA submission is incomplete. For guidance on evaluating supplier documentation during factory audits, see our <a href="/blog/pcb-supplier-audit.html">PCB supplier audit checklist</a>.</p>
-
-  <h2>Testing & Validation: What Gets Inspected Gets Built Right</h2>
-
-  <p>Medical device PCBs require testing beyond standard electrical continuity. The testing protocol is designed to catch defects that electrical test alone cannot find — latent defects that manifest only under stress conditions:</p>
-
-  <div class="checklist-item">
-    <div class="checklist-num">1</div>
-    <div class="checklist-content">
-      <h4>100% Automated Optical Inspection (AOI)</h4>
-      <p>Post-reflow and post-assembly, with Class 3 defect libraries that flag annular ring violations below 50 μm, solder bridging, and insufficient fillet. This is not the same AOI recipe used for commercial boards — the acceptance thresholds are tighter across all parameters.</p>
-    </div>
-  </div>
-
-  <div class="checklist-item">
-    <div class="checklist-num">2</div>
-    <div class="checklist-content">
-      <h4>X-Ray Inspection for Hidden Joints</h4>
-      <p>BGA, QFN, and any component with hidden solder joints receives 100% <a href="/blog/pcb-testing-methods.html">X-ray inspection</a> at multiple angles. Void percentage is measured; Class 3 typically requires &lt;15% void area per joint for BGAs.</p>
-    </div>
-  </div>
-
-  <div class="checklist-item">
-    <div class="checklist-num">3</div>
-    <div class="checklist-content">
-      <h4>Thermal Shock / Thermal Cycling</h4>
-      <p>Per IPC-TM-650 method 2.6.7.1: boards cycled from −65°C to +150°C (or application-specific range) for 500–1,000 cycles. Post-cycling, every plated through-hole is microsectioned to check for barrel cracks. This is the gold-standard test for sterilization-resistant PCBs.</p>
-    </div>
-  </div>
-
-  <div class="checklist-item">
-    <div class="checklist-num">4</div>
-    <div class="checklist-content">
-      <h4>Impedance TDR Testing</h4>
-      <p>For medical imaging and diagnostic equipment operating at high frequencies, controlled <a href="/blog/impedance-control.html">impedance with ±5% tolerance</a> is mandatory. TDR measurements are taken on every panel, not sampled — one out-of-spec trace on a 32-layer CT scanner board can render the entire panel scrap.</p>
-    </div>
-  </div>
-
-  <div class="checklist-item">
-    <div class="checklist-num">5</div>
-    <div class="checklist-content">
-      <h4>Flying Probe + ICT + Functional Test</h4>
-      <p>The medical testing stack: flying probe for bare-board netlist verification, in-circuit test for component-level faults, and custom functional test fixtures that simulate the device's operating conditions. A ventilator control board at Huaxing cycles through all three before it ships.</p>
-    </div>
-  </div>
-
-  <h2>How to Qualify a Medical PCB Manufacturer</h2>
-
-  <p>Selecting a medical PCB supplier is not the same as selecting a general PCB supplier. Here are the five dimensions that matter:</p>
-
-  <h3>1. Certifications — Not Just on Paper</h3>
-  <p>ISO 13485:2016 is the medical device quality management standard. It extends ISO 9001 with additional requirements for risk management, design control, and traceability. A supplier claiming "medical capability" without ISO 13485 certification is operating outside the regulatory framework. IATF 16949 (automotive) is also relevant — its process control requirements overlap significantly with medical requirements — but it does not substitute for ISO 13485's device-specific clauses.</p>
-
-  <p>At minimum, verify: ISO 9001:2015, ISO 13485:2016, IPC-A-610 Class 3 operator certification, and UL recognition. Huaxing holds all four plus IATF 16949:2016 for automotive-grade process control applied to medical lines.</p>
-
-  <h3>2. Process Validation, Not Just Capability Claims</h3>
-  <p>Every manufacturer claims to do Class 3. Ask for the process validation data: IQ/OQ/PQ (Installation Qualification, Operational Qualification, Performance Qualification) reports for the specific line that will produce your boards. A legitimate supplier has these on file; a supplier that "can do Class 3 when needed" does not.</p>
-
-  <h3>3. Dedicated Medical Line vs. Shared Line</h3>
-  <p>A dedicated medical line with documented contamination controls and segregated tooling is the gold standard. A shared line that processes medical boards alongside commercial boards is a risk — cross-contamination, relaxed operator discipline, and mixed inspection criteria are documented failure modes. Ask whether medical boards run on a dedicated line and, if not, what segregation procedures are in place.</p>
-
-  <h3>4. Traceability Infrastructure</h3>
-  <p>Can the supplier trace a failed board back to the specific laminate lot, copper foil lot, plating bath, and reflow oven profile — within 24 hours? If the answer is "we'd need a few days to pull that together," the traceability system does not meet medical requirements. Our <a href="/blog/turnkey-pcb-assembly.html">turnkey assembly service</a> includes component-level lot traceability with digital records retained for 10 years, meeting ISO 13485 §7.5.9.2 requirements for implantable and life-sustaining devices.</p>
-
-  <h3>5. Non-Disclosure and Regulatory Support</h3>
-  <p>A medical PCB supplier should be comfortable signing a comprehensive NDA and providing documentation packages that support your regulatory submission: process FMEAs, material declarations for REACH/RoHS, sterilization compatibility data, and biocompatibility test reports for materials that contact patient tissue. If a supplier hesitates to share process documentation, they are not a medical supplier — they are a commercial supplier willing to accept a higher price.</p>
-
-  <img src="../generated/blog-medical-testing.webp" alt="PCB undergoing precision electrical testing with probe card and automated test equipment under cleanroom lighting" loading="lazy" class="article-img">
-
-  <h2>The Cost of Getting It Wrong</h2>
-
-  <p>Medical device recalls triggered by PCB failures are rare — but when they happen, the cost is catastrophic. A single field failure in a Class III device (pacemaker, implantable defibrillator, neurostimulator) triggers an FDA adverse event report, potentially a recall affecting thousands of implanted units, and liability exposure measured in tens of millions of dollars. Even in Class II devices (infusion pumps, patient monitors, surgical instruments), a systemic PCB reliability issue discovered post-market means a CAPA investigation, a 510(k) supplement, and months of manufacturing downtime.</p>
-
-  <p>The cost difference between a Class 2 PCB and a Class 3 PCB is typically <span class="data-point">15–40%</span> depending on layer count and complexity. On a $200 patient monitor BOM, that is roughly $8–20 per board — less than the cost of one customer support call, let alone a field replacement.</p>
-
-  <div class="highlight-box">
-    <p><strong>Bottom line:</strong> If your device touches a patient — directly or indirectly — specify IPC Class 3 and qualify your supplier against the five dimensions above. The premium pays for itself the first time a board does <em>not</em> fail in the field.</p>
-  </div>
-
-  <p>At Huaxing PCBA, we manufacture medical-grade PCBs under ISO 13485:2016 and IPC-A-610 Class 3, with 10-year lot traceability, dedicated clean-zone production, and full validation documentation. Our facility in Shenzhen runs <span class="data-point">8 SMT lines</span> with AOI, X-ray, SPI, ICT, and FCT — all in-house — producing 8 million solder joints per day at a <span class="data-point">99.2%</span> on-time delivery rate. Whether you need prototype quantities for design verification or production volumes for a commercial launch, <a href="/contact/">contact our engineering team</a> with your specifications for a technical review and quote within 24 hours.</p>
-
-</article>
-
-<!-- CTA -->
-<section class="section" style="background:var(--bg-secondary)">
-  <div class="container">
-    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-rigid-flex.webp)">
-      <h2>Need Medical-Grade PCB Manufacturing?</h2>
-      <p>ISO 13485 certified. IPC Class 3. Full lot traceability. Contact our engineering team for a technical review.</p>
-      <button class="btn btn-primary btn-lg" onclick="openModal()">Get a Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China.</p></div>
-      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
-    </div>
-    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
-  </div>
-</footer>
-
-<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-dialog">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div class="modal-image-panel">
-      <img src="/generated/modal-pcba-showcase.webp" alt="">
-      <div class="modal-image-overlay"></div>
-      <div class="modal-image-top">
-        <h2 class="mi-heading">Start Your Project</h2>
-        <p class="mi-subtitle">Upload your Gerber files and BOM. We'll respond within 24 hours with a detailed quote and free DFM review.</p>
-      </div>
-      <div class="modal-image-text">
-        <div class="mi-label">HUAXING PCBA</div>
-        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 13485 &amp; IATF 16949</strong></div>
-      </div>
-    </div>
-    <div class="modal-form-panel">
-      <form onsubmit="return handleInquiry(event)" novalidate>
-        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
-        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
-        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
-        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script src="../reveal.js"></script>
-<script>
-function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-</script>
-<script src="../inquiry-handler.js"></script></body>
-</html>
+     1|<!DOCTYPE html>
+     2|<html lang="en">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>Medical Device PCB Manufacturing Guide — IPC Class 3, ISO 13485 Compliance & Reliability Validation | Huaxing PCBA</title>
+     7|<meta name="description" content="Complete guide to medical device PCB requirements: IPC Class 3 manufacturing, ISO 13485 documentation, biocompatible materials, sterilization compatibility, and traceability. From a certified medical PCB manufacturer in Shenzhen.">
+     8|<meta property="og:title" content="Medical Device PCB Manufacturing Guide — IPC Class 3, ISO 13485 Compliance & Reliability Validation">
+     9|<meta property="og:description" content="What medical device OEMs require from PCB suppliers: IPC Class 3 workmanship, full lot traceability, sterilization-compatible materials, and validated manufacturing processes. Practical guide for R&D and procurement.">
+    10|<meta property="og:type" content="article">
+    11|<meta property="og:url" content="https://huaxingpcba.com/blog/medical-device-pcb.html">
+    12|    <link rel="canonical" href="https://huaxingpcba.com/blog/medical-device-pcb.html">
+    13|<link rel="stylesheet" href="../design-tokens.css?v=20">
+    14|<link rel="icon" type="image/x-icon" href="/favicon.ico">
+    15|<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    16|<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+    17|<link rel="stylesheet" href="../blog.css?v=1">
+    18|
+    19|</head>
+    20|<body>
+    21|
+    22|<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+    23|  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    24|  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+    25|</svg>
+    26|
+    27|<header class="site-header" id="header">
+    28|  <div class="container">
+    29|    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    30|    <nav class="nav-links" id="navLinks">
+    31|    </nav>
+    32|    <script src="/nav.js?v=13"></script>
+    33|    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+    34|      <span></span><span></span><span></span>
+    35|    </div>
+    36|  </div>
+    37|</header>
+    38|
+    39|<section class="sub-hero">
+    40|  <div class="sub-hero-bg"><img src="../generated/blog-cover-medical.webp" alt="" loading="eager"></div>
+    41|  <div class="sub-hero-overlay"></div>
+    42|  <div class="sub-hero-content">
+    43|    <div class="container">
+    44|      <p class="section-label reveal">Medical Electronics</p>
+    45|      <h1 class="reveal">Medical Device PCB Manufacturing:<br><em>IPC Class 3, Reliability & Compliance</em></h1>
+    46|      <p class="reveal">When failure is not an option, your PCB supplier must meet a different standard.</p>
+    47|    </div>
+    48|  </div>
+    49|</section>
+    50|
+    51|<article class="article reveal">
+    52|  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Medical Device PCB</span></div>
+    53|
+    54|  <p>A PCB inside a patient monitor, an infusion pump, or an implantable cardiac device carries a different burden than a PCB in a consumer product. The requirement is not "works most of the time" — it is "cannot fail, ever, under any specified condition." Medical device PCBs are manufactured to IPC Class 3, the highest workmanship classification in the electronics industry, and are subject to regulatory frameworks — ISO 13485, FDA 21 CFR Part 820, and EU MDR — that extend deep into the supply chain.</p>
+    55|
+    56|  <p>At Huaxing PCBA, we manufacture medical-grade PCBs under IPC-A-610 Class 3 acceptance criteria with full lot-level traceability. This guide covers what medical device OEMs need to know before selecting a PCB supplier: the standards, the materials, the validation, and the questions that separate a capable manufacturer from a risk.</p>
+    57|
+    58|  <img src="../generated/blog-medical-class3.webp" alt="Medical-grade PCB with IPC Class 3 gold-plated pads and precision traces under inspection lighting" loading="lazy" class="article-img">
+    59|
+    60|  <h2>What Makes Medical PCBs Different from Commercial Boards</h2>
+    61|
+    62|  <p>The difference between a commercial-grade PCB and a medical-grade PCB is not the substrate or the copper — it is the <em>margin for error</em>. IPC-A-610 defines three classes:</p>
+    63|
+    64|  <div style="overflow-x:auto">
+    65|  <table class="spec-table">
+    66|    <thead>
+    67|      <tr><th>Class</th><th>Target</th><th>Defect Tolerance</th><th>Example Application</th></tr>
+    68|    </thead>
+    69|    <tbody>
+    70|      <tr><td style="color:var(--text-primary)">Class 1</td><td>General electronic products</td><td>Functional failure only</td><td>Consumer toys, disposable gadgets</td></tr>
+    71|      <tr><td style="color:var(--accent)">Class 2</td><td>Dedicated service products</td><td>Intermittent failure acceptable if not safety-critical</td><td>Laptops, telecom equipment, industrial controls</td></tr>
+    72|      <tr><td style="color:var(--accent);font-weight:600">Class 3</td><td>High-performance / life-support</td><td><strong>Zero defect tolerance</strong> — no condition that could cause failure</td><td>Pacemakers, ventilators, surgical instruments, diagnostic imaging</td></tr>
+    73|    </tbody>
+    74|  </table>
+    75|  </div>
+    76|
+    77|  <p>In practice, this means a Class 3 board cannot have: barrel fill below 75% in any plated through-hole, annular ring breakout exceeding 90° of the hole circumference, solder wicking that reduces conductor spacing, or lifted lands on any pad — conditions that would be acceptable in Class 2 and routine in Class 1. A 32-layer medical imaging board at Huaxing undergoes <span class="data-point">3× more</span> AOI inspection passes than an equivalent industrial board, because the acceptance window is tighter at every station.</p>
+    78|
+    79|  <h2>IPC Class 3: The Medical-Grade Manufacturing Standard</h2>
+    80|
+    81|  <p>IPC Class 3 is not just a tighter version of Class 2. It changes the manufacturing process at a structural level:</p>
+    82|
+    83|  <h3>Plated Through-Hole Requirements</h3>
+    84|  <p>Class 3 mandates minimum barrel copper thickness of <span class="data-point">25 μm</span> (1 mil) with no more than one void per hole and no void exceeding 5% of the barrel length. This is tested on microsections from every production panel, not sampled. For medical devices that undergo thermal sterilization (steam autoclave at 121–134°C, EtO gas exposure, or gamma irradiation), through-hole reliability after thermal cycling is the primary failure mode — and the one Class 3 directly addresses.</p>
+    85|
+    86|  <h3>Annular Ring and Breakout</h3>
+    87|  <p>Class 3 requires a minimum annular ring of <span class="data-point">50 μm</span> (2 mil) on external layers and <span class="data-point">25 μm</span> (1 mil) on internal layers. At Huaxing, we design for a minimum 75 μm external annular ring to provide margin against drill wander on high-layer-count boards. This is especially critical for <a href="/blog/hdi-technology.html">HDI designs with microvias</a>, where a 50 μm annular ring on a 100 μm laser-drilled via leaves zero room for misregistration.</p>
+    88|
+    89|  <img src="../generated/blog-medical-materials.webp" alt="Photorealistic cross-section of medical-grade multilayer PCB showing gold surface finish and precision layer alignment" loading="lazy" class="article-img">
+    90|
+    91|  <h2>Material Selection for Medical Device PCBs</h2>
+    92|
+    93|  <p>Medical PCBs face conditions that standard <a href="/blog/pcb-materials-guide.html">FR-4 substrates</a> were never designed to handle. Material selection must account for the device's sterilization method, operating environment, and regulatory classification:</p>
+    94|
+    95|  <div style="overflow-x:auto">
+    96|  <table class="spec-table">
+    97|    <thead>
+    98|      <tr><th>Sterilization Method</th><th>Temperature / Exposure</th><th>Recommended Substrate</th><th>Why</th></tr>
+    99|    </thead>
+   100|    <tbody>
+   101|      <tr><td style="color:var(--text-primary)">Steam Autoclave</td><td>121–134°C, saturated steam, 15–30 min</td><td>High-Tg FR-4 (≥170°C) or Polyimide</td><td>Standard FR-4 Tg of 130°C is too close to sterilization temperature; Z-axis expansion destroys vias</td></tr>
+   102|      <tr><td style="color:var(--text-primary)">EtO Gas</td><td>37–63°C, humidity, 2–6 hours</td><td>High-Tg FR-4 with ENIG finish</td><td>OSP and immersion silver oxidize under extended humidity exposure</td></tr>
+   103|      <tr><td style="color:var(--text-primary)">Gamma Radiation</td><td>25–40 kGy cumulative dose</td><td>Polyimide or Ceramic</td><td>FR-4 epoxy embrittles under gamma; polyimide maintains flexibility past 50 kGy</td></tr>
+   104|      <tr><td style="color:var(--text-primary)">Hydrogen Peroxide Plasma</td><td>45–55°C, low-pressure plasma</td><td>High-Tg FR-4 or Rogers</td><td>Plasma can etch exposed copper if solder mask coverage is incomplete</td></tr>
+   105|    </tbody>
+   106|  </table>
+   107|  </div>
+   108|
+   109|  <p><strong>Surface finish matters.</strong> ENIG (electroless nickel immersion gold) is the dominant finish for medical PCBs because it provides a flat, oxidation-resistant surface with excellent wire bondability — important for implantable sensors and MEMS devices. For <a href="/blog/enig-vs-hasl.html">ENIG vs alternative finishes</a>, immersion silver offers a lower-cost option but has a shorter shelf life and is incompatible with sulfur-rich sterilization environments.</p>
+   110|
+   111|  <p><strong>Implantable devices</strong> add biocompatibility requirements. While the PCB itself is typically encapsulated, any leachable materials from the substrate, solder mask, or surface finish must be characterized. Polyimide substrates are preferred for flexible implantable circuits because they pass ISO 10993 cytotoxicity testing — a requirement that standard FR-4 cannot meet without hermetic encapsulation. For <a href="/blog/rigid-flex-pcb.html">rigid-flex designs in wearable medical devices</a>, the adhesive systems in the flex layers must also be biocompatibility-tested.</p>
+   112|
+   113|  <h2>Cleanliness, Contamination Control & Biocompatibility</h2>
+   114|
+   115|  <p>Ionic contamination on a medical PCB is not just a reliability problem — it is a patient safety problem. Residual flux, plating salts, or handling contaminants can cause:</p>
+   116|
+   117|  <ul>
+   118|    <li><strong>Dendritic growth</strong> under bias voltage in humid environments (e.g., inside a ventilator's humidified air path), creating intermittent shorts that are nearly impossible to diagnose in the field</li>
+   119|    <li><strong>Electrochemical migration</strong> that degrades high-impedance sensor inputs, producing drift in diagnostic readings — a failure mode that can go undetected until the device produces clinically incorrect data</li>
+   120|    <li><strong>Corrosion of wire bonds</strong> in implantable sensor packages, where even nanometer-scale corrosion changes electrical characteristics</li>
+   121|  </ul>
+   122|
+   123|  <img src="../generated/blog-medical-cleanroom.webp" alt="PCB inspection under bright controlled lighting in a clean manufacturing environment with precision measurement equipment" loading="lazy" class="article-img">
+   124|
+   125|  <p>Huaxing's medical PCB line enforces ionic contamination limits of <span class="data-point">&lt;1.56 μg/cm²</span> NaCl equivalent — the IPC-6012 Class 3 requirement — verified by resistivity of solvent extract (ROSE) testing on every production lot. Boards are processed in a dedicated clean zone with HEPA-filtered air, ESD-controlled workstations, and DI water final rinse (resistivity ≥18 MΩ·cm). Operators wear full cleanroom garments and gloves; bare-hand contact with any board surface is prohibited after copper etch.</p>
+   126|
+   127|  <div class="highlight-box">
+   128|    <p><strong>Key question for your supplier:</strong> "What is your ionic contamination limit for medical-grade PCBs, and do you test every lot or sample?" If the answer is anything above 1.56 μg/cm² or "we test per batch," the supplier is running a commercial line dressed as a medical line.</p>
+   129|  </div>
+   130|
+   131|  <h2>Traceability & Documentation: The Paper Trail That Proves Compliance</h2>
+   132|
+   133|  <p>What separates medical PCB manufacturing from commercial manufacturing is not the equipment — it is the documentation. A Class 3 medical board must be traceable from finished assembly back to the raw laminate lot, including every process step, every inspection result, and every operator who touched it.</p>
+   134|
+   135|  <p>At Huaxing, each medical PCB lot receives:</p>
+   136|  <ul>
+   137|    <li><strong>Unique lot number</strong> laser-marked on the board or panel frame, linked to a digital manufacturing record</li>
+   138|    <li><strong>Material certifications</strong> for substrate lot, copper foil lot, solder mask batch, and surface finish chemistry — retained for 10 years minimum (per ISO 13485:2016, §7.5.3.2.2)</li>
+   139|    <li><strong>Process traveler</strong> documenting every station: drill, PTH, pattern plate, etch, solder mask, surface finish, electrical test, AOI, final inspection — with timestamps and operator IDs</li>
+   140|    <li><strong>Microsection reports</strong> from coupon coupons on every panel, with photomicrographs of plated through-hole cross-sections at 200× magnification</li>
+   141|    <li><strong>Certificate of Conformance (CoC)</strong> referencing the applicable IPC-6012 Class 3 performance specification and any customer-specific requirements (CSR)</li>
+   142|  </ul>
+   143|
+   144|  <p>This documentation is not bureaucratic overhead — it is a regulatory requirement. FDA 21 CFR Part 820.80 requires device manufacturers to maintain "device history records" that demonstrate each unit was manufactured in accordance with the device master record. If your PCB supplier cannot provide full lot traceability, your own FDA submission is incomplete. For guidance on evaluating supplier documentation during factory audits, see our <a href="/blog/pcb-supplier-audit.html">PCB supplier audit checklist</a>.</p>
+   145|
+   146|  <h2>Testing & Validation: What Gets Inspected Gets Built Right</h2>
+   147|
+   148|  <p>Medical device PCBs require testing beyond standard electrical continuity. The testing protocol is designed to catch defects that electrical test alone cannot find — latent defects that manifest only under stress conditions:</p>
+   149|
+   150|  <div class="checklist-item">
+   151|    <div class="checklist-num">1</div>
+   152|    <div class="checklist-content">
+   153|      <h4>100% Automated Optical Inspection (AOI)</h4>
+   154|      <p>Post-reflow and post-assembly, with Class 3 defect libraries that flag annular ring violations below 50 μm, solder bridging, and insufficient fillet. This is not the same AOI recipe used for commercial boards — the acceptance thresholds are tighter across all parameters.</p>
+   155|    </div>
+   156|  </div>
+   157|
+   158|  <div class="checklist-item">
+   159|    <div class="checklist-num">2</div>
+   160|    <div class="checklist-content">
+   161|      <h4>X-Ray Inspection for Hidden Joints</h4>
+   162|      <p>BGA, QFN, and any component with hidden solder joints receives 100% <a href="/blog/pcb-testing-methods.html">X-ray inspection</a> at multiple angles. Void percentage is measured; Class 3 typically requires &lt;15% void area per joint for BGAs.</p>
+   163|    </div>
+   164|  </div>
+   165|
+   166|  <div class="checklist-item">
+   167|    <div class="checklist-num">3</div>
+   168|    <div class="checklist-content">
+   169|      <h4>Thermal Shock / Thermal Cycling</h4>
+   170|      <p>Per IPC-TM-650 method 2.6.7.1: boards cycled from −65°C to +150°C (or application-specific range) for 500–1,000 cycles. Post-cycling, every plated through-hole is microsectioned to check for barrel cracks. This is the gold-standard test for sterilization-resistant PCBs.</p>
+   171|    </div>
+   172|  </div>
+   173|
+   174|  <div class="checklist-item">
+   175|    <div class="checklist-num">4</div>
+   176|    <div class="checklist-content">
+   177|      <h4>Impedance TDR Testing</h4>
+   178|      <p>For medical imaging and diagnostic equipment operating at high frequencies, controlled <a href="/blog/impedance-control.html">impedance with ±5% tolerance</a> is mandatory. TDR measurements are taken on every panel, not sampled — one out-of-spec trace on a 32-layer CT scanner board can render the entire panel scrap.</p>
+   179|    </div>
+   180|  </div>
+   181|
+   182|  <div class="checklist-item">
+   183|    <div class="checklist-num">5</div>
+   184|    <div class="checklist-content">
+   185|      <h4>Flying Probe + ICT + Functional Test</h4>
+   186|      <p>The medical testing stack: flying probe for bare-board netlist verification, in-circuit test for component-level faults, and custom functional test fixtures that simulate the device's operating conditions. A ventilator control board at Huaxing cycles through all three before it ships.</p>
+   187|    </div>
+   188|  </div>
+   189|
+   190|  <h2>How to Qualify a Medical PCB Manufacturer</h2>
+   191|
+   192|  <p>Selecting a medical PCB supplier is not the same as selecting a general PCB supplier. Here are the five dimensions that matter:</p>
+   193|
+   194|  <h3>1. Certifications — Not Just on Paper</h3>
+   195|  <p>ISO 13485:2016 is the medical device quality management standard. It extends ISO 9001 with additional requirements for risk management, design control, and traceability. A supplier claiming "medical capability" without ISO 13485 certification is operating outside the regulatory framework. IATF 16949 (automotive) is also relevant — its process control requirements overlap significantly with medical requirements — but it does not substitute for ISO 13485's device-specific clauses.</p>
+   196|
+   197|  <p>At minimum, verify: ISO 9001:2015, ISO 13485:2016, IPC-A-610 Class 3 operator certification, and UL recognition. Huaxing holds all four plus IATF 16949:2016 for automotive-grade process control applied to medical lines.</p>
+   198|
+   199|  <h3>2. Process Validation, Not Just Capability Claims</h3>
+   200|  <p>Every manufacturer claims to do Class 3. Ask for the process validation data: IQ/OQ/PQ (Installation Qualification, Operational Qualification, Performance Qualification) reports for the specific line that will produce your boards. A legitimate supplier has these on file; a supplier that "can do Class 3 when needed" does not.</p>
+   201|
+   202|  <h3>3. Dedicated Medical Line vs. Shared Line</h3>
+   203|  <p>A dedicated medical line with documented contamination controls and segregated tooling is the gold standard. A shared line that processes medical boards alongside commercial boards is a risk — cross-contamination, relaxed operator discipline, and mixed inspection criteria are documented failure modes. Ask whether medical boards run on a dedicated line and, if not, what segregation procedures are in place.</p>
+   204|
+   205|  <h3>4. Traceability Infrastructure</h3>
+   206|  <p>Can the supplier trace a failed board back to the specific laminate lot, copper foil lot, plating bath, and reflow oven profile — within 24 hours? If the answer is "we'd need a few days to pull that together," the traceability system does not meet medical requirements. Our <a href="/blog/turnkey-pcb-assembly.html">turnkey assembly service</a> includes component-level lot traceability with digital records retained for 10 years, meeting ISO 13485 §7.5.9.2 requirements for implantable and life-sustaining devices.</p>
+   207|
+   208|  <h3>5. Non-Disclosure and Regulatory Support</h3>
+   209|  <p>A medical PCB supplier should be comfortable signing a comprehensive NDA and providing documentation packages that support your regulatory submission: process FMEAs, material declarations for REACH/RoHS, sterilization compatibility data, and biocompatibility test reports for materials that contact patient tissue. If a supplier hesitates to share process documentation, they are not a medical supplier — they are a commercial supplier willing to accept a higher price.</p>
+   210|
+   211|  <img src="../generated/blog-medical-testing.webp" alt="PCB undergoing precision electrical testing with probe card and automated test equipment under cleanroom lighting" loading="lazy" class="article-img">
+   212|
+   213|  <h2>The Cost of Getting It Wrong</h2>
+   214|
+   215|  <p>Medical device recalls triggered by PCB failures are rare — but when they happen, the cost is catastrophic. A single field failure in a Class III device (pacemaker, implantable defibrillator, neurostimulator) triggers an FDA adverse event report, potentially a recall affecting thousands of implanted units, and liability exposure measured in tens of millions of dollars. Even in Class II devices (infusion pumps, patient monitors, surgical instruments), a systemic PCB reliability issue discovered post-market means a CAPA investigation, a 510(k) supplement, and months of manufacturing downtime.</p>
+   216|
+   217|  <p>The cost difference between a Class 2 PCB and a Class 3 PCB is typically <span class="data-point">15–40%</span> depending on layer count and complexity. On a $200 patient monitor BOM, that is roughly $8–20 per board — less than the cost of one customer support call, let alone a field replacement.</p>
+   218|
+   219|  <div class="highlight-box">
+   220|    <p><strong>Bottom line:</strong> If your device touches a patient — directly or indirectly — specify IPC Class 3 and qualify your supplier against the five dimensions above. The premium pays for itself the first time a board does <em>not</em> fail in the field.</p>
+   221|  </div>
+   222|
+   223|  <p>At Huaxing PCBA, we manufacture medical-grade PCBs under ISO 13485:2016 and IPC-A-610 Class 3, with 10-year lot traceability, dedicated clean-zone production, and full validation documentation. Our facility in Shenzhen runs <span class="data-point">8 SMT lines</span> with AOI, X-ray, SPI, ICT, and FCT — all in-house — producing 8 million solder joints per day at a <span class="data-point">99.2%</span> on-time delivery rate. Whether you need prototype quantities for design verification or production volumes for a commercial launch, <a href="/contact/">contact our engineering team</a> with your specifications for a technical review and quote within 24 hours.</p>
+   224|
+   225|</article>
+   226|
+   227|<!-- CTA -->
+   228|<section class="section" style="background:var(--bg-secondary)">
+   229|  <div class="container">
+   230|    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-rigid-flex.webp)">
+   231|      <h2>Need Medical-Grade PCB Manufacturing?</h2>
+   232|      <p>ISO 13485 certified. IPC Class 3. Full lot traceability. Contact our engineering team for a technical review.</p>
+   233|      <button class="btn btn-primary btn-lg" onclick="openModal()">Get a Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+   234|    </div>
+   235|  </div>
+   236|</section>
+   237|
+   238|<footer class="site-footer">
+   239|  <div class="container">
+   240|    <div class="footer-grid">
+   241|      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China.</p></div>
+   242|      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+   243|            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+   244|    </div>
+   245|    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+   246|  </div>
+   247|</footer>
+   248|
+   249|<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+   250|  <div class="modal-dialog">
+   251|    <button class="modal-close" onclick="closeModal()">&times;</button>
+   252|    <div class="modal-image-panel">
+   253|      <img src="/generated/modal-pcba-showcase.webp" alt="">
+   254|      <div class="modal-image-overlay"></div>
+   255|      <div class="modal-image-top">
+   256|        <h2 class="mi-heading">Start Your Project</h2>
+   257|        <p class="mi-subtitle">Upload your Gerber files and BOM. We'll respond within 24 hours with a detailed quote and free DFM review.</p>
+   258|      </div>
+   259|      <div class="modal-image-text">
+   260|        <div class="mi-label">HUAXING PCBA</div>
+   261|        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 13485 &amp; IATF 16949</strong></div>
+   262|      </div>
+   263|    </div>
+   264|    <div class="modal-form-panel">
+   265|      <form onsubmit="return handleInquiry(event)" novalidate>
+   266|        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+   267|        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+   268|        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+   269|        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+   270|        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+   271|      </form>
+   272|    </div>
+   273|  </div>
+   274|</div>
+   275|
+   276|<script src="../reveal.js"></script>
+   277|<script>
+   278|function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+   279|function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+   280|</script>
+   281|<script src="../inquiry-handler.js"></script></body>
+   282|</html>
+   283|
