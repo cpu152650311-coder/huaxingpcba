@@ -806,8 +806,8 @@ h6{font-size:var(--text-lg)}
 
 /* ---- Sub-page Section Classes (centralized for consistent mobile overrides) ---- */
 .hero-content{padding:var(--space-3xl) var(--space-lg)}
-/* Checklist numbers — compact badge, not a full column */
-.checklist-num,.step-num,.process-num,.article .checklist-num,.article .step-num,.article .process-num{flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);color:var(--accent);border-radius:50%;font-size:var(--text-sm);font-weight:500;line-height:1}
+/* Checklist numbers — auto-width pill (was fixed circle, overflowed long labels) */
+.checklist-num,.step-num,.process-num,.article .checklist-num,.article .step-num,.article .process-num{flex-shrink:0;min-width:36px;height:36px;width:auto;padding:0 10px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);color:var(--accent);border-radius:18px;font-size:var(--text-sm);font-weight:500;line-height:1;white-space:nowrap}
 .data-table-section{padding:var(--space-3xl) 0}
 .cta-section{padding:var(--space-3xl) 0}
 .process-section{padding:var(--space-3xl) 0}
@@ -881,7 +881,7 @@ h6{font-size:var(--text-lg)}
   .site-footer{padding:var(--space-lg) 0 var(--space-md)}
   .hero-content{padding:calc(var(--header-h) + var(--space-md)) var(--space-md) var(--space-xl)}
   .data-table-section,.cta-section,.process-section,.diff-table-section{padding:var(--space-xl) 0}
-  .checklist-num,.step-num,.process-num,.article .checklist-num,.article .step-num,.article .process-num{width:28px!important;height:28px!important;font-size:var(--text-xs)!important}
+  .checklist-num,.step-num,.process-num,.article .checklist-num,.article .step-num,.article .process-num{min-width:28px!important;height:28px!important;width:auto!important;padding:0 8px!important;border-radius:14px!important;font-size:var(--text-xs)!important;white-space:nowrap!important}
 }
 
 /* ── Nav Dropdown (shared) ── */
