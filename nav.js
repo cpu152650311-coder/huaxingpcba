@@ -102,8 +102,43 @@
     /* Fade-in with slight shift for flyout panel */
     '@keyframes flyoutIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}' +
     '.nav-flyout-trigger:hover>.nav-flyout-panel{animation:flyoutIn .2s ease}' +
-    /* Mobile responsive */
-    '@media(max-width:1024px){' +
+    /* ── Mobile ≤768px: fullscreen overlay (matches design-tokens.css) ── */
+    '@media(max-width:768px){' +
+      '.nav-links{display:none}' +
+      '.nav-links.mobile-open{' +
+        'display:flex;flex-direction:column;' +
+        'position:fixed;top:0;left:0;right:0;bottom:0;' +
+        'background:#08080b;' +
+        'padding:calc(72px + 24px) 16px 16px;' +
+        'gap:0;z-index:100;overflow-y:auto' +
+      '}' +
+      '.nav-links a,.nav-dropdown-trigger{' +
+        'padding:13px 0;border-bottom:1px solid #252530;font-size:16px;color:#e8e8ec' +
+      '}' +
+      '.nav-cta{margin-top:12px;text-align:center;border-bottom:none!important}' +
+      '.nav-dropdown{display:flex;flex-direction:column}' +
+      '.nav-dropdown-panel{' +
+        'position:static;transform:none;opacity:1;visibility:visible;' +
+        'background:transparent;border:none;box-shadow:none;' +
+        'padding:0 0 0 20px;min-width:0' +
+      '}' +
+      '.nav-dropdown-panel a{padding:10px 0;font-size:14px;color:#b0b0b8}' +
+      '.nav-dropdown-trigger svg{display:none}' +
+      '.nav-dropdown:hover>.nav-dropdown-trigger svg{transform:none}' +
+      '.nav-dropdown:hover>.nav-dropdown-panel{transform:none}' +
+      '.nav-flyout-trigger{flex-wrap:wrap!important}' +
+      '.nav-flyout-panel{' +
+        'position:static!important;opacity:1!important;visibility:visible!important;' +
+        'pointer-events:auto!important;' +
+        'background:transparent!important;border:none!important;' +
+        'box-shadow:none!important;padding:0 0 0 16px!important;' +
+        'min-width:0!important;animation:none!important;display:none!important' +
+      '}' +
+      '.nav-flyout-trigger.open>.nav-flyout-panel{display:block!important}' +
+      '.nav-flyout-trigger .ft-arrow{display:none}' +
+    '}' +
+    /* ── Tablet 769-1024px: dropdown overlay ── */
+    '@media(min-width:769px) and (max-width:1024px){' +
       '.nav-links{display:none;flex-direction:column;' +
         'position:absolute;top:100%;left:0;right:0;' +
         'background:#0d0d14;border-top:1px solid #1a1a25;' +
@@ -124,7 +159,6 @@
       '.nav-dropdown-trigger svg{display:none}' +
       '.nav-dropdown:hover>.nav-dropdown-trigger svg{transform:none}' +
       '.nav-dropdown:hover>.nav-dropdown-panel{transform:none}' +
-      /* Mobile flyout: show inline, no hover required */
       '.nav-flyout-trigger{flex-wrap:wrap!important}' +
       '.nav-flyout-panel{' +
         'position:static!important;opacity:1!important;visibility:visible!important;' +
