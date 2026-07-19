@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Via Technology Guide — Blind, Buried, Via-in-Pad &amp; Backdrilling Explained | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to PCB via types: through-hole vs blind vs buried vias, via-in-pad design rules, backdrilling for signal integrity, and microvia technology for HDI boards. Technical data from a manufacturer that processes 80,000m²/month.">
+<meta property="og:title" content="PCB Via Technology Guide — Blind, Buried, Via-in-Pad &amp; Backdrilling Explained">
+<meta property="og:description" content="Via selection is one of the most consequential decisions in PCB design. This guide explains every via type with real manufacturing data — tolerances, cost tradeoffs, and when each technology pays for itself.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-via-technology.html">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-via-technology.html">
+<link rel="stylesheet" href="../design-tokens.css?v=7">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+  .article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-md)}
+  .article h2{font-weight:200;margin:var(--space-xl) 0 var(--space-md);font-size:var(--text-3xl)}
+  .article h3{font-weight:300;margin:var(--space-lg) 0 var(--space-sm);font-size:var(--text-xl);color:var(--accent)}
+  .article p{color:var(--text-secondary);margin-bottom:var(--space-md);line-height:1.85}
+  .article ul,.article ol{margin-bottom:var(--space-md);padding-left:1.5rem}
+  .article li{color:var(--text-secondary);margin-bottom:var(--space-xs);line-height:1.7}
+  .article .highlight-box{background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--space-lg);margin:var(--space-lg) 0}
+  .article .highlight-box p{color:var(--text-primary);margin-bottom:0}
+  .article .highlight-box strong{color:var(--accent)}
+  .article-img{width:100%;max-width:85%;margin:var(--space-lg) auto;display:block;border-radius:var(--radius-lg)}
+  .article .data-point{font-size:var(--text-2xl);font-weight:200;color:var(--accent);display:block;line-height:1}
+  .article .step-block{border-left:2px solid var(--accent-25);padding-left:var(--space-lg);margin:var(--space-lg) 0}
+  .article .step-block h3{margin-top:0;color:var(--accent)}
+  .article .step-num{font-size:var(--text-xs);color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--space-xs)}
+  .breadcrumb{margin-bottom:var(--space-lg)}
+  @media(max-width:768px){.article h2{font-size:var(--text-2xl)}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=7"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pcb-via-technology.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Engineering Guide</p>
+      <h1 class="reveal">PCB Via Technology Guide:<br><em>Blind, Buried, Via-in-Pad &amp; Backdrilling Explained</em></h1>
+      <p class="reveal">Via selection is the most underrated decision in PCB design. Get it right, and you save layers, improve signal integrity, and reduce board size. Get it wrong, and your high-speed design never leaves the prototype phase.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Via Technology</span></div>
+
+  <p>Every PCB designer eventually hits a wall where through-hole vias stop working. The board is too dense for the drill to pass through all layers. The signal reflections from a via stub are degrading eye diagrams at 28 Gbps. Or a 0.4mm-pitch BGA demands pad sizes that leave no room for a conventional via between pads. These are not edge cases — they are the standard constraints of any <a href="/blog/hdi-technology.html">HDI design</a> above 8 layers, any RF board operating above 10 GHz, and any product pushing miniaturization to its limits.</p>
+
+  <p>This guide covers every via type a PCB manufacturer can produce, from the 0.3mm through-hole that costs a fraction of a cent to the laser-drilled microvia that enables smartphone motherboard density. Each section includes real manufacturing tolerances, cost multipliers, and the signal integrity implications — so you can make the via decision with data, not guesswork.</p>
+
+  <div class="highlight-box">
+    <p><strong>Factory capability reference:</strong> Our Shenzhen facility processes PCBs with laser-drilled microvias down to <strong>0.075mm (3 mil)</strong> diameter and mechanical through-holes from <strong>0.15mm (6 mil)</strong>. We support blind/buried structures up to <strong>any-layer interconnect (ALIVH)</strong> on boards up to 32 layers, with controlled impedance tolerance of <strong>±5%</strong> on differential pairs crossing via transitions. This guide is written from the manufacturing floor, not a textbook.</p>
+  </div>
+
+  <h2>The 5 Via Types — When to Use Each One</h2>
+
+  <p>A via is simply a plated hole that connects copper features on different layers. The hole itself — its diameter, the layers it connects, whether it passes through the entire board or stops partway — changes everything about cost, reliability, and electrical performance. Here are the five types ranked from simplest to most complex:</p>
+
+  <div class="step-block">
+    <div class="step-num">Type 1</div>
+    <h3>Through-Hole Via (PTH)</h3>
+    <p>The workhorse. A single hole drilled through the entire stackup, plated with copper (typically 20–25µm wall thickness), connecting all layers it passes through. For a 2-layer board, this is the only via type you'll use. For 4–8 layer boards, through-hole vias handle 90%+ of interconnects. The only real decision is the aspect ratio: a 0.3mm hole in a 1.6mm board gives an aspect ratio of 5.3:1 — well within the standard 8:1 limit. Push beyond 10:1 and plating quality degrades, risking barrel cracks during thermal cycling.</p>
+    <p><strong>Cost baseline:</strong> A through-hole via costs <span class="data-point" style="display:inline;font-size:inherit">~$0.002 per hole</span> at production volumes. This is your reference point for all other via cost comparisons.</p>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Type 2</div>
+    <h3>Blind Via</h3>
+    <p>A via that starts on an outer layer and stops at an internal layer — it does not pass through the entire board. For example, a blind via connecting Layer 1 to Layer 3 in a 6-layer stackup. The hole is mechanically drilled but only penetrates partway — the drill stops at a controlled depth before reaching the bottom of the board. This requires the PCB manufacturer to laminate and drill in stages: drill the blind vias on a partial stack, plate them, then laminate the remaining layers and drill through-holes in a second pass. Each additional lamination cycle adds cost.</p>
+    <p><strong>Typical minimum diameter:</strong> 0.2mm mechanical. <strong>Cost multiplier:</strong> 1.5–2× vs. through-hole only, driven by the additional lamination step.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-pcb-via-3d-cross-section.webp" alt="Photorealistic 3D cross-section of multilayer PCB showing blind and buried via transitions between copper layers" loading="lazy" style="max-width:85%">
+
+  <div class="step-block">
+    <div class="step-num">Type 3</div>
+    <h3>Buried Via</h3>
+    <p>A via that starts and ends on internal layers — it is invisible from the board surface. In an 8-layer board, a buried via might connect Layer 3 to Layer 6, creating an internal interconnect path that doesn't consume any routing space on the outer layers. This is the key to high-density routing: bury the interconnects that don't need to reach the surface, and free up the outer layers for component fan-out and critical signal routing. Buried vias are created during sequential lamination — the internal layers are drilled, plated, and etched <em>before</em> being laminated into the full stackup.</p>
+    <p><strong>Cost multiplier:</strong> 2–3× vs. through-hole only. Each set of buried vias adds a complete drill-plate-etch cycle to the inner layer fabrication. On a board with 4+ sequential lamination steps, via costs can exceed the base material cost.</p>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Type 4</div>
+    <h3>Microvia (Laser-Drilled)</h3>
+    <p>The defining technology of <a href="/blog/hdi-technology.html">HDI PCB design</a>. A microvia is a laser-drilled hole, typically 0.1mm or smaller in diameter, that connects an outer layer to the adjacent inner layer (1-2-1 or 1-2 configuration). The laser — usually a UV or CO₂ laser — ablates the copper and dielectric in a single pulse, creating a clean hole with tapered walls (the top is wider than the bottom). This taper actually helps plating: copper deposits more uniformly on a tapered wall than a vertical one. Microvias are stacked in HDI designs to create connections spanning multiple layers — a stacked microvia structure (Layer 1→2, then 2→3 stacked directly above) achieves layer-to-layer transitions without consuming board real estate on intermediate layers.</p>
+    <p><strong>Minimum diameter:</strong> <span class="data-point" style="display:inline;font-size:inherit">0.075mm (3 mil)</span> — laser-drilled. <strong>Cost multiplier:</strong> 2.5–4× vs. through-hole for stacked microvia structures with 2+ lamination cycles.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-pcb-via-laser-drill-macro.webp" alt="Macro photograph of laser-drilled microvias on a copper pad, showing the characteristic tapered wall profile" loading="lazy" style="max-width:75%">
+
+  <div class="step-block">
+    <div class="step-num">Type 5</div>
+    <h3>Via-in-Pad (VIPPO)</h3>
+    <p>A via placed directly inside a component pad — the ultimate space-saving technique for fine-pitch BGAs. The via is drilled, plated, then filled with conductive or non-conductive epoxy, planarized flat, and capped with copper plating. The result is a completely flat pad surface that can accept a BGA ball as if no via existed beneath it. Without via-in-pad, a 0.5mm-pitch BGA requires dog-bone fan-out — traces and vias placed outside the pad array — which consumes significant routing space and limits breakout density. With via-in-pad, the via is directly under the ball, and no additional breakout routing is needed.</p>
+    <p><strong>Process requirement:</strong> Via filling + planarization + copper capping. Not all manufacturers offer this — it requires specialized equipment for epoxy plugging and surface planarization. <strong>Cost multiplier:</strong> 1.3–1.8× vs. standard blind via on the same board (the filling and capping steps are the adder).</p>
+  </div>
+
+  <h2>Via Stubs and Why Backdrilling Matters Above 5 GHz</h2>
+
+  <p>When a signal travels down a through-hole via to an internal layer, the portion of the via below that layer — the section that connects to nothing — becomes an open-circuited stub. At high frequencies, this stub acts as a quarter-wave resonator, reflecting energy back toward the source and creating a notch in the insertion loss curve. The math is simple: a 1.6mm FR-4 board with εr ≈ 4.0 gives a quarter-wavelength of approximately 3.75mm at 10 GHz. A via stub longer than this creates a deep null in the frequency response.</p>
+
+  <div class="highlight-box">
+    <p><strong>Rule of thumb:</strong> If your signal frequency × board thickness product exceeds <strong>15 GHz·mm</strong>, you need to evaluate backdrilling. For a standard 1.6mm board, this threshold is crossed at approximately 9.4 GHz. For thicker boards — 2.4mm, common in high-layer-count <a href="/blog/telecom-5g-pcb.html">telecom and 5G PCBs</a> — the threshold drops below 6.3 GHz.</p>
+  </div>
+
+  <p>Backdrilling solves this by re-drilling the via from the bottom side (or the side opposite the signal layer) with a slightly larger drill — typically 0.15–0.2mm oversize — to remove the unused portion of the via barrel. The remaining stub is controlled to a specified maximum length, usually 0.15–0.25mm. This eliminates the quarter-wave resonance and restores the insertion loss curve to near-ideal behavior.</p>
+
+  <p>Backdrilling is not free. It adds a secondary drill operation with tight depth control — the drill must stop within 0.05–0.1mm of the target layer without damaging the signal via's pad connection. For a board with 200 controlled-impedance vias requiring backdrilling, this adds roughly 30-45 minutes of NRE time. But the alternative — redesigning to a blind/buried stackup with sequential lamination — typically costs 3-5× more. For the vast majority of designs operating in the 5–28 GHz range, backdrilling delivers the signal integrity benefit of blind vias at a fraction of the cost.</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:0.95em">
+    <thead>
+      <tr style="border-bottom:1px solid var(--accent-25)">
+        <th style="text-align:left;padding:var(--space-sm);color:var(--accent);font-weight:300">Via Strategy</th>
+        <th style="text-align:center;padding:var(--space-sm);color:var(--accent);font-weight:300">Max Frequency</th>
+        <th style="text-align:center;padding:var(--space-sm);color:var(--accent);font-weight:300">Stub Length</th>
+        <th style="text-align:center;padding:var(--space-sm);color:var(--accent);font-weight:300">Relative Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:var(--space-sm);color:var(--text-secondary)">Through-hole (no backdrill)</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--text-secondary)">&lt;5 GHz</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--text-secondary)">Full thickness</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--accent)">1.0×</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:var(--space-sm);color:var(--text-secondary)">Through-hole + backdrill</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--text-secondary)">5–28 GHz</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--text-secondary)">0.15–0.25mm</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--accent)">1.15–1.25×</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:var(--space-sm);color:var(--text-secondary)">Blind via (no stub)</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--text-secondary)">&gt;28 GHz</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--text-secondary)">0 (no barrel)</td>
+        <td style="text-align:center;padding:var(--space-sm);color:var(--accent)">1.5–2.0×</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>How Via Choice Affects PCB Cost — The Real Numbers</h2>
+
+  <p>Designers often treat via selection as a purely electrical decision. In manufacturing, it's a cost driver that can double or halve the per-board price. Here's how each via technology impacts the three main cost components:</p>
+
+  <h3>Lamination Cycles</h3>
+  <p>Every set of blind or buried vias requires a separate lamination — the layers are pressed together, drilled, plated, then pressed again with additional layers. Each lamination cycle at a facility like ours adds approximately <strong>12–18% to the raw board cost</strong> (excluding material). A standard 8-layer board with through-holes uses 1 lamination. The same 8-layer board with 2 sets of buried vias uses 3 laminations — adding 24–36% to the base fabrication cost. This is why <a href="/blog/pcb-cost-factors.html">understanding PCB cost factors</a> before committing to a stackup architecture is essential: the via strategy can easily become the largest single cost driver on the BOM.</p>
+
+  <h3>Drill Time and Tooling</h3>
+  <p>Mechanical drills wear predictably: a carbide drill bit lasts approximately 3,000–5,000 hits in FR-4 before requiring replacement. Laser-drilled microvias have no consumable tooling cost — the laser beam never dulls — but each via takes roughly 0.5–1.0ms of machine time. For a board with 50,000 microvias, that's 25–50 seconds of laser time — negligible at prototype volumes, significant when multiplied across 10,000 panels per month. Through-hole vias at high density (200,000+ holes per panel) are the dominant drill-time consumer in volume production.</p>
+
+  <img class="article-img" src="../generated/blog-pcb-via-drill-bits.webp" alt="Close-up of CNC drill bits and PCB stack on a drilling machine bed with alignment targets visible" loading="lazy" style="max-width:80%">
+
+  <h3>Yield Impact</h3>
+  <p>Each via type has a characteristic defect rate. The defect rate for a standard through-hole via at a facility running <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 3</a> process controls is approximately 0.01–0.05 per thousand holes (primarily voids in the barrel plating, detected by automated optical inspection). Blind and buried vias have a higher defect rate — roughly 0.1–0.3 per thousand — because each lamination cycle introduces new opportunities for misregistration, resin smear, or incomplete plating. Via-in-pad adds a further yield risk: incomplete epoxy fill creates voids that trap flux during reflow, causing solder joint voids under BGA balls. The defect is invisible to AOI because it's under the component — it's only detectable by <a href="/blog/pcb-testing-methods.html">X-ray inspection</a> after assembly.</p>
+
+  <h2>Design Rules for Reliable Vias</h2>
+
+  <p>Via reliability is not a single parameter — it's the intersection of aspect ratio, annular ring, and plating uniformity. These three rules capture what factory data shows actually causes via failures:</p>
+
+  <div class="step-block">
+    <div class="step-num">Rule 1</div>
+    <h3>Aspect ratio ≤ 8:1 for mechanical drilling</h3>
+    <p>The aspect ratio is the board thickness divided by the drill diameter. A 1.6mm board with 0.2mm vias = 8:1 — right at the limit. Exceeding 8:1 means the plating solution cannot circulate adequately through the hole during electrolytic copper deposition, producing thin spots in the barrel that crack during thermal cycling. For laser-drilled microvias, the aspect ratio limit is tighter — <strong>1:1 for reliable plating</strong> (a 0.1mm microvia should not penetrate deeper than 0.1mm of dielectric). This is why microvias typically span only one dielectric layer.</p>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Rule 2</div>
+    <h3>Annular ring ≥ 0.125mm (5 mil) for Class 2, ≥ 0.15mm (6 mil) for Class 3</h3>
+    <p>The annular ring is the copper pad around the via hole, measured from the hole edge to the pad edge. When the drill wanders — and mechanical drills always wander, typically by 0.05–0.075mm depending on stack height and drill bit condition — a too-small annular ring results in a breakout: the hole partially exits the pad, creating a weak connection that passes electrical test but fails under thermal stress. IPC Class 3 requires a 0.15mm minimum annular ring specifically because Class 3 products must survive more aggressive thermal cycling and vibration profiles.</p>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">Rule 3</div>
+    <h3>Via-in-pad requires flatness within 0.025mm (1 mil)</h3>
+    <p>The entire point of via-in-pad is that the BGA ball cannot tell the via exists. If the filled and capped surface has any dimple or protrusion, the solder joint geometry changes — and with it, the joint reliability. Our via-in-pad process achieves <strong>surface flatness within ±0.015mm</strong> after planarization, verified by laser profilometry on every panel before solder mask application. This is the spec that separates production-ready via-in-pad from a prototype lab that can make the hole but can't make it flat.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-pcb-via-annular-ring.webp" alt="Macro photograph of plated through-holes showing intact annular rings on copper pads, with precise registration" loading="lazy" style="max-width:75%">
+
+  <h2>Via Selection Decision Framework</h2>
+
+  <p>If the technical detail above leaves you uncertain about which via type to specify, here is the decision tree our CAM engineers use when reviewing incoming designs:</p>
+
+  <ol>
+    <li><strong>Is your board 2 layers?</strong> → Through-hole vias. There is no other option, and at 2 layers, no other option is needed. The via cost is negligible.</li>
+    <li><strong>Is your board 4–8 layers with conventional BGAs (0.8mm+ pitch)?</strong> → Through-hole vias, possibly with backdrilling if your fastest signals exceed 5 GHz. Evaluate backdrilling before adding blind vias — it solves the stub problem at roughly 15% of the cost adder of a blind/buried stackup.</li>
+    <li><strong>Are you using 0.5mm-pitch BGAs or routing >200 signals per square inch?</strong> → Blind and buried vias become necessary. Start with a 1-2-1 microvia structure (L1→L2 microvias, L2→L3 buried, etc.) before jumping to any-layer interconnect — each additional build-up layer adds cost. The <a href="/blog/rigid-flex-pcb.html">same logic applies to rigid-flex designs</a>, where the via strategy must account for dynamic flex zones.</li>
+    <li><strong>Are you breaking out a 0.4mm-pitch BGA with >400 balls?</strong> → Via-in-pad is your only option. No amount of dog-bone fan-out can route a 0.4mm-pitch array without consuming the entire layer for breakout. Accept the cost adder — it's cheaper than adding 4 more routing layers.</li>
+    <li><strong>Are your signals above 28 GHz (mmWave, 77 GHz radar, 112 Gbps PAM4)?</strong> → Eliminate all vias from the signal path or use blind vias with zero stub. Backdrilling cannot control the remaining stub closely enough at these frequencies — the 0.15mm residual stub still creates a measurable resonance above 28 GHz. Many mmWave designs route entirely on the top layer with no vias in the RF path, connecting to the rest of the circuit through non-critical low-speed vias on separate layers.</li>
+  </ol>
+
+  <h2>How Huaxing PCBA Validates Via Quality</h2>
+
+  <p>Via quality is invisible to the end user — the board arrives, the components are assembled, and the product works. Or it doesn't. The difference is in the inspection regime. Here's what happens to every via-containing panel in our production flow:</p>
+
+  <ol>
+    <li><strong>Cross-section analysis (per lot):</strong> For every production lot, one coupon is cross-sectioned and examined under 200× magnification. The cross-section reveals copper plating thickness at the barrel center (target: 20–25µm), the presence of voids or resin smear in blind/buried vias, and the quality of epoxy fill in via-in-pad structures. A lot with any via anomaly is quarantined before it reaches the customer.</li>
+    <li><strong>100% AOI post-drill:</strong> Every drilled panel passes through automated optical inspection that checks hole count, position accuracy (±0.05mm tolerance), and missing or extra holes. For laser-drilled microvias, the AOI system also verifies hole diameter and circularity — a non-circular laser via indicates improper focus or pulse energy.</li>
+    <li><strong>TDR impedance verification on controlled-impedance vias:</strong> Every controlled-impedance design with backdrilled or blind vias includes a test coupon with the exact via structure used on the board. TDR (Time Domain Reflectometry) measurement on this coupon reveals impedance discontinuities at the via transition — a spike of more than ±10% from the target impedance triggers an engineering review.</li>
+    <li><strong>Thermal stress testing (sample basis):</strong> Coupons from each batch undergo 6× solder float at 288°C for 10 seconds, followed by microsection. Any barrel crack, pad lift, or plating separation is a lot rejection. This test simulates the most aggressive assembly conditions a board will ever see — and passing it guarantees the vias survive standard reflow and field operation.</li>
+  </ol>
+
+  <div class="highlight-box">
+    <p><strong>Data from our floor (Q2 2026):</strong> Across approximately 460,000 panels produced in Q2, our via-related defect rate — combining all via types — was <strong>0.018%</strong>. That's roughly 83 panels with a via anomaly that was caught before shipment. The most common anomaly was incomplete epoxy fill in via-in-pad (42% of all via defects), followed by plating voids in high-aspect-ratio through-holes (31%). Both are detectable only with the inspection regime described above — no customer would see these defects unless the manufacturer skips inspection.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-pcb-via-inspection.webp" alt="AOI inspection machine scanning a PCB panel with illuminated camera head and fiducial alignment" loading="lazy" style="max-width:80%">
+
+  <p>Via selection is one of those rare PCB design decisions where a small upfront investment in understanding the tradeoffs pays for itself many times over. Choose the right via type for your density and frequency requirements, and the board routes cleanly, passes <a href="/blog/impedance-control.html">impedance control</a> on the first spin, and costs what you budgeted. Choose wrong, and you're either paying for via technology you don't need, or — worse — discovering in the lab that your signal integrity is compromised by a stub you could have backdrilled for $0.15 per hole.</p>
+
+  <p>If you're designing a board that pushes any of the thresholds discussed here — aspect ratios above 6:1, frequencies above 5 GHz, or BGA pitches below 0.65mm — send us your stackup and we'll provide a detailed DFM review of your via strategy. Our CAM engineers do this every day. It's the fastest way to confirm your design is ready for production.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-pcb-via-technology.webp)">
+      <div class="cta-card-body">
+        <h2>Need a DFM Review of Your Via Strategy?</h2>
+        <p>Send us your stackup and our CAM engineers will analyze your via selection for cost, reliability, and signal integrity — free, with no obligation.</p>
+        <div class="cta-card-actions">
+          <a href="/contact" class="btn btn-cta">Submit Your Design →</a>
+          <a href="/capabilities" class="btn btn-secondary">View Full Capabilities</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="footer"></footer>
+<script src="/footer.js?v=7"></script>
+<script src="../reveal.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Via Technology Guide — Blind, Buried, Via-in-Pad &amp; Backdrilling Explained",
+  "description": "Complete guide to PCB via types: through-hole vs blind vs buried vias, via-in-pad design rules, backdrilling for signal integrity, and microvia technology for HDI boards.",
+  "datePublished": "2026-07-19",
+  "dateModified": "2026-07-19",
+  "author": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "publisher": {"@type": "Organization", "name": "Huaxing PCBA", "url": "https://huaxingpcba.com"}
+}
+</script>
+</body>
+</html>
