@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IoT PCB Design &amp; Manufacturing — Connectivity, Miniaturization &amp; Reliability at Scale | Huaxing PCBA</title>
+<meta name="description" content="IoT PCB design and manufacturing guide: antenna integration, ultra-low-power layout, mixed-signal isolation, and environmental hardening — with production data from an IATF 16949-certified Shenzhen facility processing 250,000 IoT modules monthly.">
+<meta property="og:title" content="IoT PCB Design &amp; Manufacturing — Connectivity, Miniaturization &amp; Reliability at Scale">
+<meta property="og:description" content="Every IoT product lives or dies by its PCB. From BLE sensor tags to industrial LTE gateways — what hardware engineers and procurement teams need to know before production.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/iot-pcb-design-manufacturing.html">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/iot-pcb-design-manufacturing.html">
+<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=1">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=13"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-iot-pcb.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">IoT PCB Design &amp; Manufacturing:<br><em>Connectivity, Miniaturization &amp; Reliability at Scale</em></h1>
+      <p class="reveal">From BLE sensor tags to industrial LTE gateways — every IoT product lives or dies by its PCB. Here's what hardware engineers and procurement teams need to know before production.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>IoT PCB Guide</span></div>
+
+  <p>The global IoT PCB market will reach <strong>$18.4 billion by 2028</strong>, driven by smart home devices, industrial sensors, wearable health monitors, and connected vehicle modules. Every single one of those billions of devices starts with a printed circuit board — and that PCB has to be smaller, more power-efficient, and more reliable than anything built for desktop electronics.</p>
+
+  <p>At Huaxing PCBA, we process <span class="data-point">250,000</span> IoT modules per month across BLE beacons, Zigbee hubs, LoRaWAN sensors, NB-IoT trackers, and WiFi-enabled appliances. Our Shenzhen facility is IATF 16949 and ISO 9001 certified, with 8 SMT lines capable of 0201 passive placement and 0.3mm pitch BGA — the scale and precision IoT production demands.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-iot-antenna-detail.webp" alt="Compact IoT sensor PCB module with wireless antenna traces and gold ENIG pads under macro studio photography" loading="lazy">
+
+  <!-- ── Section 1 ── -->
+  <h2>What Makes IoT PCBs Fundamentally Different</h2>
+
+  <p>An IoT PCB is not just a smaller version of a standard PCB. It must satisfy four constraints simultaneously — and failing any one of them means the product fails in the field.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Integrated Wireless Connectivity</h4>
+      <p>Every IoT PCB carries at least one RF interface — BLE, WiFi, Zigbee, LoRa, NB-IoT, or LTE-M. This means the board must include antenna matching networks, impedance-controlled transmission lines, and RF shielding. A single impedance discontinuity on a 50Ω trace can degrade range by 30% or more. For multi-radio designs (BLE + WiFi + LTE-M on one board), see our <a href="/blog/impedance-control.html">impedance control guide</a> for stackup and trace width calculations.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Ultra-Low Power Budget</h4>
+      <p>A BLE sensor tag on a CR2032 coin cell must run for 2–5 years. That means quiescent current in single-digit microamps, efficient DC-DC conversion with minimal ripple, and careful ground plane partitioning to prevent digital switching noise from waking up the analog front-end. Power supply design on IoT PCBs is radically different from line-powered electronics — every microamp counts.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Mixed-Signal Coexistence</h4>
+      <p>An IoT sensor PCB typically has a sensitive analog front-end (sensor signal conditioning, ADC input) sitting millimeters away from a noisy digital section (MCU, RF transceiver, switching regulator). Without rigorous ground partitioning and guard rings, digital noise couples into the analog path and corrupts sensor readings. Our <a href="/blog/pcb-materials-guide.html">PCB materials guide</a> covers low-loss laminates that help mitigate cross-domain interference at RF frequencies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Environmental Hardening Demands</h4>
+      <p>Industrial IoT sensors operate in -40°C freezer warehouses and +85°C factory floors. Outdoor trackers face rain, UV, and salt spray. Medical wearables must survive repeated flex cycles and body fluids. Each environment demands specific PCB materials, conformal coating, and connector sealing strategies — choices you make at the design stage that determine field failure rates months later.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> A common failure pattern we see in incoming IoT designs is placing the antenna matching network on a different layer than the antenna feed point, adding an uncontrolled via in the RF path. That single via creates a 5–8Ω impedance bump — invisible on a schematic, devastating to range. Our DFM review catches this before fabrication.</p>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-iot-stackup-cross-section.webp" alt="Photorealistic 3D cross-section render of a 6-layer IoT PCB stackup showing copper layers, prepreg, and gold-plated vias" loading="lazy">
+
+  <!-- ── Section 2 ── -->
+  <h2>Critical Design Decisions That Determine IoT PCB Success</h2>
+
+  <p>The difference between an IoT PCB that works on the first prototype and one that goes through five board spins comes down to a handful of design decisions made before the first Gerber file is generated.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>PCB Stackup: 4-Layer Minimum, 6-Layer for Multi-Radio</h4>
+      <p>A 2-layer board works for a blinking LED. It does not work for an IoT device with a radio and a sensor. A 4-layer stackup (signal/GND/PWR/signal) provides a contiguous ground plane essential for impedance control and EMI suppression. For devices combining BLE, WiFi, and cellular radios, a 6-layer stackup with dedicated RF routing layers and buried ground planes becomes necessary. Our facility handles up to <span class="data-point">32 layers</span> with blind and buried vias — see our <a href="/blog/hdi-technology.html">HDI technology overview</a> for microvia routing strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Antenna Integration: On-Board vs. External</h4>
+      <p>PCB trace antennas (meandered inverted-F, PIFA) save BOM cost and assembly steps but demand precise keep-out zones and ground plane clearance. A 3mm deviation in the keep-out area can shift the antenna's resonant frequency by 50–80 MHz — enough to push a 2.4 GHz antenna out of band. Chip antennas offer more forgiving layouts but add $0.30–$1.20 to BOM. The trade-off is application-specific: a disposable asset tracker uses a PCB trace; a medical gateway with an external SMA connector uses a chip antenna with a U.FL path. Both require <a href="/blog/impedance-control.html">controlled 50Ω impedance</a> from the transceiver pad to the antenna feed point.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Power Delivery Network (PDN) Design</h4>
+      <p>IoT devices cycle between sleep (microamps), sensor sampling (milliamps), and RF transmission (tens of milliamps) in milliseconds. The PDN must supply clean, stable voltage through these transient current spikes without sagging below the MCU's brown-out threshold. Critical elements: low-ESR decoupling capacitors placed within 2mm of IC power pins, a solid power plane with minimal via inductance, and a ferrite bead or LC filter between the RF section's supply and the rest of the board to prevent conducted EMI.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Sensor Interface Isolation</h4>
+      <p>Analog sensors — thermocouples, strain gauges, electrochemical gas sensors — produce signals in the microvolt to millivolt range. When a BLE radio transmits at +4 dBm on the same PCB, the nearby analog traces can pick up induced voltages that swamp the sensor signal. Proper layout technique: route analog traces on an inner layer sandwiched between ground planes, use a dedicated analog ground region connected to digital ground at a single star point, and place the ADC as close as physically possible to the sensor connector to minimize trace length.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Flex-to-Board Transitions (Wearables)</h4>
+      <p>Wearable and compact IoT products frequently combine a rigid main board with a flexible tail for the battery, display, or sensor connector. The rigid-flex transition zone is the #1 mechanical failure point — repeated bending eventually cracks traces at the stiffener boundary. Our <a href="/blog/rigid-flex-pcb.html">rigid-flex PCB guide</a> covers the critical design rules: teardrop pad entries at the transition, minimum 1.5mm stiffener overlap, and curved trace routing (no 90° corners) in the flex region to distribute bending stress.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>IoT Subtype</th><th>Typical Layer Count</th><th>Key PCB Requirements</th><th>Common Radio</th></tr>
+    <tr><td>BLE Sensor Tag</td><td>4</td><td>0201 passives, PCB antenna, coin-cell PDN</td><td>BLE 5.0</td></tr>
+    <tr><td>Indoor Gateway</td><td>6</td><td>Multi-radio isolation, PoE PDN, DDR routing</td><td>WiFi 6 + BLE + Thread</td></tr>
+    <tr><td>Outdoor Tracker</td><td>4–6</td><td>Conformal coating, wide-temp laminate, GNSS</td><td>LTE-M + GPS</td></tr>
+    <tr><td>Industrial Sensor Node</td><td>6–8</td><td>4–20mA isolation, RS-485, 24V input</td><td>LoRaWAN / NB-IoT</td></tr>
+    <tr><td>Medical Wearable</td><td>4–6</td><td>Flex-rigid, biocompatible finish, ultra-low leakage</td><td>BLE 5.0</td></tr>
+  </table>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-iot-smt-placement.webp" alt="Macro photograph of IoT sensor module being placed by SMT pick-and-place nozzle on green PCB with factory bokeh background" loading="lazy">
+
+  <!-- ── Section 3 ── -->
+  <h2>Manufacturing IoT PCBs at Scale: What Your CM Needs</h2>
+
+  <p>Once your IoT PCB design is validated, the manufacturing partner's capabilities determine whether your 100,000-unit production run yields 98% or 88%. That 10% gap is the difference between hitting your COGS target and burning a quarter's margin on rework.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Precision SMT for Miniaturized Components</h4>
+      <p>IoT PCBs routinely use 0201 (0.6×0.3mm) passives and 0.4mm pitch QFN packages to fit everything on a board the size of a postage stamp. Placement accuracy of ±25μm and solder paste printing with 100μm stencil apertures are non-negotiable. Our 8 SMT lines include Yamaha YSM20R placers with 3D SPI (solder paste inspection) before reflow and automated AOI after — the closed-loop process that catches a missing 0201 capacitor before it becomes a field failure 6 months later.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Impedance-Controlled Fabrication</h4>
+      <p>When your PCB fab produces 10,000 boards and the antenna trace impedance on 500 of them drifts from 50Ω to 58Ω, those 500 boards pass visual inspection but fail range testing. Your CM must provide TDR (time-domain reflectometry) test coupons on every panel and reject lots outside your specified tolerance — typically ±10% for BLE/WiFi, ±5% for LTE and 5G-NR bands. As covered in our <a href="/blog/impedance-control.html">impedance control deep-dive</a>, dielectric constant variation across laminate batches is the silent killer of RF yield.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating for Harsh Environments</h4>
+      <p>Outdoor IoT devices need protection against moisture, condensation, and airborne contaminants. Acrylic conformal coating (IPC-CC-830B) applied at 25–75μm thickness protects against humidity and salt spray while remaining reworkable. Silicone coating handles -55°C to +200°C but is harder to remove. For submersible devices, parylene CVD coating provides pinhole-free coverage at 5–25μm — but requires masking of connectors and switches before application, a step that adds 20–30% to assembly cost.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Panel Utilization and Cost Optimization</h4>
+      <p>IoT PCBs are small — a 30×18mm BLE tag yields over 400 units on a standard 18×24-inch panel. But panel utilization drops sharply if your board outline has deep internal cutouts or irregular shapes. Mouse-bite and V-score panelization strategies can recover 8–15% board area. During our <a href="/blog/dfm-tips.html">DFM review process</a>, we optimize panel layout before fabrication — a step that has saved clients over $0.12 per unit on high-volume IoT production, translating to $12,000 saved per 100,000-unit batch.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When qualifying a CM for IoT production, ask for their TDR impedance test report from the last 3 production lots — not a sample, not a capability statement. The variance between lots tells you more about their process control than any certification on their wall. A standard deviation under 2Ω across 3 lots is world-class; over 5Ω means your range-critical products are at risk.</p>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-iot-sensor-desk.webp" alt="Compact IoT environmental sensor PCB module on desk with natural window light conveying connected technology" loading="lazy">
+
+  <!-- ── Section 4 ── -->
+  <h2>Testing IoT PCBs: Beyond Flying Probe</h2>
+
+  <p>Standard ICT (in-circuit test) verifies that resistors have the right value and traces aren't shorted. For IoT PCBs, that's the starting line — not the finish line.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>RF Performance Testing at Production Scale</h4>
+      <p>Every IoT PCB with a radio should undergo RF parametric testing on the production line — output power, frequency error, and receiver sensitivity at minimum, measured in a shielded enclosure. A board that powers on and advertises BLE packets at -20 dBm instead of 0 dBm (due to a badly soldered antenna matching component) will pass functional test but deliver 40% of its rated range. Production RF test fixtures with pogo-pin RF probes can test 4–8 boards simultaneously with under 10-second cycle time. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> covers the full test hierarchy from bare-board flying probe to system-level functional test.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Current Consumption Profiling</h4>
+      <p>A firmware bug that prevents the MCU from entering deep sleep mode is invisible to most production tests — until your customers discover their battery lasts 3 weeks instead of 2 years. Production-line current profiling measures sleep current, active current, and RF transmit current on every unit against a golden-reference profile. Deviations >15% trigger a failure. This test takes <3 seconds per unit with a programmable DC power analyzer and catches both assembly defects (shorts on decoupling caps) and firmware configuration errors.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Environmental Stress Screening (ESS)</h4>
+      <p>For IoT products targeting industrial or outdoor deployment, sample-based ESS validates design margins: thermal cycling (-40°C to +85°C, 100 cycles), damp heat (85°C/85% RH, 168 hours), and vibration (10–500 Hz sweep, 3 axes). ESS does not catch assembly defects on individual units — it validates that the design and material choices survive the target environment. Failures during ESS are a design problem, not a manufacturing problem.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>OTA Update Validation (Connected Devices)</h4>
+      <p>IoT products that support over-the-air firmware updates introduce a unique failure mode: if the board passes production test on firmware v1.0 but the OTA update mechanism has a hardware dependency bug, the entire fleet becomes brickable. Production validation should include at least one OTA update cycle on a sample from each batch, verifying that the bootloader and flash partitioning survive the process. This is not a PCB manufacturing step per se, but your CM should support it as part of a <a href="/blog/turnkey-pcb-assembly.html">turnkey PCBA service</a> that includes firmware flashing and validation.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 5 ── -->
+  <h2>Choosing an IoT PCB Manufacturing Partner</h2>
+
+  <p>Not every PCB manufacturer can build IoT products at production scale. Here are the specific capabilities to verify:</p>
+
+  <table class="spec-table">
+    <tr><th>Capability</th><th>Why It Matters for IoT</th><th>Huaxing PCBA</th></tr>
+    <tr><td>Minimum Passive Size</td><td>0201 passives are standard in compact IoT designs</td><td>0201 (01005 available)</td></tr>
+    <tr><td>Impedance Control</td><td>Every RF trace demands controlled impedance</td><td>±5% with TDR coupon on every panel</td></tr>
+    <tr><td>BGA Pitch Capability</td><td>Wireless SoCs increasingly use 0.35mm BGA</td><td>0.3mm pitch with X-ray inspection</td></tr>
+    <tr><td>Conformal Coating</td><td>Protection for outdoor/industrial IoT</td><td>Acrylic, silicone, parylene in-house</td></tr>
+    <tr><td>RF Test Capability</td><td>Every radio board needs parametric RF test</td><td>Shielded enclosures, 4-up fixtures</td></tr>
+    <tr><td>Certifications</td><td>Automotive/medical IoT requires certified supply chain</td><td>IATF 16949, ISO 9001, ISO 14001, UL</td></tr>
+    <tr><td>Turnkey Service</td><td>Component sourcing + assembly + test under one roof</td><td>Full turnkey with 250+ supplier network</td></tr>
+    <tr><td>Minimum Order</td><td>Prototyping before scaling to volume</td><td>5–100,000+ units</td></tr>
+  </table>
+
+  <!-- ── Closing ── -->
+  <h2>Summary: The IoT PCB Production Playbook</h2>
+
+  <p>Building IoT PCBs at production scale requires getting four things right simultaneously: the RF design (impedance control, antenna matching), the power architecture (ultra-low quiescent current, clean PDN), the mixed-signal layout (ground partitioning, sensor isolation), and the manufacturing partner (precision SMT, RF test, conformal coating). Miss any one of these and your product launch timeline slips by months.</p>
+
+  <p>At Huaxing PCBA, our IoT PCB manufacturing line processes over <span class="data-point">250,000</span> wireless modules monthly — from coin-cell BLE beacons to multi-radio industrial gateways. Every panel includes TDR impedance test coupons, and every assembled board passes RF parametric test in shielded fixtures before shipping. Our engineering team provides free DFM review for IoT designs, including antenna keep-out zone verification, PDN decoupling analysis, and panel utilization optimization.</p>
+
+  <p>Ready to move your IoT product from prototype to production? <a href="/contact/">Contact our engineering team</a> for a project-specific consultation, or explore our <a href="/blog/turnkey-pcb-assembly.html">turnkey PCBA guide</a> for end-to-end manufacturing workflows. If you are still in the design phase, our <a href="/blog/dfm-tips.html">DFM best practices</a> and <a href="/blog/impedance-control.html">impedance control reference</a> will help you avoid the most common production pitfalls before Gerber generation.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-iot-pcb.webp)">
+      <h2>Ready to Scale Your IoT Production?</h2>
+      <p>Upload your Gerber files and BOM for a free DFM review — including antenna keep-out zone analysis, PDN decoupling check, and panel utilization optimization. Engineering response within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your IoT PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
