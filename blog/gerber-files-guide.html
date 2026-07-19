@@ -45,7 +45,7 @@
     <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
     <nav class="nav-links" id="navLinks">
     </nav>
-    <script src="/nav.js?v=9"></script>
+    <script src="/nav.js?v=10"></script>
     <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
       <span></span><span></span><span></span>
     </div>
@@ -260,34 +260,57 @@
 
 <section class="section" style="background:var(--bg-secondary)">
   <div class="container">
-    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-gerber-files.webp)">
-      <div class="cta-card-body">
-        <h2>Ready to Send Your Gerber Files?</h2>
-        <p>Get a free DFM review and same-day quote. Our CAM engineers check every layer so your boards go into production without delay.</p>
-        <div class="cta-card-actions">
-          <a href="/contact" class="btn btn-cta">Submit Your Files →</a>
-          <a href="/pcb-capabilities" class="btn btn-secondary">View Capabilities</a>
-        </div>
-      </div>
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-rigid-flex.webp)">
+      <h2>Start Your PCB Project</h2>
+      <p>Send us your Gerber files and BOM. We will respond within 24 hours with a free DFM review and firm quotation — no commitment required.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
     </div>
   </div>
 </section>
 
-<footer class="site-footer" id="footer"></footer>
-<script src="/footer.js?v=7"></script>
-<script src="../reveal.js"></script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers",
-  "description": "Step-by-step Gerber file preparation guide for PCB buyers. Learn which layers your manufacturer needs, how to avoid the 5 most common errors that delay production, and the RS-274X vs Gerber X2 format decision.",
-  "datePublished": "2026-07-19",
-  "dateModified": "2026-07-19",
-  "author": {"@type": "Organization", "name": "Huaxing PCBA"},
-  "publisher": {"@type": "Organization", "name": "Huaxing PCBA", "url": "https://huaxingpcba.com"}
-}
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
 </script>
-</body>
+<script src="../inquiry-handler.js"></script></body>
 </html>
