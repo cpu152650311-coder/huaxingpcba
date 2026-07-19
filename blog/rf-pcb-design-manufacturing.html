@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RF PCB Design &amp; Manufacturing — Materials, Impedance Control &amp; Signal Integrity for High-Frequency Applications | Huaxing PCBA</title>
+<meta name="description" content="Comprehensive RF PCB design and manufacturing guide: Rogers vs PTFE vs ceramic-filled substrate selection, impedance control tolerances, insertion loss benchmarks, and high-frequency PCB production capabilities from an ISO 9001 &amp; UL-certified Shenzhen factory.">
+<meta property="og:title" content="RF PCB Design &amp; Manufacturing — Materials, Impedance Control &amp; Signal Integrity">
+<meta property="og:description" content="At frequencies above 1 GHz, your PCB substrate becomes a precision RF component. Here's what design teams and procurement managers need to know about material selection, loss budgets, and manufacturing tolerances.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/rf-pcb-design-manufacturing.html">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/rf-pcb-design-manufacturing.html">
+<link rel="stylesheet" href="../design-tokens.css?v=22">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=16"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-rf-pcb.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">RF PCB Design &amp; Manufacturing:<br><em>Materials, Impedance Control &amp; High-Frequency Signal Integrity</em></h1>
+      <p class="reveal">Above 1 GHz, your PCB substrate stops being a passive carrier and becomes an active RF component — with loss tangents, dielectric constants, and impedance tolerances that directly determine system performance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>RF PCB Design &amp; Manufacturing</span></div>
+
+  <p>RF and microwave PCB manufacturing is not simply "high-precision PCB fabrication." It is a distinct engineering discipline where the substrate itself becomes a transmission medium, and every micron of copper geometry, every percentage point of dielectric tolerance, and every via stub contributes to — or destroys — signal integrity. A standard FR-4 board that works perfectly at 100 MHz may exhibit 12 dB of insertion loss at 6 GHz, rendering it useless for 5G, radar, or satellite communication. Understanding the material-performance-manufacturing triangle is what separates successful RF PCB programs from expensive field failures.</p>
+
+  <p>At Huaxing PCBA, our Shenzhen facility handles RF PCB production across <span class="data-point">8</span> SMT lines with dedicated impedance-controlled process flows. We routinely fabricate RF boards on Rogers RO4000 and RO3000 series, PTFE-based substrates, and ceramic-filled hydrocarbon laminates — supporting frequencies up to 40 GHz with controlled impedance tolerances of ±5% on critical traces. This guide covers what RF design teams and procurement engineers need to know before releasing a high-frequency board to production.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-rf-pcb-cross-section.webp" alt="Photorealistic 3D cross-section render of RF PCB showing microstrip copper trace on Rogers substrate with precise dielectric layer and ground plane beneath" loading="lazy">
+
+  <!-- ── Section 1 ── -->
+  <h2>Why RF PCB Design Demands Fundamentally Different Rules</h2>
+
+  <p>At DC and low frequencies, a PCB trace is a simple electrical connection. At RF frequencies — generally defined as 500 MHz and above, with microwave starting around 1 GHz — that same trace behaves as a distributed circuit element with inductance, capacitance, and resistance distributed along its entire length. The PCB substrate becomes a dielectric waveguide, and the copper trace becomes a transmission line whose characteristic impedance must be tightly controlled.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Wavelength Shrinks — Geometry Becomes Critical</h4>
+      <p>At 10 GHz, the free-space wavelength is 30 mm, and the wavelength inside a typical PCB dielectric (εr ≈ 3.5) shrinks to approximately 16 mm. A quarter-wavelength stub of just 4 mm — about the length of a typical via barrel in a 1.6 mm thick board — can create a severe impedance discontinuity. This is why RF PCB design requires via stitching, back-drilling, and careful layer stackup planning that simply does not apply to digital boards. For more on via optimization, see our <a href="/blog/pcb-via-technology.html">PCB via technology guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Dielectric Loss Dominates Above 5 GHz</h4>
+      <p>Standard FR-4 has a dissipation factor (Df) of approximately 0.020 at 1 GHz, rising to 0.025–0.030 at 10 GHz. This means for every 10 cm of microstrip transmission line at 10 GHz, FR-4 alone can contribute over 1 dB of insertion loss before accounting for copper roughness and radiation losses. PTFE-based substrates like Rogers RT/duroid 5880 achieve Df values below 0.001 — roughly 20× lower loss than FR-4. This is not a marginal improvement; it is the difference between a functional radar front-end and a board that never meets its link budget.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Copper Surface Roughness Creates Additional Loss</h4>
+      <p>At microwave frequencies, current flows primarily in the outer few microns of a conductor — the skin effect. Roughened copper surfaces, used to improve adhesion to the dielectric, increase the effective path length for RF current, adding conductor loss. Electrodeposited (ED) copper with RMS roughness of 2–3 μm can add 15–30% more insertion loss compared to rolled annealed (RA) copper at 10 GHz. RF PCB fabricators use low-profile or ultra-low-profile copper foils specifically to minimize this effect.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> An FR-4 board built to standard IPC Class 2 tolerances will exhibit insertion loss variation of ±15% across a production batch at 10 GHz — enough to fail a system-level link budget. Moving to a controlled-impedance Rogers substrate with ±5% dielectric constant tolerance reduces this variation to under ±3%.</p>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-rf-pcb-materials.webp" alt="Four RF PCB substrate samples side by side on dark surface — PTFE white, Rogers RO4350B light tan, ceramic-filled dark gray, FR-4 greenish — showing distinct material textures under studio macro lighting" loading="lazy">
+
+  <!-- ── Section 2 ── -->
+  <h2>RF PCB Materials: Substrate Selection Drives Performance and Cost</h2>
+
+  <p>Material selection is the single most consequential decision in an RF PCB design — and the one where procurement teams have the most leverage to optimize cost without sacrificing performance. The following comparison captures the key trade-offs across the four substrate families most commonly specified for commercial RF products.</p>
+
+  <table class="spec-table">
+    <tr><th>Material</th><th>εr (Dk) @ 10 GHz</th><th>Dissipation Factor (Df)</th><th>Relative Cost</th><th>Typical Max Frequency</th></tr>
+    <tr><td>FR-4 (standard)</td><td>4.2–4.6</td><td>0.020–0.030</td><td>1×</td><td>~2 GHz</td></tr>
+    <tr><td>Rogers RO4350B</td><td>3.48 ±0.05</td><td>0.0037</td><td>8–12×</td><td>~20 GHz</td></tr>
+    <tr><td>Rogers RO3003 (PTFE/ceramic)</td><td>3.00 ±0.04</td><td>0.0013</td><td>12–18×</td><td>~40 GHz</td></tr>
+    <tr><td>Rogers RT/duroid 5880 (PTFE)</td><td>2.20 ±0.02</td><td>0.0009</td><td>15–22×</td><td>77+ GHz</td></tr>
+    <tr><td>Taconic RF-35 (PTFE/ceramic)</td><td>3.50 ±0.05</td><td>0.0018</td><td>10–15×</td><td>~30 GHz</td></tr>
+    <tr><td>Isola Astra MT77 (ceramic-filled)</td><td>3.00 ±0.04</td><td>0.0017</td><td>6–10×</td><td>~30 GHz</td></tr>
+  </table>
+
+  <p>The cost multiplier is not just the laminate price per square foot — PTFE substrates require specialized drilling parameters (lower RPM, slower feed rates), plasma desmear instead of standard permanganate, and different plating adhesion processes. A PTFE board that uses 3× more expensive raw laminate typically costs 5–8× more at the finished PCB level once manufacturing overhead is factored in. This is why hybrid stackups — RF materials on outer layers with standard FR-4 cores — are increasingly common. See our <a href="/blog/pcb-materials-guide.html">PCB materials guide</a> for a broader comparison of substrate families.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dielectric Constant (Dk) Stability Across Temperature</h4>
+      <p>PTFE-based materials offer the best Dk stability: Rogers RT/duroid 5880 varies less than 0.03 across –55°C to +150°C. Ceramic-filled hydrocarbons like RO4350B exhibit slightly higher variation (±0.05) but are far easier to process in standard PCB fabrication lines — no special plasma treatment required. For outdoor 5G base station equipment experiencing wide thermal swings, this temperature coefficient directly impacts antenna beam-forming accuracy.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Moisture Absorption and Outdoor Deployment</h4>
+      <p>FR-4 absorbs 0.1–0.3% moisture by weight, which shifts Dk by 0.1–0.2 — enough to detune a narrowband filter at 28 GHz. PTFE absorbs essentially zero moisture (< 0.02%), making it the default choice for outdoor mmWave equipment. For telecom infrastructure applications, see our <a href="/blog/telecom-5g-pcb.html">telecom and 5G PCB guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>CTE Matching for Reliability</h4>
+      <p>PTFE has a high coefficient of thermal expansion in the Z-axis (up to 240 ppm/°C vs. 50–70 ppm/°C for FR-4), which can cause plated through-hole barrel cracking during thermal cycling. Ceramic-filled PTFE composites and woven-glass-reinforced PTFE laminates reduce Z-axis CTE to 30–50 ppm/°C — critical for aerospace and defense applications where MIL-STD-810 thermal cycling is required. Read our <a href="/blog/aerospace-defense-pcb.html">aerospace and defense PCB guide</a> for reliability specifications.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>Impedance Control and Signal Integrity: The Manufacturing Perspective</h2>
+
+  <p>Designing a 50 Ω microstrip line in a simulation tool is straightforward. Manufacturing it to within ±5% across a production panel of 24-up, with every board matching — that requires a controlled process that starts at material receiving inspection and does not stop until final electrical test.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dielectric Thickness Is the Primary Tolerance Driver</h4>
+      <p>For a microstrip transmission line, the characteristic impedance Z₀ is proportional to the ratio of dielectric thickness (h) to trace width (w), multiplied by 1/√εr. A 10% variation in dielectric thickness produces roughly a 5% shift in impedance. Standard FR-4 laminates specify dielectric thickness tolerance at ±10%; high-reliability RF laminates tighten this to ±5% or better. At Huaxing PCBA, we cross-section verify dielectric thickness on every RF panel before imaging — catching out-of-spec laminate before it becomes scrap boards. For a deeper look at impedance fundamentals, see our <a href="/blog/impedance-control.html">impedance control guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Etch Factor and Trace Width Control</h4>
+      <p>Chemical etching is isotropic — it removes copper laterally as well as vertically. The ratio of lateral etch to copper thickness is called the etch factor. A 35 μm (1 oz) copper foil etched in a standard cupric chloride bath will lose approximately 25–35 μm of trace width per side due to undercut. On a 0.25 mm wide RF trace, this 50–70 μm total width reduction represents a 20–28% geometry change, shifting impedance upward by 8–12%. RF fabrication uses tighter etch control, thinner base copper (½ oz or ⅓ oz), and in some cases semi-additive processing (SAP) to maintain trace width within ±10 μm.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>TDR Testing Validates Impedance Profiles</h4>
+      <p>Time Domain Reflectometry (TDR) sends a fast rise-time pulse down a transmission line and measures impedance discontinuities along its entire length — not just the average. A well-manufactured RF board shows a flat TDR trace within ±5% of the target impedance. Spikes at connector transitions, via locations, or layer changes indicate manufacturing issues: over-etched traces, misaligned layers, or insufficient back-drilling. At our facility, 100% of impedance-controlled RF boards undergo TDR testing with pass/fail criteria of ±10% for commercial and ±5% for military/aerospace applications. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> covers TDR and other electrical test techniques in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Solder Mask Effect on Microstrip Impedance</h4>
+      <p>Applying solder mask over a microstrip transmission line increases the effective dielectric constant around the trace, lowering the characteristic impedance by 2–5 Ω. RF designers often leave critical traces unmasked or specify a low-loss liquid photoimageable (LPI) solder mask with known RF properties. For designs where the solder mask cannot be omitted, the impedance model must account for the mask's Dk and thickness — and the fabricator must verify this with a TDR measurement on the first article.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When comparing RF PCB quotes, ask the fabricator for their impedance control capability statement in writing. A fabricator claiming "±10% impedance control" on a standard process line is not the same as one that runs dedicated RF work cells with TDR on every panel. The difference in first-pass yield on a 12-layer RF board with 50+ controlled-impedance nets can be 60% vs. 95%.</p>
+  </div>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-rf-pcb-testing.webp" alt="Close-up macro photo of RF PCB under TDR probe testing — gold-plated RF trace on dark Rogers substrate with impedance test coupon visible, probe needle making contact under controlled lab lighting" loading="lazy">
+
+  <!-- ── Section 4 ── -->
+  <h2>RF PCB Applications: From 5G Base Stations to Radar and Satellite Communication</h2>
+
+  <p>The material and process decisions described above are not academic — they map directly to end-use applications, each with distinct frequency ranges, power levels, and environmental requirements.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>5G NR Base Stations and Small Cells (3.5 GHz / 28 GHz / 39 GHz)</h4>
+      <p>5G massive MIMO antenna arrays pack 64 or more transceiver channels onto a single PCB, each requiring matched phase and amplitude across ±5° and ±0.5 dB at 28 GHz. Rogers RO3003 and RO4835 are the dominant substrate choices — RO3003 for the antenna layer (lowest loss), RO4835 for the feed network (good loss + easier processing). A typical 64-element array PCB measures 300 × 200 mm and contains over 500 controlled-impedance traces. First-pass yield without automated TDR screening is below 40%.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Automotive Radar (77 GHz)</h4>
+      <p>Automotive long-range radar at 77 GHz requires substrates with Df below 0.002 and Dk tolerance tighter than ±0.04. Rogers RO3003 and Isola Astra MT77 are common choices. At these frequencies, even the glass weave pattern in the laminate becomes a periodic impedance perturbation — "glass weave skew" can cause phase imbalance between differential pairs. Homogeneous PTFE/ceramic composites without woven glass reinforcement eliminate this effect entirely, which is why they dominate at 77 GHz despite higher raw material cost.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Satellite Communication (Ka-Band: 26.5–40 GHz, V-Band: 40–75 GHz)</h4>
+      <p>Satellite RF PCBs face the triple challenge of ultra-low loss, extreme thermal cycling (–40°C to +125°C in LEO), and zero-failure tolerance (no field repair possible). RT/duroid 5880 and 6002 are the industry benchmarks. The additional manufacturing challenge is outgassing: NASA ASTM E595 requires total mass loss (TML) below 1.0% and collected volatile condensable material (CVCM) below 0.1%. Standard solder mask and legend inks fail these requirements, requiring specialized space-grade materials throughout the entire PCB stack.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Defense and Electronic Warfare (2–18 GHz Broadband)</h4>
+      <p>Broadband EW systems operating across 2–18 GHz demand substrates that maintain consistent Dk and Df across the entire band — PTFE/ceramic composites excel here. These boards also tend to be large format (400+ mm edge length) with high layer counts (16–24 layers), mixing RF and high-speed digital sections. The manufacturing challenge is lamination registration across large panels: a 50 μm layer-to-layer misregistration on a 400 mm board creates a 125 ppm layer shift, easily violating impedance tolerances. Dedicated RF lamination presses with heated platens that maintain ±1.5°C uniformity across the panel are required.</p>
+    </div>
+  </div>
+
+  <!-- ── Summary Section ── -->
+  <h2>What to Look for in an RF PCB Manufacturing Partner</h2>
+
+  <p>Selecting an RF PCB supplier is not a price-per-square-inch decision — it is a technical partnership that directly affects your product's RF performance, regulatory compliance, and field reliability. Here is what experienced RF procurement teams evaluate beyond the quote:</p>
+
+  <table class="spec-table">
+    <tr><th>Evaluation Criterion</th><th>Minimum Acceptable</th><th>Industry-Leading</th></tr>
+    <tr><td>Impedance control tolerance</td><td>±10%</td><td>±5% or better</td></tr>
+    <tr><td>Dielectric thickness verification</td><td>Certificate of conformance</td><td>Cross-section on every panel</td></tr>
+    <tr><td>TDR testing coverage</td><td>Coupon only</td><td>100% of controlled nets</td></tr>
+    <tr><td>Supported max frequency</td><td>6 GHz</td><td>40+ GHz with validated stackup</td></tr>
+    <tr><td>PTFE processing capability</td><td>Outsource to partner</td><td>In-house plasma + dedicated drill</td></tr>
+    <tr><td>Rogers/Taconic/Isola stock</td><td>Order per project (4–6 week lead)</td><td>Stocked common thicknesses</td></tr>
+  </table>
+
+  <p>At Huaxing PCBA, we operate a dedicated RF PCB work cell that includes plasma desmear for PTFE processing, automated optical inspection (AOI) with 5 μm resolution, and TDR testing on 100% of controlled-impedance nets. Our material inventory stocks Rogers RO4003C, RO4350B, and RO3003 in common thicknesses, cutting laminate lead times from 4–6 weeks to 3–5 days for stocked materials. We support RF frequencies up to 40 GHz and hold ISO 9001, IATF 16949, and UL certifications.</p>
+
+  <p>Whether you are designing a 5G phased array, an automotive radar sensor, or a satellite communication downlink, the substrate decisions you make at the design stage will determine your manufacturing yield and field performance. <a href="/blog/telecom-5g-pcb.html">Read our deep-dive on telecom and 5G PCB manufacturing</a> for application-specific stackup recommendations, or <a href="/contact/">contact our engineering team</a> for a material-specific impedance model review before you finalize your Gerber files.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-rf-pcb.webp)">
+      <h2>Ready to Start Your RF PCB Project?</h2>
+      <p>Send your Gerber files and stackup requirements — our RF engineering team provides a free impedance model review and delivers a production quote within 24 hours. Rogers, Taconic, and Isola materials in stock.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your RF PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
