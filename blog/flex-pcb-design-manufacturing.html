@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flex PCB Design &amp; Manufacturing Guide — Material Selection, Bend Reliability &amp; Cost Optimization | Huaxing PCBA</title>
+<meta name="description" content="Complete flex PCB design and manufacturing guide: polyimide vs polyester substrates, IPC-2223 bend radius rules, coverlay vs solder mask, dynamic vs static flex applications, and cost benchmarks from a Shenzhen factory producing 50,000+ flex boards monthly.">
+<meta property="og:title" content="Flex PCB Design &amp; Manufacturing Guide — Material Selection, Bend Reliability &amp; Cost Optimization">
+<meta property="og:description" content="Flex PCBs aren't just rigid boards that bend — they are a fundamentally different engineering discipline. Here's what design teams and procurement managers need to know before production.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/flex-pcb-design-manufacturing.html">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/flex-pcb-design-manufacturing.html">
+<link rel="stylesheet" href="../design-tokens.css?v=22">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=13"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-flex-pcb.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Flex PCB Design &amp; Manufacturing:<br><em>What Engineering Teams Must Know Before Prototyping</em></h1>
+      <p class="reveal">Flex circuits are not "rigid boards that bend" — they are a distinct engineering discipline with their own material science, design rules, and manufacturing economics.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Flex PCB Design &amp; Manufacturing</span></div>
+
+  <p>Flexible printed circuits account for roughly 15% of the global PCB market and are growing at nearly twice the rate of rigid boards, driven by wearable electronics, medical implants, automotive sensor networks, and aerospace systems where weight and space are at a premium. Yet procurement teams frequently treat flex PCB sourcing identically to rigid PCB sourcing — and that is where budgets get destroyed. A flex PCB is a different product with different materials, different failure modes, and different cost drivers.</p>
+
+  <p>At Huaxing PCBA, our Shenzhen facility processes over <span class="data-point">50,000</span> flex and rigid-flex boards per month across 8 SMT lines, with polyimide lamination capabilities supporting up to 12-layer flex constructions. This guide covers what we see engineering teams get right — and wrong — on their first flex PCB project.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-flex-pcb-dynamic-bend.webp" alt="Flex PCB bent at sharp angle showing polyimide flexibility and copper trace integrity" loading="lazy">
+
+  <!-- ── Section 1 ── -->
+  <h2>What Is a Flex PCB — and When Should You Actually Use One?</h2>
+
+  <p>A flex PCB replaces the traditional rigid FR-4 substrate with a thin polyimide (PI) or polyester (PET) film, typically 25–125μm thick. The result is a circuit board that can be bent, folded, twisted, or dynamically flexed millions of times — but only if designed correctly. The IPC-2223 standard governs flex PCB design, and ignoring it is the single most common cause of first-article failure.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dynamic Flex — Repeated Bending During Operation</h4>
+      <p>Found in printer heads, robotic arms, laptop hinges, and medical ultrasound probes. These circuits must survive hundreds of thousands to millions of flex cycles. Design rules are strict: neutral bend axis positioning, minimum bend radius of 10× the total circuit thickness, and absolutely no vias or component pads in the bend zone. Our IPC Class 3 flex builds — see our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 guide</a> — undergo 100,000-cycle bend testing as a standard validation gate.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Static Flex — Bend-to-Install, Then Fixed</h4>
+      <p>Used to replace wire harnesses in automotive dashboards, satellite solar panel interconnects, and consumer electronics. The board is bent once during assembly and never moved again. Design constraints are more forgiving — bend radii down to 6× thickness are acceptable — but material creep over time and temperature cycling still demand careful <a href="/blog/pcb-materials-guide.html">substrate material selection</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Rigid-Flex — Hybrid Constructions for 3D Packaging</h4>
+      <p>Rigid sections carry components; flex sections provide the interconnects. This approach eliminates board-to-board connectors, reducing weight by up to 40% and improving signal integrity by removing connector parasitics. Our team has built rigid-flex assemblies up to 12 layers for aerospace guidance systems. If your design combines rigid and flex sections, our <a href="/blog/rigid-flex-pcb.html">rigid-flex manufacturing guide</a> covers the full process in detail.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Decision Rule:</strong> If your design replaces a wiring harness with 8+ discrete wires, a flex PCB pays for itself in reduced assembly labor after the first 500 units. If your design needs to bend during operation more than 1,000 times in its lifetime, you need dynamic flex design rules — static flex rules will fail.</p>
+  </div>
+
+  <!-- ── Section 2 ── -->
+  <h2>Flex PCB Material Selection — The Foundation of Reliability</h2>
+
+  <p>Material choice in flex PCB is not a cost optimization exercise; it is a reliability decision. Unlike rigid boards where FR-4 is the default, flex circuits have no universal "default" substrate. The table below summarizes the four core material layers in every flex stackup:</p>
+
+  <table class="spec-table">
+    <tr><th>Layer</th><th>Material Options</th><th>Thickness Range</th><th>Key Property</th></tr>
+    <tr><td>Base substrate</td><td>Polyimide (PI), Polyester (PET), LCP</td><td>12.5–125μm</td><td>Tg 250°C (PI) vs 80°C (PET)</td></tr>
+    <tr><td>Conductor</td><td>RA copper, ED copper</td><td>9–70μm (¼oz–2oz)</td><td>RA copper survives 5× more bend cycles than ED</td></tr>
+    <tr><td>Adhesive</td><td>Acrylic, epoxy, adhesive-free</td><td>12–50μm</td><td>Adhesive-free systems reduce total thickness by 20%</td></tr>
+    <tr><td>Coverlay / Covercoat</td><td>Polyimide coverlay, photoimageable solder mask</td><td>12.5–25μm</td><td>Coverlay required in bend zones; solder mask cracks under flex</td></tr>
+  </table>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-flex-pcb-cross-section.webp" alt="3D cross-section render of flex PCB showing polyimide base copper trace adhesive and coverlay layers" loading="lazy">
+
+  <p><strong>Polyimide (PI) vs. Polyester (PET):</strong> Polyimide dominates 90%+ of flex PCB applications because it withstands soldering temperatures (Tg 250°C+) and offers superior chemical resistance. Polyester (PET) is cheaper but cannot survive reflow soldering — it is limited to low-temperature assembly or connector-only flex applications. For any design requiring SMT component placement, polyimide is non-negotiable.</p>
+
+  <p><strong>RA vs. ED Copper:</strong> Rolled-annealed (RA) copper has an elongated grain structure aligned in the rolling direction, giving it dramatically better fatigue resistance under bending. Electro-deposited (ED) copper has a columnar grain structure that cracks under repeated flex. The cost difference is approximately 15–25%, yet using ED copper in a dynamic flex application guarantees field failure. Our <a href="/blog/pcb-materials-guide.html">comprehensive materials guide</a> covers copper selection in depth.</p>
+
+  <!-- ── Section 3 ── -->
+  <h2>Flex PCB Design Rules That Prevent Field Failures</h2>
+
+  <p>Flex PCB design is where most projects go wrong. The rules are different from rigid PCB design, and violating even one of them can turn a working prototype into a field-return nightmare. These are the five rules our engineering team enforces on every flex design review:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Bend Radius — The Non-Negotiable Starting Point</h4>
+      <p>IPC-2223 specifies a minimum bend radius of 10× total circuit thickness for single-sided flex and 20× for double-sided. For a 200μm-thick single-sided flex, that is a 2mm minimum bend radius. Tighter bends concentrate stress on the outer copper layer, causing micro-cracks that propagate over time. We reject designs with bend radii under 6× for any application — even static installs need margin for temperature expansion.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Trace Routing — Curved, Never Right-Angled</h4>
+      <p>Traces crossing the bend zone must run perpendicular to the bend axis, not parallel. Use curved radii instead of 45° or 90° corners — sharp angles are stress concentrators. Stagger traces on different layers so they do not stack directly above each other (the "I-beam" effect magnifies bending stress). Our <a href="/blog/dfm-tips.html">DFM guidelines</a> include specific trace routing rules for flex designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Via Placement — Zero Vias in the Bend Zone</h4>
+      <p>Vias create a rigid discontinuity in an otherwise flexible material. Any via placed in or within 1mm of the bend zone becomes a crack initiation point. For designs requiring layer transitions, use tear-drop shaped pads and route the via outside the flexing region entirely. Our <a href="/blog/pcb-via-technology.html">PCB via technology guide</a> explains via types and when to use each.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Stiffener Placement — Support Where Rigidity Is Needed</h4>
+      <p>Flex PCBs need stiffeners (FR-4, polyimide, or stainless steel) under component mounting areas, connector pads, and ZIF (Zero Insertion Force) tail contacts. Without a stiffener, the flex circuit deflects during SMT pick-and-place, causing tombstoning and misalignment. Stiffener thickness is typically matched to the connector specification — 0.2–0.3mm for standard ZIF connectors.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Copper Balancing — Symmetry Prevents Warpage</h4>
+      <p>Unbalanced copper distribution across layers causes the flex circuit to curl after lamination — a problem that gets worse with heat. Design symmetrical copper pours: if layer 1 has a ground plane, layer 2 needs an equivalent copper fill. Cross-hatched ground planes (not solid) preserve flexibility while maintaining electrical continuity. For <a href="/blog/impedance-control.html">controlled impedance</a> designs, the cross-hatch pattern must be modeled in the field solver, not treated as a solid plane.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> A flex PCB design review that catches these five issues before Gerber generation saves an average of 14 days and $3,200 in prototype iterations. We offer free DFM reviews on every flex order — send your design files to our engineering team before committing to production.</p>
+  </div>
+
+  <!-- ── Section 4 ── -->
+  <h2>Manufacturing Process — How Flex PCBs Are Made</h2>
+
+  <p>Flex PCB manufacturing shares some steps with rigid PCB fabrication — imaging, etching, drilling — but the material handling is fundamentally different. Polyimide is not a rigid sheet; it is a flexible film that requires tension-controlled processing, specialized lamination presses, and laser-based via formation. Here is the production flow we use:</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-flex-pcb-drilling.webp" alt="Laser drilling microvias on polyimide flex PCB sheet in cleanroom environment" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Material Preparation and Cleaning</h4>
+      <p>Polyimide film arrives in rolls and is cut to panel size (250×350mm is our standard flex panel). The surface is plasma-cleaned to remove organic residues and improve copper adhesion. This step is critical — polyimide absorbs moisture from ambient air, and any residual humidity causes delamination during the 180°C lamination cycle. Our facility stores all flex materials in nitrogen-purged cabinets at 23±2°C and <30% RH.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Imaging and Etching</h4>
+      <p>Dry film photoresist is laminated onto the copper-clad polyimide, exposed with the circuit pattern, and developed. The etching process uses alkaline cupric chloride chemistry, carefully controlled to avoid undercutting the thin copper foil. For fine-pitch flex (≤75μm trace/space), we use direct imaging (LDI) systems with <span class="data-point">±10μm</span> registration accuracy — tighter than the ±25μm achievable with conventional contact printing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Coverlay Lamination</h4>
+      <p>This is the step that differentiates flex from rigid manufacturing. A polyimide coverlay film — pre-cut with openings for pads and components — is aligned to the etched circuit and laminated under heat (180°C) and pressure (25 kg/cm²) for 60–90 minutes. Misalignment exceeding 50μm exposes trace edges or covers pads, both of which cause assembly defects. Our automated optical alignment systems hold coverlay registration to <span class="data-point">±25μm</span>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Laser Drilling and Surface Finish</h4>
+      <p>Microvias in flex PCBs are formed by UV laser ablation — no mechanical drill bits, which would tear the polyimide film. Our 355nm UV laser systems produce <span class="data-point">50μm</span>-diameter vias with clean sidewalls, essential for reliable plating. After via formation, electroless copper deposition creates the via wall, followed by electrolytic copper plating to the target thickness. The final step is ENIG surface finish — our <a href="/blog/enig-vs-hasl.html">ENIG vs HASL comparison</a> explains why ENIG is the default for flex PCBs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Laser Profiling and Electrical Test</h4>
+      <p>Unlike rigid PCBs that are routed with mechanical bits, flex circuits are profiled with a UV laser cutter that produces smooth, burr-free edges. Mechanical routing leaves micro-tears in the polyimide that become crack initiation sites during bending. After profiling, every flex board undergoes 100% flying probe electrical test — continuity, isolation, and netlist verification — plus bend-cycle testing on a sample basis for dynamic flex applications. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> details all inspection technologies used.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 5 ── -->
+  <h2>Flex PCB Cost Factors and Optimization Strategies</h2>
+
+  <p>Flex PCBs cost 3–5× more than equivalent rigid boards per unit area. The premium comes from polyimide material cost (4–6× more expensive than FR-4 per square meter), lower panel utilization (flex circuits often have irregular outlines), and longer lamination cycle times. But the total system cost often favors flex: eliminating connectors and wiring harnesses reduces assembly labor, improves reliability, and shrinks the enclosure. Here is how to optimize your flex PCB BOM:</p>
+
+  <table class="spec-table">
+    <tr><th>Cost Driver</th><th>Lower Cost</th><th>Higher Cost</th><th>Savings Potential</th></tr>
+    <tr><td>Layer count</td><td>1–2 layers</td><td>4–8 layers</td><td>40–60%</td></tr>
+    <tr><td>Substrate</td><td>PET (no soldering)</td><td>Polyimide</td><td>25–35%</td></tr>
+    <tr><td>Copper type</td><td>ED copper, static flex</td><td>RA copper, dynamic flex</td><td>15–25%</td></tr>
+    <tr><td>Coverlay vs solder mask</td><td>Photoimageable solder mask (static)</td><td>Laser-cut PI coverlay</td><td>20–30%</td></tr>
+    <tr><td>Stiffeners</td><td>FR-4 stiffener</td><td>Stainless steel or PI stiffener</td><td>10–15%</td></tr>
+    <tr><td>Panel utilization</td><td>Rectangular outline, panelized</td><td>Complex contour, single-up</td><td>15–30%</td></tr>
+  </table>
+
+  <p>Our <a href="/blog/pcb-cost-factors.html">comprehensive cost factors guide</a> covers additional optimization strategies applicable to all PCB types. For flex-specific savings, the single highest-impact decision is panel utilization — a rectangular flex outline that nests efficiently on a 250×350mm panel can reduce unit cost by 30% compared to a custom-contoured design that wastes 40% of the panel area.</p>
+
+  <div class="highlight-box">
+    <p><strong>Prototype-to-Production Economics:</strong> Flex PCB NRE costs (tooling, coverlay laser programming, test fixtures) typically range from $800–2,500 depending on layer count and complexity. Amortizing this across a 1,000-unit production run adds $0.80–2.50 per unit — negligible compared to the $3–8 per unit saved by eliminating connectors. Our <a href="/blog/prototype-vs-production.html">prototype vs production guide</a> helps you plan the transition.</p>
+  </div>
+
+  <!-- ── Section 6 ── -->
+  <h2>When Flex PCB Beats Rigid PCB — And When It Does Not</h2>
+
+  <p>Flex PCB is not a universal upgrade. For applications where the board sits flat in an enclosure with ample space, standard rigid PCB at 20% of the cost is the correct engineering choice. Flex circuits earn their premium in specific use cases where the value of flexibility, weight reduction, or connector elimination justifies the higher unit cost. Here is the decision framework:</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-flex-pcb-wearable.webp" alt="Flex PCB conforming to curved wearable device wristband showing compact SMT component integration" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">✓</div>
+    <div class="checklist-content">
+      <h4>Choose Flex PCB When:</h4>
+      <p>Your product needs to fold into a 3D enclosure (cameras, drones, medical endoscopes); you are replacing a wiring harness with 8+ discrete wires; weight reduction is critical (aerospace, drones — flex saves 40–60% vs rigid+connectors); the board must survive dynamic bending (robotics, hinges, wearables); or you need a high-reliability interconnect where connector failure is unacceptable (implantable medical devices, automotive safety systems).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✗</div>
+    <div class="checklist-content">
+      <h4>Stick With Rigid PCB When:</h4>
+      <p>Your board mounts flat in a standard enclosure; the device has no moving parts or flexing requirements; your component density requires 8+ rigid layers with heavy BGAs (flex struggles beyond 6 layers with fine-pitch BGA); the production volume is under 500 units and the NRE cannot be amortized; or the environment involves continuous exposure to temperatures above 150°C (polyimide Tg is 250°C, but long-term >150°C accelerates adhesive degradation).</p>
+    </div>
+  </div>
+
+  <!-- ── Closing ── -->
+  <h2>Getting Your Flex PCB Project Into Production</h2>
+
+  <p>Flex PCB is not harder than rigid PCB — it is different. The engineering teams that succeed with flex are the ones that treat it as a separate discipline with its own design rules, material constraints, and manufacturing economics. The teams that fail are the ones that take a rigid PCB layout, swap the substrate to polyimide, and expect it to work. It will not.</p>
+
+  <p>At Huaxing PCBA, our flex PCB production line handles single-sided through 12-layer flex and rigid-flex constructions, with material options spanning standard polyimide, adhesiveless laminates, and LCP for high-frequency applications. We provide free DFM review on every flex order — including bend radius verification, coverlay clearance analysis, and stiffener compatibility checks — with a <span class="data-point">24-hour</span> engineering feedback turnaround. Read our <a href="/blog/turnkey-pcb-assembly.html">turnkey PCB assembly guide</a> to see how flex assembly integrates into full-box-build production, or <a href="/contact/">contact our engineering team</a> with your design files for a project-specific consultation.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-flex-pcb.webp)">
+      <h2>Ready to Prototype Your Flex PCB?</h2>
+      <p>Send us your design files for a free DFM review — bend radius check, coverlay analysis, and stiffener recommendation included. Engineering feedback within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
