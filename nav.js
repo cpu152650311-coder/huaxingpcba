@@ -2,23 +2,11 @@
  * Huaxing PCBA — Shared Navigation Injection
  * Injects nav HTML + critical CSS so the nav works even if
  * design-tokens.css is cached stale or loads slowly from CDN.
- * v10 — Mobile: right-side drawer + backdrop
+ * v11 — Mobile: clean fullscreen overlay
  */
 (function(){
   var nav = document.getElementById('navLinks');
   if (!nav) return;
-
-  // 0. Inject backdrop element before header
-  var backdrop = document.createElement('div');
-  backdrop.className = 'nav-backdrop';
-  backdrop.id = 'navBackdrop';
-  backdrop.onclick = function(){
-    nav.classList.remove('mobile-open');
-    backdrop.classList.remove('open');
-    document.body.style.overflow = '';
-  };
-  var header = document.getElementById('header');
-  if (header) header.parentNode.insertBefore(backdrop, header);
 
   // 1. Inject critical nav CSS
   var style = document.createElement('style');
@@ -114,99 +102,78 @@
     '.nav-flyout-panel a:hover{color:#e8e8ec!important;background:rgba(200,150,62,.08)!important}' +
     '@keyframes flyoutIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}' +
     '.nav-flyout-trigger:hover>.nav-flyout-panel{animation:flyoutIn .2s ease}' +
-    /* ── Mobile ≤768px: right-side drawer + backdrop ── */
+    /* ── Mobile ≤768px: clean fullscreen overlay ── */
     '@media(max-width:768px){' +
-      /* Backdrop overlay */
-      '.nav-backdrop{' +
-        'display:none;position:fixed;inset:0;' +
-        'background:rgba(0,0,0,.55);z-index:199;' +
-        'opacity:0;transition:opacity .3s' +
-      '}' +
-      '.nav-backdrop.open{display:block;opacity:1}' +
-      /* Drawer panel slides in from right */
       '.nav-links{' +
-        'display:flex;flex-direction:column;' +
-        'position:fixed;top:0;right:0;bottom:0;width:300px;max-width:88vw;' +
-        'background:#0d0d14;z-index:200;overflow-y:auto;' +
-        'transform:translateX(100%);' +
-        'transition:transform .32s cubic-bezier(.4,0,.2,1);' +
-        'border-left:1px solid #1a1a25;' +
-        'box-shadow:-8px 0 32px rgba(0,0,0,.4)' +
+        'display:none;' +
+        'position:fixed;top:0;left:0;right:0;bottom:0;' +
+        'background:rgba(5,5,11,.97);z-index:200;' +
+        'flex-direction:column;align-items:center;justify-content:center;' +
+        'gap:6px;overflow-y:auto;' +
+        'opacity:0;transition:opacity .25s' +
       '}' +
-      '.nav-links.mobile-open{transform:translateX(0)}' +
-      /* Gold accent line at top */
-      '.nav-links::before{' +
-        'content:"";display:block;height:1px;' +
-        'background:linear-gradient(90deg,transparent,#c8963e,transparent);' +
-        'flex-shrink:0' +
+      '.nav-links.mobile-open{display:flex;opacity:1}' +
+      /* Close button — simple X top right */
+      '.nav-close-btn{' +
+        'position:absolute;top:18px;right:18px;' +
+        'width:36px;height:36px;' +
+        'display:flex;align-items:center;justify-content:center;' +
+        'background:none;border:1px solid #2a2a35;border-radius:50%;' +
+        'color:#777;font-size:18px;cursor:pointer;' +
+        'transition:color .2s,border-color .2s' +
       '}' +
-      /* Drawer header with close button */
-      '.nav-drawer-header{' +
-        'display:flex;align-items:center;justify-content:space-between;' +
-        'padding:14px 16px;border-bottom:1px solid #1a1a25;' +
-        'position:sticky;top:0;background:#0d0d14;z-index:2;flex-shrink:0' +
-      '}' +
-      '.nav-drawer-header span{' +
-        'font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#666' +
-      '}' +
-      '.nav-drawer-close{' +
-        'width:32px;height:32px;display:flex;align-items:center;justify-content:center;' +
-        'background:none;border:1px solid #252530;border-radius:6px;color:#888;' +
-        'cursor:pointer;font-size:18px;line-height:1;transition:all .2s' +
-      '}' +
-      '.nav-drawer-close:hover{color:#e8e8ec;border-color:#555}' +
-      /* Links in drawer */
+      '.nav-close-btn:hover{color:#e8e8ec;border-color:#555}' +
+      /* Links */
       '.nav-links a,.nav-dropdown-trigger{' +
-        'display:flex;align-items:center;' +
-        'padding:12px 16px;font-size:15px;color:#d0d0d8;' +
-        'border-bottom:1px solid rgba(255,255,255,.04);' +
-        'text-decoration:none;transition:all .15s;white-space:nowrap' +
+        'display:flex;align-items:center;justify-content:center;' +
+        'padding:10px 0;font-size:17px;color:#c0c0c8;' +
+        'text-decoration:none;transition:color .15s;' +
+        'white-space:nowrap;width:100%;text-align:center' +
       '}' +
-      '.nav-links a:hover{color:#fff;background:rgba(200,150,62,.06)}' +
+      '.nav-links a:hover{color:#fff}' +
       '.nav-links a.active{color:#d4a843}' +
-      '.nav-dropdown{display:flex;flex-direction:column}' +
-      '.nav-dropdown-trigger:hover{color:#fff;background:rgba(200,150,62,.06)}' +
+      '.nav-dropdown{display:flex;flex-direction:column;align-items:center;width:100%}' +
+      '.nav-dropdown-trigger:hover{color:#fff}' +
       '.nav-dropdown-panel{' +
         'position:static;transform:none;opacity:1;visibility:visible;' +
-        'background:rgba(0,0,0,.15);border:none;box-shadow:none;' +
-        'padding:0;min-width:0' +
+        'background:transparent;border:none;box-shadow:none;' +
+        'padding:0;min-width:0;display:flex;flex-direction:column;align-items:center' +
       '}' +
       '.nav-dropdown-panel a{' +
-        'padding:10px 16px 10px 36px;font-size:13px;color:#9898a8;' +
-        'border-bottom:1px solid rgba(255,255,255,.02)' +
+        'padding:8px 0;font-size:14px;color:#9090a0' +
       '}' +
-      '.nav-dropdown-panel a:hover{color:#e0e0e8;background:rgba(200,150,62,.04)}' +
+      '.nav-dropdown-panel a:hover{color:#e0e0e8}' +
       '.nav-dropdown-trigger svg{display:none}' +
       '.nav-dropdown:hover>.nav-dropdown-trigger svg{transform:none}' +
       '.nav-dropdown:hover>.nav-dropdown-panel{transform:none}' +
       /* Flyout inline */
-      '.nav-flyout-trigger{flex-wrap:wrap!important}' +
+      '.nav-flyout-trigger{flex-wrap:wrap!important;justify-content:center!important}' +
       '.nav-flyout-panel{' +
         'position:static!important;opacity:1!important;visibility:visible!important;' +
         'pointer-events:auto!important;' +
         'background:transparent!important;border:none!important;' +
         'box-shadow:none!important;padding:0!important;' +
-        'min-width:0!important;animation:none!important;display:block!important' +
+        'min-width:0!important;animation:none!important;display:flex!important;' +
+        'flex-direction:column!important;align-items:center!important' +
       '}' +
-      '.nav-flyout-panel a{padding-left:52px!important;font-size:12px!important}' +
+      '.nav-flyout-panel a{padding:6px 0!important;font-size:13px!important}' +
       '.nav-flyout-trigger .ft-arrow{display:none}' +
-      /* CTA button at bottom of drawer */
+      /* CTA button */
       '.nav-cta{' +
-        'margin:16px!important;padding:13px 20px!important;' +
-        'text-align:center!important;justify-content:center!important;' +
+        'margin-top:16px!important;padding:12px 32px!important;' +
+        'text-align:center!important;' +
         'background:#c8963e!important;color:#08080b!important;' +
         'border:none!important;border-radius:6px!important;' +
         'font-weight:500!important;font-size:15px!important;' +
-        'letter-spacing:.02em!important;display:flex!important;' +
+        'letter-spacing:.02em!important;display:inline-flex!important;' +
         'align-items:center!important;gap:6px!important;' +
-        'flex-shrink:0' +
+        'text-decoration:none!important' +
       '}' +
       '.nav-cta:hover{background:#d4a843!important;color:#08080b!important}' +
       '.nav-cta::after{display:none!important}' +
     '}' +
     /* ── Tablet 769-1024px: dropdown overlay ── */
     '@media(min-width:769px) and (max-width:1024px){' +
-      '.nav-backdrop{display:none!important}' +
       '.nav-links{display:none;flex-direction:column;' +
         'position:absolute;top:100%;left:0;right:0;' +
         'background:#0d0d14;border-top:1px solid #1a1a25;' +
@@ -240,7 +207,7 @@
     '}';
   document.head.appendChild(style);
 
-  // 2. Inject nav HTML (with drawer header)
+  // 2. Inject nav HTML (simple overlay — close button at top right)
   var path = location.pathname;
   function active(p) {
     if (p === '/' && (path === '/' || path === '/index.html')) return ' class="active"';
@@ -249,16 +216,12 @@
   }
 
   nav.innerHTML =
-    /* Drawer header — only visible on mobile */
-    '<div class="nav-drawer-header">' +
-      '<span>MENU</span>' +
-      '<button class="nav-drawer-close" onclick="document.getElementById(\'navLinks\').classList.remove(\'mobile-open\');document.getElementById(\'navBackdrop\').classList.remove(\'open\');document.body.style.overflow=\'\'">&times;</button>' +
-    '</div>' +
+    /* Close button — only visible on mobile */
+    '<button class="nav-close-btn" onclick="document.getElementById(\'navLinks\').classList.remove(\'mobile-open\');document.body.style.overflow=\'\'">&times;</button>' +
     '<a href="/"' + active('/') + '>Home</a>' +
     '<div class="nav-dropdown" id="capabilitiesDropdown">' +
       '<span class="nav-dropdown-trigger">Capabilities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
       '<div class="nav-dropdown-panel">' +
-        /* PCB Types — flyout trigger */
         '<span class="nav-flyout-trigger" id="pcbTypesFlyout">' +
           '<a href="/capabilities/pcb-types/">PCB Types</a>' +
           '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
@@ -296,7 +259,7 @@
     '<a href="/about/"' + active('/about/') + '>About</a>' +
     '<a href="/contact/"' + active('/contact/') + '>Contact</a>' +
     '<a href="/blog/"' + active('/blog/') + '>Blog</a>' +
-    '<a href="#inquiry" class="nav-cta" onclick="if(typeof openModal==\'function\'){openModal();document.getElementById(\'navLinks\').classList.remove(\'mobile-open\');document.getElementById(\'navBackdrop\').classList.remove(\'open\');document.body.style.overflow=\'\'}return false">Get Quote</a>';
+    '<a href="#inquiry" class="nav-cta" onclick="var n=document.getElementById(\'navLinks\');n.classList.remove(\'mobile-open\');document.body.style.overflow=\'\';if(typeof openModal==\'function\')openModal();return false">Get Quote</a>';
 
   // 3. Dropdown toggles (click to open/close)
   document.addEventListener('click', function(e) {
@@ -308,7 +271,6 @@
     if (flyout && !flyout.contains(e.target)) flyout.classList.remove('open');
   });
 
-  // Dropdown click toggles (for mobile / tap devices)
   ['capabilitiesDropdown','industriesDropdown'].forEach(function(id) {
     var dd = document.getElementById(id);
     if (!dd) return;
@@ -322,7 +284,6 @@
     }
   });
 
-  // Flyout click toggle for mobile
   var flyout = document.getElementById('pcbTypesFlyout');
   if (flyout) {
     flyout.addEventListener('click', function(e) {
@@ -334,16 +295,12 @@
     });
   }
 
-  // 4. Update hamburger button to toggle backdrop + drawer
+  // 4. Hamburger button — simple toggle with body scroll lock
   var btn = document.getElementById('mobileBtn');
   if (btn) {
     btn.onclick = function() {
-      var bd = document.getElementById('navBackdrop');
       var isOpen = nav.classList.toggle('mobile-open');
-      if (bd) {
-        if (isOpen) { bd.classList.add('open'); document.body.style.overflow = 'hidden'; }
-        else { bd.classList.remove('open'); document.body.style.overflow = ''; }
-      }
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     };
   }
 })();
