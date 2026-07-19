@@ -1,0 +1,90 @@
+/**
+ * Huaxing PCBA — Blog Article Shared Styles
+ * v=1 — Extracted from 25 individual blog pages
+ * Include AFTER design-tokens.css
+ */
+
+/* ── Article container ── */
+.article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-md)}
+
+/* ── Typography ── */
+.article h2{font-weight:200;margin:var(--space-xl) 0 var(--space-md);font-size:var(--text-3xl)}
+.article h3{font-weight:300;margin:var(--space-lg) 0 var(--space-sm);font-size:var(--text-xl);color:var(--accent)}
+.article h4{font-weight:400;margin:var(--space-md) 0 var(--space-xs);font-size:var(--text-lg);color:var(--text-primary)}
+.article p{color:var(--text-secondary);margin-bottom:var(--space-md);line-height:1.85}
+.article ul,.article ol{margin-bottom:var(--space-md);padding-left:1.5rem}
+.article li{color:var(--text-secondary);margin-bottom:var(--space-xs);line-height:1.7}
+
+/* ── Highlight box ── */
+.article .highlight-box{background:var(--bg-surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:var(--space-lg);margin:var(--space-lg) 0}
+.article .highlight-box p{color:var(--text-primary);margin-bottom:0}
+.article .highlight-box strong{color:var(--accent)}
+
+/* ── Images ── */
+.article-img{width:100%;max-width:85%;margin:var(--space-lg) auto;display:block;border-radius:var(--radius-lg)}
+
+/* ── Data point (large number/accent callout) ── */
+.article .data-point{font-size:var(--text-2xl);font-weight:200;color:var(--accent);display:block;line-height:1}
+
+/* ── Breadcrumb ── */
+.breadcrumb{margin-bottom:var(--space-lg);font-size:var(--text-sm);color:var(--text-muted)}
+.breadcrumb a{color:var(--text-secondary);text-decoration:none}
+.breadcrumb a:hover{color:var(--accent)}
+
+/* ── Checklist (numbered items with circle) ── */
+.article .checklist-item{display:flex;gap:var(--space-md);padding:var(--space-md) 0;border-bottom:1px solid var(--border)}
+.article .checklist-item:last-child{border-bottom:none}
+.article .checklist-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--text-sm)}
+.article .checklist-content h4{margin:0 0 var(--space-xs) 0;font-weight:400;color:var(--text-primary)}
+.article .checklist-content p{font-size:var(--text-sm);margin-bottom:0}
+
+/* ── Step list (numbered steps) ── */
+.article .step-item{display:flex;gap:var(--space-md);padding:var(--space-md) 0;border-bottom:1px solid var(--border)}
+.article .step-item:last-child{border-bottom:none}
+.article .step-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--text-sm)}
+.article .step-content h4{margin:0 0 var(--space-xs) 0;font-weight:400;color:var(--text-primary)}
+.article .step-content p{font-size:var(--text-sm);margin-bottom:0}
+
+/* ── Process list ── */
+.article .process-item{display:flex;gap:var(--space-md);padding:var(--space-md) 0;border-bottom:1px solid var(--border)}
+.article .process-item:last-child{border-bottom:none}
+.article .process-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--text-sm)}
+.article .process-content h4{margin:0 0 var(--space-xs) 0;font-weight:400;color:var(--text-primary)}
+.article .process-content p{font-size:var(--text-sm);margin-bottom:0}
+
+/* ── Generic data table ── */
+.spec-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)}
+.spec-table th{text-align:left;padding:var(--space-sm);color:var(--text-primary);border-bottom:2px solid var(--accent)}
+.spec-table td{padding:var(--space-sm);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.spec-table tr:nth-child(even){background:var(--bg-secondary)}
+
+/* ── Key-value table (smaller, muted header) ── */
+.kv-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+.kv-table th,.kv-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+.kv-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+.kv-table td{color:var(--text-secondary)}
+.kv-table tr:nth-child(even){background:var(--bg-secondary)}
+
+/* ── Step block (numbered procedure with left accent border) ── */
+.article .step-block{border-left:2px solid var(--accent-25);padding-left:var(--space-lg);margin:var(--space-lg) 0}
+.article .step-block h3{margin-top:0;color:var(--accent)}
+
+/* ── Compare table (feature comparison with hover) ── */
+.article .compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)}
+.article .compare-table th{background:var(--bg-surface);color:var(--accent);font-weight:400;text-align:left;padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border)}
+.article .compare-table td{color:var(--text-secondary);padding:var(--space-sm) var(--space-md);border-bottom:1px solid var(--border);line-height:1.6}
+.article .compare-table tr:hover td{background:var(--bg-surface)}
+
+/* ── Mobile ≤768px ── */
+@media(max-width:768px){
+  .article h2{font-size:var(--text-2xl)}
+  .article h3{font-size:var(--text-lg)}
+  .checklist-item,.step-item,.process-item{flex-direction:column;gap:var(--space-sm)}
+  /* Note: checklist-num/step-num/process-num mobile size (28px)
+     is controlled by design-tokens.css with !important */
+  .spec-table,.kv-table{font-size:var(--text-xs)}
+  .spec-table th,.spec-table td,
+  .kv-table th,.kv-table td{padding:var(--space-xs)}
+  .article-img{max-width:100%}
+  .breadcrumb{font-size:var(--text-xs)}
+}

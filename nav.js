@@ -2,7 +2,7 @@
  * Huaxing PCBA — Shared Navigation Injection
  * Injects nav HTML + critical CSS so the nav works even if
  * design-tokens.css is cached stale or loads slowly from CDN.
- * v12 — Mobile: simple dropdown + hide X on desktop
+ * v13 — Mobile: no sub-menus (dropdown panels hidden), triggers navigate to landing pages
  */
 (function(){
   var nav = document.getElementById('navLinks');
@@ -135,29 +135,13 @@
       '.nav-links a.active{color:#d4a843}' +
       '.nav-dropdown{display:flex;flex-direction:column}' +
       '.nav-dropdown-trigger:hover{color:#fff;background:rgba(200,150,62,.04)}' +
-      '.nav-dropdown-panel{' +
-        'position:static;transform:none;opacity:1;visibility:visible;' +
-        'background:rgba(0,0,0,.2);border:none;box-shadow:none;' +
-        'padding:0;min-width:0' +
-      '}' +
-      '.nav-dropdown-panel a{' +
-        'padding:10px 20px 10px 36px;font-size:14px;color:#9898a8;' +
-        'border-bottom:1px solid rgba(255,255,255,.02)' +
-      '}' +
-      '.nav-dropdown-panel a:hover{color:#e0e0e8;background:rgba(200,150,62,.04)}' +
+      /* Hide dropdown sub-panels on mobile */
+      '.nav-dropdown-panel{display:none!important}' +
       '.nav-dropdown-trigger svg{display:none}' +
       '.nav-dropdown:hover>.nav-dropdown-trigger svg{transform:none}' +
       '.nav-dropdown:hover>.nav-dropdown-panel{transform:none}' +
-      /* Flyout inline */
-      '.nav-flyout-trigger{flex-wrap:wrap!important}' +
-      '.nav-flyout-panel{' +
-        'position:static!important;opacity:1!important;visibility:visible!important;' +
-        'pointer-events:auto!important;' +
-        'background:transparent!important;border:none!important;' +
-        'box-shadow:none!important;padding:0!important;' +
-        'min-width:0!important;animation:none!important;display:block!important' +
-      '}' +
-      '.nav-flyout-panel a{padding-left:52px!important;font-size:13px!important}' +
+      /* Flyout — hidden on mobile */
+      '.nav-flyout-panel{display:none!important}' +
       '.nav-flyout-trigger .ft-arrow{display:none}' +
       /* CTA at bottom of dropdown */
       '.nav-cta{' +
@@ -185,24 +169,11 @@
       '}' +
       '.nav-cta{margin-top:8px;text-align:center}' +
       '.nav-dropdown{display:flex;flex-direction:column}' +
-      '.nav-dropdown-panel{' +
-        'position:static;transform:none;opacity:1;visibility:visible;' +
-        'background:transparent;border:none;box-shadow:none;' +
-        'padding:0 0 0 24px;min-width:0' +
-      '}' +
-      '.nav-dropdown-panel a{padding:10px 0;font-size:14px;color:#b0b0b8}' +
+      '.nav-dropdown-panel{display:none!important}' +
       '.nav-dropdown-trigger svg{display:none}' +
       '.nav-dropdown:hover>.nav-dropdown-trigger svg{transform:none}' +
       '.nav-dropdown:hover>.nav-dropdown-panel{transform:none}' +
-      '.nav-flyout-trigger{flex-wrap:wrap!important}' +
-      '.nav-flyout-panel{' +
-        'position:static!important;opacity:1!important;visibility:visible!important;' +
-        'pointer-events:auto!important;' +
-        'background:transparent!important;border:none!important;' +
-        'box-shadow:none!important;padding:0 0 0 16px!important;' +
-        'min-width:0!important;animation:none!important;display:none!important' +
-      '}' +
-      '.nav-flyout-trigger.open>.nav-flyout-panel{display:block!important}' +
+      '.nav-flyout-panel{display:none!important}' +
       '.nav-flyout-trigger .ft-arrow{display:none}' +
     '}';
   document.head.appendChild(style);
@@ -261,7 +232,7 @@
     '<a href="/blog/"' + active('/blog/') + '>Blog</a>' +
     '<a href="#inquiry" class="nav-cta" onclick="var n=document.getElementById(\'navLinks\');n.classList.remove(\'mobile-open\');document.body.style.overflow=\'\';if(typeof openModal==\'function\')openModal();return false">Get Quote</a>';
 
-  // 3. Dropdown toggles (click to open/close)
+  // 3. Dropdown toggles (click to open/close on desktop, navigate on mobile)
   document.addEventListener('click', function(e) {
     ['capabilitiesDropdown','industriesDropdown'].forEach(function(id) {
       var dd = document.getElementById(id);
@@ -271,6 +242,11 @@
     if (flyout && !flyout.contains(e.target)) flyout.classList.remove('open');
   });
 
+  var landingPages = {
+    capabilitiesDropdown: '/capabilities/',
+    industriesDropdown: '/industries/'
+  };
+
   ['capabilitiesDropdown','industriesDropdown'].forEach(function(id) {
     var dd = document.getElementById(id);
     if (!dd) return;
@@ -279,7 +255,12 @@
       trigger.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        dd.classList.toggle('open');
+        /* Mobile: navigate to landing page. Desktop: toggle dropdown. */
+        if (window.innerWidth <= 1024) {
+          window.location.href = landingPages[id];
+        } else {
+          dd.classList.toggle('open');
+        }
       });
     }
   });
@@ -290,7 +271,7 @@
       if (window.innerWidth <= 1024) {
         e.preventDefault();
         e.stopPropagation();
-        flyout.classList.toggle('open');
+        window.location.href = '/capabilities/pcb-types/';
       }
     });
   }
