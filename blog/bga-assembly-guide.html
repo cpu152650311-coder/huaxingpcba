@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BGA Assembly Guide — X-Ray Inspection, Reflow Profiling & Defect Prevention | Huaxing PCBA</title>
+<meta name="description" content="Complete BGA assembly guide covering reflow profiling, X-ray inspection, void prevention, and design rules for 0.3mm pitch BGAs. Real production data from an IATF 16949-certified facility with 8 SMT lines.">
+<meta property="og:title" content="BGA Assembly Guide — X-Ray Inspection, Reflow Profiling & Defect Prevention">
+<meta property="og:description" content="BGA assembly is the most demanding process in SMT manufacturing — and the most unforgiving of shortcuts. This guide covers everything from reflow profile optimization to X-ray void analysis, with real capability data from a facility running 8 million placements per day.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/bga-assembly-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-bga-assembly.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/bga-assembly-guide.html">
+<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="stylesheet" href="../blog.css?v=1">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=13"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article class="article">
+    <div class="breadcrumb">
+      <a href="/">Home</a> &rsaquo; <a href="/blog/">Blog</a> &rsaquo; <span>BGA Assembly Guide</span>
+    </div>
+
+    <h2>BGA Assembly — What Procurement Engineers Need to Know Before Committing to a Production Run</h2>
+
+    <p>BGA packages have become the dominant IC packaging format for anything above 100 pins — but they introduce assembly challenges that simply don't exist with QFP or SOIC. Every BGA solder joint is hidden under the package body. You cannot visually inspect it. You cannot rework a single joint with an iron. And a single void exceeding 25% of joint volume can create a latent reliability failure that manifests months after deployment. This guide covers the five factors that determine BGA assembly yield — reflow profiling, X-ray inspection criteria, void prevention, design rules, and process capability requirements — with real production data from a facility that runs 0.3mm pitch BGAs daily.</p>
+
+    <div class="highlight-box">
+      <p><strong>Factory reality:</strong> Our 8 SMT lines process approximately <strong>250,000 BGA placements per month</strong> across package sizes from 0.3mm pitch micro-BGAs to 45mm server-class packages. First-pass yield for BGA assemblies consistently exceeds 99.2% — a number achieved not through luck but through a tightly controlled reflow process, 100% X-ray inspection with automated void analysis, and design rules enforced at the DFM stage before a single stencil is cut.</p>
+    </div>
+
+    <h2>What Makes BGA Assembly Fundamentally Different</h2>
+
+    <p>In conventional SMT assembly, every solder joint is visible after reflow. AOI cameras can inspect lead wetting, tombstoning, and bridging from above. For BGAs, the entire solder joint array is hidden beneath the package. The only non-destructive inspection method is X-ray — and even X-ray requires specific expertise to interpret correctly. This fundamental difference cascades into every process decision:</p>
+
+    <ul>
+      <li><strong>Solder paste volume control</strong> becomes critical because you cannot add paste after placement. The stencil design — aperture size, thickness, and shape — must deliver exactly the right paste volume for every ball, accounting for the PCB pad design and the expected collapse height.</li>
+      <li><strong>Reflow profile uniformity</strong> matters far more than for leaded packages. A 2°C temperature delta across the BGA footprint during liquidus can cause one corner to reflow while the opposite corner hasn't reached melting point — producing head-in-pillow defects that pass electrical test at room temperature but fail under thermal cycling.</li>
+      <li><strong>Placement accuracy</strong> requirements tighten from ±50μm for QFP to ±25μm for 0.5mm pitch BGA and ±15μm for 0.3mm pitch. Our placement machines hold ±22μm at 3σ — within spec for 0.5mm pitch but pushing the limit for ultra-fine pitch parts, where self-alignment during reflow becomes the margin of safety.</li>
+    </ul>
+
+    <img class="article-img" src="../generated/blog-bga-xray-void.webp" alt="X-ray image revealing BGA solder joint voids beneath package" loading="lazy" style="max-width:80%">
+
+    <h2>Reflow Profiling — The Single Biggest Lever on BGA Yield</h2>
+
+    <p>If there is one process parameter that separates high-yield BGA lines from average ones, it's the reflow profile. A generic lead-free profile might produce acceptable results on chip resistors and SOIC packages while generating 2-3% BGA defect rates that go undetected until functional test — or worse, until field failures.</p>
+
+    <div class="step-block">
+      <div class="step-num">Zone 1</div>
+      <h3>Preheat (25°C → 150°C, 1.5–2.5°C/sec ramp)</h3>
+      <p>The preheat ramp rate is bounded on both sides. Too slow (<1.0°C/sec) and the flux activates prematurely, consuming its cleaning capacity before the solder reaches liquidus. Too fast (>3.0°C/sec) and thermal shock can delaminate moisture-sensitive packages — especially larger BGAs where the package body and silicon die expand at different rates. Our standard ramp is 2.0°C/sec, measured at the center of the largest BGA on the board via a thermocouple embedded in a sacrificial assembly.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Zone 2</div>
+      <h3>Soak (150°C → 180°C, 60–90 seconds)</h3>
+      <p>The soak zone equalizes temperature across the board. Without adequate soak, the BGA's thermal mass — significantly higher than surrounding passives — creates a temperature gradient where the BGA center runs 8–15°C cooler than board edges. Our ovens maintain a ΔT ≤2°C across the entire assembly during soak, achieved through 10-zone convection control and board-specific profile development for every new product.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Zone 3</div>
+      <h3>Reflow (Above 217°C, 60–75 seconds for SAC305)</h3>
+      <p>Time above liquidus (TAL) is the most tightly controlled parameter. SAC305 solder (Sn96.5/Ag3.0/Cu0.5) requires 60–75 seconds above 217°C. Below 50 seconds, incomplete intermetallic formation produces mechanically weak joints. Above 90 seconds, excessive IMC growth at the ball-pad interface creates a brittle failure point. Peak temperature targets 240–245°C — hot enough for reliable wetting on large thermal-mass BGAs, but below the 250°C threshold where moisture sensitivity level (MSL) damage becomes a real risk for improperly stored components.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Zone 4</div>
+      <h3>Cooling (245°C → 100°C, 2–4°C/sec)</h3>
+      <p>Controlled cooling prevents two failure modes: too fast (>6°C/sec) and the solder joint freezes with residual stress that accelerates thermal fatigue; too slow (<1°C/sec) and the joint stays in the crystallization zone long enough for large, brittle intermetallic grains to form. Our target cooling rate is 3°C/sec, producing a fine-grain solder structure with optimal mechanical properties.</p>
+    </div>
+
+    <img class="article-img" src="../generated/blog-bga-reflow-oven.webp" alt="10-zone reflow oven with BGA assembly passing through heating zones" loading="lazy" style="max-width:85%">
+
+    <h2>X-Ray Inspection — Your Only Window Under the Package</h2>
+
+    <p>AOI cameras see the BGA package edge and surrounding components — they cannot see the 400+ solder joints underneath. X-ray is the only non-destructive method that reveals what's happening beneath the package body. And within X-ray inspection, there are two fundamentally different modes:</p>
+
+    <div class="step-block">
+      <div class="step-num">2D</div>
+      <h3>Transmission X-Ray — Fast, automated, good for void detection</h3>
+      <p>2D X-ray shoots straight down through the board and package, producing a top-down image where solder joints appear as dark circles (solder absorbs more X-rays than the surrounding PCB laminate). Automated void analysis software measures the void area as a percentage of total joint area. IPC-A-610 Class 3 allows a maximum 15% void area per joint; our internal standard is 10% after extensive reliability testing showed a correlation between 10–15% voiding and a 3× increase in thermal cycling failure rate for 0.5mm pitch and below.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">3D</div>
+      <h3>CT X-Ray — Slower, higher resolution, catches what 2D misses</h3>
+      <p>Computed tomography X-ray reconstructs a 3D volume of the entire BGA solder array from multiple angled projections. This is the only way to detect head-in-pillow defects — where the solder paste wets the pad and the solder ball collapses, but the two never fully merge. In a 2D top-down X-ray, a head-in-pillow joint looks structurally normal (the combined solder mass is there). In CT, the interface gap is clearly visible. For any design going to Class 3 acceptance or high-reliability applications, CT X-ray is not optional — it's the difference between shipping a board that passes test and shipping a board that survives 1,000 thermal cycles without intermittent opens.</p>
+    </div>
+
+    <h2>Five BGA Defects That Kill Production Yield</h2>
+
+    <p>After analyzing defect data across tens of thousands of BGA assemblies, these five defect categories account for over 90% of all BGA-related failures:</p>
+
+    <div class="step-block">
+      <div class="step-num">1</div>
+      <h3>Voiding — Acceptable levels depend on void location, not just size</h3>
+      <p>A 15% void at the center of a joint is mechanically benign. A 10% void at the ball-pad interface is a reliability risk because it reduces the effective load-bearing area at the intermetallic layer — the weakest point of any solder joint. Our void analysis software measures both total void percentage and interface proximity, flagging joints where any void touches the pad surface regardless of total void area. For critical BGA positions (corner balls, which experience the highest thermomechanical stress), we apply a 5% void limit at the interface level.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">2</div>
+      <h3>Head-in-Pillow (HiP) — The defect that passes electrical test</h3>
+      <p>HiP occurs when the solder paste and BGA ball both reach liquidus but fail to fully coalesce — leaving a microscopic gap or weak interface that maintains electrical contact at room temperature. The board passes ICT and functional test, ships to the customer, and fails after 6–12 months of thermal cycling in the field. Root cause is almost always a thermal gradient across the BGA during reflow, where the package body absorbs heat faster than the PCB pad, creating a temperature differential during the critical 10–15 seconds after liquidus. Our 10-zone ovens with nitrogen atmosphere (O₂ <100ppm) eliminate the oxidation that exacerbates HiP, and CT X-ray sampling on every batch catches the defect before it leaves the factory.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">3</div>
+      <h3>Bridging — Excess solder creates shorts between adjacent balls</h3>
+      <p>For 0.5mm pitch BGA with 0.3mm ball diameter, adjacent ball centers are only 0.5mm apart. Excess solder paste volume — from an over-etched stencil aperture, too-thick stencil, or insufficient aperture area ratio — can cause solder to bridge between balls during reflow. The paste volume sweet spot is typically 80–100% of the theoretical joint volume calculated from ball diameter, pad diameter, and expected standoff height. We determine the optimal stencil design for each BGA footprint using solder joint simulation software before cutting the stencil, not by trial and error on the production line.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">4</div>
+      <h3>Popcorning — Moisture absorption destroys the package during reflow</h3>
+      <p>Moisture absorbed by the epoxy mold compound turns to steam at reflow temperatures (220°C+), generating internal pressures that delaminate the die attach, crack the mold compound, or — in severe cases — visibly bulge the package top. Every BGA has an MSL rating (typically MSL 3 for standard packages, MSL 4–5 for larger devices). MSL 3 parts must be assembled within 168 hours of opening the moisture barrier bag, or baked at 125°C for 24 hours before use. Our component storage system tracks MSL exposure time per reel — parts that exceed their floor life are automatically flagged and quarantined until baked.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">5</div>
+      <h3>Pad Cratering — A design problem that looks like an assembly defect</h3>
+      <p>When a BGA joint fails by lifting the copper pad off the PCB laminate (leaving a crater), it's easy to blame the assembly process. In reality, pad cratering is almost always a <a href="/blog/pcb-materials-guide.html">PCB material</a> and design issue — specifically, resin-rich areas under BGA pads in High-Tg FR-4 that lack the mechanical strength to withstand the CTE mismatch between the silicon die (~3 ppm/°C) and the PCB laminate (~14–16 ppm/°C). The fix is material selection (low-CTE laminates for large BGAs), optimized pad stack design, and — for packages above 35mm — underfill to distribute the stress across the entire interface rather than concentrating it at corner balls.</p>
+    </div>
+
+    <img class="article-img" src="../generated/blog-bga-defect-types.webp" alt="Four BGA solder balls on dark surface showing different defect types under macro lens" loading="lazy" style="max-width:85%">
+
+    <h2>Design Rules That Prevent BGA Assembly Problems Before They Start</h2>
+
+    <p>The most expensive BGA assembly problems are the ones that could have been prevented at the design stage. Our DFM team reviews every BGA design against these rules before production begins — catching issues that CAD DRC rules often miss:</p>
+
+    <div class="step-block">
+      <div class="step-num">Rule 1</div>
+      <h3>Non-solder mask defined (NSMD) pads for pitches ≤0.8mm</h3>
+      <p>Solder mask defined (SMD) pads — where the mask opening is smaller than the copper pad — create a stress concentration point at the mask-pad interface. For BGA pitches of 0.8mm and below, always use NSMD pads where the copper pad is smaller than the mask opening. The entire copper surface becomes the solderable area, and the lack of mask encroachment eliminates the most common pad cratering initiation point. For a 0.5mm pitch BGA, a typical NSMD pad is 0.25mm diameter with a 0.35mm mask opening, creating a 0.05mm clearance ring.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Rule 2</div>
+      <h3>Via-in-pad must be filled and capped — no exceptions</h3>
+      <p>An open via in a BGA pad wicks solder away from the joint during reflow, producing a starved joint with unpredictable voiding and reduced mechanical strength. Via-in-pad designs must use conductive fill (copper-filled) or non-conductive fill (epoxy) with a plated cap to create a flat, non-wicking surface. The cap plating thickness should be ≥15μm over the via — specified in the fabrication drawing, not left to the manufacturer's default. For <a href="/blog/hdi-technology.html">HDI designs</a> with microvias, the stacked via structure must be fully filled and planarized before the BGA pad is defined on the outer layer.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Rule 3</div>
+      <h3>Solder mask dam width ≥0.1mm between BGA pads</h3>
+      <p>For 0.5mm pitch BGA with 0.25mm NSMD pads and 0.35mm mask openings, the solder mask dam — the strip of mask material between adjacent pad openings — is only 0.15mm wide. Below 0.1mm, the dam becomes unreliable during mask application, and adjacent mask openings merge — exposing bare laminate between pads and creating a bridging risk. If your design requires a dam below 0.1mm, switch to a solder mask material with higher resolution capability (typically a laser-direct imaging or LDI-compatible mask) and specify the requirement in your <a href="/blog/dfm-tips.html">DFM documentation</a>.</p>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num">Rule 4</div>
+      <h3>Copper balancing on internal layers under BGA footprints</h3>
+      <p>Uneven copper distribution on internal layers under a BGA creates asymmetric heating during reflow — copper-heavy areas act as heat sinks, while resin-rich areas heat faster. The result is the thermal gradient that causes head-in-pillow and uneven collapse heights. Each internal layer under the BGA footprint should have copper coverage within ±20% of the average across the footprint area. This is checked during our <a href="/blog/impedance-control.html">stackup review</a>, where we model the thermal profile based on the actual copper distribution — not the idealized uniform distribution assumed by standard reflow simulation tools.</p>
+    </div>
+
+    <h2>How Huaxing PCBA Ensures BGA Assembly Quality</h2>
+
+    <p>BGA assembly capability isn't just about having the right equipment — it's about having the right process controls and the discipline to enforce them on every single board. Here is how our BGA line operates:</p>
+
+    <ol>
+      <li><strong>Incoming inspection (30 minutes):</strong> Every BGA reel is verified against the BOM — package code, ball count, pitch, and MSL rating. MSL floor-life tracking begins immediately upon moisture barrier bag opening. Parts approaching floor-life expiry trigger an automatic bake cycle — no manual override, no "probably fine this time."</li>
+      <li><strong>Stencil design review (per product):</strong> For every new BGA design, our process engineers run solder joint simulation software to determine the optimal stencil aperture geometry. The output is not a guess — it's a data-backed aperture design with specific area ratio targets for each BGA package on the board. For designs with mixed-pitch BGAs (e.g., 1.0mm and 0.5mm on the same board), we use stepped stencils — thicker in the coarse-pitch area for adequate paste volume, thinner in the fine-pitch area to prevent bridging.</li>
+      <li><strong>Reflow profile development (per product):</strong> A sacrificial assembly with thermocouples at the center and corner balls of every BGA type on the board runs through the oven. The profile is adjusted until all BGA joints reach 235–245°C peak with ΔT ≤2°C across the entire BGA array. This profile is locked to the product and recalled automatically when the product runs again — no generic profiles, no "close enough." The full process is part of our comprehensive <a href="/blog/pcb-assembly-process.html">PCB assembly workflow</a> from stencil printing through functional testing.</li>
+      <li><strong>100% 2D X-ray with automated void analysis:</strong> Every board passes through inline X-ray. Void detection software flags any joint exceeding the IPC Class 3 threshold of 15% void area. For products specified to our internal 10% standard, the threshold is lowered accordingly. Flagged joints are reviewed by a technician — not blindly accepted by the algorithm. A <a href="/blog/pcb-testing-methods.html">full suite of test methods</a> — including AOI, SPI, ICT, and functional test — provide multiple layers of verification beyond X-ray alone.</li>
+      <li><strong>CT X-ray sampling (5% for standard products, 100% for Class 3):</strong> CT X-ray catches what 2D misses — primarily head-in-pillow defects and voids at the ball-pad interface. For Class 3 assemblies per <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 3 acceptance criteria</a>, CT X-ray coverage is 100% — every BGA on every board receives a full 3D reconstruction. For commercial-grade products, 5% sampling with tightened limits (any HiP detection triggers 100% inspection of that batch) provides an effective quality gate without the throughput penalty of full CT.</li>
+    </ol>
+
+    <div class="highlight-box">
+      <p><strong>Process capability data (Q2 2026):</strong> Across all BGA assemblies — 0.3mm to 1.27mm pitch, 9-ball to 1,936-ball packages — our first-pass yield is <strong>99.2%</strong>, with a defect escape rate (boards passing test that later exhibit BGA-related field failures) of <strong><0.03%</strong> over a 12-month rolling window. For 0.5mm pitch and below specifically, first-pass yield is 98.7% — the difference driven almost entirely by the reduced self-alignment margin at ultra-fine pitches. Our ongoing investment in placement accuracy and nitrogen reflow is targeting 99.0% for fine-pitch BGAs by Q4 2026.</p>
+    </div>
+
+    <p>The bottom line on BGA assembly: the process is well understood, the equipment is available, and the defect mechanisms are documented. The difference between a 95% yield line and a 99.2% yield line is not technology — it's the discipline to profile every product, X-ray every board, and enforce design rules at the DFM stage when changes are cheap. If you're preparing a BGA design for production, send us your files for a free DFM review. We'll tell you exactly what needs attention before you commit to tooling — and we'll back it up with process data, not opinions.</p>
+
+  </article>
+</main>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2>Ready to Start Your Next Project?</h2>
+      <p>Send us your Gerber files and BOM. We'll respond with a quote within 24 hours — free of charge, no commitment.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>
