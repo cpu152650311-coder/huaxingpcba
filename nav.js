@@ -110,7 +110,7 @@
         'position:fixed;top:0;left:0;right:0;bottom:0;' +
         'background:#08080b;' +
         'padding:calc(72px + 24px) 16px 16px;' +
-        'gap:0;z-index:100;overflow-y:auto' +
+        'gap:0;z-index:200;overflow-y:auto' +
       '}' +
       '.nav-links a,.nav-dropdown-trigger{' +
         'padding:13px 0;border-bottom:1px solid #252530;font-size:16px;color:#e8e8ec' +
