@@ -1,306 +1,306 @@
-     1|<!DOCTYPE html>
-     2|<html lang="en">
-     3|<head>
-     4|<meta charset="UTF-8">
-     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-     6|<title>Metal Core PCB (MCPCB) Manufacturing — Aluminum &amp; Copper Core Thermal Management Guide | Huaxing PCBA</title>
-     7|<meta name="description" content="Complete guide to metal core PCB (MCPCB) manufacturing: aluminum vs copper core selection, thermal conductivity benchmarks (1-8 W/m·K), Bergquist and Laird dielectric options, surface finish compatibility, and cost optimization for LED lighting, power supplies, and automotive power modules. Real data from an IATF 16949-certified Shenzhen manufacturer.">
-     8|<meta property="og:title" content="Metal Core PCB (MCPCB) Manufacturing — Aluminum &amp; Copper Core Thermal Management Guide">
-     9|<meta property="og:description" content="When FR-4 can't handle the heat, metal core PCBs are the answer. This guide breaks down thermal conductivity limits, dielectric material choices, and how to avoid the five most expensive MCPCB design mistakes. Real production data from a facility running 8 SMT lines.">
-    10|<meta property="og:type" content="article">
-    11|<meta property="og:url" content="https://huaxingpcba.com/blog/metal-core-pcb.html">
-    12|<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-metal-core.webp">
-    13|<link rel="canonical" href="https://huaxingpcba.com/blog/metal-core-pcb.html">
-    14|<link rel="stylesheet" href="../design-tokens.css?v=20">
-    15|<link rel="icon" type="image/x-icon" href="/favicon.ico">
-    16|<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    17|<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-    18|<link rel="stylesheet" href="../blog.css?v=1">
-    19|
-    20|</head>
-    21|<body>
-    22|
-    23|<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
-    24|  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-    25|  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
-    26|</svg>
-    27|
-    28|<header class="site-header" id="header">
-    29|  <div class="container">
-    30|    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    31|    <nav class="nav-links" id="navLinks">
-    32|    </nav>
-    33|    <script src="/nav.js?v=13"></script>
-    34|    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
-    35|      <span></span><span></span><span></span>
-    36|    </div>
-    37|  </div>
-    38|</header>
-    39|
-    40|<section class="sub-hero">
-    41|  <div class="sub-hero-bg">
-    42|    <img src="../generated/blog-cover-metal-core.webp" alt="" loading="eager">
-    43|  </div>
-    44|  <div class="sub-hero-overlay"></div>
-    45|  <div class="sub-hero-content">
-    46|    <div class="container">
-    47|      <p class="section-label reveal">Technical Guide</p>
-    48|      <h1 class="reveal">Metal Core PCB (MCPCB) Manufacturing:<br><em>Aluminum &amp; Copper Core Thermal Management Guide</em></h1>
-    49|      <p class="reveal">A procurement engineer's complete guide to metal core PCBs — from material selection (aluminum vs. copper, thermal conductivity 1–8 W/m·K) and dielectric options (Bergquist HT-07006, Laird T-lam) to surface finish compatibility, cost drivers, and the five most expensive design mistakes that field returns expose. Built with production data from an IATF 16949-certified Shenzhen facility.</p>
-    50|    </div>
-    51|  </div>
-    52|</section>
-    53|
-    54|<article class="article reveal">
-    55|  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Metal Core PCB (MCPCB)</span></div>
-    56|
-    57|  <p>A standard FR-4 PCB dissipates heat at roughly 0.3–0.4 W/m·K through the laminate. When you bolt a 50W COB LED array to that board, the junction temperature climbs past 120°C within minutes and the LED's lumen output drops by 15–30% while its lifetime shrinks from a rated 50,000 hours to 8,000. A metal core PCB (MCPCB) with aluminum substrate and a 2.2 W/m·K dielectric — the most basic MCPCB configuration — keeps that same LED junction at 85°C, delivering full lumen output and full lifetime. The physics is simple: replace a thermal insulator (FR-4, 0.3 W/m·K) with a thermal conductor (aluminum, 150–200 W/m·K) and put the thinnest possible dielectric layer between the copper circuit and the metal base.</p>
-    58|
-    59|  <p>This guide breaks down MCPCB material selection, dielectric options, thermal design tradeoffs, surface finish compatibility, and cost optimization — with real thermal conductivity benchmarks and production data from a facility that manufactures <a href="/blog/pcb-materials-guide.html">aluminum, copper-core, and ceramic-filled PCBs</a> alongside standard FR-4 and high-frequency laminates.</p>
-    60|
-    61|  <div class="highlight-box">
-    62|    <p><strong>Quick decision matrix:</strong> If your component dissipates <3W, use FR-4 with thermal vias (cheapest). If 3–15W, use single-layer aluminum MCPCB (sweet spot). If 15–50W, use copper-core MCPCB or aluminum with high-performance dielectric. If >50W, use <a href="/blog/heavy-copper-pcb.html">heavy copper (4–6oz)</a> on aluminum core or consider direct-bond copper (DBC) ceramic substrate. The cost jumps at each threshold: FR-4 ≈ $1–2/board, aluminum MCPCB ≈ $3–8, copper-core ≈ $8–18, DBC ceramic ≈ $25–60.</p>
-    63|  </div>
-    64|
-    65|  <img class="article-img" src="../generated/blog-mcpcb-structure.webp" alt="" loading="lazy">
-    66|
-    67|  <h2>MCPCB Layer Structure — What's Between Your Copper and the Metal</h2>
-    68|
-    69|  <p>A metal core PCB has three layers, not the two that most diagrams show:</p>
-    70|
-    71|  <ol>
-    72|    <li><strong>Circuit layer:</strong> Copper foil, typically 1oz (35μm) for LED and general power applications, 2–4oz (70–140μm) for high-current power conversion or <a href="/blog/heavy-copper-pcb.html">heavy copper designs</a>. Etched and plated using the same photolithographic process as FR-4.</li>
-    73|    <li><strong>Dielectric layer:</strong> The thermal interface material — a thin (75–150μm), electrically insulating but thermally conductive polymer-ceramic composite that bonds the copper circuit to the metal base. This is the most important layer in an MCPCB because it sets the thermal resistance between your component and the heatsink. Dielectric thermal conductivity ranges from 1.0 W/m·K (entry-level) to 8.0 W/m·K (premium, ceramic-filled).</li>
-    74|    <li><strong>Metal base:</strong> Aluminum (1.0–3.2mm thick, 5052 or 6061 alloy, thermal conductivity 150–200 W/m·K) or copper (1.0–2.0mm, thermal conductivity 390 W/m·K). The base acts as both a heat spreader and a mechanical substrate.</li>
-    75|  </ol>
-    76|
-    77|  <p>The total thermal resistance from component junction to heatsink is the sum of: junction-to-case resistance (component datasheet), TIM (thermal interface material between package and PCB), copper layer (negligible — 1oz copper, 35μm, 390 W/m·K gives <0.0001 K/W), dielectric layer (the bottleneck), and metal base. The dielectric dominates: a 100μm layer with 2.2 W/m·K thermal conductivity and 100mm² contact area gives 0.45 K/W — meaning a 20W component produces a 9°C temperature drop across the dielectric alone. Double the thermal conductivity or halve the dielectric thickness, and that drop halves.</p>
-    78|
-    79|  <h2>Aluminum vs. Copper Core — The Tradeoff Is Cost, Not Performance</h2>
-    80|
-    81|  <p>Copper-core MCPCBs are sometimes positioned as "premium" while aluminum-core is "standard." This framing is wrong. The choice depends on two factors: total thermal load and CTE matching requirements.</p>
-    82|
-    83|  <table class="spec-table">
-    84|    <tr><th>Property</th><th>Aluminum (5052/6061)</th><th>Copper</th></tr>
-    85|    <tr><td>Thermal conductivity</td><td>150–200 W/m·K</td><td>390 W/m·K</td></tr>
-    86|    <tr><td>CTE (ppm/°C)</td><td>23–24</td><td>17</td></tr>
-    87|    <tr><td>Density</td><td>2.7 g/cm³</td><td>8.9 g/cm³</td></tr>
-    88|    <tr><td>Typical thickness range</td><td>0.8–3.2mm</td><td>0.5–2.0mm</td></tr>
-    89|    <tr><td>Cost multiplier (vs 1.6mm Al)</td><td>1× (baseline)</td><td>2.5–4×</td></tr>
-    90|    <tr><td>Best application</td><td>LED lighting, power supplies ≤30W/device, general thermal</td><td>IGBT modules, power converters >30W, tight CTE matching to ceramic packages</td></tr>
-    91|  </table>
-    92|
-    93|  <p>Copper's 2× thermal conductivity advantage over aluminum often does not translate to 2× better system performance. For a 100×100mm MCPCB with a single 15W heat source, switching from 1.6mm aluminum to 1.6mm copper reduces the temperature rise across the base from ~0.5°C to ~0.25°C — a 0.25°C improvement that costs 3× more. The metal base is rarely the bottleneck; the dielectric is. Upgrade the dielectric from 2.2 to 5.0 W/m·K and you save 6°C for the same board, at roughly a 20% cost adder rather than 300%.</p>
-    94|
-    95|  <p>Copper core is justified in three specific cases: (1) when the metal base is also a current-carrying conductor (direct-bond copper eliminates the PCB entirely); (2) when thermal loads exceed 50W per device; (3) when CTE matching between the PCB and a ceramic-packaged power semiconductor (AlN, Al₂O₃) is required — copper at 17 ppm/°C matches ceramic CTE far better than aluminum at 24 ppm/°C, reducing solder joint fatigue in thermal cycling.</p>
-    96|
-    97|  <img class="article-img" src="../generated/blog-mcpcb-thermal.webp" alt="" loading="lazy">
-    98|
-    99|  <h2>Dielectric Material Selection — Bergquist, Laird, and the Generic Alternatives</h2>
-   100|
-   101|  <p>The dielectric layer is the MCPCB component that procurement engineers should specify, not assume. "Thermal conductive dielectric" on a drawing without a brand name and thermal conductivity spec will get you the cheapest generic material the supplier stocks — typically 0.8–1.5 W/m·K, which performs like FR-4 with a metal backing (defeating the purpose).</p>
-   102|
-   103|  <table class="spec-table">
-   104|    <tr><th>Dielectric System</th><th>Thermal Conductivity (W/m·K)</th><th>Dielectric Strength (kV)</th><th>Typical Thickness (μm)</th><th>Cost Tier</th></tr>
-   105|    <tr><td>Generic epoxy (no-fill)</td><td>0.8–1.5</td><td>2.0–3.0</td><td>100–150</td><td>$ (baseline)</td></tr>
-   106|    <tr><td>Bergquist HT-07006</td><td>2.2</td><td>6.0</td><td>150</td><td>$$</td></tr>
-   107|    <tr><td>Laird T-lam 1KA</td><td>3.0</td><td>4.5</td><td>100</td><td>$$</td></tr>
-   108|    <tr><td>Bergquist HPL-03015</td><td>3.0</td><td>3.0</td><td>150</td><td>$$</td></tr>
-   109|    <tr><td>Laird T-lam SS LLD</td><td>5.0</td><td>2.5</td><td>100–150</td><td>$$$</td></tr>
-   110|    <tr><td>Ceramic-filled premium</td><td>7.0–8.0</td><td>1.5–2.5</td><td>75–100</td><td>$$$$</td></tr>
-   111|  </table>
-   112|
-   113|  <p>The dielectric strength column matters for power applications: a 48V LED driver requires at least 0.5kV withstand; a 400V PFC stage needs 3.0kV+. The thinner the dielectric (better thermal performance), the lower the withstand voltage — there is a direct tradeoff. For 400V+ applications, specify minimum 100μm dielectric thickness and 3.0kV dielectric strength, which pushes you to Bergquist HT-07006 or equivalent at minimum. Do not accept "generic" for high-voltage MCPCBs.</p>
-   114|
-   115|  <h2>Single-Layer, Double-Layer, and Hybrid MCPCB — What Each Architecture Solves</h2>
-   116|
-   117|  <p>MCPCBs are available in three architectures, and the cost curve between them is steep:</p>
-   118|
-   119|  <h3>Single-Layer MCPCB — 80% of Applications</h3>
-   120|  <p>One copper circuit layer on top of one dielectric layer on top of the metal base. No vias (you cannot drill through a metal core with standard PCB processes). All components are surface-mount on one side. This is the standard for LED lighting, COB arrays, and simple power modules. Cost: $3–8 for a 100×100mm board at 100-unit quantity. The limitation is routing density — with only one layer and no vias, you cannot cross traces. All routing must be single-layer planar, which gets tight above ~50 components.</p>
-   121|
-   122|  <h3>Double-Layer MCPCB — When You Need Routing Density</h3>
-   123|  <p>Two copper circuit layers separated by a second dielectric layer, with plated through-holes connecting them. The through-holes must be isolated from the metal base — this is done by pre-drilling the base to create clearance holes, filling them with insulating resin, then drilling smaller holes through the resin plugs (a process called "resin plug via"). Cost: 1.5–2.5× single-layer. Use when you need component placement on both sides, or when single-layer routing is physically impossible.</p>
-   124|
-   125|  <h3>Hybrid MCPCB — Thermal Where You Need It, FR-4 Everywhere Else</h3>
-   126|  <p>A hybrid board embeds an aluminum or copper coin into an otherwise standard FR-4 multilayer PCB. The coin sits directly under the high-power component while the surrounding area uses standard FR-4 with normal via architecture and routing density. This is the cost-optimal solution when only one or two components on a complex digital board need thermal management. The coin is press-fit or bonded into a cavity milled in the FR-4 stackup. Cost: 1.8–3× the equivalent FR-4 board, but far cheaper than making the entire board MCPCB.</p>
-   127|
-   128|  <img class="article-img" src="../generated/blog-mcpcb-types.webp" alt="" loading="lazy">
-   129|
-   130|  <h2>Surface Finish Compatibility — What Works on MCPCB and What Doesn't</h2>
-   131|
-   132|  <p>The metal base of an MCPCB creates surface finish constraints that FR-4 designers never think about. HASL (hot air solder leveling) — the cheapest and most common FR-4 finish — is problematic on MCPCBs because the aluminum or copper base acts as a massive heat sink during the solder dip. The board surface cools faster than the solder can level, producing uneven pad surfaces with thickness variations of 25–75μm. This is unacceptable for fine-pitch LEDs (0.5mm pitch CSP LEDs are common in modern lighting) and any BGA/QFN device.</p>
-   133|
-   134|  <p>Compatible finishes for MCPCB, ranked by recommendation:</p>
-   135|
-   136|  <table class="spec-table">
-   137|    <tr><th>Finish</th><th>MCPCB Compatibility</th><th>Flatness</th><th>Cost</th><th>Best For</th></tr>
-   138|    <tr><td>ENIG (IPC-4552)</td><td>Excellent</td><td>2–5μm variation</td><td>$$</td><td>Fine-pitch LED, all BGA/QFN, general purpose. See <a href="/blog/enig-vs-hasl.html">ENIG vs HASL comparison</a>.</td></tr>
-   139|    <tr><td>OSP (Organic Solderability Preservative)</td><td>Good</td><td><1μm variation</td><td>$</td><td>Cost-sensitive LED boards with 1.0mm+ pitch. Limited shelf life (6 months sealed).</td></tr>
-   140|    <tr><td>Immersion Silver</td><td>Good</td><td>1–3μm variation</td><td>$$</td><td>RF/microwave LED drivers, aluminum wire bonding.</td></tr>
-   141|    <tr><td>Immersion Tin</td><td>Adequate</td><td>2–5μm variation</td><td>$$</td><td>Press-fit connectors on power modules.</td></tr>
-   142|    <tr><td>HASL (leaded/lead-free)</td><td>Poor — avoid</td><td>25–75μm variation</td><td>$</td><td>Acceptable only for through-hole-only MCPCBs with 2.54mm+ pitch (rare).</td></tr>
-   143|  </table>
-   144|
-   145|  <h2>SMT Assembly on MCPCB — Why Your Reflow Profile Needs Adjustment</h2>
-   146|
-   147|  <p>The metal base that makes MCPCBs thermally effective also makes them thermally difficult to assemble. During reflow soldering, the aluminum or copper core absorbs heat from the oven, delaying the time it takes for the board surface to reach the solder melting temperature. A standard lead-free reflow profile with 60–90 seconds above 217°C on FR-4 becomes 120–150 seconds on a 1.6mm aluminum-core MCPCB — enough to damage temperature-sensitive LEDs and plastic-packaged ICs.</p>
-   148|
-   149|  <p>Three assembly adjustments for MCPCB success:</p>
-   150|
-   151|  <div class="checklist-item">
-   152|    <div class="checklist-num">1</div>
-   153|    <div class="checklist-content">
-   154|      <h4>Extend preheat soak, not peak temperature</h4>
-   155|      <p>Instead of ramping to peak faster (which overheats the board surface while the core is still cold), extend the 150–180°C preheat soak by 30–60 seconds. This lets the metal core reach temperature equilibrium with the surface before the reflow zone. Peak temperature remains the same (235–245°C for SAC305 lead-free); only the soak duration changes.</p>
-   156|    </div>
-   157|  </div>
-   158|
-   159|  <div class="checklist-item">
-   160|    <div class="checklist-num">2</div>
-   161|    <div class="checklist-content">
-   162|      <h4>Verify thermocouple placement — one on the MCPCB, one on FR-4 control</h4>
-   163|      <p>When MCPCBs run on the same <a href="/blog/pcb-assembly-process.html">SMT assembly line</a> as FR-4 boards, profile the MCPCB separately with a thermocouple attached directly to the metal core edge and another on the component pad surface. The core-to-surface delta should be <8°C at peak; if it's higher, extend the soak further. Do not trust the FR-4 profile for MCPCB.</p>
-   164|    </div>
-   165|  </div>
-   166|
-   167|  <div class="checklist-item">
-   168|    <div class="checklist-num">3</div>
-   169|    <div class="checklist-content">
-   170|      <h4>Reduce cooling rate — no forced-air cooling on MCPCB</h4>
-   171|      <p>Forced-air cooling in the reflow oven exit zone can cool the metal core unevenly (edges faster than center), creating thermal-mechanical stress at the dielectric-copper interface. Let MCPCBs cool naturally to below 100°C before handling. This adds 45–60 seconds to cycle time but prevents latent dielectric delamination that field thermal cycling will expose.</p>
-   172|    </div>
-   173|  </div>
-   174|
-   175|  <h2>LED-Specific MCPCB Design — Lumen Maintenance and Thermal Budgets</h2>
-   176|
-   177|  <p>LED applications dominate MCPCB volume (estimated 60–70% of all MCPCB production), and the procurement economics are different from power electronics. LED boards are cost-sensitive ($2–6/board at volume), reliability-sensitive (warrantied for 25,000–50,000 hours), and thermally predictable (steady-state dissipation, not pulsed). The key procurement insight: the cost of upgrading from 1.5 W/m·K dielectric to 3.0 W/m·K is roughly $0.30–0.80 per board, but it extends LED lifetime by 15,000–25,000 hours — reducing warranty return exposure by roughly $3–6 per fixture. The dielectric upgrade pays for itself 5–10× over in warranty cost avoidance.</p>
-   178|
-   179|  <p>For LED MCPCBs, specify these minimum parameters:</p>
-   180|  <ul>
-   181|    <li>Dielectric thermal conductivity: ≥2.2 W/m·K (Bergquist HT-07006 equivalent)</li>
-   182|    <li>Dielectric thickness: ≤150μm (thinner = lower thermal resistance, but check dielectric strength for your operating voltage)</li>
-   183|    <li>Aluminum base thickness: 1.6mm minimum (provides adequate heat spreading; 1.0mm is too flexible and causes solder joint stress on large boards)</li>
-   184|    <li>Surface finish: ENIG for CSP/small-footprint LEDs, OSP acceptable for 2835/3030/5050 packages with ≥1.5mm pad pitch</li>
-   185|    <li>White solder mask: standard for LED to maximize light reflectance (typical LED solder mask reflectance: 85–90% at 450–700nm). Specify "LED white" not "standard white" — the TiO₂ loading differs.</li>
-   186|  </ul>
-   187|
-   188|  <h2>Cost Optimization — Where MCPCB Money Goes and How to Reduce It</h2>
-   189|
-   190|  <p>MCPCB cost breaks down differently than FR-4. On a standard FR-4 4-layer board, the laminate is ~8% of board cost and drilling/plating is ~25%. On an MCPCB, the metal base + dielectric is 35–50% of board cost and the single-layer etching is only ~10%. The cost levers are different:</p>
-   191|
-   192|  <table class="spec-table">
-   193|    <tr><th>Cost Driver</th><th>FR-4 Impact</th><th>MCPCB Impact</th><th>Optimization</th></tr>
-   194|    <tr><td>Board area</td><td>Moderate (raw material)</td><td>High — metal base cost scales with area</td><td>Panelize tightly; no decorative borders. See <a href="/blog/pcb-cost-factors.html">PCB cost optimization guide</a>.</td></tr>
-   195|    <tr><td>Dielectric grade</td><td>N/A</td><td>Very high — $0.5→$1→$3→$8 W/m·K steps</td><td>Spec the minimum thermal conductivity that meets your thermal budget; don't over-spec "premium" dielectric.</td></tr>
-   196|    <tr><td>Metal base thickness</td><td>N/A</td><td>Moderate — 1.0→1.6→2.0→3.2mm</td><td>1.6mm is the volume sweet spot. 3.2mm doubles metal cost with diminishing thermal returns.</td></tr>
-   197|    <tr><td>Copper weight</td><td>Moderate</td><td>Low — only 1 layer</td><td>1oz is sufficient for most LED; 2oz for >5A trace current.</td></tr>
-   198|    <tr><td>Surface finish</td><td>Low</td><td>Moderate — ENIG at $3–6/ft²</td><td>OSP for cost-sensitive LED; ENIG only when pad pitch requires it.</td></tr>
-   199|    <tr><td>V-scoring/routing</td><td>Low</td><td>Low — single-layer cuts easily</td><td>Aluminum routes faster than FR-4. Panel utilization is the bigger lever.</td></tr>
-   200|  </table>
-   201|
-   202|  <p>The single biggest MCPCB cost mistake: specifying a copper-core board when aluminum with a one-tier-higher dielectric would deliver the same thermal performance at half the cost. Always run the numbers before defaulting to copper.</p>
-   203|
-   204|  <h2>DFM Rules for MCPCB — The Five Most Expensive Mistakes</h2>
-   205|
-   206|  <p>Metal core PCBs have different DFM rules than FR-4, and getting them wrong produces scrap, not reworkable defects. Once the dielectric is laminated to the metal base, there is no rework — a short circuit or delamination means the entire board is scrap, because you cannot separate the layers without destroying the dielectric.</p>
-   207|
-   208|  <div class="checklist-item">
-   209|    <div class="checklist-num">1</div>
-   210|    <div class="checklist-content">
-   211|      <h4>Insufficient copper-to-edge clearance on the metal base</h4>
-   212|      <p>The exposed aluminum/copper edge of an MCPCB is electrically conductive. If a copper trace runs within 0.5mm of the board edge, and the edge is not insulated (most MCPCBs are not edge-plated), there is a short-circuit path through the metal base. Minimum copper-to-edge clearance: 0.8mm for aluminum, 1.2mm for copper-core. This is larger than the 0.3–0.5mm standard for FR-4. Refer to <a href="/blog/dfm-tips.html">DFM guidelines</a> for detailed clearance rules.</p>
-   213|    </div>
-   214|  </div>
-   215|
-   216|  <div class="checklist-item">
-   217|    <div class="checklist-num">2</div>
-   218|    <div class="checklist-content">
-   219|      <h4>Vias through the metal base — impossible on standard MCPCB</h4>
-   220|      <p>Standard single-layer MCPCBs have no vias. Period. You cannot drill through a solid aluminum plate with a PCB drill. If your design requires vias, you need either a double-layer MCPCB (with resin-plugged base clearances) or a hybrid FR-4/MCPCB approach. Designs that place vias on an MCPCB layer will be rejected by the manufacturer.</p>
-   221|    </div>
-   222|  </div>
-   223|
-   224|  <div class="checklist-item">
-   225|    <div class="checklist-num">3</div>
-   226|    <div class="checklist-content">
-   227|      <h4>Ignoring CTE mismatch between the dielectric and the metal base</h4>
-   228|      <p>The dielectric layer expands at 30–60 ppm/°C while the aluminum base expands at 23 ppm/°C. During reflow soldering (ΔT ≈ 220°C from room temperature), a 100mm board develops ~0.3–0.5mm of differential expansion between layers. If the dielectric adhesion is marginal, this stress delaminates the copper from the dielectric — typically at the edges and under large copper pours. Mitigation: use cross-hatched copper pours (not solid) on areas >500mm², and keep individual copper features to <25mm in the longest dimension.</p>
-   229|    </div>
-   230|  </div>
-   231|
-   232|  <div class="checklist-item">
-   233|    <div class="checklist-num">4</div>
-   234|    <div class="checklist-content">
-   235|      <h4>Specifying HASL surface finish — see above</h4>
-   236|      <p>HASL on MCPCB produces uneven pad surfaces. Skip it entirely. The cost savings (~$0.50–1.00/board) are not worth the assembly yield loss and field reliability risk.</p>
-   237|    </div>
-   238|  </div>
-   239|
-   240|  <div class="checklist-item">
-   241|    <div class="checklist-num">5</div>
-   242|    <div class="checklist-content">
-   243|      <h4>No thermal via design under power components (hybrid boards)</h4>
-   244|      <p>On hybrid FR-4/MCPCB boards, the thermal path from a power component on the FR-4 section to the embedded metal coin goes through thermal vias. Designers sometimes omit these, assuming the coin handles thermal management — but the coin is only effective if there is a low-resistance path to it. Thermal via count guideline: minimum 9 vias (3×3 grid) for each watt of dissipation, each via 0.3mm diameter, plated to 25μm minimum. See <a href="/blog/pcb-testing-methods.html">thermal testing methods</a> for validation approaches.</p>
-   245|    </div>
-   246|  </div>
-   247|
-   248|</article>
-   249|
-   250|<section class="cta-section">
-   251|  <div class="container">
-   252|    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-metal-core.webp)">
-   253|      <h2>Need Metal Core PCBs for Your LED or Power Application?</h2>
-   254|      <p>Send your Gerber files, BOM, and thermal requirements. You'll receive a complete quote — PCB fabrication, SMT assembly (with MCPCB-optimized reflow profiling), and testing — within 24 hours, plus a free DFM review covering dielectric selection, thermal via optimization, and surface finish compatibility for your application.</p>
-   255|      <button class="btn btn-primary btn-lg" onclick="openModal()">Request MCPCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
-   256|    </div>
-   257|  </div>
-   258|</section>
-   259|
-   260|<footer class="site-footer">
-   261|  <div class="container">
-   262|    <div class="footer-grid">
-   263|      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
-   264|      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
-   265|            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metal Core PCB (MCPCB) Manufacturing — Aluminum &amp; Copper Core Thermal Management Guide | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to metal core PCB (MCPCB) manufacturing: aluminum vs copper core selection, thermal conductivity benchmarks (1-8 W/m·K), Bergquist and Laird dielectric options, surface finish compatibility, and cost optimization for LED lighting, power supplies, and automotive power modules. Real data from an IATF 16949-certified Shenzhen manufacturer.">
+<meta property="og:title" content="Metal Core PCB (MCPCB) Manufacturing — Aluminum &amp; Copper Core Thermal Management Guide">
+<meta property="og:description" content="When FR-4 can't handle the heat, metal core PCBs are the answer. This guide breaks down thermal conductivity limits, dielectric material choices, and how to avoid the five most expensive MCPCB design mistakes. Real production data from a facility running 8 SMT lines.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/metal-core-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-metal-core.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/metal-core-pcb.html">
+<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=1">
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=13"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-metal-core.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Metal Core PCB (MCPCB) Manufacturing:<br><em>Aluminum &amp; Copper Core Thermal Management Guide</em></h1>
+      <p class="reveal">A procurement engineer's complete guide to metal core PCBs — from material selection (aluminum vs. copper, thermal conductivity 1–8 W/m·K) and dielectric options (Bergquist HT-07006, Laird T-lam) to surface finish compatibility, cost drivers, and the five most expensive design mistakes that field returns expose. Built with production data from an IATF 16949-certified Shenzhen facility.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Metal Core PCB (MCPCB)</span></div>
+
+  <p>A standard FR-4 PCB dissipates heat at roughly 0.3–0.4 W/m·K through the laminate. When you bolt a 50W COB LED array to that board, the junction temperature climbs past 120°C within minutes and the LED's lumen output drops by 15–30% while its lifetime shrinks from a rated 50,000 hours to 8,000. A metal core PCB (MCPCB) with aluminum substrate and a 2.2 W/m·K dielectric — the most basic MCPCB configuration — keeps that same LED junction at 85°C, delivering full lumen output and full lifetime. The physics is simple: replace a thermal insulator (FR-4, 0.3 W/m·K) with a thermal conductor (aluminum, 150–200 W/m·K) and put the thinnest possible dielectric layer between the copper circuit and the metal base.</p>
+
+  <p>This guide breaks down MCPCB material selection, dielectric options, thermal design tradeoffs, surface finish compatibility, and cost optimization — with real thermal conductivity benchmarks and production data from a facility that manufactures <a href="/blog/pcb-materials-guide.html">aluminum, copper-core, and ceramic-filled PCBs</a> alongside standard FR-4 and high-frequency laminates.</p>
+
+  <div class="highlight-box">
+    <p><strong>Quick decision matrix:</strong> If your component dissipates <3W, use FR-4 with thermal vias (cheapest). If 3–15W, use single-layer aluminum MCPCB (sweet spot). If 15–50W, use copper-core MCPCB or aluminum with high-performance dielectric. If >50W, use <a href="/blog/heavy-copper-pcb.html">heavy copper (4–6oz)</a> on aluminum core or consider direct-bond copper (DBC) ceramic substrate. The cost jumps at each threshold: FR-4 ≈ $1–2/board, aluminum MCPCB ≈ $3–8, copper-core ≈ $8–18, DBC ceramic ≈ $25–60.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-mcpcb-structure.webp" alt="" loading="lazy">
+
+  <h2>MCPCB Layer Structure — What's Between Your Copper and the Metal</h2>
+
+  <p>A metal core PCB has three layers, not the two that most diagrams show:</p>
+
+  <ol>
+    <li><strong>Circuit layer:</strong> Copper foil, typically 1oz (35μm) for LED and general power applications, 2–4oz (70–140μm) for high-current power conversion or <a href="/blog/heavy-copper-pcb.html">heavy copper designs</a>. Etched and plated using the same photolithographic process as FR-4.</li>
+    <li><strong>Dielectric layer:</strong> The thermal interface material — a thin (75–150μm), electrically insulating but thermally conductive polymer-ceramic composite that bonds the copper circuit to the metal base. This is the most important layer in an MCPCB because it sets the thermal resistance between your component and the heatsink. Dielectric thermal conductivity ranges from 1.0 W/m·K (entry-level) to 8.0 W/m·K (premium, ceramic-filled).</li>
+    <li><strong>Metal base:</strong> Aluminum (1.0–3.2mm thick, 5052 or 6061 alloy, thermal conductivity 150–200 W/m·K) or copper (1.0–2.0mm, thermal conductivity 390 W/m·K). The base acts as both a heat spreader and a mechanical substrate.</li>
+  </ol>
+
+  <p>The total thermal resistance from component junction to heatsink is the sum of: junction-to-case resistance (component datasheet), TIM (thermal interface material between package and PCB), copper layer (negligible — 1oz copper, 35μm, 390 W/m·K gives <0.0001 K/W), dielectric layer (the bottleneck), and metal base. The dielectric dominates: a 100μm layer with 2.2 W/m·K thermal conductivity and 100mm² contact area gives 0.45 K/W — meaning a 20W component produces a 9°C temperature drop across the dielectric alone. Double the thermal conductivity or halve the dielectric thickness, and that drop halves.</p>
+
+  <h2>Aluminum vs. Copper Core — The Tradeoff Is Cost, Not Performance</h2>
+
+  <p>Copper-core MCPCBs are sometimes positioned as "premium" while aluminum-core is "standard." This framing is wrong. The choice depends on two factors: total thermal load and CTE matching requirements.</p>
+
+  <table class="spec-table">
+    <tr><th>Property</th><th>Aluminum (5052/6061)</th><th>Copper</th></tr>
+    <tr><td>Thermal conductivity</td><td>150–200 W/m·K</td><td>390 W/m·K</td></tr>
+    <tr><td>CTE (ppm/°C)</td><td>23–24</td><td>17</td></tr>
+    <tr><td>Density</td><td>2.7 g/cm³</td><td>8.9 g/cm³</td></tr>
+    <tr><td>Typical thickness range</td><td>0.8–3.2mm</td><td>0.5–2.0mm</td></tr>
+    <tr><td>Cost multiplier (vs 1.6mm Al)</td><td>1× (baseline)</td><td>2.5–4×</td></tr>
+    <tr><td>Best application</td><td>LED lighting, power supplies ≤30W/device, general thermal</td><td>IGBT modules, power converters >30W, tight CTE matching to ceramic packages</td></tr>
+  </table>
+
+  <p>Copper's 2× thermal conductivity advantage over aluminum often does not translate to 2× better system performance. For a 100×100mm MCPCB with a single 15W heat source, switching from 1.6mm aluminum to 1.6mm copper reduces the temperature rise across the base from ~0.5°C to ~0.25°C — a 0.25°C improvement that costs 3× more. The metal base is rarely the bottleneck; the dielectric is. Upgrade the dielectric from 2.2 to 5.0 W/m·K and you save 6°C for the same board, at roughly a 20% cost adder rather than 300%.</p>
+
+  <p>Copper core is justified in three specific cases: (1) when the metal base is also a current-carrying conductor (direct-bond copper eliminates the PCB entirely); (2) when thermal loads exceed 50W per device; (3) when CTE matching between the PCB and a ceramic-packaged power semiconductor (AlN, Al₂O₃) is required — copper at 17 ppm/°C matches ceramic CTE far better than aluminum at 24 ppm/°C, reducing solder joint fatigue in thermal cycling.</p>
+
+  <img class="article-img" src="../generated/blog-mcpcb-thermal.webp" alt="" loading="lazy">
+
+  <h2>Dielectric Material Selection — Bergquist, Laird, and the Generic Alternatives</h2>
+
+  <p>The dielectric layer is the MCPCB component that procurement engineers should specify, not assume. "Thermal conductive dielectric" on a drawing without a brand name and thermal conductivity spec will get you the cheapest generic material the supplier stocks — typically 0.8–1.5 W/m·K, which performs like FR-4 with a metal backing (defeating the purpose).</p>
+
+  <table class="spec-table">
+    <tr><th>Dielectric System</th><th>Thermal Conductivity (W/m·K)</th><th>Dielectric Strength (kV)</th><th>Typical Thickness (μm)</th><th>Cost Tier</th></tr>
+    <tr><td>Generic epoxy (no-fill)</td><td>0.8–1.5</td><td>2.0–3.0</td><td>100–150</td><td>$ (baseline)</td></tr>
+    <tr><td>Bergquist HT-07006</td><td>2.2</td><td>6.0</td><td>150</td><td>$$</td></tr>
+    <tr><td>Laird T-lam 1KA</td><td>3.0</td><td>4.5</td><td>100</td><td>$$</td></tr>
+    <tr><td>Bergquist HPL-03015</td><td>3.0</td><td>3.0</td><td>150</td><td>$$</td></tr>
+    <tr><td>Laird T-lam SS LLD</td><td>5.0</td><td>2.5</td><td>100–150</td><td>$$$</td></tr>
+    <tr><td>Ceramic-filled premium</td><td>7.0–8.0</td><td>1.5–2.5</td><td>75–100</td><td>$$$$</td></tr>
+  </table>
+
+  <p>The dielectric strength column matters for power applications: a 48V LED driver requires at least 0.5kV withstand; a 400V PFC stage needs 3.0kV+. The thinner the dielectric (better thermal performance), the lower the withstand voltage — there is a direct tradeoff. For 400V+ applications, specify minimum 100μm dielectric thickness and 3.0kV dielectric strength, which pushes you to Bergquist HT-07006 or equivalent at minimum. Do not accept "generic" for high-voltage MCPCBs.</p>
+
+  <h2>Single-Layer, Double-Layer, and Hybrid MCPCB — What Each Architecture Solves</h2>
+
+  <p>MCPCBs are available in three architectures, and the cost curve between them is steep:</p>
+
+  <h3>Single-Layer MCPCB — 80% of Applications</h3>
+  <p>One copper circuit layer on top of one dielectric layer on top of the metal base. No vias (you cannot drill through a metal core with standard PCB processes). All components are surface-mount on one side. This is the standard for LED lighting, COB arrays, and simple power modules. Cost: $3–8 for a 100×100mm board at 100-unit quantity. The limitation is routing density — with only one layer and no vias, you cannot cross traces. All routing must be single-layer planar, which gets tight above ~50 components.</p>
+
+  <h3>Double-Layer MCPCB — When You Need Routing Density</h3>
+  <p>Two copper circuit layers separated by a second dielectric layer, with plated through-holes connecting them. The through-holes must be isolated from the metal base — this is done by pre-drilling the base to create clearance holes, filling them with insulating resin, then drilling smaller holes through the resin plugs (a process called "resin plug via"). Cost: 1.5–2.5× single-layer. Use when you need component placement on both sides, or when single-layer routing is physically impossible.</p>
+
+  <h3>Hybrid MCPCB — Thermal Where You Need It, FR-4 Everywhere Else</h3>
+  <p>A hybrid board embeds an aluminum or copper coin into an otherwise standard FR-4 multilayer PCB. The coin sits directly under the high-power component while the surrounding area uses standard FR-4 with normal via architecture and routing density. This is the cost-optimal solution when only one or two components on a complex digital board need thermal management. The coin is press-fit or bonded into a cavity milled in the FR-4 stackup. Cost: 1.8–3× the equivalent FR-4 board, but far cheaper than making the entire board MCPCB.</p>
+
+  <img class="article-img" src="../generated/blog-mcpcb-types.webp" alt="" loading="lazy">
+
+  <h2>Surface Finish Compatibility — What Works on MCPCB and What Doesn't</h2>
+
+  <p>The metal base of an MCPCB creates surface finish constraints that FR-4 designers never think about. HASL (hot air solder leveling) — the cheapest and most common FR-4 finish — is problematic on MCPCBs because the aluminum or copper base acts as a massive heat sink during the solder dip. The board surface cools faster than the solder can level, producing uneven pad surfaces with thickness variations of 25–75μm. This is unacceptable for fine-pitch LEDs (0.5mm pitch CSP LEDs are common in modern lighting) and any BGA/QFN device.</p>
+
+  <p>Compatible finishes for MCPCB, ranked by recommendation:</p>
+
+  <table class="spec-table">
+    <tr><th>Finish</th><th>MCPCB Compatibility</th><th>Flatness</th><th>Cost</th><th>Best For</th></tr>
+    <tr><td>ENIG (IPC-4552)</td><td>Excellent</td><td>2–5μm variation</td><td>$$</td><td>Fine-pitch LED, all BGA/QFN, general purpose. See <a href="/blog/enig-vs-hasl.html">ENIG vs HASL comparison</a>.</td></tr>
+    <tr><td>OSP (Organic Solderability Preservative)</td><td>Good</td><td><1μm variation</td><td>$</td><td>Cost-sensitive LED boards with 1.0mm+ pitch. Limited shelf life (6 months sealed).</td></tr>
+    <tr><td>Immersion Silver</td><td>Good</td><td>1–3μm variation</td><td>$$</td><td>RF/microwave LED drivers, aluminum wire bonding.</td></tr>
+    <tr><td>Immersion Tin</td><td>Adequate</td><td>2–5μm variation</td><td>$$</td><td>Press-fit connectors on power modules.</td></tr>
+    <tr><td>HASL (leaded/lead-free)</td><td>Poor — avoid</td><td>25–75μm variation</td><td>$</td><td>Acceptable only for through-hole-only MCPCBs with 2.54mm+ pitch (rare).</td></tr>
+  </table>
+
+  <h2>SMT Assembly on MCPCB — Why Your Reflow Profile Needs Adjustment</h2>
+
+  <p>The metal base that makes MCPCBs thermally effective also makes them thermally difficult to assemble. During reflow soldering, the aluminum or copper core absorbs heat from the oven, delaying the time it takes for the board surface to reach the solder melting temperature. A standard lead-free reflow profile with 60–90 seconds above 217°C on FR-4 becomes 120–150 seconds on a 1.6mm aluminum-core MCPCB — enough to damage temperature-sensitive LEDs and plastic-packaged ICs.</p>
+
+  <p>Three assembly adjustments for MCPCB success:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Extend preheat soak, not peak temperature</h4>
+      <p>Instead of ramping to peak faster (which overheats the board surface while the core is still cold), extend the 150–180°C preheat soak by 30–60 seconds. This lets the metal core reach temperature equilibrium with the surface before the reflow zone. Peak temperature remains the same (235–245°C for SAC305 lead-free); only the soak duration changes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Verify thermocouple placement — one on the MCPCB, one on FR-4 control</h4>
+      <p>When MCPCBs run on the same <a href="/blog/pcb-assembly-process.html">SMT assembly line</a> as FR-4 boards, profile the MCPCB separately with a thermocouple attached directly to the metal core edge and another on the component pad surface. The core-to-surface delta should be <8°C at peak; if it's higher, extend the soak further. Do not trust the FR-4 profile for MCPCB.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Reduce cooling rate — no forced-air cooling on MCPCB</h4>
+      <p>Forced-air cooling in the reflow oven exit zone can cool the metal core unevenly (edges faster than center), creating thermal-mechanical stress at the dielectric-copper interface. Let MCPCBs cool naturally to below 100°C before handling. This adds 45–60 seconds to cycle time but prevents latent dielectric delamination that field thermal cycling will expose.</p>
+    </div>
+  </div>
+
+  <h2>LED-Specific MCPCB Design — Lumen Maintenance and Thermal Budgets</h2>
+
+  <p>LED applications dominate MCPCB volume (estimated 60–70% of all MCPCB production), and the procurement economics are different from power electronics. LED boards are cost-sensitive ($2–6/board at volume), reliability-sensitive (warrantied for 25,000–50,000 hours), and thermally predictable (steady-state dissipation, not pulsed). The key procurement insight: the cost of upgrading from 1.5 W/m·K dielectric to 3.0 W/m·K is roughly $0.30–0.80 per board, but it extends LED lifetime by 15,000–25,000 hours — reducing warranty return exposure by roughly $3–6 per fixture. The dielectric upgrade pays for itself 5–10× over in warranty cost avoidance.</p>
+
+  <p>For LED MCPCBs, specify these minimum parameters:</p>
+  <ul>
+    <li>Dielectric thermal conductivity: ≥2.2 W/m·K (Bergquist HT-07006 equivalent)</li>
+    <li>Dielectric thickness: ≤150μm (thinner = lower thermal resistance, but check dielectric strength for your operating voltage)</li>
+    <li>Aluminum base thickness: 1.6mm minimum (provides adequate heat spreading; 1.0mm is too flexible and causes solder joint stress on large boards)</li>
+    <li>Surface finish: ENIG for CSP/small-footprint LEDs, OSP acceptable for 2835/3030/5050 packages with ≥1.5mm pad pitch</li>
+    <li>White solder mask: standard for LED to maximize light reflectance (typical LED solder mask reflectance: 85–90% at 450–700nm). Specify "LED white" not "standard white" — the TiO₂ loading differs.</li>
+  </ul>
+
+  <h2>Cost Optimization — Where MCPCB Money Goes and How to Reduce It</h2>
+
+  <p>MCPCB cost breaks down differently than FR-4. On a standard FR-4 4-layer board, the laminate is ~8% of board cost and drilling/plating is ~25%. On an MCPCB, the metal base + dielectric is 35–50% of board cost and the single-layer etching is only ~10%. The cost levers are different:</p>
+
+  <table class="spec-table">
+    <tr><th>Cost Driver</th><th>FR-4 Impact</th><th>MCPCB Impact</th><th>Optimization</th></tr>
+    <tr><td>Board area</td><td>Moderate (raw material)</td><td>High — metal base cost scales with area</td><td>Panelize tightly; no decorative borders. See <a href="/blog/pcb-cost-factors.html">PCB cost optimization guide</a>.</td></tr>
+    <tr><td>Dielectric grade</td><td>N/A</td><td>Very high — $0.5→$1→$3→$8 W/m·K steps</td><td>Spec the minimum thermal conductivity that meets your thermal budget; don't over-spec "premium" dielectric.</td></tr>
+    <tr><td>Metal base thickness</td><td>N/A</td><td>Moderate — 1.0→1.6→2.0→3.2mm</td><td>1.6mm is the volume sweet spot. 3.2mm doubles metal cost with diminishing thermal returns.</td></tr>
+    <tr><td>Copper weight</td><td>Moderate</td><td>Low — only 1 layer</td><td>1oz is sufficient for most LED; 2oz for >5A trace current.</td></tr>
+    <tr><td>Surface finish</td><td>Low</td><td>Moderate — ENIG at $3–6/ft²</td><td>OSP for cost-sensitive LED; ENIG only when pad pitch requires it.</td></tr>
+    <tr><td>V-scoring/routing</td><td>Low</td><td>Low — single-layer cuts easily</td><td>Aluminum routes faster than FR-4. Panel utilization is the bigger lever.</td></tr>
+  </table>
+
+  <p>The single biggest MCPCB cost mistake: specifying a copper-core board when aluminum with a one-tier-higher dielectric would deliver the same thermal performance at half the cost. Always run the numbers before defaulting to copper.</p>
+
+  <h2>DFM Rules for MCPCB — The Five Most Expensive Mistakes</h2>
+
+  <p>Metal core PCBs have different DFM rules than FR-4, and getting them wrong produces scrap, not reworkable defects. Once the dielectric is laminated to the metal base, there is no rework — a short circuit or delamination means the entire board is scrap, because you cannot separate the layers without destroying the dielectric.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Insufficient copper-to-edge clearance on the metal base</h4>
+      <p>The exposed aluminum/copper edge of an MCPCB is electrically conductive. If a copper trace runs within 0.5mm of the board edge, and the edge is not insulated (most MCPCBs are not edge-plated), there is a short-circuit path through the metal base. Minimum copper-to-edge clearance: 0.8mm for aluminum, 1.2mm for copper-core. This is larger than the 0.3–0.5mm standard for FR-4. Refer to <a href="/blog/dfm-tips.html">DFM guidelines</a> for detailed clearance rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Vias through the metal base — impossible on standard MCPCB</h4>
+      <p>Standard single-layer MCPCBs have no vias. Period. You cannot drill through a solid aluminum plate with a PCB drill. If your design requires vias, you need either a double-layer MCPCB (with resin-plugged base clearances) or a hybrid FR-4/MCPCB approach. Designs that place vias on an MCPCB layer will be rejected by the manufacturer.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ignoring CTE mismatch between the dielectric and the metal base</h4>
+      <p>The dielectric layer expands at 30–60 ppm/°C while the aluminum base expands at 23 ppm/°C. During reflow soldering (ΔT ≈ 220°C from room temperature), a 100mm board develops ~0.3–0.5mm of differential expansion between layers. If the dielectric adhesion is marginal, this stress delaminates the copper from the dielectric — typically at the edges and under large copper pours. Mitigation: use cross-hatched copper pours (not solid) on areas >500mm², and keep individual copper features to <25mm in the longest dimension.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Specifying HASL surface finish — see above</h4>
+      <p>HASL on MCPCB produces uneven pad surfaces. Skip it entirely. The cost savings (~$0.50–1.00/board) are not worth the assembly yield loss and field reliability risk.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>No thermal via design under power components (hybrid boards)</h4>
+      <p>On hybrid FR-4/MCPCB boards, the thermal path from a power component on the FR-4 section to the embedded metal coin goes through thermal vias. Designers sometimes omit these, assuming the coin handles thermal management — but the coin is only effective if there is a low-resistance path to it. Thermal via count guideline: minimum 9 vias (3×3 grid) for each watt of dissipation, each via 0.3mm diameter, plated to 25μm minimum. See <a href="/blog/pcb-testing-methods.html">thermal testing methods</a> for validation approaches.</p>
+    </div>
+  </div>
+
+</article>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-metal-core.webp)">
+      <h2>Need Metal Core PCBs for Your LED or Power Application?</h2>
+      <p>Send your Gerber files, BOM, and thermal requirements. You'll receive a complete quote — PCB fabrication, SMT assembly (with MCPCB-optimized reflow profiling), and testing — within 24 hours, plus a free DFM review covering dielectric selection, thermal via optimization, and surface finish compatibility for your application.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request MCPCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
 <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
-   266|      <div class="footer-col"><h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a><a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a></div>
-   267|    </div>
-   268|    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
-   269|  </div>
-   270|</footer>
-   271|
-   272|<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
-   273|  <div class="modal-dialog">
-   274|    <button class="modal-close" onclick="closeModal()">&times;</button>
-   275|    <div class="modal-image-panel">
-   276|      <img src="/generated/modal-pcba-showcase.webp" alt="">
-   277|      <div class="modal-image-overlay"></div>
-   278|      <div class="modal-image-top">
-   279|        <h2 class="mi-heading">Start Your Project</h2>
-   280|        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
-   281|      </div>
-   282|      <div class="modal-image-text">
-   283|        <div class="mi-label">HUAXING PCBA</div>
-   284|        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
-   285|      </div>
-   286|    </div>
-   287|    <div class="modal-form-panel">
-   288|      <form onsubmit="return handleInquiry(event)" novalidate>
-   289|        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
-   290|        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-   291|        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
-   292|        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
-   293|        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
-   294|      </form>
-   295|    </div>
-   296|  </div>
-   297|</div>
-   298|
-   299|<script src="../reveal.js"></script>
-   300|<script>
-   301|function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-   302|function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-   303|</script>
-   304|<script src="../inquiry-handler.js"></script></body>
-   305|</html>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:sales@huaxingpcba.com">sales@huaxingpcba.com</a><a href="/contact/">Building A, Huaxing Industrial Park, Fuyong Street, Bao'an District, Shenzhen, Guangdong 518103, China</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span><span>Precision Without Compromise</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

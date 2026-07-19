@@ -1,262 +1,261 @@
-     1|<!DOCTYPE html>
-     2|<html lang="en">
-     3|<head>
-     4|<meta charset="UTF-8">
-     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-     6|<title>Turnkey PCB Assembly Guide — Full-Service Manufacturing from Prototype to Box-Build | Huaxing PCBA</title>
-     7|<meta name="description" content="Complete turnkey PCB assembly guide for procurement managers. From component sourcing and SMT assembly to box-build and logistics — one supplier, one PO, one point of contact. With real process data from a Shenzhen factory running 8 SMT lines.">
-     8|<meta property="og:title" content="Turnkey PCB Assembly Guide — Full-Service Manufacturing from Prototype to Box-Build">
-     9|<meta property="og:description" content="Stop managing 5 suppliers for one product. Turnkey PCBA means one PO covers component procurement, SMT, through-hole, testing, conformal coating, and box-build. Here's how it works — and when it saves you 30%+ on total program cost.">
-    10|<meta property="og:type" content="article">
-    11|<meta property="og:url" content="https://huaxingpcba.com/blog/turnkey-pcb-assembly.html">
-    12|    <link rel="canonical" href="https://huaxingpcba.com/blog/turnkey-pcb-assembly.html">
-    13|<link rel="stylesheet" href="../design-tokens.css?v=20">
-    14|<link rel="icon" type="image/x-icon" href="/favicon.ico">
-    15|<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    16|<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-    17|<link rel="stylesheet" href="../blog.css?v=1">
-    18|
-    19|</head>
-    20|<body>
-    21|
-    22|<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
-    23|  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-    24|  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
-    25|</svg>
-    26|
-    27|<header class="site-header" id="header">
-    28|  <div class="container">
-    29|    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    30|    <nav class="nav-links" id="navLinks">
-    31|    </nav>
-    32|    <script src="/nav.js?v=13"></script>
-    33|    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
-    34|      <span></span><span></span><span></span>
-    35|    </div>
-    36|  </div>
-    37|</header>
-    38|
-    39|<section class="sub-hero">
-    40|  <div class="sub-hero-bg">
-    41|    <img src="../generated/blog-cover-turnkey.webp" alt="" loading="eager">
-    42|  </div>
-    43|  <div class="sub-hero-overlay"></div>
-    44|  <div class="sub-hero-content">
-    45|    <div class="container">
-    46|      <p class="section-label reveal">Procurement Guide</p>
-    47|      <h1 class="reveal">Turnkey PCB Assembly Guide:<br><em>Full-Service Manufacturing from Prototype to Box-Build</em></h1>
-    48|      <p class="reveal">How one purchase order covers everything — and why the "cheapest per-line-item" approach costs more in the long run.</p>
-    49|    </div>
-    50|  </div>
-    51|</section>
-    52|
-    53|<article class="article reveal">
-    54|  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Turnkey PCB Assembly</span></div>
-    55|
-    56|  <p>Managing five suppliers for one product is expensive in ways that don't show up on any invoice. Every handoff adds lead time. Every supplier boundary creates a quality gap that nobody owns. Every separate PO adds administrative overhead that procurement teams don't notice until they tally the cost of a single NPI cycle.</p>
-    57|
-    58|  <p>Turnkey PCB assembly collapses this supply chain into one contract. One supplier handles component procurement, SMT assembly, through-hole soldering, <a href="/blog/pcb-testing-methods.html">testing</a>, conformal coating, and box-build integration. You receive finished, tested assemblies — not bare boards that still need three more suppliers. At Huaxing PCBA, we run <span class="data-point">8 SMT lines</span> with <span class="data-point">8 million solder joints per day</span> capacity across our Shenzhen facility, providing turnkey service to 150+ customers in 30+ countries.</p>
-    59|
-    60|  <img class="article-img" src="../generated/blog-turnkey-overview.webp" alt="Turnkey PCB assembly workflow overview showing component procurement through box-build stages" loading="lazy">
-    61|
-    62|  <h2>What "Turnkey" Actually Covers (And What It Doesn't)</h2>
-    63|
-    64|  <p>The term "turnkey PCBA" gets used loosely. Some suppliers mean "we'll solder the components you send us." That's consignment assembly — not turnkey. Here's what a true turnkey service includes, and where the boundaries lie:</p>
-    65|
-    66|  <table style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)">
-    67|    <thead>
-    68|      <tr style="border-bottom:2px solid var(--accent)">
-    69|        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Service Layer</th>
-    70|        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Turnkey</th>
-    71|        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Consignment</th>
-    72|        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Partial Turnkey</th>
-    73|      </tr>
-    74|    </thead>
-    75|    <tbody>
-    76|      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">BOM component sourcing</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Supplier-managed</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Customer provides</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Customer provides ICs, supplier sources passives</td></tr>
-    77|      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">PCB fabrication</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
-    78|      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">SMT + through-hole assembly</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Assembly only</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
-    79|      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">AOI + X-ray + functional test</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Varies</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
-    80|      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Conformal coating</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
-    81|      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Box-build / enclosure assembly</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td></tr>
-    82|      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Logistics / drop-ship</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Customer arranges</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
-    83|    </tbody>
-    84|  </table>
-    85|
-    86|  <p>The critical distinction: turnkey means the supplier owns component procurement risk. If a part goes EOL mid-production, the supplier finds and qualifies the replacement — not your engineering team. If a reel of 10,000 0402 resistors arrives with incorrect markings, the supplier absorbs the rework cost, not your production line.</p>
-    87|
-    88|  <div class="highlight-box">
-    89|    <p><strong>Cost Reality Check:</strong> Consignment assembly looks 15-25% cheaper on a per-board quote, but when you add component management overhead, inbound inspection labor, inventory carrying cost, and the cost of one production stoppage from a missing reel, the total program cost typically favors turnkey by 8-15%. For volumes above 500 units, turnkey is almost always cheaper when you measure total cost of ownership — not just assembly line-item price.</p>
-    90|  </div>
-    91|
-    92|  <img class="article-img" src="../generated/blog-turnkey-smt-line.webp" alt="SMT production line with pick-and-place machines in a turnkey PCB assembly facility" loading="lazy">
-    93|
-    94|  <h2>The Component Supply Chain: Where Turnkey Earns Its Margin</h2>
-    95|
-    96|  <p>The hardest part of electronics manufacturing isn't assembly — it's component procurement. In 2025-2026, the global semiconductor supply chain has stabilized from the 2021-2023 crisis, but individual part families still experience 16-26 week lead times (STM32, certain TI analog ICs, specialized connectors). A turnkey supplier handles this complexity as a core competency:</p>
-    97|
-    98|  <h3>1. Multi-Source BOM Validation Before Production Starts</h3>
-    99|  <p>Before the first board enters SMT, a competent turnkey supplier validates every BOM line item against <span class="data-point">5+ authorized distributors</span> (Digi-Key, Mouser, Arrow, Avnet, Future). Components with lead times exceeding the project schedule are flagged with alternate part numbers. This prevents the most expensive mistake in electronics manufacturing: discovering a 22-week lead time part during production ramp, not during design.</p>
-   100|
-   101|  <h3>2. Counterfeit Component Mitigation</h3>
-   102|  <p>The counterfeit semiconductor market is estimated at $75B annually. A single counterfeit MOSFET or voltage regulator can destroy an entire production batch. Turnkey suppliers with established distributor relationships and incoming inspection protocols (<a href="/blog/pcb-supplier-audit.html">verified during supplier audits</a>) provide a procurement gate that individual design teams rarely have. Our IQC lab performs X-ray inspection, decapsulation sampling, and electrical verification on all non-authorized-distributor parts.</p>
-   103|
-   104|  <h3>3. Inventory Buffer Without the Balance Sheet Hit</h3>
-   105|  <p>Turnkey suppliers maintain buffer stock of common passives (0402/0603 resistors and capacitors across E12/E24 values) and popular ICs at their own cost. When your assembly order requires 120,000 100nF 0402 capacitors, the supplier pulls from stock — you don't need to forecast, purchase, and warehouse them. This is particularly valuable for <a href="/blog/prototype-vs-production.html">prototype-to-production transitions</a> where BOM quantities change dramatically between phases.</p>
-   106|
-   107|  <img class="article-img" src="../generated/blog-turnkey-components.webp" alt="Component inventory management and BOM validation process for turnkey PCB assembly" loading="lazy">
-   108|
-   109|  <h2>The 5 Service Layers: How Deep Does Your Turnkey Go?</h2>
-   110|
-   111|  <p>Not all turnkey programs are equal. The depth of service determines whether you're buying assembly capacity or a manufacturing partner. Here are the five layers — and the questions that distinguish genuine capability from sales claims:</p>
-   112|
-   113|  <div class="checklist-item">
-   114|    <div class="checklist-num">1</div>
-   115|    <div class="checklist-content">
-   116|      <h4>PCB Fabrication + Assembly (Basic Turnkey)</h4>
-   117|      <p>PCB manufacturing and SMT/through-hole assembly under one roof. The key advantage is DFM feedback that flows directly from fabrication engineers to assembly engineers — the PCB fab team knows when a design will tombstone in reflow because they see the pad geometry daily. Our facility produces <span class="data-point">80,000㎡</span> of PCBs monthly, with fabrication and assembly engineers sharing the same production floor.</p>
-   118|    </div>
-   119|  </div>
-   120|
-   121|  <div class="checklist-item">
-   122|    <div class="checklist-num">2</div>
-   123|    <div class="checklist-content">
-   124|      <h4>Full Component Procurement (Standard Turnkey)</h4>
-   125|      <p>Layer 1 plus complete BOM sourcing. The supplier manages the entire component supply chain — from authorized distributor orders to alternate part qualification. This is where most turnkey relationships operate. The quality of procurement is what differentiates suppliers: verify component traceability during the <a href="/blog/pcb-supplier-audit.html">factory audit</a> — ask to trace a random reel on the SMT floor back to its distributor PO and manufacturer lot number.</p>
-   126|    </div>
-   127|  </div>
-   128|
-   129|  <div class="checklist-item">
-   130|    <div class="checklist-num">3</div>
-   131|    <div class="checklist-content">
-   132|      <h4>Testing + Programming (Full-Service Turnkey)</h4>
-   133|      <p>Layer 2 plus comprehensive testing: AOI (100% of boards), X-ray (BGA/QFN packages), ICT (bed-of-nails), functional test (per your spec), and firmware flashing/programming. A supplier that runs all five test methods in-house — as we describe in our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> — catches defects at the station, not at your receiving dock. Our facility operates AOI, SPI, X-ray, ICT, and FCT in a continuous inspection flow.</p>
-   134|    </div>
-   135|  </div>
-   136|
-   137|  <div class="checklist-item">
-   138|    <div class="checklist-num">4</div>
-   139|    <div class="checklist-content">
-   140|      <h4>Conformal Coating + Environmental Protection</h4>
-   141|      <p>Layer 3 plus conformal coating (acrylic, silicone, urethane, or parylene) for environmental protection. Essential for <a href="/blog/automotive-pcb-requirements.html">automotive electronics</a>, industrial controls, and outdoor equipment. The process requires selective coating equipment and masking — a separate supplier for this step introduces a new quality boundary at the worst possible point (post-test, pre-shipment). We run this in-house.</p>
-   142|    </div>
-   143|  </div>
-   144|
-   145|  <div class="checklist-item">
-   146|    <div class="checklist-num">5</div>
-   147|    <div class="checklist-content">
-   148|      <h4>Box-Build + Logistics (Total Turnkey)</h4>
-   149|      <p>The complete package: PCB + assembly + components + test + coating + enclosure assembly + cabling + packaging + drop-ship to your end customer or distribution center. This is the true "one PO" model. For hardware startups and mid-size OEMs, this eliminates the need for in-country warehousing and final assembly labor.</p>
-   150|    </div>
-   151|  </div>
-   152|
-   153|  <h2>When Turnkey Saves Money — And When It Doesn't</h2>
-   154|
-   155|  <p>Turnkey is not universally cheaper. The economics depend on three variables:</p>
-   156|
-   157|  <p><strong>Volume threshold:</strong> Below 50 units, the supplier's component procurement overhead adds more cost than it saves. At 50-200 units, turnkey and consignment costs roughly converge. Above 200 units, turnkey's procurement leverage — particularly on passives purchased in full-reel quantities — delivers a clear cost advantage.</p>
-   158|
-   159|  <p><strong>BOM complexity:</strong> A design with 30 line items (microcontroller + passives + connectors) sees minimal turnkey advantage — the BOM is simple enough manage internally. A design with 300+ line items across 15 distributor part numbers sees dramatic turnkey savings because the procurement coordination cost alone exceeds the assembly labor cost. Our average turnkey project runs <span class="data-point">150-400</span> unique BOM lines.</p>
-   160|
-   161|  <p><strong>Lifecycle stage:</strong> For NPI and prototype phases, the flexibility of managing your own component stock can be valuable — rapid design changes are easier when you control inventory. For production (500+ units), turnkey is almost always the right economic choice. Read our <a href="/blog/prototype-vs-production.html">prototype vs production guide</a> for the economics at each stage.</p>
-   162|
-   163|  <img class="article-img" src="../generated/blog-turnkey-cost-comparison.webp" alt="Cost comparison chart showing turnkey vs consignment PCB assembly across volume ranges" loading="lazy">
-   164|
-   165|  <h2>How to Qualify a Turnkey PCB Assembly Partner</h2>
-   166|
-   167|  <p>The price quote tells you almost nothing. Here's what actually predicts a successful turnkey relationship:</p>
-   168|
-   169|  <ol>
-   170|    <li><strong>Component procurement transparency:</strong> Ask to see a sample BOM with line-item pricing broken out by component cost vs. procurement markup. A supplier that hides markup in the assembly line price is one you can't optimize with.</li>
-   171|    <li><strong>Alternate part qualification process:</strong> "We'll find an alternative" is not a process. Ask: what distributor portals do you query? Do you require customer approval before substituting? What's your policy on date code freshness — will you ship boards with components within 6 months of date code?</li>
-   172|    <li><strong>Quality system integration:</strong> A turnkey supplier's quality system must span every service layer. IPC-A-610 Class 3 acceptance criteria should apply to the PCB, the assembly, the conformal coating, AND the box-build — not just the solder joints. Our <a href="/blog/pcb-supplier-audit.html">supplier audit checklist</a> covers what to verify at each station.</li>
-   173|    <li><strong>DFM feedback loop:</strong> Before the first production run, the supplier should return a DFM report identifying: pad geometry issues, component spacing violations, solder mask slivers, and BOM-substitution opportunities that reduce cost. Our <a href="/blog/dfm-tips.html">DFM guide</a> covers the 8 rules that cut costs by 30% — a competent turnkey supplier applies all of them.</li>
-   174|    <li><strong>Scalability proof:</strong> A supplier running 2 SMT lines cannot absorb your volume ramp from 500 to 50,000 units. Verify current capacity, not promised capacity. Our facility runs 8 SMT lines with demonstrated <span class="data-point">8 million solder joints per day</span> throughput and IPC-A-610 Class 2/3 certification across all lines.</li>
-   175|  </ol>
-   176|
-   177|  <h2>The Hidden Cost: What Goes Wrong When Turnkey Goes Wrong</h2>
-   178|
-   179|  <p>Turnkey failures follow a predictable pattern. Understanding these failure modes — and how to prevent them — is more valuable than comparing price quotes:</p>
-   180|
-   181|  <p><strong>1. Component substitution without approval:</strong> A supplier swaps your specified 1% tolerance resistor for a 5% part because it was in stock. The board passes functional test but fails in the field under temperature extremes. Prevention: specify approval-required substitution policy in the contract, and verify during the first article inspection.</p>
-   182|
-   183|  <p><strong>2. Test coverage gaps at layer boundaries:</strong> The PCB passes bare-board test, and the assembly passes ICT — but the connection between them (solder joint quality) isn't tested until functional test, which only covers the paths that have test points. Prevention: require <span class="data-point">100% AOI</span> post-reflow plus X-ray on all BGA and QFN packages. These are standard in our facility, not optional add-ons.</p>
-   184|
-   185|  <p><strong>3. Box-build quality treated as secondary:</strong> The supplier is excellent at PCB assembly but the enclosure assembly station is an afterthought — loose screws, misaligned connectors, missing cable ties. Prevention: include box-build workmanship samples in the quality agreement, and inspect the first 5 box-build units yourself or through a third-party inspector.</p>
-   186|
-   187|  <div class="highlight-box">
-   188|    <p><strong>Red Flag:</strong> If a supplier cannot show you the specific IPC-A-610 acceptance criteria they use for box-build inspection — not just SMT inspection — they treat final assembly as a secondary service. A genuine turnkey supplier applies the same quality rigor to every service layer.</p>
-   189|  </div>
-   190|
-   191|  <h2>Getting Started: What to Send for a Turnkey Quote</h2>
-   192|
-   193|  <p>A complete turnkey RFQ package enables an accurate quote in one round — not three rounds of back-and-forth:</p>
-   194|
-   195|  <ol>
-   196|    <li><strong>Gerber files + drill file + BOM (with manufacturer part numbers):</strong> Without full MPNs, the supplier can only provide a ballpark estimate. "10µF capacitor, 0805" could be $0.02 or $0.50 depending on dielectric, voltage rating, and tolerance.</li>
-   197|    <li><strong>Assembly drawings + pick-and-place file (centroid):</strong> Enables the supplier to generate an accurate SMT programming estimate and identify any placement issues before quoting.</li>
-   198|    <li><strong>Test specification:</strong> What test methods, coverage targets, and pass/fail criteria? "Functional test" has a $500-to-$50,000 range depending on complexity.</li>
-   199|    <li><strong>Volume + delivery schedule:</strong> Single delivery vs. scheduled releases changes inventory strategy and panel utilization. "10,000 units over 12 months in monthly releases of 833" gets a different structure than "10,000 units all at once."</li>
-   200|  </ol>
-   201|
-   202|  <p>At Huaxing PCBA, our turnkey RFQ response includes a line-item cost breakdown (PCB, components, assembly, test, coating, box-build), a DFM report identifying 3-5 cost optimization opportunities, and a production schedule with milestone dates. Response time: <span class="data-point">24 hours</span> for standard BOMs.</p>
-   203|
-   204|</article>
-   205|
-   206|<section class="section" style="background:var(--bg-secondary)">
-   207|  <div class="container">
-   208|    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-rigid-flex.webp)">
-   209|      <h2>Ready for Turnkey PCB Assembly?</h2>
-   210|      <p>Send your Gerber files, BOM, and volume target. You'll receive a complete turnkey quote — PCB, components, assembly, test, and logistics — within 24 hours, plus a free DFM review identifying 3-5 cost optimization opportunities.</p>
-   211|      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Turnkey Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
-   212|    </div>
-   213|  </div>
-   214|</section>
-   215|
-   216|<footer class="site-footer">
-   217|  <div class="container">
-   218|    <div class="footer-grid">
-   219|      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
-   220|      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
-   221|            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turnkey PCB Assembly Guide — Full-Service Manufacturing from Prototype to Box-Build | Huaxing PCBA</title>
+<meta name="description" content="Complete turnkey PCB assembly guide for procurement managers. From component sourcing and SMT assembly to box-build and logistics — one supplier, one PO, one point of contact. With real process data from a Shenzhen factory running 8 SMT lines.">
+<meta property="og:title" content="Turnkey PCB Assembly Guide — Full-Service Manufacturing from Prototype to Box-Build">
+<meta property="og:description" content="Stop managing 5 suppliers for one product. Turnkey PCBA means one PO covers component procurement, SMT, through-hole, testing, conformal coating, and box-build. Here's how it works — and when it saves you 30%+ on total program cost.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/turnkey-pcb-assembly.html">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/turnkey-pcb-assembly.html">
+<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=1">
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=13"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-turnkey.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">Turnkey PCB Assembly Guide:<br><em>Full-Service Manufacturing from Prototype to Box-Build</em></h1>
+      <p class="reveal">How one purchase order covers everything — and why the "cheapest per-line-item" approach costs more in the long run.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Turnkey PCB Assembly</span></div>
+
+  <p>Managing five suppliers for one product is expensive in ways that don't show up on any invoice. Every handoff adds lead time. Every supplier boundary creates a quality gap that nobody owns. Every separate PO adds administrative overhead that procurement teams don't notice until they tally the cost of a single NPI cycle.</p>
+
+  <p>Turnkey PCB assembly collapses this supply chain into one contract. One supplier handles component procurement, SMT assembly, through-hole soldering, <a href="/blog/pcb-testing-methods.html">testing</a>, conformal coating, and box-build integration. You receive finished, tested assemblies — not bare boards that still need three more suppliers. At Huaxing PCBA, we run <span class="data-point">8 SMT lines</span> with <span class="data-point">8 million solder joints per day</span> capacity across our Shenzhen facility, providing turnkey service to 150+ customers in 30+ countries.</p>
+
+  <img class="article-img" src="../generated/blog-turnkey-overview.webp" alt="Turnkey PCB assembly workflow overview showing component procurement through box-build stages" loading="lazy">
+
+  <h2>What "Turnkey" Actually Covers (And What It Doesn't)</h2>
+
+  <p>The term "turnkey PCBA" gets used loosely. Some suppliers mean "we'll solder the components you send us." That's consignment assembly — not turnkey. Here's what a true turnkey service includes, and where the boundaries lie:</p>
+
+  <table style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)">
+    <thead>
+      <tr style="border-bottom:2px solid var(--accent)">
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Service Layer</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Turnkey</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Consignment</th>
+        <th style="text-align:left;padding:var(--space-sm);color:var(--text-primary)">Partial Turnkey</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">BOM component sourcing</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Supplier-managed</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Customer provides</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Customer provides ICs, supplier sources passives</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">PCB fabrication</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">SMT + through-hole assembly</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Assembly only</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">AOI + X-ray + functional test</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Varies</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Conformal coating</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Box-build / enclosure assembly</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td><td style="padding:var(--space-sm);color:var(--text-secondary)">✗ Separate supplier</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:var(--space-sm);color:var(--text-secondary)">Logistics / drop-ship</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td><td style="padding:var(--space-sm);color:var(--text-secondary)">Customer arranges</td><td style="padding:var(--space-sm);color:var(--accent)">✓ Included</td></tr>
+    </tbody>
+  </table>
+
+  <p>The critical distinction: turnkey means the supplier owns component procurement risk. If a part goes EOL mid-production, the supplier finds and qualifies the replacement — not your engineering team. If a reel of 10,000 0402 resistors arrives with incorrect markings, the supplier absorbs the rework cost, not your production line.</p>
+
+  <div class="highlight-box">
+    <p><strong>Cost Reality Check:</strong> Consignment assembly looks 15-25% cheaper on a per-board quote, but when you add component management overhead, inbound inspection labor, inventory carrying cost, and the cost of one production stoppage from a missing reel, the total program cost typically favors turnkey by 8-15%. For volumes above 500 units, turnkey is almost always cheaper when you measure total cost of ownership — not just assembly line-item price.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-turnkey-smt-line.webp" alt="SMT production line with pick-and-place machines in a turnkey PCB assembly facility" loading="lazy">
+
+  <h2>The Component Supply Chain: Where Turnkey Earns Its Margin</h2>
+
+  <p>The hardest part of electronics manufacturing isn't assembly — it's component procurement. In 2025-2026, the global semiconductor supply chain has stabilized from the 2021-2023 crisis, but individual part families still experience 16-26 week lead times (STM32, certain TI analog ICs, specialized connectors). A turnkey supplier handles this complexity as a core competency:</p>
+
+  <h3>1. Multi-Source BOM Validation Before Production Starts</h3>
+  <p>Before the first board enters SMT, a competent turnkey supplier validates every BOM line item against <span class="data-point">5+ authorized distributors</span> (Digi-Key, Mouser, Arrow, Avnet, Future). Components with lead times exceeding the project schedule are flagged with alternate part numbers. This prevents the most expensive mistake in electronics manufacturing: discovering a 22-week lead time part during production ramp, not during design.</p>
+
+  <h3>2. Counterfeit Component Mitigation</h3>
+  <p>The counterfeit semiconductor market is estimated at $75B annually. A single counterfeit MOSFET or voltage regulator can destroy an entire production batch. Turnkey suppliers with established distributor relationships and incoming inspection protocols (<a href="/blog/pcb-supplier-audit.html">verified during supplier audits</a>) provide a procurement gate that individual design teams rarely have. Our IQC lab performs X-ray inspection, decapsulation sampling, and electrical verification on all non-authorized-distributor parts.</p>
+
+  <h3>3. Inventory Buffer Without the Balance Sheet Hit</h3>
+  <p>Turnkey suppliers maintain buffer stock of common passives (0402/0603 resistors and capacitors across E12/E24 values) and popular ICs at their own cost. When your assembly order requires 120,000 100nF 0402 capacitors, the supplier pulls from stock — you don't need to forecast, purchase, and warehouse them. This is particularly valuable for <a href="/blog/prototype-vs-production.html">prototype-to-production transitions</a> where BOM quantities change dramatically between phases.</p>
+
+  <img class="article-img" src="../generated/blog-turnkey-components.webp" alt="Component inventory management and BOM validation process for turnkey PCB assembly" loading="lazy">
+
+  <h2>The 5 Service Layers: How Deep Does Your Turnkey Go?</h2>
+
+  <p>Not all turnkey programs are equal. The depth of service determines whether you're buying assembly capacity or a manufacturing partner. Here are the five layers — and the questions that distinguish genuine capability from sales claims:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>PCB Fabrication + Assembly (Basic Turnkey)</h4>
+      <p>PCB manufacturing and SMT/through-hole assembly under one roof. The key advantage is DFM feedback that flows directly from fabrication engineers to assembly engineers — the PCB fab team knows when a design will tombstone in reflow because they see the pad geometry daily. Our facility produces <span class="data-point">80,000㎡</span> of PCBs monthly, with fabrication and assembly engineers sharing the same production floor.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Full Component Procurement (Standard Turnkey)</h4>
+      <p>Layer 1 plus complete BOM sourcing. The supplier manages the entire component supply chain — from authorized distributor orders to alternate part qualification. This is where most turnkey relationships operate. The quality of procurement is what differentiates suppliers: verify component traceability during the <a href="/blog/pcb-supplier-audit.html">factory audit</a> — ask to trace a random reel on the SMT floor back to its distributor PO and manufacturer lot number.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Testing + Programming (Full-Service Turnkey)</h4>
+      <p>Layer 2 plus comprehensive testing: AOI (100% of boards), X-ray (BGA/QFN packages), ICT (bed-of-nails), functional test (per your spec), and firmware flashing/programming. A supplier that runs all five test methods in-house — as we describe in our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> — catches defects at the station, not at your receiving dock. Our facility operates AOI, SPI, X-ray, ICT, and FCT in a continuous inspection flow.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating + Environmental Protection</h4>
+      <p>Layer 3 plus conformal coating (acrylic, silicone, urethane, or parylene) for environmental protection. Essential for <a href="/blog/automotive-pcb-requirements.html">automotive electronics</a>, industrial controls, and outdoor equipment. The process requires selective coating equipment and masking — a separate supplier for this step introduces a new quality boundary at the worst possible point (post-test, pre-shipment). We run this in-house.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Box-Build + Logistics (Total Turnkey)</h4>
+      <p>The complete package: PCB + assembly + components + test + coating + enclosure assembly + cabling + packaging + drop-ship to your end customer or distribution center. This is the true "one PO" model. For hardware startups and mid-size OEMs, this eliminates the need for in-country warehousing and final assembly labor.</p>
+    </div>
+  </div>
+
+  <h2>When Turnkey Saves Money — And When It Doesn't</h2>
+
+  <p>Turnkey is not universally cheaper. The economics depend on three variables:</p>
+
+  <p><strong>Volume threshold:</strong> Below 50 units, the supplier's component procurement overhead adds more cost than it saves. At 50-200 units, turnkey and consignment costs roughly converge. Above 200 units, turnkey's procurement leverage — particularly on passives purchased in full-reel quantities — delivers a clear cost advantage.</p>
+
+  <p><strong>BOM complexity:</strong> A design with 30 line items (microcontroller + passives + connectors) sees minimal turnkey advantage — the BOM is simple enough manage internally. A design with 300+ line items across 15 distributor part numbers sees dramatic turnkey savings because the procurement coordination cost alone exceeds the assembly labor cost. Our average turnkey project runs <span class="data-point">150-400</span> unique BOM lines.</p>
+
+  <p><strong>Lifecycle stage:</strong> For NPI and prototype phases, the flexibility of managing your own component stock can be valuable — rapid design changes are easier when you control inventory. For production (500+ units), turnkey is almost always the right economic choice. Read our <a href="/blog/prototype-vs-production.html">prototype vs production guide</a> for the economics at each stage.</p>
+
+  <img class="article-img" src="../generated/blog-turnkey-cost-comparison.webp" alt="Cost comparison chart showing turnkey vs consignment PCB assembly across volume ranges" loading="lazy">
+
+  <h2>How to Qualify a Turnkey PCB Assembly Partner</h2>
+
+  <p>The price quote tells you almost nothing. Here's what actually predicts a successful turnkey relationship:</p>
+
+  <ol>
+    <li><strong>Component procurement transparency:</strong> Ask to see a sample BOM with line-item pricing broken out by component cost vs. procurement markup. A supplier that hides markup in the assembly line price is one you can't optimize with.</li>
+    <li><strong>Alternate part qualification process:</strong> "We'll find an alternative" is not a process. Ask: what distributor portals do you query? Do you require customer approval before substituting? What's your policy on date code freshness — will you ship boards with components within 6 months of date code?</li>
+    <li><strong>Quality system integration:</strong> A turnkey supplier's quality system must span every service layer. IPC-A-610 Class 3 acceptance criteria should apply to the PCB, the assembly, the conformal coating, AND the box-build — not just the solder joints. Our <a href="/blog/pcb-supplier-audit.html">supplier audit checklist</a> covers what to verify at each station.</li>
+    <li><strong>DFM feedback loop:</strong> Before the first production run, the supplier should return a DFM report identifying: pad geometry issues, component spacing violations, solder mask slivers, and BOM-substitution opportunities that reduce cost. Our <a href="/blog/dfm-tips.html">DFM guide</a> covers the 8 rules that cut costs by 30% — a competent turnkey supplier applies all of them.</li>
+    <li><strong>Scalability proof:</strong> A supplier running 2 SMT lines cannot absorb your volume ramp from 500 to 50,000 units. Verify current capacity, not promised capacity. Our facility runs 8 SMT lines with demonstrated <span class="data-point">8 million solder joints per day</span> throughput and IPC-A-610 Class 2/3 certification across all lines.</li>
+  </ol>
+
+  <h2>The Hidden Cost: What Goes Wrong When Turnkey Goes Wrong</h2>
+
+  <p>Turnkey failures follow a predictable pattern. Understanding these failure modes — and how to prevent them — is more valuable than comparing price quotes:</p>
+
+  <p><strong>1. Component substitution without approval:</strong> A supplier swaps your specified 1% tolerance resistor for a 5% part because it was in stock. The board passes functional test but fails in the field under temperature extremes. Prevention: specify approval-required substitution policy in the contract, and verify during the first article inspection.</p>
+
+  <p><strong>2. Test coverage gaps at layer boundaries:</strong> The PCB passes bare-board test, and the assembly passes ICT — but the connection between them (solder joint quality) isn't tested until functional test, which only covers the paths that have test points. Prevention: require <span class="data-point">100% AOI</span> post-reflow plus X-ray on all BGA and QFN packages. These are standard in our facility, not optional add-ons.</p>
+
+  <p><strong>3. Box-build quality treated as secondary:</strong> The supplier is excellent at PCB assembly but the enclosure assembly station is an afterthought — loose screws, misaligned connectors, missing cable ties. Prevention: include box-build workmanship samples in the quality agreement, and inspect the first 5 box-build units yourself or through a third-party inspector.</p>
+
+  <div class="highlight-box">
+    <p><strong>Red Flag:</strong> If a supplier cannot show you the specific IPC-A-610 acceptance criteria they use for box-build inspection — not just SMT inspection — they treat final assembly as a secondary service. A genuine turnkey supplier applies the same quality rigor to every service layer.</p>
+  </div>
+
+  <h2>Getting Started: What to Send for a Turnkey Quote</h2>
+
+  <p>A complete turnkey RFQ package enables an accurate quote in one round — not three rounds of back-and-forth:</p>
+
+  <ol>
+    <li><strong>Gerber files + drill file + BOM (with manufacturer part numbers):</strong> Without full MPNs, the supplier can only provide a ballpark estimate. "10µF capacitor, 0805" could be $0.02 or $0.50 depending on dielectric, voltage rating, and tolerance.</li>
+    <li><strong>Assembly drawings + pick-and-place file (centroid):</strong> Enables the supplier to generate an accurate SMT programming estimate and identify any placement issues before quoting.</li>
+    <li><strong>Test specification:</strong> What test methods, coverage targets, and pass/fail criteria? "Functional test" has a $500-to-$50,000 range depending on complexity.</li>
+    <li><strong>Volume + delivery schedule:</strong> Single delivery vs. scheduled releases changes inventory strategy and panel utilization. "10,000 units over 12 months in monthly releases of 833" gets a different structure than "10,000 units all at once."</li>
+  </ol>
+
+  <p>At Huaxing PCBA, our turnkey RFQ response includes a line-item cost breakdown (PCB, components, assembly, test, coating, box-build), a DFM report identifying 3-5 cost optimization opportunities, and a production schedule with milestone dates. Response time: <span class="data-point">24 hours</span> for standard BOMs.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-rigid-flex.webp)">
+      <h2>Ready for Turnkey PCB Assembly?</h2>
+      <p>Send your Gerber files, BOM, and volume target. You'll receive a complete turnkey quote — PCB, components, assembly, test, and logistics — within 24 hours, plus a free DFM review identifying 3-5 cost optimization opportunities.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Turnkey Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
 <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
-   222|    </div>
-   223|    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
-   224|  </div>
-   225|</footer>
-   226|
-   227|<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
-   228|  <div class="modal-dialog">
-   229|    <button class="modal-close" onclick="closeModal()">&times;</button>
-   230|    <div class="modal-image-panel">
-   231|      <img src="/generated/modal-pcba-showcase.webp" alt="">
-   232|      <div class="modal-image-overlay"></div>
-   233|      <div class="modal-image-top">
-   234|        <h2 class="mi-heading">Start Your Project</h2>
-   235|        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
-   236|      </div>
-   237|      <div class="modal-image-text">
-   238|        <div class="mi-label">HUAXING PCBA</div>
-   239|        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
-   240|      </div>
-   241|    </div>
-   242|    <div class="modal-form-panel">
-   243|      <form onsubmit="return handleInquiry(event)" novalidate>
-   244|        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
-   245|        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-   246|        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
-   247|        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
-   248|        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
-   249|      </form>
-   250|    </div>
-   251|  </div>
-   252|</div>
-   253|
-   254|<script src="../reveal.js"></script>
-   255|<script>
-   256|function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-   257|function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-   258|</script>
-   259|<script src="../inquiry-handler.js"></script></body>
-   260|</html>
-   261|
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
