@@ -2,7 +2,7 @@
  * Huaxing PCBA — Shared Navigation Injection
  * Injects nav HTML + critical CSS so the nav works even if
  * design-tokens.css is cached stale or loads slowly from CDN.
- * v11 — Mobile: clean fullscreen overlay
+ * v12 — Mobile: simple dropdown + hide X on desktop
  */
 (function(){
   var nav = document.getElementById('navLinks');
@@ -102,72 +102,72 @@
     '.nav-flyout-panel a:hover{color:#e8e8ec!important;background:rgba(200,150,62,.08)!important}' +
     '@keyframes flyoutIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}' +
     '.nav-flyout-trigger:hover>.nav-flyout-panel{animation:flyoutIn .2s ease}' +
-    /* ── Mobile ≤768px: clean fullscreen overlay ── */
+    /* Close button: hidden on desktop, shown only on mobile */
+    '.nav-close-btn{display:none}' +
+    /* ── Mobile ≤768px: clean dropdown below header ── */
     '@media(max-width:768px){' +
-      '.nav-links{' +
-        'display:none;' +
-        'position:fixed;top:0;left:0;right:0;bottom:0;' +
-        'background:rgba(5,5,11,.97);z-index:200;' +
-        'flex-direction:column;align-items:center;justify-content:center;' +
-        'gap:6px;overflow-y:auto;' +
-        'opacity:0;transition:opacity .25s' +
-      '}' +
-      '.nav-links.mobile-open{display:flex;opacity:1}' +
-      /* Close button — simple X top right */
       '.nav-close-btn{' +
-        'position:absolute;top:18px;right:18px;' +
-        'width:36px;height:36px;' +
-        'display:flex;align-items:center;justify-content:center;' +
-        'background:none;border:1px solid #2a2a35;border-radius:50%;' +
-        'color:#777;font-size:18px;cursor:pointer;' +
-        'transition:color .2s,border-color .2s' +
+        'display:flex;position:absolute;top:12px;right:12px;' +
+        'width:32px;height:32px;align-items:center;justify-content:center;' +
+        'background:none;border:1px solid #2a2a35;border-radius:6px;' +
+        'color:#777;font-size:16px;cursor:pointer;z-index:10' +
       '}' +
       '.nav-close-btn:hover{color:#e8e8ec;border-color:#555}' +
-      /* Links */
-      '.nav-links a,.nav-dropdown-trigger{' +
-        'display:flex;align-items:center;justify-content:center;' +
-        'padding:10px 0;font-size:17px;color:#c0c0c8;' +
-        'text-decoration:none;transition:color .15s;' +
-        'white-space:nowrap;width:100%;text-align:center' +
+      '.nav-links{' +
+        'display:none;' +
+        'position:absolute;top:100%;left:0;right:0;' +
+        'background:#0d0d14;z-index:200;' +
+        'flex-direction:column;' +
+        'padding:8px 0;' +
+        'border-top:1px solid #1a1a25;' +
+        'box-shadow:0 16px 32px rgba(0,0,0,.4);' +
+        'max-height:calc(100vh - 72px);overflow-y:auto' +
       '}' +
-      '.nav-links a:hover{color:#fff}' +
+      '.nav-links.mobile-open{display:flex}' +
+      /* Links in dropdown */
+      '.nav-links a,.nav-dropdown-trigger{' +
+        'display:flex;align-items:center;' +
+        'padding:12px 20px;font-size:15px;color:#c0c0c8;' +
+        'border-bottom:1px solid rgba(255,255,255,.04);' +
+        'text-decoration:none;transition:all .15s' +
+      '}' +
+      '.nav-links a:hover{color:#fff;background:rgba(200,150,62,.04)}' +
       '.nav-links a.active{color:#d4a843}' +
-      '.nav-dropdown{display:flex;flex-direction:column;align-items:center;width:100%}' +
-      '.nav-dropdown-trigger:hover{color:#fff}' +
+      '.nav-dropdown{display:flex;flex-direction:column}' +
+      '.nav-dropdown-trigger:hover{color:#fff;background:rgba(200,150,62,.04)}' +
       '.nav-dropdown-panel{' +
         'position:static;transform:none;opacity:1;visibility:visible;' +
-        'background:transparent;border:none;box-shadow:none;' +
-        'padding:0;min-width:0;display:flex;flex-direction:column;align-items:center' +
+        'background:rgba(0,0,0,.2);border:none;box-shadow:none;' +
+        'padding:0;min-width:0' +
       '}' +
       '.nav-dropdown-panel a{' +
-        'padding:8px 0;font-size:14px;color:#9090a0' +
+        'padding:10px 20px 10px 36px;font-size:14px;color:#9898a8;' +
+        'border-bottom:1px solid rgba(255,255,255,.02)' +
       '}' +
-      '.nav-dropdown-panel a:hover{color:#e0e0e8}' +
+      '.nav-dropdown-panel a:hover{color:#e0e0e8;background:rgba(200,150,62,.04)}' +
       '.nav-dropdown-trigger svg{display:none}' +
       '.nav-dropdown:hover>.nav-dropdown-trigger svg{transform:none}' +
       '.nav-dropdown:hover>.nav-dropdown-panel{transform:none}' +
       /* Flyout inline */
-      '.nav-flyout-trigger{flex-wrap:wrap!important;justify-content:center!important}' +
+      '.nav-flyout-trigger{flex-wrap:wrap!important}' +
       '.nav-flyout-panel{' +
         'position:static!important;opacity:1!important;visibility:visible!important;' +
         'pointer-events:auto!important;' +
         'background:transparent!important;border:none!important;' +
         'box-shadow:none!important;padding:0!important;' +
-        'min-width:0!important;animation:none!important;display:flex!important;' +
-        'flex-direction:column!important;align-items:center!important' +
+        'min-width:0!important;animation:none!important;display:block!important' +
       '}' +
-      '.nav-flyout-panel a{padding:6px 0!important;font-size:13px!important}' +
+      '.nav-flyout-panel a{padding-left:52px!important;font-size:13px!important}' +
       '.nav-flyout-trigger .ft-arrow{display:none}' +
-      /* CTA button */
+      /* CTA at bottom of dropdown */
       '.nav-cta{' +
-        'margin-top:16px!important;padding:12px 32px!important;' +
-        'text-align:center!important;' +
+        'margin:8px 16px!important;padding:12px 0!important;' +
+        'text-align:center!important;justify-content:center!important;' +
         'background:#c8963e!important;color:#08080b!important;' +
         'border:none!important;border-radius:6px!important;' +
         'font-weight:500!important;font-size:15px!important;' +
-        'letter-spacing:.02em!important;display:inline-flex!important;' +
-        'align-items:center!important;gap:6px!important;' +
-        'text-decoration:none!important' +
+        'display:flex!important;align-items:center!important;gap:6px!important;' +
+        'border-bottom:none!important' +
       '}' +
       '.nav-cta:hover{background:#d4a843!important;color:#08080b!important}' +
       '.nav-cta::after{display:none!important}' +
@@ -295,12 +295,11 @@
     });
   }
 
-  // 4. Hamburger button — simple toggle with body scroll lock
+  // 4. Hamburger button — toggle dropdown
   var btn = document.getElementById('mobileBtn');
   if (btn) {
     btn.onclick = function() {
-      var isOpen = nav.classList.toggle('mobile-open');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+      nav.classList.toggle('mobile-open');
     };
   }
 })();

@@ -504,22 +504,22 @@ h6{font-size:var(--text-lg)}
   background:var(--bg-elevated);
   border:1px solid var(--border-light);
   border-radius:var(--radius-xl);
-  width:100%;max-width:760px;
+  width:100%;max-width:720px;
   position:relative;
-  max-height:92vh;overflow-y:auto;
+  max-height:88vh;overflow-y:auto;
   display:grid;grid-template-columns:1fr 1fr;
   box-shadow:0 24px 80px rgba(0,0,0,0.5);
 }
 .modal-close{
-  position:absolute;top:12px;right:12px;z-index:10;
-  font-size:22px;color:#fff;
-  cursor:pointer;width:32px;height:32px;
+  position:absolute;top:10px;right:10px;z-index:10;
+  font-size:20px;color:#fff;
+  cursor:pointer;width:30px;height:30px;
   display:flex;align-items:center;justify-content:center;
   border-radius:50%;transition:all var(--duration) var(--ease);
   background:rgba(0,0,0,0.45);border:none;line-height:1;
 }
 .modal-close:hover{background:rgba(0,0,0,0.7);color:#fff}
-.modal-dialog h2{font-weight:200;margin-bottom:var(--space-xs);font-size:var(--text-xl)}
+.modal-dialog h2{font-weight:200;margin-bottom:var(--space-xs);font-size:1rem}
 .modal-image-panel{
   position:relative;
   background:var(--bg-surface);
@@ -532,41 +532,52 @@ h6{font-size:var(--text-lg)}
 }
 .modal-image-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.8) 100%);
+  background:linear-gradient(180deg,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.82) 100%);
 }
 /* Top-left: heading + subtitle */
 .modal-image-top{
   position:absolute;top:var(--space-md);left:var(--space-md);right:var(--space-md);
   color:#fff;z-index:2;
 }
-.modal-image-top .mi-heading{font-size:var(--text-xl);font-weight:200;margin-bottom:var(--space-sm);line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,0.6)}
-.modal-image-top .mi-subtitle{font-size:var(--text-xs);font-weight:300;line-height:1.5;opacity:0.85;max-width:90%;text-shadow:0 1px 6px rgba(0,0,0,0.5)}
+.modal-image-top .mi-heading{font-size:1.05rem;font-weight:200;margin-bottom:4px;line-height:1.25;text-shadow:0 1px 8px rgba(0,0,0,0.6)}
+.modal-image-top .mi-subtitle{font-size:0.7rem;font-weight:300;line-height:1.45;color:rgba(255,255,255,0.7);max-width:92%;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
 /* Bottom-left: brand + specs */
 .modal-image-text{
   position:absolute;bottom:var(--space-md);left:var(--space-md);right:var(--space-md);
   color:#fff;z-index:2;
 }
-.modal-image-text .mi-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:0.1em;opacity:0.7;margin-bottom:2px}
-.modal-image-text .mi-value{font-size:var(--text-xs);font-weight:300;line-height:1.4}
+.modal-image-text .mi-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.55);margin-bottom:2px}
+.modal-image-text .mi-value{font-size:0.65rem;font-weight:300;line-height:1.4;color:rgba(255,255,255,0.65)}
 .modal-image-text .mi-value strong{color:var(--accent);font-weight:400}
 .modal-form-panel{
-  padding:var(--space-lg) var(--space-md);
+  padding:var(--space-md);
   display:flex;flex-direction:column;
   justify-content:center;
 }
-.modal-form-panel .form-group{margin-bottom:var(--space-sm)}
-.modal-form-panel .form-group label{font-size:var(--text-xs);margin-bottom:4px}
+.modal-form-panel .form-group{margin-bottom:var(--space-xs)}
+.modal-form-panel .form-group label{font-size:0.65rem;margin-bottom:3px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em}
 .modal-form-panel .form-group input,
-.modal-form-panel .form-group textarea{padding:var(--space-xs) var(--space-sm);font-size:var(--text-sm)}
-.modal-form-panel button[type="submit"]{width:100%;margin-top:var(--space-xs);padding-top:var(--space-sm);padding-bottom:var(--space-sm)}
+.modal-form-panel .form-group textarea{padding:8px 10px;font-size:0.8rem}
+.modal-form-panel .form-group textarea{min-height:70px}
+.modal-form-panel button[type="submit"]{width:100%;margin-top:var(--space-xs);padding:10px;font-size:0.85rem}
 @media(max-width:640px){
-  .modal-dialog{grid-template-columns:1fr;max-width:420px;overflow-y:auto}
-  .modal-image-panel{min-height:auto;max-height:none;display:flex;flex-direction:column;overflow:visible}
-  .modal-image-panel img{position:relative;height:180px;inset:auto;flex-shrink:0;border-radius:0}
-  .modal-image-overlay{top:0;bottom:0}
-  .modal-image-top{position:static;padding:var(--space-md) var(--space-md) var(--space-sm);background:var(--bg-elevated)}
-  .modal-image-top .mi-heading{font-size:var(--text-lg);text-shadow:none;color:var(--text-primary)}
-  .modal-image-top .mi-subtitle{text-shadow:none;color:var(--text-secondary)}
+  .modal-dialog{grid-template-columns:1fr;max-width:400px;max-height:85vh;overflow-y:auto;border-radius:var(--radius-lg)}
+  .modal-image-panel{min-height:auto;max-height:none;display:block;overflow:hidden;position:relative}
+  .modal-image-panel img{position:relative;height:130px;inset:auto;flex-shrink:0;border-radius:var(--radius-lg) var(--radius-lg) 0 0;display:block}
+  .modal-image-overlay{position:absolute;top:0;bottom:0;left:0;right:0}
+  .modal-image-top{position:absolute;top:12px;left:12px;right:12px;padding:0;background:none}
+  .modal-image-top .mi-heading{font-size:0.95rem;text-shadow:0 1px 6px rgba(0,0,0,0.7);color:#fff}
+  .modal-image-top .mi-subtitle{font-size:0.65rem;text-shadow:0 1px 4px rgba(0,0,0,0.6);color:rgba(255,255,255,0.65)}
+  .modal-image-text{bottom:8px;left:12px;right:12px}
+  .modal-image-text .mi-label,.modal-image-text .mi-value{font-size:0.6rem}
+  .modal-form-panel{padding:var(--space-sm) var(--space-md)}
+  .modal-form-panel .form-group{margin-bottom:6px}
+  .modal-form-panel .form-group label{font-size:0.6rem}
+  .modal-form-panel .form-group input,
+  .modal-form-panel .form-group textarea{padding:7px 9px;font-size:0.75rem}
+  .modal-form-panel .form-group textarea{min-height:56px}
+  .modal-form-panel button[type="submit"]{padding:10px;font-size:0.8rem;margin-top:4px}
+  .modal-close{top:8px;right:8px;width:28px;height:28px;font-size:18px;background:rgba(0,0,0,0.55)}
   .modal-image-text{bottom:var(--space-sm);left:var(--space-sm);right:var(--space-sm)}
   .modal-form-panel{padding:var(--space-md)}
   .modal-close{background:rgba(0,0,0,0.55)}
