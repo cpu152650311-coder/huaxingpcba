@@ -9,17 +9,13 @@
 <meta property="og:description" content="META_DESCRIPTION">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://huaxingpcba.com/blog/PAGE_SLUG.html">
-<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-PAGE_SLUG.webp">
-<link rel="canonical" href="https://huaxingpcba.com/blog/PAGE_SLUG.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-IMAGE_SLUG.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/PAGE_SLUG.html">
 <link rel="stylesheet" href="../design-tokens.css?v=20">
-<link rel="stylesheet" href="../blog.css?v=1">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-<!-- PAGE-SPECIFIC STYLES (optional, only if needed beyond blog.css) -->
-<style>
-  /* Add any page-specific table or component styles here */
-</style>
+<link rel="stylesheet" href="../blog.css?v=1">
 </head>
 <body>
 
@@ -40,21 +36,68 @@
   </div>
 </header>
 
-<main>
-  <article class="article">
-    <div class="breadcrumb">
-      <a href="/">Home</a> &rsaquo; <a href="/blog/">Blog</a> &rsaquo; <span>ARTICLE_TITLE</span>
+<!-- ══ Sub-Hero: cover image + title ══ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-IMAGE_SLUG.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">CATEGORY_LABEL</p>
+      <h1 class="reveal">ARTICLE_MAIN_TITLE</h1>
+      <p class="reveal">ARTICLE_SUBTITLE — a one-sentence summary shown below the title.</p>
     </div>
+  </div>
+</section>
 
-    <h2>ARTICLE_MAIN_HEADING</h2>
+<!-- ══ Article Body ══ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>SHORT_TITLE</span></div>
 
-    <p>INTRO_PARAGRAPH</p>
+  <p>FIRST_PARAGRAPH — introduce the topic, set context, explain why it matters.</p>
 
-    <!-- Article body content goes here -->
+  <img class="article-img" src="../generated/blog-IMAGE_SLUG-hero.webp" alt="ALT_TEXT" loading="lazy">
 
-  </article>
-</main>
+  <h2>First Major Section Heading</h2>
+  <p>Section content here. Use <strong>bold</strong> for emphasis and <a href="/blog/related-page.html">links</a> to related articles.</p>
 
+  <!-- Checklist pattern — for numbered lists with explanations -->
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Item Title</h4>
+      <p>Item description with details and context.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Second Item Title</h4>
+      <p>Another description.</p>
+    </div>
+  </div>
+
+  <!-- Highlight box — for key takeaways or callouts -->
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Important point to remember from this section.</p>
+  </div>
+
+  <!-- Data point — large accent number for emphasis -->
+  <p>We produce <span class="data-point">80,000㎡</span> of PCBs monthly across our Shenzhen facility.</p>
+
+  <!-- Generic table — for specification comparisons -->
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Value A</th><th>Value B</th></tr>
+    <tr><td>Row label</td><td>Data 1</td><td>Data 2</td></tr>
+  </table>
+
+  <!-- If you need a custom table class, add page-specific styles in a <style> block in <head> -->
+
+</article>
+
+<!-- ══ CTA Section ══ -->
 <section class="section" style="background:var(--bg-secondary)">
   <div class="container">
     <div class="cta-card reveal">
@@ -65,6 +108,7 @@
   </div>
 </section>
 
+<!-- ══ Footer ══ -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -76,6 +120,7 @@
   </div>
 </footer>
 
+<!-- ══ Inquiry Modal ══ -->
 <div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
   <div class="modal-dialog">
     <button class="modal-close" onclick="closeModal()">&times;</button>
