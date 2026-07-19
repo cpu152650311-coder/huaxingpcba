@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Stackup Design Guide — Layer Count, Impedance, Signal Integrity, Power Delivery, 2-32 Layers | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB stackup design guide: 2-32 layer reference stackups with dielectric thicknesses and copper weights, impedance control ±5%, signal integrity principles, power delivery network design, and Huaxing production capabilities.">
+<meta property="og:title" content="PCB Stackup Design Guide — Layer Count, Impedance, Signal Integrity | Huaxing PCBA">
+<meta property="og:description" content="Reference stackups from 2 to 32 layers with real dielectric thicknesses and copper weights. Impedance control ±5%, via aspect ratio 10:1, back-drilling, and hybrid material stackups.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huaxingpcba.com/technology/stackup/">
+<link rel="canonical" href="https://huaxingpcba.com/technology/stackup/">
+<link rel="stylesheet" href="../../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"PCB Stackup Design Guide — Layer Count, Impedance & Signal Integrity","description":"Complete reference for PCB stackup design: 2-32 layer configurations with real dielectric thicknesses (0.1mm, 0.2mm, 0.5mm prepreg/core) and copper weights (0.5oz, 1oz, 2oz). Signal-ground adjacency, power-ground plane pairs, symmetric construction for warpage control, impedance control ±5%, via aspect ratio 10:1, and hybrid material stackups.","provider":{"@type":"Organization","name":"Huaxing PCBA"},"about":"PCB Stackup Design"}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Technology", "item": "https://huaxingpcba.com/technology/"},
+    {"@type": "ListItem", "position": 3, "name": "Stackup", "item": "https://huaxingpcba.com/technology/stackup/"}
+  ]
+}
+</script>
+
+<style>
+.sub-hero{position:relative;min-height:55vh;display:flex;align-items:center;overflow:hidden;background:var(--bg-primary)}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.4)}
+.sub-hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 30% 50%,rgba(200,150,62,.1) 0%,transparent 60%)}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+.sub-hero-content h1{font-size:clamp(2rem,4vw,3.5rem);font-weight:200;line-height:1.15;margin-bottom:var(--space-md)}
+.sub-hero-content h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
+.sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:680px;line-height:1.7}
+.tech-article{max-width:900px;margin:0 auto;padding:var(--space-2xl) var(--space-lg);font-size:var(--text-base);color:var(--text-secondary);line-height:1.85}
+.tech-article .breadcrumb{font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-2xl)}
+.tech-article .breadcrumb a{color:var(--text-muted);text-decoration:none}
+.tech-article .breadcrumb a:hover{color:var(--accent)}
+.tech-article h2{font-size:var(--text-2xl);font-weight:200;color:var(--text-primary);margin:var(--space-2xl) 0 var(--space-md);padding-top:var(--space-lg);border-top:1px solid var(--border)}
+.tech-article h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:var(--space-xl) 0 var(--space-sm)}
+.tech-article p{margin-bottom:var(--space-md)}
+.tech-article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.tech-article a:hover{color:#d4a843}
+.tech-article ul,.tech-article ol{padding-left:1.5rem;margin-bottom:var(--space-md)}
+.tech-article li{margin-bottom:var(--space-sm);line-height:1.75}
+.tech-article strong{color:var(--text-primary);font-weight:500}
+.key-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.key-metric{text-align:center;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.key-metric .km-val{display:block;font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace}
+.key-metric .km-lbl{display:block;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.08em}
+.spec-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.spec-table thead tr{border-bottom:2px solid var(--accent)}
+.spec-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);background:var(--bg-secondary)}
+.spec-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.spec-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.spec-table td:first-child{color:var(--text-primary);font-weight:500}
+.compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.compare-table thead th{text-align:center;padding:var(--space-md);color:var(--text-primary);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--accent)}
+.compare-table thead th:first-child{text-align:left}
+.compare-table td{text-align:center;padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.compare-table td:first-child{text-align:left;color:var(--text-primary);font-weight:500}
+.compare-table tbody tr:hover td{background:rgba(200,150,62,.03)}
+.compare-table .check{color:var(--accent)}
+.decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-2xl)}
+.decision-card{padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color .3s,transform .3s}
+.decision-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.decision-card .dc-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin-bottom:var(--space-md)}
+.decision-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm) 0;font-size:var(--text-base)}
+.decision-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+.cap-limits{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.cap-limits th{text-align:left;padding:var(--space-md) var(--space-lg);color:var(--accent);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;background:rgba(200,150,62,.06);border-bottom:1px solid var(--accent-subtle)}
+.cap-limits td{padding:var(--space-md) var(--space-lg);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.cap-limits td:first-child{color:var(--text-primary);font-weight:500;width:40%}
+.cap-limits tr:last-child td{border-bottom:none}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.related-card{display:block;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s}
+.related-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.related-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.related-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+.cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center;padding:var(--space-3xl) var(--space-2xl)}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+@media(max-width:1024px){.key-metrics{grid-template-columns:repeat(2,1fr)}.decision-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.sub-hero{min-height:40vh}.key-metrics{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=16"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../../generated/tech-stackup-hero.webp" alt="PCB stackup cross-section showing layer structure, prepreg, core, and copper foil layers" loading="eager"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technology / PCB Design</p>
+      <h1 class="reveal">PCB Stackup Design:<br><em>Signal Integrity Starts Here.</em></h1>
+      <p class="reveal">The right stackup is the single most consequential design decision you make. Layer count, material selection, dielectric thickness, copper weight, and plane assignment determine impedance control, crosstalk, power delivery, and manufacturability — before you route a single trace.</p>
+    </div>
+  </div>
+</section>
+
+<article class="tech-article reveal">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/technology/">Technology</a> / <span>Stackup</span></div>
+
+  <p>The PCB stackup is the laminated sequence of copper signal and plane layers, separated by dielectric materials (prepreg and core), that forms the physical substrate of your circuit. Every electrical property that matters — characteristic impedance, insertion loss, crosstalk, power distribution network (PDN) impedance, and intra-pair skew — is fundamentally determined by the stackup geometry: layer order, dielectric thickness, copper weight, and material Dk/Df.</p>
+
+  <p>At Huaxing PCBA, we manufacture boards from 2 to 32 layers with controlled-impedance stackups using materials from Isola, Shengyi, Rogers, Panasonic, and Taconic. Our standard dielectric options range from 0.05mm prepreg (for tight coupling in power-ground pairs) to 1.5mm core (for structural rigidity in high-layer-count backplanes), with copper weights from 0.5oz (18µm) for fine-pitch signal layers to 2oz (70µm) for power planes and high-current traces. Every impedance-controlled order includes a TDR-validated impedance coupon on the production panel.</p>
+
+  <div class="key-metrics">
+    <div class="key-metric"><span class="km-val">2–32</span><span class="km-lbl">Layer Count Range</span></div>
+    <div class="key-metric"><span class="km-val">10:1</span><span class="km-lbl">Via Aspect Ratio</span></div>
+    <div class="key-metric"><span class="km-val">±5%</span><span class="km-lbl">Impedance Tolerance</span></div>
+    <div class="key-metric"><span class="km-val"><1ps</span><span class="km-lbl">Intra-Pair Skew</span></div>
+  </div>
+
+  <h2>Stackup Design Principles</h2>
+
+  <p>A well-designed stackup is not a random sequence of layers — it follows fundamental electromagnetic and mechanical principles that have been validated across decades of high-speed digital design. These four principles are non-negotiable for any design above 100MHz or with controlled-impedance requirements.</p>
+
+  <h3>1. Signal-Ground Adjacency</h3>
+  <p>Every signal layer must be adjacent to a continuous reference plane (ground preferred, power acceptable if properly decoupled). This ensures a well-defined return path directly beneath each trace, minimizing loop inductance and controlling characteristic impedance. When a signal changes reference planes, the return current must find a path through stitching capacitors or vias — if it cannot, the signal radiates and creates EMI. A common stackup mistake: routing high-speed signals on layer 3 of a 4-layer board where layer 2 is power (not ground) and layer 4 is ground — the return path on layer 2 is interrupted by plane splits, forcing return currents to take long detours. <strong>Rule: every high-speed signal layer must have an adjacent, uninterrupted ground plane.</strong></p>
+
+  <h3>2. Power-Ground Plane Pairs</h3>
+  <p>Place power and ground planes adjacent with a thin dielectric (typically 0.1mm–0.2mm prepreg) to create planar capacitance. This inter-plane capacitance acts as a high-frequency decoupling capacitor with virtually zero inductance — it is the most effective PDN element you can design. The capacitance per square inch is C = ε₀ · εᵣ · A / d. With FR-4 (εᵣ ≈ 4.2) and 0.1mm dielectric, you get approximately 370pF/cm². At 1GHz, the impedance of this planar capacitance is approximately 0.43Ω/cm² — orders of magnitude lower than any discrete capacitor after accounting for mounting inductance. <strong>Rule: every power plane must be tightly coupled to a ground plane with ≤0.2mm dielectric.</strong></p>
+
+  <h3>3. Symmetric Construction for Warpage Control</h3>
+  <p>Asymmetric stackups — where copper distribution, dielectric thickness, or material type differs between the top and bottom halves — create internal stresses during lamination and thermal cycling. These stresses manifest as board warpage (bow and twist), which causes tombstoning during SMT reflow, open joints on BGA corners, and reliability failures under thermal cycling. A symmetric stackup balances copper percentage, prepreg/core thickness, and material type about the geometric centerline. <strong>Rule: the stackup cross-section must be mirror-symmetric about the center of the board.</strong> For odd-layer-count boards (e.g., 3-layer), warpage is inherent — always prefer even layer counts.</p>
+
+  <h3>4. Layer Count Optimization</h3>
+  <p>Adding layers reduces routing density per layer and improves signal integrity (more room for ground fills, wider trace spacing), but increases cost non-linearly. Each additional layer pair adds approximately 15-25% to the bare board cost due to additional lamination cycles, material, and drilling complexity. The optimal layer count minimizes total cost while meeting these constraints: (a) every signal layer has an adjacent reference plane, (b) impedance targets are achievable with manufacturable trace widths (typically ≥75µm for standard etch), (c) routing density per layer is ≤50% to leave room for ground copper pour, and (d) via aspect ratio remains ≤10:1 for reliable plating. <strong>Rule: start with the minimum layer count that satisfies signal integrity and routability, not the maximum your budget allows.</strong></p>
+
+  <h2>Reference Stackup Library: 2–32 Layers</h2>
+
+  <p>The following reference stackups cover the most common configurations from simple 2-layer consumer boards to 32-layer telecom backplanes. These are starting points — every design should be tuned for its specific impedance targets, material selection, and manufacturing partner. All configurations assume FR-4 (Tg 150°C) unless otherwise noted. Core thicknesses are given as finished dielectric after lamination; prepreg thicknesses account for approximately 10% compression during pressing.</p>
+
+  <table class="spec-table">
+    <thead><tr><th>Layers</th><th>Typical Thickness</th><th>Signal Layers</th><th>Plane Layers</th><th>Copper Wt (Signal/Plane)</th><th>Typical Applications</th><th>Relative Cost</th></tr></thead>
+    <tbody>
+      <tr><td>2L</td><td>0.6–1.6mm</td><td>2</td><td>0</td><td>1oz / –</td><td>Power supplies, LED drivers, simple single-board MCU</td><td>0.4x</td></tr>
+      <tr><td>4L</td><td>1.0–1.6mm</td><td>2</td><td>2</td><td>0.5oz / 1oz</td><td>Simple digital, IoT modules, basic consumer electronics</td><td>1x (base)</td></tr>
+      <tr><td>6L</td><td>1.2–1.6mm</td><td>3–4</td><td>2–3</td><td>0.5oz / 1oz</td><td>Mixed-signal MCU boards, basic FPGA, automotive body control</td><td>1.5x</td></tr>
+      <tr><td>8L</td><td>1.2–2.0mm</td><td>4</td><td>4</td><td>0.5oz / 1oz</td><td>DDR3/DDR4 routing, mid-range FPGA, industrial control</td><td>2x</td></tr>
+      <tr><td>10L</td><td>1.6–2.0mm</td><td>5–6</td><td>4–5</td><td>0.5oz / 1oz</td><td>Complex mixed-signal, high-pin-count FPGA, ADAS front cameras</td><td>2.5x</td></tr>
+      <tr><td>12L</td><td>1.6–2.4mm</td><td>6</td><td>6</td><td>0.5oz / 1oz</td><td>High-density digital, ADAS domain controllers, server management</td><td>3x</td></tr>
+      <tr><td>16L</td><td>2.0–3.0mm</td><td>8</td><td>8</td><td>0.5oz / 1oz</td><td>Server/network switch line cards, advanced FPGA, medical imaging</td><td>4x</td></tr>
+      <tr><td>20L</td><td>2.4–3.5mm</td><td>10</td><td>10</td><td>0.5oz / 1–2oz</td><td>Telecom line cards, 5G baseband units, high-speed backplanes</td><td>5x</td></tr>
+      <tr><td>24L</td><td>2.8–4.0mm</td><td>12</td><td>12</td><td>0.5oz / 1–2oz</td><td>High-end telecom switches, automated test equipment (ATE)</td><td>6.5x</td></tr>
+      <tr><td>28L</td><td>3.2–4.5mm</td><td>14</td><td>14</td><td>0.5oz / 1–2oz</td><td>Core network backplanes, military avionics, supercomputing</td><td>8x</td></tr>
+      <tr><td>32L</td><td>3.5–5.0mm</td><td>16</td><td>16</td><td>0.5oz / 1–2oz</td><td>Telecom core backplanes, aerospace guidance, particle physics DAQ</td><td>10x</td></tr>
+    </tbody>
+  </table>
+
+  <figure style="margin:var(--space-2xl) 0">
+    <img src="../../generated/tech-stackup-reference.webp" alt="Reference PCB stackup configurations from 2-layer to 12-layer" style="width:100%;border-radius:var(--radius-lg)" loading="lazy">
+    <figcaption style="font-size:var(--text-xs);color:var(--text-muted);text-align:center;margin-top:var(--space-sm)">Reference PCB stackup configurations from 2-layer to 12-layer, showing copper signal/power/ground planes in gold and dielectric prepreg/core layers in grey. All stackups maintain symmetric construction for warpage control.</figcaption>
+  </figure>
+
+  <h2>Dielectric Materials & Copper Options</h2>
+
+  <p>Stackup design is as much about material selection as it is about layer count. The dielectric constant (Dk) and dissipation factor (Df) of your prepreg and core materials determine impedance accuracy, signal loss, and thermal performance. Huaxing maintains inventory of the following standard materials, with hybrid stackups combining multiple material types in a single lamination.</p>
+
+  <table class="spec-table">
+    <thead><tr><th>Material</th><th>Type</th><th>Dk @ 1GHz</th><th>Df @ 1GHz</th><th>Tg (°C)</th><th>Available Thicknesses</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td>Shengyi S1000-2</td><td>Standard FR-4</td><td>4.2</td><td>0.018</td><td>150</td><td>0.10, 0.15, 0.20, 0.25, 0.36, 0.51, 0.71, 1.0, 1.5, 2.0mm</td><td>General digital, cost-sensitive designs</td></tr>
+      <tr><td>Shengyi S1000-2M</td><td>Mid-Loss FR-4</td><td>3.8</td><td>0.010</td><td>180</td><td>0.10, 0.15, 0.20, 0.25, 0.36, 0.51, 0.71, 1.0mm</td><td>Up to 10Gbps digital, DDR4/DDR5</td></tr>
+      <tr><td>Isola 370HR</td><td>High-Tg FR-4</td><td>3.9</td><td>0.017</td><td>180</td><td>0.10, 0.13, 0.18, 0.20, 0.25, 0.36, 0.51, 0.71mm</td><td>High-reliability, lead-free assembly</td></tr>
+      <tr><td>Panasonic Megtron 6</td><td>Low-Loss</td><td>3.4</td><td>0.002</td><td>185</td><td>0.05, 0.10, 0.15, 0.20, 0.30mm</td><td>25Gbps+ SerDes, 5G RF, radar</td></tr>
+      <tr><td>Rogers 4350B</td><td>Hydrocarbon Ceramic</td><td>3.48</td><td>0.0037</td><td>>280</td><td>0.10, 0.17, 0.25, 0.51, 0.76, 1.52mm</td><td>RF/microwave, mmWave antennas</td></tr>
+      <tr><td>Rogers 4003C</td><td>Hydrocarbon Ceramic</td><td>3.38</td><td>0.0027</td><td>>280</td><td>0.20, 0.30, 0.51, 0.81, 1.52mm</td><td>Precision RF, phase-sensitive arrays</td></tr>
+    </tbody>
+  </table>
+
+  <table class="cap-limits" style="margin-top:var(--space-lg)">
+    <tr><th colspan="2">Standard Prepreg & Core Thickness Options</th></tr>
+    <tr><td>Prepreg (PP) Options</td><td>0.05mm (2116 x1), 0.10mm (2116 x2 or 7628 x1), 0.15mm, 0.20mm (7628 x2), 0.25mm, 0.36mm</td></tr>
+    <tr><td>Core Options</td><td>0.10mm, 0.15mm, 0.20mm, 0.25mm, 0.36mm, 0.51mm, 0.71mm, 1.0mm, 1.2mm, 1.5mm, 2.0mm, 2.4mm</td></tr>
+    <tr><td>Copper Foil Weights</td><td>0.5oz (18µm) — fine-pitch signal layers; 1oz (35µm) — standard signal/plane; 2oz (70µm) — power planes, high-current traces; 3oz (105µm) — heavy-copper designs (available on request)</td></tr>
+    <tr><td>Copper Foil Types</td><td>Electrodeposited (ED) standard for FR-4; rolled-annealed (RA) for flex; reverse-treated (RTF) for low-loss; ultra-low-profile (HVLP) for >25Gbps</td></tr>
+  </table>
+
+  <h2>Stackup Type Comparison</h2>
+
+  <p>Not all stackups are created equal. The choice between a standard through-hole stackup, HDI with microvias, hybrid construction with mixed materials, and flex/rigid-flex depends on density requirements, signal integrity targets, and mechanical constraints.</p>
+
+  <table class="compare-table">
+    <thead><tr><th>Characteristic</th><th>Standard THT</th><th>HDI (Microvia)</th><th>Hybrid (Mixed Materials)</th><th>Flex / Rigid-Flex</th></tr></thead>
+    <tbody>
+      <tr><td>Typical Layers</td><td>2–32</td><td>4–16</td><td>6–24</td><td>2–20</td></tr>
+      <tr><td>Via Technology</td><td>Mechanical drill (≥0.2mm)</td><td>Laser microvia (≥0.075mm)</td><td>Mechanical + laser combo</td><td>Mechanical + laser</td></tr>
+      <tr><td>Impedance Control</td><td>Standard (±10%)</td><td>Controlled (±5–7%)</td><td>Precision (±5%)</td><td>Controlled (±7–10%)</td></tr>
+      <tr><td>Material Options</td><td>FR-4 (single Dk/Df)</td><td>FR-4, mid-loss</td><td>FR-4 + Rogers/Taconic/Panasonic</td><td>Polyimide + FR-4 stiffeners</td></tr>
+      <tr><td>Dielectric Thinness</td><td>≥0.10mm</td><td>≥0.05mm (laser-drillable)</td><td>≥0.05mm (RF), ≥0.10mm (digital)</td><td>≥0.025mm (flex core)</td></tr>
+      <tr><td>Complexity</td><td>Low</td><td>Medium–High</td><td>High</td><td>High–Very High</td></tr>
+      <tr><td>Cost Factor</td><td>1x</td><td>1.5x–3x</td><td>2x–4x</td><td>2x–5x</td></tr>
+      <tr><td>When to Use</td><td>BGA ≥0.8mm pitch, general digital, low-to-medium speed</td><td>BGA ≤0.5mm pitch, high density, any-layer interconnect</td><td>RF + digital on one board, mixed-frequency, antenna-integrated</td><td>Foldable assemblies, dynamic flex, space-constrained 3D packaging</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Layer Count Decision Guide</h2>
+
+  <p>Choosing the right number of layers is often the first stackup decision you face. The following guide maps application complexity to recommended layer count ranges. These are rules of thumb — the final answer comes from a proper routing study and impedance calculation in your CAD tool.</p>
+
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="dc-label">2–4 Layers</div>
+      <h4>Simple Digital & Power Electronics</h4>
+      <p>Best for designs with no high-speed signals (>50MHz), no controlled impedance, and BGA pitch ≥0.8mm. Typical applications: power supplies, LED drivers, basic MCU boards (Arduino-class), relay control, sensor interfaces. 4-layer stackup (signal-ground-power-signal) is the sweet spot — it provides a solid reference plane and PDN for very little cost premium over 2-layer. Avoid 4-layer on complex mixed-signal designs where one ground plane must be shared between analog and digital return currents.</p>
+    </div>
+    <div class="decision-card">
+      <div class="dc-label">6–10 Layers</div>
+      <h4>Mixed-Signal & Mid-Complexity Digital</h4>
+      <p>Required when you have DDR memory (DDR3/DDR4 with controlled 50Ω single-ended and 100Ω differential impedance), multiple power rails needing dedicated planes, or analog/digital partitioning. 6-layer (signal-ground-signal-signal-power-signal) is the minimum for DDR routing. 8-layer with 4 signal + 4 plane layers is the workhorse configuration for mid-range FPGA and industrial control. At 10 layers, you can dedicate entire layers to high-speed buses with adjacent ground planes on both sides (stripline routing).</p>
+    </div>
+    <div class="decision-card">
+      <div class="dc-label">12–20 Layers</div>
+      <h4>High-Density Digital & Advanced FPGA</h4>
+      <p>Necessary for large pin-count FPGAs (>800 pins), DDR4/DDR5 with 4+ byte lanes, 10Gbps+ SerDes links requiring stripline routing with precise impedance control, and mixed RF/digital designs. 12-layer provides 6 signal layers and 6 plane layers — enough for separate analog and digital ground planes, multiple power islands, and high-speed differential pairs on dedicated stripline layers. 16-layer is common for server motherboards and network switch line cards. 20-layer addresses the most demanding FPGA/ASIC designs with 20+ power rails.</p>
+    </div>
+    <div class="decision-card">
+      <div class="dc-label">20–32 Layers</div>
+      <h4>Telecom Backplanes & Aerospace Systems</h4>
+      <p>Reserved for the highest-density, highest-reliability applications: telecom core backplanes carrying hundreds of differential pairs across a passive interconnect, automated test equipment (ATE) with thousands of relay-switched channels, military avionics with redundant power planes and shielded secure channels, and particle physics data acquisition with picosecond timing distribution. These stackups require advanced materials (Megtron 6, Rogers), back-drilling to remove via stubs on high-speed layers, and aspect ratios approaching 10:1 for through-hole vias. Each additional layer pair above 20 adds approximately 10-15% cost premium.</p>
+    </div>
+  </div>
+
+  <h2>Critical Stackup Parameters: Dielectric, Copper, and Geometry</h2>
+
+  <p>While layer count gets the attention, the physical parameters that determine signal integrity live in the details. These are the numbers your PCB fabricator needs to deliver a working board — and the tolerances that separate a controlled-impedance shop from a commodity manufacturer.</p>
+
+  <table class="spec-table">
+    <thead><tr><th>Parameter</th><th>Standard Range</th><th>Huaxing Capability</th><th>Impact on Performance</th></tr></thead>
+    <tbody>
+      <tr><td>Characteristic Impedance (Single-Ended)</td><td>50Ω ±10%</td><td>50Ω ±5%</td><td>Reflections, eye closure at >1Gbps</td></tr>
+      <tr><td>Differential Impedance</td><td>100Ω ±10%</td><td>100Ω ±5%</td><td>Mode conversion, EMI from differential-to-common conversion</td></tr>
+      <tr><td>Intra-Pair Skew</td><td><5ps typical</td><td><1ps (length-matched within 0.05mm)</td><td>Bit error rate on 10Gbps+ SerDes links</td></tr>
+      <tr><td>Via Aspect Ratio</td><td>8:1 standard</td><td>10:1 (e.g., 0.25mm hole through 2.5mm board)</td><td>Plating reliability, via inductance</td></tr>
+      <tr><td>Minimum Core Thickness</td><td>0.10mm</td><td>0.10mm (FR-4), 0.05mm (Megtron 6)</td><td>Power-ground plane coupling capacitance</td></tr>
+      <tr><td>Minimum Prepreg Thickness</td><td>0.10mm (7628 x1)</td><td>0.05mm (2116 x1)</td><td>Signal-to-plane coupling, trace width for target impedance</td></tr>
+      <tr><td>Copper Thickness Tolerance</td><td>±10%</td><td>Starting foil ±5%, plated to IPC Class 2/3</td><td>Trace resistance, current capacity, impedance accuracy</td></tr>
+      <tr><td>Etch Factor (Trace Width Loss)</td><td>~0.025mm per side</td><td>Compensated in CAM — your design width is the finished width</td><td>Impedance offset, especially on 0.5oz outer layers</td></tr>
+      <tr><td>Dielectric Constant Tolerance</td><td>±0.2 (standard FR-4)</td><td>As specified — we use material datasheet Dk for impedance calculation</td><td>Impedance prediction accuracy, phase matching</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Huaxing Stackup Production Capabilities</h2>
+
+  <table class="cap-limits">
+    <tr><th colspan="2">Huaxing Production Limits — PCB Stackup</th></tr>
+    <tr><td>Maximum Layer Count</td><td>32 layers (through-hole), 16 layers (HDI any-layer), 20 layers (rigid-flex)</td></tr>
+    <tr><td>Hybrid Stackup</td><td>Mixed materials in one lamination cycle — Rogers 4350B/4003C + FR-4, Megtron 6 + FR-4, Taconic + FR-4. Different Dk/Df materials bonded in a single press cycle with verified interlayer adhesion.</td></tr>
+    <tr><td>Via Types Supported</td><td>Through-hole (mechanical drill ≥0.2mm), blind via (laser ≥0.075mm, mechanical ≥0.2mm), buried via (laser or mechanical), microvia (laser ≥0.075mm), back-drilled via (stub removal to ±0.075mm depth control)</td></tr>
+    <tr><td>Back-Drilling</td><td>Controlled-depth drilling to remove via stubs on high-speed layers. Stub length controlled to ≤0.15mm (standard) or ≤0.075mm (precision). Back-drill diameter typically 0.1mm larger than plated via hole. Essential for ≥5Gbps signals on boards >2.0mm thick.</td></tr>
+    <tr><td>Impedance Control</td><td>Field-solver calculation (Polar Si8000) on every controlled-impedance order. TDR test coupon on every production panel — 100% verification, not sample-based. ±5% tolerance standard, ±3% available on request for critical RF designs.</td></tr>
+    <tr><td>Impedance Coupon</td><td>Every panel includes an impedance test coupon with representative trace geometries (microstrip and stripline, single-ended and differential). Coupon is TDR-tested at the factory. Test data is archived and traceable by your work order number — we can pull impedance data from boards shipped 3 years ago.</td></tr>
+    <tr><td>Material Traceability</td><td>Lot-level traceability on all laminates and prepregs. Material certificate (C of C) provided with first-article shipment. UL file number E354321.</td></tr>
+    <tr><td>Symmetric Stackup Verification</td><td>Cross-section micrograph on first-article to verify: copper thickness per layer, dielectric thickness per layer, layer-to-layer registration, via plating uniformity, and overall stackup symmetry. Digital micrograph provided in first-article report.</td></tr>
+    <tr><td>Surface Finishes</td><td>ENIG (Au 0.05–0.12µm over Ni 3–6µm), ENEPIG, immersion silver, immersion tin, HASL (lead-free), hard gold (edge connectors, 0.5–1.5µm Au), OSP. Finish selection is part of stackup design — ENIG is the default for controlled-impedance boards.</td></tr>
+  </table>
+
+  <h2>Industries That Depend on Advanced Stackup Design</h2>
+
+  <div class="related-grid">
+    <a href="/industries/telecom/" class="related-card"><h4>Telecom & 5G</h4><p>32L backplanes with Megtron 6, back-drilled vias, ±5% 100Ω differential impedance. Core network routers, 5G baseband units, optical transport.</p></a>
+    <a href="/industries/automotive/" class="related-card"><h4>Automotive</h4><p>6-12L hybrid stackups for ADAS domain controllers, radar front-ends (Rogers + FR-4), camera modules. ISO 26262-ready documentation.</p></a>
+    <a href="/industries/consumer/" class="related-card"><h4>Consumer Electronics</h4><p>8-12L HDI any-layer stackups for smartphones, tablets, AR/VR. 75µm microvias, 0.4mm BGA pitch, 8M placements/day.</p></a>
+    <a href="/industries/industrial/" class="related-card"><h4>Industrial</h4><p>6-10L heavy-copper hybrid stackups (2oz Cu) for motor drives, PLCs, VFDs. High-Tg FR-4 for extended temperature range.</p></a>
+    <a href="/industries/aerospace/" class="related-card"><h4>Aerospace & Defense</h4><p>Up to 32L with IPC Class 3, full material traceability, redundant power planes, shielded secure enclave routing.</p></a>
+    <a href="/industries/medical/" class="related-card"><h4>Medical</h4><p>8-16L controlled-impedance stackups for imaging systems, patient monitoring, implantable device controllers. ISO 13485 documentation.</p></a>
+  </div>
+
+  <h2>Further Reading</h2>
+  <ul>
+    <li><a href="/blog/impedance.html">Controlled Impedance PCB Design — 50Ω, 100Ω Differential, TDR Testing</a> — deep-dive into impedance calculation, stackup geometry effects, and verification methods</li>
+    <li><a href="/blog/ddr-routing.html">DDR4/DDR5 Memory Routing Guidelines — Fly-By Topology, Length Matching, Signal Integrity</a> — how stackup selection affects DDR routing and timing closure</li>
+    <li><a href="/technology/hdi/">HDI PCB Technology — Any-Layer Interconnect & 75µm Microvias</a> — how HDI stackups differ from standard through-hole configurations</li>
+    <li><a href="/technology/materials/">PCB Laminate & Material Selection Guide</a> — Dk/Df values, Tg ratings, and when to upgrade from standard FR-4</li>
+    <li><a href="/blog/cost-factors.html">PCB Cost Factors — Layer Count, Materials, Surface Finish, and Volume Pricing</a> — economic trade-offs in stackup decisions</li>
+  </ul>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(/generated/blog-cta-cost.webp)">
+      <h2>Need a Stackup Design Review?</h2>
+      <p>Send us your proposed layer count, impedance targets, and material preferences. Our engineering team responds within 24h with a feasibility assessment, Polar-calculated impedance stackup, and cost-optimized alternatives — free, even if you don't order from us.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Stackup DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. ISO 9001 certified, UL E354321. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../reveal.js"></script>
+<script>function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}</script>
+<script src="../../inquiry-handler.js"></script></body>
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPC Standards Explained — Class 2 vs Class 3, IPC-A-610, IPC-6012, J-STD-001 | Huaxing PCBA</title>
+<meta name="description" content="Comprehensive guide to IPC standards for PCB manufacturing: IPC-A-610 Class 2 vs Class 3, IPC-6012 rigid PCB qualification, J-STD-001 soldering, and how to specify quality requirements.">
+<meta property="og:title" content="IPC Standards Explained — Class 2 vs Class 3, IPC-A-610, IPC-6012, J-STD-001">
+<meta property="og:description" content="Understand IPC classifications before you specify your next PCB. Class 2 vs Class 3, bare board vs assembly standards, and a practical checklist for your fabrication notes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/knowledge/ipc-standards/">
+<link rel="canonical" href="https://huaxingpcba.com/knowledge/ipc-standards/">
+<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"IPC Standards Explained — Class 2 vs Class 3, IPC-A-610, IPC-6012, J-STD-001","description":"Comprehensive guide to IPC standards for PCB manufacturing: IPC-A-610 Class 2 vs Class 3, IPC-6012 rigid PCB qualification, J-STD-001 soldering, and how to specify quality requirements.","provider":{"@type":"Organization","name":"Huaxing PCBA"},"about":"IPC Standards for PCB Manufacturing"}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Knowledge Base", "item": "https://huaxingpcba.com/knowledge/"},
+    {"@type": "ListItem", "position": 3, "name": "IPC Standards", "item": "https://huaxingpcba.com/knowledge/ipc-standards/"}
+  ]
+}
+</script>
+
+<style>
+/* ── Sub-Hero ── */
+.sub-hero{position:relative;min-height:45vh;display:flex;align-items:center;overflow:hidden;background:var(--bg-primary)}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.22) saturate(0.4)}
+.sub-hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 40% 30%,rgba(200,150,62,.1) 0%,transparent 60%)}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+.sub-hero-content h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:200;line-height:1.15;margin-bottom:var(--space-md)}
+.sub-hero-content h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
+.sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:640px;line-height:1.7}
+
+/* ── Knowledge Article Body ── */
+.kb-article{max-width:900px;margin:0 auto;padding:var(--space-2xl) var(--space-lg);font-size:var(--text-base);color:var(--text-secondary);line-height:1.85}
+.kb-article .breadcrumb{font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-2xl)}
+.kb-article .breadcrumb a{color:var(--text-muted);text-decoration:none}
+.kb-article .breadcrumb a:hover{color:var(--accent)}
+.kb-article h2{font-size:var(--text-2xl);font-weight:200;color:var(--text-primary);margin:var(--space-2xl) 0 var(--space-md);padding-top:var(--space-lg);border-top:1px solid var(--border)}
+.kb-article h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:var(--space-xl) 0 var(--space-sm)}
+.kb-article p{margin-bottom:var(--space-md)}
+.kb-article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.kb-article a:hover{color:#d4a843}
+.kb-article ul,.kb-article ol{padding-left:1.5rem;margin-bottom:var(--space-md)}
+.kb-article li{margin-bottom:var(--space-sm);line-height:1.75}
+.kb-article strong{color:var(--text-primary);font-weight:500}
+
+/* ── Definition Cards ── */
+.def-card{padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-lg)}
+.def-card .def-term{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm) 0}
+.def-card .def-body{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.8}
+.def-card .def-body p{margin-bottom:var(--space-sm)}
+.def-card .def-body p:last-child{margin-bottom:0}
+
+/* ── Info Table ── */
+.info-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.info-table thead tr{border-bottom:2px solid var(--accent)}
+.info-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);background:var(--bg-secondary)}
+.info-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.info-table tbody tr{transition:background .2s}
+.info-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.info-table td:first-child{color:var(--text-primary);font-weight:500}
+
+/* ── Comparison Table ── */
+.compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.compare-table thead th{text-align:center;padding:var(--space-md);color:var(--text-primary);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--accent)}
+.compare-table thead th:first-child{text-align:left}
+.compare-table td{text-align:center;padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.compare-table td:first-child{text-align:left;color:var(--text-primary);font-weight:500}
+.compare-table tbody tr:hover td{background:rgba(200,150,62,.03)}
+.compare-table .check{color:var(--accent)}
+.compare-table .dash{color:var(--text-muted)}
+
+/* ── Checklist Items (inherited from blog.css pattern) ── */
+.checklist-item{display:flex;gap:var(--space-lg);padding:var(--space-lg) 0;border-bottom:1px solid var(--border)}
+.checklist-item:last-child{border-bottom:none}
+.checklist-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:500;font-family:'JetBrains Mono','Consolas',monospace}
+.checklist-content h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-base)}
+.checklist-content p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Highlight Box ── */
+.highlight-box{padding:var(--space-lg) var(--space-xl);background:rgba(200,150,62,.05);border:1px solid var(--accent-subtle);border-radius:var(--radius-lg);margin:var(--space-lg) 0}
+.highlight-box p{font-size:var(--text-sm);color:var(--text-secondary);margin:0;line-height:1.8}
+.highlight-box strong{color:var(--accent)}
+
+/* ── Step Guide ── */
+.step-list{counter-reset:step;margin:var(--space-lg) 0}
+.step-item{counter-increment:step;display:flex;gap:var(--space-lg);padding:var(--space-lg) 0;border-bottom:1px solid var(--border)}
+.step-item:last-child{border-bottom:none}
+.step-num{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:500;font-family:'JetBrains Mono','Consolas',monospace}
+.step-body h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-base)}
+.step-body p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Related Resources ── */
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.related-card{display:block;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s}
+.related-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.related-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.related-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+.cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center;padding:var(--space-3xl) var(--space-2xl)}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+
+@media(max-width:768px){.sub-hero{min-height:30vh}.kb-article{font-size:var(--text-sm)}.info-table,.compare-table{font-size:var(--text-xs)}.info-table td,.compare-table td{padding:var(--space-sm)}}
+
+/* ── IPC Class Badge Strip ── */
+.class-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.class-badge{padding:var(--space-xl) var(--space-lg);text-align:center;border-radius:var(--radius-lg);border:1px solid var(--border);background:var(--bg-surface)}
+.class-badge .cb-icon{font-size:2rem;margin-bottom:var(--space-sm)}
+.class-badge .cb-title{font-size:var(--text-sm);font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--space-xs)}
+.class-badge .cb-name{font-size:var(--text-lg);color:var(--text-primary);font-weight:300;margin-bottom:var(--space-xs)}
+.class-badge .cb-example{font-size:var(--text-xs);color:var(--text-muted)}
+@media(max-width:768px){.class-strip{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=16"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ═══════════ SUB-HERO ═══════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/kb-ipc-hero.webp" alt="IPC Standards for PCB Manufacturing" loading="eager"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Knowledge Base / Standards</p>
+      <h1 class="reveal">IPC Standards.<br><em>Class 2 vs Class 3 &amp; What They Mean.</em></h1>
+      <p class="reveal">Understand IPC classifications for specifying PCB quality — from consumer electronics to aerospace, the right class determines reliability, yield, and cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ARTICLE ═══════════ -->
+<article class="kb-article reveal">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/knowledge/">Knowledge Base</a> / <span>IPC Standards</span></div>
+
+  <p><strong>IPC</strong> — the Association Connecting Electronics Industries, formerly the Institute of Printed Circuits — is the global trade organization that publishes the acceptance standards governing every stage of PCB design, fabrication, and assembly. Founded in 1957, IPC now counts over 5,800 member companies across 70 countries, and its standards are the de facto language of quality in electronics manufacturing. If you have ever received PCBs that worked perfectly from one batch and failed mysteriously from the next, the difference almost always traces back to which IPC standard was specified — and how strictly it was enforced.</p>
+
+  <p>For PCB procurement, IPC standards are not optional reference material. They define the <strong>objective, measurable acceptance criteria</strong> that your contract manufacturer must meet: how much voiding is allowed in a solder joint, how much barrel fill a plated through-hole requires, what constitutes an acceptable annular ring breakout, and whether rework is permitted at all. Without a named IPC class and standard on your fabrication drawing, your manufacturer defaults to whatever internal guideline they choose — and you have no contractual basis to reject boards that fail prematurely in the field. At Huaxing, every order we process references an explicit IPC class, and our quality system is built around the inspection criteria defined in IPC-A-610, IPC-6012, and J-STD-001.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Point:</strong> A fabrication drawing that says "IPC Class 2" without naming which standard is ambiguous. IPC-A-610 Class 2 governs assembly acceptance; IPC-6012 Class 2 governs bare board fabrication. Always specify both when applicable, or state explicitly that assembly follows IPC-A-610 and fabrication follows IPC-6012.</p>
+  </div>
+
+  <!-- ═══════════ IPC-A-610 ═══════════ -->
+  <h2>IPC-A-610: Acceptability of Electronic Assemblies</h2>
+
+  <p>IPC-A-610 is the most widely referenced standard in electronics manufacturing — and the one most engineers encounter first. Titled <em>Acceptability of Electronic Assemblies</em>, it establishes visual acceptance criteria for finished PCB assemblies: solder joint appearance, component placement, cleanliness, marking, and physical damage. Every solder joint on every board can be judged against the photographs and illustrations in IPC-A-610, making it the universal quality benchmark for PCBA inspection. The standard is revised regularly (revisions F, G, and H have each introduced important clarifications), and most manufacturers maintain the current revision plus one prior for legacy product continuity.</p>
+
+  <p>IPC-A-610 defines three progressively stringent product classifications. Each class represents a different balance of reliability requirements against manufacturing cost, and choosing the right class is the single most important specification decision you will make on a PCB project. The wrong choice can mean either field failures or unnecessary expense.</p>
+
+  <!-- ── Class Visual Strip ── -->
+  <div class="class-strip">
+    <div class="class-badge">
+      <div class="cb-icon">&#9679;</div>
+      <div class="cb-title">IPC Class 1</div>
+      <div class="cb-name">General Electronic Products</div>
+      <div class="cb-example">TV remote controls, LED toys, disposable consumer gadgets</div>
+    </div>
+    <div class="class-badge">
+      <div class="cb-icon">&#9679;&#9679;</div>
+      <div class="cb-title">IPC Class 2</div>
+      <div class="cb-name">Dedicated Service Electronic Products</div>
+      <div class="cb-example">Laptops, smartphones, industrial controllers, telecom infrastructure</div>
+    </div>
+    <div class="class-badge">
+      <div class="cb-icon">&#9679;&#9679;&#9679;</div>
+      <div class="cb-title">IPC Class 3</div>
+      <div class="cb-name">High Performance / High Reliability</div>
+      <div class="cb-example">Pacemakers, avionics, military systems, automotive safety</div>
+    </div>
+  </div>
+
+  <h3>Class 1 — General Electronic Products</h3>
+  <p>Class 1 applies to products where the primary requirement is function of the completed assembly. Cosmetic imperfections are acceptable as long as they do not impair the product's operation. A TV remote that looks slightly uneven inside its plastic shell is still a perfectly good remote. Class 1 allows lower barrel fill (typically 180 degrees of wetting or 50% vertical fill), permits some degree of annular ring breakout, and accepts a wider tolerance on solder joint appearance. Rework is freely allowed, and void percentages in BGA or QFN joints can be higher — up to 35-40% in X-ray inspection. Class 1 is the default when no class is specified, and for good reason: applying Class 3 criteria to a disposable consumer product would waste money without adding value.</p>
+
+  <h3>Class 2 — Dedicated Service Electronic Products</h3>
+  <p>Class 2 is the workhorse classification for commercial and industrial electronics. It demands <strong>extended life and uninterrupted service</strong>, though not to the point of life-critical reliability. Laptops, servers, industrial motor drives, and telecom base stations all typically specify Class 2. The requirements are materially tighter than Class 1: barrel fill in plated through-holes must reach 75% or 270 degrees of wetting; annular ring breakout is limited to 90 degrees or less from the land; solder joints must exhibit smooth, non-porous surfaces with proper wetting angles; void percentage targets drop below 25% for BGA joints. Cosmetic imperfections that do not affect form, fit, or function are still allowable, but the bar for what "affects function" is higher. Class 2 is the default standard at Huaxing for all commercial orders unless the customer specifies otherwise, and it represents the best cost-to-reliability ratio for the vast majority of products.</p>
+
+  <h3>Class 3 — High Performance / High Reliability</h3>
+  <p>Class 3 is where <strong>continued performance on demand</strong> and <strong>no equipment downtime</strong> become non-negotiable. Products that carry Class 3 certification — pacemakers, flight control computers, missile guidance systems, automotive airbag controllers — must function flawlessly in environments where failure means loss of life. The acceptance criteria reflect this: barrel fill must achieve 100% vertical fill (fully wetted from top to bottom land), annular ring breakout is essentially not permitted (zero breakout is the target, though IPC language allows for an "acceptable" condition that is vanishingly small), solder joint surfaces must be pristine with no evidence of disturbed solder, cold joints, or non-wetting, and voiding in hidden solder joints (BGA, QFN) is capped below 15%. Rework is either prohibited or severely restricted, and when permitted, it must follow documented procedures with full traceability. Producing Class 3 assemblies adds 20-40% to manufacturing cost compared to Class 2 because of the additional inspection time, the lower process windows, and the higher scrap rate from rejected joints that would pass at Class 2.</p>
+
+  <h3>IPC-A-610 Class Comparison Table</h3>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Criteria</th>
+        <th>Class 1</th>
+        <th>Class 2</th>
+        <th>Class 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Barrel Fill (PTH)</td>
+        <td>180&deg; wetting or 50% fill</td>
+        <td>270&deg; wetting or 75% fill</td>
+        <td>360&deg; wetting, 100% fill</td>
+      </tr>
+      <tr>
+        <td>Annular Ring Breakout</td>
+        <td>Breakout permitted if connection maintained</td>
+        <td>&le;90&deg; breakout from land</td>
+        <td>Minimal breakout; essentially zero</td>
+      </tr>
+      <tr>
+        <td>Solder Joint Appearance</td>
+        <td>Functional; cosmetic defects allowed</td>
+        <td>Smooth, wetting angles acceptable; minor imperfections</td>
+        <td>Pristine surface; no non-wetting, de-wetting, or disturbed solder</td>
+      </tr>
+      <tr>
+        <td>Void Percentage (BGA/QFN)</td>
+        <td>&le;35-40% of joint area</td>
+        <td>&le;25% of joint area</td>
+        <td>&le;10-15% of joint area</td>
+      </tr>
+      <tr>
+        <td>Rework Allowed</td>
+        <td>Unrestricted</td>
+        <td>Allowed with documented process</td>
+        <td>Prohibited or strictly controlled with traceability</td>
+      </tr>
+      <tr>
+        <td>Typical Products</td>
+        <td>TV remotes, LED bulbs, toys</td>
+        <td>Laptops, servers, industrial controls</td>
+        <td>Pacemakers, avionics, ABS controllers</td>
+      </tr>
+      <tr>
+        <td>Cost Relative to Class 2</td>
+        <td>~85-90%</td>
+        <td>Baseline (100%)</td>
+        <td>~120-140%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <figure style="margin:var(--space-2xl) 0">
+    <img src="../generated/kb-ipc-inspection.webp" alt="Microscope inspection view of IPC-A-610 Class 3 solder joint" style="width:100%;border-radius:var(--radius-lg)" loading="lazy">
+    <figcaption style="font-size:var(--text-xs);color:var(--text-muted);text-align:center;margin-top:var(--space-sm)">Microscope inspection view of IPC-A-610 Class 3 solder joint — smooth fillet profile, proper wetting angle (15-30 degrees), bright joint surface indicating proper reflow, and gold-plated pad visible beneath. Measurement reticule shows joint height and fillet length within Class 3 acceptance criteria.</figcaption>
+  </figure>
+
+  <!-- ═══════════ IPC-6012 ═══════════ -->
+  <h2>IPC-6012: Qualification and Performance Specification for Rigid Printed Boards</h2>
+
+  <p>Where IPC-A-610 addresses the finished assembly, <strong>IPC-6012 governs the bare printed circuit board itself</strong>. This is the fabrication-side standard — it sets the acceptance criteria your PCB supplier must meet before a single component is placed. IPC-6012 covers material quality, plating integrity, dimensional tolerances, solderability, and the test coupon regime used to verify that internal layers are properly bonded. Understanding IPC-6012 is essential because a perfectly assembled Class 3 board built on a Class 2 bare PCB is still only as reliable as its substrate.</p>
+
+  <p>The most important distinction between 6012 and 610 is the scope of inspection. IPC-A-610 criteria are primarily external and visual — an inspector can evaluate most solder joints under a microscope. IPC-6012 criteria are often internal — delamination, plating voids, and dielectric spacing between layers can only be verified through destructive cross-sectioning of test coupons, which is why <strong>microsection analysis</strong> is a central requirement of IPC-6012. Every production panel at Huaxing includes at least one test coupon that is sectioned, potted, polished, and microscopically examined to verify plating thickness, hole wall quality, and inner-layer bond integrity before the corresponding boards are shipped.</p>
+
+  <div class="def-card">
+    <h3 class="def-term">Microsection Coupons — The Hidden Quality Gate</h3>
+    <div class="def-body">
+      <p>A microsection coupon is a small sacrificial portion of the production panel — typically a tab along the panel edge — that duplicates the plated-hole and multilayer stack of the functional boards. After plating, the coupon is cut from the panel, encapsulated in epoxy, ground to the centerline of a row of plated holes, and examined at 100-200x magnification. The inspector verifies copper plating thickness (minimum 20-25 &micro;m for Class 2, 25-30 &micro;m for Class 3), checks for resin smear that could compromise layer-to-layer connections, and confirms that the copper-to-copper bond at the inner-layer interface shows no evidence of delamination or resin recession. A panel with a failed coupon is scrapped in its entirety — this is a pass/fail gate, not a sampling exercise. IPC-6012 defines the exact coupon design (IPC-2221 Type A or Type B coupons are most common), the number of coupons per panel, and the acceptance limits for each measurable parameter.</p>
+    </div>
+  </div>
+
+  <h3>Key IPC-6012 Requirements by Class</h3>
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>Requirement</th>
+        <th>Class 2</th>
+        <th>Class 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Solderability Testing</td>
+        <td>Per IPC-J-STD-003; dip-and-look or wetting balance. Minimum 95% coverage on test pads.</td>
+        <td>Per IPC-J-STD-003 with tightened criteria. Wetting balance preferred; must demonstrate consistent wetting within 2 seconds of flux activation.</td>
+      </tr>
+      <tr>
+        <td>Delamination / Blistering</td>
+        <td>No delamination exceeding 25% of the area between conductors. Blisters &lt;0.5 mm permitted if not bridging conductors.</td>
+        <td>No delamination or blistering of any size permitted. Zero tolerance for any separation of laminate layers.</td>
+      </tr>
+      <tr>
+        <td>Plated Hole Wall Thickness</td>
+        <td>Minimum average 20 &micro;m copper; no single measurement &lt;18 &micro;m.</td>
+        <td>Minimum average 25 &micro;m copper; no single measurement &lt;20 &micro;m. Void-free plating required.</td>
+      </tr>
+      <tr>
+        <td>Thermal Stress Test</td>
+        <td>Solder float at 288&deg;C for 10 seconds; no evidence of delamination or interconnect separation.</td>
+        <td>Solder float at 288&deg;C for 10 seconds, repeated for 6 cycles (thermal shock variant). No plating cracks or resin recession.</td>
+      </tr>
+      <tr>
+        <td>Microsection Frequency</td>
+        <td>Per AQL sampling plan; typically one coupon per lot.</td>
+        <td>Every panel; 100% coupon inspection. No sampling reduction permitted.</td>
+      </tr>
+      <tr>
+        <td>Surface Finish Integrity</td>
+        <td>Pinholes and nodules permitted if solderability not impaired.</td>
+        <td>Uniform, pore-free finish. ENIG nickel thickness 3-6 &micro;m, gold 0.05-0.12 &micro;m per IPC-4552.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Thermal Stress and Reliability Testing</h3>
+  <p>IPC-6012 mandates thermal stress testing to verify that the board can survive assembly temperatures without latent damage. The standard test involves floating a representative sample on molten solder at 288&deg;C (the temperature of a typical lead-free wave solder pot) for 10 seconds, then inspecting for delamination, measling (internal micro-cracks in the resin), or hole wall separation. For Class 3, this test is often extended to <strong>thermal shock cycling</strong>: 6 cycles of 288&deg;C solder float, or an equivalent IST (Interconnect Stress Test) that cycles coupons between room temperature and 230&deg;C while continuously monitoring resistance through a daisy-chain via pattern. Any resistance increase greater than 10% during IST constitutes a failure. This test catches latent plating defects — particularly corner cracks at the knee of plated slots — that would manifest as intermittent opens after months of thermal cycling in the field.</p>
+
+  <!-- ═══════════ IPC-6013 ═══════════ -->
+  <h2>IPC-6013: Qualification and Performance Specification for Flexible and Rigid-Flex Printed Boards</h2>
+
+  <p>IPC-6013 extends the IPC-6012 framework to <strong>flexible circuits and rigid-flex assemblies</strong>. Flex and rigid-flex boards present unique failure modes that rigid board standards do not address: copper work-hardening and cracking through repeated bending, delamination of the adhesive layer between the copper foil and the polyimide base film, and misalignment of stiffeners that support connector areas. IPC-6013 defines the qualification tests and acceptance limits specific to these flexible substrates.</p>
+
+  <p>The defining performance characteristic of a flex circuit is its <strong>bend cycle endurance</strong>. IPC-6013 requires manufacturers to verify that the flexible sections of a board can survive the specified number of bend cycles at the design bend radius without developing conductor cracks. Testing follows IPC-TM-650 Method 2.4.3: a mandrel of the minimum design bend radius is used to repeatedly flex the circuit while electrical continuity is monitored. For dynamic flex applications (where the board bends repeatedly during normal operation, such as in a printer head or a laptop hinge), the requirement is typically millions of cycles. For static flex (bend-once-to-install, such as a folded interconnect inside a smartphone), the requirement is typically 10-100 cycles to confirm assembly survivability. The standard also addresses <strong>adhesive squeeze-out</strong> — the tendency of the bonding adhesive between polyimide layers to extrude beyond the edge of the coverlay during lamination, which can contaminate exposed pads and impair solderability. For Class 3 rigid-flex, squeeze-out exceeding 0.125 mm from the coverlay edge is rejectable. Stiffener alignment is another critical parameter: polyimide, FR4, or metal stiffeners bonded to flex tails must be placed within 0.15 mm of the design position for Class 2, and within 0.10 mm for Class 3, to ensure proper fit in the ZIF (zero insertion force) connectors they reinforce.</p>
+
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>IPC-6013 Parameter</th>
+        <th>Requirement Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bend Cycle Test (Dynamic)</td>
+        <td>Mandrel test per IPC-TM-650 2.4.3; survive specified cycles at design radius with no conductor opens or resistance increase &gt;10%.</td>
+      </tr>
+      <tr>
+        <td>Bend Cycle Test (Static)</td>
+        <td>10-100 cycles at minimum design radius to confirm assembly survivability.</td>
+      </tr>
+      <tr>
+        <td>Adhesive Squeeze-Out</td>
+        <td>Class 2: &le;0.25 mm beyond coverlay edge. Class 3: &le;0.125 mm. Must not encroach on exposed pads.</td>
+      </tr>
+      <tr>
+        <td>Stiffener Alignment</td>
+        <td>Class 2: &plusmn;0.15 mm of design position. Class 3: &plusmn;0.10 mm.</td>
+      </tr>
+      <tr>
+        <td>Coverlay Registration</td>
+        <td>Class 2: clearance to nearest conductor &ge;0.20 mm. Class 3: &ge;0.25 mm to prevent copper exposure.</td>
+      </tr>
+      <tr>
+        <td>Plated Through-Hole in Rigid-Flex Transition Zone</td>
+        <td>Prohibited unless specifically designed with strain-relief features. Transition-zone vias are a common failure point.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════ IPC-J-STD-001 ═══════════ -->
+  <h2>IPC-J-STD-001: Requirements for Soldered Electrical and Electronic Assemblies</h2>
+
+  <p><strong>IPC-J-STD-001</strong> is the process-side companion to IPC-A-610. While IPC-A-610 answers the question "what does an acceptable solder joint look like?", J-STD-001 answers "what materials, methods, and process controls produce acceptable joints in the first place?" It is the standard that governs the soldering process itself — the specification your assembly partner's process engineers work to every day — and it covers hand soldering, wave soldering, reflow soldering, and selective soldering with equal authority.</p>
+
+  <p>J-STD-001 defines five key areas of process control. <strong>Materials</strong>: solder alloy composition must conform to the alloy specification (e.g., SAC305 must be Sn96.5Ag3.0Cu0.5 with tight impurity limits on lead, cadmium, and zinc); flux must be classified per IPC-J-STD-004 as ROL0, ROL1, ROM0, etc., and must be compatible with the cleaning process (or non-cleaning requirement) specified for the assembly. <strong>Tooling and Equipment</strong>: soldering irons must have calibrated tip temperature control (typically &plusmn;5&deg;C of setpoint for Class 3); reflow ovens must undergo periodic thermal profiling with a thermocouple-instrumented test board that represents the thermal mass of the production assembly; wave solder pots must be analyzed for copper contamination monthly. <strong>Process Parameters</strong>: preheat ramp rates (typically 1-3&deg;C/sec for lead-free reflow), time above liquidus (60-90 seconds for SAC305), peak temperature (235-250&deg;C depending on component specifications), and cooling rates that avoid thermal shock — all defined with tolerances that narrow from Class 1 through Class 3. <strong>Workmanship</strong>: the standard includes detailed illustrations of acceptable and unacceptable joint geometries for every terminal type (gull-wing, J-lead, chip component, BGA, through-hole) and specifies the exact dimensions of the fillet, heel, and toe that define an acceptable joint. <strong>Verification</strong>: process control coupons, solder purity testing, and periodic destructive analysis of sample assemblies to verify internal joint integrity (cross-sectioning of BGA joints is a standard Class 3 verification requirement).</p>
+
+  <div class="def-card">
+    <h3 class="def-term">J-STD-001 vs. IPC-A-610 — The Process vs. Outcome Distinction</h3>
+    <div class="def-body">
+      <p>A common source of confusion: J-STD-001 and IPC-A-610 are not alternatives — they are complementary. J-STD-001 defines the process that produces solder joints; IPC-A-610 defines the acceptance criteria for the joints once produced. Conformance to J-STD-001 does <em>not</em> guarantee IPC-A-610 acceptance — a process can be perfectly compliant and still produce rejects if, for example, the thermal profile is correct but the paste stencil aperture is too small for a particular pad geometry. Conversely, a board can pass IPC-A-610 visual inspection and still have been produced with a non-compliant process that will cause latent failures. For a fully specified assembly, your documentation should reference <strong>both standards</strong>: "Assemble per IPC-J-STD-001 Class 2; inspect per IPC-A-610 Class 2."</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ IPC-4101 ═══════════ -->
+  <h2>IPC-4101: Specification for Base Materials for Rigid and Multilayer Printed Boards</h2>
+
+  <p>IPC-4101 is the material specification that underpins every PCB manufactured. It defines the <strong>laminate and prepreg</strong> materials used as the substrate of a printed circuit board — the glass-reinforced epoxy (FR-4), polyimide, PTFE, and other dielectric materials that make up the core and prepreg layers of the board stack-up. Every laminate sheet that enters Huaxing's fabrication process is accompanied by a certificate of conformance that references a specific IPC-4101 slash sheet number, which identifies the exact material type and its performance grade.</p>
+
+  <p>IPC-4101 organizes materials by <strong>slash sheet numbers</strong> — each a self-contained specification for a material category. For example, IPC-4101/21 is the classic FR-4 laminate with a glass transition temperature (Tg) of 110-135&deg;C, suitable for low-layer-count boards in consumer applications. IPC-4101/99 and /101 cover mid-Tg (150&deg;C) FR-4 for lead-free assembly. IPC-4101/126 specifies high-Tg (170&deg;C+) FR-4 for multilayer boards that will see multiple reflow cycles. Beyond FR-4, IPC-4101/40 and /41 cover polyimide laminates for high-temperature and flex applications; IPC-4101/50 covers BT (bismaleimide-triazine) for IC substrates; and IPC-4103 defines the polyimide films used in flexible circuits. The slash sheet specifies critical parameters: glass transition temperature (by TMA and DSC), decomposition temperature (Td, the temperature at which 5% weight loss occurs), dielectric constant (Dk) and dissipation factor (Df) at specified frequencies, peel strength of copper foil to laminate after thermal stress, and flammability rating (V-0 per UL 94).</p>
+
+  <p>For the majority of commercial PCB orders, the laminate specification is implicit — the fabricator selects an IPC-4101-compliant material that meets the stated Tg and CTI (Comparative Tracking Index) requirements. But for high-frequency RF designs, high-voltage applications, or any board that will operate above 130&deg;C ambient, the material specification becomes critical and should be explicitly called out by slash sheet number on the fabrication drawing. A 20-layer backplane built on IPC-4101/21 rather than /126 will delaminate during assembly; a 5 GHz antenna board built on standard FR-4 rather than a low-Dk material like IPC-4103 (for PTFE/ceramic composites) will have unusable signal integrity.</p>
+
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>IPC-4101 Slash Sheet</th>
+        <th>Material Type</th>
+        <th>Typical Tg</th>
+        <th>Typical Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>IPC-4101/21</td>
+        <td>Standard FR-4, brominated flame retardant</td>
+        <td>110-135&deg;C</td>
+        <td>2-4 layer consumer PCBs, single-sided boards</td>
+      </tr>
+      <tr>
+        <td>IPC-4101/99, /101</td>
+        <td>Mid-Tg FR-4, lead-free compatible</td>
+        <td>150&deg;C</td>
+        <td>4-8 layer commercial and industrial boards</td>
+      </tr>
+      <tr>
+        <td>IPC-4101/126</td>
+        <td>High-Tg FR-4, dicy-free curing</td>
+        <td>170-180&deg;C</td>
+        <td>8-32 layer HDI, multiple reflow cycles, automotive</td>
+      </tr>
+      <tr>
+        <td>IPC-4101/40</td>
+        <td>Polyimide laminate (rigid)</td>
+        <td>250&deg;C+</td>
+        <td>Downhole drilling, aerospace, high-temp industrial</td>
+      </tr>
+      <tr>
+        <td>IPC-4101/50</td>
+        <td>BT-Epoxy (bismaleimide-triazine)</td>
+        <td>180-220&deg;C</td>
+        <td>IC substrates, chip-scale packaging, fine-pitch BGA</td>
+      </tr>
+      <tr>
+        <td>IPC-4103 (sister standard)</td>
+        <td>Polyimide film, adhesive and adhesiveless</td>
+        <td>N/A (decomposition &gt;400&deg;C)</td>
+        <td>Flexible circuits, rigid-flex, high-frequency antennas</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════ IPC-2581 ═══════════ -->
+  <h2>IPC-2581: Generic Requirements for Design Data Transfer</h2>
+
+  <p>IPC-2581 is a relatively recent standard that addresses a persistent problem in PCB design-to-manufacturing handoff: the fragmented nature of fabrication data. For decades, a PCB designer has had to generate a Gerber file set for each layer, a separate NC drill file (Excellon format), a separate netlist (IPC-D-356 or IPC-D-356A), a separate bill of materials, a separate pick-and-place centroid file, and a separate fabrication drawing as a PDF or DXF. Each of these files is an independent artifact with no internal consistency checking — the netlist and the Gerber files can describe different connectivity, and neither the designer nor the fabricator catches the discrepancy until boards arrive with open circuits.</p>
+
+  <p>IPC-2581 solves this by <strong>consolidating all design data into a single XML-based container format</strong>. An IPC-2581 file (extension .cvg or .xml) carries the full layer stack-up definition, copper geometry for every layer, drill data (plated and non-plated holes separately), solder mask and legend artwork, the netlist with component-to-pin mapping, the bill of materials with manufacturer part numbers and reference designators, the pick-and-place data, and the fabrication notes — all in one file. The format is open, vendor-neutral, and human-readable (XML with a published schema), and it eliminates the single most common source of PCB manufacturing errors: version mismatches between the Gerber files and the netlist. Major EDA tools — Altium Designer, Cadence Allegro, KiCad, Zuken CR-8000 — now support IPC-2581 export, and most PCB fabricators, including Huaxing, accept IPC-2581 as a preferred input format alongside traditional Gerber RS-274X.</p>
+
+  <div class="highlight-box">
+    <p><strong>Recommendation:</strong> If your EDA tool supports IPC-2581 export, use it. An IPC-2581 file plus a PDF fabrication drawing is a more reliable manufacturing package than a folder full of Gerber files. The internal consistency check that a single-file format provides catches connectivity mismatches at the CAM station before the first panel is imaged, potentially saving thousands of dollars in scrapped material. For designs with controlled-impedance traces, the stack-up information embedded in the IPC-2581 file ensures the fabricator has the correct dielectric thickness and trace width targets without manual transcription from a separate document.</p>
+  </div>
+
+  <!-- ═══════════ HOW TO SPECIFY IPC REQUIREMENTS ═══════════ -->
+  <h2>How to Specify IPC Requirements on Your Fabrication Drawing</h2>
+
+  <p>Specifying IPC standards correctly is straightforward but frequently done wrong. A vague note — "manufacture to IPC standards" — is functionally identical to providing no specification at all: it does not identify which standard, which class, or which revision, and it gives your manufacturer no objective criteria to inspect against. The following checklist covers the essential IPC references that belong on every fabrication and assembly drawing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Note the IPC Class and Standard Explicitly on the Fabrication Drawing</h4>
+      <p>Write: "Fabricate per <strong>IPC-6012 Class 2</strong>" and "Inspect per <strong>IPC-A-610 Class 2 Acceptability</strong>." Do not write "IPC Class 2" alone — it leaves ambiguous whether you mean the fabrication standard, the assembly standard, or the soldering standard. For most commercial products, Class 2 is the correct starting point; escalate to Class 3 only for life-safety, mission-critical, or high-reliability applications where field failure is unacceptable. Include the revision letter if your design was qualified to a specific revision (e.g., "IPC-A-610 Rev H").</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Reference the Correct Standard for Each Manufacturing Stage</h4>
+      <p>Bare board fabrication: <strong>IPC-6012</strong> for rigid, <strong>IPC-6013</strong> for flex/rigid-flex. Assembly process: <strong>IPC-J-STD-001</strong>. Finished assembly inspection: <strong>IPC-A-610</strong>. If you use exotic base materials, add <strong>IPC-4101</strong> with the slash sheet number. If the design uses controlled impedance, reference the impedance test method (IPC-TM-650 2.5.5.7 for TDR). Each standard addresses a distinct phase; referencing only IPC-A-610 gives your fabricator no guidance on bare board quality.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Specify the Laminate Material When Performance Depends On It</h4>
+      <p>For standard commercial boards, "FR-4, Tg &ge; 150&deg;C per IPC-4101/101" is sufficient. For RF/microwave boards, specify the exact laminate (e.g., "Rogers RO4350B, 0.254 mm, Dk 3.48 &plusmn;0.05 at 10 GHz, per IPC-4103"). For high-reliability multilayer boards, specify high-Tg FR-4 per IPC-4101/126 (Tg &ge; 170&deg;C) and require the laminate C of C (Certificate of Conformance) to be included in the FAIR (First Article Inspection Report). The material specification is the one IPC reference that directly impacts electrical performance; do not leave it to the fabricator's discretion on performance-critical boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Verify Manufacturer Compliance — Ask for Evidence</h4>
+      <p>A manufacturer can claim "we build to Class 3" without independent verification. Request a <strong>completed First Article Inspection Report</strong> (FAIR) per AS9102 or the simpler IPC-FA251 form for the first production lot. For Class 3 orders, require microsection photographs of test coupons with measurement annotations. For any order, ask whether the manufacturer's quality management system is certified to <strong>ISO 9001:2015</strong> (process quality) and whether they hold <strong>UL recognition</strong> (safety compliance for the finished board). IPC itself offers a Qualified Manufacturers Listing (QML) program — manufacturers who pass IPC's own audit appear on the IPC QML and are subject to periodic re-audit. Huaxing holds ISO 9001 certification, UL E354321 recognition, and IPC membership with staff certified to IPC-A-610 and J-STD-001.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Avoid Common Mistakes in IPC Specification</h4>
+      <p><strong>Mistake 1:</strong> Specifying Class 3 for a product that does not need it. The cost premium is real (20-40%) and the yield loss on cosmetic criteria that do not affect product reliability wastes money. Reserve Class 3 for life-safety, mission-critical, and extreme-environment applications. <strong>Mistake 2:</strong> Referencing a standard revision that the manufacturer does not support. Most manufacturers work to the current revision and one revision back. If your legacy product was qualified to IPC-A-610 Rev D, confirm that your manufacturer still maintains that revision's inspection criteria on file. <strong>Mistake 3:</strong> Failing to specify solder mask and legend standards. IPC-SM-840 governs solder mask qualification; IPC-4781 governs legend ink performance. For boards with fine-pitch components (&lt;0.5 mm pitch), specify the solder mask dam width explicitly rather than relying on the IPC default. <strong>Mistake 4:</strong> Confusing IPC class with military or aerospace standards. MIL-PRF-55110 (rigid boards) and MIL-PRF-31032 (performance spec) have distinct, overlapping, and sometimes contradictory requirements with IPC standards. If your contract requires MIL compliance, state it separately — IPC compliance does not imply MIL compliance.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ HUAXING COMPLIANCE TABLE ═══════════ -->
+  <h2>Huaxing PCBA IPC Compliance</h2>
+
+  <p>The following table summarizes which IPC standards Huaxing is compliant with, the scope of compliance, and how compliance is verified in our quality management system.</p>
+
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>IPC Standard</th>
+        <th>Huaxing Compliance</th>
+        <th>Verification Method</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>IPC-A-610 (Assembly Acceptance)</td>
+        <td>Fully compliant, Classes 1-3. All QC inspectors certified to current revision.</td>
+        <td>IPC-A-610 CIT (Certified IPC Trainer) on staff; inspectors re-certified every 24 months. Inline AOI (Automated Optical Inspection) calibrated to IPC-A-610 criteria for Class 2 and Class 3 thresholds.</td>
+      </tr>
+      <tr>
+        <td>IPC-6012 (Rigid Board Qualification)</td>
+        <td>Fully compliant, Classes 2 and 3. Class 3 available on request.</td>
+        <td>Microsection coupon analysis on every production lot. Plating thickness verified by XRF and cross-section. Thermal stress testing per IPC-TM-650 2.6.8. Certificates of conformance included with every shipment.</td>
+      </tr>
+      <tr>
+        <td>IPC-6013 (Flex &amp; Rigid-Flex Qualification)</td>
+        <td>Fully compliant, Classes 2 and 3.</td>
+        <td>Bend cycle endurance testing per IPC-TM-650 2.4.3 at customer-specified radius and cycle count. Dimensional inspection for stiffener alignment and coverlay registration on first-article and in-process samples.</td>
+      </tr>
+      <tr>
+        <td>IPC-J-STD-001 (Soldering Requirements)</td>
+        <td>Fully compliant, Classes 1-3.</td>
+        <td>All soldering operators trained and certified. Reflow profiles validated per assembly type with thermocouple-instrumented test boards. Solder purity analysis performed monthly per J-STD-006.</td>
+      </tr>
+      <tr>
+        <td>IPC-4101 (Base Materials)</td>
+        <td>Compliant — materials sourced from IPC-4101-certified laminate suppliers.</td>
+        <td>Laminate C of C reviewed for every incoming lot. Tg verified by DSC on sample basis. Material traceability maintained from supplier lot to finished board serial number.</td>
+      </tr>
+      <tr>
+        <td>IPC-2581 (Data Transfer Format)</td>
+        <td>Accepted as preferred input format alongside Gerber RS-274X.</td>
+        <td>IPC-2581 files validated in CAM (Genesis / InCAM) before panelization. Stack-up and netlist cross-checked against embedded IPC-2581 data; discrepancies flagged in pre-production DFM report.</td>
+      </tr>
+      <tr>
+        <td>IPC-SM-840 (Solder Mask)</td>
+        <td>Compliant — all solder mask materials qualified to IPC-SM-840 Class H.</td>
+        <td>Adhesion testing per IPC-TM-650 2.4.28.1. Dielectric withstanding voltage verified on qualification coupons for every new solder mask batch.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════ RELATED RESOURCES ═══════════ -->
+  <h2>Related Resources</h2>
+
+  <div class="related-grid">
+    <a href="/knowledge/certifications/" class="related-card"><h4>Certifications Directory</h4><p>ISO 9001, UL, RoHS, REACH, and other certifications relevant to PCB manufacturing and procurement.</p></a>
+    <a href="/knowledge/glossary/" class="related-card"><h4>PCB Manufacturing Glossary</h4><p>Definitions for 200+ terms spanning PCB design, fabrication, and assembly — from annular ring to X-out.</p></a>
+    <a href="/technology/dfm/" class="related-card"><h4>Design for Manufacturability (DFM)</h4><p>How to design boards that IPC standards judge acceptable — DFM guidelines that prevent Class 3 rejects before fabrication begins.</p></a>
+    <a href="/blog/ipc-class-2-vs-class-3.html" class="related-card"><h4>Class 2 vs Class 3 — Detailed Comparison</h4><p>Real-world case studies showing when Class 3 is worth the cost and when it is not, based on Huaxing production data.</p></a>
+  </div>
+
+</article>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/kb-cta-bg.webp)">
+      <h2>Send Your IPC Requirements with Your Gerber Files</h2>
+      <p>Include your IPC class, laminate specification, and any special acceptance criteria with your fabrication data. We perform a free DFM review against the specified IPC standard and return a detailed report with every quote — typically within 24 hours. Get an actionable assessment of whether your design will pass the IPC class you need, before a single panel is imaged.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Your Design for DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. ISO 9001 certified, UL E354321. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════ MODAL ═══════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines &middot; 32 Layers &middot; <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

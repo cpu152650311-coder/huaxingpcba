@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Certifications Guide — UL, ISO 9001, IATF 16949, ISO 13485, RoHS, REACH Explained | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to PCB and PCBA manufacturing certifications: UL (E354321), ISO 9001, IATF 16949, ISO 13485, ISO 14001, RoHS, and REACH. Learn what each certification means, how to verify them, and red flags to watch for when qualifying PCB suppliers.">
+<meta property="og:title" content="PCB Certifications Guide — UL, ISO, IATF, RoHS Explained | Huaxing PCBA">
+<meta property="og:description" content="Everything engineers and procurement managers need to know about PCB manufacturing certifications. UL, ISO, IATF 16949, RoHS, REACH — what they mean and how to verify them.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huaxingpcba.com/knowledge/certifications/">
+<link rel="canonical" href="https://huaxingpcba.com/knowledge/certifications/">
+<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"PCB Certifications Guide — UL, ISO 9001, IATF 16949, ISO 13485, RoHS, REACH Explained","description":"Complete guide to PCB and PCBA manufacturing certifications: UL (E354321), ISO 9001, IATF 16949, ISO 13485, ISO 14001, RoHS, and REACH. Learn what each certification means, how to verify them, and red flags to watch for when qualifying PCB suppliers.","provider":{"@type":"Organization","name":"Huaxing PCBA"},"about":"PCB Manufacturing Certifications"}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Knowledge Base", "item": "https://huaxingpcba.com/knowledge/"},
+    {"@type": "ListItem", "position": 3, "name": "Certifications Guide", "item": "https://huaxingpcba.com/knowledge/certifications/"}
+  ]
+}
+</script>
+
+<style>
+/* ── Sub-Hero ── */
+.sub-hero{position:relative;min-height:45vh;display:flex;align-items:center;overflow:hidden;background:var(--bg-primary)}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.22) saturate(0.4)}
+.sub-hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 40% 30%,rgba(200,150,62,.1) 0%,transparent 60%)}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+.sub-hero-content h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:200;line-height:1.15;margin-bottom:var(--space-md)}
+.sub-hero-content h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
+.sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:640px;line-height:1.7}
+
+/* ── Knowledge Article Body ── */
+.kb-article{max-width:900px;margin:0 auto;padding:var(--space-2xl) var(--space-lg);font-size:var(--text-base);color:var(--text-secondary);line-height:1.85}
+.kb-article .breadcrumb{font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-2xl)}
+.kb-article .breadcrumb a{color:var(--text-muted);text-decoration:none}
+.kb-article .breadcrumb a:hover{color:var(--accent)}
+.kb-article h2{font-size:var(--text-2xl);font-weight:200;color:var(--text-primary);margin:var(--space-2xl) 0 var(--space-md);padding-top:var(--space-lg);border-top:1px solid var(--border)}
+.kb-article h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:var(--space-xl) 0 var(--space-sm)}
+.kb-article p{margin-bottom:var(--space-md)}
+.kb-article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.kb-article a:hover{color:#d4a843}
+.kb-article ul,.kb-article ol{padding-left:1.5rem;margin-bottom:var(--space-md)}
+.kb-article li{margin-bottom:var(--space-sm);line-height:1.75}
+.kb-article strong{color:var(--text-primary);font-weight:500}
+
+/* ── Definition Cards ── */
+.def-card{padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-lg)}
+.def-card .def-term{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm) 0}
+.def-card .def-body{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.8}
+.def-card .def-body p{margin-bottom:var(--space-sm)}
+.def-card .def-body p:last-child{margin-bottom:0}
+
+/* ── Info Table ── */
+.info-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.info-table thead tr{border-bottom:2px solid var(--accent)}
+.info-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);background:var(--bg-secondary)}
+.info-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.info-table tbody tr{transition:background .2s}
+.info-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.info-table td:first-child{color:var(--text-primary);font-weight:500}
+
+/* ── Comparison Table ── */
+.compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.compare-table thead th{text-align:center;padding:var(--space-md);color:var(--text-primary);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--accent)}
+.compare-table thead th:first-child{text-align:left}
+.compare-table td{text-align:center;padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.compare-table td:first-child{text-align:left;color:var(--text-primary);font-weight:500}
+.compare-table tbody tr:hover td{background:rgba(200,150,62,.03)}
+.compare-table .check{color:var(--accent)}
+.compare-table .dash{color:var(--text-muted)}
+
+/* ── Checklist Items (inherited from blog.css pattern) ── */
+.checklist-item{display:flex;gap:var(--space-lg);padding:var(--space-lg) 0;border-bottom:1px solid var(--border)}
+.checklist-item:last-child{border-bottom:none}
+.checklist-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:500;font-family:'JetBrains Mono','Consolas',monospace}
+.checklist-content h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-base)}
+.checklist-content p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Highlight Box ── */
+.highlight-box{padding:var(--space-lg) var(--space-xl);background:rgba(200,150,62,.05);border:1px solid var(--accent-subtle);border-radius:var(--radius-lg);margin:var(--space-lg) 0}
+.highlight-box p{font-size:var(--text-sm);color:var(--text-secondary);margin:0;line-height:1.8}
+.highlight-box strong{color:var(--accent)}
+
+/* ── Red Flag Cards ── */
+.red-flag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:var(--space-md);margin:var(--space-lg) 0}
+.red-flag-card{display:flex;gap:var(--space-md);padding:var(--space-lg);background:rgba(220,60,60,.04);border:1px solid rgba(220,60,60,.15);border-radius:var(--radius-lg);align-items:flex-start}
+.red-flag-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(220,60,60,.1);color:#dc3c3c;display:flex;align-items:center;justify-content:center;font-size:var(--text-base);font-weight:600;font-family:'JetBrains Mono','Consolas',monospace}
+.red-flag-content h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.red-flag-content p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Certification Badge Row ── */
+.cert-badge-row{display:flex;flex-wrap:wrap;gap:var(--space-md);margin:var(--space-lg) 0;justify-content:center}
+.cert-badge{padding:var(--space-sm) var(--space-lg);border:1px solid var(--accent-subtle);border-radius:var(--radius-full);background:rgba(200,150,62,.05);color:var(--accent);font-size:var(--text-xs);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+
+/* ── Related Resources ── */
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.related-card{display:block;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s}
+.related-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.related-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.related-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+.cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center;padding:var(--space-3xl) var(--space-2xl)}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+
+@media(max-width:768px){.sub-hero{min-height:30vh}.kb-article{font-size:var(--text-sm)}.info-table,.compare-table{font-size:var(--text-xs)}.info-table td,.compare-table td{padding:var(--space-sm)}.red-flag-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 9v4m0 4h.01M10.29 3.86l-8.6 14.86A1 1 0 002.56 20h18.88a1 1 0 00.87-1.28l-8.6-14.86a1 1 0 00-1.72 0z"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=16"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ═══════════ SUB-HERO ═══════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/kb-certs-hero.webp" alt="PCB Certifications Guide" loading="eager"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Knowledge Base / Certifications</p>
+      <h1 class="reveal">PCB Certifications.<br><em>What They Mean &amp; Why They Matter.</em></h1>
+      <p class="reveal">Understanding certification requirements is essential for qualifying PCB suppliers. Each mark — UL, ISO, IATF, RoHS — represents a different layer of quality assurance. This guide explains what every certification actually means, how to verify it, and which ones matter for your industry.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ARTICLE ═══════════ -->
+<article class="kb-article reveal">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/knowledge/">Knowledge Base</a> / <span>Certifications Guide</span></div>
+
+  <p>When you source PCBs from a manufacturer you have never visited, certifications are the closest thing you have to a factory audit. A certificate hanging on a wall does not guarantee perfect boards every time — but the <strong>absence</strong> of the right certifications is a reliable indicator that a supplier has not invested in the systems required to produce consistent, compliant products.</p>
+
+  <p>Certifications in PCB manufacturing fall into three broad categories: <strong>safety certifications</strong> (UL — proving the board itself will not catch fire or fail dangerously), <strong>quality management certifications</strong> (ISO 9001, IATF 16949, ISO 13485 — proving the factory has documented, repeatable processes), and <strong>environmental/regulatory certifications</strong> (RoHS, REACH, ISO 14001 — proving the materials and processes meet regional chemical and waste-handling laws). A credible supplier will hold certifications across all three categories. A supplier with only one or two may be operating below the standard your product requires.</p>
+
+  <p>This guide walks through the seven most important certifications in PCB and PCBA manufacturing. For each one, we cover what it actually verifies, what it does <em>not</em> verify, how to check it yourself, and the red flags that should make you pause before placing an order.</p>
+
+  <div class="cert-badge-row">
+    <span class="cert-badge">UL</span>
+    <span class="cert-badge">ISO 9001</span>
+    <span class="cert-badge">IATF 16949</span>
+    <span class="cert-badge">ISO 13485</span>
+    <span class="cert-badge">ISO 14001</span>
+    <span class="cert-badge">RoHS</span>
+    <span class="cert-badge">REACH</span>
+  </div>
+
+  <!-- ═══════════ CERTIFICATION DEEP-DIVES ═══════════ -->
+  <h2>Certification Deep-Dive</h2>
+
+  <p>Each certification serves a distinct purpose. Understanding the differences — especially between certifications that sound similar — is what separates a thorough supplier evaluation from a box-checking exercise.</p>
+
+  <!-- UL -->
+  <div class="def-card">
+    <h3 class="def-term">UL Certification (UL E354321)</h3>
+    <div class="def-body">
+      <p><strong>UL (Underwriters Laboratories)</strong> is the most recognized safety certification body in North America. For PCBs, the relevant standard is <strong>UL 796</strong> (Standard for Printed Wiring Boards), which tests for electrical fire hazards, maximum operating temperature, and material flammability under <strong>UL 94</strong> (Standard for Tests for Flammability of Plastic Materials). A UL-certified PCB has been tested to ensure it will not become an ignition source or propagate a fire under specified electrical and thermal conditions.</p>
+      <p>There is an important distinction between <strong>UL Recognized</strong> (marked with a backward "UR") and <strong>UL Listed</strong>. UL Recognized applies to components intended for use <em>within</em> a larger end-product — PCBs almost always fall into this category. UL Listed applies to complete, stand-alone end-products (a power supply, a toaster). If a supplier tells you their PCBs are "UL Listed," they are either misinformed or misleading you. What you want is <strong>UL Recognized</strong> under the UL 796 (ZPMV2) category.</p>
+      <p>Every UL-certified manufacturer is assigned a unique <strong>E-number</strong> (UL file number) that you can look up in the <a href="https://productiq.ul.com/" target="_blank" rel="noopener">UL Product iQ database</a>. This is one of the few certifications you can verify yourself, instantly, without relying on the supplier to provide documentation. Simply enter the file number and confirm that (a) the company name matches, (b) the certification is active, and (c) the scope includes printed wiring boards (category ZPMV2).</p>
+      <p><strong>Huaxing's UL file number is E354321.</strong> You can verify it at <a href="https://productiq.ul.com/" target="_blank" rel="noopener">productiq.ul.com</a> — it is active, current, and covers rigid and rigid-flex printed wiring boards.</p>
+    </div>
+  </div>
+
+  <!-- ISO 9001 -->
+  <div class="def-card">
+    <h3 class="def-term">ISO 9001:2015 — Quality Management Systems</h3>
+    <div class="def-body">
+      <p><strong>ISO 9001:2015</strong> is the foundational quality management standard, and for a PCB manufacturer, it is the <strong>minimum bar</strong> you should accept. It certifies that the organization has documented, repeatable processes for design, production, inspection, and customer feedback — and that management reviews these processes regularly and drives continuous improvement.</p>
+      <p>What ISO 9001 <strong>covers</strong>: documented process control, internal auditing, management review, corrective action procedures, customer satisfaction monitoring, calibration of measurement equipment, and traceability of non-conforming products. A factory with ISO 9001 has systems in place to catch defects before they reach the customer and to prevent recurrence when defects do occur.</p>
+      <p>What ISO 9001 <strong>does not cover</strong>: product-specific performance requirements. It certifies the <em>process</em>, not the product. A PCB from an ISO 9001 factory can still fail electrically or mechanically — the standard ensures only that when it fails, the factory has a procedure for finding out why and fixing it. Nor does ISO 9001 address industry-specific requirements like automotive defect prevention (that is IATF 16949) or medical device risk management (that is ISO 13485).</p>
+      <p>A PCB manufacturer <strong>without ISO 9001 is a red flag</strong>. The certification is not expensive or difficult to obtain relative to industry revenue — a factory operating without it is either very new (untested) or unwilling to submit to external audit (concerning). Even if your product does not require ISO 9001 compliance, the certification signals that the factory has basic quality infrastructure in place.</p>
+    </div>
+  </div>
+
+  <!-- IATF 16949 -->
+  <div class="def-card">
+    <h3 class="def-term">IATF 16949 — Automotive Quality Management</h3>
+    <div class="def-body">
+      <p><strong>IATF 16949</strong> is the automotive industry's quality management standard, developed by the International Automotive Task Force (IATF) in conjunction with ISO. It is built on ISO 9001 but adds automotive-specific requirements that are <strong>substantially stricter</strong>. If ISO 9001 asks "do you have a process?", IATF 16949 asks "can you prove that process prevents defects before they happen?"</p>
+      <p>Key automotive-specific requirements include: <strong>defect prevention</strong> over detection (failure mode and effects analysis, or FMEA, is mandatory for every production process), <strong>full material traceability</strong> from raw laminate to finished board, <strong>statistical process control</strong> (SPC) on critical manufacturing parameters, and the <strong>Production Part Approval Process</strong> (PPAP) — a formal 18-element submission package that proves a supplier can produce consistent parts at rate before the first production order ships. IATF 16949 also requires a certified internal auditor program and mandatory annual layout inspections.</p>
+      <p>IATF 16949 is <strong>mandatory for Tier 1 automotive suppliers</strong> and increasingly expected of Tier 2 and Tier 3 suppliers. If you are shipping PCBs into an automotive supply chain — even indirectly — your manufacturer should hold this certification. Note that IATF 16949 certification is expensive and audit-intensive; a factory with it has demonstrated serious commitment to quality.</p>
+    </div>
+  </div>
+
+  <!-- ISO 13485 -->
+  <div class="def-card">
+    <h3 class="def-term">ISO 13485 — Medical Device Quality Management</h3>
+    <div class="def-body">
+      <p><strong>ISO 13485</strong> is the quality management standard specific to medical device manufacturing, including components like PCBs that go into medical devices. It is fundamentally about <strong>risk management</strong> — every process, from raw material receiving through final inspection, must be evaluated for its potential impact on patient safety and device efficacy.</p>
+      <p>Key medical-specific requirements include: <strong>full traceability</strong> at the batch and component level (you must be able to trace any PCB back to the specific laminate lot, solder paste batch, and reflow oven profile used to produce it), <strong>validated processes</strong> (any process where the output cannot be fully verified by subsequent inspection must be validated in advance — this typically includes soldering, cleaning, and conformal coating), <strong>cleanroom requirements</strong> (medical PCBs often require controlled-environment manufacturing to prevent particulate contamination), and <strong>documented risk management</strong> per ISO 14971 throughout the product realization cycle.</p>
+      <p>If your PCBs go into a medical device that requires FDA 510(k) clearance, CE marking under the EU Medical Device Regulation (MDR), or similar regulatory approval, your <strong>contract manufacturer should hold ISO 13485</strong>. The certification demonstrates that the factory understands and operates within a regulated medical quality framework — not just a general manufacturing one.</p>
+    </div>
+  </div>
+
+  <!-- ISO 14001 -->
+  <div class="def-card">
+    <h3 class="def-term">ISO 14001 — Environmental Management Systems</h3>
+    <div class="def-body">
+      <p><strong>ISO 14001</strong> certifies that a manufacturer has an environmental management system in place — documented policies and procedures for managing waste, controlling chemical disposal, reducing energy consumption, and complying with applicable environmental regulations. For PCB manufacturing, which involves copper etching chemicals, solder fluxes, plating solutions, and solvent-based cleaning agents, environmental management is not abstract — it is a daily operational requirement.</p>
+      <p>ISO 14001 is relevant to PCB procurement for two reasons. First, <strong>RoHS and REACH compliance</strong> — while ISO 14001 does not itself certify RoHS/REACH compliance, a factory with ISO 14001 has the environmental monitoring infrastructure to track restricted substances through its supply chain. Second, <strong>regulatory risk</strong> — a PCB factory that lacks environmental controls is at higher risk of regulatory shutdown, which can disrupt your supply. This is especially relevant when sourcing from regions with evolving environmental enforcement.</p>
+      <p>The standard also requires <strong>life-cycle thinking</strong> — considering environmental impacts from raw material acquisition through end-of-life disposal. For you as a buyer, this means a certified supplier is more likely to have evaluated the environmental footprint of their laminate suppliers, plating chemistries, and packaging materials.</p>
+    </div>
+  </div>
+
+  <!-- RoHS -->
+  <div class="def-card">
+    <h3 class="def-term">RoHS — Restriction of Hazardous Substances</h3>
+    <div class="def-body">
+      <p><strong>RoHS</strong> (Restriction of Hazardous Substances) is an EU directive (2011/65/EU, amended by 2015/863) that restricts the use of six hazardous substances in electrical and electronic equipment: <strong>lead</strong> (Pb, max 0.1% in homogeneous material), <strong>mercury</strong> (Hg, max 0.1%), <strong>cadmium</strong> (Cd, max 0.01%), <strong>hexavalent chromium</strong> (Cr6+, max 0.1%), <strong>polybrominated biphenyls</strong> (PBB, max 0.1%), and <strong>polybrominated diphenyl ethers</strong> (PBDE, max 0.1%). For PCB manufacturing, the most impactful restriction is lead — it is what drove the industry-wide transition from tin-lead (SnPb) solder to lead-free alternatives (SAC305, SN100C, etc.).</p>
+      <p><strong>RoHS 2</strong> (2011/65/EU) expanded the scope to include all electrical/electronic equipment (not just specific categories), added CE marking requirements, and required manufacturers to maintain technical documentation demonstrating compliance for 10 years. <strong>RoHS 3</strong> (2015/863) added four additional phthalate plasticizers to the restricted list: DEHP, BBP, DBP, and DIBP. If your product ships to the EU, you need to comply with RoHS 3.</p>
+      <p>How to verify RoHS compliance: a supplier should be able to provide <strong>material composition test reports</strong> from an accredited third-party lab (SGS, Intertek, TUV) for each restricted substance, not just a generic "RoHS compliant" statement on a datasheet. These reports should be dated within the last 12-24 months. You can also request <strong>XRF (X-ray fluorescence) screening results</strong> for incoming materials — many PCB manufacturers run XRF on laminate and solder paste lots as part of incoming inspection.</p>
+    </div>
+  </div>
+
+  <!-- REACH -->
+  <div class="def-card">
+    <h3 class="def-term">REACH — Registration, Evaluation, Authorisation, and Restriction of Chemicals</h3>
+    <div class="def-body">
+      <p><strong>REACH</strong> (EC 1907/2006) is a European Union regulation concerning the production and use of chemical substances. It is significantly broader than RoHS. While RoHS restricts six (now ten) specific substances in electrical/electronic equipment, REACH covers <strong>all chemicals</strong> used in manufacturing — including solvents, plating solutions, cleaning agents, adhesives, and conformal coatings — across all industries, not just electronics.</p>
+      <p>The REACH regulation operates through two key mechanisms. First, the <strong>SVHC Candidate List</strong> (Substances of Very High Concern), maintained by the European Chemicals Agency (ECHA), identifies chemicals that are carcinogenic, mutagenic, toxic to reproduction, persistent/bioaccumulative, or of equivalent concern. As of 2026, this list contains over 240 substances and is updated twice yearly. If a product contains an SVHC above 0.1% w/w, the manufacturer has a duty to communicate this to downstream customers and, upon request, to consumers within 45 days. Second, the <strong>Authorisation List</strong> (Annex XIV) — substances that cannot be placed on the EU market after a "sunset date" unless a specific use has been authorised.</p>
+      <p>For PCB procurement, REACH compliance means your manufacturer must be able to declare that their products do not contain SVHCs above the 0.1% threshold, and must have documented communication procedures with <em>their</em> chemical suppliers to stay current with ECHA updates. A supplier who provides a one-time REACH declaration from five years ago has not understood the regulation — REACH compliance is an ongoing, active process.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ CERTIFICATION COMPARISON TABLE ═══════════ -->
+  <h2>Certification Comparison</h2>
+
+  <p>Use this table to quickly compare certifications across scope, audit rigor, cost, and verification method.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Certification</th>
+        <th>Scope</th>
+        <th>Audit Frequency</th>
+        <th>Cost to Manufacturer</th>
+        <th>Key Requirements</th>
+        <th>How to Verify</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UL (UL 796)</td>
+        <td>Product safety — flammability, electrical fire hazard, max operating temp</td>
+        <td>Quarterly factory inspections (unannounced)</td>
+        <td>$5,000–$15,000/yr</td>
+        <td>Flame testing per UL 94, material traceability, factory surveillance</td>
+        <td>Look up E-number at productiq.ul.com</td>
+      </tr>
+      <tr>
+        <td>ISO 9001:2015</td>
+        <td>Quality management system — process control, continuous improvement</td>
+        <td>Annual surveillance audit; recertification every 3 years</td>
+        <td>$3,000–$8,000/yr</td>
+        <td>Documented processes, internal audits, corrective actions, management review</td>
+        <td>Request certificate; verify certifying body (TUV, SGS, BSI are credible)</td>
+      </tr>
+      <tr>
+        <td>IATF 16949</td>
+        <td>Automotive quality — defect prevention, traceability, PPAP</td>
+        <td>Annual surveillance; recertification every 3 years</td>
+        <td>$15,000–$30,000/yr</td>
+        <td>FMEA, SPC, MSA, PPAP, full traceability, internal auditor program</td>
+        <td>Verify on IATF certificate database (iatfglobaloversight.org)</td>
+      </tr>
+      <tr>
+        <td>ISO 13485</td>
+        <td>Medical device quality — risk management, validated processes</td>
+        <td>Annual surveillance; recertification every 3 years</td>
+        <td>$10,000–$20,000/yr</td>
+        <td>Risk management (ISO 14971), full traceability, validated processes, cleanroom</td>
+        <td>Request certificate; verify certifying body and scope</td>
+      </tr>
+      <tr>
+        <td>ISO 14001</td>
+        <td>Environmental management — waste, chemicals, energy</td>
+        <td>Annual surveillance; recertification every 3 years</td>
+        <td>$5,000–$10,000/yr</td>
+        <td>Environmental policy, chemical disposal plan, life-cycle assessment, regulatory compliance</td>
+        <td>Request certificate; verify certifying body</td>
+      </tr>
+      <tr>
+        <td>RoHS</td>
+        <td>Hazardous substance restriction — 10 substances in EEE</td>
+        <td>No recurring certification audit — ongoing compliance through material testing</td>
+        <td>$500–$2,000 per test batch (XRF + lab analysis)</td>
+        <td>Material composition testing, technical documentation (10-year retention), CE marking</td>
+        <td>Request third-party lab test reports (SGS, Intertek, TUV) dated within 24 months</td>
+      </tr>
+      <tr>
+        <td>REACH</td>
+        <td>Chemical substance regulation — all chemicals, all industries</td>
+        <td>No recurring certification audit — ongoing SVHC monitoring</td>
+        <td>$1,000–$5,000 per compliance declaration cycle</td>
+        <td>SVHC screening, supply-chain communication, ECHA updates monitoring</td>
+        <td>Request REACH compliance declaration and SVHC test reports</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <figure style="margin:var(--space-2xl) 0">
+    <img src="../generated/kb-certs-factory.webp" alt="ISO-certified electronics manufacturing facility" style="width:100%;border-radius:var(--radius-lg)" loading="lazy">
+    <figcaption style="font-size:var(--text-xs);color:var(--text-muted);text-align:center;margin-top:var(--space-sm)">ISO-certified electronics manufacturing facility — organized production floor with quality management visual indicators, ESD-protected workstations, and real-time process monitoring displays. Certifications include ISO 9001:2015, IATF 16949:2016, and ISO 13485:2016.</figcaption>
+  </figure>
+
+  <!-- ═══════════ HOW TO VERIFY CERTIFICATIONS ═══════════ -->
+  <h2>How to Verify Certifications</h2>
+
+  <p>A certificate on a website is worth nothing until you have verified it independently. Every certification can be faked, and in PCB sourcing — particularly when dealing with smaller brokers and trading companies — fraudulent certificates are more common than most buyers assume. Use this five-step verification checklist before qualifying any new supplier.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Look up the UL file number at the UL Product iQ database</h4>
+      <p>Go to <a href="https://productiq.ul.com/" target="_blank" rel="noopener">productiq.ul.com</a> and enter the supplier's E-number. Confirm that the company name on file matches, the certification status is "Active," and the scope includes "Printed Wiring Boards" (category ZPMV2). This is the single most reliable verification you can do — UL's database is updated in real-time, and quarterly factory inspections mean lapsed certifications are caught quickly.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Request a copy of the ISO/IATF certificate and verify the certifying body</h4>
+      <p>A legitimate ISO or IATF certificate will display the name and accreditation mark of the <strong>certification body</strong> (CB) that issued it. Credible CBs include <strong>TUV</strong> (TUV Rheinland, TUV SUD, TUV Nord), <strong>SGS</strong>, <strong>BSI</strong> (British Standards Institution), <strong>DNV</strong>, <strong>Bureau Veritas</strong>, and <strong>Intertek</strong>. These are all IAF (International Accreditation Forum) signatories. A certificate from an unknown or unfamiliar CB — especially one you cannot find on the IAF member list — should be treated as unverified. For IATF 16949 specifically, you can look up the certificate on the <a href="https://www.iatfglobaloversight.org/" target="_blank" rel="noopener">IATF Global Oversight database</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Check certificate validity dates</h4>
+      <p>Every ISO-based certificate has an <strong>issue date</strong> and an <strong>expiry date</strong> (typically three years from issue, with annual surveillance audits in between). Confirm the date range is current. Also check the <strong>original certification date</strong> — a factory certified in 2024 is very different from one that has held continuous certification since 2010. Long certification history demonstrates institutional commitment to quality, not just a one-time effort to win a contract.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Verify the certificate scope matches what you are buying</h4>
+      <p>Every ISO certificate includes a <strong>scope statement</strong> describing the activities covered. Read it carefully. If you are buying PCB fabrication and assembly and the scope says "plastic injection molding," "metal stamping," or "sales of electronic components," the certificate is for a <strong>different business line</strong> and does not apply to the PCBs you are purchasing. Similarly, if the scope says "PCB design and sales" but not "manufacturing," the factory may be outsourcing production to another facility — which means the quality systems you think you are buying into do not cover your actual manufacturer.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Request a factory audit report if the order value justifies it</h4>
+      <p>For orders above approximately $10,000, or for any order going into a regulated industry (automotive, medical, aerospace), request a copy of the most recent <strong>third-party factory audit report</strong>. This is typically a QMS audit, a social compliance audit (such as SMETA or SA8000), or a customer-specific audit conducted by one of the supplier's existing clients. A factory that cannot or will not share any audit report — even with sensitive details redacted — may have something to hide. Note that this is different from the certificate itself; the audit report contains the actual findings, non-conformances, and corrective actions.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ RED FLAGS ═══════════ -->
+  <h2>Red Flags When Reviewing Supplier Certifications</h2>
+
+  <p>Even with valid documentation, certain patterns should raise concern. These warning signs do not automatically disqualify a supplier, but they should prompt deeper investigation before you commit to an order.</p>
+
+  <div class="red-flag-grid">
+    <div class="red-flag-card">
+      <div class="red-flag-icon">!</div>
+      <div class="red-flag-content">
+        <h4>Expired Certificates</h4>
+        <p>A supplier that displays an expired certificate — or sends you one when you ask for current documentation — is either disorganized (the certification has genuinely lapsed) or hoping you will not check the date. Either way, this is not a supplier you want managing your production quality. Always cross-check the dates printed on the certificate against the certifying body's online database where available.</p>
+      </div>
+    </div>
+
+    <div class="red-flag-card">
+      <div class="red-flag-icon">!</div>
+      <div class="red-flag-content">
+        <h4>Certificates from Unknown or Obscure Certifying Bodies</h4>
+        <p>There are hundreds of accredited certification bodies worldwide, but the credible ones in manufacturing — TUV, SGS, BSI, DNV, Bureau Veritas, Intertek — are widely known. A certificate issued by a certification body you have never heard of, especially one without IAF (International Accreditation Forum) signatory status or with a website that looks insubstantial, may be from a "certification mill" that issues certificates without meaningful audits.</p>
+      </div>
+    </div>
+
+    <div class="red-flag-card">
+      <div class="red-flag-icon">!</div>
+      <div class="red-flag-content">
+        <h4>Scope Mismatch</h4>
+        <p>If the certificate scope says "plastic injection molding," "cable assembly," or "trading of electronic components" but you are buying PCBs, the certification does not cover your product. This happens more often than you might expect — trading companies sometimes present a manufacturer's certificate as their own, or show a certification for one factory when your order will be produced at a different, uncertified facility. Always verify that the <strong>company name</strong> and <strong>production address</strong> on the certificate match the entity you are contracting with.</p>
+      </div>
+    </div>
+
+    <div class="red-flag-card">
+      <div class="red-flag-icon">!</div>
+      <div class="red-flag-content">
+        <h4>Reluctance to Share Certificate Numbers</h4>
+        <p>Every UL file number, ISO certificate number, and IATF certificate number is public information — there is no confidentiality concern in sharing them. If a supplier hesitates, claims the number is "proprietary," or provides only a cropped image of the certificate without the number visible, they are almost certainly hiding something. A legitimate, certified manufacturer will provide their certificate numbers proactively, often displaying them on their website and in their email signature.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ HUAXING CERTIFICATIONS ═══════════ -->
+  <h2>Huaxing PCBA — Active Certifications</h2>
+
+  <p>All Huaxing certifications are current, independently verifiable, and cover our entire PCB fabrication and PCBA assembly operations. We encourage every customer to verify our certifications before placing an order.</p>
+
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>Certification</th>
+        <th>Certificate / File Number</th>
+        <th>Issuing Body</th>
+        <th>Validity</th>
+        <th>Scope</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UL Recognized</td>
+        <td>E354321</td>
+        <td>Underwriters Laboratories</td>
+        <td>Active — verified quarterly</td>
+        <td>Printed Wiring Boards (ZPMV2) — rigid and rigid-flex</td>
+      </tr>
+      <tr>
+        <td>ISO 9001:2015</td>
+        <td>Available upon request</td>
+        <td>TUV / SGS</td>
+        <td>Active — annual surveillance</td>
+        <td>Manufacturing of printed circuit boards and electronic assembly (PCBA)</td>
+      </tr>
+      <tr>
+        <td>IATF 16949</td>
+        <td>Available upon request</td>
+        <td>TUV / SGS</td>
+        <td>Active — annual surveillance</td>
+        <td>PCB fabrication and assembly for automotive applications</td>
+      </tr>
+      <tr>
+        <td>ISO 14001</td>
+        <td>Available upon request</td>
+        <td>TUV / SGS</td>
+        <td>Active — annual surveillance</td>
+        <td>Environmental management for PCB manufacturing and assembly operations</td>
+      </tr>
+      <tr>
+        <td>RoHS (RoHS 3)</td>
+        <td>Third-party test reports available</td>
+        <td>SGS / Intertek</td>
+        <td>Ongoing — material testing every 12 months</td>
+        <td>All 10 restricted substances below threshold in all standard PCB and PCBA products</td>
+      </tr>
+      <tr>
+        <td>REACH</td>
+        <td>SVHC compliance declaration available</td>
+        <td>—</td>
+        <td>Ongoing — SVHC monitoring updated per ECHA releases</td>
+        <td>No SVHCs above 0.1% w/w in standard products; custom requirements accommodated</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Important:</strong> If your project requires a certification not listed above — such as ISO 13485 for medical devices, AS9100 for aerospace, or MIL-PRF for defense applications — please <a href="/contact/">contact our engineering team</a>. We can discuss your specific compliance requirements, including whether we can accommodate them through our existing quality systems or refer you to a qualified partner in our network.</p>
+  </div>
+
+  <!-- ═══════════ RELATED RESOURCES ═══════════ -->
+  <h2>Related Resources</h2>
+
+  <div class="related-grid">
+    <a href="/knowledge/ipc-standards/" class="related-card">
+      <h4>IPC Standards Guide</h4>
+      <p>IPC-A-600, IPC-6012, IPC J-STD-001 — understand the manufacturing and acceptance standards that define PCB quality classes.</p>
+    </a>
+    <a href="/knowledge/glossary/" class="related-card">
+      <h4>PCB Terminology Glossary</h4>
+      <p>A-to-Z reference of PCB and PCBA manufacturing terms, from Annular Ring to Via Filling. Essential companion to certifications.</p>
+    </a>
+    <a href="/knowledge/shipping/" class="related-card">
+      <h4>International Shipping Guide</h4>
+      <p>Incoterms, customs documentation, HS codes, and duty considerations for importing PCBs. Regulatory compliance at the border.</p>
+    </a>
+    <a href="/about/" class="related-card">
+      <h4>About Huaxing — Certifications</h4>
+      <p>View our certifications page with downloadable certificate documents, factory audit summaries, and quality policy.</p>
+    </a>
+  </div>
+
+</article>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/kb-cta-bg.webp)">
+      <h2>Verify Our Certifications</h2>
+      <p>Request our complete certificate pack including UL (E354321), ISO 9001, and IATF 16949 documentation. We will send current certificates, scope statements, and third-party audit summaries — usually within one business day. No commitment required.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Certificate Pack <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. ISO 9001 certified, UL E354321. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════ MODAL ═══════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

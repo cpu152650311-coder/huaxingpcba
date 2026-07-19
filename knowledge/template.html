@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOWLEDGE_PAGE_TITLE — KNOWLEDGE_SUBTITLE | Huaxing PCBA</title>
+<meta name="description" content="META_DESCRIPTION — 150-160 characters covering the knowledge topic and its practical value for PCB procurement and engineering.">
+<meta property="og:title" content="KNOWLEDGE_PAGE_TITLE — KNOWLEDGE_SUBTITLE">
+<meta property="og:description" content="OG_DESCRIPTION — punchier, shorter for social cards.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huaxingpcba.com/knowledge/PAGE_SLUG/">
+<link rel="canonical" href="https://huaxingpcba.com/knowledge/PAGE_SLUG/">
+<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"KNOWLEDGE_PAGE_TITLE — KNOWLEDGE_SUBTITLE","description":"META_DESCRIPTION","provider":{"@type":"Organization","name":"Huaxing PCBA"},"about":"KNOWLEDGE_TOPIC_CATEGORY"}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Knowledge Base", "item": "https://huaxingpcba.com/knowledge/"},
+    {"@type": "ListItem", "position": 3, "name": "KNOWLEDGE_SHORT_NAME", "item": "https://huaxingpcba.com/knowledge/PAGE_SLUG/"}
+  ]
+}
+</script>
+
+<style>
+/* ── Sub-Hero ── */
+.sub-hero{position:relative;min-height:45vh;display:flex;align-items:center;overflow:hidden;background:var(--bg-primary)}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.22) saturate(0.4)}
+.sub-hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 40% 30%,rgba(200,150,62,.1) 0%,transparent 60%)}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+.sub-hero-content h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:200;line-height:1.15;margin-bottom:var(--space-md)}
+.sub-hero-content h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
+.sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:640px;line-height:1.7}
+
+/* ── Knowledge Article Body ── */
+.kb-article{max-width:900px;margin:0 auto;padding:var(--space-2xl) var(--space-lg);font-size:var(--text-base);color:var(--text-secondary);line-height:1.85}
+.kb-article .breadcrumb{font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-2xl)}
+.kb-article .breadcrumb a{color:var(--text-muted);text-decoration:none}
+.kb-article .breadcrumb a:hover{color:var(--accent)}
+.kb-article h2{font-size:var(--text-2xl);font-weight:200;color:var(--text-primary);margin:var(--space-2xl) 0 var(--space-md);padding-top:var(--space-lg);border-top:1px solid var(--border)}
+.kb-article h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:var(--space-xl) 0 var(--space-sm)}
+.kb-article p{margin-bottom:var(--space-md)}
+.kb-article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.kb-article a:hover{color:#d4a843}
+.kb-article ul,.kb-article ol{padding-left:1.5rem;margin-bottom:var(--space-md)}
+.kb-article li{margin-bottom:var(--space-sm);line-height:1.75}
+.kb-article strong{color:var(--text-primary);font-weight:500}
+
+/* ── Definition Cards ── */
+.def-card{padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-lg)}
+.def-card .def-term{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm) 0}
+.def-card .def-body{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.8}
+.def-card .def-body p{margin-bottom:var(--space-sm)}
+.def-card .def-body p:last-child{margin-bottom:0}
+
+/* ── Info Table ── */
+.info-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.info-table thead tr{border-bottom:2px solid var(--accent)}
+.info-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);background:var(--bg-secondary)}
+.info-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.info-table tbody tr{transition:background .2s}
+.info-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.info-table td:first-child{color:var(--text-primary);font-weight:500}
+
+/* ── Comparison Table ── */
+.compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.compare-table thead th{text-align:center;padding:var(--space-md);color:var(--text-primary);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--accent)}
+.compare-table thead th:first-child{text-align:left}
+.compare-table td{text-align:center;padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.compare-table td:first-child{text-align:left;color:var(--text-primary);font-weight:500}
+.compare-table tbody tr:hover td{background:rgba(200,150,62,.03)}
+.compare-table .check{color:var(--accent)}
+.compare-table .dash{color:var(--text-muted)}
+
+/* ── Checklist Items (inherited from blog.css pattern) ── */
+.checklist-item{display:flex;gap:var(--space-lg);padding:var(--space-lg) 0;border-bottom:1px solid var(--border)}
+.checklist-item:last-child{border-bottom:none}
+.checklist-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:500;font-family:'JetBrains Mono','Consolas',monospace}
+.checklist-content h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-base)}
+.checklist-content p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Highlight Box ── */
+.highlight-box{padding:var(--space-lg) var(--space-xl);background:rgba(200,150,62,.05);border:1px solid var(--accent-subtle);border-radius:var(--radius-lg);margin:var(--space-lg) 0}
+.highlight-box p{font-size:var(--text-sm);color:var(--text-secondary);margin:0;line-height:1.8}
+.highlight-box strong{color:var(--accent)}
+
+/* ── Step Guide ── */
+.step-list{counter-reset:step;margin:var(--space-lg) 0}
+.step-item{counter-increment:step;display:flex;gap:var(--space-lg);padding:var(--space-lg) 0;border-bottom:1px solid var(--border)}
+.step-item:last-child{border-bottom:none}
+.step-num{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--accent-subtle);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:500;font-family:'JetBrains Mono','Consolas',monospace}
+.step-body h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-base)}
+.step-body p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Related Resources ── */
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.related-card{display:block;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s}
+.related-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.related-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.related-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+/* ── Glossary Grid ── */
+.glossary-nav{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-bottom:var(--space-2xl);justify-content:center}
+.glossary-nav a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);color:var(--text-muted);text-decoration:none;font-size:var(--text-xs);transition:border-color .3s,color .3s,background .3s}
+.glossary-nav a:hover,.glossary-nav a.active{border-color:var(--accent);color:var(--accent);background:rgba(200,150,62,.06)}
+.glossary-term{margin-bottom:var(--space-2xl)}
+.glossary-term .gt-name{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm) 0;scroll-margin-top:100px}
+.glossary-term .gt-def{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.8}
+
+.cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center;padding:var(--space-3xl) var(--space-2xl)}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+
+@media(max-width:768px){.sub-hero{min-height:30vh}.kb-article{font-size:var(--text-sm)}.info-table,.compare-table{font-size:var(--text-xs)}.info-table td,.compare-table td{padding:var(--space-sm)}.glossary-nav{gap:4px}.glossary-nav a{width:30px;height:30px}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=16"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ═══════════ SUB-HERO ═══════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/blog-cta-rigid-flex.webp" alt="KNOWLEDGE_PAGE_TITLE" loading="eager"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Knowledge Base / KNOWLEDGE_CATEGORY</p>
+      <h1 class="reveal">KNOWLEDGE_MAIN_TITLE:<br><em>KNOWLEDGE_EMPHASIS</em></h1>
+      <p class="reveal">KNOWLEDGE_SUB_DESCRIPTION — one sentence value proposition for this knowledge page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ARTICLE ═══════════ -->
+<article class="kb-article reveal">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/knowledge/">Knowledge Base</a> / <span>KNOWLEDGE_SHORT_NAME</span></div>
+
+  <p>OPENING_PARAGRAPH — introduce the topic, explain why it matters for PCB procurement, manufacturing, or engineering decisions. Set context for the reference content that follows.</p>
+
+  <p>SECOND_PARAGRAPH — establish why this knowledge is essential. Reference real-world impact: compliance, cost avoidance, quality assurance. Mention Huaxing's experience where relevant.</p>
+
+  <!-- ═══════════ CONTENT SECTIONS ═══════════ -->
+  <!-- Use h2 for major sections with border-top dividers -->
+  <!-- Use h3 for sub-sections within a major topic -->
+  <!-- Use .def-card for key concept definitions -->
+  <!-- Use .info-table for parameter/spec reference tables -->
+  <!-- Use .compare-table for option comparisons -->
+  <!-- Use .checklist-item for enumerated guides/checklists -->
+  <!-- Use .step-item for sequential process steps -->
+  <!-- Use .highlight-box for key takeaways and warnings -->
+
+  <h2>SECTION_ONE_HEADING</h2>
+
+  <p>Section content — explain the concept, provide definitions, list key facts. Knowledge base pages should be authoritative and reference-oriented.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Point:</strong> A critical insight the reader should remember. Make it concrete and actionable.</p>
+  </div>
+
+  <h2>SECTION_TWO_HEADING</h2>
+
+  <p>Another major section with its own focus. Use tables for comparing options, checklist items for step-by-step guidance, and definition cards for terminology.</p>
+
+  <!-- ═══════════ Related Resources ═══════════ -->
+  <h2>Related Resources</h2>
+
+  <div class="related-grid">
+    <a href="/knowledge/RELATED_SLUG/" class="related-card"><h4>Related Knowledge Page</h4><p>Brief description of what this related resource covers.</p></a>
+    <a href="/blog/RELATED_BLOG_SLUG.html" class="related-card"><h4>Related Blog Article</h4><p>Educational deep-dive on a connected topic.</p></a>
+    <a href="/technology/RELATED_TECH_SLUG/" class="related-card"><h4>Related Technology Reference</h4><p>Technical specifications and decision frameworks.</p></a>
+  </div>
+
+</article>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-rigid-flex.webp)">
+      <h2>CTA_HEADING — Action-Oriented</h2>
+      <p>CTA_DESCRIPTION — what the reader gets, how fast, why it's worth their click. Mention the 24h response, free DFM review, or other concrete value.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">CTA_BUTTON_TEXT <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. ISO 9001 certified, UL E354321. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════ MODAL ═══════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

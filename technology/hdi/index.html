@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HDI PCB Technology — Any-Layer Interconnect, 75µm Microvias, 3+N+3 Stackup | Huaxing PCBA</title>
+<meta name="description" content="HDI PCB technology reference: any-layer interconnect, 75µm laser microvias, stacked vs staggered vias, 3+N+3 stackup architecture. Cost-per-layer comparison, design rules, and Huaxing production limits.">
+<meta property="og:title" content="HDI PCB Technology — Any-Layer Interconnect, 75µm Microvias | Huaxing PCBA">
+<meta property="og:description" content="Any-layer HDI, 75µm laser microvias, stacked vs. staggered vias, 3+N+3 stackup. Cost comparison, design rules, and production capability limits.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huaxingpcba.com/technology/hdi/">
+<link rel="canonical" href="https://huaxingpcba.com/technology/hdi/">
+<link rel="stylesheet" href="../../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"HDI PCB Technology — Any-Layer Interconnect & 75µm Microvias","description":"Complete reference for HDI PCB technology: any-layer interconnect, laser microvias, stacked vs staggered design, cost-per-layer analysis, and production capability limits.","provider":{"@type":"Organization","name":"Huaxing PCBA"},"about":"HDI PCB Technology"}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Technology", "item": "https://huaxingpcba.com/technology/"},
+    {"@type": "ListItem", "position": 3, "name": "HDI", "item": "https://huaxingpcba.com/technology/hdi/"}
+  ]
+}
+</script>
+
+<style>
+.sub-hero{position:relative;min-height:55vh;display:flex;align-items:center;overflow:hidden;background:var(--bg-primary)}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.4)}
+.sub-hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 30% 50%,rgba(200,150,62,.1) 0%,transparent 60%)}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+.sub-hero-content h1{font-size:clamp(2rem,4vw,3.5rem);font-weight:200;line-height:1.15;margin-bottom:var(--space-md)}
+.sub-hero-content h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
+.sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:680px;line-height:1.7}
+.tech-article{max-width:900px;margin:0 auto;padding:var(--space-2xl) var(--space-lg);font-size:var(--text-base);color:var(--text-secondary);line-height:1.85}
+.tech-article .breadcrumb{font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-2xl)}
+.tech-article .breadcrumb a{color:var(--text-muted);text-decoration:none}
+.tech-article .breadcrumb a:hover{color:var(--accent)}
+.tech-article h2{font-size:var(--text-2xl);font-weight:200;color:var(--text-primary);margin:var(--space-2xl) 0 var(--space-md);padding-top:var(--space-lg);border-top:1px solid var(--border)}
+.tech-article h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:var(--space-xl) 0 var(--space-sm)}
+.tech-article p{margin-bottom:var(--space-md)}
+.tech-article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.tech-article a:hover{color:#d4a843}
+.tech-article ul,.tech-article ol{padding-left:1.5rem;margin-bottom:var(--space-md)}
+.tech-article li{margin-bottom:var(--space-sm);line-height:1.75}
+.tech-article strong{color:var(--text-primary);font-weight:500}
+.key-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.key-metric{text-align:center;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.key-metric .km-val{display:block;font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace}
+.key-metric .km-lbl{display:block;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.08em}
+.spec-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.spec-table thead tr{border-bottom:2px solid var(--accent)}
+.spec-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);background:var(--bg-secondary)}
+.spec-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.spec-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.spec-table td:first-child{color:var(--text-primary);font-weight:500}
+.compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.compare-table thead th{text-align:center;padding:var(--space-md);color:var(--text-primary);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--accent)}
+.compare-table thead th:first-child{text-align:left}
+.compare-table td{text-align:center;padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.compare-table td:first-child{text-align:left;color:var(--text-primary);font-weight:500}
+.compare-table tbody tr:hover td{background:rgba(200,150,62,.03)}
+.compare-table .check{color:var(--accent)}
+.decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-2xl)}
+.decision-card{padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color .3s,transform .3s}
+.decision-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.decision-card .dc-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin-bottom:var(--space-md)}
+.decision-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm) 0;font-size:var(--text-base)}
+.decision-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+.cap-limits{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.cap-limits th{text-align:left;padding:var(--space-md) var(--space-lg);color:var(--accent);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;background:rgba(200,150,62,.06);border-bottom:1px solid var(--accent-subtle)}
+.cap-limits td{padding:var(--space-md) var(--space-lg);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.cap-limits td:first-child{color:var(--text-primary);font-weight:500;width:40%}
+.cap-limits tr:last-child td{border-bottom:none}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.related-card{display:block;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s}
+.related-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.related-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.related-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+.cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center;padding:var(--space-3xl) var(--space-2xl)}
+.cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+@media(max-width:1024px){.key-metrics{grid-template-columns:repeat(2,1fr)}.decision-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.sub-hero{min-height:40vh}.key-metrics{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=16"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../../generated/tech-hdi-hero.webp" alt="HDI PCB with laser microvias and any-layer interconnect" loading="eager"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technology / PCB Fabrication</p>
+      <h1 class="reveal">HDI & Any-Layer Interconnect:<br><em>Density Without Compromise.</em></h1>
+      <p class="reveal">75µm laser microvias, 3+N+3 stackup architecture, 0.4mm BGA escape routing. When to choose stacked vs. staggered vias — and when conventional through-hole still wins.</p>
+    </div>
+  </div>
+</section>
+
+<article class="tech-article reveal">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/technology/">Technology</a> / <span>HDI</span></div>
+
+  <p>HDI (High-Density Interconnect) is not a single technology — it's a family of PCB fabrication techniques that use laser-drilled microvias, sequential lamination, and fine-pitch routing to achieve interconnect densities impossible with conventional mechanical drilling. The defining difference: laser microvias (typically 75-100µm diameter) replace mechanically drilled vias (minimum 150-200µm), enabling pad sizes down to 200µm and via-to-via spacing down to 350µm.</p>
+
+  <p>At Huaxing PCBA, we manufacture HDI boards from 1+N+1 (one microvia layer on each side) to 3+N+3 (three sequential microvia layers). Our production capability spans smartphone main boards with 12-layer any-layer HDI, wearable rigid-flex with 75µm stacked microvias, and IoT sensor modules with 0.3mm total thickness. HDI is not a niche — it's now the default architecture for any design with a 0.5mm pitch or finer BGA.</p>
+
+  <div class="key-metrics">
+    <div class="key-metric"><span class="km-val">75µm</span><span class="km-lbl">Laser Microvia Ø</span></div>
+    <div class="key-metric"><span class="km-val">3+N+3</span><span class="km-lbl">Max Stackup</span></div>
+    <div class="key-metric"><span class="km-val">0.4mm</span><span class="km-lbl">Min BGA Pitch</span></div>
+    <div class="key-metric"><span class="km-val">±15µm</span><span class="km-lbl">Registration Tolerance</span></div>
+  </div>
+
+  <h2>HDI Architecture Levels Explained</h2>
+
+  <p>HDI is classified by the number of sequential lamination cycles. Each cycle adds one microvia layer on each side of the core. The notation "M+N+M" means M microvia layers, N conventional core layers, M microvia layers on the opposite side. Understanding this architecture is essential for cost-optimized design — each additional microvia layer adds approximately 15-25% to the bare board cost.</p>
+
+  <table class="spec-table">
+    <thead><tr><th>HDI Level</th><th>Total Layers</th><th>Via Architecture</th><th>Min BGA Pitch</th><th>Typical Applications</th></tr></thead>
+    <tbody>
+      <tr><td>1+N+1</td><td>4-8</td><td>One microvia layer each side, through-hole core</td><td>0.5mm</td><td>Consumer IoT, basic wearables, BLE modules</td></tr>
+      <tr><td>2+N+2</td><td>6-10</td><td>Two sequential microvia layers, stacked or staggered</td><td>0.4mm</td><td>Smartphones, tablets, advanced wearables, automotive infotainment</td></tr>
+      <tr><td>3+N+3</td><td>8-14</td><td>Three sequential microvia layers, any-layer via-in-pad</td><td>0.35mm</td><td>Flagship smartphones, AR/VR headsets, aerospace modules</td></tr>
+      <tr><td>Any-Layer</td><td>8-16</td><td>Every layer transition via laser microvia, no through-holes</td><td>0.3mm</td><td>Premium smartphones, military/aerospace, medical implants</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Stacked vs. Staggered Microvias: The Critical Decision</h2>
+
+  <p>When routing from layer 1 to layer 3 through a microvia stack, you have two choices: stack the vias directly on top of each other (stacked) or offset them (staggered). This single decision impacts reliability, cost, and routing density — and it's one of the most common points of confusion in HDI design.</p>
+
+  <table class="compare-table">
+    <thead><tr><th>Characteristic</th><th>Stacked Microvias</th><th>Staggered Microvias</th></tr></thead>
+    <tbody>
+      <tr><td>Routing Density</td><td><span class="check">✓</span> Highest — direct vertical path</td><td>Lower — requires horizontal offset</td></tr>
+      <tr><td>Reliability (Thermal Cycling)</td><td>Requires copper-filled vias — higher stress at stack interface</td><td><span class="check">✓</span> Better — stress distributed across offset</td></tr>
+      <tr><td>Signal Integrity</td><td><span class="check">✓</span> Shortest path, lowest inductance</td><td>Longer path, stub if not back-drilled</td></tr>
+      <tr><td>Manufacturing Cost</td><td><span class="check">✓</span> Single drill + fill cycle per stack</td><td>Higher — each via requires separate drill cycle</td></tr>
+      <tr><td>Minimum Pad Size</td><td>250µm (stack registration tolerance)</td><td><span class="check">✓</span> 200µm (single via per pad)</td></tr>
+      <tr><td>Best For</td><td>Power/ground distribution, high-current paths</td><td>Signal routing, high-reliability applications</td></tr>
+    </tbody>
+  </table>
+
+  <h2>When to Choose HDI: Cost vs. Density Analysis</h2>
+
+  <p>HDI is more expensive per square centimeter than conventional through-hole PCB — but it can reduce total layer count, shrink board area, and eliminate the need for expensive high-layer-count conventional boards. The economic break-even depends on your specific design constraints.</p>
+
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="dc-label">Use 1+N+1 HDI When</div>
+      <h4>BGA pitch ≤0.5mm or board area is constrained</h4>
+      <p>A 0.5mm BGA cannot be escaped with conventional through-hole vias (minimum annular ring 125µm + minimum hole 200µm = 450µm pad, leaving 50µm for routing — impossible). 1+N+1 HDI with 75µm laser vias and 200µm pads solves this. Added cost vs. 4-layer conventional: ~20-30%. Typical applications: MCU+BLE modules, compact sensor boards.</p>
+    </div>
+    <div class="decision-card">
+      <div class="dc-label">Use 2+N+2 When</div>
+      <h4>0.4mm BGA or double-sided component placement</h4>
+      <p>0.4mm BGA with >400 pins requires two levels of microvia fan-out. Via-in-pad with copper-filled and planarized microvias becomes mandatory — no escape routing possible on outer layers alone. Added cost vs. 1+N+1: ~25-40%. Applications: smartphone application processors, FPGA modules, ADAS camera processors.</p>
+    </div>
+    <div class="decision-card">
+      <div class="dc-label">Stay Conventional When</div>
+      <h4>BGA pitch ≥0.8mm, board area is not critical</h4>
+      <p>If your finest BGA is 0.8mm pitch and your board has room for dog-bone fan-out, conventional through-hole PCB with 0.2mm mechanical drills will be 40-60% cheaper than equivalent HDI. Don't pay for HDI if you don't need it. The density argument only matters when conventional routing fails — test it in your CAD tool first.</p>
+    </div>
+  </div>
+
+<figure style="margin:var(--space-2xl) 0">
+  <img src="../../generated/tech-hdi-smartphone.webp" alt="Smartphone main board with any-layer HDI showing 0.4mm BGA pitch, 75µm microvias, and 12-layer construction" style="width:100%;border-radius:var(--radius-lg)" loading="lazy">
+  <figcaption style="font-size:var(--text-xs);color:var(--text-muted);text-align:center;margin-top:var(--space-sm)">Smartphone main board with any-layer HDI — 0.4mm BGA pitch, 75µm microvias, 12-layer construction.</figcaption>
+</figure>
+
+<figure style="margin:var(--space-2xl) 0">
+  <img src="../../generated/tech-hdi-cross-section.webp" alt="Cross-section of 3+N+3 HDI stackup showing stacked copper-filled microvias connecting multiple build-up layers" style="width:100%;border-radius:var(--radius-lg)" loading="lazy">
+  <figcaption style="font-size:var(--text-xs);color:var(--text-muted);text-align:center;margin-top:var(--space-sm)">Cross-section of 3+N+3 HDI stackup showing stacked copper-filled microvias connecting multiple build-up layers.</figcaption>
+</figure>
+
+  <h2>Huaxing HDI Production Capabilities</h2>
+
+  <table class="cap-limits">
+    <tr><th colspan="2">Huaxing Production Limits — HDI PCB</th></tr>
+    <tr><td>Maximum HDI Architecture</td><td>3+N+3 (any-layer HDI up to 14 layers total)</td></tr>
+    <tr><td>Minimum Laser Via Diameter</td><td>75µm (CO₂ or UV laser, depending on dielectric material)</td></tr>
+    <tr><td>Minimum Via Pad Diameter</td><td>200µm (150µm for UV laser on thin dielectric <60µm)</td></tr>
+    <tr><td>Minimum Trace / Space</td><td>50µm / 50µm (2mil / 2mil) on HDI signal layers</td></tr>
+    <tr><td>Registration Tolerance</td><td>±15µm layer-to-layer (AOI-verified on every panel)</td></tr>
+    <tr><td>Minimum Board Thickness</td><td>0.4mm (4-layer 1+N+1), 0.6mm (8-layer any-layer HDI)</td></tr>
+    <tr><td>Via Fill</td><td>Copper-filled and planarized (for via-in-pad), or resin-filled and capped</td></tr>
+    <tr><td>Quality Verification</td><td>Cross-section micrograph on first-article, AOI on 100% of microvias, IST reliability coupon on every lot</td></tr>
+  </table>
+
+  <h2>Industries That Depend on HDI Technology</h2>
+
+  <div class="related-grid">
+    <a href="/industries/consumer/" class="related-card"><h4>Consumer Electronics</h4><p>Any-layer HDI for smartphones, tablets, wearables. 8M placements/day volume capability.</p></a>
+    <a href="/industries/iot/" class="related-card"><h4>IoT</h4><p>1+N+1 HDI for compact sensor modules, rigid-flex for wearable IoT devices.</p></a>
+    <a href="/industries/automotive/" class="related-card"><h4>Automotive</h4><p>2+N+2 HDI for ADAS camera modules, radar processors, infotainment systems.</p></a>
+    <a href="/industries/aerospace/" class="related-card"><h4>Aerospace & Defense</h4><p>Any-layer HDI with Class 3 reliability, copper-filled stacked vias, full traceability.</p></a>
+  </div>
+
+  <h2>Further Reading</h2>
+  <ul>
+    <li><a href="/blog/hdi-technology.html">HDI PCB Technology: The Complete Guide</a> — educational deep-dive into HDI design and manufacturing</li>
+    <li><a href="/technology/stackup/">PCB Stackup Design Guide</a> — how HDI stackup decisions affect signal integrity and cost</li>
+    <li><a href="/technology/materials/">PCB Laminate & Material Selection</a> — high-Tg and low-Dk laminates for HDI applications</li>
+  </ul>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(/generated/blog-cta-rigid-flex.webp)">
+      <h2>Need HDI Engineering Support?</h2>
+      <p>Send us your stackup, BGA pitch, and layer count target. Our engineering team responds within 24h with an HDI feasibility assessment, cost-optimized stackup proposal, and DFM review — free, even if you don't order from us.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request HDI DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. ISO 9001 certified, UL E354321. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../reveal.js"></script>
+<script>function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}</script>
+<script src="../../inquiry-handler.js"></script></body>
+</html>

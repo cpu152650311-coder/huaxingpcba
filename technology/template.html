@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECH_PAGE_TITLE — TECH_SUBTITLE | Huaxing PCBA</title>
+<meta name="description" content="META_DESCRIPTION — 150-160 characters covering the technology, key specs, and decision value.">
+<meta property="og:title" content="TECH_PAGE_TITLE — TECH_SUBTITLE">
+<meta property="og:description" content="OG_DESCRIPTION — punchier, shorter for social cards.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://huaxingpcba.com/technology/PAGE_SLUG/">
+<link rel="canonical" href="https://huaxingpcba.com/technology/PAGE_SLUG/">
+<link rel="stylesheet" href="../../design-tokens.css?v=20">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"TECH_PAGE_TITLE — TECH_SUBTITLE","description":"META_DESCRIPTION","provider":{"@type":"Organization","name":"Huaxing PCBA"},"about":"TECH_TOPIC_CATEGORY"}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Technology", "item": "https://huaxingpcba.com/technology/"},
+    {"@type": "ListItem", "position": 3, "name": "TECH_SHORT_NAME", "item": "https://huaxingpcba.com/technology/PAGE_SLUG/"}
+  ]
+}
+</script>
+
+<style>
+/* ── Sub-Hero ── */
+.sub-hero{position:relative;min-height:55vh;display:flex;align-items:center;overflow:hidden;background:var(--bg-primary)}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.4)}
+.sub-hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 30% 50%,rgba(200,150,62,.1) 0%,transparent 60%)}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+.sub-hero-content h1{font-size:clamp(2rem,4vw,3.5rem);font-weight:200;line-height:1.15;margin-bottom:var(--space-md)}
+.sub-hero-content h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
+.sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:680px;line-height:1.7}
+
+/* ── Tech Article Body ── */
+.tech-article{max-width:900px;margin:0 auto;padding:var(--space-2xl) var(--space-lg);font-size:var(--text-base);color:var(--text-secondary);line-height:1.85}
+.tech-article .breadcrumb{font-size:var(--text-sm);color:var(--text-muted);margin-bottom:var(--space-2xl)}
+.tech-article .breadcrumb a{color:var(--text-muted);text-decoration:none}
+.tech-article .breadcrumb a:hover{color:var(--accent)}
+.tech-article h2{font-size:var(--text-2xl);font-weight:200;color:var(--text-primary);margin:var(--space-2xl) 0 var(--space-md);padding-top:var(--space-lg);border-top:1px solid var(--border)}
+.tech-article h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:var(--space-xl) 0 var(--space-sm)}
+.tech-article p{margin-bottom:var(--space-md)}
+.tech-article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.tech-article a:hover{color:#d4a843}
+.tech-article ul,.tech-article ol{padding-left:1.5rem;margin-bottom:var(--space-md)}
+.tech-article li{margin-bottom:var(--space-sm);line-height:1.75}
+.tech-article strong{color:var(--text-primary);font-weight:500}
+
+/* ── Spec Table ── */
+.spec-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.spec-table thead tr{border-bottom:2px solid var(--accent)}
+.spec-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);background:var(--bg-secondary)}
+.spec-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.spec-table tbody tr{transition:background .2s}
+.spec-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.spec-table td:first-child{color:var(--text-primary);font-weight:500}
+.spec-table .highlight-row td{background:rgba(200,150,62,.06);color:var(--accent);font-weight:500}
+
+/* ── Comparison Table ── */
+.compare-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm)}
+.compare-table thead th{text-align:center;padding:var(--space-md);color:var(--text-primary);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--accent)}
+.compare-table thead th:first-child{text-align:left}
+.compare-table thead th.col-recommend{background:rgba(200,150,62,.08);color:var(--accent)}
+.compare-table td{text-align:center;padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.compare-table td:first-child{text-align:left;color:var(--text-primary);font-weight:500}
+.compare-table tbody tr:hover td{background:rgba(200,150,62,.03)}
+.compare-table td.col-recommend{background:rgba(200,150,62,.03)}
+.compare-table .check{color:var(--accent)}
+.compare-table .dash{color:var(--text-muted)}
+
+/* ── Decision Guide Cards ── */
+.decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-2xl)}
+.decision-card{padding:var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color .3s,transform .3s}
+.decision-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.decision-card .dc-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin-bottom:var(--space-md)}
+.decision-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm) 0;font-size:var(--text-base)}
+.decision-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* ── Capability Limits Table ── */
+.cap-limits{width:100%;border-collapse:collapse;margin:var(--space-lg) 0 var(--space-2xl);font-size:var(--text-sm);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.cap-limits th{text-align:left;padding:var(--space-md) var(--space-lg);color:var(--accent);font-weight:500;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;background:rgba(200,150,62,.06);border-bottom:1px solid var(--accent-subtle)}
+.cap-limits td{padding:var(--space-md) var(--space-lg);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.cap-limits td:first-child{color:var(--text-primary);font-weight:500;width:40%}
+.cap-limits tr:last-child td{border-bottom:none}
+
+/* ── Related Industries ── */
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.related-card{display:block;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s}
+.related-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.related-card h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.related-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+/* ── Key Metrics Banner ── */
+.key-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+.key-metric{text-align:center;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.key-metric .km-val{display:block;font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace}
+.key-metric .km-lbl{display:block;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.08em}
+
+@media(max-width:1024px){.key-metrics{grid-template-columns:repeat(2,1fr)}.decision-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.sub-hero{min-height:40vh}.key-metrics{grid-template-columns:1fr}.spec-table,.compare-table,.cap-limits{font-size:var(--text-xs)}.spec-table td,.compare-table td,.cap-limits td{padding:var(--space-sm)}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=16"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ═══════════ SUB-HERO ═══════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../../generated/tech-PAGE_SLUG-hero.webp" alt="TECH_PAGE_TITLE" loading="eager"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technology / TECH_CATEGORY</p>
+      <h1 class="reveal">TECH_MAIN_TITLE:<br><em>TECH_EMPHASIS</em></h1>
+      <p class="reveal">TECH_SUB_DESCRIPTION — one sentence value proposition for this technology page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ARTICLE ═══════════ -->
+<article class="tech-article reveal">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/technology/">Technology</a> / <span>TECH_SHORT_NAME</span></div>
+
+  <p>OPENING_PARAGRAPH — introduce the technology, explain what it is and why it matters for PCB design and manufacturing decisions. Set context for the technical depth that follows.</p>
+
+  <p>SECOND_PARAGRAPH — establish why this matters for procurement and engineering decisions. Mention real-world impact: cost, reliability, performance. Reference Huaxing's experience with this technology.</p>
+
+  <!-- ── Key Metrics ── -->
+  <div class="key-metrics">
+    <div class="key-metric"><span class="km-val">METRIC_1</span><span class="km-lbl">Metric Label 1</span></div>
+    <div class="key-metric"><span class="km-val">METRIC_2</span><span class="km-lbl">Metric Label 2</span></div>
+    <div class="key-metric"><span class="km-val">METRIC_3</span><span class="km-lbl">Metric Label 3</span></div>
+    <div class="key-metric"><span class="km-val">METRIC_4</span><span class="km-lbl">Metric Label 4</span></div>
+  </div>
+
+  <!-- ═══════════ SECTION 1: Technical Overview ═══════════ -->
+  <h2>How TECH_NAME Works</h2>
+
+  <p>Technical explanation of the technology — the engineering principles, key parameters, and how different variables affect the outcome. Written for an engineering/procurement audience that needs to make decisions.</p>
+
+  <p>Deeper dive into the nuances. What are the common misconceptions? What do engineers typically get wrong? What are the trade-offs?</p>
+
+  <!-- ═══════════ SECTION 2: Key Parameters Table ═══════════ -->
+  <h2>TECH_NAME: Key Parameters & Specifications</h2>
+
+  <table class="spec-table">
+    <thead><tr><th>Parameter</th><th>Specification</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Parameter 1</td><td>Value / Range</td><td>Context, trade-offs, when to use</td></tr>
+      <tr><td>Parameter 2</td><td>Value / Range</td><td>Context, trade-offs, when to use</td></tr>
+      <tr><td>Parameter 3</td><td>Value / Range</td><td>Context, trade-offs, when to use</td></tr>
+      <tr><td>Parameter 4</td><td>Value / Range</td><td>Context, trade-offs, when to use</td></tr>
+      <tr class="highlight-row"><td>Huaxing Capability</td><td>Our max/min spec</td><td>What we deliver in production</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════ SECTION 3: Options Comparison ═══════════ -->
+  <h2>TECH_NAME: Options & Trade-offs</h2>
+
+  <p>Introduction to the comparison — what are the main options, and what decision criteria should engineers use to choose between them?</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Option</th><th class="col-recommend">Option A (Recommended)</th><th>Option B</th><th>Option C</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Criterion 1</td><td class="col-recommend"><span class="check">✓</span> Best</td><td>Good</td><td><span class="dash">—</span> Limited</td></tr>
+      <tr><td>Criterion 2</td><td class="col-recommend">Good</td><td><span class="check">✓</span> Best</td><td>Adequate</td></tr>
+      <tr><td>Criterion 3</td><td class="col-recommend"><span class="check">✓</span> Excellent</td><td>Adequate</td><td>Good</td></tr>
+      <tr><td>Relative Cost</td><td class="col-recommend">$$</td><td>$</td><td>$$$</td></tr>
+      <tr><td>Best For</td><td class="col-recommend">Use case A</td><td>Use case B</td><td>Use case C</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════ SECTION 4: Decision Guide ═══════════ -->
+  <h2>How to Choose: Decision Guide</h2>
+
+  <p>Practical decision framework. When should you use each option? What questions should you ask your PCB manufacturer? What trade-offs are worth making?</p>
+
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="dc-label">Scenario 1</div>
+      <h4>When You Need X</h4>
+      <p>Choose Option A when your priority is performance metric Y, your budget allows Z, and your volume is above N units. Key specification to verify with your manufacturer: [spec]. Common pitfall: [what engineers get wrong].</p>
+    </div>
+    <div class="decision-card">
+      <div class="dc-label">Scenario 2</div>
+      <h4>When You Need Y</h4>
+      <p>Choose Option B when cost is the primary driver, performance requirements are moderate, and timeline is tight. Key trade-off: you sacrifice [X] but save approximately [Y]%. Verify: [spec to check].</p>
+    </div>
+    <div class="decision-card">
+      <div class="dc-label">Scenario 3</div>
+      <h4>When You Need Z</h4>
+      <p>Choose Option C for high-reliability applications where failure is not an option. Higher cost but longer lifetime and better performance. Verify: reliability test data, not just spec sheet claims.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ SECTION 5: Huaxing Capabilities ═══════════ -->
+  <h2>Huaxing TECH_NAME Capabilities</h2>
+
+  <p>What we can actually deliver in production — not generic capability sheet claims, but specific parameters with tolerances and verification methods.</p>
+
+  <table class="cap-limits">
+    <tr><th colspan="2">Huaxing Production Limits — TECH_NAME</th></tr>
+    <tr><td>Capability 1</td><td>Specific spec with tolerance</td></tr>
+    <tr><td>Capability 2</td><td>Specific spec with tolerance</td></tr>
+    <tr><td>Capability 3</td><td>Specific spec with tolerance</td></tr>
+    <tr><td>Capability 4</td><td>Specific spec with tolerance</td></tr>
+    <tr><td>Capability 5</td><td>Specific spec with tolerance</td></tr>
+    <tr><td>Capability 6</td><td>Specific spec with tolerance</td></tr>
+    <tr><td>Quality Verification</td><td>How we verify — test method, frequency, equipment</td></tr>
+  </table>
+
+  <!-- ═══════════ SECTION 6: Related Industries ═══════════ -->
+  <h2>Industries That Depend on TECH_NAME</h2>
+
+  <p>This technology is critical for the following industries. Each has specific requirements — click through for industry-specific PCB solutions.</p>
+
+  <div class="related-grid">
+    <a href="/industries/automotive/" class="related-card"><h4>Automotive</h4><p>Industry-specific requirement for this technology</p></a>
+    <a href="/industries/telecom/" class="related-card"><h4>Telecom & 5G</h4><p>Industry-specific requirement for this technology</p></a>
+    <a href="/industries/consumer/" class="related-card"><h4>Consumer Electronics</h4><p>Industry-specific requirement for this technology</p></a>
+    <a href="/industries/iot/" class="related-card"><h4>IoT</h4><p>Industry-specific requirement for this technology</p></a>
+  </div>
+
+  <!-- ═══════════ Further Reading ═══════════ -->
+  <h2>Further Reading</h2>
+  <ul>
+    <li><a href="/blog/RELATED_BLOG_SLUG.html">Related Blog Article Title</a> — deeper educational content on this topic</li>
+    <li><a href="/technology/RELATED_TECH_SLUG/">Related Technology Page</a> — adjacent technology that impacts design decisions</li>
+  </ul>
+
+</article>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-rigid-flex.webp)">
+      <h2>CTA_HEADING — Action-Oriented</h2>
+      <p>CTA_DESCRIPTION — what the reader gets, how fast, why it's worth their click. Mention the 24h response, free DFM review, or other concrete value.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">CTA_BUTTON_TEXT <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. ISO 9001 certified, UL E354321. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════ MODAL ═══════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../../inquiry-handler.js"></script></body>
+</html>

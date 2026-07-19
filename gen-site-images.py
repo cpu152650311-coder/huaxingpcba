@@ -14,12 +14,21 @@ GPT Image 2 params:
 import requests, base64, json, os, sys, time, argparse
 from pathlib import Path
 
+# Proxy configuration — required for API access from China
+PROXY_URL = os.environ.get('HTTPS_PROXY', os.environ.get('HTTP_PROXY', 'http://localhost:10808'))
+PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
+
 def load_env():
     env_path = Path.home() / '.hermes' / '.env'
     if env_path.exists():
         for line in env_path.read_text(encoding='utf-8').splitlines():
             if line.startswith('AIHUBMIX_API_KEY='):
                 os.environ['AIHUBMIX_API_KEY'] = line.split('=', 1)[1].strip()
+                break
+            if line.startswith('IMAGE_PROXY='):
+                global PROXY_URL, PROXIES
+                PROXY_URL = line.split('=', 1)[1].strip()
+                PROXIES = {"http": PROXY_URL, "https": PROXY_URL}
                 break
     return os.environ.get('AIHUBMIX_API_KEY')
 
@@ -54,14 +63,14 @@ def _generate_text(prompt, api_key, quality, size, output_format):
     last_error = None
     for url, name in endpoints:
         try:
-            resp = requests.post(url, headers=headers, json=payload, timeout=120)
+            resp = requests.post(url, headers=headers, json=payload, timeout=120, proxies=PROXIES)
             if resp.status_code != 200:
                 last_error = f"{name} {resp.status_code}: {resp.text[:300]}"
                 continue
             data = resp.json()
             img_data = data['data'][0]
             if 'url' in img_data:
-                r = requests.get(img_data['url'], timeout=30)
+                r = requests.get(img_data['url'], timeout=30, proxies=PROXIES)
                 r.raise_for_status()
                 return r.content
             elif 'b64_json' in img_data:
@@ -103,14 +112,14 @@ def _generate_edit(prompt, api_key, source_image, quality, size, output_format):
     for url, name in endpoints:
         try:
             resp = requests.post(url, headers={'Authorization': f'Bearer {api_key}'},
-                                files=files, data=data, timeout=120)
+                                files=files, data=data, timeout=120, proxies=PROXIES)
             if resp.status_code != 200:
                 last_error = f"{name} {resp.status_code}: {resp.text[:300]}"
                 continue
             data = resp.json()
             img_data = data['data'][0]
             if 'url' in img_data:
-                r = requests.get(img_data['url'], timeout=30)
+                r = requests.get(img_data['url'], timeout=30, proxies=PROXIES)
                 r.raise_for_status()
                 return r.content
             elif 'b64_json' in img_data:

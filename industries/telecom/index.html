@@ -144,7 +144,7 @@
     <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
     <nav class="nav-links" id="navLinks">
     </nav>
-    <script src="/nav.js?v=13"></script>
+    <script src="/nav.js?v=16"></script>
     <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
   </div>
 </header>
@@ -237,6 +237,21 @@
   </table></div>
 </div></section>
 
+<section class="section"><div class="container-wide"><div class="split-section">
+  <div class="split-content reveal">
+    <p class="section-eyebrow">5G Infrastructure & Optical</p>
+    <h2>From Antenna to Core Network.<br>A Single PCB Supply Chain.</h2>
+    <p>5G deployment spans three domains — radio access (AAU/RRU), fronthaul/backhaul transport, and baseband processing. Each domain has fundamentally different PCB requirements. A 64T64R massive MIMO antenna panel needs 14-18 layers of Rogers 4350B with ±3° phase matching across 64 channels. An 800G optical line card needs 28-32 layers with 112Gbps PAM4 SerDes and <0.5ps intra-pair skew. A single supplier that understands the full signal chain catches integration issues that two separate suppliers never see.</p>
+    <ul>
+      <li><strong>5G AAU antenna-integrated PCBs</strong> — 14-18L Rogers 4350B for 3.5GHz/4.9GHz n77/n78/n79 bands. ±3° phase matching across 64 RF channels. Embedded patch antenna elements with via-fed or aperture-coupled feed. Conformal coating for IP65 outdoor tower-top deployment. -40°C to +85°C operating range with <0.1dB amplitude drift over temperature</li>
+      <li><strong>800G optical line cards</strong> — 28-32L Megtron 6 with 112Gbps PAM4 per differential pair. <0.5ps intra-pair skew for all 8 lanes of 100G-PAM4. Back-drilled vias for stub-free transitions on 28GHz+ signals. Copper surface roughness <2µm RMS on all high-speed layers. For CFP2-DCO and QSFP-DD800 transceiver host boards</li>
+      <li><strong>mmWave phased array for 5G FR2 (24-39GHz)</strong> — Rogers 3003 or Isola Astra MT77 with Dk 3.0 ±0.04. 0.2mm BGA pitch for beamformer ICs. Thermal via grids directly under each PA channel. Embedded antenna-in-package with <0.5dB loss from beamformer to radiating element. 256-element array in <100×100mm PCB area</li>
+      <li><strong>Timing & synchronization backplanes</strong> — IEEE 1588 PTP trace routing with matched-length clock distribution. <0.1ps added jitter through PCB trace for Class C timing (±30ns to UTC). Guard traces between clock and data lanes with ground vias at λ/20 spacing. For DU/CU timing cards and GPS-disciplined oscillator distribution</li>
+    </ul>
+  </div>
+  <div class="split-visual reveal"><img src="../../generated/ind-telecom-filter.webp" alt="5G base station and optical transport PCB with RF laminate" loading="lazy"><div class="visual-overlay"></div></div>
+</div></div></section>
+
 <section class="process-section"><div class="container-wide">
   <h2 class="reveal">Telecom PCB Production Flow</h2>
   <div class="process-timeline">
@@ -266,6 +281,8 @@
     <div class="checklist-card reveal"><div class="cl-num">2</div><div class="cl-body"><h4>"What's your back-drilling depth control accuracy on production panels?"</h4><p>Via stubs over 50µm create visible insertion loss degradation above 28GHz. Target: ±50µm depth control across full panel with AOI verification of every back-drilled hole.</p></div></div>
     <div class="checklist-card reveal"><div class="cl-num">3</div><div class="cl-body"><h4>"How do you verify laminate Dk consistency lot-to-lot?"</h4><p>Laminate Dk variation of ±0.05 (Rogers spec) changes 50Ω impedance by ~2.5Ω. Ask for incoming laminate Dk verification data — not the supplier's certificate, your fabricator's own measurement.</p></div></div>
     <div class="checklist-card reveal"><div class="cl-num">4</div><div class="cl-body"><h4>"What's your thermal cycling qualification for mixed-material (Rogers+FR-4) hybrid boards?"</h4><p>Different CTE between Rogers and FR-4 creates shear stress at the bond line. 500 cycles -40/+125°C with cross-section at 0, 250, 500 cycles. No delamination, no barrel cracking.</p></div></div>
+    <div class="checklist-card reveal"><div class="cl-num">5</div><div class="cl-body"><h4>"How do you verify phase matching across 64 RF channels on a massive MIMO antenna board?"</h4><p>At 3.5GHz, a 0.5mm length mismatch between two antenna feed traces creates ~3° of phase error. Across a 64-element array, cumulative phase errors above ±5° degrade beamforming gain by >1dB — equivalent to losing 20% of your cell radius. Ask for: VNA phase measurement on every RF channel of production boards (not just coupon), <±3° phase matching across all 64 channels at 3.5GHz, and end-of-line RF test data showing amplitude and phase per channel. Electrical test passing ≠ phase-matched. A board that passes continuity test can still have 15° of phase error from Dk variation alone.</p></div></div>
+    <div class="checklist-card reveal"><div class="cl-num">6</div><div class="cl-body"><h4>"What's your insertion loss measurement capability above 20GHz — and show me recent production data."</h4><p>Insertion loss at 28GHz on FR-4 can be 3× what the simulation predicted because copper surface roughness and Df variation aren't fully modeled. A design targeting <1.5dB total loss from beamformer to antenna element can arrive at 3dB+ on the first build — and you won't know until RF validation. Ask for: VNA S-parameter measurement to 40GHz on production coupons, insertion loss data per lot with pass/fail limits tied to your link budget, and Delta-L or similar de-embedding to isolate PCB loss from connector and launch effects. A shop that quotes "we test to IPC spec" is doing DC continuity test — that tells you nothing about GHz insertion loss.</p></div></div>
   </div>
 </div></section>
 

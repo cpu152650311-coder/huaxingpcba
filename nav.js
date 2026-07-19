@@ -2,7 +2,7 @@
  * Huaxing PCBA — Shared Navigation Injection
  * Injects nav HTML + critical CSS so the nav works even if
  * design-tokens.css is cached stale or loads slowly from CDN.
- * v13 — Mobile: no sub-menus (dropdown panels hidden), triggers navigate to landing pages
+ * v16 — Restructured nav: Resources▼ dropdown (Technology + Knowledge + Blog)
  */
 (function(){
   var nav = document.getElementById('navLinks');
@@ -229,12 +229,19 @@
     '<a href="/quote/"' + active('/quote/') + '>Quick Quote</a>' +
     '<a href="/about/"' + active('/about/') + '>About</a>' +
     '<a href="/contact/"' + active('/contact/') + '>Contact</a>' +
-    '<a href="/blog/"' + active('/blog/') + '>Blog</a>' +
+    '<div class="nav-dropdown" id="resourcesDropdown">' +
+      '<span class="nav-dropdown-trigger">Resources <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
+      '<div class="nav-dropdown-panel">' +
+        '<a href="/technology/"' + active('/technology/') + '>Technology</a>' +
+        '<a href="/knowledge/"' + active('/knowledge/') + '>Knowledge Base</a>' +
+        '<a href="/blog/"' + active('/blog/') + '>Blog</a>' +
+      '</div>' +
+    '</div>' +
     '<a href="#inquiry" class="nav-cta" onclick="var n=document.getElementById(\'navLinks\');n.classList.remove(\'mobile-open\');document.body.style.overflow=\'\';if(typeof openModal==\'function\')openModal();return false">Get Quote</a>';
 
   // 3. Dropdown toggles (click to open/close on desktop, navigate on mobile)
   document.addEventListener('click', function(e) {
-    ['capabilitiesDropdown','industriesDropdown'].forEach(function(id) {
+    ['capabilitiesDropdown','industriesDropdown','resourcesDropdown'].forEach(function(id) {
       var dd = document.getElementById(id);
       if (dd && !dd.contains(e.target)) dd.classList.remove('open');
     });
@@ -244,10 +251,11 @@
 
   var landingPages = {
     capabilitiesDropdown: '/capabilities/',
-    industriesDropdown: '/industries/'
+    industriesDropdown: '/industries/',
+    resourcesDropdown: '/technology/'
   };
 
-  ['capabilitiesDropdown','industriesDropdown'].forEach(function(id) {
+  ['capabilitiesDropdown','industriesDropdown','resourcesDropdown'].forEach(function(id) {
     var dd = document.getElementById(id);
     if (!dd) return;
     var trigger = dd.querySelector('.nav-dropdown-trigger');
