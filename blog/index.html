@@ -33,12 +33,15 @@
   .blog-card-body h3{font-size:var(--text-lg);font-weight:300;margin-bottom:var(--space-sm)}
   .blog-card-body p{font-size:var(--text-sm);color:var(--text-secondary);flex:1}
   /* Pagination */
-  .pagination{display:flex;justify-content:center;gap:var(--space-sm);margin-top:var(--space-2xl)}
-  .page-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-surface);color:var(--text-secondary);cursor:pointer;font-size:var(--text-sm);transition:all .2s}
-  .page-btn:hover{border-color:var(--accent-25);color:var(--text-primary)}
+  .pagination{display:flex;justify-content:center;align-items:center;gap:var(--space-sm);margin:var(--space-2xl) 0 var(--space-lg)}
+  .page-btn{min-width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-surface);color:var(--text-secondary);cursor:pointer;font-size:var(--text-sm);transition:all .2s;padding:0 12px;user-select:none}
+  .page-btn:hover:not(:disabled){border-color:var(--accent-25);color:var(--text-primary)}
   .page-btn.active{background:var(--accent);color:#0a0a0b;border-color:var(--accent);font-weight:500}
+  .page-btn:disabled{opacity:0.35;cursor:default}
+  .page-nav{font-size:var(--text-xs);letter-spacing:0.03em}
+  .blog-card-link{min-width:0}
   @media(max-width:1024px){.blog-page.active{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:600px){.blog-page.active{grid-template-columns:1fr}}
+  @media(max-width:600px){.blog-page.active{grid-template-columns:1fr}.page-btn{min-width:32px;height:36px;font-size:var(--text-xs)}.page-nav{padding:0 8px}}
 </style>
 </head>
 <body>
@@ -346,11 +349,14 @@
       </div>
     </div>
     <div class="pagination reveal">
+      <button class="page-btn page-nav" data-page="prev" onclick="goToPage(currentPage-1)" disabled>← Prev</button>
       <button class="page-btn active" data-page="1" onclick="goToPage(1)">1</button>
       <button class="page-btn" data-page="2" onclick="goToPage(2)">2</button>
       <button class="page-btn" data-page="3" onclick="goToPage(3)">3</button>
+      <button class="page-btn page-nav" data-page="next" onclick="goToPage(currentPage+1)">Next →</button>
     </div>
-
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="section" style="background:var(--bg-secondary)">
@@ -408,11 +414,13 @@
     <div class="modal-image-panel">
       <img src="/generated/modal-pcba-showcase.webp" alt="">
       <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
       <div class="modal-image-text">
         <div class="mi-label">HUAXING PCBA</div>
         <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
-        <h2 class="mi-heading">Start Your Project</h2>
-        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
       </div>
     </div>
     <div class="modal-form-panel">
@@ -434,11 +442,23 @@ function closeModal(){document.getElementById('inquiryModal').classList.remove('
 </script>
 <script src="../inquiry-handler.js"></script>
 <script>
+var currentPage = 1;
+var totalPages = 3;
 function goToPage(n) {
+  if (n === 'prev') n = currentPage - 1;
+  if (n === 'next') n = currentPage + 1;
+  if (n < 1 || n > totalPages) return;
+  currentPage = n;
   document.querySelectorAll('.blog-page').forEach(p => p.classList.remove('active'));
   document.getElementById('blogPage' + n).classList.add('active');
   document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.page-btn[data-page="' + n + '"]').classList.add('active');
+  var btn = document.querySelector('.page-btn[data-page="' + n + '"]');
+  if (btn) btn.classList.add('active');
+  // Toggle prev/next disabled state
+  var prevBtn = document.querySelector('.page-btn[data-page="prev"]');
+  var nextBtn = document.querySelector('.page-btn[data-page="next"]');
+  if (prevBtn) prevBtn.disabled = (n <= 1);
+  if (nextBtn) nextBtn.disabled = (n >= totalPages);
   window.scrollTo({top: document.querySelector('.blog-grid').offsetTop - 100, behavior: 'smooth'});
 }
 </script>
