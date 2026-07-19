@@ -29,21 +29,25 @@
 .sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
 .sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:640px;line-height:1.7}
 .tech-hub{max-width:1100px;margin:0 auto;padding:var(--space-2xl) var(--space-lg)}
-.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-lg);margin:var(--space-2xl) 0}
-.tech-card{display:block;padding:var(--space-2xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
-.tech-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
-.tech-card:hover{border-color:var(--accent-subtle);transform:translateY(-4px)}
-.tech-card:hover::before{opacity:1}
-.tech-card .tc-thumb{width:100%;height:180px;border-radius:var(--radius-md);overflow:hidden;margin-bottom:var(--space-lg)}.tech-card .tc-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.tech-card:hover .tc-thumb img{transform:scale(1.05)}
-.tech-card h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm) 0}
-.tech-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
-.tech-card .tc-link{display:inline-block;margin-top:var(--space-md);font-size:var(--text-xs);color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+.tech-list{display:flex;flex-direction:column;gap:clamp(28px,4vw,44px);margin:var(--space-2xl) 0}
+.tech-card{display:flex;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;text-decoration:none;color:var(--text-secondary);transition:border-color .35s,box-shadow .35s,transform .35s;min-height:280px}
+.tech-card:hover{border-color:var(--accent-subtle);box-shadow:0 16px 48px rgba(0,0,0,.3);transform:translateY(-3px)}
+.tech-card .tc-img{flex:0 0 42%;overflow:hidden;position:relative;min-height:280px}
+.tech-card .tc-img img{width:100%;height:100%;object-fit:cover;transition:transform .65s}
+.tech-card:hover .tc-img img{transform:scale(1.06)}
+.tech-card .tc-body{flex:1;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center}
+.tech-card .tc-body h3{font-size:var(--text-xl);font-weight:300;color:var(--text-primary);margin:0 0 var(--space-md);line-height:1.25}
+.tech-card .tc-body p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.8;margin:0 0 var(--space-lg)}
+.tech-card .tc-body .tc-link{font-size:var(--text-xs);color:var(--accent);text-transform:uppercase;letter-spacing:.12em;display:inline-flex;align-items:center;gap:8px;font-weight:400}
+.tech-card .tc-body .tc-link::after{content:'→';display:inline-block;transition:transform .3s}
+.tech-card:hover .tc-body .tc-link::after{transform:translateX(6px)}
+.tech-card.alt{flex-direction:row-reverse}
 .cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center;padding:var(--space-3xl) var(--space-2xl)}
 .cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
 .cta-card>*{position:relative;z-index:1}
 .cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
 .cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
-@media(max-width:768px){.sub-hero{min-height:30vh}.tech-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.sub-hero{min-height:30vh}.tech-card,.tech-card.alt{flex-direction:column}.tech-card .tc-img{flex:0 0 200px;min-height:200px}}
 </style>
 </head>
 <body>
@@ -76,48 +80,62 @@
 </section>
 
 <section class="tech-hub">
-  <div class="tech-grid">
+  <div class="tech-list">
     <a href="/technology/hdi/" class="tech-card reveal">
-      <div class="tc-thumb"><img src="../generated/tech-hdi-hero.webp" alt="HDI PCB cross-section with laser microvias" loading="lazy"></div>
-      <h3>HDI & Any-Layer Interconnect</h3>
-      <p>75µm laser microvias, stacked vs. staggered, 3+N+3 stackup architecture, 0.4mm BGA escape routing. When to use any-layer HDI vs. conventional through-hole — with cost per layer comparison.</p>
-      <span class="tc-link">Explore HDI Technology →</span>
+      <div class="tc-img"><img src="../generated/tech-hdi-hero.webp" alt="HDI PCB cross-section with laser microvias" loading="lazy"></div>
+      <div class="tc-body">
+        <h3>HDI & Any-Layer Interconnect</h3>
+        <p>75µm laser microvias, stacked vs. staggered, 3+N+3 stackup architecture, 0.4mm BGA escape routing. When to use any-layer HDI vs. conventional through-hole — with cost per layer comparison.</p>
+        <span class="tc-link">Explore HDI Technology</span>
+      </div>
     </a>
-    <a href="/technology/surface-finish/" class="tech-card reveal">
-      <div class="tc-thumb"><img src="../generated/tech-surfacefinish-hero.webp" alt="PCB surface finish comparison — ENIG, HASL, ENEPIG" loading="lazy"></div>
-      <h3>PCB Surface Finish Comparison</h3>
-      <p>ENIG vs. ENEPIG vs. HASL vs. Immersion Silver vs. OSP — a data-driven comparison covering shelf life, solderability, wire-bond compatibility, cost per dm², and failure modes for each finish.</p>
-      <span class="tc-link">Compare Surface Finishes →</span>
+    <a href="/technology/surface-finish/" class="tech-card alt reveal">
+      <div class="tc-img"><img src="../generated/tech-surfacefinish-hero.webp" alt="PCB surface finish comparison — ENIG, HASL, ENEPIG" loading="lazy"></div>
+      <div class="tc-body">
+        <h3>PCB Surface Finish Comparison</h3>
+        <p>ENIG vs. ENEPIG vs. HASL vs. Immersion Silver vs. OSP — a data-driven comparison covering shelf life, solderability, wire-bond compatibility, cost per dm², and failure modes for each finish.</p>
+        <span class="tc-link">Compare Surface Finishes</span>
+      </div>
     </a>
     <a href="/technology/impedance-control/" class="tech-card reveal">
-      <div class="tc-thumb"><img src="../generated/tech-impedance-hero.webp" alt="PCB transmission line cross-section — controlled impedance" loading="lazy"></div>
-      <h3>Impedance Control & High-Speed Design</h3>
-      <p>50Ω single-ended, 100Ω differential, ±5% tolerance. Coplanar waveguide, microstrip, stripline geometries. TDR verification, insertion loss budgeting, and back-drilling for stub removal.</p>
-      <span class="tc-link">Master Impedance Control →</span>
+      <div class="tc-img"><img src="../generated/tech-impedance-hero.webp" alt="PCB transmission line cross-section — controlled impedance" loading="lazy"></div>
+      <div class="tc-body">
+        <h3>Impedance Control & High-Speed Design</h3>
+        <p>50Ω single-ended, 100Ω differential, ±5% tolerance. Coplanar waveguide, microstrip, stripline geometries. TDR verification, insertion loss budgeting, and back-drilling for stub removal.</p>
+        <span class="tc-link">Master Impedance Control</span>
+      </div>
     </a>
-    <a href="/technology/materials/" class="tech-card reveal">
-      <div class="tc-thumb"><img src="../generated/tech-materials-hero.webp" alt="PCB laminate materials — FR-4, Rogers, polyimide cross-sections" loading="lazy"></div>
-      <h3>PCB Laminate & Material Selection</h3>
-      <p>FR-4 vs. High-Tg vs. Polyimide vs. Rogers vs. Megtron 6. Dk/Df at frequency, CTE matching, CAF resistance, T260/T288 thermal limits. Material cost vs. performance trade-off framework.</p>
-      <span class="tc-link">Select Materials →</span>
+    <a href="/technology/materials/" class="tech-card alt reveal">
+      <div class="tc-img"><img src="../generated/tech-materials-hero.webp" alt="PCB laminate materials — FR-4, Rogers, polyimide cross-sections" loading="lazy"></div>
+      <div class="tc-body">
+        <h3>PCB Laminate & Material Selection</h3>
+        <p>FR-4 vs. High-Tg vs. Polyimide vs. Rogers vs. Megtron 6. Dk/Df at frequency, CTE matching, CAF resistance, T260/T288 thermal limits. Material cost vs. performance trade-off framework.</p>
+        <span class="tc-link">Select Materials</span>
+      </div>
     </a>
     <a href="/technology/dfm/" class="tech-card reveal">
-      <div class="tc-thumb"><img src="../generated/tech-dfm-hero.webp" alt="PCB DFM design for manufacturability panel optimization" loading="lazy"></div>
-      <h3>DFM Design for Manufacturability</h3>
-      <p>Panel utilization optimization, layer count reduction analysis, component selection for assembly cost, test strategy optimization. Real cost-saving examples with dollar-per-board calculations.</p>
-      <span class="tc-link">Optimize Your Design →</span>
+      <div class="tc-img"><img src="../generated/tech-dfm-hero.webp" alt="PCB DFM design for manufacturability panel optimization" loading="lazy"></div>
+      <div class="tc-body">
+        <h3>DFM Design for Manufacturability</h3>
+        <p>Panel utilization optimization, layer count reduction analysis, component selection for assembly cost, test strategy optimization. Real cost-saving examples with dollar-per-board calculations.</p>
+        <span class="tc-link">Optimize Your Design</span>
+      </div>
     </a>
-    <a href="/technology/testing/" class="tech-card reveal">
-      <div class="tc-thumb"><img src="../generated/tech-testing-hero.webp" alt="PCB testing methods — flying probe, AOI, X-Ray inspection" loading="lazy"></div>
-      <h3>PCB Testing & Inspection Methods</h3>
-      <p>Flying probe vs. bed-of-nails vs. boundary scan. AOI, X-Ray, SPI, 4-wire Kelvin, HiPot, TDR, IST, thermal cycling. Defect coverage analysis — which test catches what defect type.</p>
-      <span class="tc-link">Understand Testing →</span>
+    <a href="/technology/testing/" class="tech-card alt reveal">
+      <div class="tc-img"><img src="../generated/tech-testing-hero.webp" alt="PCB testing methods — flying probe, AOI, X-Ray inspection" loading="lazy"></div>
+      <div class="tc-body">
+        <h3>PCB Testing & Inspection Methods</h3>
+        <p>Flying probe vs. bed-of-nails vs. boundary scan. AOI, X-Ray, SPI, 4-wire Kelvin, HiPot, TDR, IST, thermal cycling. Defect coverage analysis — which test catches what defect type.</p>
+        <span class="tc-link">Understand Testing</span>
+      </div>
     </a>
     <a href="/technology/stackup/" class="tech-card reveal">
-      <div class="tc-thumb"><img src="../generated/tech-stackup-hero.webp" alt="PCB stackup design — multilayer cross-section with via types" loading="lazy"></div>
-      <h3>PCB Stackup Design Guide</h3>
-      <p>Layer count optimization, signal-ground adjacency, power plane impedance, mixed-material hybrid stackups, via aspect ratio limits, warpage control. 2-layer to 32-layer reference stackups.</p>
-      <span class="tc-link">Design Your Stackup →</span>
+      <div class="tc-img"><img src="../generated/tech-stackup-hero.webp" alt="PCB stackup design — multilayer cross-section with via types" loading="lazy"></div>
+      <div class="tc-body">
+        <h3>PCB Stackup Design Guide</h3>
+        <p>Layer count optimization, signal-ground adjacency, power plane impedance, mixed-material hybrid stackups, via aspect ratio limits, warpage control. 2-layer to 32-layer reference stackups.</p>
+        <span class="tc-link">Design Your Stackup</span>
+      </div>
     </a>
   </div>
 </section>

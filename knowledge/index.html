@@ -29,21 +29,25 @@
 .sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);margin-bottom:var(--space-lg)}
 .sub-hero-content p{font-size:var(--text-lg);color:var(--text-secondary);max-width:640px;line-height:1.7}
 .kb-hub{max-width:1100px;margin:0 auto;padding:var(--space-2xl) var(--space-lg)}
-.kb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-lg);margin:var(--space-2xl) 0}
-.kb-card{display:block;padding:var(--space-2xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);text-decoration:none;color:var(--text-secondary);transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
-.kb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
-.kb-card:hover{border-color:var(--accent-subtle);transform:translateY(-4px)}
-.kb-card:hover::before{opacity:1}
-.kb-card .kc-thumb{width:100%;height:180px;border-radius:var(--radius-md);overflow:hidden;margin-bottom:var(--space-lg)}.kb-card .kc-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.kb-card:hover .kc-thumb img{transform:scale(1.05)}
-.kb-card h3{font-size:var(--text-lg);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm) 0}
-.kb-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
-.kb-card .kc-link{display:inline-block;margin-top:var(--space-md);font-size:var(--text-xs);color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+.kb-list{display:flex;flex-direction:column;gap:clamp(28px,4vw,44px);margin:var(--space-2xl) 0}
+.kb-card{display:flex;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;text-decoration:none;color:var(--text-secondary);transition:border-color .35s,box-shadow .35s,transform .35s;min-height:280px}
+.kb-card:hover{border-color:var(--accent-subtle);box-shadow:0 16px 48px rgba(0,0,0,.3);transform:translateY(-3px)}
+.kb-card .kc-img{flex:0 0 42%;overflow:hidden;position:relative;min-height:280px}
+.kb-card .kc-img img{width:100%;height:100%;object-fit:cover;transition:transform .65s}
+.kb-card:hover .kc-img img{transform:scale(1.06)}
+.kb-card .kc-body{flex:1;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center}
+.kb-card .kc-body h3{font-size:var(--text-xl);font-weight:300;color:var(--text-primary);margin:0 0 var(--space-md);line-height:1.25}
+.kb-card .kc-body p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.8;margin:0 0 var(--space-lg)}
+.kb-card .kc-body .kc-link{font-size:var(--text-xs);color:var(--accent);text-transform:uppercase;letter-spacing:.12em;display:inline-flex;align-items:center;gap:8px;font-weight:400}
+.kb-card .kc-body .kc-link::after{content:'→';display:inline-block;transition:transform .3s}
+.kb-card:hover .kc-body .kc-link::after{transform:translateX(6px)}
+.kb-card.alt{flex-direction:row-reverse}
 .cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;background-size:cover;background-position:center;padding:var(--space-3xl) var(--space-2xl)}
 .cta-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,11,.85) 0%,rgba(8,8,11,.6) 100%);z-index:0}
 .cta-card>*{position:relative;z-index:1}
 .cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
 .cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
-@media(max-width:768px){.sub-hero{min-height:30vh}.kb-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.sub-hero{min-height:30vh}.kb-card,.kb-card.alt{flex-direction:column}.kb-card .kc-img{flex:0 0 200px;min-height:200px}}
 </style>
 </head>
 <body>
@@ -76,36 +80,46 @@
 </section>
 
 <section class="kb-hub">
-  <div class="kb-grid">
+  <div class="kb-list">
     <a href="/knowledge/ipc-standards/" class="kb-card reveal">
-      <div class="kc-thumb"><img src="../generated/kb-ipc-hero.webp" alt="IPC standards for PCB manufacturing" loading="lazy"></div>
-      <h3>IPC Standards Explained</h3>
-      <p>IPC-A-610 Class 2 vs Class 3, IPC-6012 rigid PCB performance, IPC-6013 flex, IPC-J-STD-001 soldering. Which standard applies to your product, what inspectors look for, and how to specify the right class on your fabrication drawing.</p>
-      <span class="kc-link">Understand IPC Standards →</span>
+      <div class="kc-img"><img src="../generated/kb-ipc-hero.webp" alt="IPC standards for PCB manufacturing" loading="lazy"></div>
+      <div class="kc-body">
+        <h3>IPC Standards Explained</h3>
+        <p>IPC-A-610 Class 2 vs Class 3, IPC-6012 rigid PCB performance, IPC-6013 flex, IPC-J-STD-001 soldering. Which standard applies to your product, what inspectors look for, and how to specify the right class on your fabrication drawing.</p>
+        <span class="kc-link">Understand IPC Standards</span>
+      </div>
     </a>
-    <a href="/knowledge/certifications/" class="kb-card reveal">
-      <div class="kc-thumb"><img src="../generated/kb-certs-hero.webp" alt="PCB manufacturing certifications guide" loading="lazy"></div>
-      <h3>PCB Certifications Guide</h3>
-      <p>UL E354321, ISO 9001, IATF 16949, ISO 13485, ISO 14001, RoHS, REACH. What each certification means, the audit process, why they matter for your supply chain, and how to verify a manufacturer's claims.</p>
-      <span class="kc-link">Decode Certifications →</span>
+    <a href="/knowledge/certifications/" class="kb-card alt reveal">
+      <div class="kc-img"><img src="../generated/kb-certs-hero.webp" alt="PCB manufacturing certifications guide" loading="lazy"></div>
+      <div class="kc-body">
+        <h3>PCB Certifications Guide</h3>
+        <p>UL E354321, ISO 9001, IATF 16949, ISO 13485, ISO 14001, RoHS, REACH. What each certification means, the audit process, why they matter for your supply chain, and how to verify a manufacturer's claims.</p>
+        <span class="kc-link">Decode Certifications</span>
+      </div>
     </a>
     <a href="/knowledge/glossary/" class="kb-card reveal">
-      <div class="kc-thumb"><img src="../generated/kb-glossary-hero.webp" alt="PCB terminology glossary reference" loading="lazy"></div>
-      <h3>PCB Terminology Glossary</h3>
-      <p>500+ PCB and PCBA terms defined — from Annular Ring to Z-Axis Expansion. Alphabetical reference with clear, jargon-free definitions. Essential for reading fabrication drawings, datasheets, and supplier communications.</p>
-      <span class="kc-link">Browse Glossary →</span>
+      <div class="kc-img"><img src="../generated/kb-glossary-hero.webp" alt="PCB terminology glossary reference" loading="lazy"></div>
+      <div class="kc-body">
+        <h3>PCB Terminology Glossary</h3>
+        <p>500+ PCB and PCBA terms defined — from Annular Ring to Z-Axis Expansion. Alphabetical reference with clear, jargon-free definitions. Essential for reading fabrication drawings, datasheets, and supplier communications.</p>
+        <span class="kc-link">Browse Glossary</span>
+      </div>
     </a>
-    <a href="/knowledge/shipping/" class="kb-card reveal">
-      <div class="kc-thumb"><img src="../generated/kb-shipping-hero.webp" alt="International PCB shipping and logistics guide" loading="lazy"></div>
-      <h3>International Shipping Guide</h3>
-      <p>DHL, FedEx, UPS, TNT, sea freight, air freight — transit times, cost comparison, packaging standards, customs documentation, Incoterms (FOB, CIF, DDP). How to plan your PCB delivery from Shenzhen to your door.</p>
-      <span class="kc-link">Plan Your Shipment →</span>
+    <a href="/knowledge/shipping/" class="kb-card alt reveal">
+      <div class="kc-img"><img src="../generated/kb-shipping-hero.webp" alt="International PCB shipping and logistics guide" loading="lazy"></div>
+      <div class="kc-body">
+        <h3>International Shipping Guide</h3>
+        <p>DHL, FedEx, UPS, TNT, sea freight, air freight — transit times, cost comparison, packaging standards, customs documentation, Incoterms (FOB, CIF, DDP). How to plan your PCB delivery from Shenzhen to your door.</p>
+        <span class="kc-link">Plan Your Shipment</span>
+      </div>
     </a>
     <a href="/knowledge/payment/" class="kb-card reveal">
-      <div class="kc-thumb"><img src="../generated/kb-payment-hero.webp" alt="PCB procurement payment methods guide" loading="lazy"></div>
-      <h3>Payment Methods Guide</h3>
-      <p>T/T wire transfer, Letter of Credit (L/C), PayPal, Western Union, Alibaba Trade Assurance. Payment terms (30/70, 50/50, Net 30), currency considerations, and how to protect yourself in international PCB transactions.</p>
-      <span class="kc-link">Compare Payment Options →</span>
+      <div class="kc-img"><img src="../generated/kb-payment-hero.webp" alt="PCB procurement payment methods guide" loading="lazy"></div>
+      <div class="kc-body">
+        <h3>Payment Methods Guide</h3>
+        <p>T/T wire transfer, Letter of Credit (L/C), PayPal, Western Union, Alibaba Trade Assurance. Payment terms (30/70, 50/50, Net 30), currency considerations, and how to protect yourself in international PCB transactions.</p>
+        <span class="kc-link">Compare Payment Options</span>
+      </div>
     </a>
   </div>
 </section>
