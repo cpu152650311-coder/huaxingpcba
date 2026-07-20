@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick-Turn PCB Manufacturing Guide — Lead Time Optimization &amp; Quality Assurance for Urgent Orders | Huaxing PCBA</title>
+<meta name="description" content="Complete procurement guide to quick-turn PCB manufacturing: standard vs expedited lead times, DFM requirements for speed, quality verification for 24-72h delivery, and cost trade-offs. Learn how to get fast PCBs without sacrificing reliability.">
+<meta property="og:title" content="Quick-Turn PCB Manufacturing — Lead Time Optimization &amp; Quality Assurance">
+<meta property="og:description" content="How to get 24-72h PCB fabrication and assembly without compromising quality. Covers DFM rules, supplier selection, and urgent-order procurement checklist.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/quick-turn-pcb-manufacturing.html">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/quick-turn-pcb-manufacturing.html">
+<link rel="stylesheet" href="../design-tokens.css?v=22">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=17"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-quick-turn-pcb.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">Quick-Turn PCB Manufacturing:<br><em>How to Get Production-Ready Boards in 24–72 Hours</em></h1>
+      <p class="reveal">A procurement professional's guide to navigating urgent PCB orders — from DFM shortcuts that actually work to quality verification protocols that catch defects before they ship.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Quick-Turn PCB Manufacturing Guide</span></div>
+
+  <p>When a prototype deadline shifts forward by two weeks or a production line stalls waiting for a single PCB revision, the difference between a supplier who can deliver in 72 hours and one who needs 15 days is measured in revenue. Quick-turn PCB manufacturing is not a luxury service — it is an operational necessity for hardware teams that cannot afford idle assembly lines. But speed without process discipline creates its own set of risks: skipped inspections, substituted materials, and boards that pass visual check but fail functional test three weeks later.</p>
+
+  <p>At Huaxing PCBA, we run <span class="data-point">8</span> high-speed SMT lines capable of <span class="data-point">8 million</span> placements per day, with a dedicated quick-turn cell that processes urgent orders without disrupting standard production schedules. This setup — combined with IATF 16949 and ISO 9001 certified processes — means accelerated lead times are achieved through parallelization, not corner-cutting. Here is what procurement professionals need to know before placing a quick-turn order.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-quick-turn-pcb-hero.webp" alt="High-speed SMT placement line in PCB factory processing quick-turn order, pick-and-place machine placing components on circuit board under bright industrial lighting" loading="lazy">
+
+  <!-- ── Section 1 ── -->
+  <h2>What "Quick-Turn" Actually Means in PCB Manufacturing</h2>
+
+  <p>The term "quick-turn" is used loosely across the industry, but in a production environment with ISO-certified processes, it has a specific operational definition. A true quick-turn PCB service means the supplier has allocated dedicated equipment capacity, pre-stocked the most common materials, and designed a separate workflow that does not queue behind standard orders. Without these three conditions, "quick-turn" is just a marketing label applied to rush fees on an overloaded production line.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dedicated Quick-Turn Cell — Not Just Queue Jumping</h4>
+      <p>A genuine quick-turn operation maintains a physically separate production cell — often a subset of SMT lines and drilling/routing machines — reserved exclusively for expedited orders. This cell runs independently from the main production floor. When your order arrives, it goes straight into this cell without waiting behind a batch of 10,000 standard boards. At Huaxing, 2 of our 8 SMT lines are allocated to the quick-turn cell, supported by dedicated laser drilling and AOI stations. This parallel capacity means a <span class="data-point">4-layer</span> board with standard FR-4 and ENIG finish can complete fabrication and assembly in <span class="data-point">48</span> hours.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Pre-Stocked Material Inventory — FR-4, High-Tg, ENIG Ready</h4>
+      <p>The biggest source of lead time variability is material availability. A quick-turn supplier must warehouse the most commonly specified laminates (standard FR-4, High-Tg FR-4, Rogers 4350B in 0.8mm–1.6mm thicknesses), prepregs, solder mask in standard colors, and surface finish chemistries. At Huaxing, our quick-turn material rack holds enough inventory for <span class="data-point">5,000</span> square meters of PCB fabrication — covering the majority of urgent orders without waiting for supplier shipments. For a deeper dive into substrates, see our <a href="/blog/pcb-materials-guide.html">PCB Materials Guide</a> comparing FR-4, High-Tg, and Rogers options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Process Validation Runs Concurrently — Not Sequentially</h4>
+      <p>In a standard production flow, fabrication completes → then assembly → then inspection. In a quick-turn flow, these stages are parallelized: assembly setup begins while the last fabrication step is finishing, and AOI programming is prepared from Gerber data while boards are in reflow. This requires a production engineering team that can manage parallel workstreams — a capability that separates real quick-turn providers from those who simply charge more for the same linear process.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality Check:</strong> Ask any quick-turn supplier three questions before placing an order: (1) "Do you have a physically separate quick-turn cell, or do expedited orders share the same lines?" (2) "What materials do you stock on-site for quick-turn — can you show me a current inventory list?" (3) "What inspection steps are never skipped, regardless of turnaround time?" A supplier who hesitates on question 3 is likely cutting corners under time pressure.</p>
+  </div>
+
+  <!-- ── Section 2 ── -->
+  <h2>DFM Rules That Enable Speed Without Sacrificing Quality</h2>
+
+  <p>Quick-turn success begins long before the order is placed — it starts in the PCB design file. A Gerber package optimized for manufacturability moves through fabrication with fewer engineering queries, fewer CAM revisions, and zero re-spins. Conversely, a poorly prepared design adds 12–24 hours of back-and-forth even before production starts. These are the specific DFM rules that procurement teams should communicate to their hardware engineers before submitting a quick-turn order.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-quick-turn-pcb-cross-section.webp" alt="Photorealistic 3D cross-section render of multi-layer PCB showing copper traces, vias, and dielectric layers with gold ENIG surface finish under macro lens" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Standardize on Stock Laminate and Copper Weight</h4>
+      <p>The single fastest way to delay a quick-turn order is specifying a non-stock laminate. Verify that your design uses a material the supplier warehouses for quick-turn: standard FR-4 (Tg 130–140°C), High-Tg FR-4 (Tg 170–180°C), or a commonly stocked RF material like Rogers 4350B. Similarly, copper weights of 1oz (35μm) for inner and outer layers match what most suppliers stock. Moving to 2oz or 3oz copper may add 24–48 hours for material procurement. For boards that genuinely need heavy copper, see our <a href="/blog/heavy-copper-pcb.html">Heavy Copper PCB Manufacturing Guide</a> — but plan those orders on standard lead times.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Eliminate Unnecessary Via Complexity</h4>
+      <p>Through-hole vias with a minimum drill diameter of 0.3mm and annular ring of 0.15mm are the sweet spot for quick-turn — any fab shop can process these without special tooling. Blind and buried vias, while essential for high-density designs, add laser drilling steps and lamination cycles that extend lead time by 1–2 days. Via-in-pad with plating also requires additional steps. If your design can achieve routing completion with through-hole vias only, specify that in the fabrication notes. For when microvias are unavoidable, our <a href="/blog/pcb-via-technology.html">PCB Via Technology Guide</a> explains the trade-offs between blind, buried, and backdrilled approaches.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Submit Complete Gerber + NC Drill + IPC-356 Netlist in One Package</h4>
+      <p>Incomplete data packages are the most common cause of quick-turn delays. Every order must include: all Gerber layers (copper, solder mask, silkscreen, solder paste, board outline), NC drill file with tool list, and an IPC-356 netlist for electrical testing. Missing the netlist means the supplier must generate one from Gerber data — adding 4–8 hours and introducing interpretation risk. If you are new to Gerber preparation, read our <a href="/blog/gerber-files-guide.html">Gerber Files Complete Checklist</a> before exporting. A properly prepared package moves straight from email to CAM to production with zero engineering queries.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Keep Layer Count at 6 or Below for Genuine 72-Hour Delivery</h4>
+      <p>Each additional layer pair adds a lamination cycle (typically 2–4 hours) and increases registration complexity. A 2-layer board can realistically complete fabrication in 8–12 hours; a 4-layer in 16–24 hours; a 6-layer in 24–36 hours. Above 6 layers, the lamination and drilling stack pushes fabrication beyond the 72-hour window — at that point, a standard 5-day lead time with full process validation is the safer choice. Huaxing's quick-turn cell handles up to <span class="data-point">32</span> layers on standard lead times, but we recommend 6 layers maximum for expedited orders. For high-layer-count designs, see our <a href="/blog/hdi-technology.html">HDI PCB Technology Guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Specify Standard Surface Finish — ENIG or HASL (Lead-Free)</h4>
+      <p>ENIG (Electroless Nickel Immersion Gold) and lead-free HASL are the most commonly stocked surface finishes and require no special preparation. ENEPIG, hard gold, and immersion silver may require chemistry setup that delays the start of fabrication by 4–12 hours. For a detailed comparison of all surface finish options and their trade-offs — including shelf life, cost, and application suitability — refer to our <a href="/blog/enig-vs-hasl.html">ENIG vs HASL vs OSP Surface Finish Guide</a>.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>Quality Verification for Quick-Turn Orders</h2>
+
+  <p>The central tension in quick-turn manufacturing is speed versus verification. Standard orders allow time for full AOI + X-Ray + ICT + functional test — a sequence that takes 4–8 hours on its own. Quick-turn orders compress this window, but the right approach is not to skip testing — it is to select the highest-signal inspections for the specific board type and run them in parallel with packaging.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-quick-turn-pcb-aoi.webp" alt="Automated Optical Inspection machine scanning bare PCB board with multiple camera angles, blue LED illumination, detecting solder defects and trace anomalies" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>AOI + Flying Probe: The Non-Negotiable Baseline</h4>
+      <p>Automated Optical Inspection catches surface-level defects — solder bridges, missing components, tombstoning, polarity errors — in under 2 minutes per board. Flying probe testing verifies electrical continuity on every net without requiring a custom test fixture (which would add 3–5 days for fabrication alone). This combination covers roughly <span class="data-point">85%</span> of common PCB defects and runs in under 10 minutes for a typical 4-layer board. Neither step should ever be skipped, regardless of turnaround urgency. For a complete comparison of all testing methodologies, see our <a href="/blog/pcb-testing-methods.html">PCB Testing Methods Guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>X-Ray for BGA and QFN Packages Only</h4>
+      <p>X-Ray inspection is essential for hidden solder joints under BGAs, QFNs, and LGAs — but for boards using only visible-lead components (SOICs, QFPs, passives), X-Ray adds inspection time without proportionate risk reduction. On quick-turn orders, reserve X-Ray for the specific BGA/QFN sites, not the entire board. Our <a href="/blog/bga-assembly-guide.html">BGA Assembly Guide</a> covers the specific void acceptance criteria and inspection protocols for ball-grid packages.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Cross-Section Analysis on the First Article Only</h4>
+      <p>For multi-board quick-turn orders, perform micro-section analysis on the first board off the line — not every board in the batch. A single cross-section verifies copper plating thickness, via wall integrity, and dielectric bonding quality. If the first article passes, the process is validated for the remainder of the batch. This saves 30–45 minutes per additional board while maintaining process confidence.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> The most common defect on quick-turn orders is not a manufacturing error — it is a design file issue that would have been caught during a normal DFM review. In a survey of 500 quick-turn orders processed at Huaxing in Q2 2026, <span class="data-point">62%</span> of defects originated in the design file (missing solder mask clearances, annular ring violations, acid trap geometries), not in fabrication. The single highest-ROI action a procurement team can take is sending the design through a DFM check before submitting the quick-turn order. Our <a href="/blog/dfm-tips.html">8 DFM Rules That Cut Costs by 30%</a> covers the most frequent design issues we encounter.</p>
+  </div>
+
+  <!-- ── Section 4 ── -->
+  <h2>Quick-Turn Cost Structure: What You're Paying For</h2>
+
+  <p>Quick-turn PCB manufacturing typically costs 2×–4× the standard lead-time price for the same board. Understanding what that premium funds helps procurement professionals separate legitimate rush charges from opportunistic markup.</p>
+
+  <table class="spec-table">
+    <tr><th>Cost Driver</th><th>Standard Lead Time</th><th>Quick-Turn (24-72h)</th><th>Why the Difference</th></tr>
+    <tr><td>Material allocation</td><td>Pooled inventory, pull-as-needed</td><td>Reserved stock, pre-allocated</td><td>Dedicated inventory carries holding cost</td></tr>
+    <tr><td>Equipment utilization</td><td>Batched for efficiency (80–90% utilization)</td><td>Dedicated cell (40–60% utilization)</td><td>Lower utilization = higher cost per board</td></tr>
+    <tr><td>Engineering time</td><td>CAM review in queue (4–8 hour turnaround)</td><td>Immediate CAM + DFM review (1–2 hours)</td><td>Dedicated engineer on standby</td></tr>
+    <tr><td>Setup/small batch penalty</td><td>Amortized over 1,000+ boards</td><td>Setup cost spread over 5–50 boards</td><td>Same setup time, fewer boards to absorb it</td></tr>
+    <tr><td>Expedited shipping</td><td>Sea freight or economy air</td><td>Express air (DHL/FedEx Priority)</td><td>2–3 day delivery vs 7–14 day</td></tr>
+  </table>
+
+  <p>A typical 4-layer, 100mm×100mm board with ENIG finish and 50-piece quantity might cost $8–12/board on a 10-day lead time versus $25–35/board on 48-hour quick-turn. The premium is real, but for a prototype that unlocks a $50,000 purchase order or a production line that costs $2,000/hour in downtime, the ROI calculation is straightforward. For a complete breakdown of all PCB cost factors, refer to our <a href="/blog/pcb-cost-factors.html">PCB Manufacturing Cost Drivers Guide</a>.</p>
+
+  <!-- ── Section 5 ── -->
+  <h2>When Quick-Turn Makes Sense — and When It Doesn't</h2>
+
+  <p>Not every urgent PCB order should be quick-turn. The decision tree below helps procurement teams identify when expedited manufacturing is the right call versus when a standard lead time with better pricing and more thorough verification is the smarter play.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Prototype Validation — Ideal for Quick-Turn</h4>
+      <p>When a hardware startup needs to validate a board revision before an investor demo or a certification deadline, quick-turn 24–72 hour delivery is the correct call. The cost premium is minimal compared to the opportunity cost of a missed milestone. For prototype-to-production transitions, see our <a href="/blog/prototype-vs-production.html">Prototype vs Mass Production Cost Breakdown</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Production Line Rescue — Depends on Root Cause</h4>
+      <p>If a production line is down because of a PCB defect and the replacement boards are identical to the failed batch, quick-turn is justified. But if the root cause is a design flaw, rushing a new batch of the same design guarantees the same failure. Always complete root cause analysis before ordering a replacement — even a 24-hour turnaround is wasted if the boards arrive with the same defect.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>High-Complexity Boards (8+ Layers, Blind/Buried Vias, Mixed Materials) — Avoid Quick-Turn</h4>
+      <p>Complex boards with 8 or more layers, multiple lamination cycles, controlled impedance on multiple layers, or mixed-material stackups (FR-4 + Rogers) should not be quick-turned. The process complexity inherently requires sequential verification steps that cannot be parallelized. A rushed complex board carries a significantly higher risk of latent defects that surface only after assembly — at which point the "saved" time is lost to rework and re-spin. For these designs, use standard 7–10 day lead times with full process control.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Regulated Industry Boards (Medical Class III, Automotive Safety) — Never Quick-Turn</h4>
+      <p>Medical device PCBs requiring ISO 13485 traceability and automotive safety-critical boards under ISO 26262 must follow fully documented, sequentially gated processes. Quick-turn workflows that parallelize fabrication and inspection break the traceability chain that regulators require. For medical and automotive requirements, see our <a href="/blog/medical-device-pcb.html">Medical Device PCB Guide</a> and <a href="/blog/automotive-pcb-requirements.html">Automotive PCB Requirements</a>. These boards need standard lead times with full documentation — no exceptions.</p>
+    </div>
+  </div>
+
+  <!-- ── Closing Section ── -->
+  <h2>Procurement Checklist for Quick-Turn PCB Orders</h2>
+
+  <p>Before submitting a quick-turn order, run through this checklist. Each unchecked item represents a potential delay that erodes the value of expedited manufacturing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✓</div>
+    <div class="checklist-content">
+      <h4>Design file is DFM-verified with zero violations</h4>
+      <p>Submit a pre-checked Gerber package — not one that needs supplier-side DFM correction. The single largest source of quick-turn delay is a design that needs 3 rounds of engineering queries before production can start.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✓</div>
+    <div class="checklist-content">
+      <h4>All materials are on the supplier's quick-turn stock list</h4>
+      <p>Confirm laminate type, copper weight, solder mask color, and surface finish against the supplier's stocked inventory before placing the order. Non-stock materials add procurement time that defeats the purpose of quick-turn.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✓</div>
+    <div class="checklist-content">
+      <h4>Layer count is 6 or below, via type is through-hole only</h4>
+      <p>Unless the supplier has explicitly confirmed capability for blind/buried vias in quick-turn, default to through-hole and ≤6 layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✓</div>
+    <div class="checklist-content">
+      <h4>IPC-356 netlist is included for electrical testing</h4>
+      <p>Missing netlist = added engineering time = delay. Include it with every order.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✓</div>
+    <div class="checklist-content">
+      <h4>Minimum order quantity is specified and realistic</h4>
+      <p>Quick-turn is optimized for 5–200 boards. Quantities above 500 defeat the purpose — the fabrication time for large volumes exceeds 72 hours regardless of priority status.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, our quick-turn cell processes an average of <span class="data-point">120</span> expedited orders per month with a <span class="data-point">98.6%</span> on-time delivery rate. Every quick-turn order receives the same ISO 9001 and IATF 16949 process controls as our standard production — the speed comes from dedicated capacity and parallelized workflows, not from skipped steps. For complex boards that require the full range of our 32-layer capability, <a href="/blog/pcb-certifications-compliance.html">our certifications and compliance framework</a> applies equally to standard and expedited orders. <a href="/contact/">Contact our engineering team</a> with your Gerber files for a same-day quick-turn feasibility assessment and quote.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-quick-turn-pcb.webp)">
+      <h2>Need PCB Boards in 24–72 Hours?</h2>
+      <p>Send your Gerber files now for a same-day quick-turn feasibility assessment. Dedicated cell, pre-stocked materials, free DFM review included. Response within 2 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quick-Turn Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
