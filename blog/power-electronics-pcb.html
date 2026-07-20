@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power Electronics PCB Design &amp; Manufacturing — Thermal Management &amp; High-Current Solutions | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to power electronics PCB: thermal management with metal-core and heavy copper, IGBT/SiC substrate selection, high-current design rules, and manufacturing quality control for EV chargers, solar inverters, and industrial motor drives.">
+<meta property="og:title" content="Power Electronics PCB — Thermal Management &amp; High-Current Solutions">
+<meta property="og:description" content="How to specify and manufacture power electronics PCBs that handle 50A+ currents without delamination. Covers IMS, heavy copper, ceramic substrates, and procurement checklist.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/power-electronics-pcb.html">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/power-electronics-pcb.html">
+<link rel="stylesheet" href="../design-tokens.css?v=22">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=17"></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-power-electronics.webp" alt="" loading="eager">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Power Electronics PCB Design &amp; Manufacturing:<br><em>What Procurement Engineers Must Specify for Thermal Performance</em></h1>
+      <p class="reveal">From substrate selection to high-current trace design — how to ensure your power boards survive 50A+ loads, 150°C operating temperatures, and 10-year field lifetimes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Power Electronics PCB Guide</span></div>
+
+  <p>Every EV charger, solar inverter, and industrial motor drive on the market today depends on one component that rarely gets the attention it deserves: the power electronics PCB. This isn't a standard FR-4 board running 3.3V logic signals. Power PCBs carry 50 to 200 amps through copper planes, dissipate hundreds of watts of heat, and must survive thermal cycling from -40°C to 150°C for a decade — all while maintaining dielectric integrity at 1,000V or more.</p>
+
+  <p>At Huaxing PCBA, we manufacture power electronics PCBs across <span class="data-point">8</span> SMT lines with copper weights up to 6oz and substrates including aluminum IMS, ceramic (Al₂O₃/AlN), and high-Tg FR-4 rated to 180°C. Our IATF 16949-certified facility processes over 800 million solder joints daily, and power electronics represent one of our fastest-growing segments — driven by global electrification across automotive, industrial, and renewable energy markets.</p>
+
+  <img class="article-img" src="../generated/blog-power-electronics-hero.webp" alt="Power electronics PCB with thick copper busbars and IGBT modules mounted on aluminum-core substrate in EV power inverter application" loading="lazy" style="max-width:85%">
+
+  <!-- ── Section 1: Thermal Management ── -->
+  <h2>Thermal Management: The Defining Challenge of Power Electronics PCBs</h2>
+
+  <p>A standard PCB dissipates heat through convection and radiation from its surface — adequate for logic boards pulling 5W. A power electronics PCB handling 500W or more needs a fundamentally different approach. The failure mode is well understood: every 10°C rise in junction temperature halves the expected lifetime of power semiconductors. Your substrate choice, copper weight, and via strategy don't just affect performance — they determine whether the board survives year three.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Insulated Metal Substrate (IMS / Aluminum-Core PCB)</h4>
+      <p>IMS bonds the copper circuit layer directly to an aluminum or copper base plate through a thin dielectric layer (typically 75-150μm). This eliminates the thermal bottleneck of FR-4 and achieves thermal conductivity of 1.0-3.0 W/m·K — roughly 5-10× better than standard FR-4 (0.25 W/m·K). For LED drivers, DC-DC converters, and single-layer power modules, IMS is the cost-effective default. See our <a href="/blog/metal-core-pcb.html">metal-core PCB guide</a> for substrate selection by power level.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Heavy Copper with Thermal Via Arrays</h4>
+      <p>For multilayer designs where IMS isn't practical (signal layers + power planes in one stackup), heavy copper — 4oz to 6oz on outer layers, 2oz to 4oz on inner planes — paired with dense thermal via arrays is the standard solution. Thermal vias (plated through-holes filled with conductive epoxy or left unfilled) create vertical heat paths from hot components to a heatsink on the opposite side. A single 0.3mm filled thermal via conducts roughly 0.25 W/K; a 10×10 array under a TO-247 package can move 25W directly to the heatsink. Our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB manufacturing guide</a> covers the trade-offs between copper weight, etch resolution, and cost.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ceramic Substrates for Extreme Environments</h4>
+      <p>Alumina (Al₂O₃, 96%) and aluminum nitride (AlN) substrates deliver thermal conductivity of 24 W/m·K and 170 W/m·K respectively — orders of magnitude beyond any organic laminate. Ceramic PCBs use direct-bonded copper (DBC) or direct-plated copper (DPC) processes to form circuits on the ceramic carrier. They're the standard for SiC MOSFET and GaN HEMT modules in traction inverters, where junction temperatures routinely exceed 175°C. The trade-off: ceramic is brittle, limited to smaller panel sizes (typically 140×190mm max at our facility), and 3-5× the cost of IMS per square inch.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> The substrate decision has the single largest impact on both BOM cost and field reliability. An IMS board that saves $2/unit but fails at 18 months in a solar inverter installation (where replacement labor costs $500+) is not a savings — it's a liability. Always specify substrate type explicitly in your RFQ rather than letting the manufacturer default to FR-4.</p>
+  </div>
+
+  <!-- ── Section 2: High-Current Design ── -->
+  <h2>High-Current Copper Design: Trace Width, Thickness, and Creepage</h2>
+
+  <p>High-current PCB design is a three-way negotiation between copper weight, trace width, and temperature rise. The IPC-2152 standard replaced the older IPC-2221 charts with more accurate models that account for copper plane proximity and multi-layer thermal coupling — but the procurement engineer doesn't need to run the simulation. What you need is the checklist of what to ask for.</p>
+
+  <img class="article-img" src="../generated/blog-power-electronics-copper.webp" alt="Cross-section macro photograph of 6oz heavy copper PCB trace showing thick copper profile and plated via barrel for high-current power distribution" loading="lazy" style="max-width:85%">
+
+  <table class="spec-table">
+    <tr><th>Copper Weight</th><th>Trace Width for 50A (10°C rise)</th><th>Typical Application</th><th>Min Etch Resolution</th></tr>
+    <tr><td>1oz (35μm)</td><td>~50mm (external)</td><td>Signal, logic</td><td>3/3mil</td></tr>
+    <tr><td>2oz (70μm)</td><td>~25mm</td><td>Medium power, POL converters</td><td>4/4mil</td></tr>
+    <tr><td>4oz (140μm)</td><td>~12mm</td><td>DC-DC, motor drives</td><td>6/6mil</td></tr>
+    <tr><td>6oz (210μm)</td><td>~8mm</td><td>Traction inverters, welders</td><td>8/8mil</td></tr>
+    <tr><td>Busbar (2mm+)</td><td>N/A — external bar</td><td>200A+ distribution</td><td>Mech. assembly</td></tr>
+  </table>
+
+  <p>Two practical rules for procurement specifications: first, always specify both base copper and plated copper — the plating step adds 20-25μm to outer layers, which affects both current capacity and impedance. Second, power traces on inner layers run hotter than outer layers (no direct convection cooling), requiring a 15-20% derating for the same cross-sectional area. When in doubt, run the board at 4oz inner / 6oz outer — the cost delta is under 10% for most designs but the thermal margin is substantial.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Creepage and Clearance for High-Voltage Sections</h4>
+      <p>Power electronics PCBs frequently operate at 400V (EV bus), 800V (next-gen EV), or 1,000V+ (solar string inverters). IPC-2221 specifies 0.6mm clearance for 100V and 3.2mm for 500V on uncoated external conductors. For 1,000V designs, expect to maintain at least 6mm between high-voltage and low-voltage domains. Conformal coating — which our facility applies in-line after assembly — effectively doubles the withstand voltage for a given spacing. Our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> details the coating types and application methods for high-voltage PCBs.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Substrate Selection ── -->
+  <h2>Substrate Selection: Matching Materials to Switching Frequency and Voltage</h2>
+
+  <p>The substrate does more than carry heat. At the switching frequencies of modern power semiconductors — 20kHz for IGBTs, 100-500kHz for SiC MOSFETs, and 1MHz+ for GaN HEMTs — the laminate's dielectric constant (Dk), dissipation factor (Df), and comparative tracking index (CTI) become critical design parameters. Choosing the wrong material produces a board that works on the bench but fails EMC compliance testing.</p>
+
+  <table class="spec-table">
+    <tr><th>Material</th><th>Tg (°C)</th><th>Thermal Cond. (W/m·K)</th><th>Dk @ 1MHz</th><th>CTI (V)</th><th>Best For</th></tr>
+    <tr><td>Standard FR-4</td><td>130-140</td><td>0.25</td><td>4.5-4.7</td><td>175-225</td><td>Logic, sub-48V</td></tr>
+    <tr><td>High-Tg FR-4</td><td>170-180</td><td>0.3-0.4</td><td>4.3-4.5</td><td>200-250</td><td>Industrial drives, 48-400V</td></tr>
+    <tr><td>Aluminum IMS</td><td>130 (dielectric)</td><td>1.0-3.0</td><td>4.0-6.0</td><td>—</td><td>LED, DC-DC, single-layer</td></tr>
+    <tr><td>Rogers 4350B</td><td>&gt;280</td><td>0.69</td><td>3.48 ±0.05</td><td>&gt;600</td><td>RF power, GaN, 500kHz+</td></tr>
+    <tr><td>Alumina (96% Al₂O₃)</td><td>N/A</td><td>24</td><td>9.8</td><td>&gt;600</td><td>SiC modules, &gt;400V</td></tr>
+    <tr><td>AlN Ceramic</td><td>N/A</td><td>170</td><td>8.8</td><td>&gt;600</td><td>High-power SiC, &gt;175°C Tj</td></tr>
+  </table>
+
+  <p>For the procurement engineer, two specifications matter most: CTI and Dk stability. A CTI below 200V means the PCB surface can form conductive tracks under contamination and voltage stress — a failure mechanism that takes months to appear in the field. For outdoor applications (solar, EV charging), specify CTI ≥ 400V minimum. Our <a href="/blog/pcb-materials-guide.html">PCB materials selection guide</a> covers the full substrate landscape with cost comparisons.</p>
+
+  <!-- ── Section 4: Quality Control ── -->
+  <h2>Manufacturing Quality Control for Power PCBs</h2>
+
+  <p>Power electronics PCB failures are disproportionately expensive. A delamination defect in a consumer router is a warranty return. The same defect in a traction inverter stops a $40,000 vehicle. The manufacturing QC requirements for power PCBs go well beyond standard IPC Class 2 — and procurement engineers should know which tests to specify in their purchase order.</p>
+
+  <img class="article-img" src="../generated/blog-power-electronics-testing.webp" alt="Thermal camera image of power electronics PCB under load testing showing heat distribution across IGBT modules and copper bus planes" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>High-Pot (HiPot) Dielectric Withstand Testing</h4>
+      <p>Every power PCB leaving our facility undergoes hi-pot testing: applying 1,500V DC (or 2× rated voltage + 1,000V) between isolated domains for 60 seconds while measuring leakage current. A board that passes at 500V but arcs at 1,200V has a latent manufacturing defect — incomplete etching between planes, insufficient dielectric thickness, or contamination. For automotive applications (IATF 16949), hi-pot results are archived per serial number for full traceability. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods overview</a> covers the complete electrical verification workflow.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Thermal Cycling and Thermal Shock Testing</h4>
+      <p>The most common failure mode in power PCBs is barrel cracking — the copper plating inside vias fractures after repeated thermal expansion cycles. Plated through-holes expand at 17 ppm/°C (copper) while the surrounding FR-4 expands at 14 ppm/°C (XY) and 70 ppm/°C (Z-axis). Over 1,000 cycles from -40°C to +125°C, this CTE mismatch accumulates stress that eventually cracks via barrels. We test production samples to IPC-TM-650 2.6.7.1 (thermal shock) and 2.6.7.3 (thermal cycling), with cross-section analysis at 200× magnification to verify barrel integrity. Boards destined for automotive or renewable energy applications must pass 1,000 cycles with ≤10% resistance change.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Partial Discharge Testing for Medium-Voltage Boards</h4>
+      <p>Once operating voltages exceed 700V, partial discharge (PD) becomes a real failure mechanism. Tiny voids in the laminate, incomplete resin fill in vias, or sharp copper edges create localized electric field concentrations where corona discharges can initiate. These micro-arcs erode dielectric material slowly — the board might pass initial hi-pot but fail after 6-12 months of continuous operation. For designs above 700V, specify PD testing per IEC 60270 with an inception voltage ≥ 1.5× rated operating voltage. This test requires specialized equipment that not every PCB shop has — confirm your supplier's PD capability before placing the order.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> A power PCB that passes electrical test at 25°C can still fail after 6 months in a rooftop solar inverter. The failure isn't in the copper — it's in the dielectric. Always request thermal cycle test reports for the specific stackup you're buying, not a generic qualification report for the material alone. The laminate datasheet tells you material properties; the stackup qualification tells you whether those materials work together under YOUR thermal conditions.</p>
+  </div>
+
+  <!-- ── Section 5: Procurement Checklist ── -->
+  <h2>How to Specify Power Electronics PCBs: A Procurement Engineer's Checklist</h2>
+
+  <p>Most RFQs for power PCBs are underspecified. The engineer who designed the board knows what they need; the procurement team translating that design into a purchase order often omits the critical parameters that distinguish a qualified supplier from a price-only bidder. Here is the minimum specification set every power PCB RFQ should include.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Substrate: material, thickness, copper weight (base + plated), Tg, CTI</h4>
+      <p>Don't write "FR-4." Write "High-Tg FR-4, Tg ≥ 170°C, CTI ≥ 400V, 1.6mm thickness, 4oz outer / 2oz inner." The difference between the two specs is the difference between a board that works and a board that works for 10 years.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Dielectric withstand voltage: VDC, duration, acceptance criteria</h4>
+      <p>Example: "1,500 VDC for 60 seconds between primary and secondary, leakage < 1mA." Without this, the supplier applies whatever voltage their standard QC checklist says — which may be 500V for a board that needs to handle 800V.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>IPC class: Class 2 vs Class 3 — and what that means for your specific board</h4>
+      <p>IPC Class 3 reduces acceptable barrel voids from 10% to 5% of barrel length, mandates 360° wrap plating on vias, and tightens annular ring requirements. For automotive, medical, and aerospace power electronics, Class 3 is the default. See our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 comparison</a> for the full acceptance criteria differences.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Thermal cycle qualification: cycle count, temperature range, acceptance delta-R</h4>
+      <p>Example: "500 cycles, -40°C to +125°C, 15-minute dwell, ≤ 10% resistance change per IPC-TM-650 2.6.7.1." For EV traction applications, specify 1,000 cycles minimum.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Partial discharge: inception voltage and test standard</h4>
+      <p>Required above 700V operating voltage. "PD inception ≥ 1,050 VDC, IEC 60270." Not every supplier has PD test capability — this spec alone filters out shops that can't handle medium-voltage designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Conformal coating: type, thickness, coverage areas</h4>
+      <p>For outdoor and high-humidity applications, coating isn't optional. Specify acrylic (AR), silicone (SR), or parylene (XY) with target thickness (typically 25-75μm for acrylic, 50-200μm for silicone) and masked areas (connectors, test points).</p>
+    </div>
+  </div>
+
+  <!-- ── Section 6: Applications ── -->
+  <h2>Power Electronics PCB Applications Across Industries</h2>
+
+  <p>The power PCB requirements vary significantly by end application. A solar inverter PCB and an EV onboard charger PCB both handle kilowatts — but their failure modes, regulatory requirements, and cost constraints are completely different.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>EV Chargers and Traction Inverters</h4>
+      <p>Operating at 400-800V bus voltage with 100-300A phase currents, these boards use ceramic DBC substrates for the power stage and high-Tg FR-4 for control circuitry — often combined in a single assembly through press-fit or soldered interconnects. IATF 16949 certification is non-negotiable. Our <a href="/blog/automotive-pcb-requirements.html">automotive PCB requirements guide</a> covers the full qualification framework, including PPAP Level 3 and IMDS material declarations.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Solar Inverters and Energy Storage</h4>
+      <p>String inverters (1,000-1,500V DC input, 3-phase AC output) and hybrid inverters with battery connections demand the highest CTI ratings and thick copper (4-6oz). Outdoor installation means conformal coating is mandatory. These boards see the full temperature swing from -30°C winter nights to +70°C enclosure interiors in summer — thermal cycle qualification isn't optional. Our <a href="/blog/new-energy-pcb.html">new energy PCB manufacturing guide</a> addresses the specific challenges of photovoltaic and energy storage power electronics.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Industrial Motor Drives and Servo Amplifiers</h4>
+      <p>Industrial VFDs and servo drives operate at lower voltages (380-480V AC) but face the harshest environments: vibration, conductive dust, and 24/7 duty cycles. Aluminum IMS with heavy copper circuitry is the dominant construction for drives up to 15kW; above that, separate power modules with laminated busbars become more practical than single-board solutions. These boards must pass <a href="/blog/industrial-control-pcb.html">industrial control PCB</a> qualification with extended burn-in testing — 48 hours at elevated temperature and full load before shipment.</p>
+    </div>
+  </div>
+
+  <!-- ── Closing ── -->
+  <h2>Getting Your Power Electronics PCB Project Started</h2>
+
+  <p>Power electronics PCB manufacturing sits at the intersection of materials science, thermal engineering, and precision fabrication. The right supplier doesn't just etch copper and drill holes — they understand the physics of dielectric breakdown, the metallurgy of plated vias under thermal stress, and the statistical quality control needed to deliver zero-field-failure production runs.</p>
+
+  <p>At Huaxing PCBA, we manufacture power electronics PCBs across the full technology spectrum — from single-sided aluminum IMS for LED drivers to 6-layer heavy copper with Rogers high-frequency laminates for SiC-based traction inverters. Our <a href="/blog/impedance-control.html">controlled impedance capability</a> maintains ±5% tolerance for gate drive circuits where picosecond timing margins determine switching loss, and our <a href="/blog/pcb-certifications-compliance.html">certifications portfolio</a> covers IATF 16949, ISO 9001, ISO 14001, and UL (E354321) — the full qualification package automotive and industrial OEMs require.</p>
+
+  <p>Send your Gerber files and stackup requirements to <a href="/contact/">our engineering team</a> for a same-day DFM review. We'll evaluate your design against IPC Class 3 criteria at no charge, identify thermal and manufacturability risks before you commit to production, and return a detailed quotation within 24 hours — including substrate options, copper weight recommendations, and qualification test plans tailored to your application.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-power-electronics.webp)">
+      <h2>Ready to Manufacture Your Power Electronics PCB?</h2>
+      <p>Upload your Gerber, stackup, and copper weight requirements. Our engineering team delivers a free DFM review with thermal analysis — same day, no commitment. IATF 16949 certified, 24h prototype turnaround available.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
