@@ -192,9 +192,15 @@
       <tr><td>Single-Ended 75Ω</td><td>75Ω ±7%</td><td>±5% for broadcast-grade</td><td>TDR, 35ps rise time</td><td>HD-SDI, broadcast video, coaxial interfaces</td></tr>
       <tr><td>Single-Ended 40Ω</td><td>40Ω ±10%</td><td>±10% acceptable</td><td>TDR</td><td>DDR4/5 DQ lines (ODT-calibrated), some RF power amplifiers</td></tr>
     </tbody>
-  </table>
+    <div class="photo-slot" style="margin:var(--space-2xl) 0;min-height:280px;background:var(--bg-surface);border:2px dashed var(--border);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center">
+    <p style="font-size:var(--text-sm);color:var(--text-muted);text-align:center;line-height:1.8;padding:var(--space-xl)">
+      <span style="display:block;color:var(--accent);font-weight:400;margin-bottom:4px">📷 Photo</span>
+      TDR impedance test report screenshot: 100Ω differential pair measurement showing ±5% tolerance band.
+    </p>
+  </div>
 
-  <h2>Material Selection for Controlled Impedance Designs</h2>
+
+<h2>Material Selection for Controlled Impedance Designs</h2>
 
   <p>The laminate is the single most consequential choice in a controlled-impedance PCB. It sets the baseline Dk, the Dk uniformity across frequency and temperature, and the dielectric loss tangent (Df) that determines insertion loss per unit length. The table below compares the four material families most commonly specified for impedance-controlled designs.</p>
 
@@ -245,9 +251,9 @@
 
   <table class="cap-limits">
     <tr><th colspan="2">Huaxing Production Limits — Controlled Impedance PCB</th></tr>
-    <tr><td>Impedance Tolerance (Standard)</td><td>±7% (verified by TDR on every impedance-controlled net)</td></tr>
-    <tr><td>Impedance Tolerance (Premium)</td><td>±5% (includes Dk variance compensation, smooth copper, TDR on every panel)</td></tr>
-    <tr><td>Maximum Data Rate Qualified</td><td>112Gbps PAM4 (PCIe Gen6 / 800G Ethernet class), insertion loss budget verified to 40GHz</td></tr>
+    <tr><td>Impedance Tolerance (Standard)</td><td>±5% (field-solver modeled, TDR-verified on every impedance-controlled net on every panel — 100% verification, not sample-based)</td></tr>
+    <tr><td>Impedance Tolerance (Premium)</td><td>±3% (includes Dk variance compensation per material lot, smooth/low-profile copper, TDR on every panel. Available for critical RF, 112Gbps, and aerospace designs.)</td></tr>
+    <tr><td>Maximum Data Rate Qualified</td><td>112Gbps PAM4 (PCIe Gen6 / 800G Ethernet class), insertion loss budget verified to 40GHz. 224Gbps PAM4 qualification in progress.</td></tr>
     <tr><td>TDR Verification</td><td>Every impedance-controlled trace on every panel — not sampled, not coupon-only. Rise time configurable: 35ps (standard), 20ps (high-speed), 15ps (premium). Differential and single-ended measurement.</td></tr>
     <tr><td>Back-Drilling</td><td>Stub length <150µm standard, <100µm premium, ±50µm depth tolerance. Controlled-depth back-drill on any layer count. Verified by cross-section on first-article.</td></tr>
     <tr><td>Smooth Copper Options</td><td>RTF (reverse-treated foil, RMS <1.0µm), VLP (very-low-profile, RMS <0.5µm), HVLP (hyper-VLP, RMS <0.35µm) on outer layers and signal layers</td></tr>

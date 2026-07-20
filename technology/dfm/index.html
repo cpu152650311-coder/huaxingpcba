@@ -145,21 +145,13 @@
     <li><strong>DRC says:</strong> "Board meets all clearance rules." <strong>DFM says:</strong> "Panel utilization is 72%. Rotate boards 90 degrees and reduce rail width to achieve 87% — saving 1.6 m² of laminate per 1,000 panels."</li>
   </ul>
 
-  <table class="compare-table">
-    <thead><tr><th>Aspect</th><th>DRC (Design Rule Check)</th><th>DFM (Design for Manufacturability)</th></tr></thead>
-    <tbody>
-      <tr><td>Question Answered</td><td>Can it be built?</td><td>What will it cost — and can we reduce that?</td></tr>
-      <tr><td>Scope</td><td>Geometric rules only</td><td>Geometry + materials + process + supply chain + test</td></tr>
-      <tr><td>Output</td><td>Pass / Fail (binary)</td><td>Cost delta, yield impact, optimization recommendations</td></tr>
-      <tr><td>Panel Awareness</td><td>None — treats board in isolation</td><td><span class="check">✓</span> Optimizes per-panel economics</td></tr>
-      <tr><td>Volume Sensitivity</td><td>None — same rules at any quantity</td><td><span class="check">✓</span> Different strategy for 100 vs. 100K units</td></tr>
-      <tr><td>Component Awareness</td><td>Footprint-to-footprint clearance only</td><td><span class="check">✓</span> Availability, cost-tier, alternate sources, placement efficiency</td></tr>
-      <tr><td>Test Strategy</td><td>Not addressed</td><td><span class="check">✓</span> Test point placement, ICT compatibility, flying-probe vs. bed-of-nails</td></tr>
-      <tr><td>Tool</td><td>CAD DRC engine (Altium, KiCad, Allegro)</td><td>Engineer + fabricator collaboration + CAM analysis</td></tr>
-    </tbody>
-  </table>
-
-  <h2>Common DFM Issues: The Hidden Cost Drivers</h2>
+    <div class="photo-slot" style="margin:var(--space-2xl) 0;min-height:280px;background:var(--bg-surface);border:2px dashed var(--border);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center">
+    <p style="font-size:var(--text-sm);color:var(--text-muted);text-align:center;line-height:1.8;padding:var(--space-xl)">
+      <span style="display:block;color:var(--accent);font-weight:400;margin-bottom:4px">📷 Photo</span>
+      Optimized PCB panel layout: V-score routing, breakaway tabs, fiducial markers, and material utilization calculation overlay.
+    </p>
+  </div>
+Common DFM Issues: The Hidden Cost Drivers</h2>
 
   <p>Every PCB design contains DFM opportunities — issues that are technically within spec but economically suboptimal. The table below catalogs the most frequent DFM findings our engineering team identifies during review, along with the yield and cost impact of each.</p>
 

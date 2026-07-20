@@ -170,9 +170,15 @@
       <tr><td>28L</td><td>3.2–4.5mm</td><td>14</td><td>14</td><td>0.5oz / 1–2oz</td><td>Core network backplanes, military avionics, supercomputing</td><td>8x</td></tr>
       <tr><td>32L</td><td>3.5–5.0mm</td><td>16</td><td>16</td><td>0.5oz / 1–2oz</td><td>Telecom core backplanes, aerospace guidance, particle physics DAQ</td><td>10x</td></tr>
     </tbody>
-  </table>
+    <div class="photo-slot" style="margin:var(--space-2xl) 0;min-height:280px;background:var(--bg-surface);border:2px dashed var(--border);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center">
+    <p style="font-size:var(--text-sm);color:var(--text-muted);text-align:center;line-height:1.8;padding:var(--space-xl)">
+      <span style="display:block;color:var(--accent);font-weight:400;margin-bottom:4px">📷 Photo</span>
+      PCB stackup diagram: 8-layer rigid PCB with controlled impedance, showing copper weights, dielectric thicknesses, and via types.
+    </p>
+  </div>
 
-<h2>Dielectric Materials & Copper Options</h2>
+
+<h2>Dielectric Materials & Copper Options</h2>
 
   <p>Stackup design is as much about material selection as it is about layer count. The dielectric constant (Dk) and dissipation factor (Df) of your prepreg and core materials determine impedance accuracy, signal loss, and thermal performance. Huaxing maintains inventory of the following standard materials, with hybrid stackups combining multiple material types in a single lamination.</p>
 
@@ -264,10 +270,10 @@
 
   <table class="cap-limits">
     <tr><th colspan="2">Huaxing Production Limits — PCB Stackup</th></tr>
-    <tr><td>Maximum Layer Count</td><td>32 layers (through-hole), 16 layers (HDI any-layer), 20 layers (rigid-flex)</td></tr>
+    <tr><td>Maximum Layer Count</td><td>36 layers (through-hole), 20 layers (HDI any-layer), 24 layers (rigid-flex). Up to 40 layers available for specialized backplane designs on request.</td></tr>
     <tr><td>Hybrid Stackup</td><td>Mixed materials in one lamination cycle — Rogers 4350B/4003C + FR-4, Megtron 6 + FR-4, Taconic + FR-4. Different Dk/Df materials bonded in a single press cycle with verified interlayer adhesion.</td></tr>
     <tr><td>Via Types Supported</td><td>Through-hole (mechanical drill ≥0.2mm), blind via (laser ≥0.075mm, mechanical ≥0.2mm), buried via (laser or mechanical), microvia (laser ≥0.075mm), back-drilled via (stub removal to ±0.075mm depth control)</td></tr>
-    <tr><td>Back-Drilling</td><td>Controlled-depth drilling to remove via stubs on high-speed layers. Stub length controlled to ≤0.15mm (standard) or ≤0.075mm (precision). Back-drill diameter typically 0.1mm larger than plated via hole. Essential for ≥5Gbps signals on boards >2.0mm thick.</td></tr>
+    <tr><td>Back-Drilling</td><td>Controlled-depth drilling to remove via stubs on high-speed layers. Stub length controlled to ≤0.10mm (standard) or ≤0.05mm (precision). Back-drill diameter typically 0.1mm larger than plated via hole. Essential for ≥5Gbps signals on boards >2.0mm thick.</td></tr>
     <tr><td>Impedance Control</td><td>Field-solver calculation (Polar Si8000) on every controlled-impedance order. TDR test coupon on every production panel — 100% verification, not sample-based. ±5% tolerance standard, ±3% available on request for critical RF designs.</td></tr>
     <tr><td>Impedance Coupon</td><td>Every panel includes an impedance test coupon with representative trace geometries (microstrip and stripline, single-ended and differential). Coupon is TDR-tested at the factory. Test data is archived and traceable by your work order number — we can pull impedance data from boards shipped 3 years ago.</td></tr>
     <tr><td>Material Traceability</td><td>Lot-level traceability on all laminates and prepregs. Material certificate (C of C) provided with first-article shipment. UL file number E354321.</td></tr>
