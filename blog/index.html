@@ -7,14 +7,20 @@
 <meta name="description" content="Technical articles, case studies, and manufacturing insights from Huaxing PCBA. PCB design tips, DFM guidelines, and industry trends.">
 <meta property="og:title" content="Blog | Huaxing PCBA">
 <meta property="og:description" content="PCB manufacturing insights, design tips, and case studies.">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://huaxingpcba.com/blog/">
-<link rel="stylesheet" href="../design-tokens.css?v=20">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=22" media="print" onload="this.media='all'">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
 <style>
   .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
   .blog-card-link{display:block;color:inherit;text-decoration:none}
+  .blog-card-link.hidden{display:none}
   .blog-card{
     background:var(--bg-surface);border:1px solid var(--border);
     border-radius:var(--radius-lg);overflow:hidden;
@@ -29,12 +35,240 @@
   .blog-card-body .date{font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm)}
   .blog-card-body h3{font-size:var(--text-lg);font-weight:300;margin-bottom:var(--space-sm)}
   .blog-card-body p{font-size:var(--text-sm);color:var(--text-secondary)}
-  .blog-placeholder{
-    text-align:center;padding:var(--space-3xl) 0;
-    color:var(--text-muted);
-  }
-  @media(max-width:768px){.blog-grid{grid-template-columns:1fr}}
+  .blog-placeholder{text-align:center;padding:var(--space-3xl) 0;color:var(--text-muted)}
+  /* Filter bar */
+  .filter-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:var(--space-xl)}
+  .filter-btn{padding:8px 20px;font-size:var(--text-sm);font-weight:300;color:var(--text-secondary);background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .2s}
+  .filter-btn:hover,.filter-btn.active{color:var(--accent-light);border-color:var(--accent);background:var(--accent-subtle)}
+  .filter-count{font-size:var(--text-xs);color:var(--text-muted);margin-left:4px}
+  @media(max-width:768px){.blog-grid{grid-template-columns:1fr}.filter-bar{gap:6px}.filter-btn{padding:7px 14px;font-size:var(--text-xs)}}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Huaxing PCBA Blog",
+  "description": "PCB manufacturing insights, design tips, and industry best practices",
+  "url": "https://huaxingpcba.com/blog/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com"
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "RF PCB Design & Manufacturing — Materials, Impedance Control & Signal Integrity",
+      "url": "https://huaxingpcba.com/blog/rf-pcb-design-manufacturing.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-rf-pcb.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Flex PCB Design & Manufacturing — Material Selection, Bend Reliability & Cost",
+      "url": "https://huaxingpcba.com/blog/flex-pcb-design-manufacturing.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-flex-pcb.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Certifications & Compliance — What Every Buyer Must Verify",
+      "url": "https://huaxingpcba.com/blog/pcb-certifications-compliance.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-pcb-certifications.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "IoT PCB Design & Manufacturing — Connectivity, Miniaturization & Reliability at Scale",
+      "url": "https://huaxingpcba.com/blog/iot-pcb-design-manufacturing.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-iot-pcb.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "BGA Assembly — X-Ray Inspection, Reflow Profiling & Defect Prevention",
+      "url": "https://huaxingpcba.com/blog/bga-assembly-guide.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-bga-assembly.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers",
+      "url": "https://huaxingpcba.com/blog/gerber-files-guide.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-gerber-files.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Via Technology Guide — Blind, Buried, Via-in-Pad & Backdrilling Explained",
+      "url": "https://huaxingpcba.com/blog/pcb-via-technology.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-pcb-via-technology.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "IPC Class 2 vs Class 3 PCB Assembly — Which Standard Does Your Product Actually Need?",
+      "url": "https://huaxingpcba.com/blog/ipc-class-2-vs-class-3.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-ipc-class.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Aerospace & Defense PCB — AS9100, ITAR & MIL-SPEC Requirements",
+      "url": "https://huaxingpcba.com/blog/aerospace-defense-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-aerospace.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Metal Core PCB (MCPCB) — Aluminum & Copper Core Thermal Management",
+      "url": "https://huaxingpcba.com/blog/metal-core-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-metal-core.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Heavy Copper PCB Manufacturing — Design Rules, Thermal Management & 6oz Applications",
+      "url": "https://huaxingpcba.com/blog/heavy-copper-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-heavy-copper.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Consumer Electronics PCB Manufacturing — Wearables, Smart Home & Drone Design Guide",
+      "url": "https://huaxingpcba.com/blog/consumer-electronics-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-consumer-electronics.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Security & Surveillance PCB Manufacturing — CCTV, IP Camera & Access Control Electronics",
+      "url": "https://huaxingpcba.com/blog/surveillance-security-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-surveillance.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Telecom & 5G PCB Manufacturing — High-Frequency Materials, Impedance Control & High Layer Count",
+      "url": "https://huaxingpcba.com/blog/telecom-5g-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-telecom.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Industrial Control PCB Manufacturing — PLC, VFD & Servo Drive Requirements",
+      "url": "https://huaxingpcba.com/blog/industrial-control-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-industrial.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Manufacturing for New Energy Applications — EV Charging, Energy Storage & Solar Inverters",
+      "url": "https://huaxingpcba.com/blog/new-energy-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-new-energy.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Medical Device PCB Manufacturing Guide — IPC Class 3, ISO 13485 Compliance & Reliability Validation",
+      "url": "https://huaxingpcba.com/blog/medical-device-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-medical.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Turnkey PCB Assembly Guide — Full-Service Manufacturing from Prototype to Box-Build",
+      "url": "https://huaxingpcba.com/blog/turnkey-pcb-assembly.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-turnkey.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Rigid-Flex PCB Manufacturing Guide — Design Rules, Materials & Cost Factors",
+      "url": "https://huaxingpcba.com/blog/rigid-flex-pcb.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-rigid-flex.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Automotive PCB Design Requirements — IATF 16949 Compliance & Reliability Testing",
+      "url": "https://huaxingpcba.com/blog/automotive-pcb-requirements.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-automotive.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Manufacturing Cost Drivers — How to Budget Your PCB Project in 2026",
+      "url": "https://huaxingpcba.com/blog/pcb-cost-factors.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-cost-factors.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "How to Choose a PCB Manufacturer in China — 10-Point Supplier Audit Checklist",
+      "url": "https://huaxingpcba.com/blog/pcb-supplier-audit.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-audit.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Assembly Process Step by Step: From Bare Board to Finished PCBA",
+      "url": "https://huaxingpcba.com/blog/pcb-assembly-process.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-assembly.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Testing Methods Explained: AOI, X-Ray, Flying Probe, ICT, and Functional Test Compared",
+      "url": "https://huaxingpcba.com/blog/pcb-testing-methods.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-testing.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Materials Guide: FR-4 vs High-Tg vs Rogers vs Aluminum Substrate",
+      "url": "https://huaxingpcba.com/blog/pcb-materials-guide.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-materials.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Design for Manufacturability: 8 Rules That Cut Costs by 30%",
+      "url": "https://huaxingpcba.com/blog/dfm-tips.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-dfm.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "ENIG vs HASL vs OSP: How to Choose the Right PCB Surface Finish",
+      "url": "https://huaxingpcba.com/blog/enig-vs-hasl.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-enig.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Understanding PCB Impedance Control: Why ±5% Matters at GHz Speeds",
+      "url": "https://huaxingpcba.com/blog/impedance-control.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-impedance.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "PCB Prototype vs Mass Production: The Real Cost Breakdown",
+      "url": "https://huaxingpcba.com/blog/prototype-vs-production.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/blog-cover-cost.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "HDI PCB Technology: When to Upgrade to Microvia Design",
+      "url": "https://huaxingpcba.com/blog/hdi-technology.html",
+      "datePublished": "2026-07-15",
+      "image": "https://huaxingpcba.com/generated/pcb-multilayer-showcase.webp"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -47,7 +281,7 @@
     <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
     <nav class="nav-links" id="navLinks">
     </nav>
-    <script src="/nav.js?v=17"></script>
+    <script src="/nav.js?v=17" defer></script>
     <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
       <span></span><span></span><span></span>
     </div>
@@ -55,7 +289,7 @@
 </header>
 
 <section class="sub-hero">
-  <div class="sub-hero-bg"><img src="../generated/sub-hero-blog.webp" alt="" loading="eager"></div>
+  <div class="sub-hero-bg"><img src="../generated/sub-hero-blog.webp" alt="Huaxing PCBA PCB manufacturing insights and articles" loading="eager" width="1920" height="600"></div>
   <div class="sub-hero-overlay"></div>
   <div class="sub-hero-content">
     <div class="container">
@@ -68,8 +302,15 @@
 
 <section class="section">
   <div class="container">
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All<span class="filter-count">32</span></button>
+      <button class="filter-btn" data-filter="design-engineering">Design &amp; Engineering</button>
+      <button class="filter-btn" data-filter="manufacturing">Manufacturing</button>
+      <button class="filter-btn" data-filter="industry">Industry Applications</button>
+      <button class="filter-btn" data-filter="procurement">Procurement &amp; Quality</button>
+    </div>
     <div class="blog-grid reveal">
-      <a href="/blog/rf-pcb-design-manufacturing.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/rf-pcb-design-manufacturing.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-rf-pcb.webp" alt="RF PCB Design Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -79,7 +320,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/flex-pcb-design-manufacturing.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/flex-pcb-design-manufacturing.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-flex-pcb.webp" alt="Flex PCB Design Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -89,7 +330,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/pcb-certifications-compliance.html" class="blog-card-link">
+      <a data-cat="procurement" href="/blog/pcb-certifications-compliance.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-pcb-certifications.webp" alt="PCB Certifications Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -99,7 +340,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/iot-pcb-design-manufacturing.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/iot-pcb-design-manufacturing.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-iot-pcb.webp" alt="IoT PCB Design Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -109,7 +350,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/bga-assembly-guide.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/bga-assembly-guide.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-bga-assembly.webp" alt="BGA Assembly Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -119,7 +360,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/gerber-files-guide.html" class="blog-card-link">
+      <a data-cat="manufacturing" href="/blog/gerber-files-guide.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-gerber-files.webp" alt="PCB Gerber Files Preparation Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -130,7 +371,7 @@
         </div>
       </a>
 
-      <a href="/blog/pcb-via-technology.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/pcb-via-technology.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-pcb-via-technology.webp" alt="PCB Via Technology Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -141,7 +382,7 @@
         </div>
       </a>
 
-      <a href="/blog/ipc-class-2-vs-class-3.html" class="blog-card-link">
+      <a data-cat="procurement" href="/blog/ipc-class-2-vs-class-3.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-ipc-class.webp" alt="IPC Class 2 vs Class 3 PCB Assembly Standards" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -151,7 +392,7 @@
         </div>
       </a>
 
-      <a href="/blog/aerospace-defense-pcb.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/aerospace-defense-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-aerospace.webp" alt="Aerospace &amp; Defense PCB Manufacturing Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -162,7 +403,7 @@
         </div>
       </a>
 
-      <a href="/blog/metal-core-pcb.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/metal-core-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-metal-core.webp" alt="Metal Core PCB MCPCB Thermal Management Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -173,7 +414,7 @@
         </div>
       </a>
 
-      <a href="/blog/heavy-copper-pcb.html" class="blog-card-link">
+      <a data-cat="manufacturing" href="/blog/heavy-copper-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-heavy-copper.webp" alt="Heavy Copper PCB Manufacturing Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -183,7 +424,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/consumer-electronics-pcb.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/consumer-electronics-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-consumer-electronics.webp" alt="Consumer Electronics PCB Manufacturing" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -193,7 +434,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/surveillance-security-pcb.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/surveillance-security-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-surveillance.webp" alt="Security &amp; Surveillance PCB Manufacturing" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -203,7 +444,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/telecom-5g-pcb.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/telecom-5g-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-telecom.webp" alt="Telecom &amp; 5G PCB Manufacturing" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -213,7 +454,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/industrial-control-pcb.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/industrial-control-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-industrial.webp" alt="Industrial Control PCB Manufacturing" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -223,7 +464,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/new-energy-pcb.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/new-energy-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-new-energy.webp" alt="New Energy PCB Manufacturing" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -233,7 +474,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/medical-device-pcb.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/medical-device-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-medical.webp" alt="Medical Device PCB Manufacturing" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -243,7 +484,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/turnkey-pcb-assembly.html" class="blog-card-link">
+      <a data-cat="procurement" href="/blog/turnkey-pcb-assembly.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-turnkey.webp" alt="Turnkey PCB Assembly" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -253,7 +494,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/rigid-flex-pcb.html" class="blog-card-link">
+      <a data-cat="manufacturing" href="/blog/rigid-flex-pcb.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-rigid-flex.webp" alt="Rigid-Flex PCB Manufacturing" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -263,7 +504,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/automotive-pcb-requirements.html" class="blog-card-link">
+      <a data-cat="industry" href="/blog/automotive-pcb-requirements.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-automotive.webp" alt="Automotive PCB Requirements" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -273,7 +514,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/pcb-cost-factors.html" class="blog-card-link">
+      <a data-cat="procurement" href="/blog/pcb-cost-factors.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-cost-factors.webp" alt="PCB Cost Factors" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -283,7 +524,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/pcb-supplier-audit.html" class="blog-card-link">
+      <a data-cat="procurement" href="/blog/pcb-supplier-audit.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-audit.webp" alt="PCB Supplier Audit Checklist" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -293,7 +534,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/pcb-assembly-process.html" class="blog-card-link">
+      <a data-cat="manufacturing" href="/blog/pcb-assembly-process.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-assembly.webp" alt="PCB Assembly Process" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -303,7 +544,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/pcb-testing-methods.html" class="blog-card-link">
+      <a data-cat="procurement" href="/blog/pcb-testing-methods.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-testing.webp" alt="PCB Testing Methods" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -313,7 +554,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/pcb-materials-guide.html" class="blog-card-link">
+      <a data-cat="manufacturing" href="/blog/pcb-materials-guide.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-materials.webp" alt="PCB Materials Guide" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -323,7 +564,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/dfm-tips.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/dfm-tips.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-dfm.webp" alt="PCB DFM Tips" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -333,7 +574,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/enig-vs-hasl.html" class="blog-card-link">
+      <a data-cat="manufacturing" href="/blog/enig-vs-hasl.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-enig.webp" alt="ENIG vs HASL" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -343,7 +584,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/impedance-control.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/impedance-control.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-impedance.webp" alt="PCB Impedance Control" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -353,7 +594,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/prototype-vs-production.html" class="blog-card-link">
+      <a data-cat="procurement" href="/blog/prototype-vs-production.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/blog-cover-cost.webp" alt="PCB Cost Breakdown" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -363,7 +604,7 @@
           </div>
         </div>
       </a>
-      <a href="/blog/hdi-technology.html" class="blog-card-link">
+      <a data-cat="design-engineering" href="/blog/hdi-technology.html" class="blog-card-link">
         <div class="blog-card">
           <img src="../generated/pcb-multilayer-showcase.webp" alt="HDI PCB Technology" loading="lazy" class="blog-card-img">
           <div class="blog-card-body">
@@ -418,6 +659,8 @@
         <a href="/about/">Certifications</a>
         <a href="/blog/">Blog</a>
         <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -431,7 +674,7 @@
   <div class="modal-dialog">
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <div class="modal-image-panel">
-      <img src="/generated/modal-pcba-showcase.webp" alt="">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
       <div class="modal-image-overlay"></div>
       <div class="modal-image-text">
         <div class="mi-label">HUAXING PCBA</div>
@@ -453,6 +696,36 @@
 </div>
 
 <script src="../reveal.js"></script>
+<script>
+// Category filter
+(function(){
+  var btns = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('.blog-card-link');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var filter = this.getAttribute('data-filter');
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+      var visible = 0;
+      cards.forEach(function(card){
+        if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      // Update article count
+      var countEl = this.querySelector('.filter-count');
+      if (countEl) countEl.textContent = visible;
+      else if (filter === 'all') {
+        var allCount = document.querySelector('.filter-btn[data-filter="all"] .filter-count');
+        if (allCount) allCount.textContent = visible;
+      }
+    });
+  });
+})();
+</script>
 <script>
 function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
