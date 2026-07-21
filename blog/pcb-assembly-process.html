@@ -1,352 +1,367 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PCB Assembly Process Step by Step — From Bare Board to Finished PCBA | Huaxing PCBA</title>
-<meta name="description" content="Complete PCB assembly process explained: solder paste printing, SMT placement, reflow soldering, AOI inspection, through-hole assembly, and functional testing. Real factory data from a 9-line SMT facility.">
-<meta property="og:title" content="PCB Assembly Process Step by Step — From Bare Board to Finished PCBA">
-<meta property="og:description" content="Every step of PCB assembly explained with real factory data — solder paste inspection, pick-and-place, reflow profiles, AOI, X-ray, and functional test. From a Shenzhen manufacturer with 8 SMT lines.">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-assembly-process.html">
-<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-assembly.webp">
-    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-assembly-process.html">
-<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="/design-tokens.css?v=28">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-<link rel="stylesheet" href="/blog.css?v=3">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "PCB Assembly Process Step by Step: From Bare Board to Finished PCBA",
-  "description": "Every station explained — solder paste, SMT placement, reflow, AOI, X-ray, and functional test. Real data from a 9-line facility.",
-  "datePublished": "2026-07-15",
-  "dateModified": "2026-07-15",
-  "image": "https://huaxingpcba.com/generated/blog-cover-assembly.webp",
-  "url": "https://huaxingpcba.com/blog/pcb-assembly-process.html",
-  "author": {
-    "@type": "Organization",
-    "name": "Huaxing PCBA"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Huaxing PCBA",
-    "url": "https://huaxingpcba.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://huaxingpcba.com/images/logo.webp"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://huaxingpcba.com/blog/pcb-assembly-process.html"
-  }
-}
-</script>
-</head>
-<body>
-
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
-  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
-</svg>
-
-<header class="site-header" id="header">
-  <div class="container">
-    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    <nav class="nav-links" id="navLinks">
-    </nav>
-    <script src="/nav.js?v=22" defer></script>
-    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
-      <span></span><span></span><span></span>
-    </div>
+     1|<!DOCTYPE html>
+     2|<html lang="en">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>PCB Assembly Process Step by Step — From Bare Board to Finished PCBA | Huaxing PCBA</title>
+     7|<meta name="description" content="Complete PCB assembly process explained: solder paste printing, SMT placement, reflow soldering, AOI inspection, through-hole assembly, and functional testing. Real factory data from a 9-line SMT facility.">
+     8|<meta property="og:title" content="PCB Assembly Process Step by Step — From Bare Board to Finished PCBA">
+     9|<meta property="og:description" content="Every step of PCB assembly explained with real factory data — solder paste inspection, pick-and-place, reflow profiles, AOI, X-ray, and functional test. From a Shenzhen manufacturer with 8 SMT lines.">
+    10|<meta name="twitter:card" content="summary_large_image">
+    11|<meta property="og:type" content="article">
+    12|<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-assembly-process.html">
+    13|<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-assembly.webp">
+    14|    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-assembly-process.html">
+    15|<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+    16|<link rel="stylesheet" href="/design-tokens.css?v=28">
+    17|<link rel="icon" type="image/x-icon" href="/favicon.ico">
+    18|<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    19|<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    20|<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    21|<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+    22|<link rel="stylesheet" href="/blog.css?v=3">
+    23|
+    24|<script type="application/ld+json">
+    25|{
+    26|  "@context": "https://schema.org",
+    27|  "@type": "BlogPosting",
+    28|  "headline": "PCB Assembly Process Step by Step: From Bare Board to Finished PCBA",
+    29|  "description": "Every station explained — solder paste, SMT placement, reflow, AOI, X-ray, and functional test. Real data from a 9-line facility.",
+    30|  "datePublished": "2026-07-15",
+    31|  "dateModified": "2026-07-15",
+    32|  "image": "https://huaxingpcba.com/generated/blog-cover-assembly.webp",
+    33|  "url": "https://huaxingpcba.com/blog/pcb-assembly-process.html",
+    34|  "author": {
+    35|    "@type": "Organization",
+    36|    "name": "Huaxing PCBA"
+    37|  },
+    38|  "publisher": {
+    39|    "@type": "Organization",
+    40|    "name": "Huaxing PCBA",
+    41|    "url": "https://huaxingpcba.com",
+    42|    "logo": {
+    43|      "@type": "ImageObject",
+    44|      "url": "https://huaxingpcba.com/images/logo.webp"
+    45|    }
+    46|  },
+    47|  "mainEntityOfPage": {
+    48|    "@type": "WebPage",
+    49|    "@id": "https://huaxingpcba.com/blog/pcb-assembly-process.html"
+    50|  }
+    51|}
+    52|</script>
+    53|</head>
+    54|<body>
+    55|
+    56|<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+    57|  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    58|  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+    59|</svg>
+    60|
+    61|<header class="site-header" id="header">
+    62|  <div class="container">
+    63|    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    64|    <nav class="nav-links" id="navLinks">
+    65|    </nav>
+    66|    <script src="/nav.js?v=22" defer></script>
+    67|    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+    68|      <span></span><span></span><span></span>
+    69|    </div>
+    70|  </div>
+    71|</header>
+    72|
+    73|<section class="sub-hero">
+    74|  <div class="sub-hero-bg">
+    75|    <img src="../generated/blog-cover-assembly.webp" alt="" loading="eager" width="1920" height="600">
+    76|  </div>
+    77|  <div class="sub-hero-overlay"></div>
+    78|  <div class="sub-hero-content">
+    79|    <div class="container">
+    80|      <p class="section-label reveal">Manufacturing Guide</p>
+    81|      <h1 class="reveal">PCB Assembly Process Step by Step:<br><em>From Bare Board to Finished PCBA</em></h1>
+    82|      <p class="reveal">Every station, every inspection gate, every decision that determines whether your boards work — or fail in the field.</p>
+    83|    </div>
+    84|  </div>
+    85|</section>
+    86|
+    87|<article class="article reveal">
+    88|  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Assembly Process</span></div>
+    89|
+    90|  <p>PCB assembly looks simple from the outside: print solder paste, place components, heat it up, done. But the gap between "assembled" and "assembled reliably" is where most manufacturers fail. A board that passes visual inspection can have cold joints lurking under BGAs, insufficient solder on critical power components, or moisture damage from improper handling — all invisible until the board fails in the field.</p>
+    91|
+    92|  <p>This guide walks through every step of PCB assembly as it's actually performed in a production environment — specifically, our 15,000㎡ facility with 8 SMT lines running Yamaha YSM20R and ASM Siplace placement machines. We'll cover what happens at each station, what can go wrong, and what separates IPC Class 2 production from Class 3.</p>
+    93|
+    94|  <div class="highlight-box">
+    95|    <p><strong>Factory context:</strong> Our SMT lines place approximately <strong>8 million components per day</strong> across all lines. At that volume, even a 0.1% defect rate means 8,000 defects daily. The process controls described below are what keep our actual defect rate at <strong>under 50 DPMO</strong> (defects per million opportunities) — roughly 0.005%.</p>
+    96|  </div>
+    97|
+    98|  <h2>Step 1: Material Preparation & Incoming Inspection</h2>
+    99|
+   100|  <div class="step-block">
+   101|    <div class="step-num">Step 1</div>
+   102|  </div>
+   103|
+   104|  <p>Assembly begins before any machine is powered on. Every component reel, tray, and tube arrives with documentation — and every document gets verified against the BOM and the physical material.</p>
+   105|
+   106|  <img src="../generated/blog-assembly-iqc.webp" alt="Incoming quality control inspection station" loading="lazy" class="article-img">
+   107|
+   108|  <p><strong>What actually happens:</strong> Our IQC (Incoming Quality Control) station checks manufacturer part numbers against the BOM, verifies date codes (components more than 2 years old require baking before use), measures sample dimensions for mechanical fit, and confirms that moisture-sensitive devices (MSDs) were shipped in sealed packaging with humidity indicator cards intact.</p>
+   109|
+   110|  <p>For bare PCBs arriving from our fabrication department, IQC verifies: finish quality (ENIG thickness ≥3µm Au, HASL flatness within IPC spec), solder mask registration (no misalignment >0.05mm), and hole wall quality on cross-section samples. A single batch of boards with thin ENIG or poor mask registration will cause assembly defects that no amount of process control can fix.</p>
+   111|
+   112|  <div class="highlight-box">
+   113|    <p><strong>Critical data point:</strong> According to IPC studies, <strong>40% of SMT assembly defects originate from incoming material quality</strong> — not from the assembly process itself. Bypass IQC and you're betting your entire production run on your supplier's quality control.</p>
+   114|  </div>
+   115|
+   116|  <h2>Step 2: Solder Paste Printing</h2>
+   117|
+   118|  <div class="step-block">
+   119|    <div class="step-num">Step 2</div>
+   120|  </div>
+   121|
+   122|  <p>This is the single most critical step in SMT assembly. If the solder paste deposit is wrong — wrong volume, wrong position, wrong shape — nothing downstream can fix it. Industry data consistently shows that <strong>60-70% of all SMT defects trace back to the printing process</strong>.</p>
+   123|
+   124|  <p>The process: a stainless steel stencil (laser-cut, typically 0.1-0.15mm thick) is aligned over the PCB. Solder paste — a mixture of tin-silver-copper alloy particles suspended in flux — is spread across the stencil with a squeegee blade at controlled pressure, speed, and angle. The paste deposits through the apertures onto the PCB pads.</p>
+   125|
+   126|  <img src="../generated/blog-assembly-solder-paste.webp" alt="Solder paste printing and SPI inspection" loading="lazy" class="article-img">
+   127|
+   128|  <p><span class="data-point">±25µm</span></p>
+   129|  <p><strong>The precision required:</strong> For 0.4mm pitch BGA pads, a single aperture is roughly 0.25mm wide. The solder paste deposit must be centered within ±25µm of the pad center and must cover 80-120% of the pad area. SPI (Solder Paste Inspection) systems measure every deposit in 3D — volume, area, height, and position — and reject boards that fall outside spec before a single component is placed.</p>
+   130|
+   131|  <p><strong>Stencil design matters:</strong> Aperture shape, aspect ratio, and area ratio all affect paste release. For fine-pitch components (0.5mm and below), aperture walls may be electropolished or nano-coated to improve paste release. The stencil thickness directly controls paste volume — too thin and you get insufficient solder; too thick and you get bridging on fine-pitch pads. Step stencils (different thicknesses in different areas) solve this but add cost and complexity.</p>
+   132|
+   133|  <h2>Step 3: SMT Component Placement</h2>
+   134|
+   135|  <div class="step-block">
+   136|    <div class="step-num">Step 3</div>
+   137|  </div>
+   138|
+   139|  <p>Pick-and-place machines are the workhorses of SMT assembly. Modern placement systems like the Yamaha YSM20R achieve placement speeds of 95,000 CPH (components per hour) with placement accuracy of ±0.035mm — roughly one-third the width of a human hair.</p>
+   140|
+   141|  <p><strong>The placement sequence matters:</strong> Components are placed in a specific order based on size and mass. Small passives (0201, 0402) go first because they're lightest and most susceptible to displacement. Larger ICs and connectors follow. BGAs — which cannot be visually inspected after reflow — are placed last and with the highest precision requirements.</p>
+   142|
+   143|  <p>Each component is picked from its feeder by a vacuum nozzle, visually aligned by an on-the-fly camera system that verifies the component's orientation and checks for bent leads or physical damage, then placed onto its solder paste deposit with controlled force. A placement force of 1-3N is typical — enough to seat the component in the paste but not enough to squeeze paste out from under the component body.</p>
+   144|
+   145|  <div class="highlight-box">
+   146|    <p><strong>What determines placement quality:</strong> Feeder calibration (a misaligned feeder causes pick errors that cascade), nozzle condition (worn nozzles drop components), and fiducial recognition (the machine uses PCB fiducial marks to correct for board position and thermal expansion). At 95,000 CPH, the machine makes a placement decision every 38 milliseconds. The engineering is in making those decisions correct at speed.</p>
+   147|  </div>
+   148|
+   149|  <h2>Step 4: Reflow Soldering</h2>
+   150|
+   151|  <div class="step-block">
+   152|    <div class="step-num">Step 4</div>
+   153|  </div>
+   154|
+   155|  <img src="../generated/blog-assembly-reflow-profile.webp" alt="Reflow oven temperature profile zones" loading="lazy" class="article-img">
+   156|
+   157|  <p>Reflow soldering is a precisely controlled thermal process. The populated board travels through a conveyor oven with multiple temperature zones — typically 8-12 zones in production ovens — each set to a specific temperature. The board follows a thermal profile: preheat, soak, reflow, and cooling.</p>
+   158|
+   159|  <p><strong>The four zones:</strong></p>
+   160|  <ul>
+   161|    <li><strong>Preheat (1.5-3°C/second ramp)</strong> — Gradually raises board temperature to ~150°C. Ramping too fast causes thermal shock; too slow allows the flux to activate prematurely and exhaust itself before reflow.</li>
+   162|    <li><strong>Soak (150-180°C, 60-120 seconds)</strong> — Stabilizes temperature across the board, activates flux chemistry to remove oxides from pad and component surfaces, and drives off volatile compounds from the paste.</li>
+   163|    <li><strong>Reflow (above 217°C, 45-90 seconds)</strong> — The solder alloy melts (SAC305 melts at 217-220°C). Peak temperature is typically 235-250°C. Time above liquidus must be long enough for complete wetting but short enough to avoid intermetallic growth and component damage.</li>
+   164|    <li><strong>Cooling (2-4°C/second)</strong> — Controlled cooling to solidify joints with fine grain structure. Too fast and you get thermal stress; too slow and you get large brittle intermetallic crystals at the joint interface.</li>
+   165|  </ul>
+   166|
+   167|  <p><span class="data-point">235°C</span></p>
+   168|  <p><strong>Why the profile matters:</strong> A board with a large BGA next to a tiny 0201 capacitor has enormous thermal mass differences. The capacitor reaches reflow temperature in 30 seconds; the BGA might need 90 seconds. If the profile is tuned for the small component, the BGA never fully reflows. If tuned for the BGA, the capacitor overheats. Multi-zone ovens with top and bottom heating elements compensate for this, but the profile must still be validated with thermocouples attached to representative components on an actual board.</p>
+   169|
+   170|  <h2>Step 5: Automated Optical Inspection (AOI)</h2>
+   171|
+   172|  <div class="step-block">
+   173|    <div class="step-num">Step 5</div>
+   174|  </div>
+   175|
+   176|  <p>AOI is the first quality gate after reflow. High-resolution cameras scan every solder joint on the board, comparing each one against a reference image or CAD data. The system flags anomalies: insufficient solder, bridging, tombstoning (a component standing on end), missing components, shifted components, and lifted leads.</p>
+   177|
+   178|  <p><strong>What AOI can and can't see:</strong> AOI is excellent at detecting visible defects — surface-mount solder joint quality, component presence and orientation, and obvious bridging or insufficient solder. It cannot see under BGAs, under QFN thermal pads, or inside plated through-holes. For those, you need X-ray inspection.</p>
+   179|
+   180|  <div class="highlight-box">
+   181|    <p><strong>False positives vs real defects:</strong> AOI systems generate false-positive rates of 2-5% in typical operation — flagged joints that are actually acceptable. Every flag requires a human operator to verify under a microscope. This is why tuning AOI algorithms is a specialized skill: too sensitive and your operators spend all day verifying false flags; too lenient and real defects escape.</p>
+   182|  </div>
+   183|
+   184|  <h2>Step 6: Through-Hole Assembly (When Needed)</h2>
+   185|
+   186|  <div class="step-block">
+   187|    <div class="step-num">Step 6</div>
+   188|  </div>
+   189|
+   190|  <p>Not every board is 100% surface-mount. Connectors, transformers, large capacitors, and some power components still require through-hole assembly. This can be done by selective soldering (a robotic fountain that solders specific pins in sequence), wave soldering (the entire bottom side passes over a molten solder wave), or manual soldering for low-volume or complex assemblies.</p>
+   191|
+   192|  <p>For mixed-technology boards (SMT on both sides plus through-hole), the assembly sequence must be carefully planned. Components on the bottom side must survive the wave solder process without falling off or being damaged — which often requires adhesive bonding of bottom-side SMT components before wave soldering.</p>
+   193|
+   194|  <h2>Step 7: X-Ray Inspection (BGA, QFN, Hidden Joints)</h2>
+   195|
+   196|  <div class="step-block">
+   197|    <div class="step-num">Step 7</div>
+   198|  </div>
+   199|
+   200|  <img src="../generated/blog-assembly-xray.webp" alt="X-ray inspection of BGA solder joints" loading="lazy" class="article-img">
+   201|
+   202|  <p>X-ray inspection is non-negotiable for BGA and QFN assemblies. These packages hide their solder joints completely — there is no optical path to verify joint quality. X-ray imaging penetrates the component body and reveals voids, insufficient solder, bridging between adjacent balls, and head-in-pillow defects (where the solder ball and paste make contact but don't fuse).</p>
+   203|
+   204|  <p><strong>IPC-A-610 void criteria:</strong> For BGA balls, IPC Class 3 allows a maximum void size of 20% of the ball diameter for any single void, and a total void area not exceeding 25% of the ball cross-section. Class 2 allows 25% and 30% respectively. Voids exceeding these limits weaken the joint mechanically and thermally — a BGA with a 40% void may pass electrical test at room temperature and fail after 200 thermal cycles.</p>
+   205|
+   206|  <p>At our facility, BGA assemblies receive 100% X-ray inspection. For non-BGA boards, X-ray sampling is performed at a rate determined by the customer's quality requirements and the board's complexity.</p>
+   207|
+   208|  <h2>Step 8: In-Circuit Testing (ICT) and Flying Probe</h2>
+   209|
+   210|  <div class="step-block">
+   211|    <div class="step-num">Step 8</div>
+   212|  </div>
+   213|
+   214|  <p>Electrical testing verifies that every net on the board is connected correctly. There are two approaches:</p>
+   215|
+   216|  <p><strong>ICT (In-Circuit Test):</strong> A bed-of-nails fixture with spring-loaded pins contacts test points across the board simultaneously. ICT can verify: opens and shorts on every net, resistor and capacitor values within tolerance, diode and transistor orientation, and basic IC functionality. The fixture is custom-built for each board design and costs $1,000-5,000 — justified only for production volumes above ~500 pieces.</p>
+   217|
+   218|  <p><strong>Flying Probe:</strong> Instead of a fixed fixture, 2-6 robotic probes move across the board, touching test points in sequence. Flying probe testers are slower than ICT (minutes vs seconds per board) but require no custom fixture — the test program is generated directly from CAD data. This makes flying probe ideal for prototypes, low-volume production, and high-mix manufacturing environments.</p>
+   219|
+   220|  <div class="highlight-box">
+   221|    <p><strong>At Huaxing:</strong> We maintain both ICT fixtures for repeat production orders and a fleet of flying probe testers for prototypes and low-volume runs. Every board shipped — regardless of volume — receives 100% electrical test. No exceptions. The cost of shipping a board with an open circuit is orders of magnitude higher than the cost of testing.</p>
+   222|  </div>
+   223|
+   224|  <h2>Step 9: Functional Testing (FCT)</h2>
+   225|
+   226|  <div class="step-block">
+   227|    <div class="step-num">Step 9</div>
+   228|  </div>
+   229|
+   230|  <p>FCT is the final quality gate — the board is powered up and tested under conditions that simulate its actual operating environment. This verifies that the assembly works as a system: power rails come up in the correct sequence, firmware boots, interfaces communicate, analog signals are within spec.</p>
+   231|
+   232|  <p>Functional test is entirely application-specific. The test fixture, software, and pass/fail criteria are developed for each product. Some customers provide their own FCT fixtures and test protocols; others specify the functional requirements and we develop the test solution in-house.</p>
+   233|
+   234|  <p>For turnkey PCBA projects, FCT is often the most valuable step — it's the only test that catches integration issues like a correctly-soldered but incorrectly-sourced component, or a firmware incompatibility that wouldn't show up in ICT or AOI.</p>
+   235|
+   236|  <h2>Step 10: Conformal Coating, Boxing, and Shipment</h2>
+   237|
+   238|  <div class="step-block">
+   239|    <div class="step-num">Step 10</div>
+   240|  </div>
+   241|
+   242|  <p>For boards destined for harsh environments — automotive under-hood, outdoor industrial equipment, marine electronics — conformal coating provides protection against moisture, dust, chemicals, and temperature extremes. Common coating materials include acrylic (easiest to apply and rework), silicone (best temperature range), and polyurethane (best chemical resistance). The coating is applied by selective robotic spraying, dipping, or manual brushing, then UV-cured or thermally cured.</p>
+   243|
+   244|  <p>After coating (or directly after test for non-coated boards), assemblies are packaged in ESD-safe packaging with humidity indicators and desiccant packs as needed. Each shipment includes: Certificate of Conformance, test reports (AOI, ICT/FPT, FCT as applicable), and material certifications.</p>
+   245|
+   246|  <h2>What Separates Good Assembly from Great Assembly</h2>
+   247|
+   248|  <p>The process steps above are standard — every competent PCBA manufacturer follows them. What separates the best from the rest is not the checklist but the rigor:</p>
+   249|
+   250|  <ul>
+   251|    <li><strong>SPI on 100% of boards</strong>, not sampled. If you're only checking solder paste on every 10th board, you're shipping 9 uninspected deposits for every one you verify.</li>
+   252|    <li><strong>Reflow profile validation per product</strong>, not per "product family." Two boards with different component mixes and copper distribution need different profiles, even if they share the same part number prefix.</li>
+   253|    <li><strong>100% AOI + 100% electrical test</strong>, not one or the other. AOI catches visible defects; electrical test catches invisible ones. Both are necessary.</li>
+   254|    <li><strong>X-ray for all BGAs</strong>, no exceptions. The "we know our process, we don't need X-ray" argument is how field failures happen.</li>
+   255|    <li><strong>Traceability from component reel to finished board serial number</strong>. When a field failure occurs 18 months later, you need to know exactly which reel of which lot went onto which board — instantly, not after days of investigation.</li>
+   256|  </ul>
+   257|
+   258|  <p><span class="data-point">50 DPMO</span></p>
+   259|  <p>At our facility, we target under 50 DPMO (defects per million opportunities) across all lines. For context, the industry average for SMT assembly is approximately 500-1,000 DPMO. The 10× difference comes from the controls described above — not from having different machines, but from using them differently.</p>
+   260|
+   261|</article>
+   262|
+   263|
+   264|<section class="section" style="background:var(--bg-secondary)">
+   265|  <div class="container">
+   266|    <h2 style="font-weight:200;text-align:center;margin-bottom:var(--space-xl)">Related <em>Articles</em></h2>
+   267|    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)">
+   268|      <a href="/blog/gerber-files-guide.html" style="display:block;color:inherit;text-decoration:none">
+   269|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+   270|          <div style="padding:var(--space-lg)">
+   271|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
+   272|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers</h4>
+   273|          </div>
+   274|        </div>
+   275|      </a>
+   276|      <a href="/blog/heavy-copper-pcb.html" style="display:block;color:inherit;text-decoration:none">
+   277|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+   278|          <div style="padding:var(--space-lg)">
+   279|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
+   280|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Heavy Copper PCB Manufacturing — Design Rules, Thermal Management & 6oz Applications</h4>
+   281|          </div>
+   282|        </div>
+   283|      </a>
+   284|      <a href="/blog/rigid-flex-pcb.html" style="display:block;color:inherit;text-decoration:none">
+   285|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+   286|          <div style="padding:var(--space-lg)">
+   287|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
+   288|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Rigid-Flex PCB Manufacturing Guide — Design Rules, Materials & Cost Factors</h4>
+   289|          </div>
+   290|        </div>
+   291|      </a>
+   292|    </div>
+   293|    <style>@media(max-width:768px){.section div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}</style>
+   294|  </div>
+   295|</section>
+   296|
+   297|<section class="section" style="background:var(--bg-secondary)">
+   298|  <div class="container">
+   299|    <div class="cta-card reveal" style="background-image:url(/generated/blog-cta-turnkey.webp)">
+   300|      <h2>Ready to Start Your PCBA Project?</h2>
+   301|      <p>Send us your BOM and Gerber files. We'll provide a complete assembly quote with a detailed DFM review — within 24 hours.</p>
+   302|      <button class="btn btn-primary btn-lg" onclick="openModal()">Get a Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+   303|    </div>
+   304|  </div>
+   305|</section>
+   306|
+   307|
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+            <li><a href="/blog/turnkey-pcb-assembly.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Turnkey PCB Assembly Guide</a></li>
+            <li><a href="/blog/quick-turn-pcb-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Quick-Turn PCB Manufacturing</a></li>
+            <li><a href="/blog/prototype-vs-production.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Prototype vs Mass Production</a></li>
+            <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods</a></li>
+            <li><a href="/blog/heavy-copper-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Heavy Copper PCB Manufacturing</a></li>
+    </ul>
   </div>
-</header>
 
-<section class="sub-hero">
-  <div class="sub-hero-bg">
-    <img src="../generated/blog-cover-assembly.webp" alt="" loading="eager" width="1920" height="600">
-  </div>
-  <div class="sub-hero-overlay"></div>
-  <div class="sub-hero-content">
-    <div class="container">
-      <p class="section-label reveal">Manufacturing Guide</p>
-      <h1 class="reveal">PCB Assembly Process Step by Step:<br><em>From Bare Board to Finished PCBA</em></h1>
-      <p class="reveal">Every station, every inspection gate, every decision that determines whether your boards work — or fail in the field.</p>
-    </div>
-  </div>
-</section>
-
-<article class="article reveal">
-  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Assembly Process</span></div>
-
-  <p>PCB assembly looks simple from the outside: print solder paste, place components, heat it up, done. But the gap between "assembled" and "assembled reliably" is where most manufacturers fail. A board that passes visual inspection can have cold joints lurking under BGAs, insufficient solder on critical power components, or moisture damage from improper handling — all invisible until the board fails in the field.</p>
-
-  <p>This guide walks through every step of PCB assembly as it's actually performed in a production environment — specifically, our 15,000㎡ facility with 8 SMT lines running Yamaha YSM20R and ASM Siplace placement machines. We'll cover what happens at each station, what can go wrong, and what separates IPC Class 2 production from Class 3.</p>
-
-  <div class="highlight-box">
-    <p><strong>Factory context:</strong> Our SMT lines place approximately <strong>8 million components per day</strong> across all lines. At that volume, even a 0.1% defect rate means 8,000 defects daily. The process controls described below are what keep our actual defect rate at <strong>under 50 DPMO</strong> (defects per million opportunities) — roughly 0.005%.</p>
-  </div>
-
-  <h2>Step 1: Material Preparation & Incoming Inspection</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 1</div>
-  </div>
-
-  <p>Assembly begins before any machine is powered on. Every component reel, tray, and tube arrives with documentation — and every document gets verified against the BOM and the physical material.</p>
-
-  <img src="../generated/blog-assembly-iqc.webp" alt="Incoming quality control inspection station" loading="lazy" class="article-img">
-
-  <p><strong>What actually happens:</strong> Our IQC (Incoming Quality Control) station checks manufacturer part numbers against the BOM, verifies date codes (components more than 2 years old require baking before use), measures sample dimensions for mechanical fit, and confirms that moisture-sensitive devices (MSDs) were shipped in sealed packaging with humidity indicator cards intact.</p>
-
-  <p>For bare PCBs arriving from our fabrication department, IQC verifies: finish quality (ENIG thickness ≥3µm Au, HASL flatness within IPC spec), solder mask registration (no misalignment >0.05mm), and hole wall quality on cross-section samples. A single batch of boards with thin ENIG or poor mask registration will cause assembly defects that no amount of process control can fix.</p>
-
-  <div class="highlight-box">
-    <p><strong>Critical data point:</strong> According to IPC studies, <strong>40% of SMT assembly defects originate from incoming material quality</strong> — not from the assembly process itself. Bypass IQC and you're betting your entire production run on your supplier's quality control.</p>
-  </div>
-
-  <h2>Step 2: Solder Paste Printing</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 2</div>
-  </div>
-
-  <p>This is the single most critical step in SMT assembly. If the solder paste deposit is wrong — wrong volume, wrong position, wrong shape — nothing downstream can fix it. Industry data consistently shows that <strong>60-70% of all SMT defects trace back to the printing process</strong>.</p>
-
-  <p>The process: a stainless steel stencil (laser-cut, typically 0.1-0.15mm thick) is aligned over the PCB. Solder paste — a mixture of tin-silver-copper alloy particles suspended in flux — is spread across the stencil with a squeegee blade at controlled pressure, speed, and angle. The paste deposits through the apertures onto the PCB pads.</p>
-
-  <img src="../generated/blog-assembly-solder-paste.webp" alt="Solder paste printing and SPI inspection" loading="lazy" class="article-img">
-
-  <p><span class="data-point">±25µm</span></p>
-  <p><strong>The precision required:</strong> For 0.4mm pitch BGA pads, a single aperture is roughly 0.25mm wide. The solder paste deposit must be centered within ±25µm of the pad center and must cover 80-120% of the pad area. SPI (Solder Paste Inspection) systems measure every deposit in 3D — volume, area, height, and position — and reject boards that fall outside spec before a single component is placed.</p>
-
-  <p><strong>Stencil design matters:</strong> Aperture shape, aspect ratio, and area ratio all affect paste release. For fine-pitch components (0.5mm and below), aperture walls may be electropolished or nano-coated to improve paste release. The stencil thickness directly controls paste volume — too thin and you get insufficient solder; too thick and you get bridging on fine-pitch pads. Step stencils (different thicknesses in different areas) solve this but add cost and complexity.</p>
-
-  <h2>Step 3: SMT Component Placement</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 3</div>
-  </div>
-
-  <p>Pick-and-place machines are the workhorses of SMT assembly. Modern placement systems like the Yamaha YSM20R achieve placement speeds of 95,000 CPH (components per hour) with placement accuracy of ±0.035mm — roughly one-third the width of a human hair.</p>
-
-  <p><strong>The placement sequence matters:</strong> Components are placed in a specific order based on size and mass. Small passives (0201, 0402) go first because they're lightest and most susceptible to displacement. Larger ICs and connectors follow. BGAs — which cannot be visually inspected after reflow — are placed last and with the highest precision requirements.</p>
-
-  <p>Each component is picked from its feeder by a vacuum nozzle, visually aligned by an on-the-fly camera system that verifies the component's orientation and checks for bent leads or physical damage, then placed onto its solder paste deposit with controlled force. A placement force of 1-3N is typical — enough to seat the component in the paste but not enough to squeeze paste out from under the component body.</p>
-
-  <div class="highlight-box">
-    <p><strong>What determines placement quality:</strong> Feeder calibration (a misaligned feeder causes pick errors that cascade), nozzle condition (worn nozzles drop components), and fiducial recognition (the machine uses PCB fiducial marks to correct for board position and thermal expansion). At 95,000 CPH, the machine makes a placement decision every 38 milliseconds. The engineering is in making those decisions correct at speed.</p>
-  </div>
-
-  <h2>Step 4: Reflow Soldering</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 4</div>
-  </div>
-
-  <img src="../generated/blog-assembly-reflow-profile.webp" alt="Reflow oven temperature profile zones" loading="lazy" class="article-img">
-
-  <p>Reflow soldering is a precisely controlled thermal process. The populated board travels through a conveyor oven with multiple temperature zones — typically 8-12 zones in production ovens — each set to a specific temperature. The board follows a thermal profile: preheat, soak, reflow, and cooling.</p>
-
-  <p><strong>The four zones:</strong></p>
-  <ul>
-    <li><strong>Preheat (1.5-3°C/second ramp)</strong> — Gradually raises board temperature to ~150°C. Ramping too fast causes thermal shock; too slow allows the flux to activate prematurely and exhaust itself before reflow.</li>
-    <li><strong>Soak (150-180°C, 60-120 seconds)</strong> — Stabilizes temperature across the board, activates flux chemistry to remove oxides from pad and component surfaces, and drives off volatile compounds from the paste.</li>
-    <li><strong>Reflow (above 217°C, 45-90 seconds)</strong> — The solder alloy melts (SAC305 melts at 217-220°C). Peak temperature is typically 235-250°C. Time above liquidus must be long enough for complete wetting but short enough to avoid intermetallic growth and component damage.</li>
-    <li><strong>Cooling (2-4°C/second)</strong> — Controlled cooling to solidify joints with fine grain structure. Too fast and you get thermal stress; too slow and you get large brittle intermetallic crystals at the joint interface.</li>
-  </ul>
-
-  <p><span class="data-point">235°C</span></p>
-  <p><strong>Why the profile matters:</strong> A board with a large BGA next to a tiny 0201 capacitor has enormous thermal mass differences. The capacitor reaches reflow temperature in 30 seconds; the BGA might need 90 seconds. If the profile is tuned for the small component, the BGA never fully reflows. If tuned for the BGA, the capacitor overheats. Multi-zone ovens with top and bottom heating elements compensate for this, but the profile must still be validated with thermocouples attached to representative components on an actual board.</p>
-
-  <h2>Step 5: Automated Optical Inspection (AOI)</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 5</div>
-  </div>
-
-  <p>AOI is the first quality gate after reflow. High-resolution cameras scan every solder joint on the board, comparing each one against a reference image or CAD data. The system flags anomalies: insufficient solder, bridging, tombstoning (a component standing on end), missing components, shifted components, and lifted leads.</p>
-
-  <p><strong>What AOI can and can't see:</strong> AOI is excellent at detecting visible defects — surface-mount solder joint quality, component presence and orientation, and obvious bridging or insufficient solder. It cannot see under BGAs, under QFN thermal pads, or inside plated through-holes. For those, you need X-ray inspection.</p>
-
-  <div class="highlight-box">
-    <p><strong>False positives vs real defects:</strong> AOI systems generate false-positive rates of 2-5% in typical operation — flagged joints that are actually acceptable. Every flag requires a human operator to verify under a microscope. This is why tuning AOI algorithms is a specialized skill: too sensitive and your operators spend all day verifying false flags; too lenient and real defects escape.</p>
-  </div>
-
-  <h2>Step 6: Through-Hole Assembly (When Needed)</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 6</div>
-  </div>
-
-  <p>Not every board is 100% surface-mount. Connectors, transformers, large capacitors, and some power components still require through-hole assembly. This can be done by selective soldering (a robotic fountain that solders specific pins in sequence), wave soldering (the entire bottom side passes over a molten solder wave), or manual soldering for low-volume or complex assemblies.</p>
-
-  <p>For mixed-technology boards (SMT on both sides plus through-hole), the assembly sequence must be carefully planned. Components on the bottom side must survive the wave solder process without falling off or being damaged — which often requires adhesive bonding of bottom-side SMT components before wave soldering.</p>
-
-  <h2>Step 7: X-Ray Inspection (BGA, QFN, Hidden Joints)</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 7</div>
-  </div>
-
-  <img src="../generated/blog-assembly-xray.webp" alt="X-ray inspection of BGA solder joints" loading="lazy" class="article-img">
-
-  <p>X-ray inspection is non-negotiable for BGA and QFN assemblies. These packages hide their solder joints completely — there is no optical path to verify joint quality. X-ray imaging penetrates the component body and reveals voids, insufficient solder, bridging between adjacent balls, and head-in-pillow defects (where the solder ball and paste make contact but don't fuse).</p>
-
-  <p><strong>IPC-A-610 void criteria:</strong> For BGA balls, IPC Class 3 allows a maximum void size of 20% of the ball diameter for any single void, and a total void area not exceeding 25% of the ball cross-section. Class 2 allows 25% and 30% respectively. Voids exceeding these limits weaken the joint mechanically and thermally — a BGA with a 40% void may pass electrical test at room temperature and fail after 200 thermal cycles.</p>
-
-  <p>At our facility, BGA assemblies receive 100% X-ray inspection. For non-BGA boards, X-ray sampling is performed at a rate determined by the customer's quality requirements and the board's complexity.</p>
-
-  <h2>Step 8: In-Circuit Testing (ICT) and Flying Probe</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 8</div>
-  </div>
-
-  <p>Electrical testing verifies that every net on the board is connected correctly. There are two approaches:</p>
-
-  <p><strong>ICT (In-Circuit Test):</strong> A bed-of-nails fixture with spring-loaded pins contacts test points across the board simultaneously. ICT can verify: opens and shorts on every net, resistor and capacitor values within tolerance, diode and transistor orientation, and basic IC functionality. The fixture is custom-built for each board design and costs $1,000-5,000 — justified only for production volumes above ~500 pieces.</p>
-
-  <p><strong>Flying Probe:</strong> Instead of a fixed fixture, 2-6 robotic probes move across the board, touching test points in sequence. Flying probe testers are slower than ICT (minutes vs seconds per board) but require no custom fixture — the test program is generated directly from CAD data. This makes flying probe ideal for prototypes, low-volume production, and high-mix manufacturing environments.</p>
-
-  <div class="highlight-box">
-    <p><strong>At Huaxing:</strong> We maintain both ICT fixtures for repeat production orders and a fleet of flying probe testers for prototypes and low-volume runs. Every board shipped — regardless of volume — receives 100% electrical test. No exceptions. The cost of shipping a board with an open circuit is orders of magnitude higher than the cost of testing.</p>
-  </div>
-
-  <h2>Step 9: Functional Testing (FCT)</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 9</div>
-  </div>
-
-  <p>FCT is the final quality gate — the board is powered up and tested under conditions that simulate its actual operating environment. This verifies that the assembly works as a system: power rails come up in the correct sequence, firmware boots, interfaces communicate, analog signals are within spec.</p>
-
-  <p>Functional test is entirely application-specific. The test fixture, software, and pass/fail criteria are developed for each product. Some customers provide their own FCT fixtures and test protocols; others specify the functional requirements and we develop the test solution in-house.</p>
-
-  <p>For turnkey PCBA projects, FCT is often the most valuable step — it's the only test that catches integration issues like a correctly-soldered but incorrectly-sourced component, or a firmware incompatibility that wouldn't show up in ICT or AOI.</p>
-
-  <h2>Step 10: Conformal Coating, Boxing, and Shipment</h2>
-
-  <div class="step-block">
-    <div class="step-num">Step 10</div>
-  </div>
-
-  <p>For boards destined for harsh environments — automotive under-hood, outdoor industrial equipment, marine electronics — conformal coating provides protection against moisture, dust, chemicals, and temperature extremes. Common coating materials include acrylic (easiest to apply and rework), silicone (best temperature range), and polyurethane (best chemical resistance). The coating is applied by selective robotic spraying, dipping, or manual brushing, then UV-cured or thermally cured.</p>
-
-  <p>After coating (or directly after test for non-coated boards), assemblies are packaged in ESD-safe packaging with humidity indicators and desiccant packs as needed. Each shipment includes: Certificate of Conformance, test reports (AOI, ICT/FPT, FCT as applicable), and material certifications.</p>
-
-  <h2>What Separates Good Assembly from Great Assembly</h2>
-
-  <p>The process steps above are standard — every competent PCBA manufacturer follows them. What separates the best from the rest is not the checklist but the rigor:</p>
-
-  <ul>
-    <li><strong>SPI on 100% of boards</strong>, not sampled. If you're only checking solder paste on every 10th board, you're shipping 9 uninspected deposits for every one you verify.</li>
-    <li><strong>Reflow profile validation per product</strong>, not per "product family." Two boards with different component mixes and copper distribution need different profiles, even if they share the same part number prefix.</li>
-    <li><strong>100% AOI + 100% electrical test</strong>, not one or the other. AOI catches visible defects; electrical test catches invisible ones. Both are necessary.</li>
-    <li><strong>X-ray for all BGAs</strong>, no exceptions. The "we know our process, we don't need X-ray" argument is how field failures happen.</li>
-    <li><strong>Traceability from component reel to finished board serial number</strong>. When a field failure occurs 18 months later, you need to know exactly which reel of which lot went onto which board — instantly, not after days of investigation.</li>
-  </ul>
-
-  <p><span class="data-point">50 DPMO</span></p>
-  <p>At our facility, we target under 50 DPMO (defects per million opportunities) across all lines. For context, the industry average for SMT assembly is approximately 500-1,000 DPMO. The 10× difference comes from the controls described above — not from having different machines, but from using them differently.</p>
-
-</article>
-
-
-<section class="section" style="background:var(--bg-secondary)">
-  <div class="container">
-    <h2 style="font-weight:200;text-align:center;margin-bottom:var(--space-xl)">Related <em>Articles</em></h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)">
-      <a href="/blog/gerber-files-guide.html" style="display:block;color:inherit;text-decoration:none">
-        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-          <div style="padding:var(--space-lg)">
-            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
-            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers</h4>
-          </div>
-        </div>
-      </a>
-      <a href="/blog/heavy-copper-pcb.html" style="display:block;color:inherit;text-decoration:none">
-        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-          <div style="padding:var(--space-lg)">
-            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
-            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Heavy Copper PCB Manufacturing — Design Rules, Thermal Management & 6oz Applications</h4>
-          </div>
-        </div>
-      </a>
-      <a href="/blog/rigid-flex-pcb.html" style="display:block;color:inherit;text-decoration:none">
-        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-          <div style="padding:var(--space-lg)">
-            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
-            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Rigid-Flex PCB Manufacturing Guide — Design Rules, Materials & Cost Factors</h4>
-          </div>
-        </div>
-      </a>
-    </div>
-    <style>@media(max-width:768px){.section div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}</style>
-  </div>
-</section>
-
-<section class="section" style="background:var(--bg-secondary)">
-  <div class="container">
-    <div class="cta-card reveal" style="background-image:url(/generated/blog-cta-turnkey.webp)">
-      <h2>Ready to Start Your PCBA Project?</h2>
-      <p>Send us your BOM and Gerber files. We'll provide a complete assembly quote with a detailed DFM review — within 24 hours.</p>
-      <button class="btn btn-primary btn-lg" onclick="openModal()">Get a Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
-    </div>
-  </div>
-</section>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
-      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
-            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
-<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
-    </div>
-    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
-  </div>
-</footer>
-
-<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-dialog">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div class="modal-image-panel">
-      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
-      <div class="modal-image-overlay"></div>
-      <div class="modal-image-top">
-        <h2 class="mi-heading">Start Your Project</h2>
-        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
-      </div>
-      <div class="modal-image-text">
-        <div class="mi-label">HUAXING PCBA</div>
-        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
-      </div>
-    </div>
-    <div class="modal-form-panel">
-      <form onsubmit="return handleInquiry(event)" novalidate>
-        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
-        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
-        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
-        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script src="../reveal.js"></script>
-<script>
-function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-</script>
-<script src="../inquiry-handler.js"></script></body>
-</html>
+   308|  <div class="container">
+   309|    <div class="footer-grid">
+   310|      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+   311|      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+   312|            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+   313|<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+   314|    </div>
+   315|    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+   316|  </div>
+   317|</footer>
+   318|
+   319|<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+   320|  <div class="modal-dialog">
+   321|    <button class="modal-close" onclick="closeModal()">&times;</button>
+   322|    <div class="modal-image-panel">
+   323|      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+   324|      <div class="modal-image-overlay"></div>
+   325|      <div class="modal-image-top">
+   326|        <h2 class="mi-heading">Start Your Project</h2>
+   327|        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+   328|      </div>
+   329|      <div class="modal-image-text">
+   330|        <div class="mi-label">HUAXING PCBA</div>
+   331|        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+   332|      </div>
+   333|    </div>
+   334|    <div class="modal-form-panel">
+   335|      <form onsubmit="return handleInquiry(event)" novalidate>
+   336|        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+   337|        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+   338|        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+   339|        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+   340|        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+   341|      </form>
+   342|    </div>
+   343|  </div>
+   344|</div>
+   345|
+   346|<script src="../reveal.js"></script>
+   347|<script>
+   348|function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+   349|function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+   350|</script>
+   351|<script src="../inquiry-handler.js"></script></body>
+   352|</html>
+   353|

@@ -1,368 +1,382 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers | Huaxing PCBA</title>
-<meta name="description" content="Step-by-step Gerber file preparation guide for PCB buyers. Learn which layers your manufacturer needs, how to avoid the 5 most common errors that delay production, and the RS-274X vs Gerber X2 format decision.">
-<meta property="og:title" content="How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers">
-<meta property="og:description" content="Gerber file preparation is the #1 cause of production delays in PCB manufacturing. This guide covers every layer, format decision, and validation step — so your boards go into production the same day you submit.">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://huaxingpcba.com/blog/gerber-files-guide.html">
-<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-gerber-files.webp">
-    <link rel="canonical" href="https://huaxingpcba.com/blog/gerber-files-guide.html">
-<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="/design-tokens.css?v=28">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-<link rel="stylesheet" href="/blog.css?v=3">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers",
-  "description": "The 8-point CAM checklist that separates same-day production from week-long engineering holds. RS-274X vs Gerber X2, common mistakes, and exactly what your manufacturer's CAM team checks before releasing your boards to production.",
-  "datePublished": "2026-07-15",
-  "dateModified": "2026-07-15",
-  "image": "https://huaxingpcba.com/generated/blog-cover-gerber-files.webp",
-  "url": "https://huaxingpcba.com/blog/gerber-files-guide.html",
-  "author": {
-    "@type": "Organization",
-    "name": "Huaxing PCBA"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Huaxing PCBA",
-    "url": "https://huaxingpcba.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://huaxingpcba.com/images/logo.webp"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://huaxingpcba.com/blog/gerber-files-guide.html"
-  }
-}
-</script>
-</head>
-<body>
-
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
-  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
-</svg>
-
-<header class="site-header" id="header">
-  <div class="container">
-    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    <nav class="nav-links" id="navLinks">
-    </nav>
-    <script src="/nav.js?v=22" defer></script>
-    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
-      <span></span><span></span><span></span>
-    </div>
+     1|<!DOCTYPE html>
+     2|<html lang="en">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers | Huaxing PCBA</title>
+     7|<meta name="description" content="Step-by-step Gerber file preparation guide for PCB buyers. Learn which layers your manufacturer needs, how to avoid the 5 most common errors that delay production, and the RS-274X vs Gerber X2 format decision.">
+     8|<meta property="og:title" content="How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers">
+     9|<meta property="og:description" content="Gerber file preparation is the #1 cause of production delays in PCB manufacturing. This guide covers every layer, format decision, and validation step — so your boards go into production the same day you submit.">
+    10|<meta name="twitter:card" content="summary_large_image">
+    11|<meta property="og:type" content="article">
+    12|<meta property="og:url" content="https://huaxingpcba.com/blog/gerber-files-guide.html">
+    13|<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-gerber-files.webp">
+    14|    <link rel="canonical" href="https://huaxingpcba.com/blog/gerber-files-guide.html">
+    15|<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+    16|<link rel="stylesheet" href="/design-tokens.css?v=28">
+    17|<link rel="icon" type="image/x-icon" href="/favicon.ico">
+    18|<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    19|<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    20|<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    21|<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+    22|<link rel="stylesheet" href="/blog.css?v=3">
+    23|
+    24|<script type="application/ld+json">
+    25|{
+    26|  "@context": "https://schema.org",
+    27|  "@type": "BlogPosting",
+    28|  "headline": "How to Prepare PCB Gerber Files — A Complete Checklist for First-Time Buyers",
+    29|  "description": "The 8-point CAM checklist that separates same-day production from week-long engineering holds. RS-274X vs Gerber X2, common mistakes, and exactly what your manufacturer's CAM team checks before releasing your boards to production.",
+    30|  "datePublished": "2026-07-15",
+    31|  "dateModified": "2026-07-15",
+    32|  "image": "https://huaxingpcba.com/generated/blog-cover-gerber-files.webp",
+    33|  "url": "https://huaxingpcba.com/blog/gerber-files-guide.html",
+    34|  "author": {
+    35|    "@type": "Organization",
+    36|    "name": "Huaxing PCBA"
+    37|  },
+    38|  "publisher": {
+    39|    "@type": "Organization",
+    40|    "name": "Huaxing PCBA",
+    41|    "url": "https://huaxingpcba.com",
+    42|    "logo": {
+    43|      "@type": "ImageObject",
+    44|      "url": "https://huaxingpcba.com/images/logo.webp"
+    45|    }
+    46|  },
+    47|  "mainEntityOfPage": {
+    48|    "@type": "WebPage",
+    49|    "@id": "https://huaxingpcba.com/blog/gerber-files-guide.html"
+    50|  }
+    51|}
+    52|</script>
+    53|</head>
+    54|<body>
+    55|
+    56|<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+    57|  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    58|  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+    59|</svg>
+    60|
+    61|<header class="site-header" id="header">
+    62|  <div class="container">
+    63|    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    64|    <nav class="nav-links" id="navLinks">
+    65|    </nav>
+    66|    <script src="/nav.js?v=22" defer></script>
+    67|    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+    68|      <span></span><span></span><span></span>
+    69|    </div>
+    70|  </div>
+    71|</header>
+    72|
+    73|<section class="sub-hero">
+    74|  <div class="sub-hero-bg">
+    75|    <img src="../generated/blog-cover-gerber-files.webp" alt="" loading="eager" width="1920" height="600">
+    76|  </div>
+    77|  <div class="sub-hero-overlay"></div>
+    78|  <div class="sub-hero-content">
+    79|    <div class="container">
+    80|      <p class="section-label reveal">Manufacturing Guide</p>
+    81|      <h1 class="reveal">How to Prepare PCB Gerber Files:<br><em>A Complete Checklist for First-Time Buyers</em></h1>
+    82|      <p class="reveal">The difference between boards that go into production today and boards that sit in engineering review for a week — it's almost always the Gerber package.</p>
+    83|    </div>
+    84|  </div>
+    85|</section>
+    86|
+    87|<article class="article reveal">
+    88|  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Gerber Files Guide</span></div>
+    89|
+    90|  <p>Every PCB order starts with the same question from your manufacturer: "Can you send the Gerber files?" And every week, roughly <strong>30–40% of first-time submissions</strong> at our factory require at least one clarification cycle — a missing solder mask layer, drill file format mismatch, or undefined board outline that adds 1–3 days before production can start. This isn't a reflection on the engineer's skill. It's a reflection on how poorly documented the Gerber submission process is across the industry.</p>
+    91|
+    92|  <p>This guide covers exactly what a complete Gerber package looks like, which format to use, and the 8-point checklist our CAM engineers run against every incoming order. If your files pass all 8 checks, your boards go into production the same day — no back-and-forth, no delay.</p>
+    93|
+    94|  <div class="highlight-box">
+    95|    <p><strong>Factory reality:</strong> Our CAM team processes approximately <strong>120 Gerber packages per week</strong> across PCB fabrication and assembly orders. The most common rejection reason — accounting for roughly 40% of engineering queries — is <strong>missing or incorrectly defined board outline</strong>. Second place: drill files that don't match the copper layer pad positions. Both are preventable with the checks below.</p>
+    96|  </div>
+    97|
+    98|  <h2>What Are Gerber Files — And Why They're Non-Negotiable</h2>
+    99|
+   100|  <p>Gerber files are the universal language of PCB manufacturing. Each file describes one physical layer of your board as a set of 2D vector images — copper traces on the top layer, solder mask openings, silkscreen markings, drill positions. When you send a Gerber package to a manufacturer, you're sending an unambiguous, machine-readable instruction set that drives every piece of equipment on the production floor: photoplotters for imaging, CNC drills for hole creation, AOI machines for inspection.</p>
+   101|
+   102|  <p>There is no alternative format that carries the same weight. PDFs and screenshots are for human review, not production. Native CAD files (Altium .PcbDoc, KiCad .kicad_pcb) are useful for DFM review but can't be loaded directly onto fabrication equipment — every machine reads Gerber. This is why <strong>every manufacturer, from prototype shops to high-volume facilities producing 80,000m² per month</strong>, requires Gerber as the primary data format.</p>
+   103|
+   104|  <img class="article-img" src="../generated/blog-gerber-files-copper.webp" alt="PCB copper layer macro showing trace routing" loading="lazy" style="max-width:80%">
+   105|
+   106|  <h2>The 8 Essential Gerber Layers Every Manufacturer Needs</h2>
+   107|
+   108|  <p>A complete Gerber package has 8 mandatory files (for a standard 2-layer board). Each additional layer — a 4-layer board, a 6-layer board — adds 2 more copper layers. Here's the full list:</p>
+   109|
+   110|  <div class="step-block">
+   111|    <div class="step-num">Layer 1</div>
+   112|    <h3>Top Copper (GTL / .GTL)</h3>
+   113|    <p>All traces, pads, and copper pours on the top side of the board. This is the file that defines what your circuit actually looks like. For a typical 2-layer board, this layer carries signal routing plus component pads. Errors here — unintended shorts, trace width violations below the manufacturer's minimum — are the most expensive to fix because they're often discovered after fabrication.</p>
+   114|  </div>
+   115|
+   116|  <div class="step-block">
+   117|    <div class="step-num">Layer 2</div>
+   118|    <h3>Bottom Copper (GBL / .GBL)</h3>
+   119|    <p>Mirror image of the top copper pattern, viewed from above (not mirrored in the file). For 4+ layer designs, internal layers follow the same convention: G1, G2, G3, etc. Internal layers typically carry power and ground planes with fewer signal traces.</p>
+   120|  </div>
+   121|
+   122|  <div class="step-block">
+   123|    <div class="step-num">Layer 3</div>
+   124|    <h3>Top Solder Mask (GTS / .GTS)</h3>
+   125|    <p>Defines where solder mask is <em>not</em> applied — i.e., the openings that expose copper pads for component soldering. A missing solder mask layer produces a board covered entirely in green (or your chosen color) with no exposed pads. The board is unassemblable. Mask expansion — the deliberate oversizing of openings beyond pad dimensions — is typically 0.05–0.1mm on each side and should be defined here or specified in your fabrication notes.</p>
+   126|  </div>
+   127|
+   128|  <div class="step-block">
+   129|    <div class="step-num">Layer 4</div>
+   130|    <h3>Bottom Solder Mask (GBS / .GBS)</h3>
+   131|    <p>Same function for the bottom side. If your board has no bottom-side components (single-sided assembly), this layer may be blank — but it must still be included as an empty file. Omitting the bottom mask layer creates ambiguity: is it intentional, or did the file get lost in export?</p>
+   132|  </div>
+   133|
+   134|  <div class="step-block">
+   135|    <div class="step-num">Layer 5</div>
+   136|    <h3>Top Silkscreen (GTO / .GTO)</h3>
+   137|    <p>Component outlines, reference designators (R1, C3, U2), polarity markers, and any text printed on the top side. Silkscreen clarity matters — text below 0.8mm height becomes illegible on standard white silkscreen. Our production standard ensures legibility down to 0.6mm line width for silkscreen features.</p>
+   138|  </div>
+   139|
+   140|  <div class="step-block">
+   141|    <div class="step-num">Layer 6</div>
+   142|    <h3>Bottom Silkscreen (GBO / .GBO)</h3>
+   143|    <p>Bottom-side markings. If your board has components on both sides, both silkscreen layers are required. Single-sided boards can omit this layer but, like the bottom mask, include an empty file to avoid ambiguity.</p>
+   144|  </div>
+   145|
+   146|  <div class="step-block">
+   147|    <div class="step-num">Layer 7</div>
+   148|    <h3>Board Outline (GKO / .GKO or .GML)</h3>
+   149|    <p>The single most commonly missing or incorrect layer. This file defines the physical perimeter of your PCB — where the router cuts. Without it, the manufacturer cannot panelize your board, cannot calculate material utilization, and cannot produce a finished board. The outline must be a closed polygon on its own dedicated layer. Do not draw the outline on a copper or silkscreen layer and assume the CAM engineer will extract it — they won't. They'll flag it as incomplete and send it back.</p>
+   150|  </div>
+   151|
+   152|  <div class="step-block">
+   153|    <div class="step-num">Layer 8</div>
+   154|    <h3>Drill File (Excellon format, .TXT or .DRL)</h3>
+   155|    <p>Technically not a Gerber file — it's Excellon format — but treated as part of the package. Contains the X/Y coordinates and diameter of every hole on the board: plated through-holes for component leads, non-plated mounting holes, and vias. A drill file with positions that don't align to pads on the copper layers is the second most common rejection reason. Our CAM team verifies drill-to-pad registration on every order before releasing to production — a check that catches roughly 15% of incoming packages.</p>
+   156|  </div>
+   157|
+   158|  <img class="article-img" src="../generated/blog-gerber-files-drill.webp" alt="CNC drilling machine creating micro-vias on PCB panel" loading="lazy" style="max-width:85%">
+   159|
+   160|  <h2>The 8-Point Pre-Submission Checklist</h2>
+   161|
+   162|  <p>Before you click "send" on that email or upload to your manufacturer's portal, run through this list. Our CAM engineers use these exact checks on every incoming order — passing them all means your package skips engineering review and goes straight to production planning.</p>
+   163|
+   164|  <div class="step-block">
+   165|    <div class="step-num">Check 1</div>
+   166|    <h3>All 8 layers present and named consistently</h3>
+   167|    <p>Count your files. A 2-layer board needs at minimum 8 files (7 Gerber + 1 drill). A 4-layer board needs 10 (9 Gerber + 1 drill). Every file must use a naming convention the manufacturer can parse — either the industry-standard extensions (.GTL, .GBL, .GTS, etc.) or a clear descriptive name with a README file explaining the mapping.</p>
+   168|  </div>
+   169|
+   170|  <div class="step-block">
+   171|    <div class="step-num">Check 2</div>
+   172|    <h3>Board outline is a closed polygon on its own dedicated layer</h3>
+   173|    <p>Open the board outline file in a Gerber viewer. Zoom in on the corners — are the lines meeting? Is the shape closed? A broken outline can't define a perimeter, and the router can't follow it. Also verify the outline file contains nothing except the outline — no copper traces, no silkscreen text, no drill symbols.</p>
+   174|  </div>
+   175|
+   176|  <div class="step-block">
+   177|    <div class="step-num">Check 3</div>
+   178|    <h3>Drill file positions match copper pad centers</h3>
+   179|    <p>Overlay the drill file on the top copper layer in your Gerber viewer. Every plated hole should sit centered on a copper pad. A 0.1mm offset is acceptable; a 0.5mm offset means your drill and copper layers use different origins. This happens more often than you'd think — typically when the CAD tool's drill export uses a different reference point than the Gerber export.</p>
+   180|  </div>
+   181|
+   182|  <div class="step-block">
+   183|    <div class="step-num">Check 4</div>
+   184|    <h3>Minimum trace width and spacing meet manufacturer capability</h3>
+   185|    <p>Measure your smallest trace width and smallest gap between traces. Our standard capability is <strong>3/3mil (0.075mm) trace/space</strong> — anything below that requires advanced processing and should be discussed before submission. If your design pushes these limits, note it explicitly in your fabrication drawing so the CAM team can apply the appropriate process controls.</p>
+   186|  </div>
+   187|
+   188|  <div class="step-block">
+   189|    <div class="step-num">Check 5</div>
+   190|    <h3>Solder mask expansion is defined and consistent</h3>
+   191|    <p>Every pad should have a mask opening that extends beyond the copper pad edge by 0.05–0.1mm per side. Too little expansion and solder mask can bleed onto the pad surface during application. Too much and adjacent pads' mask openings merge, exposing bare substrate between them. Both conditions cause assembly defects.</p>
+   192|  </div>
+   193|
+   194|  <div class="step-block">
+   195|    <div class="step-num">Check 6</div>
+   196|    <h3>Gerber format matches your manufacturer's requirements</h3>
+   197|    <p>RS-274X is the industry standard and universally accepted. Gerber X2 is newer and embeds layer type and function metadata directly in the file — it's preferred when available because it eliminates ambiguity about which file is which layer. RS-274D (the original 1980s format) is obsolete and should never be used for new designs. We accept RS-274X and Gerber X2; most manufacturers do the same.</p>
+   198|  </div>
+   199|
+   200|  <div class="step-block">
+   201|    <div class="step-num">Check 7</div>
+   202|    <h3>Fabrication notes are included (PDF or text file)</h3>
+   203|    <p>A fabrication drawing doesn't need to be elaborate, but it must specify: board material (e.g., FR-4, High-Tg FR-4 for lead-free assembly), finished copper weight (1oz is standard, 2oz for power boards), surface finish (ENIG, HASL, OSP), solder mask color, silkscreen color, and any special requirements like controlled impedance or <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 3</a> acceptance criteria. Without these specifications, the manufacturer defaults to their standard offering — which may not match your requirements. For a complete breakdown of material options, see our <a href="/blog/pcb-materials-guide.html">PCB materials selection guide</a> covering FR-4, High-Tg, Rogers, and metal-core substrates.</p>
+   204|  </div>
+   205|
+   206|  <div class="step-block">
+   207|    <div class="step-num">Check 8</div>
+   208|    <h3>Verify your files in a Gerber viewer — not your CAD tool</h3>
+   209|    <p>Your CAD tool shows you the design as you intended it. A Gerber viewer shows you exactly what the manufacturer will see. Free tools like gerbv, KiCad's Gerber Viewer, and online viewers (UCamco Reference Viewer, GerberLogix) all work. This is the single highest-ROI check: 10 minutes of Gerber review catches roughly 70% of the issues that would otherwise trigger a CAM hold. Look specifically for missing layers, misaligned drill positions, and trace-spacing violations near dense BGA areas.</p>
+   210|  </div>
+   211|
+   212|  <img class="article-img" src="../generated/blog-gerber-files-inspection.webp" alt="PCB quality inspection comparing board to design specification" loading="lazy" style="max-width:80%">
+   213|
+   214|  <h2>RS-274X vs Gerber X2: Which Format Should You Use?</h2>
+   215|
+   216|  <p>The short answer: <strong>use Gerber X2 if your CAD tool supports it.</strong> If not, RS-274X is perfectly fine and universally accepted.</p>
+   217|
+   218|  <p>The difference matters for one reason: <strong>eliminating ambiguity.</strong> An RS-274X file says "here is a set of shapes." A Gerber X2 file says "here is the top copper layer, these are its pad functions, and this is how it relates to the other layers in the package." The metadata is embedded in the file itself, not in a separate README or assumed from the file extension. For a 2-layer board with standard extensions, this doesn't change much. For an 8-layer board with blind and buried vias — where internal layer numbering can be ambiguous — Gerber X2 eliminates the most common source of layer mapping errors.</p>
+   219|
+   220|  <div class="highlight-box">
+   221|    <p><strong>Compatibility note:</strong> Every modern CAM system (Frontline Genesis, Ucamco uFlex, CAM350) reads Gerber X2. If your manufacturer claims they only accept RS-274X, they're running outdated software — and that's a red flag for their overall process capability. All manufacturers in our supply chain, including our own CAM station, process both formats without issue.</p>
+   222|  </div>
+   223|
+   224|  <h2>Common Gerber File Mistakes That Delay Production</h2>
+   225|
+   226|  <p>After processing over 6,000 Gerber packages annually, our CAM team has seen every possible mistake. These five account for roughly 85% of all engineering queries:</p>
+   227|
+   228|  <div class="step-block">
+   229|    <div class="step-num">Mistake 1</div>
+   230|    <h3>Board outline drawn on a copper or silkscreen layer</h3>
+   231|    <p>The designer draws the board perimeter on the top copper layer (or worse, the silkscreen layer) instead of exporting a dedicated outline. Result: the CAM engineer receives a set of files with no identifiable outline. They can extract it from copper — but this takes time, introduces interpretation risk, and generates an engineering hold. Always export the outline to its own dedicated mechanical layer.</p>
+   232|  </div>
+   233|
+   234|  <div class="step-block">
+   235|    <div class="step-num">Mistake 2</div>
+   236|    <h3>Drill file and Gerber layers use different origins</h3>
+   237|    <p>Your CAD tool exports Gerber files with origin at (0,0) — the bottom-left corner of the design. But the drill export defaults to a "relative" origin at the center of the board. The drill holes land in the wrong place when the CAM system loads both. Fix: set both exports to use the same absolute origin. In KiCad, it's "Use absolute origin" under drill file generation. In Altium, it's "Reference to absolute origin" in the Gerber and NC Drill setup dialogs.</p>
+   238|  </div>
+   239|
+   240|  <div class="step-block">
+   241|    <div class="step-num">Mistake 3</div>
+   242|    <h3>Missing internal plane layers on multilayer boards</h3>
+   243|    <p>A 4-layer board package arrives with only top and bottom copper files. The two internal layers (typically power and ground planes) are missing — usually because the designer exported "all visible layers" without realizing internal planes were hidden in the CAD view. Always export using the "plot all layers" or "all layers" option, not "visible layers."</p>
+   244|  </div>
+   245|
+   246|  <div class="step-block">
+   247|    <div class="step-num">Mistake 4</div>
+   248|    <h3>Trace widths below the manufacturer's minimum capability</h3>
+   249|    <p>Your design passes DRC in your CAD tool because your DRC rules are set to 4/4mil, but the manufacturer you've selected can only do 5/5mil. Or — more commonly — your design pushes 3/3mil in a dense BGA breakout area but the rest of the board is 6/6mil, and you didn't flag it. Always check your manufacturer's published <a href="/blog/pcb-cost-factors.html">capability specifications</a> before finalizing trace widths, and call out any areas that push the limits so the CAM team applies tighter process controls.</p>
+   250|  </div>
+   251|
+   252|  <div class="step-block">
+   253|    <div class="step-num">Mistake 5</div>
+   254|    <h3>No fabrication notes or specifications</h3>
+   255|    <p>The Gerber package arrives with perfect layer data but zero accompanying documentation: no material specification, no surface finish preference, no stackup requirements, no copper weight. The manufacturer has to email you to ask — adding a day of turnaround. A single-page fabrication drawing (PDF) with these specs avoids the entire back-and-forth. At minimum, include: material type, copper weight, surface finish, solder mask color, and any controlled impedance requirements with target values.</p>
+   256|  </div>
+   257|
+   258|  <img class="article-img" src="../generated/blog-gerber-files-stackup.webp" alt="Multilayer PCB cross-section showing copper layers" loading="lazy" style="max-width:85%">
+   259|
+   260|  <h2>How Huaxing PCBA Handles Your Gerber Files</h2>
+   261|
+   262|  <p>When your Gerber package arrives at our facility, it goes through a structured CAM workflow designed to catch issues before they reach production — not after:</p>
+   263|
+   264|  <ol>
+   265|    <li><strong>Automated pre-check (5 minutes):</strong> Our CAM system counts files, verifies extensions, and checks for the 8 mandatory layers. Missing layers trigger an immediate flag — our engineering team contacts you the same day, not 3 days later.</li>
+   266|    <li><strong>DFM analysis (15–30 minutes):</strong> The complete package runs through <a href="/blog/dfm-tips.html">design-for-manufacturability</a> software that checks trace/space against our 3/3mil minimum, verifies annular ring requirements for plated holes, and flags solder mask slivers or insufficient clearances. A DFM report is generated automatically and shared with you if issues are found. Once your design passes DFM, it's ready for <a href="/blog/pcb-assembly-process.html">full PCB assembly</a> — from solder paste printing through functional testing.</li>
+   267|    <li><strong>Impedance calculation (if required):</strong> For controlled impedance designs (±5% tolerance on our standard capability), our engineers model the stackup in Polar Si9000 using your specified target impedance and the actual material dielectric constants from our inventory. The resulting trace width adjustments are applied before panelization.</li>
+   268|    <li><strong>Panelization and tooling generation:</strong> Once the design passes all checks, it's panelized for our 600×800mm maximum panel size — optimizing material utilization and adding tooling strips, fiducials, and test coupons. The final production Gerber and drill data is then released to the fabrication floor.</li>
+   269|  </ol>
+   270|
+   271|  <div class="highlight-box">
+   272|    <p><strong>Turnaround commitment:</strong> For standard 2–8 layer designs with a clean Gerber package (all 8 checklist items pass), engineering review is completed within <strong>4 hours</strong> of submission during business hours. Production begins the same day. Our average CAM-to-production release time across all orders in Q2 2026 was 3.2 hours.</p>
+   273|  </div>
+   274|
+   275|  <p>The best way to ensure your order moves through this process without delays is simple: run the 8-point checklist before sending. It takes 10 minutes and eliminates the #1 cause of production delays — incomplete or incorrectly formatted Gerber data. If you're unsure about any aspect of your Gerber export, our engineering team provides a <strong>free DFM review</strong> before you commit to an order. Send your files and we'll tell you exactly what needs attention — no obligation, no pressure.</p>
+   276|
+   277|</article>
+   278|
+   279|
+   280|<section class="section" style="background:var(--bg-secondary)">
+   281|  <div class="container">
+   282|    <h2 style="font-weight:200;text-align:center;margin-bottom:var(--space-xl)">Related <em>Articles</em></h2>
+   283|    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)">
+   284|      <a href="/blog/heavy-copper-pcb.html" style="display:block;color:inherit;text-decoration:none">
+   285|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+   286|          <div style="padding:var(--space-lg)">
+   287|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
+   288|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Heavy Copper PCB Manufacturing — Design Rules, Thermal Management & 6oz Applications</h4>
+   289|          </div>
+   290|        </div>
+   291|      </a>
+   292|      <a href="/blog/rigid-flex-pcb.html" style="display:block;color:inherit;text-decoration:none">
+   293|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+   294|          <div style="padding:var(--space-lg)">
+   295|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
+   296|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Rigid-Flex PCB Manufacturing Guide — Design Rules, Materials & Cost Factors</h4>
+   297|          </div>
+   298|        </div>
+   299|      </a>
+   300|      <a href="/blog/pcb-assembly-process.html" style="display:block;color:inherit;text-decoration:none">
+   301|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+   302|          <div style="padding:var(--space-lg)">
+   303|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
+   304|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">PCB Assembly Process Step by Step: From Bare Board to Finished PCBA</h4>
+   305|          </div>
+   306|        </div>
+   307|      </a>
+   308|    </div>
+   309|    <style>@media(max-width:768px){.section div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}</style>
+   310|  </div>
+   311|</section>
+   312|
+   313|<section class="section" style="background:var(--bg-secondary)">
+   314|  <div class="container">
+   315|    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-turnkey.webp)">
+   316|      <h2>Start Your PCB Project</h2>
+   317|      <p>Send us your Gerber files and BOM. We will respond within 24 hours with a free DFM review and firm quotation — no commitment required.</p>
+   318|      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+   319|    </div>
+   320|  </div>
+   321|</section>
+   322|
+   323|
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+            <li><a href="/blog/dfm-tips.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Design for Manufacturability</a></li>
+            <li><a href="/blog/pcb-assembly-process.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Assembly Process Step by Step</a></li>
+            <li><a href="/blog/pcb-cost-factors.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Manufacturing Cost Drivers</a></li>
+            <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design Guide</a></li>
+            <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit Checklist</a></li>
+    </ul>
   </div>
-</header>
 
-<section class="sub-hero">
-  <div class="sub-hero-bg">
-    <img src="../generated/blog-cover-gerber-files.webp" alt="" loading="eager" width="1920" height="600">
-  </div>
-  <div class="sub-hero-overlay"></div>
-  <div class="sub-hero-content">
-    <div class="container">
-      <p class="section-label reveal">Manufacturing Guide</p>
-      <h1 class="reveal">How to Prepare PCB Gerber Files:<br><em>A Complete Checklist for First-Time Buyers</em></h1>
-      <p class="reveal">The difference between boards that go into production today and boards that sit in engineering review for a week — it's almost always the Gerber package.</p>
-    </div>
-  </div>
-</section>
-
-<article class="article reveal">
-  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Gerber Files Guide</span></div>
-
-  <p>Every PCB order starts with the same question from your manufacturer: "Can you send the Gerber files?" And every week, roughly <strong>30–40% of first-time submissions</strong> at our factory require at least one clarification cycle — a missing solder mask layer, drill file format mismatch, or undefined board outline that adds 1–3 days before production can start. This isn't a reflection on the engineer's skill. It's a reflection on how poorly documented the Gerber submission process is across the industry.</p>
-
-  <p>This guide covers exactly what a complete Gerber package looks like, which format to use, and the 8-point checklist our CAM engineers run against every incoming order. If your files pass all 8 checks, your boards go into production the same day — no back-and-forth, no delay.</p>
-
-  <div class="highlight-box">
-    <p><strong>Factory reality:</strong> Our CAM team processes approximately <strong>120 Gerber packages per week</strong> across PCB fabrication and assembly orders. The most common rejection reason — accounting for roughly 40% of engineering queries — is <strong>missing or incorrectly defined board outline</strong>. Second place: drill files that don't match the copper layer pad positions. Both are preventable with the checks below.</p>
-  </div>
-
-  <h2>What Are Gerber Files — And Why They're Non-Negotiable</h2>
-
-  <p>Gerber files are the universal language of PCB manufacturing. Each file describes one physical layer of your board as a set of 2D vector images — copper traces on the top layer, solder mask openings, silkscreen markings, drill positions. When you send a Gerber package to a manufacturer, you're sending an unambiguous, machine-readable instruction set that drives every piece of equipment on the production floor: photoplotters for imaging, CNC drills for hole creation, AOI machines for inspection.</p>
-
-  <p>There is no alternative format that carries the same weight. PDFs and screenshots are for human review, not production. Native CAD files (Altium .PcbDoc, KiCad .kicad_pcb) are useful for DFM review but can't be loaded directly onto fabrication equipment — every machine reads Gerber. This is why <strong>every manufacturer, from prototype shops to high-volume facilities producing 80,000m² per month</strong>, requires Gerber as the primary data format.</p>
-
-  <img class="article-img" src="../generated/blog-gerber-files-copper.webp" alt="PCB copper layer macro showing trace routing" loading="lazy" style="max-width:80%">
-
-  <h2>The 8 Essential Gerber Layers Every Manufacturer Needs</h2>
-
-  <p>A complete Gerber package has 8 mandatory files (for a standard 2-layer board). Each additional layer — a 4-layer board, a 6-layer board — adds 2 more copper layers. Here's the full list:</p>
-
-  <div class="step-block">
-    <div class="step-num">Layer 1</div>
-    <h3>Top Copper (GTL / .GTL)</h3>
-    <p>All traces, pads, and copper pours on the top side of the board. This is the file that defines what your circuit actually looks like. For a typical 2-layer board, this layer carries signal routing plus component pads. Errors here — unintended shorts, trace width violations below the manufacturer's minimum — are the most expensive to fix because they're often discovered after fabrication.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Layer 2</div>
-    <h3>Bottom Copper (GBL / .GBL)</h3>
-    <p>Mirror image of the top copper pattern, viewed from above (not mirrored in the file). For 4+ layer designs, internal layers follow the same convention: G1, G2, G3, etc. Internal layers typically carry power and ground planes with fewer signal traces.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Layer 3</div>
-    <h3>Top Solder Mask (GTS / .GTS)</h3>
-    <p>Defines where solder mask is <em>not</em> applied — i.e., the openings that expose copper pads for component soldering. A missing solder mask layer produces a board covered entirely in green (or your chosen color) with no exposed pads. The board is unassemblable. Mask expansion — the deliberate oversizing of openings beyond pad dimensions — is typically 0.05–0.1mm on each side and should be defined here or specified in your fabrication notes.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Layer 4</div>
-    <h3>Bottom Solder Mask (GBS / .GBS)</h3>
-    <p>Same function for the bottom side. If your board has no bottom-side components (single-sided assembly), this layer may be blank — but it must still be included as an empty file. Omitting the bottom mask layer creates ambiguity: is it intentional, or did the file get lost in export?</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Layer 5</div>
-    <h3>Top Silkscreen (GTO / .GTO)</h3>
-    <p>Component outlines, reference designators (R1, C3, U2), polarity markers, and any text printed on the top side. Silkscreen clarity matters — text below 0.8mm height becomes illegible on standard white silkscreen. Our production standard ensures legibility down to 0.6mm line width for silkscreen features.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Layer 6</div>
-    <h3>Bottom Silkscreen (GBO / .GBO)</h3>
-    <p>Bottom-side markings. If your board has components on both sides, both silkscreen layers are required. Single-sided boards can omit this layer but, like the bottom mask, include an empty file to avoid ambiguity.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Layer 7</div>
-    <h3>Board Outline (GKO / .GKO or .GML)</h3>
-    <p>The single most commonly missing or incorrect layer. This file defines the physical perimeter of your PCB — where the router cuts. Without it, the manufacturer cannot panelize your board, cannot calculate material utilization, and cannot produce a finished board. The outline must be a closed polygon on its own dedicated layer. Do not draw the outline on a copper or silkscreen layer and assume the CAM engineer will extract it — they won't. They'll flag it as incomplete and send it back.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Layer 8</div>
-    <h3>Drill File (Excellon format, .TXT or .DRL)</h3>
-    <p>Technically not a Gerber file — it's Excellon format — but treated as part of the package. Contains the X/Y coordinates and diameter of every hole on the board: plated through-holes for component leads, non-plated mounting holes, and vias. A drill file with positions that don't align to pads on the copper layers is the second most common rejection reason. Our CAM team verifies drill-to-pad registration on every order before releasing to production — a check that catches roughly 15% of incoming packages.</p>
-  </div>
-
-  <img class="article-img" src="../generated/blog-gerber-files-drill.webp" alt="CNC drilling machine creating micro-vias on PCB panel" loading="lazy" style="max-width:85%">
-
-  <h2>The 8-Point Pre-Submission Checklist</h2>
-
-  <p>Before you click "send" on that email or upload to your manufacturer's portal, run through this list. Our CAM engineers use these exact checks on every incoming order — passing them all means your package skips engineering review and goes straight to production planning.</p>
-
-  <div class="step-block">
-    <div class="step-num">Check 1</div>
-    <h3>All 8 layers present and named consistently</h3>
-    <p>Count your files. A 2-layer board needs at minimum 8 files (7 Gerber + 1 drill). A 4-layer board needs 10 (9 Gerber + 1 drill). Every file must use a naming convention the manufacturer can parse — either the industry-standard extensions (.GTL, .GBL, .GTS, etc.) or a clear descriptive name with a README file explaining the mapping.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Check 2</div>
-    <h3>Board outline is a closed polygon on its own dedicated layer</h3>
-    <p>Open the board outline file in a Gerber viewer. Zoom in on the corners — are the lines meeting? Is the shape closed? A broken outline can't define a perimeter, and the router can't follow it. Also verify the outline file contains nothing except the outline — no copper traces, no silkscreen text, no drill symbols.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Check 3</div>
-    <h3>Drill file positions match copper pad centers</h3>
-    <p>Overlay the drill file on the top copper layer in your Gerber viewer. Every plated hole should sit centered on a copper pad. A 0.1mm offset is acceptable; a 0.5mm offset means your drill and copper layers use different origins. This happens more often than you'd think — typically when the CAD tool's drill export uses a different reference point than the Gerber export.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Check 4</div>
-    <h3>Minimum trace width and spacing meet manufacturer capability</h3>
-    <p>Measure your smallest trace width and smallest gap between traces. Our standard capability is <strong>3/3mil (0.075mm) trace/space</strong> — anything below that requires advanced processing and should be discussed before submission. If your design pushes these limits, note it explicitly in your fabrication drawing so the CAM team can apply the appropriate process controls.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Check 5</div>
-    <h3>Solder mask expansion is defined and consistent</h3>
-    <p>Every pad should have a mask opening that extends beyond the copper pad edge by 0.05–0.1mm per side. Too little expansion and solder mask can bleed onto the pad surface during application. Too much and adjacent pads' mask openings merge, exposing bare substrate between them. Both conditions cause assembly defects.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Check 6</div>
-    <h3>Gerber format matches your manufacturer's requirements</h3>
-    <p>RS-274X is the industry standard and universally accepted. Gerber X2 is newer and embeds layer type and function metadata directly in the file — it's preferred when available because it eliminates ambiguity about which file is which layer. RS-274D (the original 1980s format) is obsolete and should never be used for new designs. We accept RS-274X and Gerber X2; most manufacturers do the same.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Check 7</div>
-    <h3>Fabrication notes are included (PDF or text file)</h3>
-    <p>A fabrication drawing doesn't need to be elaborate, but it must specify: board material (e.g., FR-4, High-Tg FR-4 for lead-free assembly), finished copper weight (1oz is standard, 2oz for power boards), surface finish (ENIG, HASL, OSP), solder mask color, silkscreen color, and any special requirements like controlled impedance or <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 3</a> acceptance criteria. Without these specifications, the manufacturer defaults to their standard offering — which may not match your requirements. For a complete breakdown of material options, see our <a href="/blog/pcb-materials-guide.html">PCB materials selection guide</a> covering FR-4, High-Tg, Rogers, and metal-core substrates.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Check 8</div>
-    <h3>Verify your files in a Gerber viewer — not your CAD tool</h3>
-    <p>Your CAD tool shows you the design as you intended it. A Gerber viewer shows you exactly what the manufacturer will see. Free tools like gerbv, KiCad's Gerber Viewer, and online viewers (UCamco Reference Viewer, GerberLogix) all work. This is the single highest-ROI check: 10 minutes of Gerber review catches roughly 70% of the issues that would otherwise trigger a CAM hold. Look specifically for missing layers, misaligned drill positions, and trace-spacing violations near dense BGA areas.</p>
-  </div>
-
-  <img class="article-img" src="../generated/blog-gerber-files-inspection.webp" alt="PCB quality inspection comparing board to design specification" loading="lazy" style="max-width:80%">
-
-  <h2>RS-274X vs Gerber X2: Which Format Should You Use?</h2>
-
-  <p>The short answer: <strong>use Gerber X2 if your CAD tool supports it.</strong> If not, RS-274X is perfectly fine and universally accepted.</p>
-
-  <p>The difference matters for one reason: <strong>eliminating ambiguity.</strong> An RS-274X file says "here is a set of shapes." A Gerber X2 file says "here is the top copper layer, these are its pad functions, and this is how it relates to the other layers in the package." The metadata is embedded in the file itself, not in a separate README or assumed from the file extension. For a 2-layer board with standard extensions, this doesn't change much. For an 8-layer board with blind and buried vias — where internal layer numbering can be ambiguous — Gerber X2 eliminates the most common source of layer mapping errors.</p>
-
-  <div class="highlight-box">
-    <p><strong>Compatibility note:</strong> Every modern CAM system (Frontline Genesis, Ucamco uFlex, CAM350) reads Gerber X2. If your manufacturer claims they only accept RS-274X, they're running outdated software — and that's a red flag for their overall process capability. All manufacturers in our supply chain, including our own CAM station, process both formats without issue.</p>
-  </div>
-
-  <h2>Common Gerber File Mistakes That Delay Production</h2>
-
-  <p>After processing over 6,000 Gerber packages annually, our CAM team has seen every possible mistake. These five account for roughly 85% of all engineering queries:</p>
-
-  <div class="step-block">
-    <div class="step-num">Mistake 1</div>
-    <h3>Board outline drawn on a copper or silkscreen layer</h3>
-    <p>The designer draws the board perimeter on the top copper layer (or worse, the silkscreen layer) instead of exporting a dedicated outline. Result: the CAM engineer receives a set of files with no identifiable outline. They can extract it from copper — but this takes time, introduces interpretation risk, and generates an engineering hold. Always export the outline to its own dedicated mechanical layer.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Mistake 2</div>
-    <h3>Drill file and Gerber layers use different origins</h3>
-    <p>Your CAD tool exports Gerber files with origin at (0,0) — the bottom-left corner of the design. But the drill export defaults to a "relative" origin at the center of the board. The drill holes land in the wrong place when the CAM system loads both. Fix: set both exports to use the same absolute origin. In KiCad, it's "Use absolute origin" under drill file generation. In Altium, it's "Reference to absolute origin" in the Gerber and NC Drill setup dialogs.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Mistake 3</div>
-    <h3>Missing internal plane layers on multilayer boards</h3>
-    <p>A 4-layer board package arrives with only top and bottom copper files. The two internal layers (typically power and ground planes) are missing — usually because the designer exported "all visible layers" without realizing internal planes were hidden in the CAD view. Always export using the "plot all layers" or "all layers" option, not "visible layers."</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Mistake 4</div>
-    <h3>Trace widths below the manufacturer's minimum capability</h3>
-    <p>Your design passes DRC in your CAD tool because your DRC rules are set to 4/4mil, but the manufacturer you've selected can only do 5/5mil. Or — more commonly — your design pushes 3/3mil in a dense BGA breakout area but the rest of the board is 6/6mil, and you didn't flag it. Always check your manufacturer's published <a href="/blog/pcb-cost-factors.html">capability specifications</a> before finalizing trace widths, and call out any areas that push the limits so the CAM team applies tighter process controls.</p>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">Mistake 5</div>
-    <h3>No fabrication notes or specifications</h3>
-    <p>The Gerber package arrives with perfect layer data but zero accompanying documentation: no material specification, no surface finish preference, no stackup requirements, no copper weight. The manufacturer has to email you to ask — adding a day of turnaround. A single-page fabrication drawing (PDF) with these specs avoids the entire back-and-forth. At minimum, include: material type, copper weight, surface finish, solder mask color, and any controlled impedance requirements with target values.</p>
-  </div>
-
-  <img class="article-img" src="../generated/blog-gerber-files-stackup.webp" alt="Multilayer PCB cross-section showing copper layers" loading="lazy" style="max-width:85%">
-
-  <h2>How Huaxing PCBA Handles Your Gerber Files</h2>
-
-  <p>When your Gerber package arrives at our facility, it goes through a structured CAM workflow designed to catch issues before they reach production — not after:</p>
-
-  <ol>
-    <li><strong>Automated pre-check (5 minutes):</strong> Our CAM system counts files, verifies extensions, and checks for the 8 mandatory layers. Missing layers trigger an immediate flag — our engineering team contacts you the same day, not 3 days later.</li>
-    <li><strong>DFM analysis (15–30 minutes):</strong> The complete package runs through <a href="/blog/dfm-tips.html">design-for-manufacturability</a> software that checks trace/space against our 3/3mil minimum, verifies annular ring requirements for plated holes, and flags solder mask slivers or insufficient clearances. A DFM report is generated automatically and shared with you if issues are found. Once your design passes DFM, it's ready for <a href="/blog/pcb-assembly-process.html">full PCB assembly</a> — from solder paste printing through functional testing.</li>
-    <li><strong>Impedance calculation (if required):</strong> For controlled impedance designs (±5% tolerance on our standard capability), our engineers model the stackup in Polar Si9000 using your specified target impedance and the actual material dielectric constants from our inventory. The resulting trace width adjustments are applied before panelization.</li>
-    <li><strong>Panelization and tooling generation:</strong> Once the design passes all checks, it's panelized for our 600×800mm maximum panel size — optimizing material utilization and adding tooling strips, fiducials, and test coupons. The final production Gerber and drill data is then released to the fabrication floor.</li>
-  </ol>
-
-  <div class="highlight-box">
-    <p><strong>Turnaround commitment:</strong> For standard 2–8 layer designs with a clean Gerber package (all 8 checklist items pass), engineering review is completed within <strong>4 hours</strong> of submission during business hours. Production begins the same day. Our average CAM-to-production release time across all orders in Q2 2026 was 3.2 hours.</p>
-  </div>
-
-  <p>The best way to ensure your order moves through this process without delays is simple: run the 8-point checklist before sending. It takes 10 minutes and eliminates the #1 cause of production delays — incomplete or incorrectly formatted Gerber data. If you're unsure about any aspect of your Gerber export, our engineering team provides a <strong>free DFM review</strong> before you commit to an order. Send your files and we'll tell you exactly what needs attention — no obligation, no pressure.</p>
-
-</article>
-
-
-<section class="section" style="background:var(--bg-secondary)">
-  <div class="container">
-    <h2 style="font-weight:200;text-align:center;margin-bottom:var(--space-xl)">Related <em>Articles</em></h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)">
-      <a href="/blog/heavy-copper-pcb.html" style="display:block;color:inherit;text-decoration:none">
-        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-          <div style="padding:var(--space-lg)">
-            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
-            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Heavy Copper PCB Manufacturing — Design Rules, Thermal Management & 6oz Applications</h4>
-          </div>
-        </div>
-      </a>
-      <a href="/blog/rigid-flex-pcb.html" style="display:block;color:inherit;text-decoration:none">
-        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-          <div style="padding:var(--space-lg)">
-            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
-            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Rigid-Flex PCB Manufacturing Guide — Design Rules, Materials & Cost Factors</h4>
-          </div>
-        </div>
-      </a>
-      <a href="/blog/pcb-assembly-process.html" style="display:block;color:inherit;text-decoration:none">
-        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-          <div style="padding:var(--space-lg)">
-            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">manufacturing</div>
-            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">PCB Assembly Process Step by Step: From Bare Board to Finished PCBA</h4>
-          </div>
-        </div>
-      </a>
-    </div>
-    <style>@media(max-width:768px){.section div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}</style>
-  </div>
-</section>
-
-<section class="section" style="background:var(--bg-secondary)">
-  <div class="container">
-    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-turnkey.webp)">
-      <h2>Start Your PCB Project</h2>
-      <p>Send us your Gerber files and BOM. We will respond within 24 hours with a free DFM review and firm quotation — no commitment required.</p>
-      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
-    </div>
-  </div>
-</section>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
-      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
-      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
-    </div>
-    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
-  </div>
-</footer>
-
-<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-dialog">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div class="modal-image-panel">
-      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
-      <div class="modal-image-overlay"></div>
-      <div class="modal-image-top">
-        <h2 class="mi-heading">Start Your Project</h2>
-        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
-      </div>
-      <div class="modal-image-text">
-        <div class="mi-label">HUAXING PCBA</div>
-        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
-      </div>
-    </div>
-    <div class="modal-form-panel">
-      <form onsubmit="return handleInquiry(event)" novalidate>
-        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
-        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
-        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
-        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script src="../reveal.js"></script>
-<script>
-function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-</script>
-<script src="../inquiry-handler.js"></script></body>
-</html>
+   324|  <div class="container">
+   325|    <div class="footer-grid">
+   326|      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+   327|      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+   328|      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+   329|      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+   330|    </div>
+   331|    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+   332|  </div>
+   333|</footer>
+   334|
+   335|<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+   336|  <div class="modal-dialog">
+   337|    <button class="modal-close" onclick="closeModal()">&times;</button>
+   338|    <div class="modal-image-panel">
+   339|      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+   340|      <div class="modal-image-overlay"></div>
+   341|      <div class="modal-image-top">
+   342|        <h2 class="mi-heading">Start Your Project</h2>
+   343|        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+   344|      </div>
+   345|      <div class="modal-image-text">
+   346|        <div class="mi-label">HUAXING PCBA</div>
+   347|        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+   348|      </div>
+   349|    </div>
+   350|    <div class="modal-form-panel">
+   351|      <form onsubmit="return handleInquiry(event)" novalidate>
+   352|        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+   353|        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+   354|        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+   355|        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+   356|        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+   357|      </form>
+   358|    </div>
+   359|  </div>
+   360|</div>
+   361|
+   362|<script src="../reveal.js"></script>
+   363|<script>
+   364|function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+   365|function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+   366|</script>
+   367|<script src="../inquiry-handler.js"></script></body>
+   368|</html>

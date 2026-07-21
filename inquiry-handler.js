@@ -23,9 +23,7 @@ async function handleInquiry(event) {
     });
     const result = await res.json();
     if (result.success) {
-      alert('Thank you! Your inquiry has been received. We will respond within 24 hours.');
-      form.reset();
-      if (typeof closeModal === 'function') closeModal();
+      window.location.href = '/thank-you.html';
     } else {
       alert(result.message || 'Submission failed. Please try again.');
     }
