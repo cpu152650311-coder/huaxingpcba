@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="stylesheet" href="../design-tokens.css?v=24">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -54,8 +54,10 @@
 .method-card:hover::before{opacity:1}
 .method-card.featured{border-color:var(--accent-25)}
 .method-card.featured::before{opacity:1}
-.method-card .mc-icon{width:52px;height:52px;border-radius:50%;background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-lg)}
-.method-card .mc-icon svg{width:24px;height:24px;color:var(--accent)}
+.method-card .mc-icon{width:52px;height:52px;border-radius:50%;background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-lg);transition:background .3s}
+.method-card:hover .mc-icon{background:rgba(200,150,62,.18)}
+.method-card .mc-icon svg{width:24px;height:24px;color:var(--accent);transition:color .3s,filter .3s}
+.method-card:hover .mc-icon svg{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
 .method-card .mc-speed{font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace;margin-bottom:var(--space-xs)}
 .method-card h3{font-size:var(--text-xl);font-weight:300;color:var(--text-primary);margin:0 0 var(--space-sm)}
 .method-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
@@ -69,21 +71,27 @@
 
 /* Region grid */
 .region-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg)}
-.region-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);text-align:center;transition:border-color .3s}
-.region-card:hover{border-color:var(--accent-subtle)}
-.region-card h4{font-size:var(--text-base);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm)}
+.region-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);text-align:center;transition:border-color .3s,transform .3s,box-shadow .3s}
+.region-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.region-card .rc-icon{display:inline-block;color:var(--accent);margin-bottom:var(--space-xs);transition:color .3s,filter .3s;line-height:1}
+.region-card:hover .rc-icon{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
+.region-card h4{font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-sm);transition:color .3s}
+.region-card:hover h4{color:#fff}
 .region-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.7;margin:0}
 
 /* Packaging features */
 .pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-sm)}
-.pkg-item{text-align:center;padding:var(--space-lg) var(--space-sm)}
-.pkg-item svg{width:28px;height:28px;color:var(--accent);margin-bottom:var(--space-sm)}
+.pkg-item{text-align:center;padding:var(--space-lg) var(--space-sm);transition:transform .3s}
+.pkg-item:hover{transform:translateY(-2px)}
+.pkg-item svg{width:28px;height:28px;color:var(--accent);margin-bottom:var(--space-sm);transition:color .3s,filter .3s}
+.pkg-item:hover svg{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
 .pkg-item h4{font-size:var(--text-sm);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)}
 .pkg-item p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
 
 /* Incoterms */
 .terms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-lg)}
-.term-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl)}
+.term-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);transition:border-color .3s,transform .3s,box-shadow .3s}
+.term-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
 .term-card h4{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm)}
 .term-card .tc-desc{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.7}
 
@@ -197,19 +205,23 @@
     <h2 class="reveal" style="text-align:center;font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)">Serving <em>30+ Countries</em></h2>
     <div class="region-grid">
       <div class="region-card reveal">
-        <h4>🇺🇸 North America</h4>
+        <div class="rc-icon"><svg width="24" height="24"><use href="#icon-globe"/></svg></div>
+        <h4>North America</h4>
         <p>USA, Canada, Mexico<br>DHL/FedEx 3–5 days<br>Sea freight 25–30 days<br>DDP available</p>
       </div>
       <div class="region-card reveal">
-        <h4>🇪🇺 Europe</h4>
+        <div class="rc-icon"><svg width="24" height="24"><use href="#icon-globe"/></svg></div>
+        <h4>Europe</h4>
         <p>Germany, UK, France, Netherlands, Sweden, Denmark, Italy, Spain, Poland, Czech Republic<br>Express 3–5 days · Rail 15–20 days</p>
       </div>
       <div class="region-card reveal">
-        <h4>🌏 Asia-Pacific</h4>
+        <div class="rc-icon"><svg width="24" height="24"><use href="#icon-globe"/></svg></div>
+        <h4>Asia-Pacific</h4>
         <p>Japan, South Korea, Singapore, Australia, New Zealand, Taiwan, Thailand, Vietnam, Malaysia<br>Express 2–4 days</p>
       </div>
       <div class="region-card reveal">
-        <h4>🌍 Middle East & Others</h4>
+        <div class="rc-icon"><svg width="24" height="24"><use href="#icon-globe"/></svg></div>
+        <h4>Middle East &amp; Others</h4>
         <p>Israel, UAE, Saudi Arabia, Brazil, South Africa, Turkey<br>Express 4–6 days<br>Customs support included</p>
       </div>
     </div>

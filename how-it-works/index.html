@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="stylesheet" href="../design-tokens.css?v=24">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -53,9 +53,12 @@
 .files-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md)}
 .file-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;transition:all .25s;position:relative;overflow:hidden}
 .file-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-25),transparent);opacity:0;transition:opacity .25s}
-.file-card:hover{border-color:var(--accent-25);transform:translateY(-2px)}
+.file-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
 .file-card:hover::before{opacity:1}
-.file-card .fc-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--accent-subtle);color:var(--accent);margin:0 auto var(--space-md)}
+.file-card .fc-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--accent-subtle);color:var(--accent);margin:0 auto var(--space-md);transition:background .3s}
+.file-card .fc-icon svg{transition:color .3s,filter .3s}
+.file-card:hover .fc-icon{background:rgba(200,150,62,.18)}
+.file-card:hover .fc-icon svg{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
 .file-card h4{font-size:var(--text-base);font-weight:300;margin-bottom:var(--space-xs)}
 .file-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6}
 

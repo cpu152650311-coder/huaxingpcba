@@ -384,7 +384,7 @@ h6{font-size:var(--text-lg)}
   transition:all var(--duration-slow) var(--ease);
   position:relative;overflow:hidden;
 }
-.card:hover{border-color:var(--accent-25);transform:translateY(-2px)}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
 .card::before{
   content:'';position:absolute;top:0;left:0;right:0;
   height:1px;
@@ -398,8 +398,11 @@ h6{font-size:var(--text-lg)}
   width:48px;height:48px;display:flex;align-items:center;justify-content:center;
   border-radius:var(--radius-md);
   background:var(--accent-subtle);color:var(--accent);
-  margin-bottom:var(--space-md);
+  margin-bottom:var(--space-md);transition:background .3s;
 }
+.card-icon svg{transition:color .3s,filter .3s}
+.card:hover .card-icon{background:rgba(200,150,62,.18)}
+.card:hover .card-icon svg{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
 .card h3{font-size:var(--text-xl);font-weight:300;margin-bottom:var(--space-sm)}
 .card p{color:var(--text-secondary);font-size:var(--text-sm);font-weight:300}
 .card-img{

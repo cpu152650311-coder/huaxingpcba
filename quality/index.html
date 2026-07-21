@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="stylesheet" href="../design-tokens.css?v=24">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -56,10 +56,13 @@
 /* Cert badges */
 .cert-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-lg)}
 .cert-card{text-align:center;padding:var(--space-xl) var(--space-md);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color .3s}
-.cert-card:hover{border-color:var(--accent-subtle)}
+.cert-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.cert-card:hover .cert-icon{background:rgba(200,150,62,.18)}
+.cert-card:hover .cert-icon svg{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
+.cert-card:hover h4{color:#fff}
 .cert-card .cert-icon{width:48px;height:48px;margin:0 auto var(--space-md);border-radius:50%;background:var(--accent-subtle);display:flex;align-items:center;justify-content:center}
-.cert-card .cert-icon svg{width:24px;height:24px;color:var(--accent)}
-.cert-card h4{font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)}
+.cert-card .cert-icon svg{width:24px;height:24px;color:var(--accent);transition:color .3s,filter .3s}
+.cert-card h4{font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs);transition:color .3s}
 .cert-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
 
 /* QC process flow */
@@ -74,7 +77,7 @@
 /* Test methods grid */
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
 .test-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);transition:border-color .3s}
-.test-card:hover{border-color:var(--accent-subtle)}
+.test-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
 .test-card h4{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm)}
 .test-card .tc-meta{font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-sm)}
 .test-card p{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.7;margin:0}

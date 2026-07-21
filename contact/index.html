@@ -11,7 +11,7 @@
 <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://huaxingpcba.com/contact/">
 <link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="stylesheet" href="../design-tokens.css?v=24">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -34,7 +34,10 @@
   .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start}
   .contact-info{padding:var(--space-xl) 0}
   .contact-info-item{display:flex;gap:var(--space-md);align-items:flex-start;padding:var(--space-md) 0;border-bottom:1px solid var(--border)}
-  .contact-info-item .ci-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);border-radius:var(--radius-md);color:var(--accent);flex-shrink:0}
+  .contact-info-item .ci-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--accent-subtle);border-radius:var(--radius-md);color:var(--accent);flex-shrink:0;transition:background .3s}
+  .contact-info-item .ci-icon svg{transition:color .3s,filter .3s}
+  .contact-info-item:hover .ci-icon{background:rgba(200,150,62,.18)}
+  .contact-info-item:hover .ci-icon svg{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
   .contact-info-item h4{font-size:var(--text-sm);font-weight:400;margin-bottom:2px}
   .contact-info-item p{font-size:var(--text-sm);color:var(--text-secondary)}
   @media(max-width:768px){.contact-layout{grid-template-columns:1fr}}
