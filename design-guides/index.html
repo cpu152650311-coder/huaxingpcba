@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Design Guides — DFM Tips, File Prep, Material Selection | Huaxing PCBA</title>
+<meta name="description" content="Free PCB design guides and resources: DFM tips, Gerber file preparation, material selection, layer stackup, impedance control, IPC standards. From Huaxing PCBA engineers.">
+<meta property="og:title" content="PCB Design Guides — DFM Tips, File Prep, Material Selection | Huaxing PCBA">
+<meta property="og:description" content="Free PCB design resources: DFM checklists, Gerber export guides, material selection, stackup design, IPC standards explained.">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="canonical" href="https://huaxingpcba.com/design-guides/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "PCB Design Guides",
+  "description": "Free PCB design guides: DFM tips, Gerber file preparation, material selection, stackup design, IPC standards.",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Design Guides", "item": "https://huaxingpcba.com/design-guides/"}
+  ]
+}
+</script>
+<style>
+.sub-hero{position:relative;min-height:45vh;display:flex;align-items:center;overflow:hidden}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3) saturate(0.5)}
+.sub-hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,150,62,0.1) 0%,transparent 60%);z-index:1}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+
+/* Guide category */
+.guide-section{margin-bottom:var(--space-2xl)}
+.guide-section h2{font-size:var(--text-2xl);font-weight:200;margin:0 0 var(--space-md);padding-bottom:var(--space-sm);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:var(--space-sm)}
+.guide-section h2 svg{color:var(--accent);flex-shrink:0}
+
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md)}
+.guide-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);transition:border-color .3s,transform .3s;text-decoration:none;display:block}
+.guide-card:hover{border-color:var(--accent-subtle);transform:translateY(-2px)}
+.guide-card .gc-tag{display:inline-block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:var(--space-sm)}
+.guide-card h4{font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs);line-height:1.4}
+.guide-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+@media(max-width:768px){
+  .guide-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=17" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/sub-hero-design-guides.webp" alt="PCB design blueprints and engineering documents" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Knowledge Base</p>
+      <h1 class="reveal">PCB <em>Design Guides</em></h1>
+      <p class="reveal">Free resources from our engineering team: DFM best practices, file preparation, material selection, stackup design, and more.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding:var(--space-3xl) 0">
+  <div class="container" style="max-width:1100px">
+
+    <!-- Getting Started -->
+    <div class="guide-section reveal">
+      <h2><svg width="22" height="22"><use href="#icon-file"/></svg> Getting Started — File Preparation</h2>
+      <div class="guide-grid">
+        <a href="/blog/gerber-files-guide.html" class="guide-card">
+          <span class="gc-tag">Essential</span>
+          <h4>Gerber Files: What They Are & How to Generate Them</h4>
+          <p>Complete guide to generating correct Gerber RS-274X files from Altium, Eagle, KiCad, OrCAD, and EasyEDA. Layer-by-layer checklist.</p>
+        </a>
+        <a href="/blog/dfm-tips.html" class="guide-card">
+          <span class="gc-tag">Must-Read</span>
+          <h4>DFM Tips: Design for Manufacturability Checklist</h4>
+          <p>25-point DFM checklist covering trace/space, annular rings, solder mask, silkscreen, and drill specifications. Avoid the most common CAM rejections.</p>
+        </a>
+        <a href="/blog/pcb-assembly-process.html" class="guide-card">
+          <span class="gc-tag">Overview</span>
+          <h4>PCB Assembly Process: From Files to Finished Board</h4>
+          <p>Step-by-step walkthrough of the SMT and through-hole assembly process. Understand what happens after you submit your files.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Materials & Stackup -->
+    <div class="guide-section reveal">
+      <h2><svg width="22" height="22"><use href="#icon-layers"/></svg> Materials & Layer Stackup</h2>
+      <div class="guide-grid">
+        <a href="/blog/pcb-materials-guide.html" class="guide-card">
+          <span class="gc-tag">Reference</span>
+          <h4>PCB Materials Guide: FR-4, Rogers, Polyimide & More</h4>
+          <p>Comprehensive comparison of PCB substrate materials — electrical properties, thermal performance, cost, and application suitability.</p>
+        </a>
+        <a href="/blog/impedance-control.html" class="guide-card">
+          <span class="gc-tag">Technical</span>
+          <h4>Impedance Control: Design Rules for ±5% Tolerance</h4>
+          <p>How to design controlled-impedance traces for 50Ω single-ended and 90Ω/100Ω differential pairs. Stackup design considerations.</p>
+        </a>
+        <a href="/blog/hdi-technology.html" class="guide-card">
+          <span class="gc-tag">Advanced</span>
+          <h4>HDI Technology: Microvias, Any-Layer, and Via-in-Pad</h4>
+          <p>When and how to use HDI design techniques. Via types compared: through-hole, blind, buried, microvia, stacked, staggered.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Advanced Design -->
+    <div class="guide-section reveal">
+      <h2><svg width="22" height="22"><use href="#icon-cpu"/></svg> Advanced PCB Design</h2>
+      <div class="guide-grid">
+        <a href="/blog/rf-pcb-design-manufacturing.html" class="guide-card">
+          <span class="gc-tag">RF/Microwave</span>
+          <h4>RF PCB Design & Manufacturing Guide</h4>
+          <p>Material selection, impedance tolerance, insertion loss management, and manufacturability considerations for RF and microwave PCBs.</p>
+        </a>
+        <a href="/blog/power-electronics-pcb.html" class="guide-card">
+          <span class="gc-tag">Power</span>
+          <h4>Power Electronics PCB: Thermal Design & Heavy Copper</h4>
+          <p>Designing PCBs for high-current applications. Copper weight selection, thermal via arrays, creepage and clearance per IPC-2221.</p>
+        </a>
+        <a href="/blog/flex-pcb-design-manufacturing.html" class="guide-card">
+          <span class="gc-tag">Flex</span>
+          <h4>Flex PCB Design & Manufacturing Guide</h4>
+          <p>Bend radius calculations, stiffener design, coverlay vs. solder mask, and dynamic vs. static flex applications.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quality & Standards -->
+    <div class="guide-section reveal">
+      <h2><svg width="22" height="22"><use href="#icon-shield"/></svg> Quality Standards & Compliance</h2>
+      <div class="guide-grid">
+        <a href="/blog/ipc-class-2-vs-class-3.html" class="guide-card">
+          <span class="gc-tag">Essential</span>
+          <h4>IPC Class 2 vs. Class 3: What's the Difference?</h4>
+          <p>Detailed comparison of acceptance criteria, when to specify Class 3, and the cost/quality tradeoffs for your application.</p>
+        </a>
+        <a href="/blog/pcb-certifications-compliance.html" class="guide-card">
+          <span class="gc-tag">Reference</span>
+          <h4>PCB Certifications & Compliance: ISO, UL, IATF, RoHS</h4>
+          <p>What each certification means, which ones matter for your industry, and how to verify your supplier's credentials.</p>
+        </a>
+        <a href="/blog/pcb-testing-methods.html" class="guide-card">
+          <span class="gc-tag">Technical</span>
+          <h4>PCB Testing Methods: AOI, X-Ray, Flying Probe, ICT, FCT</h4>
+          <p>Overview of every testing method we use. What each one catches, why it matters, and which tests to specify for your order.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Cost & Sourcing -->
+    <div class="guide-section reveal">
+      <h2><svg width="22" height="22"><use href="#icon-dollar"/></svg> Cost Optimization & Sourcing</h2>
+      <div class="guide-grid">
+        <a href="/blog/pcb-cost-factors.html" class="guide-card">
+          <span class="gc-tag">Popular</span>
+          <h4>PCB Cost Factors: What Drives Pricing and How to Optimize</h4>
+          <p>Understand how layer count, material, surface finish, quantity, and lead time affect your PCB quote. Practical cost-saving tips.</p>
+        </a>
+        <a href="/blog/pcb-supplier-audit.html" class="guide-card">
+          <span class="gc-tag">Guide</span>
+          <h4>PCB Supplier Audit Checklist: 20 Questions to Ask</h4>
+          <p>How to evaluate a PCB manufacturer before placing your first order. Facility, equipment, certifications, and quality system questions.</p>
+        </a>
+        <a href="/blog/prototype-vs-production.html" class="guide-card">
+          <span class="gc-tag">Planning</span>
+          <h4>Prototype vs. Production: When and How to Transition</h4>
+          <p>NPI best practices: when to move from prototype to production, panelization strategies, and maintaining quality across the transition.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Special Applications -->
+    <div class="guide-section reveal">
+      <h2><svg width="22" height="22"><use href="#icon-settings"/></svg> Application-Specific Guides</h2>
+      <div class="guide-grid">
+        <a href="/blog/automotive-pcb-requirements.html" class="guide-card">
+          <span class="gc-tag">Automotive</span>
+          <h4>Automotive PCB Requirements: IATF 16949, AEC-Q100, Reliability</h4>
+          <p>Key design and qualification requirements for automotive-grade PCBs. Temperature, vibration, and reliability testing expectations.</p>
+        </a>
+        <a href="/blog/medical-device-pcb.html" class="guide-card">
+          <span class="gc-tag">Medical</span>
+          <h4>Medical Device PCB: Design for ISO 13485 & IEC 60601</h4>
+          <p>Regulatory requirements, material restrictions, traceability, and documentation for medical-grade PCB manufacturing.</p>
+        </a>
+        <a href="/blog/iot-pcb-design-manufacturing.html" class="guide-card">
+          <span class="gc-tag">IoT</span>
+          <h4>IoT PCB Design & Manufacturing: Antenna, Power, Miniaturization</h4>
+          <p>Design considerations for connected devices: RF antenna integration, battery power optimization, and compact HDI layouts.</p>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align:center;padding:var(--space-3xl) 0;border-top:1px solid var(--border)">
+  <div class="container">
+    <h2 class="reveal" style="font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-md)">Have a Design Question?</h2>
+    <p class="reveal" style="color:var(--text-secondary);margin-bottom:var(--space-xl)">Our engineering team provides free DFM feedback with every quote. Send us your files — we'll help you optimize before production.</p>
+    <div class="reveal" style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-primary btn-lg" onclick="openModal()">
+        <svg width="16" height="16"><use href="#icon-mail"/></svg> Ask an Engineer
+      </button>
+      <a href="/quote/" class="btn btn-secondary btn-lg">
+        <svg width="16" height="16"><use href="#icon-zap"/></svg> Instant PCB Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>
+        <a href="/capabilities/pcba-assembly/">SMT Assembly</a>
+        <a href="/capabilities/smt-stencil/">SMT Stencil</a>
+        <a href="/capabilities/box-build/">Box-Build Assembly</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/projects/">Case Studies</a>
+        <a href="/quality/">Quality & Testing</a>
+        <a href="/shipping/">Shipping & Logistics</a>
+        <a href="/factory/">Factory Tour</a>
+        <a href="/design-guides/">Design Guides</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Huaxing PCBA. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Ask an Engineer</h2>
+        <p class="mi-subtitle">Get free DFM feedback — our engineers respond within 24 hours.</p>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="Describe your design question or upload requirements. Our engineers will review and provide feedback." required></textarea>
+        <button type="submit" class="btn btn-primary btn-block">
+          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Inquiry
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>

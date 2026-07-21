@@ -211,6 +211,7 @@
         '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
         '<a href="/capabilities/pcba-assembly/">PCBA Assembly</a>' +
         '<a href="/capabilities/smt-stencil/">SMT Stencil</a>' +
+        '<a href="/capabilities/box-build/">Box-Build Assembly</a>' +
         '<a href="/capabilities/components-sourcing/">Components Sourcing</a>' +
       '</div>' +
     '</div>' +
