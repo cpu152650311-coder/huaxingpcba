@@ -2,7 +2,7 @@
  * Huaxing PCBA — Shared Navigation Injection
  * Injects nav HTML + critical CSS so the nav works even if
  * design-tokens.css is cached stale or loads slowly from CDN.
- * v17 — Simplified nav: Blog as standalone link, removed Resources dropdown
+ * v18 — Expanded dropdowns: PCB Fab, PCBA, Box-Build, Stencil flyouts
  */
 (function(){
   var nav = document.getElementById('navLinks');
@@ -208,10 +208,44 @@
           '</div>' +
         '</span>' +
         '<a href="/capabilities/advanced-pcb/">Advanced PCB</a>' +
-        '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
-        '<a href="/capabilities/pcba-assembly/">PCBA Assembly</a>' +
-        '<a href="/capabilities/smt-stencil/">SMT Stencil</a>' +
-        '<a href="/capabilities/box-build/">Box-Build Assembly</a>' +
+        '<span class="nav-flyout-trigger" id="pcbFabFlyout">' +
+          '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
+          '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
+          '<div class="nav-flyout-panel">' +
+            '<a href="/capabilities/pcb-fabrication/standard-pcb/">Standard PCB · 2-32L</a>' +
+            '<a href="/capabilities/pcb-fabrication/quick-turn/">Quick-Turn · 24-72h</a>' +
+            '<a href="/capabilities/pcb-fabrication/impedance-control/">Impedance Control</a>' +
+            '<a href="/capabilities/pcb-fabrication/back-drilling/">Back Drilling</a>' +
+          '</div>' +
+        '</span>' +
+        '<span class="nav-flyout-trigger" id="pcbaFlyout">' +
+          '<a href="/capabilities/pcba-assembly/">PCBA Assembly</a>' +
+          '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
+          '<div class="nav-flyout-panel">' +
+            '<a href="/capabilities/pcba-assembly/smt/">SMT Assembly</a>' +
+            '<a href="/capabilities/pcba-assembly/through-hole/">Through-Hole / DIP</a>' +
+            '<a href="/capabilities/pcba-assembly/bga-qfn/">BGA &amp; QFN</a>' +
+            '<a href="/capabilities/pcba-assembly/conformal-coating/">Conformal Coating</a>' +
+            '<a href="/capabilities/pcba-assembly/functional-testing/">Functional Testing</a>' +
+          '</div>' +
+        '</span>' +
+        '<span class="nav-flyout-trigger" id="stencilFlyout">' +
+          '<a href="/capabilities/smt-stencil/">SMT Stencil</a>' +
+          '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
+          '<div class="nav-flyout-panel">' +
+            '<a href="/capabilities/smt-stencil/laser-cut/">Laser-Cut Stencil</a>' +
+            '<a href="/capabilities/smt-stencil/step-stencil/">Step Stencil</a>' +
+          '</div>' +
+        '</span>' +
+        '<span class="nav-flyout-trigger" id="boxbuildFlyout">' +
+          '<a href="/capabilities/box-build/">Box-Build Assembly</a>' +
+          '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
+          '<div class="nav-flyout-panel">' +
+            '<a href="/capabilities/box-build/enclosure-integration/">Enclosure &amp; Integration</a>' +
+            '<a href="/capabilities/box-build/cable-harness/">Cable Harness</a>' +
+            '<a href="/capabilities/box-build/testing-packaging/">Testing &amp; Packaging</a>' +
+          '</div>' +
+        '</span>' +
         '<a href="/capabilities/components-sourcing/">Components Sourcing</a>' +
       '</div>' +
     '</div>' +
@@ -241,8 +275,10 @@
       var dd = document.getElementById(id);
       if (dd && !dd.contains(e.target)) dd.classList.remove('open');
     });
-    var flyout = document.getElementById('pcbTypesFlyout');
-    if (flyout && !flyout.contains(e.target)) flyout.classList.remove('open');
+    ['pcbTypesFlyout','pcbFabFlyout','pcbaFlyout','stencilFlyout','boxbuildFlyout'].forEach(function(fid) {
+      var flyout = document.getElementById(fid);
+      if (flyout && !flyout.contains(e.target)) flyout.classList.remove('open');
+    });
   });
 
   var landingPages = {
@@ -268,16 +304,25 @@
     }
   });
 
-  var flyout = document.getElementById('pcbTypesFlyout');
-  if (flyout) {
-    flyout.addEventListener('click', function(e) {
-      if (window.innerWidth <= 1024) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.location.href = '/capabilities/pcb-types/';
-      }
-    });
-  }
+  var flyoutMap = {
+    pcbTypesFlyout: '/capabilities/pcb-types/',
+    pcbFabFlyout: '/capabilities/pcb-fabrication/',
+    pcbaFlyout: '/capabilities/pcba-assembly/',
+    stencilFlyout: '/capabilities/smt-stencil/',
+    boxbuildFlyout: '/capabilities/box-build/'
+  };
+  Object.keys(flyoutMap).forEach(function(fid) {
+    var flyout = document.getElementById(fid);
+    if (flyout) {
+      flyout.addEventListener('click', function(e) {
+        if (window.innerWidth <= 1024) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = flyoutMap[fid];
+        }
+      });
+    }
+  });
 
   // 4. Hamburger button — toggle dropdown
   var btn = document.getElementById('mobileBtn');

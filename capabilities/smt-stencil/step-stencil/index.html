@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Step Stencil — Multi-Level Solder Paste Deposition | Huaxing PCBA</title>
+<meta name="description" content="Step/stepped SMT stencils for mixed-technology PCB assembly. Multi-level thickness in one stencil — optimized paste volume for fine-pitch ICs + power components. Shenzhen, China.">
+<meta property="og:title" content="Step Stencil — Multi-Level Solder Paste Deposition | Huaxing PCBA">
+<meta property="og:description" content="Step stencils solve paste volume mismatch on mixed-technology boards. Step-up and step-down designs, 3D profiles for 0201 + power MOSFETs on the same board.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../../../design-tokens.css?v=25">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="canonical" href="https://huaxingpcba.com/capabilities/smt-stencil/step-stencil/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Step Stencil — Multi-Level Solder Paste Deposition",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "description": "Step/stepped SMT stencils for mixed-technology boards. Multi-level thickness: thick for power components, thin for fine-pitch. Step-up and step-down designs.",
+  "areaServed": {"@type": "Continent", "name": "Worldwide"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Capabilities", "item": "https://huaxingpcba.com/capabilities/"},
+    {"@type": "ListItem", "position": 3, "name": "SMT Stencil", "item": "https://huaxingpcba.com/capabilities/smt-stencil/"},
+    {"@type": "ListItem", "position": 4, "name": "Step Stencil", "item": "https://huaxingpcba.com/capabilities/smt-stencil/step-stencil/"}
+  ]
+}
+</script>
+<style>
+.sub-hero{position:relative;min-height:45vh;display:flex;align-items:center;overflow:hidden}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3) saturate(0.5)}
+.sub-hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,150,62,0.1) 0%,transparent 60%);z-index:1}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+
+.split-section{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:stretch;padding:var(--space-2xl) 0}
+.split-img{position:relative;border-radius:var(--radius-lg);overflow:hidden}
+.split-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split-text h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-lg);line-height:1.2}
+.split-text h2 em{font-style:normal;color:var(--accent)}
+.split-text p{font-size:var(--text-base);color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-md)}
+
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+.app-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);transition:border-color .3s,transform .3s}
+.app-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.app-card h3{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm)}
+.app-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md);max-width:1000px;margin:0 auto}
+.spec-item{display:flex;gap:var(--space-md);padding:var(--space-md);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);align-items:flex-start}
+.spec-item svg{flex-shrink:0;width:20px;height:20px;color:var(--accent);margin-top:2px}
+.spec-item h4{font-size:var(--text-sm);font-weight:400;color:var(--text-primary);margin:0 0 2px}
+.spec-item p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+.design-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-lg)}
+.design-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-2xl)}
+.design-card h3{font-size:var(--text-xl);font-weight:300;color:var(--accent);margin:0 0 var(--space-md)}
+.design-card .step-diagram{width:100%;height:80px;background:linear-gradient(90deg,rgba(200,150,62,.08) 0%,rgba(200,150,62,.03) 100%);border-radius:var(--radius-md);margin-bottom:var(--space-md);display:flex;align-items:flex-end;gap:1px;overflow:hidden}
+.design-card .step-bar{flex:1;background:var(--accent);border-radius:2px 2px 0 0;position:relative}
+.design-card .step-bar::after{content:attr(data-label);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--text-muted);white-space:nowrap}
+.design-card p{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.7;margin:0 0 var(--space-sm)}
+.design-card ul{list-style:none;padding:0;margin:0}
+.design-card ul li{font-size:var(--text-sm);color:var(--text-muted);padding:var(--space-xs) 0;padding-left:var(--space-lg);position:relative;line-height:1.7}
+.design-card ul li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.5}
+
+.cta-section{position:relative;padding:var(--space-3xl) 0;text-align:center;overflow:hidden}
+.cta-bg{position:absolute;inset:0;z-index:0}
+.cta-bg img{width:100%;height:100%;object-fit:cover}
+.cta-overlay{position:absolute;inset:0;background:rgba(8,8,11,.8);z-index:1}
+.cta-section .container{position:relative;z-index:2}
+
+@media(max-width:768px){
+  .split-section{grid-template-columns:1fr}
+  .app-grid{grid-template-columns:1fr}
+  .spec-grid{grid-template-columns:1fr}
+  .design-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></symbol>
+  <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></symbol>
+  <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="icon-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=18" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../../../generated/blog-assembly-reflow-profile.webp" alt="Step stencil for mixed-technology PCB solder paste deposition" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Advanced Stencil Technology</p>
+      <h1 class="reveal"><em>Step Stencil</em> — Multi-Level Paste Deposition</h1>
+      <p class="reveal">Different paste volumes for different components — on the same board, in a single print stroke. Solve the fine-pitch vs. power-component paste volume conflict with precision-engineered step stencils.</p>
+    </div>
+  </div>
+</section>
+
+<!-- The Problem & Solution -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container" style="max-width:1100px">
+    <div class="split-section">
+      <div class="split-text reveal">
+        <h2>The <em>Problem</em> Step Stencils Solve</h2>
+        <p>Standard stencils have uniform thickness across the entire foil. For a board carrying only 0.5mm-pitch QFNs, a 0.10mm stencil delivers ideal paste volume. But add large power MOSFETs or through-hole connectors requiring intrusive reflow solder paste on the same board, and that 0.10mm thickness starves them of solder — leading to insufficient fillets, weak joints, and field failures.</p>
+        <p>A thicker stencil (0.15mm+) solves the power-component problem but deposits too much paste on fine-pitch pads — causing bridging, solder balls, and shorts on QFNs and 0201 passives. Step stencils eliminate this trade-off by manufacturing different thickness zones in a single stencil foil, each optimized for the component mix in that area.</p>
+      </div>
+      <div class="split-img reveal">
+        <img src="../../../generated/blog-bga-reflow-oven.webp" alt="Step stencil solving mixed-technology paste volume challenges" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Step-Up vs Step-Down -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-2xl)">Step-Up vs <em>Step-Down</em> Designs</h2>
+    <div class="design-grid">
+      <div class="design-card reveal">
+        <h3>Step-Down Stencil</h3>
+        <div class="step-diagram">
+          <div class="step-bar" data-label="0.15mm" style="height:60%;flex:3;opacity:1"></div>
+          <div class="step-bar" data-label="0.10mm" style="height:40%;flex:2;opacity:.7"></div>
+          <div class="step-bar" data-label="0.15mm" style="height:60%;flex:3;opacity:1"></div>
+        </div>
+        <p>The most common configuration. The stencil starts at a thicker base (e.g., 0.15mm) and is locally etched thinner (e.g., 0.10mm) in the fine-pitch zones on the squeegee side.</p>
+        <ul>
+          <li>Pocket etched into squeegee side — downward step</li>
+          <li>Ideal when most of the board needs thick paste</li>
+          <li>Fine-pitch areas get reduced volume</li>
+          <li>Step transition needs &ge; 2mm clearance from nearest aperture</li>
+          <li>Common for motor drives, power supplies, LED driver boards</li>
+        </ul>
+      </div>
+      <div class="design-card reveal">
+        <h3>Step-Up Stencil</h3>
+        <div class="step-diagram">
+          <div class="step-bar" data-label="0.10mm" style="height:40%;flex:3;opacity:.7"></div>
+          <div class="step-bar" data-label="0.18mm" style="height:72%;flex:2;opacity:1"></div>
+          <div class="step-bar" data-label="0.10mm" style="height:40%;flex:3;opacity:.7"></div>
+        </div>
+        <p>The reverse approach. A thinner base stencil (e.g., 0.10mm) has material added locally (e.g., 0.18mm) for power-component zones on the board-contact side. More complex to manufacture but protects fine-pitch print quality.</p>
+        <ul>
+          <li>Material added on board-contact side — upward step</li>
+          <li>Base preserves excellent fine-pitch release</li>
+          <li>Thick zones supply extra paste to power pads</li>
+          <li>Requires &ge; 3mm clearance from step edge to aperture</li>
+          <li>Preferred for densely populated IoT/telecom boards</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Applications -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-2xl)">Where Step Stencils <em>Excel</em></h2>
+    <div class="app-grid">
+      <div class="app-card reveal">
+        <h3>Motor Controllers &amp; Drives</h3>
+        <p>Boards with DSP/MCU fine-pitch logic alongside large IGBT modules, MOSFET arrays, and high-current bus bar pads. Step-down stencil delivers 0.10mm on the logic side, 0.18mm on power devices — in one print stroke.</p>
+      </div>
+      <div class="app-card reveal">
+        <h3>Automotive ECUs</h3>
+        <p>Modern ECUs pack 0201 decoupling caps, 0.4mm-pitch BGAs, and large connector footprints on one board. A well-designed step stencil prevents bridging on the processor while ensuring sufficient paste for high-reliability connector solder joints.</p>
+      </div>
+      <div class="app-card reveal">
+        <h3>IoT &amp; Wireless Modules</h3>
+        <p>Compact wireless modules with fine-pitch RF shields and chip antennas alongside power-management ICs with exposed thermal pads. Step stencil lets you optimize paste for both without compromising RF grounding or thermal performance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Design Guidelines -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container" style="max-width:1100px">
+    <div class="split-section">
+      <div class="split-img reveal">
+        <img src="../../../generated/blog-heavy-copper-cross-section.webp" alt="Step stencil cross-section and design clearance zones" loading="lazy">
+      </div>
+      <div class="split-text reveal">
+        <h2><em>Design Guidelines</em> for Step Stencils</h2>
+        <p>Effective step stencil design requires planning at the PCB layout stage. Keep-out zones of 2–3mm around step transitions ensure the squeegee blade rides smoothly and the stencil gaskets properly against the board surface. We recommend grouping fine-pitch components together in one contiguous zone and power/high-volume paste components in another.</p>
+        <p>The step transition itself is a gradual ramp (approximately 1mm per 0.02mm step height), not an abrupt wall. Our CAM engineers review your step plan during the DFM stage and may recommend zone adjustments to avoid aperture-distortion risk near transition areas. Multi-level stencils (3+ thickness levels) are possible but add complexity; we typically recommend a maximum of two step levels for reliable print performance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capability Checklist -->
+<section style="padding:var(--space-2xl) 0">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-2xl)">Step Stencil <em>Capabilities</em></h2>
+    <div class="spec-grid">
+      <div class="spec-item reveal">
+        <svg><use href="#icon-check"/></svg>
+        <div><h4>Step Configuration</h4><p>Step-down (pocket on squeegee side) and step-up (raised on board-contact side). Two-level standard, three-level on request. Step height from 0.02mm to 0.10mm differential.</p></div>
+      </div>
+      <div class="spec-item reveal">
+        <svg><use href="#icon-check"/></svg>
+        <div><h4>Maximum Thickness Range</h4><p>Base foil 0.08–0.15mm. Stepped zones 0.10–0.20mm. Total differential up to 0.10mm. Combination example: 0.10mm base + 0.08mm step-down = 0.18mm / 0.10mm zones.</p></div>
+      </div>
+      <div class="spec-item reveal">
+        <svg><use href="#icon-check"/></svg>
+        <div><h4>Clearance Requirements</h4><p>Step-down: &ge; 2mm from step edge to nearest aperture. Step-up: &ge; 3mm clearance. Transition ramp: approximately 1mm per 0.02mm step. Detailed zone map reviewed during DFM.</p></div>
+      </div>
+      <div class="spec-item reveal">
+        <svg><use href="#icon-check"/></svg>
+        <div><h4>Printer Compatibility</h4><p>Compatible with all major automatic printers (DEK Horizon/Eclipse, MPM Momentum/Accela, Ekra, GKG, Desen). Step stencils are framed only — frameless step stencils are not recommended.</p></div>
+      </div>
+      <div class="spec-item reveal">
+        <svg><use href="#icon-check"/></svg>
+        <div><h4>Foil Material</h4><p>304 stainless steel foil, mesh-mounted on precision aluminum frame. Nano-coating available on step stencils — recommended for fine-pitch zones to maintain release performance.</p></div>
+      </div>
+      <div class="spec-item reveal">
+        <svg><use href="#icon-check"/></svg>
+        <div><h4>DFM &amp; Turnaround</h4><p>Free step-zone DFM review included. Standard turnaround: 48 hours from approved step plan. Rush: 36 hours. Complex 3+ level designs: 72 hours. Contact us for same-day feasibility assessment.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><img src="../../../generated/blog-cta-rigid-flex.webp" alt="Step stencil CTA" loading="lazy"></div>
+  <div class="cta-overlay"></div>
+  <div class="container">
+    <h2 class="reveal" style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)">Got a Mixed-Technology Board? <em>We Can Help.</em></h2>
+    <p class="reveal" style="color:var(--text-secondary);margin-bottom:var(--space-xl);max-width:600px;margin-left:auto;margin-right:auto">Send us your Gerber file and component placement. Our CAM engineers will propose an optimized step stencil configuration — free, no obligation.</p>
+    <div class="reveal"><button onclick="openModal()" class="btn btn-primary btn-lg"><svg width="16" height="16"><use href="#icon-mail"/></svg> Request Step Stencil Consultation</button></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>
+        <a href="/capabilities/pcba-assembly/">SMT Assembly</a>
+        <a href="/capabilities/smt-stencil/">SMT Stencil</a>
+        <a href="/capabilities/box-build/">Box-Build Assembly</a>
+        <a href="/capabilities/components-sourcing/">Components Sourcing</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quality &amp; Logistics</h4>
+        <a href="/quality/">Quality &amp; Testing</a>
+        <a href="/shipping/">Shipping &amp; Logistics</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Huaxing PCBA. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Request a Quote</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="../../../reveal.js"></script>
+<script src="../../../inquiry-handler.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+
+</body>
+</html>

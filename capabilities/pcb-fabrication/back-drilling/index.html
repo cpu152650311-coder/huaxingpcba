@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Back Drilling PCB — Stub Removal for High-Speed Signals | Huaxing PCBA</title>
+<meta name="description" content="Back drilling / controlled depth drilling for via stub removal in high-speed designs. Depth tolerance ±50µm, X-ray verified. For 5G, data center, FPGA boards, 100G backplanes. IATF 16949 certified.">
+<meta property="og:title" content="Back Drilling PCB — Stub Removal for High-Speed Signals | Huaxing PCBA">
+<meta property="og:description" content="Precision back drilling for via stub removal. ±50µm depth tolerance, X-ray verification. Eliminate signal reflections above 5Gbps. For 5G, data center, FPGA, 100G backplanes.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../../../design-tokens.css?v=25">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="canonical" href="https://huaxingpcba.com/capabilities/pcb-fabrication/back-drilling/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Capabilities", "item": "https://huaxingpcba.com/capabilities/"},
+    {"@type": "ListItem", "position": 3, "name": "PCB Fabrication", "item": "https://huaxingpcba.com/capabilities/pcb-fabrication/"},
+    {"@type": "ListItem", "position": 4, "name": "Back Drilling", "item": "https://huaxingpcba.com/capabilities/pcb-fabrication/back-drilling/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Back Drilling PCB",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "description": "Controlled depth drilling for via stub removal in high-speed PCB designs. ±50µm depth tolerance, X-ray verified. For 5G, data center, FPGA, 100G backplane applications.",
+  "areaServed": {"@type": "Continent", "name": "Worldwide"}
+}
+</script>
+<style>
+.sub-hero{min-height:45vh}
+.sub-hero-bg::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(8,8,11,.75) 0%,rgba(8,8,11,.35) 100%)}
+.stub-diagram{max-width:700px;margin:0 auto var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);text-align:center}
+.stub-diagram .layer-stack{display:flex;flex-direction:column;gap:4px;max-width:260px;margin:0 auto var(--space-md)}
+.stub-diagram .layer-row{display:flex;align-items:center;gap:var(--space-sm);font-size:var(--text-xs);font-family:'JetBrains Mono',monospace}
+.stub-diagram .l-num{width:24px;text-align:right;color:var(--text-muted)}
+.stub-diagram .l-bar{flex:1;height:12px;border-radius:2px}
+.stub-diagram .l-bar.signal{background:var(--accent-25);border:1px solid var(--accent)}
+.stub-diagram .l-bar.plane{background:rgba(100,100,120,.3);border:1px solid rgba(120,120,140,.4)}
+.stub-diagram .l-label{width:80px;color:var(--text-secondary);font-size:.65rem}
+.via-line{display:flex;align-items:center;gap:var(--space-sm);font-size:var(--text-xs);font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+.via-line .v-label{width:24px;text-align:right;color:var(--text-muted)}
+.via-line .v-bar{width:3px;flex-shrink:0;border-radius:2px}
+.via-line .v-bar.active{background:var(--accent);height:18px}
+.via-line .v-bar.stub{background:var(--error);height:18px;opacity:.6;position:relative}
+.via-line .v-bar.stub::after{content:'STUB';position:absolute;right:-54px;top:0;color:var(--error);font-size:.55rem;font-weight:600;letter-spacing:.08em}
+.via-line .v-desc{color:var(--text-secondary);font-size:.65rem;margin-left:var(--space-sm)}
+.param-highlight{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);text-align:center;padding:var(--space-xl) 0}
+.param-highlight .ph-val{font-size:var(--text-3xl);font-weight:200;color:var(--accent);line-height:1;font-family:'JetBrains Mono',monospace}
+.param-highlight .ph-label{font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:768px){.param-highlight{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M20 9h3M1 15h3M20 15h3"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 22 8.5 12 15 2 8.5 12 2"/><polyline points="2 15.5 12 22 22 15.5"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="../../../nav.js?v=18" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../../../generated/blog-pcb-via-3d-cross-section.webp" alt="PCB via 3D cross-section showing back drilling" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <p class="section-label reveal">PCB Fabrication / Back Drilling</p>
+    <h1 class="reveal">Back Drilling PCB — <em>Stub Removal for Signal Integrity</em></h1>
+    <p class="reveal">Controlled-depth drilling removes unused via stubs that cause signal reflections and degrade eye diagrams at data rates above 5 Gbps. Essential for 5G infrastructure, 100G/400G data center, and high-speed FPGA designs. Depth tolerance 50 m, X-ray verified on every board.</p>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-value">±50<span style="font-size:.4em;font-weight:300">µm</span></div><div class="stat-label">Depth Tolerance</div></div>
+      <div class="stat-item"><div class="stat-value">8-32</div><div class="stat-label">Layer Count Range</div></div>
+      <div class="stat-item"><div class="stat-value">&gt;5<span style="font-size:.4em;font-weight:300">Gbps</span></div><div class="stat-label">Data Rate Threshold</div></div>
+      <div class="stat-item"><div class="stat-value">100<span style="font-size:.4em;font-weight:300">%</span></div><div class="stat-label">X-Ray Verified</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="media-split reveal">
+      <div class="media-text">
+        <p class="section-eyebrow" style="font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:var(--space-md)">The Via Stub Problem</p>
+        <h2>What Back Drilling Is — <em>and Why It Matters</em></h2>
+        <p>In a multilayer PCB, a plated through-hole (PTH) via extends through the entire board stack. If a signal only travels between layers 1 and 3 of a 16-layer board, the via segment from layer 3 to layer 16 is an unused "stub." At data rates above 5 Gbps, this stub acts as an unterminated transmission-line branch, causing signal reflections, resonant nulls at quarter-wavelength frequencies, and degraded eye diagrams. Back drilling removes this stub by drilling out the unused portion of the via barrel from the opposite side — leaving only the electrically necessary length.</p>
+        <div class="spec-list" style="margin-top:var(--space-lg)">
+          <div class="spec-item"><span class="val">-20dB</span><span class="lbl">Insertion Loss Improvement at 28Gbps</span></div>
+          <div class="spec-item"><span class="val">0.25mm</span><span class="lbl">Min Back Drill Diameter</span></div>
+          <div class="spec-item"><span class="val">50-150µm</span><span class="lbl">Stub Length Remaining</span></div>
+          <div class="spec-item"><span class="val">±50µm</span><span class="lbl">Depth Tolerance Control</span></div>
+        </div>
+      </div>
+      <div class="media-img"><img src="../../../generated/blog-pcb-via-drill-bits.webp" alt="PCB drill bits for back drilling" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg-secondary)">
+  <div class="container" style="padding:var(--space-3xl) 0">
+    <p class="section-label reveal">Technical Specifications</p>
+    <h2 class="reveal" style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)">Back Drilling <em>Capability Data</em></h2>
+    <div class="param-highlight reveal">
+      <div><div class="ph-val">±50µm</div><div class="ph-label">Depth Tolerance</div></div>
+      <div><div class="ph-val">50-150µm</div><div class="ph-label">Min Stub Remaining</div></div>
+      <div><div class="ph-val">0.25-0.8mm</div><div class="ph-label">Back Drill Bit Range</div></div>
+      <div><div class="ph-val">8-32</div><div class="ph-label">Compatible Layers</div></div>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="data-table reveal" style="width:100%;border-collapse:collapse;font-size:var(--text-sm);max-width:800px;margin:0 auto">
+      <thead><tr><th>Parameter</th><th>Specification</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:500">Drill Type</td><td>Mechanical CNC, controlled depth with precision depth collar</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Back Drill Diameter</td><td>Original hole diameter + 0.15mm to 0.30mm oversize</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Depth Tolerance</td><td>±50µm (standard), ±75µm for cost-optimized designs</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Remaining Stub Length</td><td>50-150µm typical; shorter stubs require tighter process control</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Layer Range</td><td>8-32 layers (back drilling requires sufficient stack thickness)</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Via Types Supported</td><td>PTH, blind vias, stacked microvias on through-hole back-drilled locations</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Post-Drill Inspection</td><td>100% X-ray verification; cross-section on first article</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Data Format</td><td>Separate back-drill file specifying drill layers, diameters, and depths</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Finish After Drill</td><td>Standard ENIG/HASL/OSP; back-drilled holes receive same finish as PTH</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Burr Control</td><td>Dedicated entry/exit material; burr height &lt;25µm post-process</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="media-split reversed reveal">
+      <div class="media-text">
+        <p class="section-eyebrow" style="font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:var(--space-md)">Applications</p>
+        <h2>Where Back Drilling <em>Makes the Difference</em></h2>
+        <p>Any design with high-speed serial links running through multiple PCB layers can benefit from back drilling. The performance gain becomes critical above 10 Gbps per lane, where even a short via stub can create a resonant notch within the signal bandwidth. Modern SerDes standards demand back drilling as a standard design practice.</p>
+        <ul style="list-style:none;padding:0;margin-top:var(--space-md)">
+          <li style="padding:4px 0;color:var(--text-secondary);font-size:var(--text-sm)"><svg width="14" height="14" style="display:inline;color:var(--accent);vertical-align:-2px;margin-right:6px"><use href="#icon-check"/></svg> <strong>5G Base Station Backplanes</strong> — 25Gbps CPRI/eCPRI links across 20+ layer boards</li>
+          <li style="padding:4px 0;color:var(--text-secondary);font-size:var(--text-sm)"><svg width="14" height="14" style="display:inline;color:var(--accent);vertical-align:-2px;margin-right:6px"><use href="#icon-check"/></svg> <strong>Data Center Switches</strong> — 100GBASE-KR4, 400G PAM4 across 28-32 layers</li>
+          <li style="padding:4px 0;color:var(--text-secondary);font-size:var(--text-sm)"><svg width="14" height="14" style="display:inline;color:var(--accent);vertical-align:-2px;margin-right:6px"><use href="#icon-check"/></svg> <strong>FPGA/ASIC Prototype Boards</strong> — High-speed transceivers (GTY/GTH) with multiple via transitions</li>
+          <li style="padding:4px 0;color:var(--text-secondary);font-size:var(--text-sm)"><svg width="14" height="14" style="display:inline;color:var(--accent);vertical-align:-2px;margin-right:6px"><use href="#icon-check"/></svg> <strong>Aerospace & Defense</strong> — High-reliability radar signal processing, SATCOM RF/digital boards</li>
+          <li style="padding:4px 0;color:var(--text-secondary);font-size:var(--text-sm)"><svg width="14" height="14" style="display:inline;color:var(--accent);vertical-align:-2px;margin-right:6px"><use href="#icon-check"/></svg> <strong>High-Speed Test Equipment</strong> — Oscilloscope front-ends, BERT instruments, VNA test fixtures</li>
+        </ul>
+      </div>
+      <div class="media-img"><img src="../../../generated/blog-pcb-via-laser-drill-macro.webp" alt="Laser drill macro image showing via detail" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section class="data-table-section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)">Quality Verification <em>Process</em></h2>
+    <div style="overflow-x:auto">
+    <table class="data-table reveal" style="width:100%;border-collapse:collapse;font-size:var(--text-sm)">
+      <thead><tr><th>Inspection Stage</th><th>Method</th><th>Coverage</th><th>What We Check</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:500">Depth Verification</td><td>X-Ray imaging</td><td>100% of back-drilled holes</td><td>Stub length within tolerance; no under-drill (stub too long) or over-drill (damaged signal layer)</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Diameter Check</td><td>AOI + mechanical pin gauge</td><td>100% AOI; sample pin gauge</td><td>Back drill diameter matches spec; hole roundness within IPC limits</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Cross-Section</td><td>Microsection analysis</td><td>First article; 1 coupon per panel</td><td>Stub length measured optically; copper barrel integrity; no resin smear or delamination</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Electrical Test</td><td>Flying probe or fixture</td><td>100%</td><td>No opens or shorts on back-drilled nets; via resistance within spec</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Burr Inspection</td><td>Visual + microscope</td><td>100% visual; sample microscope</td><td>Burr height under 25 m; no lifted pads at back-drill entry side</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../../../generated/blog-cta-stackup.webp)">
+      <h2>Have a High-Speed Design? Share Your Stackup for Review</h2>
+      <p>Send us your stackup diagram and high-speed net list. Our engineering team will identify which vias need back drilling, calculate optimal drill depths, and provide a complete DFM report before production. Free back-drill feasibility review on every project.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Design for Back-Drill Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>
+        <a href="/capabilities/pcba-assembly/">SMT Assembly</a>
+        <a href="/capabilities/smt-stencil/">SMT Stencil</a>
+        <a href="/capabilities/box-build/">Box-Build Assembly</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/projects/">Case Studies</a>
+        <a href="/quality/">Quality & Testing</a>
+        <a href="/shipping/">Shipping & Logistics</a>
+        <a href="/factory/">Factory Tour</a>
+        <a href="/design-guides/">Design Guides</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../../reveal.js"></script>
+<script>function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}</script>
+<script src="../../../inquiry-handler.js"></script></body>
+</html>

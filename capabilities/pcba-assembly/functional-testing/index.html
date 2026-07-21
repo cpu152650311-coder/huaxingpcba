@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Functional Testing — FCT, ICT, Flying Probe, AOI | Huaxing PCBA</title>
+<meta name="description" content="Comprehensive PCB and PCBA testing: FCT (functional circuit test), ICT (in-circuit test), flying probe, 3D AOI, X-ray (BGA/QFN voids), burn-in testing, boundary scan/JTAG. Custom test fixtures designed in-house. Full test reports.">
+<meta property="og:title" content="Functional Testing — FCT, ICT, Flying Probe, AOI | Huaxing PCBA">
+<meta property="og:description" content="Full-spectrum PCBA test: FCT, ICT, flying probe, 3D AOI, X-ray, burn-in, JTAG. Custom fixtures in-house. Full test reports with every shipment.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../../../design-tokens.css?v=25">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="canonical" href="https://huaxingpcba.com/capabilities/pcba-assembly/functional-testing/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Capabilities", "item": "https://huaxingpcba.com/capabilities/"},
+    {"@type": "ListItem", "position": 3, "name": "PCBA Assembly", "item": "https://huaxingpcba.com/capabilities/pcba-assembly/"},
+    {"@type": "ListItem", "position": 4, "name": "Functional Testing", "item": "https://huaxingpcba.com/capabilities/pcba-assembly/functional-testing/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "PCB Functional Testing",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "description": "Full PCBA test services: FCT, ICT, flying probe, 3D AOI, X-ray, burn-in, JTAG boundary scan. Custom fixtures in-house.",
+  "areaServed": {"@type": "Continent", "name": "Worldwide"}
+}
+</script>
+<style>
+:root{--section-gap:6rem}
+.container-wide{max-width:1280px;margin:0 auto;padding:0 var(--space-lg)}
+.sub-hero{position:relative;min-height:45vh;display:flex;align-items:center;overflow:hidden}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.22) saturate(0.35)}
+.sub-hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(200,150,62,0.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(200,150,62,0.06) 0%,transparent 50%)}
+.sub-hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto;text-align:center;padding:var(--space-3xl) var(--space-md)}
+.sub-hero-eyebrow{display:inline-block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.25em;color:var(--accent);border:1px solid rgba(200,150,62,.3);padding:.35em 1em;border-radius:2px;margin-bottom:var(--space-lg)}
+.sub-hero h1{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:200;line-height:1.15;margin-bottom:var(--space-md);letter-spacing:-.01em}
+.sub-hero h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-lead{font-size:var(--text-lg);color:var(--text-secondary);max-width:640px;margin:0 auto var(--space-xl);line-height:1.7}
+.hero-metrics{display:flex;justify-content:center;gap:var(--space-2xl);flex-wrap:wrap}
+.hero-metric{text-align:center}
+.hero-metric .val{display:block;font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace;letter-spacing:-.02em}
+.hero-metric .lbl{display:block;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.1em}
+.trust-strip{padding:var(--space-lg) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-secondary)}
+.trust-items{display:flex;justify-content:center;align-items:center;gap:var(--space-2xl) var(--space-xl);flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:var(--space-sm);color:var(--text-muted);font-size:var(--text-sm)}
+.trust-item svg{flex-shrink:0;opacity:.6}
+.media-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:stretch;min-height:440px}
+.media-split.reverse{direction:rtl}
+.media-split.reverse .media-content{direction:ltr}
+.media-content{display:flex;flex-direction:column;justify-content:center;padding:var(--space-2xl) 0}
+.media-content .section-eyebrow{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:var(--space-md)}
+.media-content h2{font-size:var(--text-3xl);font-weight:200;margin:0 0 var(--space-lg) 0;line-height:1.2}
+.media-content p{color:var(--text-secondary);line-height:1.85;margin-bottom:var(--space-md)}
+.media-content ul{margin-bottom:var(--space-md);padding-left:1.2rem}
+.media-content li{color:var(--text-secondary);margin-bottom:var(--space-sm);line-height:1.7}
+.media-visual{position:relative;border-radius:var(--radius-xl);overflow:hidden;min-height:380px}
+.media-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media-visual::after{content:'';position:absolute;top:var(--space-xl);right:var(--space-xl);width:60px;height:60px;border:1px solid rgba(200,150,62,.2);border-radius:50%;pointer-events:none}
+.media-visual::before{content:'';position:absolute;bottom:var(--space-xl);left:var(--space-xl);width:100px;height:1px;background:rgba(200,150,62,.3);pointer-events:none}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+.test-card{padding:var(--space-2xl) var(--space-xl);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
+.test-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.test-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.test-card:hover::before{opacity:1}
+.test-card h3{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm) 0}
+.test-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+.data-table-section h2{font-size:var(--text-3xl);font-weight:200;text-align:center;margin-bottom:var(--space-2xl)}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--text-sm)}
+.data-table thead tr{border-bottom:2px solid var(--accent)}
+.data-table th{text-align:left;padding:var(--space-md);color:var(--text-primary);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs)}
+.data-table td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid var(--border)}
+.data-table tbody tr{transition:background .2s}
+.data-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.test-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);position:relative}
+.test-flow::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);z-index:0}
+.test-flow-step{text-align:center;position:relative;z-index:1}
+.test-flow-step .tf-num{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:var(--bg-secondary);border:2px solid var(--accent);color:var(--accent);font-weight:600;font-size:var(--text-base);margin:0 auto var(--space-md)}
+.test-flow-step h4{font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs) 0;font-size:var(--text-sm)}
+.test-flow-step p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+.cta-section{padding:var(--space-3xl) 0}
+.cta-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;text-align:center;padding:var(--space-3xl) var(--space-xl);background-size:cover;background-position:center}
+.cta-card::before{content:'';position:absolute;inset:0;background:rgba(8,8,11,.8);z-index:0}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-card p{color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-xl);line-height:1.7}
+@media(max-width:1024px){.media-split{grid-template-columns:1fr;gap:var(--space-xl)}.media-split .media-visual{min-height:300px;order:-1}.media-split.reverse{direction:ltr}.test-grid{grid-template-columns:repeat(2,1fr)}.test-flow{grid-template-columns:repeat(2,1fr)}.test-flow::before{display:none}}
+@media(max-width:768px){.sub-hero h1{font-size:var(--text-2xl)}.test-grid{grid-template-columns:1fr}.data-table{font-size:var(--text-xs)}.data-table th,.data-table td{padding:var(--space-sm)}.test-flow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M20 9h3M1 15h3M20 15h3"/></symbol>
+  <symbol id="icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="icon-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=18" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../../../generated/blog-testing-fct-station.webp" alt="Functional circuit test station for PCBA" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-content">
+    <p class="sub-hero-eyebrow reveal">Capabilities / PCBA Assembly / Functional Testing</p>
+    <h1 class="reveal">Functional Testing —<br><em>FCT, ICT, Flying Probe, AOI, X-Ray</em></h1>
+    <p class="sub-hero-lead reveal">Comprehensive PCB and PCBA testing from bare board to powered-on functional verification. Seven test methodologies under one roof — every board that leaves our factory carries a digital test report. Custom fixtures designed and fabricated in-house. Test coverage: what you specify, we verify.</p>
+    <div class="hero-metrics reveal">
+      <div class="hero-metric"><span class="val">7</span><span class="lbl">Test Methods</span></div>
+      <div class="hero-metric"><span class="val">100%</span><span class="lbl">AOI Coverage</span></div>
+      <div class="hero-metric"><span class="val">Custom</span><span class="lbl">Fixtures In-House</span></div>
+      <div class="hero-metric"><span class="val">Report</span><span class="lbl">Per Shipment</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container-wide">
+    <div class="trust-items">
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-shield"/></svg> IATF 16949</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> IPC-A-610 Class 3</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> ISO 13485 Medical</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-eye"/></svg> 100% AOI + X-Ray on BGA</div>
+      <div class="trust-item"><svg width="16" height="16"><use href="#icon-check"/></svg> Full Test Reports</div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container-wide">
+    <p class="section-label reveal" style="text-align:center">Seven Test Methods</p>
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Catch Defects <em>Before They Ship</em></h2>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <h3>FCT — Functional Test</h3>
+        <p>Powered-on testing under real operating conditions. Custom test station built to your test specification — applies input signals, measures outputs, verifies firmware behavior. Simulates end-use environment: temperature, load, signal timing. Test fixture includes pogo-pin bed, power supply, signal generator, oscilloscope, and data acquisition. Firmware flashing and calibration included. Pass/fail criteria per your test plan. Full FCT report generated per board with serial number traceability.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>ICT — In-Circuit Test</h3>
+        <p>Bed-of-nails fixture with spring-loaded pogo pins contacts every test point on the board. Measures resistor values, capacitor values, inductor values, diode polarity, transistor gain, and open/short detection on every net — without powering the board. Catches wrong components, reversed polarity, missing parts, and solder opens before functional test. Fixtures designed and fabricated in-house. Typical ICT coverage: 85-95% of all components verified.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>Flying Probe</h3>
+        <p>Programmable moving probes contact test points without a dedicated fixture. Ideal for prototypes, low-volume production, and NPI where fixture cost is not justified. Four flying probes access both sides of the board simultaneously. Tests opens, shorts, component values, and diode/transistor orientation. No fixture cost and 24-hour programming turnaround. Limited to low-to-medium volume — ICT with fixture remains more economical above 500-1000 units.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>3D AOI</h3>
+        <p>Automated Optical Inspection on 100% of production boards. Koh Young Zenith 2 and Mirtec MV-6 systems capture 3D solder joint profiles from four angles at 25 micron resolution. AI-powered defect classification identifies bridging, tombstoning, lifted leads, missing components, wrong polarity, insufficient solder, and solder balls. Real-time SPC tracks defect trends across production lots. AOI is the first electrical-adjacent inspection gate — catching assembly defects before any powered test.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>X-Ray — BGA/QFN</h3>
+        <p>2D transmission X-ray on every BGA and QFN site — 100% coverage, not sample-based. Nikon XT V 160 and Nordson Dage Quadra 5 systems with automatic void analysis software. Void percentage calculated per ball against IPC-7095 thresholds. 3D computed tomography available for NPI qualification and Class 3 builds — reveals partial non-wets and head-in-pillow defects invisible in 2D. 0.5 micron feature detection resolves sub-micron cracks and intermetallic anomalies.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>Burn-In Testing</h3>
+        <p>Extended powered operation at elevated temperature (typically 50-70C) for 24-168 hours to accelerate infant mortality failures. Boards are powered and monitored in a temperature-controlled chamber. Catches marginal components, weak solder joints, and timing issues that pass initial functional test but fail within the first hours of operation. Common requirement for medical, aerospace, and automotive Tier-1 electronics where field failure is not an option. Burn-in profiles per customer specification or industry standard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container-wide">
+    <div class="media-split">
+      <div class="media-content reveal">
+        <p class="section-eyebrow">Optical Inspection</p>
+        <h2>3D AOI — Every Board, Four Angles</h2>
+        <p>Automated Optical Inspection is the universal gatekeeper in our production flow. After reflow soldering, every board passes through 3D AOI before it reaches any other test station. The system captures solder joint height, volume, and shape data from four camera angles — not just a single top-down view that can miss lifted leads and hidden bridges.</p>
+        <ul>
+          <li><strong>25 micron resolution</strong> — Resolves solder joint geometry at the level of individual grains. Detects wetting angle, fillet height, and pad coverage against IPC-A-610 class-specific thresholds.</li>
+          <li><strong>AI defect classification</strong> — Machine learning model trained on millions of verified solder joints. Distinguishes true defects from acceptable process variation. Human operator reviews only borderline and rejected cases — not false positives.</li>
+          <li><strong>Real-time SPC</strong> — Statistical process control tracks defect types and rates per product, per line, per shift. Early warning when a process starts to drift — before it produces scrap.</li>
+          <li><strong>Full traceability</strong> — Every board's AOI result is stored with its unique serial number. Complete inspection history available for any shipped board.</li>
+        </ul>
+      </div>
+      <div class="media-visual reveal">
+        <img src="../../../generated/blog-testing-aoi.webp" alt="3D Automated Optical Inspection system" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-wide">
+    <div class="media-split reverse">
+      <div class="media-content reveal">
+        <p class="section-eyebrow">Fixtureless Testing</p>
+        <h2>Flying Probe — Rapid Test Without Tooling</h2>
+        <p>When you need 5 prototypes tested tomorrow — not 500 units next month — flying probe is the answer. Four independently programmable probes move at high speed to contact test points on both sides of the board simultaneously. No custom fixture required: we program the probe paths from your CAD data (ODB++ or IPC-2581) and Gerber files, typically within 24 hours.</p>
+        <ul>
+          <li><strong>Zero fixture cost</strong> — No bed-of-nails to design, machine, and wire. Test program generated directly from your EDA output files. Ideal for prototypes, NPI runs, and products still undergoing design iteration where a fixed ICT fixture would be obsolete before it pays for itself.</li>
+          <li><strong>Double-sided access</strong> — Probes access both top and bottom simultaneously. Measures component values, checks polarity, detects opens and shorts on every accessible net. Not as fast as ICT (seconds per board vs. fractions of a second) but eliminates the $2,000-$15,000 fixture cost.</li>
+          <li><strong>Transition to ICT</strong> — When your volume justifies it, we design a bed-of-nails fixture and transition from flying probe to ICT. The flying probe test data serves as the golden reference for ICT program validation.</li>
+        </ul>
+      </div>
+      <div class="media-visual reveal">
+        <img src="../../../generated/blog-testing-flying-probe.webp" alt="Flying probe test system for PCB testing" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container-wide">
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-3xl)" class="reveal">Test Flow <em>by Production Stage</em></h2>
+    <div class="test-flow reveal">
+      <div class="test-flow-step">
+        <div class="tf-num">1</div>
+        <h4>Pre-Reflow SPI</h4>
+        <p>3D solder paste inspection. Verifies paste volume, area, height, and alignment on every pad. Catch stencil issues before placement.</p>
+      </div>
+      <div class="test-flow-step">
+        <div class="tf-num">2</div>
+        <h4>Post-Reflow AOI</h4>
+        <p>3D Automated Optical Inspection on 100% of boards. Solder joint quality, component presence, polarity, bridging, tombstoning.</p>
+      </div>
+      <div class="test-flow-step">
+        <div class="tf-num">3</div>
+        <h4>X-Ray BGA/QFN</h4>
+        <p>2D X-ray inspection on every BGA/QFN site. Void analysis per IPC-7095. 3D CT for NPI and Class 3 verification.</p>
+      </div>
+      <div class="test-flow-step">
+        <div class="tf-num">4</div>
+        <h4>ICT / Flying Probe</h4>
+        <p>In-circuit test or flying probe. Component value verification, open/short, polarity. Pass before powered test.</p>
+      </div>
+    </div>
+    <div class="test-flow reveal" style="margin-top:var(--space-lg);grid-template-columns:repeat(3,1fr)">
+      <div class="test-flow-step">
+        <div class="tf-num">5</div>
+        <h4>FCT</h4>
+        <p>Functional circuit test — powered on, real operating conditions. Firmware flash, calibration. Per your test specification.</p>
+      </div>
+      <div class="test-flow-step">
+        <div class="tf-num">6</div>
+        <h4>Burn-In (Opt.)</h4>
+        <p>Extended powered testing at elevated temperature. 24-168 hours. Accelerates infant mortality. Medical, automotive, aerospace.</p>
+      </div>
+      <div class="test-flow-step">
+        <div class="tf-num">7</div>
+        <h4>Final QA Release</h4>
+        <p>Visual inspection, label check, packaging review. Digital test report compiled. Serial number traceability confirmed. Ship.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="data-table-section">
+  <div class="container-wide">
+    <h2 class="reveal">Test Capability Specifications</h2>
+    <div style="overflow-x:auto">
+    <table class="data-table reveal">
+      <thead><tr><th>Test Method</th><th>What It Verifies</th><th>Coverage</th><th>Fixture Required</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:500">SPI</td><td>Paste volume, area, height, alignment</td><td>100% pads</td><td>No</td><td>All production</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">3D AOI</td><td>Solder joints, components, polarity</td><td>100% boards</td><td>No</td><td>All production</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">X-Ray 2D</td><td>BGA/QFN voids, bridges, missing balls</td><td>100% BGA sites</td><td>No</td><td>All BGA/QFN</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">X-Ray 3D/CT</td><td>Head-in-pillow, partial non-wets, void distribution</td><td>Per lot sample</td><td>No</td><td>NPI, Class 3</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Flying Probe</td><td>Component values, opens, shorts, polarity</td><td>85-95% components</td><td>No</td><td>Proto, low volume</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">ICT</td><td>Component values, opens, shorts, polarity</td><td>85-98% components</td><td>Yes — in-house</td><td>Mid-high volume</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Boundary Scan / JTAG</td><td>Interconnects between JTAG devices, logic faults</td><td>JTAG-chain nets</td><td>No</td><td>Complex digital</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">FCT</td><td>Powered-on functional behavior</td><td>Per test spec</td><td>Yes — in-house</td><td>Per customer req.</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Burn-In</td><td>Infant mortality, marginal components</td><td>Powered operation</td><td>Yes — in-house</td><td>Medical, auto, aero</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Micro-Section</td><td>IMC layer, solder joint cross-section</td><td>Destructive sample</td><td>No</td><td>NPI, failure analysis</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container-wide">
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-lg)" class="reveal">Boundary Scan <em>and JTAG</em></h2>
+    <p style="text-align:center;color:var(--text-secondary);max-width:680px;margin:0 auto var(--space-2xl);line-height:1.7" class="reveal">For complex digital boards with BGAs, fine-pitch connectors, and high layer counts where physical test point access is limited, boundary scan (IEEE 1149.1 JTAG) provides interconnect testing without physical probe access. We support boundary scan test development and execution for complex digital assemblies.</p>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <h3>Interconnect Test</h3>
+        <p>Verifies connections between all JTAG-compliant devices on the board — even nets buried under BGAs with no physical test points. Detects opens, shorts, and stuck-at faults on every pin of every device in the scan chain. Complements ICT for high-density digital boards where physical access is limited.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>Memory Interface Test</h3>
+        <p>Tests DDR memory buses between processors and DRAM — signal integrity, address and data line connectivity, and termination. Boundary scan patterns exercise the full memory interface at-speed. Detects marginal solder joints that pass DC continuity but fail under AC conditions.</p>
+      </div>
+      <div class="test-card reveal">
+        <h3>Device Programming</h3>
+        <p>In-system programming of flash memory, CPLDs, and FPGAs via JTAG chain. Firmware, serial numbers, MAC addresses, and security keys loaded during test. Eliminates pre-programmed device inventory management — every device is blank until test, ensuring version control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container-wide">
+    <div class="cta-card reveal" style="background-image:url(../../../generated/blog-cta-turnkey.webp)">
+      <h2>Define Your Test Plan — We Build the Fixtures</h2>
+      <p>Send your Gerber files, BOM, schematic, and test specification. Our test engineering team will propose the optimal mix of AOI, ICT, flying probe, X-ray, and FCT — with custom fixture design and fabrication included. Full test report with every shipment.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Test Engineering Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB and PCBA manufacturing from Shenzhen. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>
+        <a href="/capabilities/pcba-assembly/">SMT Assembly</a>
+        <a href="/capabilities/smt-stencil/">SMT Stencil</a>
+        <a href="/capabilities/box-build/">Box-Build Assembly</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/projects/">Case Studies</a>
+        <a href="/quality/">Quality and Testing</a>
+        <a href="/shipping/">Shipping and Logistics</a>
+        <a href="/factory/">Factory Tour</a>
+        <a href="/design-guides/">Design Guides</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="../../../generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 and UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../../reveal.js"></script>
+<script>function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}</script>
+<script src="../../../inquiry-handler.js"></script></body>
+</html>
