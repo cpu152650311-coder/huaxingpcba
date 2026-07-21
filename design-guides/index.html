@@ -137,9 +137,9 @@
       </div>
     </div>
     <div class="reveal" style="text-align:center;margin:var(--space-2xl) 0">
-      <a href="/contact/" class="btn btn-primary">
-        <svg width="16" height="16"><use href="#icon-mail"/></svg> Get Free DFM Review for Your Design
-      </a>
+      <button onclick="openModal()" class="btn btn-primary">
+    <svg width="16" height="16"><use href="#icon-mail"/></svg> Get Free DFM Review for Your Design
+   </button>
     </div>
 
     <!-- Materials & Stackup -->
@@ -264,9 +264,9 @@
     <h2 class="reveal" style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md);color:#fff">Have a <em>Design Question?</em></h2>
     <p class="reveal" style="color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:var(--space-xl)">Our engineering team provides free DFM feedback with every quote. Send us your files — we'll help you optimize before production.</p>
     <div class="reveal" style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap">
-      <a href="/contact/" class="btn btn-primary btn-lg">
-        <svg width="16" height="16"><use href="#icon-mail"/></svg> Ask an Engineer
-      </a>
+      <button onclick="openModal()" class="btn btn-primary btn-lg">
+    <svg width="16" height="16"><use href="#icon-mail"/></svg> Ask an Engineer
+   </button>
     </div>
   </div>
 </section>
@@ -310,6 +310,37 @@
   </div>
 </footer>
 
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Request a Quote</h2>
+        <p class="mi-subtitle">Fill in your details — we'll respond within 24 hours with a competitive quote.</p>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..." required></textarea>
+        <button type="submit" class="btn btn-primary btn-block">
+          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Request
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script src="../reveal.js"></script>
+<script src="../inquiry-handler.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+
 </body>
 </html>

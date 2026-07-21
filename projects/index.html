@@ -39,42 +39,72 @@
 </script>
 <style>
 .container-wide{max-width:1280px;margin:0 auto;padding:0 var(--space-lg)}
-.sub-hero{position:relative;min-height:50vh;display:flex;align-items:center;overflow:hidden}
+
+/* Sub Hero */
+.sub-hero{position:relative;min-height:55vh;display:flex;align-items:center;overflow:hidden}
 .sub-hero-bg{position:absolute;inset:0;z-index:0}
-.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3) saturate(0.5)}
-.sub-hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,150,62,0.1) 0%,transparent 60%);z-index:1}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.4)}
+.sub-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(8,8,11,0.85) 100%);z-index:1}
 .sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+.sub-hero-content .section-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:var(--space-md)}
+.sub-hero-content h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:200;line-height:1.15;margin:0}
+.sub-hero-content h1 em{font-style:normal;color:var(--accent)}
+.sub-hero-content .hero-sub{font-size:var(--text-lg);color:var(--text-secondary);max-width:640px;margin-top:var(--space-lg);line-height:1.7}
 
-/* Case study cards */
-.case-grid{display:flex;flex-direction:column;gap:var(--space-3xl);max-width:1100px;margin:0 auto}
-.case-card{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;transition:border-color .3s}
-.case-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
-.case-card:nth-child(even) .case-img{order:2}
-.case-card:nth-child(even) .case-body{order:1}
-.case-img{position:relative;aspect-ratio:4/3;overflow:hidden}
-.case-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
-.case-card:hover .case-img img{transform:scale(1.04)}
-.case-body{padding:var(--space-2xl) var(--space-xl)}
-.case-tag{display:inline-block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.15em;color:var(--accent);border:1px solid var(--accent-25);padding:4px 12px;border-radius:2px;margin-bottom:var(--space-md)}
-.case-body h2{font-size:var(--text-2xl);font-weight:200;margin:0 0 var(--space-md);line-height:1.25}
-.case-body h2 em{font-style:normal;color:var(--accent)}
-.case-body .challenge{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin-bottom:var(--space-lg)}
-.case-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-bottom:var(--space-lg)}
-.case-stat{text-align:center;padding:var(--space-sm)}
-.case-stat .cs-val{font-size:var(--text-lg);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace}
-.case-stat .cs-lbl{font-size:var(--text-xs);color:var(--text-muted);margin-top:2px}
-.case-body .solution{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.7}
-.case-body .solution strong{color:var(--text-primary);font-weight:400}
+/* Case Study Sections */
+.case-section{padding:var(--space-3xl) 0;border-bottom:1px solid var(--border)}
+.case-section:last-of-type{border-bottom:none}
+.case-header{text-align:center;margin-bottom:var(--space-2xl)}
+.case-tag{display:inline-block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.15em;color:var(--accent);border:1px solid var(--accent-25);padding:5px 14px;border-radius:2px;margin-bottom:var(--space-md)}
+.case-header h2{font-size:var(--text-3xl);font-weight:200;margin:var(--space-md) 0 var(--space-sm);line-height:1.2}
+.case-header h2 em{font-style:normal;color:var(--accent)}
+.case-header .case-subtitle{color:var(--text-muted);font-size:var(--text-sm);max-width:560px;margin:0 auto}
 
-/* CTA */
-.cta-section{text-align:center;padding:var(--space-3xl) 0}
+.case-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);align-items:start;max-width:1100px;margin:0 auto}
+.case-visual{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3}
+.case-visual img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.case-visual:hover img{transform:scale(1.03)}
+.case-visual .visual-tag{position:absolute;bottom:var(--space-md);left:var(--space-md);background:rgba(8,8,11,.85);border:1px solid var(--accent-25);color:var(--accent);font-size:var(--text-xs);padding:4px 10px;border-radius:2px;letter-spacing:.08em}
+
+.case-text h3{font-size:var(--text-lg);font-weight:300;margin:0 0 var(--space-sm);color:var(--text-primary)}
+.case-text .label-row{display:flex;gap:var(--space-sm);align-items:center;margin-bottom:var(--space-md)}
+.case-text .label-chip{font-size:var(--text-xs);padding:3px 10px;border-radius:2px;letter-spacing:.06em}
+.label-chip.challenge{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+.label-chip.solution{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+.case-text p{color:var(--text-secondary);line-height:1.8;margin:0 0 var(--space-lg)}
+.case-text p strong{color:var(--text-primary);font-weight:400}
+
+.case-stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:var(--space-lg)}
+.case-stats-bar .stat-cell{background:var(--bg-surface);padding:var(--space-md);text-align:center}
+.stat-cell .val{font-size:var(--text-xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace}
+.stat-cell .lbl{font-size:11px;color:var(--text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:.08em}
+
+/* Image Grid for case details */
+.case-img-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);margin-top:var(--space-md)}
+.case-img-row .thumb{aspect-ratio:16/10;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border)}
+.case-img-row .thumb img{width:100%;height:100%;object-fit:cover}
+
+/* Trust Bar */
+.trust-strip{display:flex;justify-content:center;align-items:center;gap:var(--space-3xl);flex-wrap:wrap;text-align:center;padding:var(--space-2xl) 0}
+.trust-item{min-width:120px}
+.trust-item .t-val{font-size:var(--text-3xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace}
+.trust-item .t-lbl{font-size:var(--text-xs);color:var(--text-muted);margin-top:4px}
+
+/* CTA Section */
+.cta-wrap{position:relative;padding:var(--space-3xl) 0;overflow:hidden;text-align:center;border-radius:var(--radius-lg);margin-top:var(--space-2xl)}
+.cta-wrap .cta-bg{position:absolute;inset:0;z-index:0}
+.cta-wrap .cta-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3)}
+.cta-wrap .cta-fade{position:absolute;inset:0;background:rgba(8,8,11,.8);z-index:1}
+.cta-wrap .cta-inner{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:0 var(--space-lg)}
+.cta-wrap .cta-inner h2{font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)}
+.cta-wrap .cta-inner p{color:var(--text-secondary);margin-bottom:var(--space-xl)}
 
 @media(max-width:768px){
-  .case-card{grid-template-columns:1fr}
-  .case-card:nth-child(even) .case-img{order:0}
-  .case-card:nth-child(even) .case-body{order:0}
-  .case-body{padding:var(--space-lg)}
-  .case-body h2{font-size:var(--text-xl)}
+  .case-body-grid{grid-template-columns:1fr;gap:var(--space-xl)}
+  .case-stats-bar{grid-template-columns:repeat(3,1fr)}
+  .case-img-row{grid-template-columns:1fr}
+  .trust-strip{gap:var(--space-xl)}
+  .case-header h2{font-size:var(--text-2xl)}
 }
 </style>
 </head>
@@ -103,75 +133,122 @@
 
 <!-- Sub Hero -->
 <section class="sub-hero">
-  <div class="sub-hero-bg"><img src="../generated/sub-hero-projects.webp" alt="PCB and electronics manufacturing case studies" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-bg"><img src="../generated/blog-turnkey-overview.webp" alt="PCB assembly and electronics manufacturing" loading="eager" width="1920" height="600"></div>
   <div class="sub-hero-overlay"></div>
   <div class="sub-hero-content">
     <div class="container">
-      <p class="section-label reveal">Real Projects. Real Results.</p>
+      <p class="section-label reveal">Proven. Delivered. Trusted.</p>
       <h1 class="reveal">Customer <em>Case Studies</em></h1>
-      <p class="reveal">See how we solved complex PCB and PCBA challenges for automotive, medical, and IoT clients. Same engineering team. Same factory. Same quality.</p>
+      <p class="hero-sub reveal">Three real projects. Three complex challenges. One factory in Shenzhen that delivered — on time, on spec, with zero excuses.</p>
     </div>
   </div>
 </section>
 
-<!-- Case Studies -->
-<section style="padding:var(--space-3xl) 0">
+<!-- Case 1: Automotive ECU -->
+<section class="case-section">
   <div class="container-wide">
+    <div class="case-header reveal">
+      <span class="case-tag">Automotive · IATF 16949</span>
+      <h2>ADAS Control Unit: <em>8-Layer HDI</em></h2>
+      <p class="case-subtitle">Tier-1 supplier. 50,000 units/year. Zero room for field failure.</p>
+    </div>
 
-    <div class="case-grid">
-
-      <!-- Case 1: Automotive ECU -->
-      <article class="case-card reveal">
-        <div class="case-img"><img src="../generated/case-study-automotive.webp" alt="Automotive ECU multilayer PCB case study" loading="lazy"></div>
-        <div class="case-body">
-          <span class="case-tag">Automotive · IATF 16949</span>
-          <h2>ADAS Control Unit: <em>8-Layer HDI</em></h2>
-          <p class="challenge">A Tier-1 automotive supplier needed an ADAS camera control unit PCB with stringent thermal and reliability requirements. The design demanded 8-layer HDI with 0.3mm pitch BGA, controlled impedance on all high-speed lanes, and IPC Class 3 throughout — all at a production volume of 50,000 units/year.</p>
-          <div class="case-stats">
-            <div class="case-stat"><div class="cs-val">8L</div><div class="cs-lbl">HDI Layers</div></div>
-            <div class="case-stat"><div class="cs-val">50K</div><div class="cs-lbl">Annual Volume</div></div>
-            <div class="case-stat"><div class="cs-val">0 DPPM</div><div class="cs-lbl">Field Returns</div></div>
-          </div>
-          <p class="solution"><strong>Solution:</strong> We proposed a modified stackup using Panasonic Megtron 6 laminate for superior signal integrity, implemented laser-drilled microvias with stacked-via architecture, and built a custom flying-probe test program covering 100% of nets. First-pass yield stabilized at 99.2% within 3 production batches.</p>
-        </div>
-      </article>
-
-      <!-- Case 2: Medical Device -->
-      <article class="case-card reveal">
-        <div class="case-img"><img src="../generated/case-study-medical.webp" alt="Medical device PCB manufacturing case study" loading="lazy"></div>
-        <div class="case-body">
-          <span class="case-tag">Medical · ISO 13485 Ready</span>
-          <h2>Portable Patient Monitor: <em>Rigid-Flex Hybrid</em></h2>
-          <p class="challenge">A medical device startup developing a wearable patient monitor needed a compact 6-layer rigid-flex PCB with ultra-fine 2.5/2.5mil traces, ENIG finish, and the ability to fold into a wrist-worn form factor. They were on a tight FDA submission timeline and needed functional prototypes in 10 days.</p>
-          <div class="case-stats">
-            <div class="case-stat"><div class="cs-val">6L</div><div class="cs-lbl">Rigid-Flex</div></div>
-            <div class="case-stat"><div class="cs-val">10d</div><div class="cs-lbl">Prototype Turn</div></div>
-            <div class="case-stat"><div class="cs-val">Class 3</div><div class="cs-lbl">IPC Standard</div></div>
-          </div>
-          <p class="solution"><strong>Solution:</strong> We fast-tracked the DFM review (completed within 8 hours of file receipt), used polyimide flex layers with PSA stiffeners for the folding sections, and ran parallel prototype batches to de-risk delivery. 20 functional prototypes delivered on day 10. Full production ramped to 5,000/month after FDA clearance.</p>
-        </div>
-      </article>
-
-      <div class="reveal" style="text-align:center;padding:var(--space-md) 0">
-        <a href="/contact/" class="btn btn-primary" ><svg width="16" height="16"><use href="#icon-mail"/></svg> Discuss Your Project Requirements</a>
+    <div class="case-body-grid">
+      <div class="case-visual reveal">
+        <img src="../generated/blog-automotive-adas.webp" alt="ADAS camera control unit multilayer HDI PCB" loading="lazy">
+        <span class="visual-tag">8-Layer HDI Stackup</span>
       </div>
-
-      <!-- Case 3: IoT Gateway -->
-      <article class="case-card reveal">
-        <div class="case-img"><img src="../generated/case-study-iot.webp" alt="IoT gateway HDI PCB assembly case study" loading="lazy"></div>
-        <div class="case-body">
-          <span class="case-tag">IoT · Turnkey PCBA</span>
-          <h2>Smart Building Gateway: <em>Turnkey PCBA</em></h2>
-          <p class="challenge">A European smart-building company needed turnkey PCBA for their LoRaWAN + WiFi gateway. The BOM had 287 line items, including 4 BGAs, multiple RF shields, and specialty IoT sensors with 16-week lead times. They needed 2,000 units in 8 weeks with full functional testing.</p>
-          <div class="case-stats">
-            <div class="case-stat"><div class="cs-val">287</div><div class="cs-lbl">BOM Lines</div></div>
-            <div class="case-stat"><div class="cs-val">8wk</div><div class="cs-lbl">Total Lead Time</div></div>
-            <div class="case-stat"><div class="cs-val">99.5%</div><div class="cs-lbl">FCT Pass Rate</div></div>
-          </div>
-          <p class="solution"><strong>Solution:</strong> Our procurement team identified 14 long-lead-time components and secured allocation from 6 franchised distributors within 72 hours. We built a custom functional test station simulating LoRaWAN end-device registration and WiFi throughput testing. 2,000 units shipped on week 8 with 99.5% first-pass FCT yield. Re-order now running at 5,000 units/quarter.</p>
+      <div class="case-text reveal">
+        <div class="label-row"><span class="label-chip challenge">THE CHALLENGE</span></div>
+        <p>A Tier-1 automotive supplier needed an ADAS camera control unit PCB with stringent thermal and reliability requirements. The design demanded <strong>8-layer HDI with 0.3mm pitch BGA</strong>, controlled impedance on all high-speed lanes, and IPC Class 3 throughout — at a production volume of 50,000 units/year.</p>
+        <div class="case-stats-bar">
+          <div class="stat-cell"><div class="val">8L</div><div class="lbl">HDI Layers</div></div>
+          <div class="stat-cell"><div class="val">50K</div><div class="lbl">Annual Volume</div></div>
+          <div class="stat-cell"><div class="val">0 DPPM</div><div class="lbl">Field Returns</div></div>
         </div>
-      </article>
+        <div class="label-row"><span class="label-chip solution">OUR SOLUTION</span></div>
+        <p><strong>Modified stackup using Panasonic Megtron 6 laminate</strong> for superior signal integrity. Laser-drilled microvias with stacked-via architecture. Custom flying-probe test program covering 100% of nets. First-pass yield stabilized at <strong>99.2% within 3 production batches</strong>.</p>
+      </div>
+    </div>
 
+    <div class="case-img-row reveal" style="max-width:1100px;margin:var(--space-lg) auto 0">
+      <div class="thumb"><img src="../generated/blog-automotive-thermal.webp" alt="Automotive PCB thermal testing" loading="lazy"></div>
+      <div class="thumb"><img src="../generated/blog-automotive-testing.webp" alt="Automotive PCB reliability testing station" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Case 2: Medical Device -->
+<section class="case-section">
+  <div class="container-wide">
+    <div class="case-header reveal">
+      <span class="case-tag">Medical · ISO 13485 Ready</span>
+      <h2>Portable Patient Monitor: <em>Rigid-Flex Hybrid</em></h2>
+      <p class="case-subtitle">Startup on an FDA deadline. 10 days to functional prototypes. No margin for error.</p>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="case-visual reveal">
+        <img src="../generated/blog-rigid-flex-3d-fold.webp" alt="Rigid-flex PCB for wearable medical device" loading="lazy">
+        <span class="visual-tag">6L Rigid-Flex · Polyimide Core</span>
+      </div>
+      <div class="case-text reveal">
+        <div class="label-row"><span class="label-chip challenge">THE CHALLENGE</span></div>
+        <p>A medical device startup developing a wearable patient monitor needed a <strong>compact 6-layer rigid-flex PCB</strong> with ultra-fine 2.5/2.5mil traces, ENIG finish, and the ability to fold into a wrist-worn form factor. They were on a tight <strong>FDA submission timeline</strong> and needed functional prototypes in 10 days.</p>
+        <div class="case-stats-bar">
+          <div class="stat-cell"><div class="val">6L</div><div class="lbl">Rigid-Flex</div></div>
+          <div class="stat-cell"><div class="val">10d</div><div class="lbl">Proto Turn</div></div>
+          <div class="stat-cell"><div class="val">Class 3</div><div class="lbl">IPC Standard</div></div>
+        </div>
+        <div class="label-row"><span class="label-chip solution">OUR SOLUTION</span></div>
+        <p><strong>DFM review completed within 8 hours</strong> of file receipt. Used polyimide flex layers with PSA stiffeners for the folding sections. Ran parallel prototype batches to de-risk delivery. <strong>20 functional prototypes delivered on day 10</strong>. Full production ramped to 5,000/month after FDA clearance.</p>
+      </div>
+    </div>
+
+    <div class="case-img-row reveal" style="max-width:1100px;margin:var(--space-lg) auto 0">
+      <div class="thumb"><img src="../generated/blog-medical-class3.webp" alt="IPC Class 3 medical PCB inspection" loading="lazy"></div>
+      <div class="thumb"><img src="../generated/blog-medical-cleanroom.webp" alt="Medical device PCB cleanroom assembly" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Mid CTA -->
+<div class="reveal" style="text-align:center;padding:var(--space-2xl) 0">
+  <button class="btn btn-primary btn-lg" onclick="openModal()">
+    <svg width="16" height="16"><use href="#icon-mail"/></svg> Discuss Your Project Requirements
+  </button>
+</div>
+
+<!-- Case 3: IoT Gateway -->
+<section class="case-section">
+  <div class="container-wide">
+    <div class="case-header reveal">
+      <span class="case-tag">IoT · Turnkey PCBA</span>
+      <h2>Smart Building Gateway: <em>Turnkey PCBA</em></h2>
+      <p class="case-subtitle">287 BOM lines. 4 BGAs. 2,000 units. 8 weeks. Delivered.</p>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="case-visual reveal">
+        <img src="../generated/blog-turnkey-smt-line.webp" alt="IoT gateway turnkey PCBA assembly" loading="lazy">
+        <span class="visual-tag">Full Turnkey · 287 BOM Lines</span>
+      </div>
+      <div class="case-text reveal">
+        <div class="label-row"><span class="label-chip challenge">THE CHALLENGE</span></div>
+        <p>A European smart-building company needed turnkey PCBA for their LoRaWAN + WiFi gateway. The BOM had <strong>287 line items, including 4 BGAs</strong>, multiple RF shields, and specialty IoT sensors with 16-week lead times. They needed <strong>2,000 units in 8 weeks</strong> with full functional testing.</p>
+        <div class="case-stats-bar">
+          <div class="stat-cell"><div class="val">287</div><div class="lbl">BOM Lines</div></div>
+          <div class="stat-cell"><div class="val">8wk</div><div class="lbl">Lead Time</div></div>
+          <div class="stat-cell"><div class="val">99.5%</div><div class="lbl">FCT Pass Rate</div></div>
+        </div>
+        <div class="label-row"><span class="label-chip solution">OUR SOLUTION</span></div>
+        <p><strong>Identified 14 long-lead-time components</strong> and secured allocation from 6 franchised distributors within 72 hours. Built a custom functional test station simulating LoRaWAN end-device registration and WiFi throughput. <strong>2,000 units shipped on week 8</strong> with 99.5% first-pass FCT yield. Re-order now running at 5,000 units/quarter.</p>
+      </div>
+    </div>
+
+    <div class="case-img-row reveal" style="max-width:1100px;margin:var(--space-lg) auto 0">
+      <div class="thumb"><img src="../generated/blog-turnkey-components.webp" alt="Electronic components sourcing for IoT gateway" loading="lazy"></div>
+      <div class="thumb"><img src="../generated/blog-testing-fct-station.webp" alt="Functional test station for IoT gateway" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -179,22 +256,25 @@
 <!-- Trust Bar -->
 <section style="padding:var(--space-xl) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-secondary)">
   <div class="container">
-    <div style="display:flex;justify-content:center;align-items:center;gap:var(--space-2xl);flex-wrap:wrap;text-align:center">
-      <div><span style="font-size:var(--text-3xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace">30+</span><br><span style="font-size:var(--text-xs);color:var(--text-muted)">Countries Served</span></div>
-      <div><span style="font-size:var(--text-3xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace">500+</span><br><span style="font-size:var(--text-xs);color:var(--text-muted)">Clients Worldwide</span></div>
-      <div><span style="font-size:var(--text-3xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace">98.7%</span><br><span style="font-size:var(--text-xs);color:var(--text-muted)">First-Pass Yield</span></div>
-      <div><span style="font-size:var(--text-3xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace">10+</span><br><span style="font-size:var(--text-xs);color:var(--text-muted)">Years in Business</span></div>
+    <div class="trust-strip">
+      <div class="trust-item reveal"><div class="t-val">30+</div><div class="t-lbl">Countries Served</div></div>
+      <div class="trust-item reveal"><div class="t-val">500+</div><div class="t-lbl">Clients Worldwide</div></div>
+      <div class="trust-item reveal"><div class="t-val">98.7%</div><div class="t-lbl">First-Pass Yield</div></div>
+      <div class="trust-item reveal"><div class="t-val">10+</div><div class="t-lbl">Years in Business</div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <h2 class="reveal" style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)">Your Project Could Be <em>Next</em></h2>
-    <p class="reveal" style="color:var(--text-secondary);margin-bottom:var(--space-xl);max-width:600px;margin-left:auto;margin-right:auto">Send us your requirements. Our engineering team will review and respond with a feasibility assessment and quotation within 24 hours.</p>
-    <div class="reveal" style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap">
-      <a href="/contact/" class="btn btn-primary btn-lg" >        <svg width="16" height="16"><use href="#icon-mail"/></svg> Start Your Project      </a>    </div>
+<!-- CTA Section -->
+<section class="cta-wrap reveal">
+  <div class="cta-bg"><img src="../generated/blog-turnkey-overview.webp" alt="PCB assembly production line" loading="lazy"></div>
+  <div class="cta-fade"></div>
+  <div class="cta-inner">
+    <h2>Your Project Could Be <em style="color:var(--accent);font-style:normal">Next</em></h2>
+    <p>Send us your requirements. Our engineering team will review and respond with a feasibility assessment and quotation within 24 hours.</p>
+    <button class="btn btn-primary btn-lg" onclick="openModal()">
+      <svg width="16" height="16"><use href="#icon-mail"/></svg> Start Your Project
+    </button>
   </div>
 </section>
 
@@ -237,6 +317,36 @@
   </div>
 </footer>
 
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Tell us about your requirements — we'll respond with a quote within 24 hours.</p>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="Describe your project — PCB specs, quantity, timeline, any special requirements..." required></textarea>
+        <button type="submit" class="btn btn-primary btn-block">
+          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Inquiry
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script src="../reveal.js"></script>
+<script src="../inquiry-handler.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
 </body>
 </html>

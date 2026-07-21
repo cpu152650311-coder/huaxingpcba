@@ -187,9 +187,9 @@
         <h2 style="font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-lg)">Key Equipment <em>Showcase</em></h2>
         <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-md)">Every piece of equipment in our facility is selected for precision and reliability. We invest in industry-leading brands — Yamaha, Koh Young, Omron, Heller, Polar Instruments — and maintain calibrated, documented performance records.</p>
         <p style="color:var(--text-secondary);line-height:1.8">Our equipment maintenance program runs on predictive schedules: monthly calibration checks, quarterly preventive maintenance, and annual full-service overhauls. Every machine has a digital maintenance log accessible to auditors.</p>
-        <a href="/contact/" class="btn btn-primary" style="margin-top:var(--space-lg)">
-          <svg width="16" height="16"><use href="#icon-mail"/></svg> Request Equipment List
-        </a>
+        <button onclick="openModal()" class="btn btn-primary" style="margin-top:var(--space-lg)">
+     <svg width="16" height="16"><use href="#icon-mail"/></svg> Request Equipment List
+    </button>
       </div>
       <div class="reveal" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3">
         <img src="../generated/factory-smt-lines.webp" alt="High-speed SMT pick-and-place assembly lines" loading="lazy" style="width:100%;height:100%;object-fit:cover">
@@ -226,9 +226,9 @@
     </table>
     </div>
     <div class="reveal" style="text-align:center;margin-top:var(--space-xl)">
-      <a href="/contact/" class="btn btn-primary btn-lg">
-        <svg width="16" height="16"><use href="#icon-mail"/></svg> Get a Production Quote
-      </a>
+      <button onclick="openModal()" class="btn btn-primary btn-lg">
+    <svg width="16" height="16"><use href="#icon-mail"/></svg> Get a Production Quote
+   </button>
     </div>
   </div>
 </section>
@@ -242,9 +242,9 @@
     <h2 class="reveal" style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md);color:#fff"><em>Tour Our Factory</em> in Shenzhen</h2>
     <p class="reveal" style="color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:var(--space-xl)">We welcome customer audits and factory visits. Meet the engineering team, walk the production floor, and see our quality processes firsthand. Located 20 minutes from Shenzhen Bao'an International Airport (SZX).</p>
     <div class="reveal" style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap">
-      <a href="/contact/" class="btn btn-primary btn-lg">
-        <svg width="16" height="16"><use href="#icon-mail"/></svg> Schedule a Visit
-      </a>
+      <button onclick="openModal()" class="btn btn-primary btn-lg">
+    <svg width="16" height="16"><use href="#icon-mail"/></svg> Schedule a Visit
+   </button>
     </div>
   </div>
 </section>
@@ -288,6 +288,37 @@
   </div>
 </footer>
 
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Request a Quote</h2>
+        <p class="mi-subtitle">Fill in your details — we'll respond within 24 hours with a competitive quote.</p>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..." required></textarea>
+        <button type="submit" class="btn btn-primary btn-block">
+          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Request
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script src="../reveal.js"></script>
+<script src="../inquiry-handler.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+
 </body>
 </html>

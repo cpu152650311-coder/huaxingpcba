@@ -194,7 +194,7 @@
     <h2>From Gerber to <em>Finished Stencil</em></h2>
     <p>Upload your solder paste Gerber layer and we handle the rest. Our CAM engineers extract apertures, optimize for your component mix, and laser-cut to exact specifications. Every stencil is verified against your original Gerber data before packaging.</p>
     <p>We stock standard framed sizes (584×584mm, 650×650mm, 736×736mm) and can manufacture custom sizes for unique SMT line configurations. Frameless (foil-only) stencils are also available for universal tensioning frames.</p>
-    <a href="/contact/" class="btn btn-primary" style="margin-top:var(--space-md)">      <svg width="16" height="16"><use href="#icon-mail"/></svg> Request Stencil Quote    </a>  </div>
+    <button onclick="openModal()" class="btn btn-primary" style="margin-top:var(--space-md)">   <svg width="16" height="16"><use href="#icon-mail"/></svg> Request Stencil Quote  </button>  </div>
 </section>
 
 <!-- Process Steps -->
@@ -288,17 +288,17 @@
   <div class="container">
     <h2 class="reveal" style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)">Need a Stencil for Your <em>Next PCB Build?</em></h2>
     <p class="reveal" style="color:var(--text-secondary);margin-bottom:var(--space-xl);max-width:600px;margin-left:auto;margin-right:auto">Upload your solder paste Gerber layer. Stencil ships in 24 hours. Free DFM review included.</p>
-    <div class="reveal">      <a href="/contact/" class="btn btn-primary btn-lg" >        <svg width="16" height="16"><use href="#icon-mail"/></svg> Get Your Stencil Quote      </button>
-    </div>
+    <div class="reveal">      <button onclick="openModal()" class="btn btn-primary btn-lg" >    <svg width="16" height="16"><use href="#icon-mail"/></svg> Get Your Stencil Quote   </button>
   </div>
+ </div>
 </section>
 
 <!-- Footer -->
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+ <div class="container">
+  <div class="footer-grid">
+   <div class="footer-brand">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></button>
         <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
       </div>
       <div class="footer-col">
@@ -332,6 +332,37 @@
 </footer>
 
 <!-- Inquiry Modal -->
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Request a Quote</h2>
+        <p class="mi-subtitle">Fill in your details — we'll respond within 24 hours with a competitive quote.</p>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..." required></textarea>
+        <button type="submit" class="btn btn-primary btn-block">
+          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Request
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script src="../../reveal.js"></script>
+<script src="../../inquiry-handler.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+
 </body>
 </html>
