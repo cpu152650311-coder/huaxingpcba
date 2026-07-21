@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — PCB Manufacturing Process | Huaxing PCBA</title>
+<meta name="description" content="Your step-by-step guide to PCB & PCBA manufacturing at Huaxing — from Gerber upload to global delivery. Free DFM review, 24h quotes, 5-7 day production.">
+<meta property="og:title" content="How It Works — PCB Manufacturing Process | Huaxing PCBA">
+<meta property="og:description" content="Step-by-step: upload your Gerber files, get a free DFM review, receive your quote within 24h, and track your PCBs through fabrication to delivery.">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+/* ── Process Timeline ── */
+.process-hero{position:relative;min-height:40vh;display:flex;align-items:center;overflow:hidden}
+.process-hero-bg{position:absolute;inset:0;z-index:0}
+.process-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.process-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(8,8,11,.38) 0%,rgba(8,8,11,.58) 40%,rgba(8,8,11,.88) 100%)}
+.process-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0;text-align:center}
+.process-hero-content h1{font-weight:200;letter-spacing:.04em;margin-bottom:var(--space-sm);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.process-hero-content p{color:var(--text-secondary);font-size:var(--text-lg);font-weight:300;max-width:600px;margin-inline:auto;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+
+/* ── Timeline ── */
+.timeline-section{padding:var(--space-3xl) 0}
+.timeline{position:relative;max-width:820px;margin:0 auto}
+.timeline::before{content:'';position:absolute;left:39px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent-25),var(--accent-10),var(--accent-25))}
+.tl-step{display:flex;gap:var(--space-lg);margin-bottom:var(--space-xl);position:relative}
+.tl-step:last-child{margin-bottom:0}
+.tl-num{width:80px;height:80px;flex-shrink:0;border-radius:50%;background:var(--bg-surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:var(--text-2xl);font-weight:200;color:var(--accent);position:relative;z-index:1;transition:all .3s}
+.tl-step:hover .tl-num{border-color:var(--accent);box-shadow:0 0 24px var(--accent-10)}
+.tl-body{flex:1;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);transition:border-color .25s}
+.tl-step:hover .tl-body{border-color:var(--accent-25)}
+.tl-body h3{font-size:var(--text-xl);font-weight:300;margin-bottom:var(--space-xs)}
+.tl-body h3 em{font-style:normal;color:var(--accent)}
+.tl-body p{color:var(--text-secondary);font-size:var(--text-sm);line-height:1.75;margin-bottom:var(--space-sm)}
+.tl-body .tl-meta{display:flex;gap:var(--space-md);flex-wrap:wrap}
+.tl-meta-item{display:flex;align-items:center;gap:6px;font-size:var(--text-xs);color:var(--text-muted)}
+.tl-meta-item svg{color:var(--accent);flex-shrink:0}
+.tl-img{width:100%;aspect-ratio:16/7;overflow:hidden;border-radius:var(--radius-md);margin-bottom:var(--space-md)}
+.tl-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+.tl-step:hover .tl-img img{transform:scale(1.04)}
+.tl-body .tl-checklist{display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);margin-top:var(--space-sm)}
+.tl-checklist li{display:flex;align-items:flex-start;gap:8px;font-size:var(--text-xs);color:var(--text-secondary)}
+.tl-checklist li svg{color:var(--accent);flex-shrink:0;margin-top:3px}
+
+/* ── File Requirements Card ── */
+.files-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md)}
+.file-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;transition:all .25s;position:relative;overflow:hidden}
+.file-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-25),transparent);opacity:0;transition:opacity .25s}
+.file-card:hover{border-color:var(--accent-25);transform:translateY(-2px)}
+.file-card:hover::before{opacity:1}
+.file-card .fc-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--accent-subtle);color:var(--accent);margin:0 auto var(--space-md)}
+.file-card h4{font-size:var(--text-base);font-weight:300;margin-bottom:var(--space-xs)}
+.file-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6}
+
+/* ── Timeline Highlights Bar ── */
+.highlights-bar{background:var(--bg-surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:var(--space-lg) 0}
+.hl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);text-align:center}
+.hl-item .hl-val{font-size:var(--text-2xl);font-weight:200;color:var(--accent);line-height:1}
+.hl-item .hl-lbl{font-size:var(--text-xs);color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .timeline::before{left:23px}
+  .tl-num{width:48px;height:48px;font-size:var(--text-lg)}
+  .tl-step{gap:var(--space-sm)}
+  .tl-body{padding:var(--space-md)}
+  .tl-checklist{grid-template-columns:1fr}
+  .files-grid{grid-template-columns:1fr}
+  .hl-grid{grid-template-columns:repeat(2,1fr)}
+  .process-hero{min-height:32vh}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Icon Sprite -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+  <symbol id="icon-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></symbol>
+  <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10M12 2a15.3 15.3 0 00-4 10 15.3 15.3 0 004 10"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></symbol>
+</svg>
+
+<!-- Header -->
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=17" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Sub Hero -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/sub-hero-process.webp" alt="PCB manufacturing process from design to delivery" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Your Manufacturing Journey</p>
+      <h1 class="reveal">How It <em>Works</em></h1>
+      <p class="reveal">From Gerber upload to global delivery — a transparent, 7-step process designed for busy engineers and procurement teams.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Highlights Bar -->
+<section class="highlights-bar">
+  <div class="container">
+    <div class="hl-grid">
+      <div class="hl-item reveal"><div class="hl-val">24h</div><div class="hl-lbl">Quote Turnaround</div></div>
+      <div class="hl-item reveal"><div class="hl-val">Free</div><div class="hl-lbl">DFM Review</div></div>
+      <div class="hl-item reveal"><div class="hl-val">5–7d</div><div class="hl-lbl">PCB Production</div></div>
+      <div class="hl-item reveal"><div class="hl-val">30+</div><div class="hl-lbl">Countries Shipped</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Process Timeline -->
+<section class="timeline-section" style="position:relative">
+  <div style="position:absolute;inset:0;background:url(../generated/geometric-tech-texture.webp) center/cover no-repeat;opacity:.03;pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <p class="section-label reveal">7-Step Process</p>
+    <h2 class="section-title reveal">Transparent, <em>Trackable</em>, Reliable</h2>
+    <p class="section-desc reveal mb-xl">Every step is monitored. You receive updates at each milestone — no black boxes, no surprises.</p>
+
+    <div class="timeline">
+
+      <!-- Step 1 -->
+      <div class="tl-step reveal">
+        <div class="tl-num">1</div>
+        <div class="tl-body">
+          <div class="tl-img"><img src="../generated/process-step1-upload.webp" alt="Upload Gerber files and PCB design documents" loading="lazy"></div>
+          <h3><em>Upload</em> Your Design Files</h3>
+          <p>Send us your Gerber files (RS-274X), drill files, and BOM if you need PCBA. For PCB-only orders, Gerber + drill is all we need. We accept Eagle, Altium, KiCad, OrCAD, and all major EDA formats — our CAM team handles the conversion.</p>
+          <div class="tl-checklist">
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Gerber RS-274X (.gbr/.gerber)</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> NC Drill (.drl/.txt)</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> BOM (.csv/.xlsx) — for PCBA</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Pick & Place / CPL (.csv) — for PCBA</li>
+          </div>
+          <div class="tl-meta" style="margin-top:var(--space-sm)">
+            <span class="tl-meta-item"><svg width="14" height="14"><use href="#icon-clock"/></svg> Takes ~3 minutes</span>
+            <span class="tl-meta-item"><svg width="14" height="14"><use href="#icon-file"/></svg> Max 50MB per upload</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="tl-step reveal">
+        <div class="tl-num">2</div>
+        <div class="tl-body">
+          <div class="tl-img"><img src="../generated/process-step2-dfm.webp" alt="DFM engineering review of PCB design" loading="lazy"></div>
+          <h3><em>DFM Review</em> & Engineering Check</h3>
+          <p>Within 4 business hours, our CAM engineers run a comprehensive Design for Manufacturability check. We verify trace/space, annular rings, solder mask clearances, drill-to-copper distances, and impedance stackup feasibility — against your target IPC class.</p>
+          <div class="tl-checklist">
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Trace/space feasibility check</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Drill & annular ring verification</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Solder mask clearance audit</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Impedance stackup simulation (if applicable)</li>
+          </div>
+          <div class="tl-meta" style="margin-top:var(--space-sm)">
+            <span class="tl-meta-item"><svg width="14" height="14"><use href="#icon-clock"/></svg> Within 4 business hours</span>
+            <span class="tl-meta-item"><svg width="14" height="14"><use href="#icon-eye"/></svg> Free — no charge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="tl-step reveal">
+        <div class="tl-num">3</div>
+        <div class="tl-body">
+          <div class="tl-img"><img src="../generated/process-step3-quote.webp" alt="Detailed PCB manufacturing quotation and pricing" loading="lazy"></div>
+          <h3><em>Quotation</em> & Order Confirmation</h3>
+          <p>You receive a detailed quotation with unit price breakdown, NRE costs, tooling fees, and shipping estimates — all itemized. No hidden charges. Once approved, we issue a Proforma Invoice. Production begins upon PO confirmation. For new clients, we recommend starting with a prototype batch to validate quality before scaling.</p>
+          <div class="tl-checklist">
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Itemized unit + NRE + tooling breakdown</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Proforma Invoice within 24h</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> T/T, L/C, PayPal, Alibaba Trade Assurance</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Prototype validation recommended for new clients</li>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="tl-step reveal">
+        <div class="tl-num">4</div>
+        <div class="tl-body">
+          <div class="tl-img"><img src="../generated/pcb-manufacturing-flow.webp" alt="PCB manufacturing fabrication process" loading="lazy"></div>
+          <h3><em>PCB Fabrication</em></h3>
+          <p>Your boards enter our 80,000㎡ facility. The process includes: inner layer imaging & etching → AOI inspection → lamination → drilling → electroless copper deposition → outer layer imaging → pattern plating → etching → solder mask application → surface finish → silkscreen → electrical test → final inspection.</p>
+          <div class="tl-checklist">
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> 2–32 layers, FR-4/Rogers/Ceramic/Aluminum</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> IPC Class 2 or Class 3 standard</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> ENIG / HASL / OSP / Imm Silver / Imm Tin / Hard Gold</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> 100% AOI + flying probe / fixture e-test</li>
+          </div>
+          <div class="tl-meta" style="margin-top:var(--space-sm)">
+            <span class="tl-meta-item"><svg width="14" height="14"><use href="#icon-clock"/></svg> 5–7 days standard · 24h rush available</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="tl-step reveal">
+        <div class="tl-num">5</div>
+        <div class="tl-body">
+          <div class="tl-img"><img src="../generated/pcba-assembly-flow.webp" alt="SMT assembly and pick-and-place production line" loading="lazy"></div>
+          <h3><em>SMT Assembly</em> (PCBA Orders)</h3>
+          <p>If your order includes assembly: we source components from 50+ authorized distributors (Digi-Key, Mouser, Arrow, Avnet, LCSC) or use your consigned parts. Our 8 high-speed SMT lines handle 0201 to 55mm BGA. 3D SPI before reflow, 10-zone reflow ovens, inline AOI after each side, and X-Ray for BGA/QFN verification.</p>
+          <div class="tl-checklist">
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> 8 SMT lines, 8M placements/day</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> 0201 to 55×55mm BGA, 0.3mm pitch QFN</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> 3D SPI + 10-zone reflow + AOI + X-Ray inline</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Conformal coating, potting, thermal management</li>
+          </div>
+          <div class="tl-meta" style="margin-top:var(--space-sm)">
+            <span class="tl-meta-item"><svg width="14" height="14"><use href="#icon-clock"/></svg> 3–10 days depending on complexity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="tl-step reveal">
+        <div class="tl-num">6</div>
+        <div class="tl-body">
+          <div class="tl-img"><img src="../generated/quality-inspection.webp" alt="Automated optical inspection and PCB quality testing" loading="lazy"></div>
+          <h3><em>Quality Inspection</em> & Testing</h3>
+          <p>Every board passes through our multi-stage QC gate: visual inspection → AOI → electrical test (100% netlist) → microsection analysis (batch sample) → solderability test → ionic contamination test → dimensional verification. PCBA orders add: first-article inspection, ICT/flying probe, functional test per your spec, burn-in testing if required.</p>
+          <div class="tl-checklist">
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> 100% AOI + electrical test (IPC-9252)</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Microsection & cross-section analysis</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> X-Ray for BGA/QFN/hidden joints</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Functional testing per customer specification</li>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="tl-step reveal">
+        <div class="tl-num">7</div>
+        <div class="tl-body">
+          <div class="tl-img"><img src="../generated/process-step7-shipping.webp" alt="Vacuum-sealed PCB packaging and global shipping" loading="lazy"></div>
+          <h3><em>Packaging</em> & Global Delivery</h3>
+          <p>Boards are vacuum-sealed with desiccant and humidity indicator cards, packed in anti-static foam-lined cartons. We ship via DHL, FedEx, UPS, TNT (3–5 days express) or sea/rail freight for volume orders. Every shipment includes: QC inspection report, Certificate of Conformance, RoHS/REACH compliance docs, and traceability records.</p>
+          <div class="tl-checklist">
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Vacuum-sealed ESD-safe packaging</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> DHL/FedEx/UPS 3–5 days worldwide</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Full QC documentation included</li>
+            <li><svg width="14" height="14"><use href="#icon-check"/></svg> Real-time tracking number within 24h of dispatch</li>
+          </div>
+          <div class="tl-meta" style="margin-top:var(--space-sm)">
+            <span class="tl-meta-item"><svg width="14" height="14"><use href="#icon-globe"/></svg> DDP / DAP / FOB / EXW — your choice</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- What You'll Need -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <p class="section-label reveal">File Requirements</p>
+    <h2 class="section-title reveal">What You'll <em>Need to Prepare</em></h2>
+    <p class="section-desc reveal mb-lg">Most EDA tools export these directly. If you're unsure, our engineers will guide you — just reach out.</p>
+    <div class="files-grid reveal">
+      <div class="file-card">
+        <div class="fc-icon"><svg width="24" height="24"><use href="#icon-layers"/></svg></div>
+        <h4>Gerber Files</h4>
+        <p>RS-274X format. One file per layer (copper, mask, silkscreen, outline). Generated from your EDA tool's CAM processor.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-icon"><svg width="24" height="24"><use href="#icon-settings"/></svg></div>
+        <h4>NC Drill File</h4>
+        <p>Excellon format. Contains all drill hole positions, sizes, and plating flags. Required for all PCB orders.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-icon"><svg width="24" height="24"><use href="#icon-file"/></svg></div>
+        <h4>BOM (Bill of Materials)</h4>
+        <p>For PCBA orders. Part numbers, quantities, designators, and preferred manufacturers. CSV or Excel format.</p>
+      </div>
+    </div>
+    <p class="reveal" style="text-align:center;color:var(--text-muted);font-size:var(--text-sm);margin-top:var(--space-lg)">Supported EDA tools: Altium Designer, Eagle, KiCad, OrCAD, Allegro, EasyEDA, Diptrace, PADS, Proteus, and any tool that exports standard Gerber.</p>
+  </div>
+</section>
+
+<!-- Quality Promise -->
+<section class="section">
+  <div class="container">
+    <div class="media-split reveal">
+      <div class="media-text">
+        <p class="section-label">Quality Commitment</p>
+        <h2>Every Board <em>Inspected</em></h2>
+        <p>We don't sample-test — every single board passes through AOI and electrical test. Our IPC Class 3 production line is audited quarterly. If any board fails our outgoing inspection, the entire batch is reworked or remanufactured at our cost.</p>
+        <div class="spec-list">
+          <div class="spec-item"><span class="val">100%</span><span class="lbl">AOI + E-Test</span></div>
+          <div class="spec-item"><span class="val">IPC-A-600</span><span class="lbl">Class 2 / 3</span></div>
+          <div class="spec-item"><span class="val">IPC-9252</span><span class="lbl">E-Test Standard</span></div>
+          <div class="spec-item"><span class="val">Quarterly</span><span class="lbl">Audit Cycle</span></div>
+        </div>
+      </div>
+      <div class="media-img">
+        <img src="../generated/quality-inspection.webp" alt="PCB quality inspection and testing at Huaxing PCBA" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-rigid-flex.webp)">
+      <h2>Ready to Start Your PCB Project?</h2>
+      <p>Upload your Gerber files now. Free DFM review, 24-hour quote, 5-7 day production. No registration, no commitment.</p>
+      <div style="display:flex;gap:var(--space-sm);justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary btn-lg" onclick="openModal()">
+          <svg width="16" height="16"><use href="#icon-upload"/></svg> Upload Files & Get Quote
+        </button>
+        <a href="/quote/" class="btn btn-ghost btn-lg">Try Online Estimator</a>
+        <a href="/faq/" class="btn btn-ghost btn-lg">Read FAQ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/">PCB Fabrication</a>
+        <a href="/capabilities/">SMT Assembly</a>
+        <a href="/capabilities/">Box-Build</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="/industries/automotive/">Automotive</a>
+        <a href="/industries/medical/">Medical</a>
+        <a href="/industries/industrial/">Industrial</a>
+        <a href="/industries/iot/">IoT</a>
+        <a href="/industries/telecom/">Telecom &amp; 5G</a>
+        <a href="/industries/energy/">New Energy</a>
+        <a href="/industries/consumer/">Consumer</a>
+        <a href="/industries/aerospace/">Aerospace &amp; Defense</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Huaxing PCBA. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>

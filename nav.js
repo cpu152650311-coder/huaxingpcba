@@ -210,6 +210,7 @@
         '<a href="/capabilities/advanced-pcb/">Advanced PCB</a>' +
         '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
         '<a href="/capabilities/pcba-assembly/">PCBA Assembly</a>' +
+        '<a href="/capabilities/smt-stencil/">SMT Stencil</a>' +
         '<a href="/capabilities/components-sourcing/">Components Sourcing</a>' +
       '</div>' +
     '</div>' +
@@ -227,6 +228,7 @@
       '</div>' +
     '</div>' +
     '<a href="/quote/"' + active('/quote/') + '>Quick Quote</a>' +
+    '<a href="/how-it-works/"' + active('/how-it-works/') + '>How It Works</a>' +
     '<a href="/about/"' + active('/about/') + '>About</a>' +
     '<a href="/contact/"' + active('/contact/') + '>Contact</a>' +
     '<a href="/blog/"' + active('/blog/') + '>Blog</a>' +

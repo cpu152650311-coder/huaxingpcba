@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quality & Testing — IPC Class 2/3, ISO 9001, IATF 16949 | Huaxing PCBA</title>
+<meta name="description" content="Comprehensive PCB quality control and testing: AOI, X-Ray, flying probe, ICT, FCT, microsection analysis, SPC. IPC-A-610 Class 2 & 3. ISO 9001, IATF 16949, UL certified. 98.7% first-pass yield.">
+<meta property="og:title" content="Quality & Testing — IPC Class 2/3, ISO 9001, IATF 16949 | Huaxing PCBA">
+<meta property="og:description" content="AOI, X-Ray, flying probe, ICT, FCT, microsection analysis. IPC Class 2 & 3. ISO 9001, IATF 16949, UL certified. 98.7% first-pass yield across all product types.">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="canonical" href="https://huaxingpcba.com/quality/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Quality Control & Testing",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "description": "PCB quality control: AOI, X-Ray, flying probe, ICT, FCT, microsection. IPC Class 2/3. ISO 9001, IATF 16949, UL certified. 98.7% first-pass yield.",
+  "areaServed": {"@type": "Continent", "name": "Worldwide"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Quality & Testing", "item": "https://huaxingpcba.com/quality/"}
+  ]
+}
+</script>
+<style>
+:root{--section-gap:5rem}
+
+/* Sub-hero */
+.sub-hero{position:relative;min-height:55vh;display:flex;align-items:center;overflow:hidden}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3) saturate(0.5)}
+.sub-hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,150,62,0.1) 0%,transparent 60%);z-index:1}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+
+/* Stats bar */
+.stats-bar{padding:var(--space-xl) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-secondary)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);text-align:center}
+.stat-value{font-size:var(--text-4xl);font-weight:200;color:var(--accent);line-height:1.1;font-family:'JetBrains Mono','Consolas',monospace}
+.stat-label{font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-xs);text-transform:uppercase;letter-spacing:.1em}
+
+/* Cert badges */
+.cert-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-lg)}
+.cert-card{text-align:center;padding:var(--space-xl) var(--space-md);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color .3s}
+.cert-card:hover{border-color:var(--accent-subtle)}
+.cert-card .cert-icon{width:48px;height:48px;margin:0 auto var(--space-md);border-radius:50%;background:var(--accent-subtle);display:flex;align-items:center;justify-content:center}
+.cert-card .cert-icon svg{width:24px;height:24px;color:var(--accent)}
+.cert-card h4{font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)}
+.cert-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+/* QC process flow */
+.qc-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--space-sm);align-items:start}
+.qc-step{text-align:center;padding:var(--space-lg) var(--space-sm);position:relative}
+.qc-step::after{content:'';position:absolute;top:28px;right:-8px;width:16px;height:1px;background:var(--accent);opacity:.4}
+.qc-step:last-child::after{display:none}
+.qc-step .step-num{width:56px;height:56px;border-radius:50%;background:var(--bg-surface);border:1px solid var(--accent-25);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-md);font-size:var(--text-xl);font-weight:200;color:var(--accent)}
+.qc-step h4{font-size:var(--text-sm);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)}
+.qc-step p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+/* Test methods grid */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+.test-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);transition:border-color .3s}
+.test-card:hover{border-color:var(--accent-subtle)}
+.test-card h4{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm)}
+.test-card .tc-meta{font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-sm)}
+.test-card p{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.7;margin:0}
+
+/* Spec table */
+.spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm)}
+.spec-table thead th{text-align:left;padding:var(--space-md);color:var(--accent);font-weight:300;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);border-bottom:1px solid var(--border)}
+.spec-table tbody td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid rgba(255,255,255,.04)}
+.spec-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.spec-table .param{color:var(--text-primary);font-weight:400;white-space:nowrap}
+
+@media(max-width:768px){
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
+  .qc-flow{grid-template-columns:repeat(3,1fr)}
+  .qc-step::after{display:none}
+  .test-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Sprite -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+  <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10M12 2a15.3 15.3 0 00-4 10 15.3 15.3 0 004 10"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></symbol>
+</svg>
+
+<!-- Header -->
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=17" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Sub Hero -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/sub-hero-quality.webp" alt="PCB quality control and testing laboratory" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Trust Through Testing</p>
+      <h1 class="reveal">Quality Built <em>Into Every Layer</em></h1>
+      <p class="reveal">IPC-A-610 Class 2 and Class 3. 100% inspection. Six-stage QC process. IATF 16949 certified for automotive-grade reliability.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-value">98.7<span style="font-size:.35em;font-weight:300">%</span></div>
+        <div class="stat-label">First-Pass Yield</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value">100<span style="font-size:.35em;font-weight:300">%</span></div>
+        <div class="stat-label">AOI + E-Test Coverage</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value">6</div>
+        <div class="stat-label">QC Inspection Gates</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value">7</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center">Certifications</p>
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)">Audited. Certified. <em>Verified.</em></h2>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon"><svg><use href="#icon-award"/></svg></div>
+        <h4>ISO 9001:2015</h4>
+        <p>Quality management system. Annual TÜV surveillance audit.</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><svg><use href="#icon-globe"/></svg></div>
+        <h4>ISO 14001:2015</h4>
+        <p>Environmental management. RoHS & REACH compliant processes.</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><svg><use href="#icon-shield"/></svg></div>
+        <h4>IATF 16949</h4>
+        <p>Automotive quality management. Zero-defect methodology for critical systems.</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><svg><use href="#icon-zap"/></svg></div>
+        <h4>UL Certified</h4>
+        <p>Safety certification for PCB materials and finished boards. UL file available.</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon"><svg><use href="#icon-file"/></svg></div>
+        <h4>IPC Member</h4>
+        <p>IPC-A-610 Class 2 & 3 acceptance. IPC-9252 electrical test. IPC-1601 handling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QC Process Flow -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center">Quality Control Process</p>
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)">Six Gates to <em>Zero Defects</em></h2>
+    <div class="qc-flow">
+      <div class="qc-step reveal">
+        <div class="step-num">1</div>
+        <h4>IQC</h4>
+        <p>Incoming material inspection: laminates, solder mask, chemicals, components — verified against spec before production</p>
+      </div>
+      <div class="qc-step reveal">
+        <div class="step-num">2</div>
+        <h4>IPQC</h4>
+        <p>In-process QC at each station: etching, drilling, plating, solder mask, silkscreen — real-time SPC monitoring</p>
+      </div>
+      <div class="qc-step reveal">
+        <div class="step-num">3</div>
+        <h4>AOI</h4>
+        <p>100% automated optical inspection: opens, shorts, trace width violations, solder mask defects — both sides scanned</p>
+      </div>
+      <div class="qc-step reveal">
+        <div class="step-num">4</div>
+        <h4>E-Test</h4>
+        <p>100% electrical test: flying probe (prototype/NPI) or bed-of-nails fixture (volume). IPC-9252 Class 2 compliance</p>
+      </div>
+      <div class="qc-step reveal">
+        <div class="step-num">5</div>
+        <h4>Microsection</h4>
+        <p>Cross-section analysis per batch: plating thickness, annular ring, dielectric integrity. Solderability test on coupons</p>
+      </div>
+      <div class="qc-step reveal">
+        <div class="step-num">6</div>
+        <h4>OQC</h4>
+        <p>Final visual, dimensional, and cosmetic check. Vacuum-sealed packaging per IPC-1601. Documentation pack assembled</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testing Methods -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center">Testing Capabilities</p>
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)"><em>Every Board</em> Tested. Every Time.</h2>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <span class="tc-meta">PCB · PCBA</span>
+        <h4>Automated Optical Inspection (AOI)</h4>
+        <p>2D and 3D AOI systems from Koh Young and Omron. Detects solder bridges, tombstoning, missing components, lifted leads, and polarity errors at production speed. 100% coverage — both sides, every board.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCB · PCBA</span>
+        <h4>X-Ray Inspection (AXI)</h4>
+        <p>2D and CT X-Ray for BGA, QFN, and hidden-joint inspection. Void analysis per IPC-7095. Detects head-in-pillow, insufficient solder, and pad cratering. Standard on all BGA and QFN assemblies.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCB</span>
+        <h4>Flying Probe / ICT</h4>
+        <p>Flying probe for prototype and NPI (no fixture cost). Bed-of-nails ICT for volume production. Tests: opens, shorts, component values, diode/transistor orientation, capacitance, inductance. IPC-9252 compliant.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCB</span>
+        <h4>Impedance Testing</h4>
+        <p>TDR (Time Domain Reflectometry) impedance testing with ±5% tolerance guarantee. Test coupons on every controlled-impedance panel. Polar Instruments CITS880s system. Report included with shipment.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCBA</span>
+        <h4>Functional Test (FCT)</h4>
+        <p>Custom functional test fixtures built to your specification. Simulates real operating conditions: power-up, signal integrity, communication protocols, sensor calibration. Golden-sample verification before every run.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCB</span>
+        <h4>Microsection & Cross-Section</h4>
+        <p>Destructive analysis on sacrificial coupons per production batch. Measures: copper plating thickness, intermetallic layer formation, hole wall quality, dielectric thickness, solder mask registration. Per IPC-6012.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCB · PCBA</span>
+        <h4>3D Solder Paste Inspection (SPI)</h4>
+        <p>Koh Young 3D SPI on every SMT line — before reflow. Measures paste volume, height, area, and offset. Catches insufficient paste, bridging, and misalignment before it becomes a defect. Real-time SPC feedback loop.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCB</span>
+        <h4>Solderability & Thermal Stress</h4>
+        <p>Solderability testing per IPC-J-STD-003 on test coupons. Thermal stress testing (288°C / 10s float) for delamination resistance. Tin whisker mitigation verification for lead-free finishes.</p>
+      </div>
+      <div class="test-card reveal">
+        <span class="tc-meta">PCBA</span>
+        <h4>Conformal Coating Inspection</h4>
+        <p>Automated UV inspection of conformal coating coverage and thickness per IPC-CC-830. Black-light booth for manual verification on complex geometries. Coating thickness measured at 5-point grid per board.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IPC Class Comparison -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-2xl)">IPC Class <em>Comparison</em></h2>
+    <div style="max-width:900px;margin:0 auto;overflow-x:auto">
+    <table class="spec-table">
+      <thead><tr><th>Requirement</th><th>IPC Class 2 (Industrial)</th><th>IPC Class 3 (High Reliability)</th></tr></thead>
+      <tbody>
+        <tr><td class="param">Annular Ring (External)</td><td>90° breakout allowed</td><td>Min. 0.05mm annular ring, no breakout</td></tr>
+        <tr><td class="param">Annular Ring (Internal)</td><td>90° breakout allowed, not connected</td><td>Min. 0.025mm annular ring</td></tr>
+        <tr><td class="param">Solder Joint (PTH)</td><td>180° circumferential wetting</td><td>270° minimum, 330° preferred</td></tr>
+        <tr><td class="param">Plating Void</td><td>&lt; 5% of barrel length</td><td>&lt; 2.5% of barrel length</td></tr>
+        <tr><td class="param">Etchback / Negative Etchback</td><td>Allowed if no resin smear</td><td>Not permitted — positive etchback required</td></tr>
+        <tr><td class="param">Solder Mask Clearance</td><td>±0.075mm registration</td><td>±0.05mm registration</td></tr>
+        <tr><td class="param">Dielectric Spacing</td><td>&gt; 0.09mm (external)</td><td>&gt; 0.13mm (external)</td></tr>
+        <tr><td class="param">Typical Applications</td><td>Industrial, consumer, commercial</td><td>Automotive, medical, aerospace, defense</td></tr>
+        <tr><td class="param">Inspection Level</td><td>Sampling + 100% AOI/E-test</td><td>100% visual + AOI + E-test + microsection</td></tr>
+        <tr><td class="param">Cost Premium vs Class 2</td><td>—</td><td>~20–30%</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- SPC & Documentation -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center">
+      <div class="reveal">
+        <p class="section-label">Continuous Improvement</p>
+        <h2 style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-lg)">SPC-Driven <em>Process Control</em></h2>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-md)">Every critical process parameter — plating thickness, etch factor, line width, registration accuracy, solder paste volume — is monitored in real time via Statistical Process Control (SPC). Control charts track Cp and Cpk indices, triggering automatic alerts when any parameter drifts beyond ±1.5σ.</p>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-md)">Each production batch includes a complete QC documentation package: AOI images, electrical test reports (IPC-9252), impedance test data (TDR plots), microsection images with measurements, Certificate of Conformance, RoHS/REACH compliance, and lot traceability records — archived for 3 years.</p>
+        <div style="display:flex;gap:var(--space-lg);margin-top:var(--space-lg)">
+          <div><span style="font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace">≥1.67</span><br><span style="font-size:var(--text-xs);color:var(--text-muted)">Target Cpk</span></div>
+          <div><span style="font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace">3yr</span><br><span style="font-size:var(--text-xs);color:var(--text-muted)">Record Retention</span></div>
+          <div><span style="font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace">24/7</span><br><span style="font-size:var(--text-xs);color:var(--text-muted)">SPC Monitoring</span></div>
+        </div>
+      </div>
+      <div class="reveal" style="position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3">
+        <img src="../generated/quality-inspection.webp" alt="Automated optical PCB inspection process" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Failure Handling -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container" style="max-width:800px;text-align:center">
+    <svg width="48" height="48" style="color:var(--accent);margin-bottom:var(--space-lg)"><use href="#icon-shield"/></svg>
+    <h2 class="reveal" style="font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-lg)">Our <em>Quality Guarantee</em></h2>
+    <p class="reveal" style="color:var(--text-secondary);line-height:1.8;font-size:var(--text-base)">If any board fails outgoing QC inspection, we perform a root cause analysis and either rework or remanufacture — at our cost. For IPC Class 3 orders, any non-conformance triggers a full batch review, a corrective action report (CAR), and preventive action implementation within 48 hours. Your design files, production parameters, and test fixtures are retained for consistent quality across re-orders.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align:center;padding:var(--space-3xl) 0">
+  <div class="container">
+    <h2 class="reveal" style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)">Quality You Can <em>Count On</em></h2>
+    <p class="reveal" style="color:var(--text-secondary);margin-bottom:var(--space-xl);max-width:600px;margin-left:auto;margin-right:auto">Request our quality manual, certificates, or a sample QC documentation package. See how we ensure zero-defect delivery.</p>
+    <div class="reveal">
+      <button class="btn btn-primary btn-lg" onclick="openModal()">
+        <svg width="16" height="16"><use href="#icon-mail"/></svg> Request Quality Documentation
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>
+        <a href="/capabilities/pcba-assembly/">SMT Assembly</a>
+        <a href="/capabilities/smt-stencil/">SMT Stencil</a>
+        <a href="/capabilities/components-sourcing/">Components Sourcing</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quality & Logistics</h4>
+        <a href="/quality/">Quality & Testing</a>
+        <a href="/shipping/">Shipping & Logistics</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Huaxing PCBA. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Quality Documentation Request</h2>
+        <p class="mi-subtitle">Our quality team responds within 24 hours.</p>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="What quality documentation or certifications would you like to review?" required></textarea>
+        <button type="submit" class="btn btn-primary btn-block">
+          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Request
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>

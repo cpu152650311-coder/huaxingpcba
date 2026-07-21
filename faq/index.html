@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — PCB & PCBA Manufacturing Questions | Huaxing PCBA</title>
+<meta name="description" content="Frequently asked questions about PCB manufacturing, PCBA assembly, ordering process, lead times, quality certifications, and shipping — answered by Huaxing PCBA engineers.">
+<meta property="og:title" content="FAQ — PCB & PCBA Manufacturing | Huaxing PCBA">
+<meta property="og:description" content="28 detailed answers to common PCB manufacturing questions: capabilities, pricing, lead times, quality, shipping, and technical requirements.">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<style>
+/* ── FAQ Page Layout ── */
+.faq-section{padding:var(--space-3xl) 0}
+.faq-nav{display:flex;gap:var(--space-sm);flex-wrap:wrap;justify-content:center;margin-bottom:var(--space-xl)}
+.faq-nav-btn{padding:8px 18px;font-size:var(--text-sm);font-weight:300;color:var(--text-secondary);border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:all .2s;background:transparent}
+.faq-nav-btn:hover,.faq-nav-btn.active{border-color:var(--accent);color:var(--accent);background:var(--accent-subtle)}
+.faq-category{margin-bottom:var(--space-xl)}
+.faq-cat-title{font-size:var(--text-xl);font-weight:300;color:var(--accent);margin-bottom:var(--space-lg);padding-bottom:var(--space-sm);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:var(--space-sm)}
+.faq-cat-title svg{flex-shrink:0}
+.faq-cat-img{width:100%;aspect-ratio:16/6;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:var(--space-md)}
+.faq-cat-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+.faq-cat-img:hover img{transform:scale(1.03)}
+.faq-list{max-width:800px;margin:0 auto}
+
+/* Override FAQ accordion for richer answers */
+.faq-a p{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.75}
+.faq-a p + p{margin-top:var(--space-sm)}
+
+/* Quick links at top */
+.quick-links{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-sm);margin-bottom:var(--space-xl)}
+.ql-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-md);text-align:center;cursor:pointer;transition:all .2s}
+.ql-card:hover{border-color:var(--accent-25);background:var(--bg-elevated)}
+.ql-card svg{color:var(--accent);margin-bottom:var(--space-xs)}
+.ql-card h4{font-size:var(--text-sm);font-weight:300;color:var(--text-primary)}
+
+@media(max-width:768px){
+  .quick-links{grid-template-columns:repeat(2,1fr)}
+  .faq-nav{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .faq-nav-btn{flex-shrink:0;font-size:var(--text-xs);padding:6px 14px}
+  .faq-cat-title{font-size:var(--text-lg)}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Icon Sprite -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+  <symbol id="icon-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></symbol>
+  <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></symbol>
+  <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10M12 2a15.3 15.3 0 00-4 10 15.3 15.3 0 004 10"/></symbol>
+  <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></symbol>
+  <symbol id="icon-calculator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h0M8 14h0M8 18h0M12 10h0M12 14h0M12 18h0M16 10h0M16 14h0M16 18h0"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+</svg>
+
+<!-- Header -->
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=17" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Sub Hero -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/sub-hero-faq.webp" alt="PCB manufacturing frequently asked questions" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Got Questions?</p>
+      <h1 class="reveal"><em>Frequently Asked</em> Questions</h1>
+      <p class="reveal">28 detailed answers from our engineering and sales teams. Don't see yours? Reach out directly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section" style="position:relative">
+  <div style="position:absolute;inset:0;background:url(../generated/geometric-tech-texture.webp) center/cover no-repeat;opacity:.03;pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1">
+
+    <!-- Quick Links -->
+    <div class="quick-links reveal">
+      <div class="ql-card" onclick="document.getElementById('cat-ordering').scrollIntoView({behavior:'smooth'})">
+        <svg width="24" height="24"><use href="#icon-dollar"/></svg>
+        <h4>Ordering & Pricing</h4>
+      </div>
+      <div class="ql-card" onclick="document.getElementById('cat-pcb').scrollIntoView({behavior:'smooth'})">
+        <svg width="24" height="24"><use href="#icon-layers"/></svg>
+        <h4>PCB Capabilities</h4>
+      </div>
+      <div class="ql-card" onclick="document.getElementById('cat-pcba').scrollIntoView({behavior:'smooth'})">
+        <svg width="24" height="24"><use href="#icon-cpu"/></svg>
+        <h4>PCBA Assembly</h4>
+      </div>
+      <div class="ql-card" onclick="document.getElementById('cat-quality').scrollIntoView({behavior:'smooth'})">
+        <svg width="24" height="24"><use href="#icon-shield"/></svg>
+        <h4>Quality & Certs</h4>
+      </div>
+      <div class="ql-card" onclick="document.getElementById('cat-shipping').scrollIntoView({behavior:'smooth'})">
+        <svg width="24" height="24"><use href="#icon-truck"/></svg>
+        <h4>Shipping & Delivery</h4>
+      </div>
+      <div class="ql-card" onclick="document.getElementById('cat-technical').scrollIntoView({behavior:'smooth'})">
+        <svg width="24" height="24"><use href="#icon-settings"/></svg>
+        <h4>Technical & Files</h4>
+      </div>
+    </div>
+
+    <div class="faq-list">
+
+      <!-- CATEGORY: Ordering & Pricing -->
+      <div class="faq-category" id="cat-ordering">
+        <div class="faq-cat-img"><img src="../generated/faq-ordering.webp" alt="PCB manufacturing pricing and ordering process" loading="lazy"></div>
+        <h3 class="faq-cat-title"><svg width="22" height="22"><use href="#icon-dollar"/></svg> Ordering & Pricing</h3>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is your minimum order quantity (MOQ)?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Our MOQ is <strong>1 piece</strong> for PCB fabrication and <strong>5 pieces</strong> for PCBA. We specialize in supporting both prototyping and mass production — same factory, same quality standards. For prototypes, we recommend ordering 5–10 pieces to validate your design before scaling to production volumes.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How quickly can I get a quote?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Standard quote turnaround is <strong>within 24 hours</strong>. For simple 2-4 layer PCB orders with complete Gerber files, we often respond within 4–6 business hours. Complex multilayer or PCBA orders with BOM review may take the full 24 hours. Use our <a href="/quote/" style="color:var(--accent)">online estimator</a> for instant ballpark pricing.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What payment methods do you accept?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We accept <strong>T/T (wire transfer), L/C (Letter of Credit), PayPal, and Alibaba Trade Assurance</strong>. For new clients, we typically start with 50% deposit / 50% before shipment. After establishing a relationship, we offer net-30 terms for qualified buyers.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How is PCB pricing calculated?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>PCB pricing depends on: <strong>layer count, board dimensions, quantity, material (FR-4 vs. Rogers vs. ceramic), copper weight, surface finish, trace/space requirements, and turnaround time</strong>. Engineering/NRE fees are one-time and decrease per unit with volume. Our <a href="/quote/" style="color:var(--accent)">online calculator</a> gives instant estimates — try different configurations to see how each parameter affects price.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you offer free samples or prototypes?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We don't offer free samples for custom PCB fabrication, but we do offer <strong>heavily discounted prototype pricing</strong> for first-time customers — typically 30-50% off standard prototype rates on your first order. This includes full DFM review, AOI, and electrical testing — identical to our production QC process.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I get a re-order discount?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Yes. Once we've manufactured your design, <strong>NRE and tooling fees are waived on re-orders</strong> (files are kept on file for 3 years). Re-orders also benefit from faster turnaround since CAM engineering is already complete. We maintain your approved production panel layout and test fixtures for consistent quality across batches.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY: PCB Capabilities -->
+      <div class="faq-category" id="cat-pcb">
+        <div class="faq-cat-img"><img src="../generated/faq-pcb-capabilities.webp" alt="Advanced multi-layer PCB manufacturing capabilities" loading="lazy"></div>
+        <h3 class="faq-cat-title"><svg width="22" height="22"><use href="#icon-layers"/></svg> PCB Capabilities</h3>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is the maximum number of layers you can produce?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We manufacture up to <strong>32 layers</strong> for rigid PCBs. Our high-layer-count capability includes blind, buried, and back-drill vias, with precision impedance control (±5%). For HDI designs, we support any-layer microvia technology with laser-drilled vias down to 0.075mm.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What PCB materials do you stock?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We stock <strong>FR-4 (standard, high-Tg, halogen-free), Rogers (4350B, 4003C, 3003), Taconic (RF-35, TLX), Isola (370HR, FR408HR), Panasonic Megtron 6, Polyimide (flex/rigid-flex), Aluminum (MCPCB), Copper-core, Al₂O₃ and AlN ceramic</strong>. For materials not in stock, procurement lead time is typically 3–7 days. We can source virtually any laminate — just ask.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What surface finishes do you offer?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We offer: <strong>ENIG (electroless nickel immersion gold), ENEPIG, HASL lead-free, OSP, Immersion Silver, Immersion Tin, and Hard Gold</strong> (for edge connectors). ENIG is our most popular finish — excellent solderability, flat surface for fine-pitch components, and 12+ month shelf life. See our <a href="/capabilities/pcb-fabrication/" style="color:var(--accent)">PCB fabrication page</a> for a full finish comparison.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What are your trace/space and drill capabilities?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Our standard capability is <strong>3/3 mil trace/space</strong> with 0.15mm minimum mechanical drill. For advanced designs, we achieve 2.5/2.5 mil and 0.10mm laser drill. We recommend staying at 5/5 mil or above for cost-optimized production. All trace/space values are verified during DFM review against your target IPC class.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you support impedance control?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Yes, <strong>impedance control to ±5% tolerance</strong> is a standard offering. We use Polar Instruments Si8000 for stackup simulation before production. Common targets: 50Ω single-ended, 90Ω / 100Ω differential. We provide impedance test coupons with every controlled-impedance order and include the test report in your QC documentation package.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can you do flex and rigid-flex PCBs?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Yes. We manufacture <strong>flex (1–8 layers) and rigid-flex (2–20 layers)</strong> with polyimide base material. Capabilities include: laser-cut coverlay openings, stiffeners (FR-4, polyimide, stainless steel), PSA adhesives, and ZIF connector-compatible thickness. Common applications: wearables, aerospace, medical devices, foldable consumer electronics.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY: PCBA Assembly -->
+      <div class="faq-category" id="cat-pcba">
+        <div class="faq-cat-img"><img src="../generated/faq-pcba-assembly.webp" alt="SMT pick-and-place assembly line with precision component placement" loading="lazy"></div>
+        <h3 class="faq-cat-title"><svg width="22" height="22"><use href="#icon-cpu"/></svg> PCBA Assembly</h3>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is your SMT assembly capacity?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We operate <strong>8 high-speed SMT lines</strong> with a combined capacity of <strong>8 million placements per day</strong>. Each line features: automatic solder paste printer, 3D SPI (solder paste inspection), high-speed chip shooters + multi-function placers, 10-zone reflow ovens, and inline AOI. Component range: 0201 passives to 55×55mm BGAs, 0.3mm pitch QFNs.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do you source components?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We source from <strong>50+ franchised distributors</strong> including Digi-Key, Mouser, Arrow, Avnet, Future Electronics, and LCSC. All components are traceable to manufacturer COO. We can also work with your consigned parts. For EOL or hard-to-find components, our procurement team performs cross-reference verification and authenticity testing before use.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What assembly quality checks do you perform?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Every PCBA order undergoes: <strong>3D SPI (before reflow) → AOI (after reflow, both sides) → X-Ray (BGA/QFN joints) → ICT or flying probe (electrical verification) → functional test</strong> (per your specification). First-article inspection (FAI) is performed on every new design. We comply with IPC-A-610 Class 2 and Class 3 acceptance criteria.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you offer conformal coating?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Yes. We apply <strong>acrylic, silicone, and polyurethane conformal coatings</strong> via selective robotic spray or manual brush for low volumes. Coating thickness is verified per IPC-CC-830. We also offer potting/encapsulation for harsh-environment electronics. Common applications: automotive under-hood, outdoor industrial, marine electronics.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's the difference between turnkey and consigned PCBA?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p><strong>Turnkey</strong>: we procure all components, manage inventory, and handle assembly — you provide BOM and Gerber, we deliver assembled boards. <strong>Consigned</strong>: you ship us the components, we assemble and test. Turnkey saves you procurement time and leverages our distributor relationships for better pricing. Consigned works well when you have existing component inventory or proprietary parts.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY: Quality & Certifications -->
+      <div class="faq-category" id="cat-quality">
+        <div class="faq-cat-img"><img src="../generated/faq-quality.webp" alt="Automated optical inspection microscope examining PCB quality" loading="lazy"></div>
+        <h3 class="faq-cat-title"><svg width="22" height="22"><use href="#icon-shield"/></svg> Quality & Certifications</h3>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What certifications does Huaxing hold?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We are certified to: <strong>ISO 9001:2015</strong> (quality management), <strong>ISO 14001:2015</strong> (environmental management), <strong>IATF 16949</strong> (automotive quality), and <strong>UL</strong> (safety). We are RoHS and REACH compliant. Our facility is audited quarterly by internal teams and annually by TÜV for ISO/IATF surveillance. Certificates available upon request.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is the difference between IPC Class 2 and Class 3?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p><strong>IPC Class 2</strong> (Dedicated Service): suitable for commercial/industrial products where extended life and uninterrupted service are desired. Allows minor visual imperfections. <strong>IPC Class 3</strong> (High Reliability): required for automotive, medical, aerospace, and military — zero-defect tolerance. Tightens annular ring, solder joint, and plating requirements. Class 3 adds approximately 20–30% to PCB cost due to tighter process controls and 100% inspection.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do you ensure consistent quality across batches?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We use a <strong>statistical process control (SPC)</strong> system that monitors key parameters in real time: plating thickness, etch factor, line width, registration accuracy. Each batch includes microsection coupons for cross-section analysis. We retain production records, test data, and retained samples for 3 years per IATF requirements. Re-orders use your approved panel layout and process parameters — no deviation without your approval.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What testing is included with every PCB order?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Every order includes: <strong>100% AOI (automated optical inspection), 100% electrical test (flying probe or fixture, per IPC-9252), visual final inspection, dimensional verification, and solderability testing</strong> on coupons. Impedance test reports are included for controlled-impedance designs. Microsection analysis is performed on a per-batch sampling basis. All test data is included in your QC documentation package.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What happens if a board fails inspection?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>If any board fails our outgoing QC inspection, we perform a <strong>root cause analysis</strong> and either rework or remanufacture the affected boards — at our cost. For critical failures, the entire batch is remanufactured. Our first-pass yield is 98.7% across all product types. For IPC Class 3 orders, any non-conformance triggers a full batch review and corrective action report (CAR).</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY: Shipping & Delivery -->
+      <div class="faq-category" id="cat-shipping">
+        <div class="faq-cat-img"><img src="../generated/faq-shipping.webp" alt="ESD-safe PCB packaging in modern logistics warehouse" loading="lazy"></div>
+        <h3 class="faq-cat-title"><svg width="22" height="22"><use href="#icon-truck"/></svg> Shipping & Delivery</h3>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What are your standard lead times?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p><strong>PCB fabrication</strong>: standard 5–7 days, rush 24–48 hours (2-4 layer), 3–4 days (multilayer). <strong>PCBA</strong>: 7–15 days depending on complexity and component availability. <strong>Turnkey PCBA with sourcing</strong>: add 3–5 days for component procurement. Lead times are guaranteed — if we miss the committed date, we cover the express shipping upgrade.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What shipping methods and costs should I expect?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We ship via <strong>DHL, FedEx, UPS, TNT (3–5 days express)</strong> for most orders. Sea freight (25–35 days) and rail freight (15–20 days to Europe) available for volume shipments. Express shipping for a typical prototype order (0.5–2 kg) costs $25–45 to North America/Europe. We offer DDP (delivered duty paid), DAP, FOB, and EXW Incoterms — your choice.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How are PCBs packaged for shipping?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>All PCBs are <strong>vacuum-sealed with desiccant packs and humidity indicator cards</strong> (per IPC-1601), then packed in anti-static bubble wrap and foam-lined export-grade cartons. PCBA orders include additional ESD-safe tray/tape-and-reel packaging. Every shipment includes: QC inspection report, Certificate of Conformance, RoHS/REACH compliance documents, and lot traceability records.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you ship to my country?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We ship to <strong>30+ countries</strong> across North America, Europe, Asia-Pacific, Middle East, and South America. Our primary markets: USA, Canada, Germany, UK, France, Netherlands, Sweden, Denmark, Australia, Japan, South Korea, Singapore, Israel, and UAE. If your country isn't listed, contact us — we can likely arrange shipping. No export restrictions on standard commercial PCBs.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY: Technical & File Requirements -->
+      <div class="faq-category" id="cat-technical">
+        <div class="faq-cat-img"><img src="../generated/faq-technical.webp" alt="PCB design blueprints and Gerber file layers on digital interface" loading="lazy"></div>
+        <h3 class="faq-cat-title"><svg width="22" height="22"><use href="#icon-settings"/></svg> Technical & File Requirements</h3>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What file formats do you accept for PCB fabrication?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>We accept <strong>Gerber RS-274X (.gbr, .gerber)</strong> and <strong>Excellon NC Drill (.drl, .txt)</strong> as the standard fabrication package. For PCBA, we also need <strong>BOM (.csv, .xlsx, .xls)</strong> and <strong>Pick & Place / CPL (.csv)</strong>. We can work with ODB++ and IPC-2581 if available. Our CAM team handles conversion from all major EDA tools: Altium, Eagle, KiCad, OrCAD, Allegro, EasyEDA, Diptrace, PADS, and Proteus.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What information should my BOM include?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>A complete BOM should include: <strong>designator (reference ID), MPN (manufacturer part number), quantity, description/package type, and preferred manufacturer</strong>. Optional but helpful: alternate MPNs (for sourcing flexibility), Digi-Key/Mouser part numbers, and any special notes (e.g., "do not substitute", "matched pair"). Our procurement team reviews the BOM and flags any availability issues before we quote.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is DFM review and why does it matter?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p><strong>Design for Manufacturability (DFM) review</strong> is our engineering team's pre-production analysis of your design files to identify potential manufacturing issues. We check: trace/space violations, annular ring adequacy, solder mask slivers, acid traps, copper-to-edge clearance, drill aspect ratios, and impedance stackup feasibility. A good DFM review catches issues that would cause fabrication defects — saving you time, cost, and re-spins. Our DFM review is <strong>free and included with every quote</strong>.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">I'm new to PCB design — can you help?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Yes. Our engineering team provides <strong>design guidance for new clients</strong>: we'll review your concept, recommend stackup configurations, suggest cost-optimized material choices, and advise on DFM best practices. We don't offer full PCB layout services, but we can connect you with trusted design partners. For startups and first-time PCB buyers, we recommend starting with a <a href="/blog/dfm-tips.html" style="color:var(--accent)">DFM tips review</a> and sending us your files early — even rough drafts — for preliminary feedback.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What are Gerber files and how do I generate them?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Gerber files (RS-274X) are the industry-standard format for PCB fabrication data — one file per layer (copper, solder mask, silkscreen, board outline). Every EDA tool has a CAM processor or "Plot" function to export Gerbers. Typically: File → Plot / Fabrication Outputs → select layers → check "RS-274X" format → generate. We have a detailed guide in our <a href="/blog/gerber-files-guide.html" style="color:var(--accent)">Gerber files guide</a>. If you're stuck, send us your EDA source files and we'll help with the export.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you sign NDAs and respect design confidentiality?<svg width="16" height="16"><use href="#icon-plus"/></svg></button>
+          <div class="faq-a"><p>Yes. We sign <strong>Mutual NDAs (Non-Disclosure Agreements)</strong> as a standard practice before reviewing your design files. All client design data is stored on air-gapped internal servers — not cloud-connected. Access is restricted to the engineering team assigned to your project. We never share, reuse, or reverse-engineer client designs. See our <a href="/privacy/" style="color:var(--accent)">Privacy Policy</a> for full details on design file confidentiality.</p></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Still have questions? -->
+    <div class="reveal" style="text-align:center;margin-top:var(--space-2xl)">
+      <p style="color:var(--text-secondary);font-size:var(--text-lg);margin-bottom:var(--space-md)">Don't see your question here?</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">
+        <svg width="16" height="16"><use href="#icon-mail"/></svg> Ask Our Engineering Team
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/">PCB Fabrication</a>
+        <a href="/capabilities/">SMT Assembly</a>
+        <a href="/capabilities/">Box-Build</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <a href="/industries/automotive/">Automotive</a>
+        <a href="/industries/medical/">Medical</a>
+        <a href="/industries/industrial/">Industrial</a>
+        <a href="/industries/iot/">IoT</a>
+        <a href="/industries/telecom/">Telecom &amp; 5G</a>
+        <a href="/industries/energy/">New Energy</a>
+        <a href="/industries/consumer/">Consumer</a>
+        <a href="/industries/aerospace/">Aerospace &amp; Defense</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Huaxing PCBA. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Have a Question?</h2>
+        <p class="mi-subtitle">Our engineering team responds within 24 hours.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Your Question</label><textarea name="message" placeholder="What would you like to know about our PCB manufacturing or assembly services?"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Question</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>

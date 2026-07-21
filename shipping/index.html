@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shipping & Logistics — Global PCB/PCBA Delivery | Huaxing PCBA</title>
+<meta name="description" content="Global PCB and PCBA shipping from Shenzhen: DHL, FedEx, UPS express (3-5 days), sea freight, rail to Europe. DDP, DAP, FOB, EXW. ESD-safe packaging per IPC-1601. 30+ countries served.">
+<meta property="og:title" content="Shipping & Logistics — Global PCB/PCBA Delivery | Huaxing PCBA">
+<meta property="og:description" content="Express 3-5 days, sea freight, rail to Europe. DDP/DAP/FOB/EXW. ESD-safe packaging, IPC-1601 compliant. Serving 30+ countries from Shenzhen, China.">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=23">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="canonical" href="https://huaxingpcba.com/shipping/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "PCB & PCBA Shipping & Logistics",
+  "provider": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "description": "Global PCB shipping: DHL/FedEx/UPS express 3-5 days, sea freight, rail to Europe. DDP, DAP, FOB, EXW Incoterms. ESD-safe packaging per IPC-1601.",
+  "areaServed": {"@type": "Continent", "name": "Worldwide"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://huaxingpcba.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Shipping & Logistics", "item": "https://huaxingpcba.com/shipping/"}
+  ]
+}
+</script>
+<style>
+:root{--section-gap:5rem}
+
+.sub-hero{position:relative;min-height:55vh;display:flex;align-items:center;overflow:hidden}
+.sub-hero-bg{position:absolute;inset:0;z-index:0}
+.sub-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3) saturate(0.5)}
+.sub-hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,150,62,0.1) 0%,transparent 60%);z-index:1}
+.sub-hero-content{position:relative;z-index:2;width:100%;padding:var(--space-3xl) 0}
+
+/* Shipping method cards */
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}
+.method-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-2xl);transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
+.method-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.method-card:hover{border-color:var(--accent-subtle);transform:translateY(-4px)}
+.method-card:hover::before{opacity:1}
+.method-card.featured{border-color:var(--accent-25)}
+.method-card.featured::before{opacity:1}
+.method-card .mc-icon{width:52px;height:52px;border-radius:50%;background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-lg)}
+.method-card .mc-icon svg{width:24px;height:24px;color:var(--accent)}
+.method-card .mc-speed{font-size:var(--text-2xl);font-weight:200;color:var(--accent);font-family:'JetBrains Mono','Consolas',monospace;margin-bottom:var(--space-xs)}
+.method-card h3{font-size:var(--text-xl);font-weight:300;color:var(--text-primary);margin:0 0 var(--space-sm)}
+.method-card p{font-size:var(--text-sm);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* Lead time table */
+.lead-table{width:100%;border-collapse:collapse;font-size:var(--text-sm)}
+.lead-table thead th{text-align:left;padding:var(--space-md);color:var(--accent);font-weight:300;text-transform:uppercase;letter-spacing:.08em;font-size:var(--text-xs);border-bottom:1px solid var(--border)}
+.lead-table tbody td{padding:var(--space-md);color:var(--text-secondary);border-bottom:1px solid rgba(255,255,255,.04)}
+.lead-table tbody tr:hover{background:rgba(200,150,62,.03)}
+.lead-table .product{color:var(--text-primary);font-weight:400}
+
+/* Region grid */
+.region-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg)}
+.region-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl);text-align:center;transition:border-color .3s}
+.region-card:hover{border-color:var(--accent-subtle)}
+.region-card h4{font-size:var(--text-base);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm)}
+.region-card p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.7;margin:0}
+
+/* Packaging features */
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-sm)}
+.pkg-item{text-align:center;padding:var(--space-lg) var(--space-sm)}
+.pkg-item svg{width:28px;height:28px;color:var(--accent);margin-bottom:var(--space-sm)}
+.pkg-item h4{font-size:var(--text-sm);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)}
+.pkg-item p{font-size:var(--text-xs);color:var(--text-muted);line-height:1.6;margin:0}
+
+/* Incoterms */
+.terms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-lg)}
+.term-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-xl)}
+.term-card h4{font-size:var(--text-lg);font-weight:400;color:var(--accent);margin:0 0 var(--space-sm)}
+.term-card .tc-desc{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.7}
+
+@media(max-width:768px){
+  .method-grid{grid-template-columns:1fr}
+  .region-grid{grid-template-columns:repeat(2,1fr)}
+  .pkg-grid{grid-template-columns:repeat(2,1fr)}
+  .terms-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Sprite -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+  <symbol id="icon-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10M12 2a15.3 15.3 0 00-4 10 15.3 15.3 0 004 10"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="icon-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16M8 3l-2 4M16 3l2 4M9 19l-1 3M15 19l1 3"/></symbol>
+  <symbol id="icon-anchor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></symbol>
+</svg>
+
+<!-- Header -->
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=17" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Sub Hero -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/sub-hero-shipping.webp" alt="Global PCB shipping and logistics warehouse" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Global Delivery</p>
+      <h1 class="reveal">Your Boards, <em>Worldwide</em></h1>
+      <p class="reveal">Express 3–5 days to major markets. Sea freight, rail, and air options. Serving 30+ countries with full customs documentation and ESD-safe packaging.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Shipping Methods -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center">Shipping Methods</p>
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)">Fast. Secure. <em>Trackable.</em></h2>
+    <div class="method-grid">
+      <div class="method-card reveal featured">
+        <div class="mc-icon"><svg><use href="#icon-truck"/></svg></div>
+        <div class="mc-speed">3–5 Days</div>
+        <h3>Express Courier</h3>
+        <p>DHL, FedEx, UPS, TNT — door-to-door with full tracking. Best for prototypes and small-to-medium orders up to 30kg. $25–45 to North America/Europe for typical prototype shipments. Customs clearance included.</p>
+      </div>
+      <div class="method-card reveal">
+        <div class="mc-icon"><svg><use href="#icon-anchor"/></svg></div>
+        <div class="mc-speed">25–35 Days</div>
+        <h3>Sea Freight</h3>
+        <p>FCL and LCL options from Shenzhen/Yantian port. Most cost-effective for volume orders over 200kg. Weekly sailings to all major ports. Includes marine insurance and full export documentation package.</p>
+      </div>
+      <div class="method-card reveal">
+        <div class="mc-icon"><svg><use href="#icon-train"/></svg></div>
+        <div class="mc-speed">15–20 Days</div>
+        <h3>Rail Freight (Europe)</h3>
+        <p>China-Europe Railway Express via Malaszewicze/Duisburg. 2× faster than sea, 60% cheaper than air. Ideal for mid-weight European shipments (50–500kg). Full-container and consolidated options.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lead Times -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-2xl)">Production + Transit <em>Time Estimates</em></h2>
+    <div style="max-width:900px;margin:0 auto;overflow-x:auto">
+    <table class="lead-table">
+      <thead><tr><th>Product</th><th>Standard Production</th><th>Express Transit</th><th>Total (Door to Door)</th></tr></thead>
+      <tbody>
+        <tr><td class="product">2-4 Layer PCB (Standard)</td><td>5–7 days</td><td>3–5 days</td><td>8–12 days</td></tr>
+        <tr><td class="product">2-4 Layer PCB (Rush)</td><td>24–48 hours</td><td>3–5 days</td><td>4–7 days</td></tr>
+        <tr><td class="product">6-16 Layer PCB</td><td>7–10 days</td><td>3–5 days</td><td>10–15 days</td></tr>
+        <tr><td class="product">HDI / Advanced PCB</td><td>10–15 days</td><td>3–5 days</td><td>13–20 days</td></tr>
+        <tr><td class="product">PCBA (Turnkey, Standard)</td><td>7–15 days</td><td>3–5 days</td><td>10–20 days</td></tr>
+        <tr><td class="product">PCBA (Turnkey, with Sourcing)</td><td>10–18 days</td><td>3–5 days</td><td>13–23 days</td></tr>
+        <tr><td class="product">SMT Stencil Only</td><td>24 hours</td><td>3–5 days</td><td>4–6 days</td></tr>
+        <tr><td class="product">Volume PCB Order (Sea Freight)</td><td>10–15 days</td><td>25–35 days</td><td>35–50 days</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:var(--text-xs);margin-top:var(--space-md)">Lead times guaranteed — if we miss the committed production date, we cover the express shipping upgrade.</p>
+  </div>
+</section>
+
+<!-- Regions Served -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center">Global Coverage</p>
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)">Serving <em>30+ Countries</em></h2>
+    <div class="region-grid">
+      <div class="region-card reveal">
+        <h4>🇺🇸 North America</h4>
+        <p>USA, Canada, Mexico<br>DHL/FedEx 3–5 days<br>Sea freight 25–30 days<br>DDP available</p>
+      </div>
+      <div class="region-card reveal">
+        <h4>🇪🇺 Europe</h4>
+        <p>Germany, UK, France, Netherlands, Sweden, Denmark, Italy, Spain, Poland, Czech Republic<br>Express 3–5 days · Rail 15–20 days</p>
+      </div>
+      <div class="region-card reveal">
+        <h4>🌏 Asia-Pacific</h4>
+        <p>Japan, South Korea, Singapore, Australia, New Zealand, Taiwan, Thailand, Vietnam, Malaysia<br>Express 2–4 days</p>
+      </div>
+      <div class="region-card reveal">
+        <h4>🌍 Middle East & Others</h4>
+        <p>Israel, UAE, Saudi Arabia, Brazil, South Africa, Turkey<br>Express 4–6 days<br>Customs support included</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packaging Standards -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-2xl)"><em>ESD-Safe</em> Packaging Standards</h2>
+    <div class="pkg-grid">
+      <div class="pkg-item reveal">
+        <svg><use href="#icon-package"/></svg>
+        <h4>Vacuum Sealing</h4>
+        <p>All PCBs vacuum-sealed with desiccant packs and humidity indicator cards per IPC-1601</p>
+      </div>
+      <div class="pkg-item reveal">
+        <svg><use href="#icon-shield"/></svg>
+        <h4>ESD Protection</h4>
+        <p>Anti-static bubble wrap, ESD-safe trays, and moisture-barrier bags for all PCBA shipments</p>
+      </div>
+      <div class="pkg-item reveal">
+        <svg><use href="#icon-file"/></svg>
+        <h4>Full Documentation</h4>
+        <p>QC report, Certificate of Conformance, RoHS/REACH compliance, and lot traceability records included</p>
+      </div>
+      <div class="pkg-item reveal">
+        <svg><use href="#icon-zap"/></svg>
+        <h4>Rigid Protection</h4>
+        <p>Foam-lined export-grade cartons with corner reinforcement. Custom crating for large/heavy orders</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Incoterms -->
+<section style="padding:var(--space-3xl) 0">
+  <div class="container">
+    <h2 class="reveal" style="text-align:center;font-size:var(--text-2xl);font-weight:200;margin-bottom:var(--space-2xl)">Incoterms: <em>Your Choice</em></h2>
+    <div class="terms-grid">
+      <div class="term-card reveal">
+        <h4>DDP — Delivered Duty Paid</h4>
+        <p class="tc-desc">We handle everything: freight, insurance, import duties, and taxes. You receive the package at your door — no customs paperwork, no surprise fees. Recommended for first-time buyers and prototypes.</p>
+      </div>
+      <div class="term-card reveal">
+        <h4>DAP — Delivered at Place</h4>
+        <p class="tc-desc">We cover freight and insurance to your named destination. You handle import clearance and any local duties/taxes. Good balance for buyers with established customs brokers.</p>
+      </div>
+      <div class="term-card reveal">
+        <h4>FOB — Free on Board</h4>
+        <p class="tc-desc">Goods delivered to Shenzhen port, cleared for export. You arrange and pay for ocean/air freight, insurance, and destination charges. Preferred by experienced importers with their own forwarders.</p>
+      </div>
+      <div class="term-card reveal">
+        <h4>EXW — Ex Works</h4>
+        <p class="tc-desc">Goods available at our factory. You arrange all transportation, export clearance, freight, and import. Best when you have a consolidated shipment or existing logistics partner in China.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Global Map + CTA -->
+<section style="padding:var(--space-2xl) 0;background:var(--bg-secondary)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center">
+      <div class="reveal" style="position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3">
+        <img src="../generated/shipping-global.webp" alt="Global shipping routes and logistics network" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="reveal">
+        <h2 style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-lg)">Ready to <em>Ship?</em></h2>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-md)">Every shipment includes a dedicated account manager who tracks your order from production through customs clearance to final delivery. We send tracking information same-day and proactively update you on any customs requirements for your destination country.</p>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)">Need a shipping estimate? Tell us your destination, order size, and preferred speed — we'll provide exact freight costs with your production quote.</p>
+        <div style="display:flex;gap:var(--space-md);flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="openModal()">
+            <svg width="16" height="16"><use href="#icon-mail"/></svg> Request Shipping Quote
+          </button>
+          <button class="btn btn-secondary" onclick="window.location.href='/quote/'">
+            <svg width="16" height="16"><use href="#icon-clock"/></svg> Instant PCB Quote
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align:center;padding:var(--space-3xl) 0">
+  <div class="container">
+    <h2 class="reveal" style="font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-md)">Your Boards, <em>On Time</em>, Every Time</h2>
+    <p class="reveal" style="color:var(--text-secondary);margin-bottom:var(--space-xl);max-width:600px;margin-left:auto;margin-right:auto">From prototype to volume production, we deliver. Guaranteed lead times, full documentation, ESD-safe packaging.</p>
+    <div class="reveal">
+      <button class="btn btn-primary btn-lg" onclick="openModal()">
+        <svg width="16" height="16"><use href="#icon-mail"/></svg> Start Your Order
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>
+        <a href="/capabilities/pcba-assembly/">SMT Assembly</a>
+        <a href="/capabilities/smt-stencil/">SMT Stencil</a>
+        <a href="/capabilities/components-sourcing/">Components Sourcing</a>
+        <a href="/quote/">Quick Quote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quality & Logistics</h4>
+        <a href="/quality/">Quality & Testing</a>
+        <a href="/shipping/">Shipping & Logistics</a>
+        <a href="/how-it-works/">How It Works</a>
+        <a href="/faq/">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About Us</a>
+        <a href="/blog/">Blog</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Huaxing PCBA. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Shipping & Order Inquiry</h2>
+        <p class="mi-subtitle">Tell us your destination and timeline — we'll quote within 24 hours.</p>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" placeholder="Tell us about your order: product type, quantity, destination country, preferred shipping method and timeline..." required></textarea>
+        <button type="submit" class="btn btn-primary btn-block">
+          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Inquiry
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script src="../inquiry-handler.js"></script>
+</body>
+</html>
