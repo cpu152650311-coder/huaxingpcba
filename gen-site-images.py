@@ -7,7 +7,7 @@ Image-to-image: python gen-site-images.py --prompt "enhance..." --source-image p
 Batch mode:     python gen-site-images.py --prompts image-strategy.json --out generated/
 
 GPT Image 2 params:
-  quality: low | medium | high (default: high)
+  quality: low (ONLY low is allowed; medium/high are BLOCKED — see quality guard below)
   size: WxH, max edge 3840px, multiple of 16, up to 8.3M pixels
   output_format: png | webp | jpeg
 """
@@ -32,7 +32,7 @@ def load_env():
                 break
     return os.environ.get('AIHUBMIX_API_KEY')
 
-def generate_image(prompt, api_key, quality='high', size='1024x1024',
+def generate_image(prompt, api_key, quality='low', size='1024x1024',
                    output_format='webp', source_image=None):
     """
     Call GPT Image 2 API.
@@ -63,7 +63,7 @@ def _generate_text(prompt, api_key, quality, size, output_format):
     last_error = None
     for url, name in endpoints:
         try:
-            resp = requests.post(url, headers=headers, json=payload, timeout=120, proxies=PROXIES)
+            resp = requests.post(url, headers=headers, json=payload, timeout=300, proxies=PROXIES)
             if resp.status_code != 200:
                 last_error = f"{name} {resp.status_code}: {resp.text[:300]}"
                 continue
@@ -112,7 +112,7 @@ def _generate_edit(prompt, api_key, source_image, quality, size, output_format):
     for url, name in endpoints:
         try:
             resp = requests.post(url, headers={'Authorization': f'Bearer {api_key}'},
-                                files=files, data=data, timeout=120, proxies=PROXIES)
+                                files=files, data=data, timeout=300, proxies=PROXIES)
             if resp.status_code != 200:
                 last_error = f"{name} {resp.status_code}: {resp.text[:300]}"
                 continue
@@ -151,8 +151,8 @@ def main():
     parser.add_argument('--prompts', help='Path to image-strategy.json (batch mode)')
     parser.add_argument('--out', required=True, help='Output directory')
     parser.add_argument('--manifest', default=None, help='Existing manifest path')
-    parser.add_argument('--quality', default='high', choices=['low', 'medium', 'high'],
-                       help='Image quality (default: high)')
+    parser.add_argument('--quality', default='low', choices=['low'],
+                       help='Image quality — ONLY "low" is allowed. medium/high are BLOCKED to prevent accidental cost spikes.')
     parser.add_argument('--size', default='1024x1024',
                        help='Output size WxH, e.g. 1536x1024 for landscape hero')
     parser.add_argument('--delay', type=float, default=0.5)
@@ -161,6 +161,21 @@ def main():
     parser.add_argument('--id', help='Output filename ID (without extension)')
 
     args = parser.parse_args()
+
+    # ═══════════════════════════════════════════════════════════════
+    # QUALITY GUARD — HARD BLOCK: only "low" is permitted.
+    # medium ($0.053) and high ($0.211) are 9x / 35x more expensive.
+    # Skill "建站工作流" mandates low for ALL images unless the user
+    # explicitly manually overrides this guard by editing the script.
+    # ═══════════════════════════════════════════════════════════════
+    if args.quality != 'low':
+        print("=" * 60)
+        print("⛔ QUALITY BLOCKED: --quality={}".format(args.quality))
+        print("   Skill 建站工作流 mandates --quality low for ALL images.")
+        print("   medium=$0.053 | high=$0.211 per image vs low=$0.006.")
+        print("   This guard exists to prevent accidental cost spikes.")
+        print("=" * 60)
+        sys.exit(1)
 
     api_key = load_env()
     if not api_key:
@@ -228,6 +243,16 @@ def main():
 
     for i, img in enumerate(images):
         img_id = img['id']
+
+        # ── Per-image quality guard ──
+        img_quality = img.get('quality', args.quality)
+        if img_quality != 'low':
+            print("=" * 60)
+            print("⛔ BLOCKED: image '{}' has quality='{}'".format(img_id, img_quality))
+            print("   Only 'low' is permitted. Fix your JSON file.")
+            print("=" * 60)
+            sys.exit(1)
+
         out_file = out_dir / f"{img_id}.webp"
 
         if out_file.exists():
@@ -238,7 +263,7 @@ def main():
             continue
 
         img_size = img.get('size', args.size)
-        img_quality = img.get('quality', args.quality)
+        # img_quality already validated by guard above — guaranteed 'low'
         print(f"[{i+1}/{total}] {img_id} ({img['role']}, {img_size}, q={img_quality})...",
               end=' ', flush=True)
 
