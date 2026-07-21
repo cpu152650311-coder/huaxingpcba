@@ -361,22 +361,24 @@
       <div class="modal-image-overlay"></div>
       <div class="modal-image-top">
         <h2 class="mi-heading">Request a Quote</h2>
-        <p class="mi-subtitle">Fill in your details — we'll respond within 24 hours with a competitive quote.</p>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
       </div>
     </div>
     <div class="modal-form-panel">
-      <form class="inquiry-form" onsubmit="return handleInquiry(event)">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..." required></textarea>
-        <button type="submit" class="btn btn-primary btn-block">
-          <svg width="16" height="16"><use href="#icon-mail"/></svg> Send Request
-        </button>
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
       </form>
     </div>
   </div>
 </div>
-
 <script src="../reveal.js"></script>
 <script src="../inquiry-handler.js"></script>
 <script>
