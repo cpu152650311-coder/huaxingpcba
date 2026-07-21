@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mixed-Signal PCB Design — Grounding, Partitioning &amp; Noise Control for Precision Circuits | Huaxing PCBA</title>
+<meta name="description" content="Mixed-signal PCB design guide: analog-digital partitioning, ground plane strategies, isolation techniques, and layer stackup optimization — with production data from an IATF 16949-certified Shenzhen facility supporting 3/3mil precision.">
+<meta property="og:title" content="Mixed-Signal PCB Design — Grounding, Partitioning &amp; Noise Control for Precision Circuits">
+<meta property="og:description" content="Every millivolt of noise in an ADC input is lost resolution. How hardware engineers and procurement teams ensure mixed-signal boards work on rev 1.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/mixed-signal-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-mixed-signal.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/mixed-signal-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=25">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mixed-Signal PCB Design — Grounding, Partitioning & Noise Control for Precision Circuits",
+  "description": "Analog-digital partitioning, ground plane strategies, isolation techniques, and layer stackup optimization for mixed-signal PCBs. With production data from an IATF 16949-certified Shenzhen facility supporting 3/3mil precision, 32 layers, and ±5% impedance control.",
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-21",
+  "image": "https://huaxingpcba.com/generated/blog-cover-mixed-signal.webp",
+  "url": "https://huaxingpcba.com/blog/mixed-signal-pcb-design.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/mixed-signal-pcb-design.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=17" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-mixed-signal.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Mixed-Signal PCB Design:<br><em>Grounding, Partitioning &amp; Noise Control for Precision Circuits</em></h1>
+      <p class="reveal">Why the gap between an analog sensor and a 12-bit ADC is measured in microvolts — and how PCB design closes it before layout even begins.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Mixed-Signal PCB Design</span></div>
+
+  <p>Every PCB that reads a sensor, drives a motor, or processes an RF signal is a mixed-signal board. The analog front-end lives in a world of microvolts and nanoamperes; the digital back-end switches at gigahertz rates. Put them on the same substrate without deliberate isolation, and the digital noise floor rises through the analog section like static on a radio — reducing a 12-bit ADC to 8 effective bits before the firmware team even writes a line of code.</p>
+
+  <p>Our Shenzhen facility has produced mixed-signal boards for IoT sensor nodes, industrial PLC analog input modules, medical diagnostic front-ends, and automotive ECU sensor interfaces — processing over <span class="data-point">250,000</span> mixed-signal PCBs annually across 8 SMT lines. This article distills the design rules that separate a board that works on revision 1 from one that enters a six-month debug loop.</p>
+
+  <img class="article-img" src="../generated/blog-mixed-signal-partition.webp" alt="Mixed-signal PCB with physical analog-digital partitioning showing guard ring and separate ground regions on a 6-layer board" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 1: The Physics Problem ── -->
+  <h2>Why Mixed-Signal Boards Fail — The Physics Before the Schematic</h2>
+
+  <p>Mixed-signal failures are rarely component defects. They are layout failures masquerading as "noise problems." Three physical mechanisms dominate:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Ground Bounce — Digital Return Currents Don't Stay in Their Lane</h4>
+      <p>When a CMOS gate switches, it pulls a current spike through the power distribution network. That spike returns through the ground plane — and in an undivided ground plane, it flows directly under the analog section. For a 16-bit ADC with a 3.3V reference, one LSB equals 50 µV. A single gate switching at 3.3V with 10 mA through 5 mΩ of copper plane produces a 50 µV drop — one entire bit of resolution lost per switching event. The fix is not splitting the plane blindly (see Section 2); it is understanding where the return currents actually flow and controlling that path. Our boards use <a href="/blog/impedance-control.html">controlled-impedance routing</a> with dedicated return-path vias to keep digital return currents out of analog territory.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Capacitive Crosstalk — FR-4 Is Not an Insulator at High Frequencies</h4>
+      <p>Two parallel traces 6 mil apart on FR-4 form a capacitor of approximately 0.5 pF per inch. At 100 MHz, that is 3.2 kΩ of coupling impedance — enough for a 3.3V digital trace to inject millivolts into a neighboring analog trace. The rule is simple: 3× the dielectric height between analog and digital traces, minimum. For a 4-mil prepreg, that means 12-mil spacing. On dense boards where spacing is constrained, we add grounded guard traces — a copper trace connected to analog ground between every analog signal and the nearest digital signal, with via stitching every λ/20 (roughly 1.5 cm at 1 GHz).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Substrate Coupling — The Path You Can't See</h4>
+      <p>FR-4 has a bulk resistivity of approximately 10⁸ Ω·cm. Digital switching noise injects displacement currents directly into the substrate, where they propagate to analog nodes regardless of surface trace routing. This is the hardest coupling mechanism to fix post-layout — it requires substrate-level design decisions: using low-loss materials (Rogers 4350B for the analog layer in the stackup), maximizing the distance between digital ICs and analog front-ends (>10 mm separation), and adding grounded substrate contacts (via fences). See our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> for material selection trade-offs.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Mixed-signal problems are predictable, not mysterious. They follow Maxwell's equations. Every failure has a specific coupling mechanism — ground bounce (conductive), crosstalk (capacitive/inductive), or substrate injection (displacement current). Identify the mechanism before you change the layout.</p>
+  </div>
+
+  <!-- ── Section 2: Ground Plane Strategy ── -->
+  <h2>The Ground Plane Decision — Split vs. Unified vs. Bridged</h2>
+
+  <p>The most contentious topic in mixed-signal design is whether to split the ground plane. The answer depends on frequency, precision, and what you're willing to verify in simulation.</p>
+
+  <img class="article-img" src="../generated/blog-mixed-signal-grounding.webp" alt="Cross-section of a 6-layer mixed-signal PCB showing analog ground plane, digital ground plane, and bridge connection at the ADC location with via stitching" loading="lazy" style="max-width:85%">
+
+  <table class="spec-table">
+    <tr><th>Strategy</th><th>When to Use</th><th>Risk</th><th>Best For</th></tr>
+    <tr><td><strong>Unified Ground</strong></td><td>Digital frequencies &lt;50 MHz, ADC resolution ≤10 bits</td><td>Lowest — no return-path breaks</td><td>Simple mixed-signal: temperature sensors, basic motor controllers</td></tr>
+    <tr><td><strong>Split Ground (moat)</strong></td><td>≥14-bit ADC, analog bandwidth &lt;1 MHz, low-speed digital</td><td>Medium — must verify no traces cross the moat</td><td>Precision instrumentation: weigh scales, medical ECG front-ends</td></tr>
+    <tr><td><strong>Bridged Ground</strong></td><td>≥16-bit ADC, mixed high-speed digital, RF present</td><td>Highest complexity — bridge location is critical</td><td>High-performance: SDR, spectrum analyzers, 5G O-RU radio boards</td></tr>
+  </table>
+
+  <p><strong>The bridged ground approach</strong> — the one we recommend for most professional mixed-signal designs with ≥12-bit converters — uses a single ground plane with a narrow "bridge" region directly under the ADC or mixed-signal IC. Analog and digital sections share the same copper pour everywhere except at the bridge, where a deliberate constriction forces return currents to flow through the ADC's internal substrate connection. This gives you the low-impedance return path of a unified plane with the current-steering control of a split plane.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Bridge Placement Rule: Under the Converter, Not Between Sections</h4>
+      <p>The bridge must be located directly beneath the mixed-signal IC — typically an ADC, DAC, or codec. Width: 2-3× the IC package width. The idea is that all return currents from the digital section must pass through the IC's substrate (where they are common-mode and rejected by the differential analog input) before reaching the analog section. A bridge placed elsewhere in the layout creates a common-impedance coupling point that adds noise instead of rejecting it. See <a href="/blog/pcb-testing-methods.html">our PCB testing guide</a> for post-assembly noise floor verification.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Component Placement ── -->
+  <h2>Component Placement — The Physical Partitioning That Determines Everything</h2>
+
+  <p>Mixed-signal placement is not about minimizing board area; it is about maximizing isolation. The placement phase — before a single trace is routed — sets the noise floor. Get it wrong and no amount of routing gymnastics will recover the lost SNR.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Analog Section Placement — Closest to the Connector</h4>
+      <p>The analog front-end (op-amps, filters, reference voltage, ADC analog inputs) should be placed closest to the analog input connector. This minimizes the antenna area for noise pickup on input traces. Place the ADC at the boundary between analog and digital sections. For a 4-layer board dedicating layers 1 and 4 to analog signals: keep the entire analog section within a 50×50 mm zone, with the crystal oscillator placed >25 mm away from the ADC input pins. A 25 mm separation on FR-4 provides roughly 60 dB of isolation at 100 MHz — enough for 10 effective bits without guard structures.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Power Supply Partitioning — Separate Regulation, Shared Reference</h4>
+      <p>Use independent LDO regulators for analog and digital supply rails, fed from a common upstream switching regulator. The analog LDO should have >60 dB PSRR at the switching frequency. Add a ferrite bead (e.g., BLM18PG121SN1, 120 Ω at 100 MHz) between the digital 3.3V rail and the analog LDO input to block switching noise from propagating upstream. Decoupling: 10 µF tantalum + 0.1 µF ceramic + 1 nF NPO at each analog IC power pin, placed within 2 mm of the pin. See our <a href="/blog/dfm-tips.html">DFM design tips</a> for decoupling capacitor placement rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Clock and Digital I/O Placement — The Noise Aggressor Zone</h4>
+      <p>Microcontrollers, FPGAs, and high-speed digital interfaces (SPI, I²C at >1 MHz, parallel buses) are noise aggressors. They belong on the far side of the ADC from the analog section. The clock signal trace between the oscillator and the microcontroller must not cross the analog section — not even on a different layer. Clock harmonics extend to 11× the fundamental (the 11th harmonic of a 25 MHz clock is 275 MHz). Route clock traces as stripline (embedded between two planes) and add series termination within 5 mm of the driver.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-mixed-signal-cross-section.webp" alt="3D cross-section render of a 6-layer mixed-signal PCB showing dedicated analog layer, digital layer, and continuous ground plane isolation" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 4: Layer Stackup ── -->
+  <h2>Layer Stackup — The 6-Layer Reference Design That Solves 90% of Mixed-Signal Problems</h2>
+
+  <p>For boards with ≥12-bit converters and digital content above 50 MHz, a 4-layer stackup is marginal. The 6-layer stackup below is our production-proven reference for precision mixed-signal designs:</p>
+
+  <table class="spec-table">
+    <tr><th>Layer</th><th>Assignment</th><th>Purpose</th></tr>
+    <tr><td>L1 (Top)</td><td>Analog signals + critical digital</td><td>Low-noise analog routing; controlled-impedance digital traces</td></tr>
+    <tr><td>L2</td><td>Analog ground plane (solid)</td><td>Uninterrupted return path for all L1 analog signals</td></tr>
+    <tr><td>L3</td><td>Digital signals</td><td>General digital routing; isolated from analog by L2 ground</td></tr>
+    <tr><td>L4</td><td>Power plane (split)</td><td>Analog 3.3V / digital 3.3V / digital 1.8V — partitioned, same layer</td></tr>
+    <tr><td>L5</td><td>Digital ground plane (solid)</td><td>Return path for L3 and L6 digital traces</td></tr>
+    <tr><td>L6 (Bottom)</td><td>Low-speed digital + analog aux</td><td>I²C, UART, GPIO; board-edge analog guard ring</td></tr>
+  </table>
+
+  <p>Key design rules for this stackup: L1-to-L2 dielectric thickness ≤4 mil (100 µm) to minimize analog signal loop area; L4-to-L5 dielectric ≥8 mil (200 µm) to provide adequate power-ground plane capacitance for digital decoupling; total board thickness 1.6 mm with FR-4 Tg170 for standard applications, or Rogers 4350B prepreg between L1-L2 for designs above 1 GHz analog bandwidth. Our facility supports <span class="data-point">3/3 mil</span> trace/space for the dense mixed-signal routing these boards demand.</p>
+
+  <!-- ── Section 5: Verification ── -->
+  <h2>Verification — Measuring What the Layout Actually Delivered</h2>
+
+  <p>Mixed-signal board bring-up without measurement is gambling. Three measurements separate a validated design from an untested one:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Noise Floor Measurement — ADC Input Shorted to Ground</h4>
+      <p>Short the ADC input to analog ground at the connector (not at the ADC pin — this includes the full analog signal path). Acquire 10,000 samples at the ADC's maximum sample rate. Compute the RMS noise in LSBs. For a 16-bit ADC, an RMS noise floor >3 LSBs (≈150 µV for 3.3V reference) indicates analog signal path contamination. Our factory's <a href="/blog/pcb-testing-methods.html">testing capability includes</a> 24-bit source-measure units with 100 nV resolution for precision verification.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Digital Activity Injection Test — Run the CPU at Full Load</h4>
+      <p>With the ADC input still shorted, run the microcontroller at maximum clock frequency with all peripherals active (SPI, I²C, PWM, UART TX). The noise floor should not increase by more than 1 LSB RMS. An increase of >2 LSBs means digital return currents are finding a path through the analog section — re-examine the ground plane bridge width and via stitching density.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>PSRR Measurement — Modulate the Input Supply</h4>
+      <p>Superimpose a 100 mVpp sine wave at 100 kHz onto the board's main 5V input rail using a line injector. Measure the ADC output spectrum. The 100 kHz spur should be below the ADC's noise floor. If it is visible, the analog LDO's PSRR is insufficient at 100 kHz or the ferrite bead between the digital and analog rails is saturating. Our production test fixtures at Huaxing PCBA verify PSRR on every mixed-signal board before shipment, catching layout-dependent supply rejection failures that pass schematic review.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> We have seen mixed-signal boards where the difference between a working first revision and a scrap run was a single missing ground via. The via connected the ADC's exposed thermal pad to the analog ground plane — without it, the pad acted as a parasitic antenna coupling digital switching noise into the ADC substrate. Board worked at room temperature, failed at 45°C. One 0.3 mm via. This is why our DFM review for mixed-signal designs inspects every ADC thermal pad connection individually.</p>
+  </div>
+
+  <!-- ── Section 6: Procurement Considerations ── -->
+  <h2>What Procurement Engineers Should Ask Before Releasing a Mixed-Signal BOM</h2>
+
+  <p>Mixed-signal boards introduce procurement complexity that pure digital or pure power boards do not. Component tolerances that are "close enough" for digital become catastrophic for analog precision.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Resistor Tolerance in Gain-Setting Networks</h4>
+      <p>A difference amplifier's CMRR depends on resistor matching, not absolute value. Four 1% resistors in a differential amplifier produce a worst-case CMRR of 34 dB — essentially useless for rejecting 50/60 Hz mains hum. 0.1% matched resistor networks (e.g., LT5400, ±0.01% matching) deliver >80 dB CMRR. The BOM cost difference: $0.02 vs $2.50 per amplifier. But skipping the precision network means the board fails conducted immunity testing — and a respin costs 50× more than the resistor upgrade. <a href="/blog/pcb-materials-guide.html">Our materials guide</a> covers passive component selection for precision circuits.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">12</div>
+    <div class="checklist-content">
+      <h4>Capacitor Dielectric in the Signal Path</h4>
+      <p>X7R and X5R capacitors are microphonic and have a voltage coefficient of -25% at rated voltage. In an analog filter, an X7R capacitor changes the cutoff frequency by 25% depending on DC bias — and introduces audible piezoelectric ringing if the board vibrates. Use C0G/NP0 for all capacitors in the analog signal path. They cost 3-5× more per unit, but a typical mixed-signal board uses <20 signal-path capacitors total — the BOM impact is under $10.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When sourcing mixed-signal PCB assembly, verify the manufacturer's capability to handle precision analog components. Ask: "What is your process for ESD protection during analog component placement?" If the answer is "standard ESD mats" without specifying ionization, humidity control, and wrist strap verification — the analog yield on that line will be unpredictable. Our facility operates all analog-assembly SMT lines at 45% ±5% RH with overhead ionizers achieving <50V residual charge on all work surfaces. This is standard for <a href="/blog/medical-device-pcb.html">medical-device-grade PCB assembly</a> — and it makes a measurable difference in analog yield.</p>
+  </div>
+
+  <!-- ── Closing ── -->
+  <h2>Mixed-Signal Design Is a Manufacturing Discipline, Not Just an Engineering One</h2>
+
+  <p>The same schematic on two different PCB layouts produces two different analog noise floors — and the same layout from two different manufacturers produces two different yields. The design rules in this article — bridged ground planes, component partitioning by noise domain, 6-layer stackups with dedicated analog return paths, and C0G-only signal-path capacitors — are not theoretical guidelines. They are the difference between a product that ships and one that spends another quarter in compliance testing.</p>
+
+  <p>At Huaxing PCBA, we manufacture mixed-signal boards for applications ranging from <a href="/blog/iot-pcb-design-manufacturing.html">IoT sensor nodes</a> sampling at 100 SPS to <a href="/blog/industrial-control-pcb.html">industrial PLC analog modules</a> with 24-bit delta-sigma ADCs and <a href="/blog/telecom-5g-pcb.html">5G radio boards</a> digitizing 100 MHz of instantaneous bandwidth. Every board goes through the verification sequence described in Section 5 — shorted-input noise floor, digital activity injection, and PSRR sweep — before it leaves our 15,000 m² Shenzhen facility. If your next mixed-signal design needs a manufacturer that understands the analog half as well as the digital half, <a href="/contact/">contact our engineering team</a> with your Gerber files and BOM. We'll return a DFM review within 24 hours — including noise-floor predictions based on your stackup and placement.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-mixed-signal.webp)">
+      <h2>Ready to Build Your Mixed-Signal PCB?</h2>
+      <p>Upload your Gerber files and BOM — we'll return a DFM review with noise-floor predictions based on your stackup and component placement. 24-hour response, free for first-time projects. IATF 16949 certified, 3/3mil precision, 32 layers.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
