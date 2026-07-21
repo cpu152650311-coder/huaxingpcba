@@ -2,7 +2,7 @@
  * Huaxing PCBA — Shared Navigation Injection
  * Injects nav HTML + critical CSS so the nav works even if
  * design-tokens.css is cached stale or loads slowly from CDN.
- * v18 — Expanded dropdowns: PCB Fab, PCBA, Box-Build, Stencil flyouts
+ * v19 — Added 1s mouseleave delay on flyout sub-menus; centralized table+layout CSS in design-tokens v26
  */
 (function(){
   var nav = document.getElementById('navLinks');
@@ -320,6 +320,18 @@
           e.stopPropagation();
           window.location.href = flyoutMap[fid];
         }
+      });
+      // Hover delay: keep flyout open for 1s after mouse leaves
+      flyout.addEventListener('mouseenter', function() {
+        clearTimeout(flyout._hideTimer);
+        var panel = flyout.querySelector('.nav-flyout-panel');
+        if (panel) { panel.style.opacity = '1'; panel.style.visibility = 'visible'; panel.style.pointerEvents = 'auto'; }
+      });
+      flyout.addEventListener('mouseleave', function(e) {
+        var panel = flyout.querySelector('.nav-flyout-panel');
+        flyout._hideTimer = setTimeout(function() {
+          if (panel) { panel.style.opacity = ''; panel.style.visibility = ''; panel.style.pointerEvents = ''; }
+        }, 1000);
       });
     }
   });

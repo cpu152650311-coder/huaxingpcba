@@ -11,7 +11,7 @@
 <meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="../../../design-tokens.css?v=25">
+<link rel="stylesheet" href="../../../design-tokens.css?v=26">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -78,7 +78,7 @@
   <div class="container">
     <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
     <nav class="nav-links" id="navLinks"></nav>
-    <script src="../../../nav.js?v=18" defer></script>
+    <script src="../../../nav.js?v=19" defer></script>
     <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
   </div>
 </header>
@@ -106,54 +106,19 @@
 
 <section class="section">
   <div class="container">
-    <p class="section-label reveal">Turnaround Tiers</p>
-    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Choose Your <em>Speed</em></h2>
-    <div class="tier-grid reveal">
-      <div class="tier-card">
-        <div class="tier-hours">72h</div>
-        <h3>Express</h3>
-        <div class="tier-price">3 business days from Gerber approval</div>
-        <ul>
-          <li>2-16 layers, FR-4</li>
-          <li>Standard stackup only</li>
-          <li>5/5mil trace/space minimum</li>
-          <li>Green solder mask, white silkscreen</li>
-          <li>ENIG or HASL finish</li>
-          <li>100% AOI + flying probe E-test</li>
-        </ul>
-        <button class="btn btn-ghost btn-sm" onclick="openModal()">Get 72h Quote</button>
-      </div>
-      <div class="tier-card featured">
-        <div class="tier-hours">48h</div>
-        <h3>Rush</h3>
-        <div class="tier-price">2 business days — our most popular tier</div>
-        <ul>
-          <li>2-12 layers, FR-4 High-Tg</li>
-          <li>Standard or custom stackup</li>
-          <li>4/4mil trace/space minimum</li>
-          <li>Any solder mask color</li>
-          <li>ENIG, HASL, OSP, or Imm Ag</li>
-          <li>100% AOI + flying probe E-test</li>
-          <li>X-ray on multilayer registration</li>
-        </ul>
-        <button class="btn btn-primary btn-sm" onclick="openModal()">Get 48h Quote</button>
-      </div>
-      <div class="tier-card">
-        <div class="tier-hours">24h</div>
-        <h3>Super Rush</h3>
-        <div class="tier-price">Next business day — subject to capacity</div>
-        <ul>
-          <li>2-8 layers, FR-4 only</li>
-          <li>Standard 1.6mm thickness</li>
-          <li>6/6mil trace/space minimum</li>
-          <li>Green mask, white silkscreen</li>
-          <li>ENIG or HASL finish</li>
-          <li>100% AOI + E-test</li>
-          <li>Must be submitted before 10:00 AM CST</li>
-        </ul>
-        <button class="btn btn-ghost btn-sm" onclick="openModal()">Check 24h Availability</button>
-      </div>
+    <p class="section-label reveal">Turnaround Speeds</p>
+    <h2 style="text-align:center;font-weight:200;font-size:var(--text-3xl);margin-bottom:var(--space-2xl)" class="reveal">Our Quick-Turn <em>Capabilities</em></h2>
+    <div style="overflow-x:auto">
+    <table class="data-table reveal" style="width:100%;border-collapse:collapse;font-size:var(--text-sm)">
+      <thead><tr><th>Tier</th><th>Turnaround</th><th>Layer Count</th><th>Materials</th><th>Trace/Space</th><th>Finishes</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:500">Super Rush</td><td>24 hours</td><td>2-8 layers</td><td>FR-4, 1.6mm</td><td>6/6 mil min</td><td>ENIG, HASL</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Rush</td><td>48 hours</td><td>2-12 layers</td><td>FR-4 High-Tg</td><td>4/4 mil min</td><td>ENIG, HASL, OSP, Imm Ag</td></tr>
+        <tr><td style="color:var(--accent);font-weight:500">Express</td><td>72 hours</td><td>2-16 layers</td><td>FR-4 standard</td><td>5/5 mil min</td><td>ENIG, HASL</td></tr>
+      </tbody>
+    </table>
     </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:var(--text-sm);margin-top:var(--space-lg)">All quick-turn orders include 100% AOI, flying probe E-test, and same-day DFM review. Submit before 10:00 AM CST for same-day processing. <button onclick="openModal()" class="btn btn-primary" style="margin-left:var(--space-md)">Check Availability <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button></p>
   </div>
 </section>
 
@@ -205,7 +170,7 @@
           <div class="spec-item"><span class="val">IPC-A-600</span><span class="lbl">Class 2 Standard</span></div>
         </div>
       </div>
-      <div class="media-img"><img src="../../../generated/blog-process-efficiency.webp" alt="Efficient PCB manufacturing process" loading="lazy"></div>
+      <div class="media-img"><img src="../../../generated/blog-quick-turn-pcb-cross-section.webp" alt="PCB cross-section quality verification" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -225,12 +190,13 @@
     </table>
     </div>
     <p style="text-align:center;color:var(--text-muted);font-size:var(--text-sm);margin-top:var(--space-lg)">All shipments include tracking and insurance. DDP (delivered duty paid) available for most destinations. <a href="/shipping/" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Full shipping details</a>.</p>
+    <p style="text-align:center;margin-top:var(--space-lg)"><button onclick="openModal()" class="btn btn-primary">Get Quick-Turn Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button></p>
   </div>
 </section>
 
 <section class="cta-section">
   <div class="container">
-    <div class="cta-card reveal" style="--cta-bg:url(../../../generated/blog-cta-stackup.webp)">
+    <div class="cta-card reveal" style="background-image:url(../../../generated/blog-cta-quick-turn-pcb.webp)">
       <h2>Need Boards Fast? Upload Your Gerber Files Now</h2>
       <p>Submit your design before 10:00 AM CST for same-day DFM review and next-day production start. Include your turnaround requirement (24h/48h/72h) in the message.</p>
       <button class="btn btn-primary btn-lg" onclick="openModal()">Start Quick-Turn Order <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
