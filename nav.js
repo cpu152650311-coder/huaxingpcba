@@ -214,8 +214,6 @@
             '<a href="/capabilities/advanced-pcb/via-in-pad/">Via-in-Pad · Plugging</a>' +
             '<a href="/capabilities/pcb-fabrication/back-drilling/">Back Drilling</a>' +
             '<a href="/capabilities/pcb-fabrication/impedance-control/">Impedance Control</a>' +
-            '<a href="/capabilities/advanced-pcb/edge-plating/">Edge Plating · Castellation</a>' +
-            '<a href="/capabilities/advanced-pcb/hybrid-stackups/">Hybrid Stackups</a>' +
           '</div>' +
         '</span>' +
         '<span class="nav-flyout-trigger" id="pcbFabFlyout">' +
@@ -274,14 +272,23 @@
     '</div>' +
     '<a href="/quote/"' + active('/quote/') + '>Quick Quote</a>' +
     '<a href="/how-it-works/"' + active('/how-it-works/') + '>How It Works</a>' +
-    '<a href="/about/"' + active('/about/') + '>About</a>' +
+    '<div class="nav-dropdown" id="aboutDropdown">' +
+      '<span class="nav-dropdown-trigger">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>' +
+      '<div class="nav-dropdown-panel">' +
+        '<a href="/about/">About Us</a>' +
+        '<a href="/factory/">Factory Tour</a>' +
+        '<a href="/quality/">Quality &amp; Testing</a>' +
+        '<a href="/shipping/">Shipping &amp; Logistics</a>' +
+        '<a href="/projects/">Case Studies</a>' +
+      '</div>' +
+    '</div>' +
     '<a href="/contact/"' + active('/contact/') + '>Contact</a>' +
     '<a href="/blog/"' + active('/blog/') + '>Blog</a>' +
     '<a href="#inquiry" class="nav-cta" onclick="var n=document.getElementById(\'navLinks\');n.classList.remove(\'mobile-open\');document.body.style.overflow=\'\';if(typeof openModal==\'function\')openModal();return false">Get Quote</a>';
 
   // 3. Dropdown toggles (click to open/close on desktop, navigate on mobile)
   document.addEventListener('click', function(e) {
-    ['capabilitiesDropdown','industriesDropdown'].forEach(function(id) {
+    ['capabilitiesDropdown','industriesDropdown','aboutDropdown'].forEach(function(id) {
       var dd = document.getElementById(id);
       if (dd && !dd.contains(e.target)) dd.classList.remove('open');
     });
@@ -293,7 +300,8 @@
 
   var landingPages = {
     capabilitiesDropdown: '/capabilities/',
-    industriesDropdown: '/industries/'
+    industriesDropdown: '/industries/',
+    aboutDropdown: '/about/'
   };
 
   ['capabilitiesDropdown','industriesDropdown'].forEach(function(id) {
