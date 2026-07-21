@@ -1,25 +1,25 @@
 async function handleInquiry(event) {
   event.preventDefault();
   const form = event.target;
-  // Collect form fields
+  
+  const formData = new FormData();
+  formData.append('name', form.querySelector('[name="name"]')?.value || '');
+  formData.append('email', form.querySelector('[name="email"]')?.value || '');
+  formData.append('message', form.querySelector('[name="message"]')?.value || '');
+  formData.append('source', 'huaxingpcba.com');
+
+  // Attach files (real upload — no more fake filenames!)
   const fileInput = form.querySelector('[name="attachment"]');
-  const hasFiles = fileInput && fileInput.files && fileInput.files.length > 0;
-  let msg = form.querySelector('[name="message"]')?.value || '';
-  if (hasFiles) {
-    const names = Array.from(fileInput.files).map(f => f.name).join(', ');
-    msg = `[Attachments: ${names} — please email files to sales@huaxingpcba.com]\n\n${msg}`;
+  if (fileInput && fileInput.files) {
+    for (const file of fileInput.files) {
+      formData.append('files', file);
+    }
   }
-  const data = {
-    name: form.querySelector('[name="name"]')?.value || '',
-    email: form.querySelector('[name="email"]')?.value || '',
-    message: msg,
-    source: 'huaxingpcba.com',
-  };
+
   try {
-    const res = await fetch('https://inquiry-proxy.cpu152650311.workers.dev/inquiry', {
+    const res = await fetch('https://inquiry-proxy.cpu152650311.workers.dev/inquiry-upload', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: formData,
     });
     const result = await res.json();
     if (result.success) {
