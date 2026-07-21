@@ -14,8 +14,8 @@
     <link rel="canonical" href="https://huaxingpcba.com/">
 <link rel="alternate" hreflang="x-default" href="https://huaxingpcba.com/">
 <link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-<link rel="stylesheet" href="design-tokens.css?v=23">
-<style>@media(max-width:768px){.res-grid{grid-template-columns:repeat(2,1fr)!important}}</style>
+<link rel="stylesheet" href="design-tokens.css?v=24">
+
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -365,52 +365,63 @@
 </section>
 
 <!-- Resource Hub -->
+<style>
+.res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md)}
+.res-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s,box-shadow .3s;display:block}
+.res-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.res-icon{display:inline-block;color:var(--accent);transition:color .3s,filter .3s;line-height:1}
+.res-card:hover .res-icon{color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.45))}
+.res-card h4{font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:var(--space-xs) 0 var(--space-xs);transition:color .3s}
+.res-card:hover h4{color:#fff}
+.res-card p{font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5}
+@media(max-width:768px){.res-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
 <section class="section" style="padding-top:0">
   <div class="container">
     <p class="section-label reveal" style="text-align:center">Resources</p>
     <h2 class="reveal" style="text-align:center;font-size:var(--text-3xl);font-weight:200;margin-bottom:var(--space-2xl)">Everything You Need to <em>Make a Decision</em></h2>
-    <div class="res-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md)">
-      <a href="/projects/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">📋</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">Case Studies</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">Real projects. Real results. See how we solved complex PCB challenges.</p>
+    <div class="res-grid">
+      <a href="/projects/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 13 2 2 4-5"/></svg></div>
+        <h4>Case Studies</h4>
+        <p>Real projects. Real results. See how we solved complex PCB challenges.</p>
       </a>
-      <a href="/factory/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">🏭</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">Factory Tour</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">15,000㎡ facility. 8 SMT lines. See the equipment behind every board.</p>
+      <a href="/factory/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><rect x="8" y="15" width="3" height="3" rx=".5"/><rect x="13" y="15" width="3" height="3" rx=".5"/><rect x="8" y="10" width="3" height="3" rx=".5"/><rect x="13" y="10" width="3" height="3" rx=".5"/></svg></div>
+        <h4>Factory Tour</h4>
+        <p>15,000㎡ facility. 8 SMT lines. See the equipment behind every board.</p>
       </a>
-      <a href="/design-guides/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">📐</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">Design Guides</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">Free DFM checklists, material guides, and stackup design resources.</p>
+      <a href="/design-guides/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h4>Design Guides</h4>
+        <p>Free DFM checklists, material guides, and stackup design resources.</p>
       </a>
-      <a href="/quality/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">🛡️</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">Quality & Testing</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">IPC Class 2/3, IATF 16949. Six QC gates. 98.7% first-pass yield.</p>
+      <a href="/quality/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h4>Quality & Testing</h4>
+        <p>IPC Class 2/3, IATF 16949. Six QC gates. 98.7% first-pass yield.</p>
       </a>
     </div>
-    <div class="res-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);margin-top:var(--space-md)">
-      <a href="/shipping/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">🚚</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">Shipping & Logistics</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">Express 3-5 days to 30+ countries. DDP, FOB, EXW. Full tracking.</p>
+    <div class="res-grid" style="margin-top:var(--space-md)">
+      <a href="/shipping/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h4>Shipping & Logistics</h4>
+        <p>Express 3-5 days to 30+ countries. DDP, FOB, EXW. Full tracking.</p>
       </a>
-      <a href="/capabilities/box-build/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">📦</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">Box-Build Assembly</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">From bare PCB to finished product. Enclosure, wiring, testing, packaging.</p>
+      <a href="/capabilities/box-build/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-9 5-9-5"/><path d="m3 8 9 5 9-5"/><path d="M12 3 3 8l9 5 9-5-9-5z"/><line x1="12" y1="13" x2="12" y2="21"/></svg></div>
+        <h4>Box-Build Assembly</h4>
+        <p>From bare PCB to finished product. Enclosure, wiring, testing, packaging.</p>
       </a>
-      <a href="/how-it-works/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">⚙️</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">How It Works</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">7 steps from file upload to delivery. Transparent process, no surprises.</p>
+      <a href="/how-it-works/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m-7.78-18.78 1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72 1.42-1.42"/></svg></div>
+        <h4>How It Works</h4>
+        <p>7 steps from file upload to delivery. Transparent process, no surprises.</p>
       </a>
-      <a href="/faq/" class="reveal" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;text-decoration:none;transition:border-color .3s,transform .3s;display:block">
-        <div style="font-size:var(--text-2xl);margin-bottom:var(--space-sm)">💬</div>
-        <h4 style="font-size:var(--text-base);font-weight:400;color:var(--text-primary);margin:0 0 var(--space-xs)">FAQ</h4>
-        <p style="font-size:var(--text-xs);color:var(--text-muted);margin:0;line-height:1.5">28 answers on pricing, capabilities, quality, shipping, and technical specs.</p>
+      <a href="/faq/" class="res-card reveal">
+        <div class="res-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+        <h4>FAQ</h4>
+        <p>28 answers on pricing, capabilities, quality, shipping, and technical specs.</p>
       </a>
     </div>
   </div>
