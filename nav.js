@@ -2,7 +2,7 @@
  * Huaxing PCBA — Shared Navigation Injection
  * Injects nav HTML + critical CSS so the nav works even if
  * design-tokens.css is cached stale or loads slowly from CDN.
- * v19 — Added 1s mouseleave delay on flyout sub-menus; centralized table+layout CSS in design-tokens v26
+ * v21 — Advanced PCB converted to flyout with sub-menu items
  */
 (function(){
   var nav = document.getElementById('navLinks');
@@ -81,7 +81,7 @@
     '.nav-flyout-trigger:hover .ft-arrow{color:#c8963e}' +
     /* Flyout sub-panel */
     '.nav-flyout-panel{' +
-      'position:absolute;left:calc(100% + 4px);top:-8px;' +
+      'position:absolute;left:100%;top:-8px;' +
       'background:#16161d;border:1px solid #252530;' +
       'border-radius:8px;padding:8px;min-width:240px;' +
       'opacity:0;visibility:hidden;pointer-events:none;' +
@@ -207,7 +207,17 @@
             '<a href="/capabilities/pcb-types/ceramic/">Ceramic · Al₂O₃ / AlN</a>' +
           '</div>' +
         '</span>' +
-        '<a href="/capabilities/advanced-pcb/">Advanced PCB</a>' +
+        '<span class="nav-flyout-trigger" id="advancedPcbFlyout">' +
+          '<a href="/capabilities/advanced-pcb/">Advanced PCB</a>' +
+          '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
+          '<div class="nav-flyout-panel">' +
+            '<a href="/capabilities/advanced-pcb/via-in-pad/">Via-in-Pad · Plugging</a>' +
+            '<a href="/capabilities/pcb-fabrication/back-drilling/">Back Drilling</a>' +
+            '<a href="/capabilities/pcb-fabrication/impedance-control/">Impedance Control</a>' +
+            '<a href="/capabilities/advanced-pcb/edge-plating/">Edge Plating · Castellation</a>' +
+            '<a href="/capabilities/advanced-pcb/hybrid-stackups/">Hybrid Stackups</a>' +
+          '</div>' +
+        '</span>' +
         '<span class="nav-flyout-trigger" id="pcbFabFlyout">' +
           '<a href="/capabilities/pcb-fabrication/">PCB Fabrication</a>' +
           '<svg class="ft-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>' +
@@ -275,7 +285,7 @@
       var dd = document.getElementById(id);
       if (dd && !dd.contains(e.target)) dd.classList.remove('open');
     });
-    ['pcbTypesFlyout','pcbFabFlyout','pcbaFlyout','stencilFlyout','boxbuildFlyout'].forEach(function(fid) {
+    ['pcbTypesFlyout','advancedPcbFlyout','pcbFabFlyout','pcbaFlyout','stencilFlyout','boxbuildFlyout'].forEach(function(fid) {
       var flyout = document.getElementById(fid);
       if (flyout && !flyout.contains(e.target)) flyout.classList.remove('open');
     });
@@ -306,6 +316,7 @@
 
   var flyoutMap = {
     pcbTypesFlyout: '/capabilities/pcb-types/',
+    advancedPcbFlyout: '/capabilities/advanced-pcb/',
     pcbFabFlyout: '/capabilities/pcb-fabrication/',
     pcbaFlyout: '/capabilities/pcba-assembly/',
     stencilFlyout: '/capabilities/smt-stencil/',
@@ -320,18 +331,6 @@
           e.stopPropagation();
           window.location.href = flyoutMap[fid];
         }
-      });
-      // Hover delay: keep flyout open for 1s after mouse leaves
-      flyout.addEventListener('mouseenter', function() {
-        clearTimeout(flyout._hideTimer);
-        var panel = flyout.querySelector('.nav-flyout-panel');
-        if (panel) { panel.style.opacity = '1'; panel.style.visibility = 'visible'; panel.style.pointerEvents = 'auto'; }
-      });
-      flyout.addEventListener('mouseleave', function(e) {
-        var panel = flyout.querySelector('.nav-flyout-panel');
-        flyout._hideTimer = setTimeout(function() {
-          if (panel) { panel.style.opacity = ''; panel.style.visibility = ''; panel.style.pointerEvents = ''; }
-        }, 1000);
       });
     }
   });

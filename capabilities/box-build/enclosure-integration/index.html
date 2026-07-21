@@ -102,13 +102,14 @@
   <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
   <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
   <symbol id="icon-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
 </svg>
 
 <header class="site-header" id="header">
   <div class="container">
     <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
     <nav class="nav-links" id="navLinks"></nav>
-    <script src="/nav.js?v=19" defer></script>
+    <script src="/nav.js?v=21" defer></script>
     <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
       <span></span><span></span><span></span>
     </div>
@@ -216,6 +217,7 @@
         <h2>Branding <em>&amp; Customization</em></h2>
         <p>Your product needs to look like yours. We apply custom branding during assembly: laser-etched logos and model numbers, silk-screen printed legends on front/rear panels, color-matched enclosure painting, and custom membrane keypad or overlay installation.</p>
         <p>Serial number labeling with barcode or QR code is applied per your specification — thermal-transfer printed labels on polyester or polyimide substrate, rated for the operating environment. Regulatory marks (CE, FCC, UL, UKCA) are positioned per your compliance documentation on every unit.</p>
+        <button onclick="openModal()" class="btn btn-primary" style="margin-top:var(--space-md)"><svg width="16" height="16"><use href="#icon-pen"/></svg> Get Your Branding &amp; Labeling Quote</button>
       </div>
     </div>
   </div>
@@ -254,15 +256,11 @@
   </div>
 </section>
 
-<div class="reveal" style="text-align:center;padding:var(--space-xl) 0">
-  <a href="/capabilities/box-build/cable-harness/" class="btn btn-outline" style="margin-right:var(--space-md)">Explore Cable Harness Assembly <svg width="14" height="14"><use href="#icon-arrow-right"/></svg></a>
-  <button class="btn btn-primary" onclick="openModal()">Discuss Your Enclosure Project</button>
-</div>
 
 <!-- CTA -->
 <section class="cta-section">
   <div class="container">
-    <div class="cta-card reveal" style="background-image:url(../../../generated/blog-cta-industrial.webp)">
+    <div class="cta-card reveal" style="background-image:url(../../../generated/blog-cta-turnkey.webp)">
       <h2>Ready to House Your <em>Electronics?</em></h2>
       <p>Send us your enclosure requirements and 3D model. We handle sourcing, assembly, sealing, and branding — one partner, one delivery.</p>
       <button class="btn btn-primary btn-lg" onclick="openModal()">Request Enclosure Assembly Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
@@ -313,7 +311,7 @@
   <div class="modal-dialog">
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <div class="modal-image-panel">
-      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <img src="../../../generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
       <div class="modal-image-overlay"></div>
       <div class="modal-image-top">
         <h2 class="mi-heading">Request a Quote</h2>
