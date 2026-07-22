@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Panelization Guide — Optimize Panel Layout to Cut Manufacturing Costs | Huaxing PCBA</title>
+<meta name="description" content="Learn how PCB panelization reduces per-unit manufacturing costs. V-scoring vs tab routing comparison, design rules for maximum panel utilization, and cost optimization strategies for overseas procurement managers.">
+<meta property="og:title" content="PCB Panelization Guide — Optimize Panel Layout to Cut Manufacturing Costs">
+<meta property="og:description" content="V-scoring vs tab routing, panel utilization math, and design rules that directly impact your PCB quote. From a Shenzhen factory that processes 800+ panel designs monthly.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-panelization-cost-optimization.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-panelization.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-panelization-cost-optimization.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Panelization Guide — Optimize Panel Layout to Cut Manufacturing Costs",
+  "description": "Learn how PCB panelization reduces per-unit manufacturing costs. V-scoring vs tab routing comparison, design rules for maximum panel utilization, and cost optimization strategies for overseas procurement managers.",
+  "datePublished": "2026-07-22",
+  "dateModified": "2026-07-22",
+  "image": "https://huaxingpcba.com/generated/blog-cover-panelization.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-panelization-cost-optimization.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-panelization-cost-optimization.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-panelization.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">PCB Panelization Guide:<br><em>Optimize Panel Layout to Cut Manufacturing Costs</em></h1>
+      <p class="reveal">How panelization decisions — from V-scoring to utilization rates — directly impact your per-unit price, MOQ, and lead time.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Panelization Guide</span></div>
+
+  <p>PCB panelization is one of the most overlooked cost levers in electronics manufacturing. A <span class="data-point">10% improvement</span> in panel utilization can reduce your per-unit cost by 8-12% — yet most procurement managers never discuss panel layout with their manufacturer. This guide explains exactly how panelization works, the three main methods, and how to optimize your design for maximum cost efficiency.</p>
+
+  <p>At Huaxing PCBA, our engineering team reviews over <span class="data-point">800 panel designs</span> every month across <span class="data-point">8 SMT lines</span>. We've seen the same costly mistakes repeated across industries — from automotive ECUs to IoT sensor modules. Here's what every procurement manager and design engineer needs to know before sending their next PCB order to production.</p>
+
+  <img class="article-img" src="../generated/blog-panelization-vscore.webp" alt="PCB panel with V-scoring grooves showing individual board separation lines on a manufacturing panel" loading="lazy">
+
+  <h2>What Is PCB Panelization and Why It Directly Affects Your Quote</h2>
+
+  <p>Panelization is the process of grouping multiple identical (or different) PCB designs onto a single manufacturing panel for production. Rather than handling individual boards one at a time, SMT pick-and-place machines, reflow ovens, and AOI systems process entire panels — dramatically improving throughput and consistency.</p>
+
+  <p>The core metric that determines your cost is <strong>panel utilization rate</strong>: the percentage of the panel surface area that contains actual boards versus wasted space (borders, gaps, tooling strips). Standard panel sizes in Chinese PCB factories are <span class="data-point">18 × 24 inches</span> (457 × 610 mm) and <span class="data-point">21 × 24 inches</span> (533 × 610 mm). The math is straightforward:</p>
+
+  <div class="highlight-box">
+    <p><strong>Panel Utilization Formula:</strong> Utilization Rate = (Total Board Area × Boards Per Panel) ÷ (Panel Area) × 100%. A panel with 75% utilization vs 90% utilization on a 1,000-unit order can mean a <strong>17% cost difference</strong> — approximately $850 on a typical $5,000 batch.</p>
+  </div>
+
+  <p>Panel utilization also affects your minimum order quantity. Higher utilization means each panel holds more boards, which means <a href="/blog/pcb-cost-factors.html">fewer panels are needed to hit your target volume</a> — and since tooling and setup costs are amortized across panels, this directly lowers your per-unit price at any order size.</p>
+
+  <h2>Panelization Methods: V-Scoring vs Tab Routing vs Stamp Holes</h2>
+
+  <p>There are three primary panelization methods, and choosing the wrong one for your board geometry can increase cost by <span class="data-point">15-30%</span>. Here's how to match the method to your design:</p>
+
+  <table class="spec-table">
+    <tr><th>Method</th><th>Best For</th><th>Edge Quality</th><th>Relative Cost</th><th>Min Board Spacing</th></tr>
+    <tr><td>V-Scoring</td><td>Rectangular boards, straight edges</td><td>Smooth, slight groove residue</td><td>Lowest</td><td>0 mm (shared cut line)</td></tr>
+    <tr><td>Tab Routing</td><td>Irregular shapes, rounded corners</td><td>Smooth with mouse-bite marks</td><td>Medium</td><td>2.0-2.4 mm</td></tr>
+    <tr><td>Stamp Holes</td><td>Castellated modules, small PCBs</td><td>Semi-circular edge plating</td><td>Highest</td><td>0.5-1.0 mm</td></tr>
+  </table>
+
+  <h3>V-Scoring: The Cost-Effective Workhorse</h3>
+
+  <p>V-scoring uses a precision blade to cut a V-shaped groove approximately <span class="data-point">1/3 of the board thickness</span> deep along straight lines. After assembly, panels are separated by a depaneling machine that snaps along the groove. V-scoring is the <strong>lowest-cost method</strong> because multiple boards share the same cut line — zero wasted material between boards.</p>
+
+  <p>However, V-scoring has strict limitations: the cut must be a straight line from edge to edge of the panel, and components must maintain a <span class="data-point">minimum 5 mm clearance</span> from the score line to avoid cracked solder joints during depaneling. Boards with curved edges, cutouts, or non-rectangular shapes <strong>cannot</strong> use V-scoring.</p>
+
+  <img class="article-img" src="../generated/blog-panelization-routing.webp" alt="CNC router machine depaneling PCB panels with tab routing, showing perforated breakaway tabs" loading="lazy">
+
+  <h3>Tab Routing: Flexibility for Complex Geometries</h3>
+
+  <p>Tab routing uses a CNC router to mill around each board's perimeter, leaving small perforated tabs ("mouse bites") that hold the board in the panel frame. This method works for <strong>any board shape</strong> — round, L-shaped, or boards with internal cutouts — but the router bit requires clearance between boards, reducing panel utilization by <span class="data-point">3-8%</span> compared to V-scoring.</p>
+
+  <p>Standard tab specifications: <span class="data-point">3-5 tabs</span> per board edge (more for heavy boards), tab width <span class="data-point">1.6-2.0 mm</span>, with <span class="data-point">3-5 perforation holes</span> per tab at 0.5-0.8 mm diameter. For <a href="/blog/heavy-copper-pcb.html">heavy copper boards (4oz+)</a>, wider tabs of 2.5-3.0 mm are recommended to prevent premature breakage during handling.</p>
+
+  <h3>Stamp Holes: For Castellated Edge Modules</h3>
+
+  <p>Stamp holes are used primarily for small modules with castellated (half-plated) edge connections — common in Bluetooth/WiFi modules, sensor breakout boards, and IoT edge devices. The board is connected to the panel by a series of plated half-holes that become the edge connectors after depaneling. This is the most expensive method due to the additional plating step and tighter process control requirements.</p>
+
+  <h2>Design Rules for Panel-Ready PCB Layouts</h2>
+
+  <p>Submitting a panel-ready design (rather than individual board files) can <a href="/blog/dfm-tips.html">reduce your engineering review cycle</a> by 2-3 days and eliminate back-and-forth with the manufacturer. Here are the key specifications every designer should follow:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Panel Border Width: 12.7 mm Minimum</h4>
+      <p>The panel frame needs sufficient width for conveyor rail gripping during SMT and reflow. Standard border is <span class="data-point">12.7 mm (0.5 inch)</span> on all four sides. For panels with heavy components (>100g total), increase to <span class="data-point">15 mm</span> to prevent sagging in the reflow oven.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Fiducial Marks: 3 Global + 2 Local Per Board</h4>
+      <p>Place <span class="data-point">3 global fiducials</span> on the panel frame (outside the board area) for overall alignment, plus <span class="data-point">2 local fiducials</span> per individual board for fine positioning. Fiducial diameter: 1.0-1.5 mm, with a 2-3 mm clear copper-free zone around each mark. Missing or insufficient fiducials is the #1 cause of SMT placement errors on new designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Tooling Holes: 3.2 mm Diameter, Non-Plated</h4>
+      <p>Include <span class="data-point">4 tooling holes</span> (one near each corner of the panel frame), <span class="data-point">3.2 mm diameter</span>, non-plated. These are used for mechanical fixturing during drilling, routing, and electrical test. Position tolerance: ±0.05 mm from the panel datum.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Component-to-Edge Clearance: 5 mm Minimum</h4>
+      <p>Keep all SMT components at least <span class="data-point">5 mm away</span> from V-score lines and <span class="data-point">3 mm away</span> from routed edges. Components near the breakaway zone experience mechanical stress during depaneling — capacitors and BGAs are especially vulnerable to micro-crack damage. For designs that must place components close to edges, <a href="/blog/pcb-testing-methods.html">specify post-depaneling AOI and X-ray inspection</a> in your test plan.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Copper Balance: Maintain Symmetry Across the Panel</h4>
+      <p>Uneven copper distribution causes warpage during reflow — especially on <span class="data-point">2-layer and 4-layer boards</span> where copper density varies between layers. Add copper thieving (dummy fill) on sparse layers to achieve <span class="data-point">within 15% copper density</span> across the panel. Warped panels cause tombstoning, open joints, and can even jam conveyor systems.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-panelization-utilization.webp" alt="PCB panel layout optimization showing different board arrangements with utilization rate calculations from 65% to 92%" loading="lazy">
+
+  <h2>How Panelization Requirements Differ by PCB Type</h2>
+
+  <p>Different PCB technologies impose different constraints on panelization — a one-size-fits-all approach doesn't work. Here's how the four major PCB categories affect your panel design:</p>
+
+  <table class="spec-table">
+    <tr><th>PCB Type</th><th>Panelization Consideration</th><th>Typical Waste Factor</th></tr>
+    <tr><td>Standard FR-4 (1.6mm)</td><td>Standard V-scoring, 12.7mm border</td><td>8-12%</td></tr>
+    <tr><td>HDI / Microvia</td><td>Laser-drilled alignment targets needed; tighter border tolerances (±0.05mm)</td><td>12-18%</td></tr>
+    <tr><td>Heavy Copper (4oz+)</td><td>Wider tabs (2.5mm), extra tooling holes, grain direction alignment</td><td>15-20%</td></tr>
+    <tr><td>Flex / Rigid-Flex</td><td>Stiffener frame required; no V-scoring; specialized depaneling tooling</td><td>18-25%</td></tr>
+  </table>
+
+  <p>For <a href="/blog/hdi-technology.html">HDI boards with laser-drilled microvias</a>, panel alignment targets must be positioned with <span class="data-point">±0.05 mm precision</span> because the laser drill references panel fiducials. Misalignment at the panel level cascades into via-pad misregistration on every board in the batch. This is why HDI panels typically have 2-4 extra fiducial pairs beyond the standard count.</p>
+
+  <p><a href="/blog/flex-pcb-design-manufacturing.html">Flex and rigid-flex circuits</a> require a completely different approach: the flexible sections cannot be V-scored or routed with standard tooling. Instead, a rigid stiffener frame holds the flex portion flat during SMT assembly, and specialized laser or die-cutting separates the boards afterward. Expect panel utilization to drop to 70-78% for flex designs.</p>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When requesting quotes, ask your manufacturer to provide the panel layout drawing showing the utilization calculation. A transparent supplier will share this — if they won't, you can't verify you're paying for value, not waste. At Huaxing PCBA, every quote includes the panelization plan with utilization percentage.</p>
+  </div>
+
+  <h2>Common Panelization Mistakes That Inflate Your PCB Cost</h2>
+
+  <p>After reviewing thousands of customer designs, these are the five errors we see most frequently — each one adds unnecessary cost:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Ignoring FR-4 Grain Direction</h4>
+      <p>FR-4 laminate has a grain direction (warp direction) that affects mechanical strength. Boards should be oriented so the longer dimension aligns with the grain — otherwise, panels warp during reflow, especially on single-sided SMT designs. Warped panels = <span class="data-point">rejection rates up to 5%</span>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Placing Heavy Components Near V-Score Lines</h4>
+      <p>Large BGAs, transformers, and electrolytic capacitors within <span class="data-point">5 mm of a V-score line</span> experience mechanical shock during depaneling. We've seen cracked BGA balls that passed ICT but failed after 50 thermal cycles. The fix is simple: rotate the board 90° or shift component placement.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Insufficient Tab Width for Large Boards</h4>
+      <p>Boards larger than <span class="data-point">100 × 100 mm</span> with only 3 tabs per edge often break loose during transport. Standard: <span class="data-point">1 tab per 50 mm of edge length</span>, minimum 3 tabs per side regardless of length. This is especially critical for <a href="/blog/heavy-copper-pcb.html">heavy copper boards</a> where board weight is 30-50% higher than standard FR-4.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Sending Individual Board Files Without Panel Instructions</h4>
+      <p>If you send Gerber files for individual boards without specifying panelization preferences, the manufacturer chooses the cheapest option — which may not be optimal for your assembly process. Always include: preferred panelization method, maximum panel size your assembly line can handle, and any component clearance zones. A <a href="/blog/gerber-files-guide.html">complete Gerber package with fabrication notes</a> prevents this ambiguity.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Forgetting to Account for Depaneling Tolerance</h4>
+      <p>After depaneling, board dimensions are typically <span class="data-point">±0.15-0.25 mm</span> different from the routed dimension due to the router bit kerf and breakaway edge roughness. If your enclosure has tight mechanical tolerances, specify the <strong>post-depaneling</strong> target dimension in your fabrication drawing — not the routed dimension.</p>
+    </div>
+  </div>
+
+  <h2>How to Work With Your PCB Manufacturer on Panel Design</h2>
+
+  <p>The most cost-efficient approach is to collaborate with your manufacturer early in the design phase. Here's a practical workflow:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Send Individual Board Gerbers + Assembly Requirements</h4>
+      <p>Unless you have in-house panelization expertise, sending individual board files with a clear note that you want the manufacturer to propose the panel layout typically yields the best result. Include your assembly line's maximum panel handling size and any depaneling equipment constraints.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Request a Panel Layout Drawing for Approval</h4>
+      <p>Before production begins, ask for a <span class="data-point">panel fabrication drawing (PFD)</span> showing board placement, utilization calculation, fiducial locations, and tooling hole positions. Review it with your assembly team — a 10-minute review can prevent a batch of unbuildable panels.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Validate With a First Article Panel</h4>
+      <p>For orders over <span class="data-point">$3,000</span>, request a <strong>first article panel</strong> before committing to the full batch. Run it through your assembly line, verify depaneling quality, and confirm that all boards separate cleanly without component damage. This single step catches <span class="data-point">80% of panelization issues</span> before they become batch-level problems.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, our DFM engineering team reviews every panel design before production — at no extra charge. We check for the 5 common mistakes listed above, verify clearance rules against your component placement, and calculate the panel utilization rate. If we find a way to fit more boards on the same panel without compromising quality, we'll propose it. <a href="/blog/pcb-quote-comparison-guide.html">Compare our quotes against any supplier</a> — you'll find the panelization transparency alone saves real money.</p>
+
+  <p>For project-specific panelization consultation, <a href="/contact/">contact our engineering team</a> with your Gerber files. Typical panel layout review turnaround: <span class="data-point">24 hours</span> with detailed DFM report.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-panelization.webp)">
+      <h2>Get a Panel-Optimized PCB Quote</h2>
+      <p>Send your Gerber files and we'll propose a panel layout that maximizes utilization. Free DFM review included — typical turnaround 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
