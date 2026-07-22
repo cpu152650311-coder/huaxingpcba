@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High-Voltage PCB Design Guide — Creepage, Clearance &amp; Isolation Requirements Above 500V | Huaxing PCBA</title>
+<meta name="description" content="High-voltage PCB design guide covering IPC-2221 creepage and clearance requirements, CTI material selection, pollution degree classification, and 5 layout rules for boards operating above 500V. IATF 16949 certified manufacturing.">
+<meta property="og:title" content="High-Voltage PCB Design — Creepage, Clearance &amp; Isolation Above 500V">
+<meta property="og:description" content="IPC-2221 spacing tables, CTI material selection, and 5 proven layout rules for boards operating above 500V — from EV chargers to industrial drives.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/high-voltage-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-high-voltage-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/high-voltage-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "High-Voltage PCB Design Guide — Creepage, Clearance & Isolation Requirements Above 500V",
+  "description": "High-voltage PCB design guide covering IPC-2221 creepage and clearance requirements, CTI material selection, pollution degree classification, and 5 layout rules for boards operating above 500V. IATF 16949 certified manufacturing.",
+  "datePublished": "2026-07-23",
+  "dateModified": "2026-07-23",
+  "image": "https://huaxingpcba.com/generated/blog-cover-high-voltage-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/high-voltage-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/high-voltage-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-high-voltage-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">High-Voltage PCB Design:<br><em>Creepage, Clearance &amp; Isolation Requirements Above 500V</em></h1>
+      <p class="reveal">IPC-2221 spacing tables, CTI material selection, and 5 proven layout rules for boards operating above 500V — from EV chargers to industrial motor drives.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>High-Voltage PCB Design</span></div>
+
+  <p>When your PCB carries <span class="data-point">500V or more</span>, standard FR-4 spacing rules stop being guidelines and become safety-critical engineering decisions. A 0.2mm trace gap that works flawlessly at 12V can arc across at 600V, destroying components and creating a fire hazard. High-voltage PCB design is not about adding extra margin — it's about understanding the physics of dielectric breakdown, creepage paths along contaminated surfaces, and the certification requirements that determine whether your product ships or gets rejected at compliance testing.</p>
+
+  <p>This guide covers the IPC-2221 voltage spacing requirements, the difference between creepage and clearance (and why confusing them causes field failures), how to select PCB materials with the right Comparative Tracking Index (CTI), and five layout rules proven across thousands of high-voltage boards manufactured at our <span class="data-point">IATF 16949</span> certified facility. At Huaxing PCBA, we process high-voltage PCBs from 2 to 32 layers with materials rated to <span class="data-point">40kV/mm</span> dielectric strength — serving EV charging, solar inverter, industrial VFD, and medical imaging customers across 30+ countries.</p>
+
+  <img class="article-img" style="max-width:80%" src="/generated/blog-high-voltage-pcb-creepage.webp" alt="PCB cross-section showing creepage path along surface between high-voltage traces with conformal coating protection" loading="lazy">
+
+  <!-- ── Section 1 ── -->
+  <h2>What Counts as "High Voltage" in PCB Design?</h2>
+
+  <p>Industry standards don't use a single voltage threshold. The classification depends on which standard you're designing to — and getting this wrong at the schematic stage cascades into board respins and certification failures.</p>
+
+  <table class="spec-table">
+    <tr><th>Standard</th><th>Low Voltage</th><th>High Voltage</th><th>Notes</th></tr>
+    <tr><td>IPC-2221</td><td>&lt;100V (internal), &lt;500V (external)</td><td>≥100V internal, ≥500V external</td><td>Spacing tables split at these thresholds</td></tr>
+    <tr><td>IEC 60950-1 / 62368-1</td><td>&lt;60V DC, &lt;42.4V AC peak</td><td>≥60V DC / 42.4V AC</td><td>Safety Extra-Low Voltage (SELV) boundary</td></tr>
+    <tr><td>IEC 60664-1</td><td>Depends on overvoltage category</td><td>Depends on rated impulse voltage</td><td>Used for mains-connected equipment (CAT II–IV)</td></tr>
+    <tr><td>UL 60950-1</td><td>ES1 (&lt;60V)</td><td>ES2 (60–250V), ES3 (&gt;250V)</td><td>Energy Source classification</td></tr>
+  </table>
+
+  <p>For most PCB designers, the practical boundary is <strong>500V peak</strong>. Below this, IPC-2221 spacing tables give adequate margins for clean, dry, indoor environments. Above this threshold — or any time your board connects to AC mains — you enter the world of creepage distance calculations, pollution degree classifications, and material CTI requirements. The applications that routinely cross this boundary include <span class="data-point">EV onboard chargers (400–800V)</span>, industrial VFD DC buses (560V), solar string inverters (600–1500V), and medical X-ray generator supplies (40–150kV with special isolation).</p>
+
+  <!-- ── Section 2 ── -->
+  <h2>Creepage vs Clearance — The Distinction That Prevents Field Failures</h2>
+
+  <p>These two terms are often used interchangeably by engineers who haven't designed for high voltage before — but they describe fundamentally different failure mechanisms, and IEC/UL standards treat them as separate requirements.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Clearance — The Shortest Path Through Air</h4>
+      <p>Clearance is the line-of-sight distance between two conductive parts through air. It protects against <strong>transient overvoltage</strong> — the lightning strike, the switching surge, the ESD event. Air breaks down at approximately <span class="data-point">3kV/mm</span> at sea level under standard conditions, but this drops significantly at altitude (lower air density = easier breakdown). For a PCB operating at 1,000m altitude, the derating factor is approximately <span class="data-point">0.89x</span>; at 3,000m, it drops to <span class="data-point">0.73x</span>. Clearance requirements come from the expected transient overvoltage category (CAT II/III/IV), not the working voltage.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Creepage — The Path Along a Surface</h4>
+      <p>Creepage is the shortest path along the surface of an insulator between two conductors. It protects against <strong>long-term tracking</strong> — the gradual degradation of the PCB surface when voltage stress, humidity, and contamination combine to form conductive carbon paths. A board that passes dielectric withstand testing in the lab can fail in the field after <span class="data-point">6–12 months</span> of dust accumulation and humidity cycling. Creepage requirements are calculated from the RMS working voltage, the pollution degree of the operating environment, and the Comparative Tracking Index (CTI) of the PCB base material.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> The most dangerous failure mode in high-voltage PCBs is not dielectric breakdown — it's <strong>electrochemical migration (ECM)</strong>. When moisture condenses on a contaminated PCB surface between two traces at different potentials, copper ions migrate from the anode to the cathode, forming conductive dendrites. This happens below the dielectric breakdown voltage and below the clearance arc-over threshold. Only adequate creepage distance — accounting for pollution degree — prevents it.</p>
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>IPC-2221 Spacing Requirements by Voltage Level</h2>
+
+  <p>The IPC-2221 standard provides the baseline conductor spacing table that most PCB designs reference. For high-voltage work, use <strong>Table 6-1</strong> (electrical conductor spacing) with the B4 column for external conductors with permanent polymer coating, or the A5/A6/A7 columns depending on your specific application and altitude. Below are the key voltage-to-spacing mappings:</p>
+
+  <table class="spec-table">
+    <tr><th>Voltage (DC or AC Peak)</th><th>B1 — Internal</th><th>B2 — External, Uncoated</th><th>B4 — External, Coated</th><th>Typical Application</th></tr>
+    <tr><td>0–15V</td><td>0.05mm</td><td>0.1mm</td><td>0.05mm</td><td>Digital logic, microcontrollers</td></tr>
+    <tr><td>16–30V</td><td>0.05mm</td><td>0.1mm</td><td>0.05mm</td><td>Analog sensor circuits</td></tr>
+    <tr><td>31–50V</td><td>0.1mm</td><td>0.6mm</td><td>0.13mm</td><td>Power-over-Ethernet (PoE)</td></tr>
+    <tr><td>51–100V</td><td>0.1mm</td><td>0.6mm</td><td>0.13mm</td><td>48V battery systems, audio amps</td></tr>
+    <tr><td>101–150V</td><td>0.2mm</td><td>1.25mm</td><td>0.4mm</td><td>DC-DC converter primaries</td></tr>
+    <tr><td>151–170V</td><td>0.2mm</td><td>1.25mm</td><td>0.4mm</td><td>US mains rectified (120V AC → 170V DC)</td></tr>
+    <tr><td>171–250V</td><td>0.2mm</td><td>1.25mm</td><td>0.4mm</td><td>EU mains rectified (230V → 325V DC)</td></tr>
+    <tr><td>251–300V</td><td>0.2mm</td><td>1.25mm</td><td>0.4mm</td><td>PFC boost output stage</td></tr>
+    <tr><td>301–500V</td><td>0.25mm</td><td>2.5mm</td><td>0.8mm</td><td>3-phase rectified bus, EV charger input</td></tr>
+    <tr><td>501–600V</td><td>0.5mm</td><td>3.2mm</td><td>1.0mm</td><td>EV traction inverter DC link</td></tr>
+    <tr><td>601–800V</td><td>0.75mm</td><td>4.0mm</td><td>1.25mm</td><td>800V EV architecture, solar string inverters</td></tr>
+    <tr><td>801–1000V</td><td>1.0mm</td><td>5.0mm</td><td>1.5mm</td><td>Industrial VFD DC bus, 1500V solar</td></tr>
+  </table>
+
+  <p>Note that the B2 column (uncoated external) jumps dramatically above 500V — from 2.5mm to 5.0mm between 500V and 1000V. This is precisely why conformal coating (B4) is almost mandatory for production high-voltage boards: it more than <strong>halves</strong> the required spacing, enabling denser layouts without sacrificing safety. For a deeper understanding of coating options, see our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating selection guide</a> which covers silicone, acrylic, and parylene materials for high-voltage PCB protection.</p>
+
+  <!-- ── Section 4 ── -->
+  <h2>Material Selection for High-Voltage PCBs</h2>
+
+  <p>Not all FR-4 is created equal when voltage climbs above 500V. Two material properties dominate high-voltage PCB reliability: <strong>Comparative Tracking Index (CTI)</strong> and <strong>dielectric breakdown strength</strong>. Selecting the wrong grade of FR-4 for a 600V design can reduce creepage life by <span class="data-point">10–100x</span> compared to a properly specified high-CTI laminate.</p>
+
+  <img class="article-img" style="max-width:85%" src="/generated/blog-high-voltage-pcb-materials.webp" alt="Close-up comparison of standard FR-4 versus high-CTI PCB laminate surfaces under magnification showing tracking resistance difference" loading="lazy">
+
+  <table class="spec-table">
+    <tr><th>Material</th><th>CTI (Volts)</th><th>PLC Rating</th><th>Dielectric Strength</th><th>Cost Multiplier</th><th>Best For</th></tr>
+    <tr><td>Standard FR-4</td><td>175–249V</td><td>PLC 3</td><td>20–30 kV/mm</td><td>1.0x</td><td>≤150V designs, non-safety-critical</td></tr>
+    <tr><td>High-Tg FR-4 (Tg 170°C+)</td><td>200–300V</td><td>PLC 2–3</td><td>25–35 kV/mm</td><td>1.2–1.4x</td><td>High-temp environments with moderate voltage</td></tr>
+    <tr><td>High-CTI FR-4 (CTI ≥400V)</td><td>400–599V</td><td>PLC 1</td><td>30–40 kV/mm</td><td>1.5–2.0x</td><td>500–800V designs, Pollution Degree 2</td></tr>
+    <tr><td>Polyimide</td><td>≥600V</td><td>PLC 0</td><td>40–60 kV/mm</td><td>3.0–5.0x</td><td>800V+, flex/rigid-flex, aerospace</td></tr>
+    <tr><td>Ceramic-filled PTFE</td><td>≥600V</td><td>PLC 0</td><td>30–50 kV/mm</td><td>5.0–10.0x</td><td>RF + high-voltage, GHz power amps</td></tr>
+  </table>
+
+  <p><strong>How CTI affects your creepage requirements:</strong> Under IEC 62368-1, a material with CTI ≥600V (PLC 0) needs <strong>30–50% less creepage distance</strong> than standard FR-4 (PLC 3) for the same working voltage and pollution degree. For a 600V RMS design in Pollution Degree 2: standard FR-4 requires approximately 6.3mm creepage, while high-CTI FR-4 requires only 3.8mm. That 2.5mm difference can mean fitting the high-voltage section on a smaller board — or avoiding a larger enclosure. For a complete breakdown of PCB material properties, see our <a href="/blog/pcb-materials-guide.html">PCB materials guide comparing FR-4, Rogers, aluminum, and high-frequency substrates</a>.</p>
+
+  <!-- ── Section 5 ── -->
+  <h2>5 Design Rules for High-Voltage PCB Layout</h2>
+
+  <p>These five rules come from <span class="data-point">thousands of high-voltage boards</span> manufactured at our facility — including designs operating at 800V for EV traction inverters, 1500V for solar string inverters, and 6kV for medical X-ray supplies. Each rule addresses a specific failure mode we've seen in pre-production prototypes that passed schematic review but failed hi-pot testing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Add Slots and Barriers Between High-Voltage and Low-Voltage Domains</h4>
+      <p>A routed slot (milled opening) in the PCB between the high-voltage primary side and the low-voltage secondary side is the single most effective way to increase creepage distance. A <span class="data-point">1.6mm-wide slot</span> adds 3.2mm of creepage path (the trace must travel down one wall, across the bottom, and up the other side) without consuming additional board area. For 600V+ designs with limited real estate, slots are often the difference between passing and failing safety certification. The slot width should be at least <span class="data-point">1.0mm</span> (standard routing tool diameter) and positioned directly between the primary and secondary isolation boundary. Do not place vias or copper within 0.5mm of the slot edge — the routing process can tear thin dielectric near copper features.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Eliminate Sharp Corners on High-Voltage Copper</h4>
+      <p>Electric field concentration at sharp corners — especially on polygon pours and rectangular pads — can initiate corona discharge at voltages as low as <span class="data-point">300V</span> in dry air. Every high-voltage trace, pad, and copper pour should use <strong>radiused corners</strong> with a minimum radius of <span class="data-point">1.0mm</span>. For polygon pours, set the minimum neck width to match the trace width and use curved (not mitered) corners. This is not just a best practice — IEC 60664-1 explicitly requires that creepage distance measurements ignore sharp corners and narrow grooves where tracking can concentrate. Our DFM review automatically flags sharp-corner copper on any net above 100V; <a href="/blog/dfm-tips.html">our DFM tips guide</a> covers additional layout optimizations that prevent fabrication issues.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Specify Pollution Degree and Conformal Coating in Fabrication Notes</h4>
+      <p>The pollution degree of your product's operating environment is the single largest multiplier on creepage requirements, yet it's the most frequently omitted specification in PCB fabrication drawings. <strong>Pollution Degree 1</strong> (sealed, clean, dry — e.g., hermetically sealed modules) allows the tightest spacings. <strong>Pollution Degree 2</strong> (non-conductive pollution with occasional condensation — e.g., office/lab equipment, EV onboard chargers in IP67 enclosures) is the default for most industrial products. <strong>Pollution Degree 3</strong> (conductive pollution or frequent condensation — e.g., unheated outdoor equipment, engine compartment electronics) requires <span class="data-point">1.6–2.0x</span> the creepage of PD2. The pollution degree must be stated unambiguously on your fabrication drawing, along with the conformal coating specification (type, thickness, coverage areas). See our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> for material selection by operating environment.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Design Isolation Barriers with Multiple Protective Impedances</h4>
+      <p>A single isolation component (optocoupler, digital isolator, transformer) is a single point of failure for safety isolation. For voltages above 500V, safety standards increasingly require <strong>two protective impedances in series</strong> — either two independent isolation barriers (reinforced isolation) or one basic isolation barrier plus a secondary protective element (protective bonding to earth). On the PCB, this means: (a) the isolation boundary should have a visible, unbroken zone across all layers with no copper crossing it except the isolation components; (b) the isolation component's creepage package rating must exceed the board-level requirement — many optocouplers rated for 5kV in a DIP-8 package drop to <span class="data-point">400V</span> working voltage in a narrow-body SOIC-8 due to reduced pin spacing; (c) place Y-capacitors bridging the isolation boundary close to the isolation component itself to minimize common-mode current loop area.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Account for Altitude Derating in Your Spacing Budget</h4>
+      <p>Atmospheric pressure drops with altitude, and with it, the dielectric strength of air. IPC-2221 spacing values assume operation at or below <span class="data-point">2,000m</span>. If your product is specified for 3,000m (common for telecom equipment in high-altitude deployments) or 5,000m (medical equipment for high-altitude hospitals), you must multiply clearance distances by the altitude correction factor from IEC 60664-1 Table A.2: <strong>1.14x at 3,000m, 1.48x at 5,000m</strong>. For an 800V design at 5,000m, 4.0mm nominal clearance becomes 5.92mm — nearly a 50% increase. This must be budgeted from the start of layout, not patched in later. Our engineering team can provide altitude-derated spacing calculations specific to your design voltage and operating altitude — usually within 24 hours of receiving your stackup.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> The most common reason high-voltage PCBs fail first-article inspection is not a design error — it's that the fabrication drawing doesn't explicitly state the hi-pot test voltage and duration. Without this, the factory tests to their default (typically 100V for standard FR-4 boards). For a 600V board, you need at minimum a <span class="data-point">1,500V DC hi-pot test for 60 seconds</span>. Specify it on the drawing. If you don't, nobody tests for it.</p>
+  </div>
+
+  <!-- ── Section 6 ── -->
+  <h2>Testing &amp; Verification for High-Voltage Boards</h2>
+
+  <p>Standard PCB electrical test (continuity/shorts) does not verify high-voltage isolation. You need at minimum a dielectric withstand (hi-pot) test, and for designs above 1kV or with tight creepage margins, partial discharge testing provides the most sensitive detection of incipient insulation failures.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">●</div>
+    <div class="checklist-content">
+      <h4>Dielectric Withstand (Hi-Pot) Test</h4>
+      <p>Apply a DC voltage equal to <span class="data-point">2× rated voltage + 1,000V</span> for 60 seconds between isolated domains. The leakage current should remain below <span class="data-point">1mA</span> and show no rising trend (rising current during the test indicates impending breakdown). For AC mains-connected equipment, IEC 62368-1 specifies the test voltage based on the required insulation class (basic, supplementary, or reinforced) and the working voltage.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">●</div>
+    <div class="checklist-content">
+      <h4>Partial Discharge (PD) Testing</h4>
+      <p>For boards operating above 1kV or using embedded isolation structures, partial discharge testing detects microscopic voids in the dielectric that will grow into full breakdown over months or years of operation. The test applies <span class="data-point">1.25× rated voltage</span> and measures discharge pulses in the picocoulomb range. A PD inception voltage below the rated working voltage means the board will fail in the field — even if it passes hi-pot today. PD testing is mandatory for reinforced isolation in medical (IEC 60601-1) and recommended for EV power electronics (IEC 61800-5-1).</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, our in-house testing capability includes automated hi-pot testing up to <span class="data-point">6kV DC</span>, partial discharge testing per IEC 60270, and thermal imaging of powered boards to identify hot spots before they become field failures. For a complete overview of PCB testing methodologies, refer to <a href="/blog/pcb-testing-methods.html">our guide comparing AOI, X-ray, flying probe, ICT, and functional test</a>.</p>
+
+  <!-- ── Closing Section ── -->
+  <h2>From Design Rules to Certified Production</h2>
+
+  <p>High-voltage PCB design is a systems engineering problem: the spacing tables, material CTI, pollution degree, altitude derating, and isolation topology all interact. A board that satisfies IPC-2221 spacing but ignores pollution degree will track and fail. A board with correct creepage but sharp-cornered copper pours will suffer corona discharge. A board that passes all electrical tests but doesn't have the hi-pot requirement on the fabrication drawing will ship untested for the one failure mode that matters.</p>
+
+  <p>The five rules in this guide — slots and barriers, radiused copper, explicit pollution degree and coating specs, dual protective impedances, and altitude-derated clearance budgets — form a checklist that catches the failures we've seen repeatedly in first-article prototypes from customers who designed for low voltage and scaled up. Every rule addresses a specific root cause, not a theoretical concern.</p>
+
+  <p>At Huaxing PCBA, we process high-voltage PCBs from <span class="data-point">2 to 32 layers</span> with materials spanning standard FR-4 to polyimide and ceramic-filled PTFE, under <span class="data-point">IATF 16949</span> and ISO 9001 certified production. Our engineering team provides free DFM review with voltage-specific checks — creepage verification, sharp corner detection, isolation boundary audit, and hi-pot test specification — typically within 24 hours. <a href="/blog/power-electronics-pcb.html">Read our power electronics PCB guide</a> for thermal management strategies in high-voltage, high-current designs, or <a href="/contact/">contact our engineering team</a> to discuss your high-voltage PCB requirements.</p>
+
+</article>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/power-electronics-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Power Electronics PCB Design &amp; Manufacturing</a></li>
+      <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+      <li><a href="/blog/pcb-materials-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Materials Guide — FR-4 vs Rogers vs Aluminum</a></li>
+      <li><a href="/blog/heavy-copper-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Heavy Copper PCB Manufacturing Guide</a></li>
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods — AOI, X-Ray, ICT &amp; Functional Test</a></li>
+    </ul>
+  </div>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(/generated/blog-cta-high-voltage-pcb.webp)">
+      <h2>Need a High-Voltage PCB Manufacturer?</h2>
+      <p>Send us your stackup and voltage specs. We'll provide a free DFM review with creepage verification, sharp corner detection, and hi-pot test specification — typically within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Your DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
