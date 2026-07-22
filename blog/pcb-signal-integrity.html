@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Signal Integrity — Design Rules for Clean High-Speed Signals Above 100 MHz | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB signal integrity design guide: crosstalk prevention, termination strategies, differential pair routing, return path design, and stackup optimization. Real design rules from a factory that processes 80,000㎡ of controlled-impedance PCBs monthly.">
+<meta property="og:title" content="PCB Signal Integrity — Design Rules for Clean High-Speed Signals Above 100 MHz">
+<meta property="og:description" content="Signal integrity isn't a simulation checkbox. It's a set of PCB design decisions made at every layer. Here's what to specify so your board passes eye-diagram testing on the first spin.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-signal-integrity.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-signal-integrity.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-signal-integrity.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Signal Integrity — Design Rules for Clean High-Speed Signals Above 100 MHz",
+  "description": "Complete PCB signal integrity design guide: crosstalk prevention, termination strategies, differential pair routing, return path design, and stackup optimization from a manufacturer's perspective.",
+  "datePublished": "2026-07-23",
+  "dateModified": "2026-07-23",
+  "image": "https://huaxingpcba.com/generated/blog-cover-signal-integrity.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-signal-integrity.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-signal-integrity.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-signal-integrity.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Design Guide</p>
+      <h1 class="reveal">PCB Signal Integrity:<br><em>Design Rules for Clean High-Speed Signals Above 100 MHz</em></h1>
+      <p class="reveal">Crosstalk, reflections, ground bounce, and jitter — what causes them, how to measure them, and the 8 design rules that prevent them before your first board spin.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Signal Integrity</span></div>
+
+  <p>Signal integrity is the difference between a board that works on the first spin and one that consumes <span class="data-point">3-6 months</span> of debug cycles. When rise times drop below 1 nanosecond — which happens at clock speeds above roughly <span class="data-point">100 MHz</span> — your traces stop behaving like simple wires and start behaving like transmission lines. Reflections, crosstalk, and ground bounce become deterministic failures, not statistical anomalies.</p>
+
+  <p>At Huaxing PCBA, we manufacture over <span class="data-point">80,000 square meters</span> of controlled-impedance PCBs every month across <span class="data-point">8 SMT lines</span>. Our TDR (Time Domain Reflectometry) equipment validates impedance on every controlled-impedance order, and our engineering team reviews signal integrity concerns on roughly <span class="data-point">40% of all fabrication notes</span> — from high-speed digital to RF to mixed-signal designs. This guide covers the signal integrity rules that matter at the PCB fabrication level, where design intent meets physical reality.</p>
+
+  <img class="article-img" src="../generated/blog-signal-integrity-traces.webp" alt="Macro photograph of high-speed PCB traces on a multi-layer board with differential pairs and controlled impedance routing" loading="lazy">
+
+  <h2>When Signal Integrity Actually Matters: The Rise-Time Rule</h2>
+
+  <p>The industry shorthand is simple: signal integrity stops being optional when your signal's rise time is shorter than <span class="data-point">6× the propagation delay</span> of your longest trace. For FR-4 with a dielectric constant of ~4.0, propagation delay is approximately <span class="data-point">150 ps/inch</span> (59 ps/cm). That means:</p>
+
+  <table class="spec-table">
+    <tr><th>Trace Length</th><th>Propagation Delay</th><th>Critical Rise Time</th><th>Corresponding Clock Speed</th></tr>
+    <tr><td>50 mm (2")</td><td>295 ps</td><td>&lt; 1.8 ns</td><td>~110 MHz</td></tr>
+    <tr><td>100 mm (4")</td><td>590 ps</td><td>&lt; 3.5 ns</td><td>~57 MHz</td></tr>
+    <tr><td>200 mm (8")</td><td>1.18 ns</td><td>&lt; 7 ns</td><td>~28 MHz</td></tr>
+    <tr><td>500 mm (20")</td><td>2.95 ns</td><td>&lt; 17.7 ns</td><td>~11 MHz</td></tr>
+  </table>
+
+  <p>Notice the counterintuitive reality: a <span class="data-point">200 mm</span> SPI bus running at just <span class="data-point">25 MHz</span> can have worse signal integrity problems than a <span class="data-point">50 mm</span> DDR4 interface at <span class="data-point">1.6 GHz</span>. It's the combination of trace length and edge rate that determines whether you need to treat your traces as transmission lines. A modern FPGA with <span class="data-point">200 ps rise times</span> makes even a 30 mm trace a transmission line — at any clock frequency.</p>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Signal:</strong> If your PCB specification includes terms like "controlled impedance," "differential pairs," or "length matching," your manufacturer must have TDR equipment and a documented impedance control process. At Huaxing PCBA, every controlled-impedance order includes a <strong>TDR test report</strong> with measured impedance values for each specified trace structure — not just a coupon measurement, but actual impedance traces from production panels.</p>
+  </div>
+
+  <h2>The Four Enemies of Signal Integrity</h2>
+
+  <p>Every signal integrity problem traces back to one of four root causes. Understanding which one dominates your design determines your mitigation strategy:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Reflections — Impedance Mismatches at Every Junction</h4>
+      <p>When a signal encounters a change in impedance — at a connector, a via stub, a bend in the trace, or an unterminated receiver — a portion of the signal energy reflects back toward the source. For a <span class="data-point">50Ω source driving a 50Ω trace that terminates into a high-impedance CMOS input</span>, the reflection coefficient approaches 1.0 — meaning the entire signal reflects back, superimposing on subsequent bits and closing the eye diagram. Reflections are the most common SI failure mode in single-ended digital interfaces below 500 MHz.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Crosstalk — When Your Neighbor's Signal Becomes Your Noise</h4>
+      <p>Capacitive and inductive coupling between adjacent traces injects noise from aggressive (switching) signals into victim (quiet) signals. Near-end crosstalk (NEXT) propagates backward toward the driver and saturates at a fixed amplitude; far-end crosstalk (FEXT) propagates forward and grows with trace length. The standard rule — <span class="data-point">3× the trace width</span> for center-to-center spacing — is a starting point, not a guarantee. At edge rates below <span class="data-point">500 ps</span>, even 5W spacing may be insufficient for parallel runs longer than 25 mm. See our <a href="/blog/impedance-control.html">impedance control guide</a> for how spacing affects both crosstalk and characteristic impedance simultaneously.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ground Bounce and Simultaneous Switching Noise (SSN)</h4>
+      <p>When multiple outputs switch simultaneously — common in wide parallel buses and FPGA I/O banks — the cumulative current surge through the shared ground inductance creates a voltage spike: V = L × di/dt. With <span class="data-point">32 outputs switching 5 mA each in 500 ps</span> through just 1 nH of package inductance, the ground bounce reaches <span class="data-point">320 mV</span> — enough to corrupt the threshold detection on a 1.8V logic interface. The fix involves power delivery network (PDN) design, which we cover in our <a href="/blog/pcb-stackup-design.html">stackup design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Inter-Symbol Interference (ISI) — When One Bit Corrupts the Next</h4>
+      <p>In lossy channels — long traces on standard FR-4 above <span class="data-point">1 GHz</span> — frequency-dependent dielectric loss and skin effect attenuate high-frequency components more than low-frequency ones. The result: a transmitted '1' doesn't fully charge the line, so the following '0' starts from the wrong voltage level. ISI closes the eye diagram vertically and is the dominant failure mode in <a href="/blog/rf-pcb-design-manufacturing.html">high-speed serial links</a> (PCIe, SATA, USB 3.x) running across backplanes longer than <span class="data-point">300 mm</span>.</p>
+    </div>
+  </div>
+
+  <h2>Impedance Control: The Non-Negotiable Foundation</h2>
+
+  <p>Every signal integrity strategy starts with controlled impedance. A trace that's supposed to be <span class="data-point">50Ω ±10%</span> but measures <span class="data-point">62Ω</span> will have a reflection coefficient of <span class="data-point">0.11</span> at every impedance discontinuity — meaning 11% of your signal energy reflects at each junction. For a signal passing through a connector, two vias, and a package pin (four discontinuities), that compounds to roughly <span class="data-point">37% total reflection loss</span> before the signal even reaches the receiver.</p>
+
+  <p>The three parameters that determine your trace impedance are well understood, but how they interact at the fabrication level is where designs succeed or fail:</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Impact on Impedance</th><th>Fabrication Tolerance</th><th>Your Specification</th></tr>
+    <tr><td>Trace Width</td><td>Wider = lower Z₀</td><td>±10% (standard), ±5% (controlled)</td><td>Specify finished width, not drawn width</td></tr>
+    <tr><td>Dielectric Thickness (h)</td><td>Thinner = lower Z₀</td><td>±10% on prepreg thickness</td><td>Request actual laminate thickness data</td></tr>
+    <tr><td>Dielectric Constant (Dk)</td><td>Higher Dk = lower Z₀</td><td>±0.05 to ±0.15 (material dependent)</td><td>Specify material by manufacturer part number</td></tr>
+  </table>
+
+  <p>At Huaxing PCBA, our <a href="/blog/pcb-materials-guide.html">material selection</a> for controlled-impedance designs always includes a pre-production impedance calculation using the actual laminate Dk values — not the datasheet nominal, but the value measured from the specific material lot. This single step eliminates roughly <span class="data-point">60% of impedance-related SI issues</span> before the first panel enters production.</p>
+
+  <img class="article-img" src="../generated/blog-signal-integrity-diffpair.webp" alt="Close-up macro photograph of differential pair PCB traces with length-matched serpentine routing on a high-density board" loading="lazy">
+
+  <h2>Differential Pair Routing: The 8 Rules That Prevent SI Failure</h2>
+
+  <p>Differential signaling — used in USB, HDMI, PCIe, LVDS, and virtually every modern high-speed interface — is inherently more immune to common-mode noise than single-ended signaling. But that immunity evaporates if the pair routing violates basic physics:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Length Match Within 5 mils (0.127 mm) for Signals Above 1 Gbps</h4>
+      <p>Intra-pair skew — the time difference between the P and N signals arriving at the receiver — converts differential signal energy into common-mode noise. For a <span class="data-point">5 Gbps</span> signal (200 ps unit interval), a <span class="data-point">5 mil length mismatch</span> in FR-4 creates approximately <span class="data-point">0.75 ps</span> of skew — well within the typical <span class="data-point">10 ps maximum</span> for PCIe Gen 2. But at <span class="data-point">16 Gbps</span> (PCIe Gen 4), the same 5 mil mismatch represents a larger fraction of the unit interval and starts closing the eye. Target: ≤5 mils for all differential pairs, ≤2 mils for interfaces above 8 Gbps.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Maintain Consistent Spacing Throughout the Route</h4>
+      <p>Differential impedance depends on both trace width and pair spacing. Widening the gap to route around an obstacle changes the differential impedance locally, creating a reflection point. If you must change spacing, do it <strong>once</strong> (at a known location) and keep the transition region shorter than <span class="data-point">1/10 of the signal rise time</span>. For a 100 ps rise time on FR-4, that's roughly <span class="data-point">6.7 mm</span> maximum transition length.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Route Over a Continuous Reference Plane — No Splits, No Gaps</h4>
+      <p>A differential pair's return current flows primarily in the reference plane directly beneath the traces. If the pair crosses a plane split — common in <a href="/blog/mixed-signal-pcb-design.html">mixed-signal designs</a> with separate analog and digital ground regions — the return current must find an alternative path, creating a large inductive loop that radiates and couples noise into adjacent signals. The fix is either to route around the split or to stitch the reference planes with capacitors at the crossing point (typically <span class="data-point">10-100 nF X7R</span>).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Minimize Via Transitions — Each Via Adds ~0.5 pF Capacitance</h4>
+      <p>Every via introduces a capacitive discontinuity of approximately <span class="data-point">0.3-0.7 pF</span> (depending on pad size, antipad diameter, and barrel length). For a single-ended 50Ω trace at 2.5 GHz, this capacitance creates a reflection coefficient of about <span class="data-point">0.05 per via</span>. For differential pairs, the pair must transition layers together, and the antipad geometry must be identical for both vias. Backdrilling removes unused via stubs — essential for signals above <span class="data-point">3 GHz</span> where a 0.5 mm stub creates a quarter-wave resonance. See our <a href="/blog/pcb-via-technology.html">via technology guide</a> for stub length calculations.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Add Serpentine Compensation Close to the Mismatch Source</h4>
+      <p>When matching lengths, add the serpentine (delay line) as close as possible to the shorter trace's mismatch point — not randomly along the route. Serpentine amplitude should be at least <span class="data-point">3× the trace-to-trace spacing</span> to minimize coupling between adjacent serpentine segments. Never add serpentine inside the BGA breakout region where space is already constrained.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Route Clock Pairs on Inner Layers Between Two Reference Planes</h4>
+      <p>Clock signals carry the highest edge rate in the system and are the most common aggressors. Routing sensitive pairs on a stripline layer (between two ground planes) provides <span class="data-point">15-20 dB better</span> far-end crosstalk isolation compared to microstrip (outer layer). The tradeoff is slightly higher dielectric loss — acceptable for clock lengths under 200 mm.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Do Not Route High-Speed Pairs Near the Board Edge</h4>
+      <p>Traces within <span class="data-point">5 mm of the board edge</span> experience impedance change due to the absence of dielectric on one side — the electric field fringes differently at the boundary. This creates a localized impedance increase of <span class="data-point">2-5Ω</span> that exacerbates reflections. Keep high-speed pairs at least 5 mm from routed edges and 10 mm from board corners.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Specify the Differential Impedance — Not the Single-Ended</h4>
+      <p>A common fabricator frustration: receiving a note that says "100Ω differential impedance" without specifying whether it's differential (Zdiff) or odd-mode (Zodd). For loosely coupled pairs, Zdiff ≈ 2 × Zodd; for tightly coupled pairs, Zdiff can be significantly lower. Be explicit in your fabrication notes: "100Ω differential impedance, 50Ω single-ended to reference plane." This eliminates ambiguity and prevents the fabricator from building to the wrong target.</p>
+    </div>
+  </div>
+
+  <h2>Return Path Design: The Most Overlooked SI Variable</h2>
+
+  <p>Every signal current requires a return path. At DC, return current takes the path of least resistance (shortest route). At high frequency, return current takes the path of <strong>least inductance</strong> — which is the reference plane directly beneath the signal trace. When you force the return current to detour around a plane split, gap, or via field, you create a loop antenna that radiates and receives noise.</p>
+
+  <p>The return path for a microstrip trace running 150 μm above a ground plane has a loop inductance of approximately <span class="data-point">1-3 nH/cm</span>. Split that plane and force the return current to travel an extra <span class="data-point">1 cm</span> around the gap, and you've added ~2 nH of inductance. At a 500 ps edge rate (2 GHz equivalent bandwidth), that 2 nH creates an impedance of <span class="data-point">Z = 2πfL ≈ 25Ω</span> — comparable to your trace impedance and guaranteed to cause a reflection.</p>
+
+  <div class="highlight-box">
+    <p><strong>Design Rule:</strong> Never route a high-speed signal across a split or gap in its reference plane. If you must cross plane boundaries — for example, in a <a href="/blog/mixed-signal-pcb-design.html">mixed-signal design</a> where analog and digital grounds meet at a single point — place stitching capacitors (100 nF in 0402 package) on both sides of the signal at the crossing point, spaced no more than <span class="data-point">2 mm</span> from the trace.</p>
+  </div>
+
+  <h2>Termination Strategies: Matching the Methods to Your Topology</h2>
+
+  <p>Termination absorbs signal energy at the receiver to prevent reflections. The right method depends on your driver type, trace length, and number of loads:</p>
+
+  <table class="spec-table">
+    <tr><th>Termination Type</th><th>Topology</th><th>Power Cost</th><th>Best Application</th></tr>
+    <tr><td>Series (Source)</td><td>Point-to-point only</td><td>Zero DC power</td><td>Single load, CMOS drivers, SPI, UART</td></tr>
+    <tr><td>Parallel (End)</td><td>Point-to-point or daisy-chain</td><td>V²/R per terminated line</td><td>High-speed clocks, single-ended buses</td></tr>
+    <tr><td>Thevenin</td><td>Multi-drop buses</td><td>2 × V²/R (pull-up + pull-down)</td><td>DDR address/command buses, VME, PCI</td></tr>
+    <tr><td>AC (RC)</td><td>Point-to-point</td><td>AC power only (C blocks DC)</td><td>Clock distribution, periodic signals</td></tr>
+    <tr><td>Differential (On-Die)</td><td>Point-to-point differential</td><td>Integrated in receiver</td><td>LVDS, CML, PCIe, USB 3.x, HDMI</td></tr>
+  </table>
+
+  <p>Series termination — a resistor placed at the driver output equal to (Z₀ − Rdriver) — is the most common and most misapplied method. It works because the half-amplitude wave that launches onto the trace reflects at the open receiver, doubles, and returns to the source where the series resistor absorbs the reflection. But this only works for <strong>single-load point-to-point</strong> topologies. On a multi-drop bus, the reflection from the first receiver corrupts the signal at subsequent receivers before the source resistor can absorb it.</p>
+
+  <p>For DDR memory interfaces, the termination scheme is protocol-specific: DDR3 uses on-die termination (ODT) with programmable values (typically <span class="data-point">40Ω, 60Ω, or 120Ω</span>), while DDR4 adds dynamic ODT that changes termination strength during reads vs writes. Specifying ODT correctly in your <a href="/blog/pcb-stackup-design.html">stackup planning</a> phase avoids having to add external termination resistors that consume board space and increase BOM cost.</p>
+
+  <img class="article-img" src="../generated/blog-signal-integrity-stackup.webp" alt="Cross-section render of a multi-layer PCB showing signal layers between reference planes with controlled dielectric thickness" loading="lazy">
+
+  <h2>Stackup Optimization for Signal Integrity</h2>
+
+  <p>The ideal signal integrity stackup has three properties: thin dielectrics between signal and reference layers (for tight coupling and lower crosstalk), alternating signal and plane layers (every signal layer adjacent to at least one continuous plane), and symmetric construction (to prevent warpage during reflow). Here's a proven 8-layer stackup that achieves all three:</p>
+
+  <table class="spec-table">
+    <tr><th>Layer</th><th>Type</th><th>Typical Use</th><th>Dielectric Thickness</th></tr>
+    <tr><td>L1 (Top)</td><td>Signal — Microstrip</td><td>Low-speed, short high-speed routes</td><td>Prepreg 100 μm to L2</td></tr>
+    <tr><td>L2</td><td>Ground Plane</td><td>Reference for L1 and L3</td><td>Core 200 μm to L3</td></tr>
+    <tr><td>L3</td><td>Signal — Stripline</td><td>High-speed differential pairs, clocks</td><td>Prepreg 150 μm to L4</td></tr>
+    <tr><td>L4</td><td>Power Plane</td><td>VCC plane, reference for L3 and L5</td><td>Core 400 μm to L5</td></tr>
+    <tr><td>L5</td><td>Ground Plane</td><td>Reference for L4 and L6</td><td>Prepreg 150 μm to L6</td></tr>
+    <tr><td>L6</td><td>Signal — Stripline</td><td>High-speed parallel buses, memory</td><td>Core 200 μm to L7</td></tr>
+    <tr><td>L7</td><td>Ground Plane</td><td>Reference for L6 and L8</td><td>Prepreg 100 μm to L8</td></tr>
+    <tr><td>L8 (Bottom)</td><td>Signal — Microstrip</td><td>Low-speed, test points, decoupling</td><td>—</td></tr>
+  </table>
+
+  <p>This stackup provides two stripline routing layers (L3 and L6) sandwiched between continuous reference planes — the ideal environment for <a href="/blog/hdi-technology.html">high-speed signals</a>. The 100 μm prepreg between L1 and L2 keeps microstrip impedance manageable with narrow traces (typically <span class="data-point">150-180 μm</span> width for 50Ω on standard FR-4), while the 200 μm core between L2 and L3 provides enough separation to minimize crosstalk between the top microstrip and the inner stripline.</p>
+
+  <p>For designs with <a href="/blog/rf-pcb-design-manufacturing.html">RF or microwave signals</a> above 3 GHz, consider upgrading from standard FR-4 (Dk ≈ 4.2-4.5, Df ≈ 0.020) to a low-loss material like Rogers 4350B (Dk = 3.48 ±0.05, Df = 0.0037) for the outer layers. The lower Dk enables wider traces for the same impedance, and the tighter Dk tolerance (sub-1% vs FR-4's ±10%) means your as-manufactured impedance stays within 5% of your calculated target.</p>
+
+  <h2>When to Simulate vs When to Trust Design Rules</h2>
+
+  <p>SI simulation (HyperLynx, Ansys SIwave, Cadence Sigrity) has become the industry default for interfaces above 5 Gbps. But simulation is only as accurate as the <a href="/blog/pcb-materials-guide.html">material models</a> you feed it — and FR-4's wide Dk/Df variation means pre-layout simulation often misses real-world performance by <span class="data-point">10-15%</span> in impedance and <span class="data-point">20-30%</span> in insertion loss.</p>
+
+  <p>For interfaces below 5 Gbps on trace lengths under 150 mm, well-applied design rules — the ones covered in this guide — produce first-pass success rates above <span class="data-point">90%</span> in our production experience. For interfaces above 5 Gbps, or any interface spanning a backplane longer than 300 mm, simulation is essential. At that point, you're no longer just avoiding failure — you're optimizing margin for manufacturing variation.</p>
+
+  <p>At Huaxing PCBA, our engineering team reviews your <a href="/blog/gerber-files-guide.html">Gerber files and stackup</a> for SI concerns as part of every controlled-impedance order. We flag potential issues — split planes under differential pairs, missing reference planes, excessive via stubs, and impedance mismatches between layers — before the first panel enters production. For complex designs, we provide impedance coupon data and TDR traces with your shipment so you can correlate simulation to measurement.</p>
+
+  <p>Whether you're designing a DDR4 memory interface for an automotive ECU, a PCIe Gen 4 backplane for a telecom blade, or a mixed-signal sensor board for medical diagnostics, the signal integrity rules in this guide apply. They're not theory — they're the difference between a board that passes eye-diagram compliance on the first spin and one that spends months in the lab chasing intermittent failures. <a href="/blog/dfm-tips.html">Read our DFM guide</a> for the manufacturing considerations that complement these SI rules, or <a href="/contact/">contact our engineering team</a> for a project-specific stackup and impedance review.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(../generated/blog-cta-signal-integrity.webp)">
+      <h2>Get a Free Impedance & Stackup Review</h2>
+      <p>Send your Gerber files and impedance requirements. Our engineers will verify your stackup, calculate trace impedances from actual laminate data, and flag SI concerns — including split planes, via stubs, and crosstalk risks — before your board enters production. 24-hour turnaround.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Upload Gerber Files <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
