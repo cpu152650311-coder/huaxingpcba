@@ -1,204 +1,204 @@
-     1|<!DOCTYPE html>
-     2|<html lang="en">
-     3|<head>
-     4|<meta charset="UTF-8">
-     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-     6|<title>Understanding PCB Impedance Control: Why ±5% Matters at GHz Speeds | Huaxing PCBA</title>
-     7|<meta name="description" content="A practical guide to controlled impedance PCB design. How trace geometry, dielectric constant, and stackup design affect signal integrity. Real TDR measurement data and design rules for 50Ω and 100Ω differential pairs.">
-     8|<meta property="og:title" content="Understanding PCB Impedance Control: Why ±5% Matters at GHz Speeds">
-     9|<meta property="og:description" content="Practical impedance control guide — trace geometry, dielectric materials, stackup design. Real TDR data from a manufacturer's perspective.">
-    10|<meta name="twitter:card" content="summary_large_image">
-    11|<meta property="og:type" content="article">
-    12|<meta property="og:url" content="https://huaxingpcba.com/blog/impedance-control.html">
-    13|<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-impedance.webp">
-    14|    <link rel="canonical" href="https://huaxingpcba.com/blog/impedance-control.html">
-    15|<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
-    16|<link rel="stylesheet" href="/design-tokens.css?v=28">
-    17|<link rel="icon" type="image/x-icon" href="/favicon.ico">
-    18|<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    19|<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-    20|<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    21|<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
-    22|<link rel="stylesheet" href="/blog.css?v=3">
-    23|
-    24|<script type="application/ld+json">
-    25|{
-    26|  "@context": "https://schema.org",
-    27|  "@type": "BlogPosting",
-    28|  "headline": "Understanding PCB Impedance Control: Why ±5% Matters at GHz Speeds",
-    29|  "description": "How trace geometry, dielectric constant, and stackup design affect signal integrity. Real TDR data and design rules.",
-    30|  "datePublished": "2026-07-15",
-    31|  "dateModified": "2026-07-15",
-    32|  "image": "https://huaxingpcba.com/generated/blog-cover-impedance.webp",
-    33|  "url": "https://huaxingpcba.com/blog/impedance-control.html",
-    34|  "author": {
-    35|    "@type": "Organization",
-    36|    "name": "Huaxing PCBA"
-    37|  },
-    38|  "publisher": {
-    39|    "@type": "Organization",
-    40|    "name": "Huaxing PCBA",
-    41|    "url": "https://huaxingpcba.com",
-    42|    "logo": {
-    43|      "@type": "ImageObject",
-    44|      "url": "https://huaxingpcba.com/images/logo.webp"
-    45|    }
-    46|  },
-    47|  "mainEntityOfPage": {
-    48|    "@type": "WebPage",
-    49|    "@id": "https://huaxingpcba.com/blog/impedance-control.html"
-    50|  }
-    51|}
-    52|</script>
-    53|</head>
-    54|<body>
-    55|
-    56|<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
-    57|  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-    58|</svg>
-    59|
-    60|<header class="site-header" id="header">
-    61|  <div class="container">
-    62|    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
-    63|    <nav class="nav-links" id="navLinks">
-    64|    </nav>
-    65|    <script src="/nav.js?v=22" defer></script>
-    66|    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
-    67|  </div>
-    68|</header>
-    69|
-    70|<section class="sub-hero">
-    71|  <div class="sub-hero-bg"><img src="../generated/blog-cover-impedance.webp" alt="" loading="eager" width="1920" height="600"></div>
-    72|  <div class="sub-hero-overlay"></div>
-    73|  <div class="sub-hero-content">
-    74|    <div class="container">
-    75|      <p class="section-label reveal">Signal Integrity Series</p>
-    76|      <h1 class="reveal">Understanding PCB <em>Impedance Control</em></h1>
-    77|      <p class="reveal">Why ±5% tolerance matters at GHz speeds — and how to design for it.</p>
-    78|    </div>
-    79|  </div>
-    80|</section>
-    81|
-    82|<article class="article reveal">
-    83|  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Impedance Control</span></div>
-    84|
-    85|  <p>At 1GHz, a 10% impedance mismatch causes a -20dB return loss. At 5GHz, that same mismatch costs you -15dB. At 28GHz (5G mmWave), it's -10dB — enough to make a high-speed link fail entirely. Controlled impedance is no longer optional for any design with DDR4, PCIe Gen4/5, USB 3.2, HDMI 2.1, or RF signals. It's table stakes.</p>
-    86|
-    87|  <p>At Huaxing PCBA, we manufacture controlled-impedance PCBs with ±5% tolerance on every impedance-controlled trace, verified by TDR on every panel. Here's what actually determines impedance — and what you can control as a designer.</p>
-    88|
-    89|  <img src="../generated/blog-impedance-stackup.webp" alt="Impedance controlled PCB stackup" loading="lazy" class="article-img">
-    90|
-    91|  <h2>What Actually Determines Impedance</h2>
-    92|
-    93|  <p>Characteristic impedance (Z₀) of a PCB trace is determined by exactly four variables. No more, no less:</p>
-    94|
-    95|  <p><strong>1. Trace width (W).</strong> Wider trace = lower impedance. A 50Ω microstrip on standard FR-4 (Dk=4.2, 0.2mm dielectric to reference plane) requires approximately 0.36mm trace width. Change the width by ±10% and impedance shifts by roughly ±5%.</p>
-    96|
-    97|  <p><strong>2. Dielectric thickness (H).</strong> Thicker dielectric between trace and reference plane = higher impedance. This is the variable with the most leverage — and the one most affected by lamination process variation. A 10% change in prepreg thickness produces a 6–8% shift in impedance.</p>
-    98|
-    99|  <p><strong>3. Dielectric constant (Dk).</strong> Higher Dk = lower impedance. Standard FR-4 has Dk ≈4.2 at 1GHz; high-speed materials like Rogers 4350B are 3.48 ±0.05. The tolerance matters: FR-4 Dk varies ±0.2 between batches; Rogers varies ±0.05. That's the difference between hitting ±5% impedance and ±10%.</p>
-   100|
-   101|  <p><strong>4. Copper thickness (T).</strong> Thicker copper = slightly lower impedance (more capacitance to the reference plane). This is a second-order effect below 5GHz but becomes meaningful above 10GHz where skin depth concentrates current at the trace surface.</p>
-   102|
-   103|  <div class="highlight-box">
-   104|    <p><strong>Critical insight:</strong> Impedance depends on the <em>ratio</em> of W/H, not the absolute values. A 0.36mm trace on 0.2mm dielectric produces the same impedance as a 0.18mm trace on 0.1mm dielectric. This is why moving to thinner dielectrics — a common high-density strategy — requires proportionally narrower traces, which increases conductor loss. There is no free lunch in impedance design.</p>
-   105|  </div>
-   106|
-   107|  <h2>Microstrip vs Stripline: The 30% Difference</h2>
-   108|
-   109|  <p>A 50Ω microstrip (trace on outer layer, one reference plane) is approximately 30% wider than a 50Ω stripline (trace buried between two reference planes) on the same dielectric. This is because microstrip's fields partially travel through air (Dk=1), while stripline fields travel entirely through the PCB dielectric (Dk≈4). The effective Dk for microstrip is ~3.0 — the average of the substrate and air — which lowers the capacitance per unit length and raises the impedance for a given width.</p>
-   110|
-   111|  <p><strong>Design rule:</strong> Microstrip for outer-layer high-speed signals where you want wider, lower-loss traces. Stripline for inner-layer signals where you need isolation from external EMI and can accept the narrower trace width. Never route a critical high-speed signal that transitions from microstrip to stripline without a 3D EM simulation of the via transition — that via is an impedance discontinuity that will reflect energy.</p>
-   112|
-   113|  <img src="../generated/blog-microstrip-vs-stripline.webp" alt="Microstrip vs stripline cross-section comparison" loading="lazy" class="article-img">
-   114|
-   115|  <h2>Differential Pairs: 100Ω Doesn't Mean Two 50Ω Lines</h2>
-   116|
-   117|  <p>A common misconception: "If I need 100Ω differential impedance, I'll just use two 50Ω single-ended traces." Wrong. Differential impedance depends on the coupling between the two traces — the edge-to-edge spacing. Tightly coupled pairs (S < W) behave differently from loosely coupled pairs (S > 2W). A 100Ω differential pair might use two 55–60Ω single-ended traces with specific spacing, not two 50Ω traces.</p>
-   118|
-   119|  <p>Differential impedance (Zdiff) ≈ 2 × Zodd, where Zodd is the odd-mode impedance of each trace (the impedance of one trace when the pair is driven differentially). Zodd is always lower than Z₀ because of mutual coupling. The tighter the coupling, the further Zodd deviates from Z₀. Your field solver handles this math — the point is that you cannot design differential pairs by designing two independent 50Ω traces and hoping they sum to 100Ω.</p>
-   120|
-   121|  <img src="../generated/blog-differential-pair.webp" alt="Differential pair PCB routing with field coupling visualization" loading="lazy" class="article-img">
-   122|
-   123|  <h2>Why ±5% — And When ±10% Is Acceptable</h2>
-   124|
-   125|  <img src="../generated/blog-impedance-tdr.webp" alt="TDR impedance measurement" loading="lazy" class="article-img">
-   126|
-   127|  <p>At Huaxing PCBA, our standard impedance control tolerance is ±10%, with ±5% available as a premium option. The difference comes down to process controls: ±10% uses standard laminate Dk values from the manufacturer datasheet; ±5% requires measuring the actual Dk of each laminate batch (dielectric constant varies batch-to-batch) and adjusting trace width for that specific batch. It adds approximately 8–12% to the PCB cost but is mandatory for:</p>
-   128|
-   129|  <ul>
-   130|    <li>PCIe Gen 4 (16 GT/s) and Gen 5 (32 GT/s)</li>
-   131|    <li>DDR5 memory interfaces (4800+ MT/s)</li>
-   132|    <li>USB 3.2 Gen 2×2 (20 Gbps) and USB4 (40 Gbps)</li>
-   133|    <li>Any RF design above 10GHz</li>
-   134|    <li>Backplane links longer than 300mm</li>
-   135|  </ul>
-   136|
-   137|  <p>±10% is acceptable for DDR4 (<3200 MT/s), PCIe Gen 3, USB 3.0, HDMI 2.0, and most sub-5GHz applications where link margins are sufficient to absorb the reflection.</p>
-   138|
-   139|  <h2>Material Choice for Impedance-Critical Designs</h2>
-   140|
-   141|  <p><span class="data-point">±0.05</span></p>
-   142|  <p>Standard FR-4 has a Dk tolerance of approximately ±0.2 between production batches. For ±10% impedance control, that's acceptable. For ±5%, you need a material with tighter Dk tolerance: Rogers 4350B (±0.05), Isola I-Speed (±0.05), or Panasonic Megtron 6 (±0.04). These materials cost 3–5× more than FR-4 but eliminate the batch-to-batch Dk variation that dominates impedance error.</p>
-   143|
-   144|  <p>For mixed-stackup designs, we often use a hybrid approach: Rogers or Megtron for the high-speed layers, standard FR-4 for power and low-speed layers. This captures most of the performance benefit at roughly half the material cost of an all-premium stackup.</p>
-   145|
-   146|  <h2>The TDR Verification Guarantee</h2>
-   147|
-   148|  <p>Every impedance-controlled panel manufactured at Huaxing PCBA includes a test coupon — a small PCB section on the same panel with representative trace structures — that we measure with TDR (Time Domain Reflectometry). The coupon includes 50Ω single-ended and 100Ω differential structures. We measure impedance at the coupon, not at the board, because the coupon is physically adjacent on the same panel and sees the same plating and etching conditions.</p>
-   149|
-   150|  <p>Our TDR equipment (Tektronix DSA8300) resolves impedance discontinuities down to 1mm spatial resolution. Any coupon failing the specified tolerance triggers a 100% panel inspection — not just a coupon retest. This is the difference between statistical process control and hope.</p>
-   151|
-   152|  <h2>The Bottom Line</h2>
-   153|  <p>Impedance control is a manufacturing discipline, not a design checkbox. It requires the right material choice, trace geometry calculated for the actual (not nominal) Dk, and TDR verification on every panel. At Huaxing PCBA, we've invested in the materials inventory, process controls, and measurement equipment to deliver ±5% impedance tolerance as a standard premium option — not a special request that requires quoting a different factory. If your design has impedance-controlled traces, include the target impedance and tolerance on your fabrication drawing. Our engineering team will propose the stackup, trace widths, and materials to hit it.</p>
-   154|
-   155|</article>
-   156|
-   157|
-   158|<section class="section" style="background:var(--bg-secondary)">
-   159|  <div class="container">
-   160|    <h2 style="font-weight:200;text-align:center;margin-bottom:var(--space-xl)">Related <em>Articles</em></h2>
-   161|    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)">
-   162|      <a href="/blog/rf-pcb-design-manufacturing.html" style="display:block;color:inherit;text-decoration:none">
-   163|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-   164|          <div style="padding:var(--space-lg)">
-   165|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">design engineering</div>
-   166|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">RF PCB Design & Manufacturing — Materials, Impedance Control & Signal Integrity</h4>
-   167|          </div>
-   168|        </div>
-   169|      </a>
-   170|      <a href="/blog/flex-pcb-design-manufacturing.html" style="display:block;color:inherit;text-decoration:none">
-   171|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-   172|          <div style="padding:var(--space-lg)">
-   173|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">design engineering</div>
-   174|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Flex PCB Design & Manufacturing — Material Selection, Bend Reliability & Cost</h4>
-   175|          </div>
-   176|        </div>
-   177|      </a>
-   178|      <a href="/blog/iot-pcb-design-manufacturing.html" style="display:block;color:inherit;text-decoration:none">
-   179|        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
-   180|          <div style="padding:var(--space-lg)">
-   181|            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">design engineering</div>
-   182|            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">IoT PCB Design & Manufacturing — Connectivity, Miniaturization & Reliability at Scale</h4>
-   183|          </div>
-   184|        </div>
-   185|      </a>
-   186|    </div>
-   187|    <style>@media(max-width:768px){.section div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}</style>
-   188|  </div>
-   189|</section>
-   190|
-   191|<section class="section" style="background:var(--bg-secondary)">
-   192|  <div class="container">
-   193|    <div class="cta-card reveal" style="background-image:url(/generated/blog-cta-turnkey.webp)">
-   194|      <h2>Need Controlled Impedance?</h2>
-   195|      <p>Send us your stackup requirements. We'll propose trace geometry and materials to hit your target — with TDR verification on every panel.</p>
-   196|      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Your Design <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
-   197|    </div>
-   198|  </div>
-   199|</section>
-   200|
-   201|
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding PCB Impedance Control: Why ±5% Matters at GHz Speeds | Huaxing PCBA</title>
+<meta name="description" content="A practical guide to controlled impedance PCB design. How trace geometry, dielectric constant, and stackup design affect signal integrity. Real TDR measurement data and design rules for 50Ω and 100Ω differential pairs.">
+<meta property="og:title" content="Understanding PCB Impedance Control: Why ±5% Matters at GHz Speeds">
+<meta property="og:description" content="Practical impedance control guide — trace geometry, dielectric materials, stackup design. Real TDR data from a manufacturer's perspective.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/impedance-control.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-impedance.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/impedance-control.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Understanding PCB Impedance Control: Why ±5% Matters at GHz Speeds",
+  "description": "How trace geometry, dielectric constant, and stackup design affect signal integrity. Real TDR data and design rules.",
+  "datePublished": "2026-07-15",
+  "dateModified": "2026-07-15",
+  "image": "https://huaxingpcba.com/generated/blog-cover-impedance.webp",
+  "url": "https://huaxingpcba.com/blog/impedance-control.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/impedance-control.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/blog-cover-impedance.webp" alt="" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Signal Integrity Series</p>
+      <h1 class="reveal">Understanding PCB <em>Impedance Control</em></h1>
+      <p class="reveal">Why ±5% tolerance matters at GHz speeds — and how to design for it.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Impedance Control</span></div>
+
+  <p>At 1GHz, a 10% impedance mismatch causes a -20dB return loss. At 5GHz, that same mismatch costs you -15dB. At 28GHz (5G mmWave), it's -10dB — enough to make a high-speed link fail entirely. Controlled impedance is no longer optional for any design with DDR4, PCIe Gen4/5, USB 3.2, HDMI 2.1, or RF signals. It's table stakes.</p>
+
+  <p>At Huaxing PCBA, we manufacture controlled-impedance PCBs with ±5% tolerance on every impedance-controlled trace, verified by TDR on every panel. Here's what actually determines impedance — and what you can control as a designer.</p>
+
+  <img src="../generated/blog-impedance-stackup.webp" alt="Impedance controlled PCB stackup" loading="lazy" class="article-img">
+
+  <h2>What Actually Determines Impedance</h2>
+
+  <p>Characteristic impedance (Z₀) of a PCB trace is determined by exactly four variables. No more, no less:</p>
+
+  <p><strong>1. Trace width (W).</strong> Wider trace = lower impedance. A 50Ω microstrip on standard FR-4 (Dk=4.2, 0.2mm dielectric to reference plane) requires approximately 0.36mm trace width. Change the width by ±10% and impedance shifts by roughly ±5%.</p>
+
+  <p><strong>2. Dielectric thickness (H).</strong> Thicker dielectric between trace and reference plane = higher impedance. This is the variable with the most leverage — and the one most affected by lamination process variation. A 10% change in prepreg thickness produces a 6–8% shift in impedance.</p>
+
+  <p><strong>3. Dielectric constant (Dk).</strong> Higher Dk = lower impedance. Standard FR-4 has Dk ≈4.2 at 1GHz; high-speed materials like Rogers 4350B are 3.48 ±0.05. The tolerance matters: FR-4 Dk varies ±0.2 between batches; Rogers varies ±0.05. That's the difference between hitting ±5% impedance and ±10%.</p>
+
+  <p><strong>4. Copper thickness (T).</strong> Thicker copper = slightly lower impedance (more capacitance to the reference plane). This is a second-order effect below 5GHz but becomes meaningful above 10GHz where skin depth concentrates current at the trace surface.</p>
+
+  <div class="highlight-box">
+    <p><strong>Critical insight:</strong> Impedance depends on the <em>ratio</em> of W/H, not the absolute values. A 0.36mm trace on 0.2mm dielectric produces the same impedance as a 0.18mm trace on 0.1mm dielectric. This is why moving to thinner dielectrics — a common high-density strategy — requires proportionally narrower traces, which increases conductor loss. There is no free lunch in impedance design.</p>
+  </div>
+
+  <h2>Microstrip vs Stripline: The 30% Difference</h2>
+
+  <p>A 50Ω microstrip (trace on outer layer, one reference plane) is approximately 30% wider than a 50Ω stripline (trace buried between two reference planes) on the same dielectric. This is because microstrip's fields partially travel through air (Dk=1), while stripline fields travel entirely through the PCB dielectric (Dk≈4). The effective Dk for microstrip is ~3.0 — the average of the substrate and air — which lowers the capacitance per unit length and raises the impedance for a given width.</p>
+
+  <p><strong>Design rule:</strong> Microstrip for outer-layer high-speed signals where you want wider, lower-loss traces. Stripline for inner-layer signals where you need isolation from external EMI and can accept the narrower trace width. Never route a critical high-speed signal that transitions from microstrip to stripline without a 3D EM simulation of the via transition — that via is an impedance discontinuity that will reflect energy.</p>
+
+  <img src="../generated/blog-microstrip-vs-stripline.webp" alt="Microstrip vs stripline cross-section comparison" loading="lazy" class="article-img">
+
+  <h2>Differential Pairs: 100Ω Doesn't Mean Two 50Ω Lines</h2>
+
+  <p>A common misconception: "If I need 100Ω differential impedance, I'll just use two 50Ω single-ended traces." Wrong. Differential impedance depends on the coupling between the two traces — the edge-to-edge spacing. Tightly coupled pairs (S < W) behave differently from loosely coupled pairs (S > 2W). A 100Ω differential pair might use two 55–60Ω single-ended traces with specific spacing, not two 50Ω traces.</p>
+
+  <p>Differential impedance (Zdiff) ≈ 2 × Zodd, where Zodd is the odd-mode impedance of each trace (the impedance of one trace when the pair is driven differentially). Zodd is always lower than Z₀ because of mutual coupling. The tighter the coupling, the further Zodd deviates from Z₀. Your field solver handles this math — the point is that you cannot design differential pairs by designing two independent 50Ω traces and hoping they sum to 100Ω.</p>
+
+  <img src="../generated/blog-differential-pair.webp" alt="Differential pair PCB routing with field coupling visualization" loading="lazy" class="article-img">
+
+  <h2>Why ±5% — And When ±10% Is Acceptable</h2>
+
+  <img src="../generated/blog-impedance-tdr.webp" alt="TDR impedance measurement" loading="lazy" class="article-img">
+
+  <p>At Huaxing PCBA, our standard impedance control tolerance is ±10%, with ±5% available as a premium option. The difference comes down to process controls: ±10% uses standard laminate Dk values from the manufacturer datasheet; ±5% requires measuring the actual Dk of each laminate batch (dielectric constant varies batch-to-batch) and adjusting trace width for that specific batch. It adds approximately 8–12% to the PCB cost but is mandatory for:</p>
+
+  <ul>
+    <li>PCIe Gen 4 (16 GT/s) and Gen 5 (32 GT/s)</li>
+    <li>DDR5 memory interfaces (4800+ MT/s)</li>
+    <li>USB 3.2 Gen 2×2 (20 Gbps) and USB4 (40 Gbps)</li>
+    <li>Any RF design above 10GHz</li>
+    <li>Backplane links longer than 300mm</li>
+  </ul>
+
+  <p>±10% is acceptable for DDR4 (<3200 MT/s), PCIe Gen 3, USB 3.0, HDMI 2.0, and most sub-5GHz applications where link margins are sufficient to absorb the reflection.</p>
+
+  <h2>Material Choice for Impedance-Critical Designs</h2>
+
+  <p><span class="data-point">±0.05</span></p>
+  <p>Standard FR-4 has a Dk tolerance of approximately ±0.2 between production batches. For ±10% impedance control, that's acceptable. For ±5%, you need a material with tighter Dk tolerance: Rogers 4350B (±0.05), Isola I-Speed (±0.05), or Panasonic Megtron 6 (±0.04). These materials cost 3–5× more than FR-4 but eliminate the batch-to-batch Dk variation that dominates impedance error.</p>
+
+  <p>For mixed-stackup designs, we often use a hybrid approach: Rogers or Megtron for the high-speed layers, standard FR-4 for power and low-speed layers. This captures most of the performance benefit at roughly half the material cost of an all-premium stackup.</p>
+
+  <h2>The TDR Verification Guarantee</h2>
+
+  <p>Every impedance-controlled panel manufactured at Huaxing PCBA includes a test coupon — a small PCB section on the same panel with representative trace structures — that we measure with TDR (Time Domain Reflectometry). The coupon includes 50Ω single-ended and 100Ω differential structures. We measure impedance at the coupon, not at the board, because the coupon is physically adjacent on the same panel and sees the same plating and etching conditions.</p>
+
+  <p>Our TDR equipment (Tektronix DSA8300) resolves impedance discontinuities down to 1mm spatial resolution. Any coupon failing the specified tolerance triggers a 100% panel inspection — not just a coupon retest. This is the difference between statistical process control and hope.</p>
+
+  <h2>The Bottom Line</h2>
+  <p>Impedance control is a manufacturing discipline, not a design checkbox. It requires the right material choice, trace geometry calculated for the actual (not nominal) Dk, and TDR verification on every panel. At Huaxing PCBA, we've invested in the materials inventory, process controls, and measurement equipment to deliver ±5% impedance tolerance as a standard premium option — not a special request that requires quoting a different factory. If your design has impedance-controlled traces, include the target impedance and tolerance on your fabrication drawing. Our engineering team will propose the stackup, trace widths, and materials to hit it.</p>
+
+</article>
+
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <h2 style="font-weight:200;text-align:center;margin-bottom:var(--space-xl)">Related <em>Articles</em></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)">
+      <a href="/blog/rf-pcb-design-manufacturing.html" style="display:block;color:inherit;text-decoration:none">
+        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+          <div style="padding:var(--space-lg)">
+            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">design engineering</div>
+            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">RF PCB Design & Manufacturing — Materials, Impedance Control & Signal Integrity</h4>
+          </div>
+        </div>
+      </a>
+      <a href="/blog/flex-pcb-design-manufacturing.html" style="display:block;color:inherit;text-decoration:none">
+        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+          <div style="padding:var(--space-lg)">
+            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">design engineering</div>
+            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">Flex PCB Design & Manufacturing — Material Selection, Bend Reliability & Cost</h4>
+          </div>
+        </div>
+      </a>
+      <a href="/blog/iot-pcb-design-manufacturing.html" style="display:block;color:inherit;text-decoration:none">
+        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s;height:100%">
+          <div style="padding:var(--space-lg)">
+            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:var(--space-sm);text-transform:capitalize">design engineering</div>
+            <h4 style="font-weight:300;font-size:var(--text-base);line-height:1.4">IoT PCB Design & Manufacturing — Connectivity, Miniaturization & Reliability at Scale</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <style>@media(max-width:768px){.section div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}</style>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(/generated/blog-cta-turnkey.webp)">
+      <h2>Need Controlled Impedance?</h2>
+      <p>Send us your stackup requirements. We'll propose trace geometry and materials to hit your target — with TDR verification on every panel.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Your Design <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+
   <!-- ── Related Reading ── -->
   <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
     <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
@@ -213,49 +213,48 @@
 
 
 <footer class="site-footer">
-   202|  <div class="container">
-   203|    <div class="footer-grid">
-   204|      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China.</p></div>
-   205|      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
-   206|            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
-   207|<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
-   208|    </div>
-   209|    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
-   210|  </div>
-   211|</footer>
-   212|
-   213|<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
-   214|  <div class="modal-dialog">
-   215|    <button class="modal-close" onclick="closeModal()">&times;</button>
-   216|    <div class="modal-image-panel">
-   217|      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
-   218|      <div class="modal-image-overlay"></div>
-   219|      <div class="modal-image-top">
-   220|        <h2 class="mi-heading">Start Your Project</h2>
-   221|        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
-   222|      </div>
-   223|      <div class="modal-image-text">
-   224|        <div class="mi-label">HUAXING PCBA</div>
-   225|        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
-   226|      </div>
-   227|    </div>
-   228|    <div class="modal-form-panel">
-   229|      <form onsubmit="return handleInquiry(event)" novalidate>
-   230|        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
-   231|        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
-   232|        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
-   233|        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
-   234|        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
-   235|      </form>
-   236|    </div>
-   237|  </div>
-   238|</div>
-   239|
-   240|<script src="../reveal.js"></script>
-   241|<script>
-   242|function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
-   243|function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
-   244|</script>
-   245|<script src="../inquiry-handler.js"></script></body>
-   246|</html>
-   247|
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+            <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
