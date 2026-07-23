@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Design for AI Edge Computing — High-Speed Requirements for NPU, FPGA &amp; GPU Accelerator Boards | Huaxing PCBA</title>
+<meta name="description" content="AI edge computing demands PCB designs that handle 25-112 Gbps serial links, 100A+ core power, and 0.8mm BGA pitch — all in compact form factors. This guide covers the 6 PCB design decisions that determine whether your NPU/FPGA accelerator board ships or stalls: material selection, stackup, power integrity, signal routing, thermal management, and DFM for HDI.">
+<meta property="og:title" content="PCB Design for AI Edge Computing — High-Speed Requirements for NPU, FPGA &amp; GPU Accelerator Boards">
+<meta property="og:description" content="AI edge devices need PCBs that push the limits of high-speed design. Here's what to specify for NPU, FPGA, and GPU accelerator boards — from Megtron 6 laminates to 0.5mm BGA fanout.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/ai-edge-computing-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ai-edge-computing.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/ai-edge-computing-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Design for AI Edge Computing — High-Speed Requirements for NPU, FPGA & GPU Accelerator Boards",
+  "description": "AI edge computing demands PCB designs that handle 25-112 Gbps serial links, 100A+ core power, and 0.8mm BGA pitch — all in compact form factors. This guide covers the 6 PCB design decisions that determine whether your NPU/FPGA accelerator board ships or stalls.",
+  "datePublished": "2026-07-23",
+  "dateModified": "2026-07-23",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ai-edge-computing.webp",
+  "url": "https://huaxingpcba.com/blog/ai-edge-computing-pcb.html",
+  "author": {"@type": "Organization", "name": "Huaxing PCBA"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {"@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp"}
+  },
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://huaxingpcba.com/blog/ai-edge-computing-pcb.html"}
+}
+</script>
+
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ai-edge-computing.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Design for AI Edge Computing:<br><em>High-Speed Requirements for NPU, FPGA &amp; GPU Accelerator Boards</em></h1>
+      <p class="reveal">What procurement engineers and hardware architects need to specify when building PCBAs for edge AI inference — from 112 Gbps PAM4 routing to 0.5 mm BGA fanout.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>AI Edge Computing PCB Design</span></div>
+
+  <p>Every AI edge device — the smart camera performing real-time object detection, the autonomous mobile robot navigating a warehouse floor, the medical imaging system running inference at the bedside — starts with a PCB that pushes the boundaries of high-speed digital design. When your NPU or FPGA accelerator board carries <span class="data-point">32</span> serial lanes each running at 25 Gbps, power rails delivering over 100A to a single ASIC, and a BGA pitch tight enough to challenge every via technology in your arsenal, "standard" PCB design rules break down fast.</p>
+
+  <p>At Huaxing PCBA, we manufacture HDI boards for edge AI applications from our <span class="data-point">8</span> SMT line facility in Shenzhen, handling layer counts up to 32 with laser-drilled microvias and sequential lamination. This guide walks through the six PCB design decisions that determine whether your AI accelerator board meets its performance targets on the first spin — or enters a costly redesign loop. For foundational high-speed concepts, see our <a href="/blog/pcb-signal-integrity.html">PCB signal integrity guide</a> and <a href="/blog/impedance-control.html">impedance control deep-dive</a>.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-ai-edge-computing-hero.webp" alt="High-density AI edge computing PCB with BGA processor, DDR memory, and high-speed differential pairs" loading="lazy">
+
+  <!-- ── Section 1: Material Selection ── -->
+  <h2>1. Laminate Selection: Why FR-4 Won't Cut It at 56 Gbps</h2>
+
+  <p>The dielectric material you choose for an AI edge computing PCB determines everything: insertion loss at Nyquist frequency, skew within differential pairs, and whether your 112 Gbps PAM4 eye diagram opens or closes before it reaches the connector. Standard FR-4 (Dk ≈ 4.2–4.5, Df ≈ 0.020 at 1 GHz) introduces <span class="data-point">0.8–1.2 dB/inch</span> of loss at 14 GHz — manageable for PCIe Gen 4, catastrophic for PCIe Gen 5/6 or 112G SerDes.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Low-Loss Laminates: When Megtron 6 Becomes Mandatory</h4>
+      <p>For 56 Gbps NRZ and 112 Gbps PAM4 links, Panasonic Megtron 6 (Df = 0.002 at 1 GHz) or Isola Tachyon 100G (Df = 0.0019) are the industry baseline. These materials reduce insertion loss to <span class="data-point">0.35–0.50 dB/inch</span> at 14 GHz — roughly half the loss of FR-4. At these data rates, every 3 dB of margin you recover through material selection is one less equalization stage your SerDes needs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Matching Dk Across the Stackup</h4>
+      <p>Differential impedance depends on the effective Dk of the dielectric surrounding the trace. When your stackup mixes a low-Dk core with a higher-Dk prepreg — common in hybrid constructions — the impedance on outer layers can deviate by <span class="data-point">3–5 Ω</span> from the target 100 Ω differential. Specify glass-weave style (106, 1080, 2116) and resin content percentage in your fabrication notes, not just the laminate brand. For impedance-critical designs, see our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>High-Tg for High-Power AI ASICs</h4>
+      <p>AI accelerators routinely dissipate 75–150W. The PCB substrate under a large BGA must survive continuous operation at <span class="data-point">130–150 °C</span> without delamination or CAF (conductive anodic filament) growth. Specify Tg ≥ 170 °C (Megtron 6 is Tg 185 °C) and Td (decomposition temperature) ≥ 350 °C. If your design pushes beyond 150W, read our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> for heat dissipation strategies.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> Megtron 6 adds $8–15/ft² over standard FR-4. For a 16-layer, 200 × 250 mm board, that's $180–340 in raw material cost. But one respin avoided pays for the laminate 10× over. Specify the material in your RFQ — don't let the fab house choose for you.</p>
+  </div>
+
+  <!-- ── Section 2: Stackup & Layer Count ── -->
+  <h2>2. Stackup Architecture: How Many Layers Does Your AI Board Actually Need?</h2>
+
+  <p>Layer count for AI accelerator boards is driven by two constraints: BGA breakout density and power delivery impedance. A typical edge AI board carrying an NVIDIA Jetson Orin (699-ball BGA, 0.8 mm pitch) plus four LPDDR5 packages needs <span class="data-point">10–14 layers</span> minimum. A custom FPGA accelerator with a 1,760-pin BGA and eight 25 Gbps transceiver channels pushes to <span class="data-point">16–22 layers</span>. The stackup isn't just about routing — it's about embedding enough plane capacitance to keep core voltage ripple below 20 mVpp during load transients.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-ai-edge-computing-signal.webp" alt="Cross-section of 16-layer AI accelerator PCB showing high-speed differential pairs and power planes" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Signal Layer Allocation</h4>
+      <p>Budget your layers: 2–4 layers for BGA fanout (via-in-pad + blind/buried vias), 4–6 layers for high-speed differential routing (PCIe, Ethernet, MIPI CSI), 2–4 layers for power distribution, and 2–3 ground planes for return-path continuity. A 16-layer board might stack as: SIG–GND–SIG–PWR–GND–SIG–GND–SIG || SIG–GND–SIG–PWR–GND–SIG–GND–SIG. If BGA pitch drops to 0.5 mm, you'll need <a href="/blog/hdi-technology.html">HDI with microvias</a> — standard through-hole vias can't fan out at that density.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Power Plane Capacitance</h4>
+      <p>AI ASICs pull 50–150A at 0.75–1.1V core voltage. The plane capacitance between adjacent power/ground layers provides the first line of defense against transient droop. A 200 × 200 mm power-ground pair with 3 mil separation yields ~<span class="data-point">47 nF</span> of embedded capacitance. Every additional power-ground pair you add reduces the PDN impedance at mid-frequency (1–100 MHz), shrinking the number of discrete decoupling capacitors needed. For power electronics PCB considerations, see our <a href="/blog/power-electronics-pcb.html">power electronics design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Backdrill for Stub-Free Vias</h4>
+      <p>At 28 Gbps and above, via stubs longer than <span class="data-point">10 mils</span> create impedance discontinuities and resonant nulls in the insertion loss profile. Backdrilling removes the unused portion of plated through-holes on high-speed nets — specify backdrill depth tolerance of ±4 mil and confirm with time-domain reflectometry (TDR) on the first article. For via technology fundamentals, read our <a href="/blog/pcb-via-technology.html">PCB via technology guide</a>.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Signal Integrity ── -->
+  <h2>3. Signal Integrity: Routing 112 Gbps PAM4 on a PCB</h2>
+
+  <p>At 112 Gbps PAM4, the unit interval is <span class="data-point">8.93 ps</span> — the time it takes light to travel about 2.7 mm in vacuum. Your differential pair must maintain impedance within ±5% from driver die to receiver die, through package vias, PCB traces, and connector transitions. Intra-pair skew exceeding 2 ps turns differential signaling into common-mode noise. Here's what breaks and how to prevent it.</p>
+
+  <table class="spec-table">
+    <tr><th>Data Rate</th><th>Min. Laminate Df</th><th>Max. Trace Length (no retimer)</th><th>Via Stub Limit</th><th>Impedance Tolerance</th></tr>
+    <tr><td>PCIe Gen 4 (16 GT/s)</td><td>0.008 (FR-4 OK)</td><td>12 inches</td><td>25 mil</td><td>±10%</td></tr>
+    <tr><td>PCIe Gen 5 (32 GT/s)</td><td>0.004 (Megtron 4)</td><td>8 inches</td><td>15 mil</td><td>±7%</td></tr>
+    <tr><td>56 Gbps PAM4 (112G)</td><td>0.002 (Megtron 6)</td><td>5 inches</td><td>10 mil</td><td>±5%</td></tr>
+    <tr><td>112 Gbps PAM4 (224G)</td><td>0.0015 (Tachyon 100G)</td><td>3 inches</td><td>5 mil</td><td>±3%</td></tr>
+  </table>
+
+  <p>For boards mixing these data rates — common when an NPU talks PCIe Gen 5 to a host and 25 Gbps Ethernet to the network — route the highest-speed lanes first. Their constraints (shorter, tighter, fewer vias) cascade down to the slower lanes. Group lanes by speed grade with at least <span class="data-point">5× dielectric thickness</span> separation between groups to prevent crosstalk from Gen 5 aggressors coupling into 112G victims.</p>
+
+  <!-- ── Section 4: Power Integrity ── -->
+  <h2>4. Power Delivery: Feeding a 150W AI Accelerator Without Voltage Droop</h2>
+
+  <p>An AI ASIC running inference at 100% utilization can swing its current draw from 20A to 120A in <span class="data-point">50 nanoseconds</span>. The PCB's power distribution network (PDN) must keep the core voltage within the specified tolerance — typically ±3% or ±30 mV for a 1.0V rail — during these transients. If the PDN impedance exceeds the target (often <span class="data-point">1–5 mΩ</span> across 100 kHz–100 MHz), the voltage droop triggers a brownout and the chip resets.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-ai-edge-computing-thermal.webp" alt="High-current power delivery section of AI accelerator PCB with voltage regulator modules and decoupling capacitors" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Decoupling Strategy by Frequency Band</h4>
+      <p>Low-frequency (DC–100 kHz): Bulk electrolytic or polymer capacitors (100–470 μF) at the VRM output. Mid-frequency (100 kHz–10 MHz): MLCC arrays (10–47 μF, X7R, 0805/1206) placed as close to the ASIC power pins as the placement density allows. High-frequency (10 MHz–1 GHz): Low-ESL MLCCs (0.1–1 μF, 0201/0402 reverse-geometry) on the BGA breakout layer, directly under the die shadow. Target <span class="data-point">20–30</span> decoupling caps per rail for a 100A+ ASIC.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>DC Resistance (DCR) Budget</h4>
+      <p>At 120A, every milliohm of DCR in the power path burns <span class="data-point">14.4W</span> as heat (I²R). Use 2 oz or 3 oz copper on power layers, parallel multiple vias per power pin (8–12 vias per BGA power ball), and consider embedded copper coin technology under the ASIC to spread current and heat simultaneously. For heavy copper design rules, see our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Design Check:</strong> If your PDN simulation shows impedance peaks above the target at any frequency, do not assume "we'll fix it with more caps." Caps only shift the resonance — they don't eliminate it. You need plane pairs with tighter spacing or a different stackup. Simulate before you route.</p>
+  </div>
+
+  <!-- ── Section 5: Thermal Management ── -->
+  <h2>5. Thermal Design: Keeping a 150W ASIC Below Junction Temperature</h2>
+
+  <p>Edge AI devices rarely have fans. A vision system on a factory line, an autonomous drone, or a roadside inference unit all rely on passive cooling — heat sinks, thermal vias, and copper planes conducting heat to the enclosure. The PCB itself must move <span class="data-point">5–15W</span> of heat away from the ASIC through the board thickness. That's where thermal via arrays and embedded copper planes earn their place in the BOM.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Thermal Via Arrays Under the Die</h4>
+      <p>Fill the ASIC footprint with a grid of plated thermal vias (0.3 mm drill, 1.0 mm pitch) connecting the top-layer thermal pad to internal ground planes and a bottom-side heat spreader. A <span class="data-point">20 × 20</span> via array with 1 oz copper plating yields ~3–5 °C/W thermal resistance from junction to board. Plug and cap the vias to prevent solder wicking during assembly. For more strategies, see our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Copper Balancing for Warpage Control</h4>
+      <p>A 16-layer board with heavy copper on power layers and thin copper on signal layers will warp during reflow — potentially cracking BGA joints. Target <span class="data-point">±10%</span> copper coverage symmetry across the stackup centerline. If your design puts 70% copper on layers 1–8 and 30% on layers 9–16, add copper thieving (dummy fill) on the sparse layers to balance thermal expansion. Mixing copper weights across layers? Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> covers the symmetry rules in detail.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 6: DFM for HDI ── -->
+  <h2>6. DFM for AI Boards: HDI Rules That Prevent Fabrication Rejects</h2>
+
+  <p>The same design features that make AI accelerator boards perform — 0.5 mm BGA pitch, via-in-pad, laser-drilled microvias — also make them harder to manufacture. A design that routes perfectly in your EDA tool can still fail at fabrication if it violates the fab's HDI capability limits. Here are the rules our <span class="data-point">120,000</span> panels/month production floor lives by.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-ai-edge-computing-pcie.webp" alt="HDI PCB section showing laser-drilled microvias and fine-pitch BGA fanout for AI accelerator board" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Microvia Aspect Ratio and Stacking</h4>
+      <p>Laser-drilled microvias have a maximum aspect ratio (depth/diameter) of <span class="data-point">1:1</span> for reliable plating. A 4 mil via can only penetrate a 4 mil dielectric layer. Stacked microvias (via-on-via across sequential laminations) are possible but require filled-and-plated intermediate layers — specify "copper-filled, planarized" in your fab notes. Staggered microvias are more reliable and cheaper: offset each layer's vias by at least one drill diameter. For HDI fundamentals, see our <a href="/blog/hdi-technology.html">HDI technology guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">12</div>
+    <div class="checklist-content">
+      <h4>Minimum Annular Ring for Reliability</h4>
+      <p>IPC Class 2 allows 1 mil annular ring — but for AI boards operating at elevated temperatures with high layer counts, specify IPC Class 3 with <span class="data-point">2 mil</span> minimum annular ring. The thermal cycling from 25 °C to 125 °C (idle to full inference load) stresses every plated hole. Tighter annular rings fail earlier. Not sure which IPC class your product needs? See our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 comparison</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">13</div>
+    <div class="checklist-content">
+      <h4>Solder Mask Registration on 0.5 mm Pitch</h4>
+      <p>At 0.5 mm BGA pitch, the land pad diameter is ~0.25 mm leaving a <span class="data-point">0.25 mm</span> gap between pads. Standard solder mask registration tolerance is ±2 mil (0.05 mm) — tight but workable. If any solder mask encroaches onto a pad, it reduces the solderable area and risks opens. For 0.4 mm pitch and below, consider solder-mask-defined (SMD) pads or skip solder mask entirely under the BGA (NSMD with OSP finish). For finish selection guidance, read our <a href="/blog/enig-vs-hasl.html">surface finish comparison</a> and <a href="/blog/pcb-solder-mask-types.html">solder mask selection guide</a>.</p>
+    </div>
+  </div>
+
+  <!-- ── Closing ── -->
+  <h2>From Prototype to Production: What to Send to Your Fab</h2>
+
+  <p>AI edge computing PCBs are among the most demanding boards a fab house receives. The difference between a board that passes bring-up on the first power-on and one that spends three months in debug is <span class="data-point">95%</span> in the fabrication notes you include with your Gerber package. Specify the laminate by brand and type (not just "low-loss"), the impedance profile per layer, the backdrill requirements per net class, and the IPC class for every via structure.</p>
+
+  <p>At Huaxing PCBA, we manufacture HDI boards for edge AI applications with <a href="/blog/pcb-via-technology.html">laser-drilled microvias</a> down to 0.1 mm, sequential lamination up to 4-step HDI, and <a href="/blog/impedance-control.html">impedance control</a> to ±5% across 32 layers. We support Megtron 6, Tachyon 100G, and Rogers 4350B laminates with in-house TDR verification on every impedance-controlled panel. Our 8 SMT lines handle 0.4 mm BGA pitch with ±25 μm placement accuracy. <strong>Send us your Gerber files and stackup requirements — our engineering team provides a free DFM review with your quote, typically within 24 hours.</strong></p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — Design Rules for Clean High-Speed Signals Above 100 MHz</a></li>
+      <li><a href="/blog/hdi-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">HDI PCB Technology — When to Upgrade from Standard to Microvia Design</a></li>
+      <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Count, Material Selection & Impedance Planning</a></li>
+      <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control Guide — Why ±5% Matters at GHz Speeds</a></li>
+      <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management — Design Strategies for Heat Dissipation in High-Power Boards</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  CTA — Reusable Site CTA Component         -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="cta" style="--cta-bg:url(../generated/blog-cta-ai-edge-computing.webp)">
+  <div class="container">
+    <div class="cta-content reveal">
+      <h2>Building an AI Edge Device? Let's Review Your PCB Design.</h2>
+      <p>Our engineering team evaluates every AI accelerator board for signal integrity, power delivery, and HDI manufacturability before production begins. We support Megtron 6, 32-layer stackups, laser-drilled microvias, and ±5% impedance control. <strong>Upload your Gerber files and BOM — get a free DFM review and quote within 24 hours.</strong></p>
+      <button class="btn btn-primary btn-lg" onclick="document.getElementById('inquiryModal').classList.add('active')">Request Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo"><img src="/images/logo.webp" loading="lazy" alt="HUAXING PCBA" width="126" height="36"></a>
+        <p>Serving 30+ countries worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/pcb-manufacturing.html">PCB Manufacturing</a></li>
+          <li><a href="/pcb-assembly.html">PCB Assembly</a></li>
+          <li><a href="/turnkey-pcba.html">Turnkey PCBA</a></li>
+          <li><a href="/prototype-pcb.html">Prototype PCB</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="/industries/automotive-electronics.html">Automotive</a></li>
+          <li><a href="/industries/medical-device-electronics.html">Medical</a></li>
+          <li><a href="/industries/industrial-control-electronics.html">Industrial</a></li>
+          <li><a href="/industries/iot-electronics.html">IoT</a></li>
+          <li><a href="/industries/telecom-electronics.html">Telecom &amp; 5G</a></li>
+          <li><a href="/industries/new-energy-electronics.html">New Energy</a></li>
+          <li><a href="/industries/consumer-electronics.html">Consumer</a></li>
+          <li><a href="/industries/aerospace-electronics.html">Aerospace &amp; Defense</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/certifications.html">Certifications</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Huaxing PCBA Limited. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal">
+  <div class="modal" role="dialog">
+    <button class="modal-close" onclick="document.getElementById('inquiryModal').classList.remove('active')">&times;</button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+
+<script src="/nav.js?v=22" defer></script>
+<script src="../reveal.js"></script>
+</body>
+</html>
