@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Copper Weight Selection — 1oz to 6oz: How to Specify Copper Thickness for Power, Thermal &amp; High-Current | Huaxing PCBA</title>
+<meta name="description" content="Copper weight determines current capacity, thermal performance, and minimum trace width on your PCB. Learn when to specify 1oz, 2oz, 3oz, or 6oz copper — and how each choice affects cost, manufacturability, and impedance control.">
+<meta property="og:title" content="PCB Copper Weight Selection — 1oz to 6oz: Choose the Right Thickness">
+<meta property="og:description" content="Choosing copper weight isn't just about current — it affects trace width, impedance, thermal dissipation, and cost. A practical guide for PCB designers and procurement.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-copper-weight-selection.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-copper-weight.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-copper-weight-selection.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Copper Weight Selection — 1oz to 6oz: How to Specify Copper Thickness for Power, Thermal & High-Current",
+  "description": "Copper weight determines current capacity, thermal performance, and minimum trace width. Learn when to specify 1oz, 2oz, 3oz, or 6oz copper and how each choice affects cost and manufacturability.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-copper-weight.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-copper-weight-selection.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-copper-weight-selection.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/blog-cover-copper-weight.webp" alt="" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Copper Weight Selection:<br><em>How to Choose 1oz Through 6oz for Your Design</em></h1>
+      <p class="reveal">Copper weight isn't just about current — it affects trace width, impedance, thermal dissipation, etch resolution, and board cost. Here's how to pick the right one.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Copper Weight Guide</span></div>
+
+  <p>Every PCB designer has asked the question: should I spec 1oz copper or go heavier? The answer isn't a number on a current-capacity chart — it's a cascade of decisions affecting trace geometry, thermal performance, via design, and ultimately your bill of materials. Getting it wrong in either direction costs money.</p>
+
+  <p>At Huaxing PCBA, we process <span class="data-point">0.5oz to 6oz</span> copper across our fabrication lines, supporting everything from <span class="data-point">3/3mil</span> fine-line HDI at 0.5oz to <span class="data-point">6oz</span> power distribution boards for EV charging stations. Here's the full decision framework.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-copper-weight-hero.webp" alt="PCB copper layers with visibly different thicknesses under macro photography, showing 1oz to 6oz contrast" loading="lazy">
+
+  <h2>What "Copper Weight" Actually Means</h2>
+
+  <p>Copper weight is specified in ounces per square foot (oz/ft²) — but no one talks about square feet on a PCB. Here's what it translates to in actual thickness:</p>
+
+  <table class="spec-table">
+    <tr><th>Copper Weight</th><th>Thickness</th><th>Typical Application</th><th>Min Trace/Space (etch factor)</th></tr>
+    <tr><td>0.5 oz (½ oz)</td><td>17μm (0.7 mil)</td><td>Fine-line HDI, high-density digital</td><td>3/3mil</td></tr>
+    <tr><td>1 oz</td><td>35μm (1.4 mil)</td><td>Standard digital/analog, most designs</td><td>4/4mil</td></tr>
+    <tr><td>2 oz</td><td>70μm (2.8 mil)</td><td>Power supplies, motor drivers, LED boards</td><td>6/6mil</td></tr>
+    <tr><td>3 oz</td><td>105μm (4.2 mil)</td><td>High-current power distribution, automotive</td><td>8/8mil</td></tr>
+    <tr><td>4 oz</td><td>140μm (5.6 mil)</td><td>Battery management, solar inverters</td><td>10/10mil</td></tr>
+    <tr><td>6 oz</td><td>210μm (8.4 mil)</td><td>Welding equipment, EV charger, traction drives</td><td>15/15mil</td></tr>
+  </table>
+
+  <p>Notice the etch resolution column. Every time you double copper thickness, your minimum trace/space approximately doubles too — because thicker copper requires longer etch time, which increases lateral undercut. This is the single most important trade-off in copper weight selection: <strong>more current capacity always comes at the cost of routing density</strong>.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> Designers often specify 2oz copper for the entire board when only the power plane actually needs it. This is wasteful — a mixed copper-weight stackup (2oz outer layers with 1oz inner layers) saves cost while delivering the same current capacity on the layers that matter.</p>
+  </div>
+
+  <h2>How Copper Weight Affects Current Capacity</h2>
+
+  <p>The IPC-2152 standard replaced the older IPC-2221 charts with more accurate current-carrying models. The fundamental relationship: a <span class="data-point">10°C</span> temperature rise on a 1oz outer-layer trace carrying 5A requires roughly a <span class="data-point">100mil (2.54mm)</span> wide trace. Double the copper to 2oz and that same 5A needs only <span class="data-point">50mil</span> — or conversely, a 100mil 2oz trace can carry about <span class="data-point">9A</span> with the same 10°C rise.</p>
+
+  <p>But here's what the charts don't tell you: real-world PCBs have thermal coupling between traces, and a power plane sharing the FR-4 with dense digital routing will heat the entire board above ambient. Our rule of thumb at Huaxing: <strong>derate IPC-2152 by 20%</strong> for boards with more than four layers, and by <strong>30%</strong> for boards operating above 85°C ambient. For a deeper dive into thermal design, see our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a>.</p>
+
+  <h2>Making the Right Choice by Application</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>0.5oz — Fine-Line HDI and High-Density Digital</h4>
+      <p>When your design needs <span class="data-point">3/3mil</span> traces and <span class="data-point">0.15mm</span> mechanical vias, 0.5oz copper is the only option. The thin copper allows tight etch control, which is essential for any-layer HDI stackups and <span class="data-point">0.3mm</span> pitch BGA breakouts. The trade-off: 0.5oz traces carry about 55% of the current that 1oz traces carry at the same width. For most digital circuits operating at <span class="data-point">3.3V/1.8V</span> with sub-100mA per net, this is perfectly adequate. Our <a href="/blog/hdi-technology.html">HDI technology guide</a> covers via-in-pad and microvia strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>1oz — The Universal Default</h4>
+      <p>For <span class="data-point">90%</span> of PCB designs, 1oz copper is the correct starting point. It balances current capacity (a 200mil-wide trace carries ~10A with 10°C rise), etch resolution (4/4mil minimum), and cost. Most IoT, industrial control, consumer electronics, and telecom boards use 1oz outer layers with 1oz or 0.5oz inner layers. At Huaxing, our standard 1oz process achieves <span class="data-point">±5%</span> impedance control — adequate for signals up to <span class="data-point">10 Gbps</span>. For requirements above that, see our <a href="/blog/impedance-control.html">impedance control deep-dive</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>2oz — Power Supplies, Motor Drives, and LED Boards</h4>
+      <p>When your board has power paths carrying <span class="data-point">10-30A</span>, 2oz copper becomes the sweet spot. A 2oz power plane reduces I²R losses by 50% compared to 1oz at the same width, and the 70μm thickness handles thermal cycling better. Common applications: DC-DC converter modules, BLDC motor drivers, high-power LED arrays (like our <a href="/blog/led-pcb-manufacturing.html">LED PCB solutions</a>), and automotive power distribution. For mixed designs — digital processing plus power delivery — consider a hybrid stackup: 2oz on the power layers, 1oz on signal layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>3oz-4oz — Battery Management and Renewable Energy</h4>
+      <p>BMS boards, solar inverters, and UPS systems routinely handle <span class="data-point">50-200A</span>. At these currents, even 2oz traces need to be impractically wide. 3oz copper on outer layers supports <span class="data-point">~25A</span> on a 200mil trace; 4oz pushes that to <span class="data-point">~35A</span>. The manufacturing challenge: drilling and plating become more complex. Via barrels need thicker plating, and the thermal stress of soldering increases. We recommend minimum <span class="data-point">0.3mm</span> via hole diameters for 3oz+ boards and <span class="data-point">0.5mm</span> for 6oz — the additional copper needs room for reliable plating. Our <a href="/blog/power-electronics-pcb.html">power electronics PCB guide</a> covers layout best practices.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>6oz — Extreme Current Applications</h4>
+      <p>Six-ounce copper (210μm) is reserved for the heaviest current applications: EV traction inverters, industrial welding equipment, and high-power RF amplifiers. At this thickness, standard PCB processing reaches its limits: lamination requires specialized prepreg that fills the gaps between copper features, and solder mask application often needs two coats to achieve reliable coverage. We typically recommend <span class="data-point">15/15mil</span> minimum trace/space at 6oz and suggest bus-bar integration for currents above <span class="data-point">150A</span>. See our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB manufacturing guide</a> for details on the fabrication process.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-copper-weight-cross-section.webp" alt="Photorealistic 3D cross-section of multi-layer PCB showing different copper thicknesses on different layers" loading="lazy">
+
+  <h2>Cost Implications of Copper Weight Decisions</h2>
+
+  <p>Heavier copper costs more — but not linearly. Here's the approximate cost multiplier relative to 1oz for a standard 4-layer PCB:</p>
+
+  <table class="spec-table">
+    <tr><th>Copper Weight</th><th>Material Cost</th><th>Processing Cost</th><th>Total Cost vs 1oz</th><th>Lead Time Impact</th></tr>
+    <tr><td>1oz (all layers)</td><td>1.0×</td><td>1.0×</td><td>1.0× (baseline)</td><td>Standard</td></tr>
+    <tr><td>2oz (all layers)</td><td>1.4×</td><td>1.2×</td><td>~1.5×</td><td>+1 day</td></tr>
+    <tr><td>2oz outer / 1oz inner</td><td>1.2×</td><td>1.1×</td><td>~1.25×</td><td>Standard</td></tr>
+    <tr><td>3oz (all layers)</td><td>1.8×</td><td>1.5×</td><td>~2.0×</td><td>+2-3 days</td></tr>
+    <tr><td>4oz (outer only)</td><td>1.5×</td><td>1.4×</td><td>~1.7×</td><td>+2 days</td></tr>
+    <tr><td>6oz (outer only)</td><td>2.2×</td><td>2.0×</td><td>~2.8×</td><td>+4-5 days</td></tr>
+  </table>
+
+  <p>The smartest cost optimization: <strong>use heavier copper only on the layers that need it</strong>. A 4-layer board with 2oz outer layers and 1oz inner layers costs only ~25% more than all-1oz, while delivering nearly the same current capacity as all-2oz for most designs. For a detailed cost breakdown by layer count and technology, see our <a href="/blog/pcb-cost-factors.html">PCB cost factors guide</a>.</p>
+
+  <h2>Stackup Considerations for Mixed Copper Weights</h2>
+
+  <p>Mixing copper weights within a single stackup introduces challenges that can catch designers off guard. The primary concern: <strong>asymmetric copper distribution</strong>. If your top layer is 2oz and your bottom layer is 1oz, the board will tend to warp during reflow because the copper expands and contracts at different rates on each side. Our solution: balance the copper weight symmetrically — if the top is 2oz, the bottom should also be 2oz, even if that bottom layer carries negligible current.</p>
+
+  <p>Second concern: <strong>impedance control accuracy</strong>. When reference planes use heavier copper, the distance between signal trace and reference plane effectively changes because thicker copper alters the dielectric spacing. For controlled-impedance designs (USB 3.0, PCIe, DDR4), we strongly recommend keeping signal layers at 1oz and only using heavier copper on dedicated power layers. Our engineers recalculate impedance for every stackup variation — including copper weight — during the CAM review. See our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> for impedance planning with mixed copper weights.</p>
+
+  <h2>How Huaxing PCBA Optimizes Copper Weight for Your Design</h2>
+
+  <p>Every PCB project that comes through our factory gets a DFM review that includes copper weight optimization. We've seen designs that specified all-2oz when a simple mixed stackup would have saved <span class="data-point">25%</span> — and designs that specified 1oz when the power traces were running at <span class="data-point">85°C</span> above ambient.</p>
+
+  <p>Our fabrication capabilities span the full copper weight range: <span class="data-point">0.5oz to 6oz</span> on outer layers, with inner layers configurable independently. We stock FR-4, High-Tg FR-4, Rogers, aluminum-core, and ceramic substrates in full copper weight ranges. For boards above 3oz, our laminating process uses specialized high-resin-content prepreg to ensure complete copper gap fill — a step that budget manufacturers often skip, leading to delamination in the field.</p>
+
+  <p>Our <span class="data-point">8 SMT lines</span> are configured to handle mixed-copper-weight boards: preheating profiles adjust automatically based on thermal mass calculations, and our <span class="data-point">10-zone reflow ovens</span> maintain <span class="data-point">±2°C</span> profile accuracy even on 6oz boards. Need guidance on copper weight selection? <a href="/contact/">Contact our engineering team</a> — we'll review your design and recommend the optimal copper distribution before you commit to production.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/heavy-copper-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Heavy Copper PCB Manufacturing Guide</a></li>
+      <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Strategies</a></li>
+      <li><a href="/blog/power-electronics-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Power Electronics PCB Design & Manufacturing</a></li>
+      <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design Guide</a></li>
+      <li><a href="/blog/pcb-cost-factors.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Cost Factors: What Drives Your Quote</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-copper-weight.webp)">
+      <h2>Get a Copper-Optimized DFM Review</h2>
+      <p>Upload your Gerber files. Our engineers check copper weight, current capacity, and thermal performance — free, 24h turnaround.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Start Your DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

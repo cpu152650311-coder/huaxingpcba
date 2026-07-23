@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Back Drilling Guide — Stub Removal, Via Stub Effects &amp; Signal Integrity Above 5 Gbps | Huaxing PCBA</title>
+<meta name="description" content="Via stubs create signal reflections that destroy high-speed signal integrity above 5 Gbps. Learn how back drilling removes stubs, the design rules that control cost, and when controlled-depth drilling is worth the investment.">
+<meta property="og:title" content="PCB Back Drilling Guide — Stub Removal for High-Speed Signals">
+<meta property="og:description" content="Via stubs cause reflections and signal degradation above 5 Gbps. This guide covers back drilling design rules, cost trade-offs, and when you need it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-backdrilling-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-backdrill.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-backdrilling-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Back Drilling Guide — Stub Removal, Via Stub Effects & Signal Integrity Above 5 Gbps",
+  "description": "Via stubs cause reflections that destroy signal integrity above 5 Gbps. Learn back drilling design rules, when you need it, and how to control costs.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-backdrill.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-backdrilling-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-backdrilling-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg"><img src="../generated/blog-cover-backdrill.webp" alt="" loading="eager" width="1920" height="600"></div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Back Drilling:<br><em>When Via Stubs Kill Your Signal — and How Stub Removal Fixes It</em></h1>
+      <p class="reveal">A via stub just 50 mils long can degrade a 10 Gbps signal by 3 dB. Back drilling removes the problem at the source — here's when you need it and how to specify it.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Back Drilling Guide</span></div>
+
+  <p>Your differential pair simulation looks perfect. Insertion loss is within spec, return loss is under -15 dB, and the eye diagram is wide open. Then you build the board and the eye closes by <span class="data-point">40%</span> at the receiver. The culprit isn't your routing — it's the unused portion of every signal via hanging below the layer transition. PCB designers call it a stub, and at data rates above <span class="data-point">5 Gbps</span>, it becomes the dominant signal integrity problem on multi-layer boards.</p>
+
+  <p>At Huaxing PCBA, we back drill thousands of high-speed boards per month for telecom, data center, and aerospace applications — removing via stubs to <span class="data-point">&lt;10 mil</span> residual length tolerances. Here's what every PCB designer and procurement engineer needs to know about when back drilling is necessary, how to specify it, and what it costs.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-backdrill-hero.webp" alt="Macro close-up photograph of back-drilled PCB vias showing the drill entry from the opposite side with copper barrel partially removed" loading="lazy">
+
+  <h2>What a Via Stub Is — and Why It Matters</h2>
+
+  <p>In a multi-layer PCB, a signal transitions from one layer to another through a plated via. The via barrel extends through the entire board thickness — but the portion of the barrel beyond the signal's target layer carries no current. That unused segment is called a <strong>via stub</strong>, and electrically it behaves as an open-circuited transmission line stub.</p>
+
+  <p>At low frequencies, a stub is invisible. At <span class="data-point">1 Gbps</span>, a 100-mil stub in FR-4 introduces about <span class="data-point">1 dB</span> of insertion loss — negligible for most designs. But at <span class="data-point">10 Gbps</span>, that same stub creates a resonant null at approximately <span class="data-point">7.5 GHz</span>, right in the middle of the signal's frequency content. The result: dramatic reflections, eye closure, and bit errors. The relationship is quadratic — doubling the data rate quadruples the stub's destructive effect.</p>
+
+  <table class="spec-table">
+    <tr><th>Data Rate</th><th>Maximum Acceptable Stub Length (FR-4, εr≈4.0)</th><th>Typical Application</th></tr>
+    <tr><td>≤ 1 Gbps</td><td>300+ mil (7.6mm) — rarely a concern</td><td>Legacy digital, basic control signals</td></tr>
+    <tr><td>2.5-3.125 Gbps</td><td>~150 mil (3.8mm)</td><td>PCIe Gen 1, SATA 3G</td></tr>
+    <tr><td>5 Gbps</td><td>~80 mil (2.0mm)</td><td>PCIe Gen 2, USB 3.0, SATA 6G</td></tr>
+    <tr><td>8-10 Gbps</td><td>~40 mil (1.0mm)</td><td>PCIe Gen 3, 10GbE, USB 3.1 Gen 2</td></tr>
+    <tr><td>16 Gbps</td><td>~25 mil (0.64mm)</td><td>PCIe Gen 4, 16G Fibre Channel</td></tr>
+    <tr><td>25-28 Gbps</td><td>~15 mil (0.38mm)</td><td>PCIe Gen 5, 25GbE, SFP28</td></tr>
+    <tr><td>56 Gbps+</td><td>≤ 10 mil (0.25mm)</td><td>PCIe Gen 6, 400GbE PAM4</td></tr>
+  </table>
+
+  <p>This table explains why a standard <span class="data-point">62-mil</span> thick 16-layer board with signals transitioning from the top to layer 3 typically has a stub of about <span class="data-point">50 mils</span>. That's fine at 3 Gbps but fails at 10 Gbps. As our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> explains, simulation without stub modeling is one of the most common reasons high-speed boards fail first-pass test.</p>
+
+  <div class="highlight-box">
+    <p><strong>Design Rule of Thumb:</strong> A via stub becomes a problem when its electrical length exceeds <span class="data-point">¼ wavelength</span> at the highest significant frequency in your signal (typically the 5th harmonic of the clock). For NRZ signaling at 10 Gbps (5 GHz fundamental, 25 GHz 5th harmonic), the quarter-wavelength in FR-4 is approximately <span class="data-point">35 mils</span>. If your stub is longer than that, you need back drilling.</p>
+  </div>
+
+  <h2>How Back Drilling Works</h2>
+
+  <p>Back drilling — also called controlled-depth drilling or stub removal — is exactly what it sounds like. After the PCB is fabricated and plated (all vias are already conductive), a slightly larger drill bit enters from the opposite side of the board and removes the unused portion of the via barrel. The drill stops a controlled distance short of the target signal layer, leaving a small residual stub.</p>
+
+  <p>The process requires three things that standard PCB fabrication does not:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Controlled-Depth Drilling Equipment</h4>
+      <p>Standard PCB drills penetrate completely through the board. Back drilling uses a depth-controlled CNC spindle that can stop within <span class="data-point">±2 mils</span> of the target layer. The drill bit diameter is typically <span class="data-point">8-12 mils</span> larger than the original via drill to ensure complete copper removal from the barrel wall. For a <span class="data-point">10-mil</span> via, the back drill bit is typically <span class="data-point">18-22 mils</span>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Precise Layer Registration</h4>
+      <p>The drill must stop within a specific dielectric layer — not in the middle of a copper plane. This requires tight layer-to-layer registration during lamination. At Huaxing, we maintain <span class="data-point">±3 mils</span> layer registration for back-drilled boards, which ensures the back drill stops in the correct dielectric gap. We recommend designers leave at least <span class="data-point">8 mils</span> of clearance between the back-drill stop layer and the nearest copper feature — tighter than that and registration variation risks damaging the signal via itself.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Post-Drill Cleaning</h4>
+      <p>Back drilling generates debris inside the via hole. Without thorough cleaning — typically a high-pressure deionized water wash followed by plasma desmear — residual copper particles can create intermittent shorts or degrade the dielectric. Our post-drill process includes <span class="data-point">100% AOI</span> inspection of back-drilled vias to verify complete copper removal and absence of debris.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-backdrill-cross-section.webp" alt="Photorealistic 3D cross-section render of a multi-layer PCB showing a via with back drilling removing the lower stub portion" loading="lazy">
+
+  <h2>When to Use Back Drilling — and When You Can Avoid It</h2>
+
+  <p>Back drilling adds cost. A typical high-layer-count board with <span class="data-point">200-500</span> back-drilled vias sees a <span class="data-point">15-25%</span> cost increase and <span class="data-point">2-3 days</span> additional lead time. Before committing, consider these alternatives:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Blind and Buried Vias — The Clean Alternative</h4>
+      <p>If your design uses controlled-depth or laser-drilled microvias (blind vias that connect only specific layer pairs), the via physically doesn't extend beyond its target layers — there's no stub to remove. This is the preferred approach for high-density designs, but it increases layer count and lamination cycles. For example, a 12-layer board with blind vias from L1-L3 costs roughly <span class="data-point">30-40%</span> more than a through-via board — but eliminates stub concerns entirely. See our <a href="/blog/pcb-via-technology.html">PCB via technology guide</a> for a full comparison of via types.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Route Signals on Layers Near the Board Center</h4>
+      <p>If your high-speed signals transition between layers that are both near the middle of the board, the stub length is split between top and bottom — effectively halving the problematic stub length. On a standard <span class="data-point">62-mil</span> 16-layer board, routing between layers 7 and 10 creates a 25-mil stub on each side instead of a 50-mil stub on one side. For signals up to <span class="data-point">10 Gbps</span>, this can eliminate the need for back drilling entirely.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Use Low-Dk Materials to Increase Acceptable Stub Length</h4>
+      <p>The stub's electrical length depends on the dielectric constant. Moving from standard FR-4 (Dk ≈ 4.0) to a low-Dk material like Rogers 4350B (Dk ≈ 3.48) increases the acceptable stub length by about <span class="data-point">7%</span>. For mixed digital/RF designs where only a few signals need back drilling, consider using low-Dk laminate for those specific layers. Our <a href="/blog/pcb-materials-guide.html">PCB materials selection guide</a> covers the full range of substrate options.</p>
+    </div>
+  </div>
+
+  <h2>Design Rules for Back Drilling</h2>
+
+  <p>Communicating back drill requirements to your fabricator requires clear documentation. Here's what we need to see in your fabrication drawing:</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Recommendation</th><th>Why It Matters</th></tr>
+    <tr><td>Back drill diameter</td><td>Original via drill + 8-12 mils</td><td>Must be large enough to remove all barrel copper but not damage adjacent traces</td></tr>
+    <tr><td>Back drill-to-copper clearance</td><td>≥ 8 mils from back drill edge to nearest copper</td><td>Prevents accidental copper damage during drilling</td></tr>
+    <tr><td>Target stop layer</td><td>Specify exact layer number and dielectric gap</td><td>"Drill from bottom to stop between L3 and L4" — be explicit</td></tr>
+    <tr><td>Maximum residual stub</td><td>≤ 10 mils for 25 Gbps; ≤ 15 mils for 10 Gbps</td><td>Tighter tolerances cost more; don't over-specify</td></tr>
+    <tr><td>Back drill side</td><td>Specify top, bottom, or both</td><td>Usually only one side; both sides doubles cost</td></tr>
+    <tr><td>Via grouping</td><td>Group back-drilled vias by stop layer</td><td>Separate drill files per stop layer; reduces setup time</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Common Mistake:</strong> Designers sometimes back drill every via on a high-speed net — including vias that don't have stubs (e.g., a via from L1 to L16 on a 16-layer board). Only vias that don't use the full board thickness need back drilling. Over-specifying back drill locations wastes money: each unnecessary back-drilled via adds about <span class="data-point">$0.02-0.05</span> to the board cost. On a board with 1,000 vias, that's real money.</p>
+  </div>
+
+  <h2>Back Drilling for Differential Pairs</h2>
+
+  <p>Differential pairs create a special case. The two vias in a differential pair must have matched stub lengths — a difference of even <span class="data-point">5 mils</span> in residual stub creates a skew that degrades differential-to-common-mode conversion. At Huaxing, we back drill differential pair vias in the same drill cycle using the same depth setting, and we verify stub length matching via cross-section on first-article boards. The typical specification: residual stub difference ≤ <span class="data-point">3 mils</span> between the P and N vias of a differential pair.</p>
+
+  <p>For 56 Gbps PAM4 signaling (PCIe Gen 6 and 400GbE), the stub tolerance tightens dramatically: residual stub must be ≤ <span class="data-point">8 mils</span> with ≤ <span class="data-point">2 mils</span> matching between differential pairs. At these speeds, we also recommend TDR verification of back-drilled vias on first-article units — measuring the impedance discontinuity at the stub location and confirming it's below the <span class="data-point">5%</span> impedance variation budget. For more on high-speed design, see our <a href="/blog/impedance-control.html">impedance control guide</a>.</p>
+
+  <h2>Specifying Back Drilling on Your Fabrication Drawing</h2>
+
+  <p>Here's the exact note we recommend for your fab drawing — it covers everything a manufacturer needs:</p>
+
+  <div class="highlight-box">
+    <p><strong>Sample Fab Note:</strong> "Back drill all vias identified in drill file BACKDRILL-1.TXT. Drill from bottom side using <span class="data-point">0.55mm (21.7 mil)</span> diameter bit. Stop in dielectric between layer 3 and layer 4. Maximum residual stub length: <span class="data-point">10 mils (0.25mm)</span>. Verify stub removal via cross-section on <span class="data-point">3</span> locations per panel. Clean all back-drilled holes per IPC-6012 Class 3 requirements."</p>
+  </div>
+
+  <p>Also include a separate mechanical layer in your Gerber package that highlights every via to be back drilled. Group vias by stop layer — if some vias stop between L3-L4 and others stop between L8-L9, these should be in separate drill files with separate fab notes. This prevents setup errors and reduces cost compared to mixing stop depths in a single drill file.</p>
+
+  <h2>Huaxing's Back Drilling Capability</h2>
+
+  <p>We back drill PCBs from <span class="data-point">4 to 32 layers</span> with controlled-depth accuracy of <span class="data-point">±3 mils</span> — suitable for signals up to <span class="data-point">56 Gbps</span> PAM4. Our process supports standard FR-4, high-Tg FR-4, Rogers, and mixed-dielectric stackups. Every back-drilled board receives:</p>
+
+  <p><strong>First-article cross-section:</strong> We microsection <span class="data-point">3-5</span> back-drilled vias on the first panel of every production run, measuring residual stub length and copper removal completeness. Reports ship with the boards.</p>
+
+  <p><strong>100% via inspection:</strong> After back drilling and cleaning, every back-drilled via passes through AOI to verify complete copper removal. Our <span class="data-point">98.7%</span> first-pass yield on back-drilled boards means fewer rework cycles.</p>
+
+  <p><strong>TDR verification (optional):</strong> For boards operating above 25 Gbps, we offer TDR measurement of back-drilled via impedance on the first article — confirming that residual stubs don't create impedance discontinuities exceeding your specification.</p>
+
+  <p>Whether you need a <span class="data-point">24-hour</span> quick-turn prototype with <span class="data-point">50</span> back-drilled vias or <span class="data-point">80,000m²/month</span> production with thousands per panel — we have the controlled-depth drilling capacity and the inspection rigor to deliver. <a href="/contact/">Contact our engineering team</a> to discuss your back drilling requirements, or upload your Gerber files for a same-day DFM review.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity: Design Rules Above 100 MHz</a></li>
+      <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control: ±5% Tolerance PCB Manufacturing</a></li>
+      <li><a href="/blog/pcb-via-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Via Technology: Through, Blind, Buried & Microvias</a></li>
+      <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design: Layer Count & Material Selection</a></li>
+      <li><a href="/blog/telecom-5g-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Telecom & 5G PCB Design & Manufacturing</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-backdrill.webp)">
+      <h2>Need Back Drilling on Your High-Speed Board?</h2>
+      <p>Upload your Gerber files and stackup. Our engineers verify stub lengths and back drill requirements during DFM — free, 24h response.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Start Your DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
