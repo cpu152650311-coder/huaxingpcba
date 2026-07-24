@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Pre-Shipment Inspection for Overseas Buyers — OQC Checklist Before Accepting Delivery | Huaxing PCBA</title>
+<meta name="description" content="Practical PCB pre-shipment inspection guide for international buyers. OQC checklist covering visual defects, dimensional checks, solderability, packaging, and how to set up a remote inspection process that catches issues before shipping.">
+<meta property="og:title" content="PCB Pre-Shipment Inspection for Overseas Buyers — OQC Checklist Before Accepting Delivery">
+<meta property="og:description" content="Complete pre-shipment inspection guide for PCB buyers. OQC checklist, remote inspection setup, AQL sampling, and red flags to catch before your boards leave the factory.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-pre-shipment-inspection.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pre-shipment.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-pre-shipment-inspection.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Pre-Shipment Inspection for Overseas Buyers — OQC Checklist Before Accepting Delivery",
+  "description": "Practical PCB pre-shipment inspection guide for international buyers. OQC checklist, AQL sampling, and how to set up remote inspection before your boards ship.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pre-shipment.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-pre-shipment-inspection.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-pre-shipment-inspection.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pre-shipment.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Quality Assurance</p>
+      <h1 class="reveal">PCB Pre-Shipment Inspection for Overseas Buyers:<br><em>Your OQC Checklist Before Accepting Delivery</em></h1>
+      <p class="reveal">How to set up a pre-shipment inspection process that catches PCB defects at the factory — before your boards cross an ocean and become your problem.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Pre-Shipment Inspection Guide</span></div>
+
+  <p>When you're importing PCBs from a contract manufacturer 6,000 miles away, your quality assurance window is the <span class="data-point">24–72 hours</span> between final production and container loading. Once those boards leave Shenzhen, catching a solder mask registration error or a warped panel costs you return freight, production delays, and a damaged supplier relationship. A structured pre-shipment inspection — executed before payment release — is your single most powerful quality control tool as an overseas buyer. This guide gives you the exact checklist, AQL sampling plan, and red flags that catch <span class="data-point">95%</span> of common PCB defects before they become your problem.</p>
+
+  <p>At Huaxing PCBA, our outgoing quality control (OQC) process inspects <span class="data-point">100% of production lots</span> against IPC-A-600 Class 2 and Class 3 acceptance criteria before packaging. We've seen which defects slip through when inspections are cursory, and we've built this checklist from real defect data across thousands of customer shipments. Here's what to look for — whether you're inspecting in person, via a third-party service, or reviewing factory inspection reports remotely.</p>
+
+  <img class="article-img" src="../generated/blog-pre-shipment-hero.webp" alt="PCB quality inspection under magnifying lamp, technician examining board against IPC-A-600 checklist" loading="lazy">
+
+  <h2>The OQC Process: What Should Happen Before Your Boards Ship</h2>
+
+  <p>Pre-shipment inspection is not a single glance at a few boards. It's a structured, multi-stage process that verifies conformance at the lot level. A proper OQC workflow at a competent PCB factory follows this sequence:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Document Review — Before Touching a Single Board</h4>
+      <p>The inspector starts with the paperwork: your purchase order, the Gerber-derived fabrication drawing, the IPC class specified (Class 2 or Class 3), and any special requirements (controlled impedance test report, microsection coupon, solderability certificate). Verify that the lot quantity matches the PO, that the revision matches, and that the specified surface finish, solder mask color, and silkscreen color are correctly recorded. If the paperwork is wrong here, everything downstream is suspect. For understanding how to specify requirements correctly in your PO, read our <a href="/blog/ipc-standards-comparison.html">IPC standards comparison guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>AQL Sampling — Don't Inspect Every Board, But Be Statistically Rigorous</h4>
+      <p>Use ANSI/ASQ Z1.4 (formerly MIL-STD-1916) single sampling plans. For PCB lots of <span class="data-point">501–3,200 units</span>, a Level II inspection with AQL 1.0 (critical defects) and AQL 2.5 (major defects) means inspecting <span class="data-point">80 boards</span>. If ≤2 critical defects and ≤5 major defects are found, the lot passes. If the defect count exceeds the acceptance number, the entire lot should be 100% screened or rejected. Do not accept "we'll just fix the bad ones" — for non-repairable PCB defects like delamination or inner-layer shorts, the affected boards are scrap. For a deeper understanding of PCB defect classification, see our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection guide</a> for the IQC side of the equation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Visual Inspection — The First Line of Defense</h4>
+      <p>Under <span class="data-point">3–5× magnification</span> with adequate lighting (≥1,000 lux at the inspection surface), the inspector checks: solder mask registration (no peeling, no bridging between pads, no mask in holes), silkscreen legibility and alignment, surface finish uniformity (no discoloration on ENIG pads, no exposed copper on HASL pads), edge quality (no burrs, no delamination), and general workmanship. This should follow the IPC-A-600 acceptance criteria specific to your specified class. Class 3 boards have tighter criteria on every parameter — our <a href="/blog/ipc-class-2-vs-class-3.html">Class 2 vs Class 3 comparison</a> covers the specific differences.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-pre-shipment-checklist.webp" alt="Organized PCB inspection station with microscope, calipers, test coupons, and quality checklist documentation" loading="lazy">
+
+  <h2>The 10-Point Pre-Shipment Inspection Checklist</h2>
+
+  <p>Every OQC inspection should verify these ten dimensions before signing off. Missing any of these is how defects cross the ocean.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dimensional Verification — Don't Trust the Fab Drawing Blind</h4>
+      <p>Measure <span class="data-point">5 boards from different panels</span> across the lot. Check: overall length/width (±0.15mm for standard tolerance), board thickness (verify at 3 points per board — corners and center), hole diameters (sample 10 holes per board with pin gauge or optical measurement), and slot dimensions. Warpage/twist: place board on granite surface plate, measure maximum deviation. IPC-A-600 allows <span class="data-point">0.75% bow and twist</span> for surface-mount boards (Class 2) and 0.5% for Class 3 — a 200mm board should not deviate more than 1.0mm from flat. This is the #1 missed defect — we see warped boards that passed electrical test but failed assembly because pick-and-place vacuum couldn't grip them. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> covers the full verification sequence.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Solder Mask Integrity — Registration, Coverage, and Cure</h4>
+      <p>Check under magnification: mask-to-pad registration (no mask encroaching on BGA pads — minimum <span class="data-point">75μm</span> clearance for Class 3), no mask peeling at edges or around vias (tape test: apply and remove 3M 600 tape — no mask lift-off), no pinholes or bubbles in the mask surface, mask thickness on conductor edges (≥5μm for Class 2, ≥8μm for Class 3 per IPC-SM-840), and full curing — uncured mask feels tacky and traps flux residues. This is especially critical for <a href="/blog/pcb-solder-mask-types.html">PCB solder mask type selection</a> — LPI, dry film, and UV ink cure differently and have different defect profiles.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Surface Finish Quality — Appearance and Solderability</h4>
+      <p>ENIG (Electroless Nickel Immersion Gold): check for black pad (dark, non-reflective patches — indicates excessive nickel oxidation, reject lot immediately), uniform gold color (gold thickness should be 0.05–0.12μm per IPC-4552), and no skip plating. HASL: check for uniform coating with no exposed copper, no solder icicles or peaks (>0.15mm protrusion is rejectable), pad flatness acceptable for SMT. OSP: uniform transparent organic coating, no discoloration indicating oxidation. For every surface finish, perform a <strong>solderability test</strong> on 3 sample boards from the lot: dip in SAC305 at 255°C for 3 seconds, verify ≥95% wetting. Our <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a> covers which finish to specify for your application.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Electrical Test Report Verification</h4>
+      <p>Every production lot should ship with an electrical test report (flying probe or bed-of-nails). Verify: test method matches what you specified (100% netlist test vs sample test), report shows <span class="data-point">0 opens and 0 shorts</span> across all nets, test voltage was appropriate (100–250V for standard boards, 500V+ for high-voltage designs), and the report date and lot number match your shipment. For <a href="/blog/high-voltage-pcb-design.html">high-voltage PCB designs</a>, Hi-Pot testing must be performed and documented separately. Ask to see the actual test log, not just a summary — summary-only reports hide intermittent failures that were retested and passed on a second attempt.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Impedance Control Verification — Don't Trust the Coupon Alone</h4>
+      <p>For controlled-impedance PCBs (typically 50Ω single-ended, 100Ω differential), verify: the TDR test report shows measured impedance within your specified tolerance (standard is ±10%, tight-tolerance is ±5%), the test coupon is from the same production panel as your boards (verify panel serial number), and impedance values are stable across the coupon length. Impedance is not something you can check visually — a missing or out-of-spec TDR report is a reject. See our <a href="/blog/impedance-control.html">impedance control guide</a> for how to specify requirements in your fab drawing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Microsection Analysis — The Truth Is in the Cross-Section</h4>
+      <p>For multilayer PCBs (≥6 layers) or any Class 3 board, a microsection coupon from the production panel should be analyzed. Key checks: inner-layer registration (layer-to-layer misregistration <75μm for Class 2, <50μm for Class 3), copper plating thickness in holes (≥20μm average, ≥18μm minimum for Class 2), no voids in the copper barrel exceeding 5% of hole wall area, resin recession from inner-layer copper (≤80μm for Class 3), and no delamination at the weave-resin interface. A microsection takes 2–4 hours to prepare but reveals defects that electrical test and visual inspection both miss. For <a href="/blog/pcb-stackup-design.html">PCB stackup design</a> validation, microsection is non-negotiable.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Cleanliness and Ionic Contamination</h4>
+      <p>Residual ionic contamination causes electrochemical migration and dendritic growth — shorts that develop weeks or months after assembly, when the board is in the field. The IPC standard is <span class="data-point">≤1.56 μg/cm² NaCl equivalent</span> (ROSE test per IPC-TM-650 2.3.25). Ask for the cleanliness test report. Boards that pass electrical test but fail ROSE are time bombs. This is especially critical for <a href="/blog/medical-device-pcb.html">medical device PCBs</a> and <a href="/blog/aerospace-defense-pcb.html">aerospace applications</a> where field failures have safety consequences.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>RoHS and Material Compliance Documentation</h4>
+      <p>Verify: the RoHS compliance certificate covers the specific lot, the certificate references the correct test standard (IEC 62321), and restricted substance levels are below thresholds (Pb <1,000ppm, Hg <1,000ppm, Cd <100ppm, Cr6+ <1,000ppm, PBB/PBDE <1,000ppm). For EU buyers, REACH SVHC declarations must accompany RoHS certificates. Raw material certificates (FR-4 laminate, solder mask ink, surface finish chemistry) should be available on request. Our <a href="/blog/pcb-rohs-compliance-guide.html">RoHS compliance guide</a> has the complete regulatory framework.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Packaging Verification — Moisture, ESD, and Mechanical Protection</h4>
+      <p>PCBs must be packed in <strong>moisture-barrier bags (MBB)</strong> with desiccant and humidity indicator cards (HIC) per IPC/JEDEC J-STD-033 for MSL-rated assemblies. Vacuum seal is preferred. Inside the MBB: boards separated by interleaving paper or foam, stacked with rigid backing boards on top and bottom to prevent bending. Outer packaging: double-wall corrugated cartons with edge protectors. For sea freight, add vapor-phase corrosion inhibitor (VCI) paper for ENIG and immersion silver finishes which are sensitive to sulfur atmospheres. Packaging that looks "good enough" often isn't — moisture ingress during 3 weeks at sea ruins a perfectly manufactured lot. See our <a href="/blog/pcb-msl-moisture-sensitivity-guide.html">MSL and moisture sensitivity guide</a> for handling requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Labeling and Traceability</h4>
+      <p>Every package should carry: supplier name, your PO number, part number/revision, lot number, quantity, date of manufacture, and a 2D barcode or QR code linking to the full inspection data package. UL marking (if applicable) must be on every individual board, legible, with the correct UL file number. Traceability is what connects a field failure back to a specific production lot — without it, a single bad lot forces a recall of every board from that supplier. Our <a href="/blog/pcb-certifications-compliance.html">certifications and compliance guide</a> details the mandatory markings for each standard.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Red Flag Rule:</strong> If the factory cannot or will not provide microsection photos, a TDR impedance report, and a ROSE cleanliness test report — for a lot you're paying thousands of dollars for — reconsider the supplier. These three reports cost the factory less than $50 combined to produce and are standard OQC deliverables at any IPC-certified facility.</p>
+  </div>
+
+  <h2>Remote Inspection: How to Verify Quality Without Flying to Shenzhen</h2>
+
+  <p>Most overseas buyers cannot inspect every lot in person. Here's how to build a remote inspection process that's 90% as effective as an on-site visit:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Require a Photo/Video Inspection Package With Every Shipment</h4>
+      <p>Specify in your PO: photos of the entire lot laid out on the inspection table (proves quantity), close-up photos of <span class="data-point">5 specific areas</span> on 3 sample boards (shows detail), a 30-second video scan of a board under magnification (proves the inspection was actually performed), and photos of the packaging process — boards in MBB, desiccant visible, sealed bag, and outer carton with labels. A supplier who pushes back on this request is telling you something about their confidence in their quality. At Huaxing, this is standard OQC documentation for every export shipment.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Third-Party Inspection Services — When the Order Value Justifies It</h4>
+      <p>For orders above <span class="data-point">$5,000</span>, a third-party inspection (SGS, Bureau Veritas, TÜV, AsiaInspection/QIMA) costs <span class="data-point">$250–$400</span> per man-day in China. The inspector follows your checklist, takes independent photos and measurements, and issues a report before you authorize shipment. This is 5–8% of a $5,000 order — cheap insurance. Specify that the inspector must witness the packaging process — not just inspect boards on the table. Our <a href="/blog/pcb-supplier-audit.html">supplier audit checklist</a> includes third-party inspection as a scored criterion.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ship a Golden Sample With the First Order</h4>
+      <p>After your first production run with a new supplier, have them ship you <span class="data-point">2–3 "golden sample" boards</span> from the approved lot — properly packaged, with full inspection data. These become your reference standard for all future lots. When you receive the next shipment, compare the new boards to the golden sample. Differences in surface finish appearance, solder mask color, or silkscreen quality are immediately obvious against a reference. Golden samples also settle disputes: "This doesn't match the approved sample" is unambiguous. For <a href="/blog/pcb-cost-factors.html">cost-sensitive production</a>, golden samples prevent the slow quality drift that happens when inspection standards relax over time.</p>
+    </div>
+  </div>
+
+  <h2>What to Do When Inspection Fails</h2>
+
+  <p>An inspection failure doesn't necessarily mean the supplier is bad — it means your quality system is working. Here's the escalation ladder:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Rule 1</div>
+    <div class="checklist-content">
+      <h4>Critical Defects (1 found) → Reject Lot, Require Root Cause Analysis</h4>
+      <p>A single critical defect — delamination, inner-layer short, ENIG black pad, wrong material — is an automatic lot rejection. Require the factory to perform root cause analysis and corrective action (CAPA) before re-manufacturing. Do not accept a partial rework: if the root cause is a process parameter (over-etching, under-curing), every board in the lot is suspect, not just the one found defective. Our <a href="/blog/pcb-incoming-quality-inspection.html">incoming QC guide</a> covers what to do when defects reach your facility despite pre-shipment inspection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Rule 2</div>
+    <div class="checklist-content">
+      <h4>Major Defects (exceed AQL) → 100% Screen or Reject</h4>
+      <p>When major defect count exceeds the AQL acceptance number, offer the factory two options: 100% sort the entire lot (with you verifying the sort results), or remake the lot. Sorting is viable for visual defects (mask scratches, silkscreen smudges); it is not viable for hidden defects (inner-layer registration, contamination). Be realistic about which defects are sortable and which demand a remake. Our <a href="/blog/pcb-price-negotiation.html">price negotiation guide</a> covers how to handle quality-related cost discussions.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Rule 3</div>
+    <div class="checklist-content">
+      <h4>Pattern of Failures → Supplier Audit, Not Just Another Inspection</h4>
+      <p>If the same defect type appears across 3 consecutive lots, the problem is systemic — not a random event. At this point, a remote inspection is not enough. Either conduct a supplier audit (on-site or via third-party) or qualify an alternative source. Document every failure and the supplier's CAPA response — if you need to switch suppliers, this documentation protects your sourcing decision. Read our <a href="/blog/pcb-supplier-audit.html">supplier audit guide</a> for the 10-point evaluation framework.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Pre-Shipment Inspection Is Your Last Line of Defense</h2>
+
+  <p>Once PCBs leave the factory, every defect becomes exponentially more expensive: a solder mask issue caught at OQC costs the factory a remake. That same issue caught at your assembly line in Chicago or Stuttgart costs you <span class="data-point">$500–$5,000</span> in downtime, rework, and expedited replacements — plus a damaged production schedule. The 10-point checklist, AQL sampling, verified test reports, and documented packaging you require before shipment are not bureaucratic overhead. They are ROI: <span class="data-point">$250–$400</span> in inspection cost protects thousands of dollars in production value.</p>
+
+  <p>At Huaxing PCBA, every export shipment includes a complete OQC data package: lot photos, microsection images, electrical test log, TDR impedance report, ROSE cleanliness certificate, RoHS/REACH compliance documents, and packaging verification photos. We ship to <span class="data-point">30+ countries</span> and our <span class="data-point">98.7% first-pass yield</span> means our pre-shipment inspection catches issues before our customers ever see them. <a href="/blog/pcb-certifications-compliance.html">Review our certifications</a> or <a href="/contact/">request a quote</a> with your Gerber files for your next PCB order.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-pre-shipment.webp)">
+      <h2>Want Full OQC Documentation With Your Next PCB Order?</h2>
+      <p>Every Huaxing PCBA export shipment includes a complete pre-shipment inspection package. Upload your Gerber files — get a quote with quality specifications within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Quote With QC Specs <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+const FORM_ENDPOINT = 'https://inquiry-proxy.huaxingpcba.workers.dev';
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch(FORM_ENDPOINT,{method:'POST',body:d});if(r.ok){f.reset();closeModal();alert('Thank you! We will respond within 24 hours.')}else{alert('Error submitting. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+
+</body>
+</html>

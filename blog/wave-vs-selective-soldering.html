@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wave Soldering vs Selective Soldering — How to Choose the Right Through-Hole PCB Assembly Process | Huaxing PCBA</title>
+<meta name="description" content="Complete comparison of wave soldering vs selective soldering for through-hole PCB assembly. Process selection criteria, cost per joint analysis, design rules, and when to use each method for your project.">
+<meta property="og:title" content="Wave Soldering vs Selective Soldering — How to Choose the Right Through-Hole PCB Assembly Process">
+<meta property="og:description" content="Complete comparison of wave soldering vs selective soldering for through-hole assembly. Process selection, cost analysis, and design rules for procurement managers and engineers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/wave-vs-selective-soldering.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-wave-solder.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/wave-vs-selective-soldering.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Wave Soldering vs Selective Soldering — How to Choose the Right Through-Hole PCB Assembly Process",
+  "description": "Complete comparison of wave soldering vs selective soldering for through-hole PCB assembly. Process selection criteria, cost per joint analysis, and design rules.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-wave-solder.webp",
+  "url": "https://huaxingpcba.com/blog/wave-vs-selective-soldering.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/wave-vs-selective-soldering.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-wave-solder.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Process</p>
+      <h1 class="reveal">Wave Soldering vs Selective Soldering:<br><em>How to Choose the Right Through-Hole Assembly Process</em></h1>
+      <p class="reveal">When your PCB has through-hole components, the soldering method you specify affects cost, quality, and design — here's the data-driven comparison.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Wave vs Selective Soldering</span></div>
+
+  <p>Through-hole components — connectors, transformers, large capacitors, terminal blocks — remain essential in power electronics, industrial controls, and automotive PCBs. But when it comes to soldering them at scale, you have two fundamentally different process choices: wave soldering and selective soldering. Choosing wrong adds <span class="data-point">$0.08–$0.25 per joint</span> in unnecessary cost or compromises joint quality on mixed-technology boards. This guide compares both methods on cost, quality, throughput, and design constraints — with decision criteria you can apply to your next BOM.</p>
+
+  <p>At Huaxing PCBA, we operate <span class="data-point">4 wave soldering lines</span> and <span class="data-point">2 selective soldering machines</span> across our Shenzhen facility, processing through-hole assemblies for automotive, industrial, and medical customers at IPC Class 2 and Class 3 standards. Here's how to decide which process your project needs.</p>
+
+  <img class="article-img" src="../generated/blog-wave-solder-hero.webp" alt="Molten solder wave flowing over PCB in wave soldering machine, industrial manufacturing close-up" loading="lazy">
+
+  <h2>How Wave Soldering Works</h2>
+
+  <p>Wave soldering is a bulk process where the entire underside of a populated PCB passes over a molten solder wave. The board travels on a conveyor at a controlled angle and speed through three zones: flux application, preheating, and the solder wave itself. Solder wets all exposed metal surfaces — component leads and PCB pads — forming joints simultaneously across every through-hole location on the board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Process Parameters That Determine Quality</h4>
+      <p>Wave soldering quality depends on five controllable variables: <strong>solder temperature</strong> (typically <span class="data-point">250–260°C</span> for lead-free SAC305 alloy), <strong>conveyor speed</strong> (0.8–1.5 m/min), <strong>preheat profile</strong> (100–130°C topside before wave contact), <strong>flux type</strong> (no-clean, water-soluble, or rosin-based), and <strong>wave height/pump speed</strong>. The interaction between conveyor speed and wave contact time is critical: 2–4 seconds of contact time produces optimal hole fill. Faster = insufficient wetting; slower = thermal damage to SMD components on the underside. For a detailed breakdown of assembly quality standards, read our <a href="/blog/pcb-assembly-process.html">PCB assembly process guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>The Pallet Problem — When SMD Meets Through-Hole</h4>
+      <p>Wave soldering was designed for single-sided through-hole boards. On modern mixed-technology PCBs — where SMD components populate the bottom side — the solder wave would flood and destroy those surface-mount parts. The solution: <strong>selective pallets</strong> (also called wave solder fixtures). These custom-machined carriers shield bottom-side SMD components while exposing only the through-hole pins that need soldering. A pallet costs <span class="data-point">$200–$600</span> (one-time) and must be designed for your specific board layout. For production volumes above <span class="data-point">500 units</span>, the pallet cost amortizes to near zero per board. For prototypes, selective soldering avoids this tooling cost entirely.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Throughput: The Wave Soldering Advantage</h4>
+      <p>A single wave solder line processes <span class="data-point">120–300 boards per hour</span>, depending on board length and conveyor speed. This makes wave soldering the clear winner for high-volume, low-mix production — think automotive ECU assemblies running 10,000+ identical boards. The process cost per board is typically <span class="data-point">$0.15–$0.50</span> at volume, including amortized pallet cost and consumables (flux, solder replenishment, nitrogen if used).</p>
+    </div>
+  </div>
+
+  <h2>How Selective Soldering Works</h2>
+
+  <p>Selective soldering is a programmable, point-by-point process. A robotic nozzle — typically 3–12mm in diameter — moves to each through-hole location on the board, applies flux precisely to that pad, then delivers a miniature solder fountain only to that specific joint. There is no mask, no pallet, and no exposure of adjacent components. The entire process is nozzle-path-programmed from your PCB CAD data.</p>
+
+  <img class="article-img" src="../generated/blog-selective-solder-detail.webp" alt="Close-up of selective soldering nozzle applying solder to individual through-hole pin on PCB" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>No Tooling, No Pallets — The Prototype Advantage</h4>
+      <p>The biggest differentiator: selective soldering requires no mechanical tooling. The nozzle path is programmed from Gerber or ODB++ data in <span class="data-point">15–30 minutes</span>, and the program can be reused for repeat orders at zero additional cost. This eliminates the $200–$600 pallet investment per board design that wave soldering requires. For prototype runs (5–50 boards), low-volume production, or high-mix manufacturing environments, selective soldering is typically <span class="data-point">40–60% cheaper</span> than wave soldering when you include tooling amortization. Read our <a href="/blog/low-volume-pcb-assembly.html">low-volume PCB assembly guide</a> for the full economics.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Per-Joint Precision — Better Quality on Dense Boards</h4>
+      <p>Selective soldering applies flux and solder to one joint at a time under full process control. Each joint gets its own temperature profile, its own flux quantity, and its own dwell time — typically <span class="data-point">1.5–4 seconds per joint</span>. This precision eliminates bridging between adjacent pins (a common wave soldering defect on fine-pitch connectors) and dramatically reduces thermal stress on temperature-sensitive components. Our IPC Class 3 customers in <a href="/blog/medical-device-pcb.html">medical device manufacturing</a> and <a href="/blog/aerospace-defense-pcb.html">aerospace/defense</a> uniformly specify selective soldering for through-hole joints on high-reliability boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Throughput Tradeoff — Speed vs Flexibility</h4>
+      <p>A selective soldering machine processes <span class="data-point">3–8 joints per second</span> (including nozzle travel time between joints). For a board with 100 through-hole pins, that's 15–35 seconds per board cycle time — or <span class="data-point">100–240 boards per hour</span>. This is slightly slower than wave soldering on a dedicated line, but the elimination of pallet loading/unloading and pallet cleaning often narrows the real-world gap. For boards with fewer than 30 through-hole joints, selective soldering can actually be faster end-to-end. See our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> for quality verification of through-hole joints.</p>
+    </div>
+  </div>
+
+  <h2>Head-to-Head Comparison</h2>
+
+  <table class="spec-table">
+    <tr><th>Criterion</th><th>Wave Soldering</th><th>Selective Soldering</th></tr>
+    <tr><td>Tooling required</td><td>Pallet ($200–600 per design)</td><td>None (program-only)</td></tr>
+    <tr><td>Cost per joint (volume)</td><td>$0.002–$0.005</td><td>$0.008–$0.015</td></tr>
+    <tr><td>Cost per board (1,000 units)</td><td>$0.15–$0.50</td><td>$0.80–$3.00</td></tr>
+    <tr><td>Throughput</td><td>120–300 boards/hr</td><td>100–240 boards/hr</td></tr>
+    <tr><td>Setup time (new design)</td><td>2–4 hrs (pallet fab + setup)</td><td>0.5–1 hr (programming only)</td></tr>
+    <tr><td>Minimum viable volume</td><td>300–500 units</td><td>1 unit</td></tr>
+    <tr><td>Mixed-technology support</td><td>Requires pallet</td><td>Native (no masking needed)</td></tr>
+    <tr><td>Fine-pitch TH reliability</td><td>Moderate (bridging risk)</td><td>Excellent (per-joint control)</td></tr>
+    <tr><td>Thermal stress on SMD</td><td>High (full board exposed)</td><td>Minimal (localized heating)</td></tr>
+    <tr><td>Nitrogen capability</td><td>Optional</td><td>Standard (nozzle N2 blanket)</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Decision Rule:</strong> If your through-hole joint count exceeds 80 per board AND your annual volume exceeds 5,000 units, wave soldering with a pallet is the cost-optimal choice. Below either threshold, selective soldering wins on total cost — especially when you factor in pallet design, fabrication, and storage overhead.</p>
+  </div>
+
+  <h2>Design Rules That Affect Process Choice</h2>
+
+  <p>Your PCB layout directly constrains which soldering method is viable. Engineers who understand these rules during design avoid costly process changes later.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep-Out Zones Around Through-Hole Pins</h4>
+      <p>Wave soldering requires a <span class="data-point">3–5mm</span> clearance zone around every through-hole pin on the bottom side — no SMD components, no vias, no exposed copper in the wave path. This is the pallet window opening. Selective soldering needs only <span class="data-point">1.5–2mm</span> clearance around each pin (the nozzle diameter plus tolerance). For dense mixed-technology boards — common in <a href="/blog/iot-pcb-design-manufacturing.html">IoT and miniaturized designs</a> — this 2× difference in keep-out zone often makes selective soldering the only viable process.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Connector Orientation Relative to Conveyor Direction</h4>
+      <p>In wave soldering, through-hole connector rows must be oriented perpendicular to the conveyor direction. Parallel orientation creates solder shadows — the leading pins block solder from reaching the trailing pins. Selective soldering has no conveyor-direction constraint: the nozzle approaches each pin from the optimal angle. This is why boards with multiple connector orientations (e.g., edge-mounted I/O connectors facing different directions) almost always use selective soldering. For <a href="/blog/industrial-control-pcb.html">industrial control PCBs</a> with multiple connector types, this design freedom alone justifies the selective soldering cost premium.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Component Height Clearance on the Bottom Side</h4>
+      <p>Wave soldering pallets add <span class="data-point">3–6mm</span> of thickness to the board underside. Bottom-side components taller than 3mm require deeper pallet pockets — adding cost and complexity. Selective soldering has no bottom-side clearance constraint: the nozzle approaches from below with the board held in a simple fixture. For <a href="/blog/power-electronics-pcb.html">power electronics PCBs</a> with tall electrolytic capacitors on both sides, selective soldering eliminates an entire class of pallet-design problems.</p>
+    </div>
+  </div>
+
+  <h2>Process Selection Guide: 4 Scenarios</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 1</div>
+    <div class="checklist-content">
+      <h4>High-Volume, Single-Sided TH Board → Wave Soldering</h4>
+      <p>Example: power supply board with 60 through-hole components, no bottom-side SMD, annual volume 20,000 units. Wave soldering: $0.25/board + $0.03/board amortized pallet = <span class="data-point">$0.28/board</span>. Selective: ~$1.20/board. Wave wins. Our <a href="/blog/turnkey-pcb-assembly.html">turnkey PCBA service</a> handles these high-volume through-hole assemblies with inline AOI after wave.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 2</div>
+    <div class="checklist-content">
+      <h4>Mixed-Technology, Medium Volume → Selective Soldering</h4>
+      <p>Example: industrial controller with 40 SMD components + 25 through-hole connectors, annual volume 3,000 units. Wave requires custom pallet ($450 one-time) + process validation. Selective: program in 45 minutes, $0.90/board, no tooling. Selective wins on total cost and setup time. Read our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 comparison</a> for quality requirements on this type of mixed-technology board.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 3</div>
+    <div class="checklist-content">
+      <h4>Prototype/Low-Volume, Any Board → Selective Soldering</h4>
+      <p>For runs of 5–200 boards, the economics are unambiguous. Wave soldering's pallet cost alone ($200–$600) exceeds the total selective soldering cost for 100 boards (~$90–$300). Plus, selective soldering's program can be modified between revisions without new tooling. Our <a href="/blog/quick-turn-pcb-manufacturing.html">quick-turn PCB service</a> uses selective soldering exclusively for through-hole on prototype orders — it's faster, cheaper, and more flexible for low volumes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 4</div>
+    <div class="checklist-content">
+      <h4>High-Reliability, Dense Connectors → Selective Soldering</h4>
+      <p>For <a href="/blog/automotive-pcb-requirements.html">automotive PCBs</a> with 100-pin ECU connectors at 2.54mm pitch, selective soldering with nitrogen blanket delivers zero-defect soldering that wave soldering cannot match. The nitrogen environment reduces dross formation and improves wetting on each individual joint. For IPC Class 3 and IATF 16949 requirements, this per-joint process control is non-negotiable. Our automotive line uses selective soldering exclusively for through-hole — the quality data supports it.</p>
+    </div>
+  </div>
+
+  <h2>Solder Alloy Considerations</h2>
+
+  <p>Both wave and selective soldering use the same solder alloys — typically SAC305 (Sn96.5/Ag3.0/Cu0.5) for lead-free RoHS compliance. However, selective soldering consumes significantly less solder per joint because the nozzle fountain is recirculated, while wave soldering continuously exposes a large bath surface to oxidation. Over a year of operation, a wave solder line's solder consumption (dross + replenishment) can be <span class="data-point">3–5× higher</span> than selective soldering for the same joint count. For RoHS compliance details, read our <a href="/blog/pcb-rohs-compliance-guide.html">RoHS compliance guide</a>. For surface finish compatibility — ENIG vs HASL vs OSP interact differently with each process — see our <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a>.</p>
+
+  <h2>Summary: Match the Process to Your Volume and Board Complexity</h2>
+
+  <p>The choice between wave and selective soldering is a function of <span class="data-point">three variables</span>: annual volume, number of through-hole joints per board, and board complexity (mixed SMD/TH vs pure TH). For pure through-hole boards above 5,000 units/year, wave soldering is the cost champion. For everything else — prototypes, mixed-technology boards, low-to-medium volumes, and high-reliability applications — selective soldering wins on total cost, quality, and flexibility.</p>
+
+  <p>At Huaxing PCBA, our NPI engineers evaluate every new BOM against these criteria and recommend the optimal process. We run both wave and selective lines in-house, so you get the right process for your volume and design — not the one our factory happens to have. <a href="/blog/pcb-cost-factors.html">Learn about PCB cost factors</a> or <a href="/contact/">contact us with your Gerber files</a> for a process-specific assembly quote.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-wave-solder.webp)">
+      <h2>Not Sure Which Soldering Process Your Board Needs?</h2>
+      <p>Send your Gerber files and BOM — our NPI team will recommend the optimal through-hole process with cost comparison for your volume within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Process Recommendation <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+const FORM_ENDPOINT = 'https://inquiry-proxy.huaxingpcba.workers.dev';
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch(FORM_ENDPOINT,{method:'POST',body:d});if(r.ok){f.reset();closeModal();alert('Thank you! We will respond within 24 hours.')}else{alert('Error submitting. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+
+</body>
+</html>
