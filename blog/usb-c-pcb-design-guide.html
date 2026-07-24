@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USB-C PCB Design & Layout Guide — Impedance Control, ESD Protection & Power Delivery Routing | Huaxing PCBA</title>
+<meta name="description" content="Complete USB-C PCB design guide for hardware engineers: 90Ω differential impedance routing, SuperSpeed lane layout, ESD protection placement, and 100W PD power delivery design rules.">
+<meta property="og:title" content="USB-C PCB Design & Layout Guide — Impedance Control, ESD Protection & Power Delivery">
+<meta property="og:description" content="Practical USB-C PCB layout rules: differential pair routing, ESD diode placement, and PD power path design for reliable USB 3.2/4.0 boards.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/usb-c-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-usb-c-pcb.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/usb-c-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "USB-C PCB Design & Layout Guide — Impedance Control, ESD Protection & Power Delivery Routing",
+  "description": "Complete USB-C PCB design guide for hardware engineers: 90Ω differential impedance routing, SuperSpeed lane layout, ESD protection placement, and 100W PD power delivery design rules.",
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "image": "https://huaxingpcba.com/generated/blog-cover-usb-c-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/usb-c-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/usb-c-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-usb-c-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">USB-C PCB Design & Layout:<br><em>Impedance, ESD & Power Delivery Routing Rules</em></h1>
+      <p class="reveal">Practical layout rules for designing reliable USB-C boards — from 90Ω differential pairs to 100W PD power planes, validated across 10,000+ connector-mating cycles.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>USB-C PCB Design Guide</span></div>
+
+  <p>USB-C has become the universal connector standard — from smartphones and laptops to industrial peripherals and medical devices. But designing a PCB that reliably passes USB 3.2 Gen 2 (10 Gbps) or USB4 (40 Gbps) signals while delivering up to 100W of power is not trivial. A single impedance discontinuity, misplaced ESD diode, or undersized power trace can cause negotiation failures, data errors, or thermal shutdown.</p>
+
+  <p>At Huaxing PCBA, we manufacture USB-C boards across <span class="data-point">8 SMT lines</span> for consumer electronics, industrial IoT, and medical device customers. This guide distills the layout rules our engineering team applies daily — from differential pair routing to PD power path design — so your next USB-C design passes compliance on the first spin.</p>
+
+  <img class="article-img" src="../generated/blog-usb-c-pcb-hero.webp" alt="Close-up macro photograph of USB-C connector soldered on a multi-layer PCB with visible differential pair traces" loading="lazy" style="max-width:85%">
+
+  <h2>USB-C Pinout and Signal Groups — What the PCB Designer Must Know</h2>
+
+  <p>The USB-C receptacle has 24 pins arranged symmetrically so the connector works in either orientation. From a PCB layout perspective, these pins break into four signal groups, each with distinct routing requirements:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>SuperSpeed Differential Pairs (TX1±, RX1±, TX2±, RX2±) — 4 lanes at up to 10 Gbps per lane</h4>
+      <p>These are the most demanding signals on the board. Each pair requires controlled 90Ω differential impedance (±10%), intra-pair skew under 5 mils, and continuous reference plane beneath. For USB4 40 Gbps designs, consider <a href="/blog/pcb-stackup-design.html">low-loss laminate materials</a> like Megtron 6 or Tachyon-100G. Route these pairs on the top layer with no vias if possible; each via stub acts as a stub filter at these frequencies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>High-Speed D+/D− (USB 2.0) — 480 Mbps differential pair</h4>
+      <p>Legacy USB 2.0 runs over a dedicated differential pair that is duplicated on both rows of the connector (pins A6/A7 and B6/B7). Route as 90Ω differential pair, but the tolerance is more forgiving than SuperSpeed — ±15% is acceptable. Keep away from noisy switching nodes like DC-DC converter inductors. For mixed-signal boards, see our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>CC1/CC2 Configuration Channel — 300 kbps single-ended</h4>
+      <p>The CC pins handle orientation detection, power role negotiation, and Alternate Mode entry (DisplayPort, Thunderbolt). These are low-speed but must be routed with care — keep away from switching noise and add 5.1 kΩ pull-down resistors (for UFP/sink devices) within 10 mm of the connector. ESD protection on CC lines is mandatory; use low-capacitance TVS diodes (&lt;5 pF).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>VBUS Power and GND — up to 20V/5A (100W PD 3.0)</h4>
+      <p>Four VBUS pins and four GND pins carry all power. For a 5A design, you need at least 50 mils of trace width per amp on 1oz copper — that means multiple parallel VBUS pins must be stitched into a single wide plane, not daisy-chained. Use <a href="/blog/pcb-copper-weight-selection.html">2oz or heavier copper</a> for high-current USB-C power boards. Place bulk decoupling capacitance (10 μF + 0.1 μF) within 5 mm of the connector VBUS pins.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> USB-C is four independent signal groups on one connector. Treat SuperSpeed pairs like RF transmission lines, protect CC lines with low-C ESD diodes, and size VBUS traces for the full 5A rating — even if your current product only draws 15W. Future-proofing the power path costs almost nothing at layout time.</p>
+  </div>
+
+  <h2>Differential Impedance Routing for SuperSpeed Lanes</h2>
+
+  <p>USB 3.2 Gen 2 and USB4 signals are essentially microwave-frequency transmissions shrunk onto a PCB. At 10 Gbps, the Nyquist frequency is 5 GHz — well into the regime where every impedance discontinuity creates a reflection that closes the eye diagram.</p>
+
+  <img class="article-img" src="../generated/blog-usb-c-pcb-traces.webp" alt="Macro photograph of precision differential pair PCB traces on a dark substrate with gold-plated test points" loading="lazy" style="max-width:85%">
+
+  <p>Here are the non-negotiable rules for SuperSpeed differential pair routing:</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>USB 3.2 Gen 1 (5 Gbps)</th><th>USB 3.2 Gen 2 (10 Gbps)</th><th>USB4 Gen 3 (40 Gbps)</th></tr>
+    <tr><td>Differential Impedance</td><td>90Ω ±15%</td><td>90Ω ±10%</td><td>85Ω ±10% (TBT3 mode)</td></tr>
+    <tr><td>Intra-Pair Skew</td><td>&lt;10 mil</td><td>&lt;5 mil</td><td>&lt;2 mil</td></tr>
+    <tr><td>Max Via Count per Lane</td><td>4</td><td>2</td><td>0 (top-layer preferred)</td></tr>
+    <tr><td>Reference Plane Gap</td><td>&lt;5× dielectric height</td><td>&lt;3× dielectric height</td><td>No splits under pair</td></tr>
+    <tr><td>Min Pair-to-Pair Spacing</td><td>3× trace width</td><td>4× trace width</td><td>5× trace width</td></tr>
+    <tr><td>Recommended Laminate</td><td>FR-4 (standard Tg)</td><td>FR-4 High-Tg or mid-loss</td><td>Megtron 6 / Tachyon-100G</td></tr>
+  </table>
+
+  <p>The most common failure we see in customer Gerber files is broken reference planes. When a differential pair crosses a plane split — even a narrow one — the return current must find an alternate path, creating a large loop area and radiated EMI. Always inspect your stackup with a 2D field solver to verify continuous reference under every SuperSpeed pair. For detailed stackup planning, refer to our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a>.</p>
+
+  <h2>ESD Protection Strategy for USB-C Ports</h2>
+
+  <p>USB-C ports face a harsh ESD environment — every time a user plugs in a cable, the connector pins are exposed to potential discharge. The USB-IF specification requires ±8 kV contact discharge survival per IEC 61000-4-2, but real-world ESD events frequently exceed 15 kV, especially in dry environments.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Place TVS Diodes Within 2 mm of Connector Pads</h4>
+      <p>ESD current rise times are sub-nanosecond. Every millimeter of trace between the connector pin and the TVS diode adds ~5 nH of parasitic inductance, which creates a voltage overshoot at the protected IC pin: V_overshoot = V_clamp + L × di/dt. At 15 kV ESD, di/dt exceeds 30 A/ns — a 2 mm trace (10 nH) produces 300V of overshoot on top of the TVS clamp voltage. Use 0201 or 0402 package TVS diodes placed directly adjacent to connector pads.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Select Low-Capacitance Diodes for SuperSpeed Lines</h4>
+      <p>TVS diode junction capacitance adds directly to the differential pair's capacitive load. For 10 Gbps SuperSpeed lanes, keep diode capacitance below 0.3 pF. For CC/SBU lines, 5 pF is acceptable. Recommended parts: Nexperia PESD5V0U1BA (0.28 pF, 5V) for SuperSpeed; Semtech RClamp0551P (0.22 pF) for USB4. High-capacitance diodes on SuperSpeed lines are the #1 cause of USB compliance test failures we observe at the factory.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Route ESD Current Directly to Chassis Ground — Not Signal Ground</h4>
+      <p>The ESD discharge path must go to the chassis/shield, not the board's signal ground plane. Create a dedicated ESD guard ring around the USB-C connector footprint, connected to chassis ground through multiple vias. Bridge signal ground and chassis ground at exactly one point (near the power supply input) with a 1 MΩ/1 nF parallel RC network. Routing ESD current through signal ground couples noise into every IC on the board.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When reviewing PCB fab quotes for USB-C designs, ask whether the manufacturer performs TDR impedance testing on every panel. At Huaxing PCBA, we run <a href="/blog/pcb-testing-methods.html">100% TDR verification</a> on controlled-impedance boards, catching ±2Ω deviations before they ship. This single quality gate prevents field failures that cost 50× more to fix than to prevent.</p>
+  </div>
+
+  <h2>USB Power Delivery — PCB Layout for 100W Power Paths</h2>
+
+  <p>USB PD 3.1 extends to 240W (48V/5A), but in practice most designs today target 60-100W (20V/3-5A). Delivering 5A through a USB-C connector requires careful thermal management of both the connector and the PCB traces.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Size VBUS Traces for DC Drop Under 50 mV at Full Load</h4>
+      <p>At 5A, a 10 mΩ trace resistance drops 50 mV — already consuming 250 mW as heat in the trace alone. For 1oz copper, you need a trace width of approximately 150 mils to achieve 10 mΩ over a 2-inch run. Use <a href="/blog/pcb-copper-weight-selection.html">2oz copper</a> to halve the required width. Flood-fill VBUS as a polygon on a dedicated power layer, not as a routed trace. Every via in the VBUS path adds ~0.5 mΩ — use at least 6 parallel vias when transitioning between layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Place Bulk Capacitance Within 5 mm of Connector VBUS Pins</h4>
+      <p>USB PD negotiates power contracts over the CC line while VBUS is cold (0V). When the source switches VBUS on, the inrush current into the sink's input capacitance can momentarily exceed 10A. A 10 μF MLCC (X7R, 25V) in 0805 or 1206 package placed within 5 mm of the connector absorbs this surge without ringing. Add a 0.1 μF in parallel for high-frequency bypass. For 100W+ designs, consider a <a href="/blog/pcb-thermal-management.html">thermal pad under the USB-C connector</a> tied to the ground plane.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Use a PD Controller with Integrated Gate Drivers and Sense Resistors</h4>
+      <p>Discrete PD implementations (external MOSFETs, separate current-sense amplifier) consume board area and add failure points. Modern single-chip PD controllers (Infineon CYPD, ST STUSB, TI TPS65987) integrate the power path and CC logic. Place the PD controller within 20 mm of the connector to minimize CC line length. For automotive or industrial USB-C designs requiring <a href="/blog/high-voltage-pcb-design.html">higher isolation voltage</a>, use galvanically isolated PD controllers with reinforced insulation.</p>
+    </div>
+  </div>
+
+  <h2>Common USB-C Layout Mistakes That Fail Compliance</h2>
+
+  <p>After reviewing hundreds of USB-C board designs at our Shenzhen factory, these are the recurring issues that cause first-spin failures:</p>
+
+  <table class="spec-table">
+    <tr><th>Mistake</th><th>Symptom</th><th>Fix</th></tr>
+    <tr><td>Missing or wrong CC pull-down resistor</td><td>No VBUS from source; port dead</td><td>5.1 kΩ ±10% on each CC pin to GND for sink devices</td></tr>
+    <tr><td>SuperSpeed pairs routed over plane split</td><td>Eye diagram closure, USB 2.0 fallback</td><td>Re-route to avoid split; use stitching caps across gap if unavoidable</td></tr>
+    <tr><td>TVS diode >5 mm from connector</td><td>ESD damage to PD controller after ~100 plug cycles</td><td>Move diodes to within 2 mm; use 0201 package</td></tr>
+    <tr><td>VBUS trace width calculated at 20°C rise, actual ΔT >40°C</td><td>Trace discoloration, intermittent disconnects</td><td>Derate ampacity to 50% of IPC-2152 values for inner layers</td></tr>
+    <tr><td>No chassis-ground connection at connector shield</td><td>EMI radiated emissions failure at 480 MHz</td><td>Connect shield to chassis GND through 4+ vias at connector footprint</td></tr>
+    <tr><td>Pin swapping for layout convenience without updating schematic</td><td>TX connects to RX, no link established</td><td>Verify TX→RX and RX→TX connections in schematic review</td></tr>
+  </table>
+
+  <h2>Design Checklist Before Sending Gerber Files</h2>
+
+  <p>Use this 8-point checklist as a final review before releasing your USB-C board for fabrication:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content"><h4>Verify differential impedance with a 2D field solver (not just stackup calculator)</h4><p>A stackup calculator assumes ideal planes — a field solver accounts for actual trace geometry and adjacent copper. At 10 Gbps, the difference matters.</p></div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content"><h4>Confirm all SuperSpeed lanes have continuous reference plane — no splits, no voids</h4><p>Use your CAD tool's "plane inspection" view. Every pair needs unbroken ground beneath its entire length.</p></div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content"><h4>Check CC line pull-down resistors: 5.1 kΩ ±10%, placed within 10 mm of connector</h4><p>A common error: using the wrong value or forgetting to place both resistors (one per CC pin).</p></div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content"><h4>Verify TVS diode capacitance <0.5 pF on SuperSpeed lines</h4><p>If you used a generic 5 pF ESD diode array, replace it. 5 pF creates a 3 dB loss at 5 GHz on a 90Ω line.</p></div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content"><h4>VBUS trace/polygon IR drop under 50 mV at maximum negotiated current</h4><p>Simulate in your CAD tool's PDN analyzer. If >50 mV, add copper or increase to 2oz.</p></div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content"><h4>Connector shield tied to chassis ground through ≥4 stitching vias</h4><p>Single-via shield connections are the top cause of USB-C radiated EMI failures.</p></div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content"><h4>TX→RX crossover verified in schematic netlist</h4><p>Host TX pairs connect to device RX pairs. Pin-swap for routing convenience must be reflected in the schematic.</p></div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content"><h4>Request TDR impedance coupon on fabrication drawing</h4><p>Specify that each panel includes an impedance test coupon at the same layer stack as the production board. Without a TDR coupon, your manufacturer <a href="/blog/impedance-control.html">cannot guarantee impedance</a> within tolerance.</p></div>
+  </div>
+
+  <p>Following these eight rules eliminates roughly 80% of the USB-C compliance failures we diagnose at our Shenzhen factory. For designs pushing USB4 40 Gbps speeds, add one more: engage your PCB fab's engineering team during stackup design — don't wait until Gerber submission. At Huaxing PCBA, our <a href="/blog/dfm-tips.html">DFM review</a> catches impedance mismatches before they become boards.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design Guide</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control Fundamentals</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity Guide</a></li>
+    <li><a href="/blog/mixed-signal-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Mixed-Signal PCB Design</a></li>
+    <li><a href="/blog/pcb-copper-weight-selection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Copper Weight Selection</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-usb-c-pcb.webp)">
+      <h2>Ready to Build Your USB-C Board?</h2>
+      <p>Upload your Gerber files and BOM for a free DFM review. Our engineering team checks impedance, ESD protection, and PD power path routing — 24-hour turnaround with a transparent quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Gold Plating Guide — Hard Gold vs Soft Gold vs ENIG vs ENEPIG for Edge Connectors & Wire Bonding | Huaxing PCBA</title>
+<meta name="description" content="Hard gold vs soft gold vs ENIG vs ENEPIG: complete PCB gold plating comparison for edge connectors, wire bonding, and high-reliability contacts. Includes thickness specs, IPC standards, and cost tradeoffs.">
+<meta property="og:title" content="PCB Gold Plating Guide — Hard Gold vs Soft Gold for Edge Connectors">
+<meta property="og:description" content="Hard gold (Type I/II/III) vs soft gold (ENIG/ENEPIG): thickness, hardness, contact durability and which process to specify for your PCB's connector and bonding requirements.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-gold-plating-hard-vs-soft.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-gold-plating.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-gold-plating-hard-vs-soft.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Gold Plating Guide — Hard Gold vs Soft Gold vs ENIG vs ENEPIG for Edge Connectors & Wire Bonding",
+  "description": "Hard gold vs soft gold vs ENIG vs ENEPIG: complete PCB gold plating comparison for edge connectors, wire bonding, and high-reliability contacts. Includes thickness specs, IPC standards, and cost tradeoffs.",
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "image": "https://huaxingpcba.com/generated/blog-cover-gold-plating.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-gold-plating-hard-vs-soft.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-gold-plating-hard-vs-soft.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-gold-plating.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Gold Plating:<br><em>Hard Gold vs Soft Gold vs ENIG vs ENEPIG for Edge Connectors &amp; Wire Bonding</em></h1>
+      <p class="reveal">Gold isn't one process — it's four. Choosing the wrong type can mean connector failures at 50 mating cycles or wire bonds that won't stick. Here's how to specify the right gold for your application.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Gold Plating Guide</span></div>
+
+  <p>Gold plating on a PCB is not decorative — it's functional. It protects copper from oxidation, provides a solderable surface, and delivers the contact reliability needed for edge connectors that will be mated and unmated thousands of times. But "gold plating" is an umbrella term covering at least four distinct processes with dramatically different properties. Specifying "gold finish" without the details is like ordering "metal" for your car body — the outcome depends entirely on which metal and which process.</p>
+
+  <p>At Huaxing PCBA, we run <span class="data-point">3 dedicated</span> gold plating lines — electrolytic hard gold, ENIG (electroless nickel immersion gold), and ENEPIG — across our Shenzhen facility. This guide explains what differentiates hard gold from soft gold, when each is appropriate, and how to specify the right finish on your fabrication drawing so there are no surprises at incoming inspection. For the broader landscape of PCB surface finishes, see our <a href="/blog/pcb-surface-finish-selection.html">complete surface finish selection guide</a>.</p>
+
+  <img class="article-img" src="../generated/blog-gold-plating-hero.webp" alt="Close-up macro photograph of gold-plated PCB edge connector fingers with precise beveled edges reflecting warm light" loading="lazy" style="max-width:85%">
+
+  <h2>Hard Gold vs Soft Gold — The Fundamental Difference</h2>
+
+  <p>The distinction between hard and soft gold is not about the gold itself — pure gold is always soft (25-65 HK Knoop hardness). The difference comes from what's <em>alloyed</em> with the gold and how it's deposited.</p>
+
+  <table class="spec-table">
+    <tr><th>Property</th><th>Hard Gold (Electrolytic)</th><th>Soft Gold (ENIG)</th><th>Soft Gold (ENEPIG)</th></tr>
+    <tr><td>Deposition method</td><td>Electrolytic (requires bus bar)</td><td>Electroless (chemical, no bus)</td><td>Electroless (chemical, no bus)</td></tr>
+    <tr><td>Gold purity</td><td>99.7% Au + 0.3% Co/Ni hardener</td><td>~99.9% Au (immersion)</td><td>~99.9% Au (immersion)</td></tr>
+    <tr><td>Hardness (Knoop)</td><td>130-200 HK</td><td>60-90 HK</td><td>60-90 HK</td></tr>
+    <tr><td>Typical thickness</td><td>0.75-2.5 μm (30-100 μin)</td><td>0.05-0.12 μm Au (2-5 μin)</td><td>0.05-0.12 μm Au (2-5 μin)</td></tr>
+    <tr><td>Underlayer</td><td>5-8 μm nickel (sulfamate bath)</td><td>3-7 μm electroless Ni (6-10% P)</td><td>3-7 μm electroless Ni + 0.05-0.3 μm electroless Pd</td></tr>
+    <tr><td>Wear resistance (mating cycles)</td><td>1,000-10,000+</td><td>&lt;50 (not for connectors)</td><td>&lt;100 (not for connectors)</td></tr>
+    <tr><td>Solderability</td><td>Poor (thick Au + Ni underlayer)</td><td>Excellent</td><td>Excellent (Pd barrier protects Ni)</td></tr>
+    <tr><td>Wire bondable (Al)</td><td>Yes (Type III, ≥0.75 μm)</td><td>No (too thin + Ni diffusion)</td><td>Yes (Pd layer is the bond surface)</td></tr>
+    <tr><td>Wire bondable (Au)</td><td>Yes</td><td>Limited</td><td>Excellent</td></tr>
+    <tr><td>Cost relative to HASL</td><td>5-15×</td><td>2-4×</td><td>3-6×</td></tr>
+    <tr><td>Selective plating possible?</td><td>Yes (mask + plate specific areas)</td><td>No (full board immersion)</td><td>No (full board immersion)</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Rule of Thumb:</strong> If your PCB has edge connector fingers that will be inserted more than 50 times, you need hard gold — full stop. ENIG's 0.05-0.12 μm of soft gold wears through to the nickel underlayer within a few dozen mating cycles, creating a high-resistance NiO contact that causes intermittent failures. Hard gold at 0.75 μm survives 1,000+ cycles. That's the difference between a product that works for years and one that generates warranty returns in month three.</p>
+  </div>
+
+  <h2>Hard Gold Plating — The Edge Connector Standard</h2>
+
+  <p>Hard gold is electrolytic: the PCB panel is connected to a cathode bus bar, immersed in a gold plating bath (typically cobalt-hardened acid gold), and current is applied. This deposits a dense, wear-resistant gold-cobalt alloy (99.7% Au, 0.3% Co) over a nickel underlayer. The nickel provides the hardness foundation; the gold-cobalt alloy provides the corrosion-resistant sliding surface.</p>
+
+  <p>IPC-4552 classifies hard gold into three types based on thickness, each with distinct applications:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Type I — 0.75 μm (30 μin) minimum gold over 2.5 μm (100 μin) nickel</h4>
+      <p>The general-purpose hard gold specification. Suitable for edge connectors with 100-500 design mating cycles, test points, and keypad contacts. This is what most commercial and industrial PCB edge connectors use. Cost adder vs HASL: approximately $15-25 per panel for selective edge plating on a standard 18×24-inch panel.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Type II — 1.25 μm (50 μin) minimum gold over 5.0 μm (200 μin) nickel</h4>
+      <p>Specified for connectors expecting 500-1,000+ mating cycles. Common in telecom backplanes, military connectors, and test instrumentation. The thicker nickel underlayer resists cracking under repeated insertion forces. Our <a href="/blog/aerospace-defense-pcb.html">aerospace and defense PCB customers</a> routinely specify Type II or Type III hard gold for connector cards that must survive the equipment's full service life without connector replacement.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Type III — 2.5 μm (100 μin) minimum gold over 5.0 μm nickel</h4>
+      <p>The highest durability grade, used when the connector must survive 10,000+ mating cycles or when aluminum wire bonding is required. Type III is significantly more expensive (2-3× Type I) because the longer plating time reduces throughput — at our facility, a Type III panel spends roughly 45 minutes in the gold bath vs 12 minutes for Type I. Specify Type III only when the application demands it; over-specifying drives cost without adding functional value.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-gold-plating-edge.webp" alt="Macro photograph of a PCB edge connector with gold-plated fingers showing the characteristic beveled edge and individual contact pads under directional lighting" loading="lazy" style="max-width:85%">
+
+  <h2>ENIG and ENEPIG — The Solderable Gold Finishes</h2>
+
+  <p>ENIG (IPC-4552A) deposits a thin immersion gold layer (0.05-0.12 μm) over electroless nickel (3-7 μm, 6-10% phosphorus). The gold's job is to protect the nickel from oxidation until soldering — during reflow, the gold dissolves into the solder and the joint forms between solder and nickel. This is fundamentally different from hard gold, where the gold remains as a sliding contact surface.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>ENIG Advantages: Flat pads for fine-pitch, excellent solderability, 12-month shelf life</h4>
+      <p>The electroless process produces exceptionally flat pads — critical for BGA and QFN packages where coplanarity matters. ENIG also provides the best shelf life (12+ months) among common finishes because the gold layer prevents nickel oxidation without passivating like OSP. For designs with fine-pitch BGAs, see our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> for finish compatibility details.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>ENIG Limitation: Black pad syndrome and unsuitability for connectors</h4>
+      <p>ENIG's main reliability risk is "black pad" — excessive phosphorus enrichment at the Ni-Au interface that creates a brittle Ni₃P layer, causing pad cratering during drop testing. Modern ENIG processes (mid-phosphorus, 7-9% P) have largely solved this, but the risk remains if the plating bath chemistry drifts out of spec. ENIG is also entirely unsuitable for connector contacts — the 0.05 μm gold wears through almost immediately.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>ENEPIG: The high-reliability upgrade with a palladium diffusion barrier</h4>
+      <p>ENEPIG adds a thin electroless palladium layer (0.05-0.3 μm) between nickel and gold. This palladium layer acts as a diffusion barrier — it prevents nickel from migrating into the gold during storage, and it provides a superior surface for gold and aluminum wire bonding. ENEPIG is the finish of choice for medical device PCBs and semiconductor packaging where both solderability and wire bondability are required on the same board. For medical applications requiring ISO 13485 compliance, refer to our <a href="/blog/medical-device-pcb.html">medical device PCB guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>How to Specify Gold Plating on Your Fabrication Drawing</h2>
+
+  <p>The most common error we see at Huaxing PCBA is ambiguous gold plating specifications. "Gold finish" or "gold plating on connectors" is not sufficient — it doesn't tell the fabricator which process, what thickness, or what underlayer. Here's how to specify correctly:</p>
+
+  <table class="spec-table">
+    <tr><th>Application</th><th>Specification to Write on Fab Drawing</th><th>IPC Reference</th></tr>
+    <tr><td>Edge connector, commercial</td><td>"Hard gold per IPC-4552 Type I, 0.75 μm Au min over 2.5 μm Ni, selective plating on edge contacts only"</td><td>IPC-4552 §3.2.1</td></tr>
+    <tr><td>Edge connector, high-cycle</td><td>"Hard gold per IPC-4552 Type II, 1.25 μm Au min over 5.0 μm Ni, bevel edge 30° ±5°"</td><td>IPC-4552 §3.2.2</td></tr>
+    <tr><td>Solder pads, fine-pitch</td><td>"ENIG per IPC-4552A, 0.05-0.12 μm Au over 3-7 μm electroless Ni (7-9% P)"</td><td>IPC-4552A</td></tr>
+    <tr><td>Wire bond pads + solder pads</td><td>"ENEPIG per IPC-4556, 0.05-0.12 μm Au / 0.05-0.3 μm Pd / 3-7 μm Ni"</td><td>IPC-4556</td></tr>
+    <tr><td>Mixed: edge hard gold + ENIG pads</td><td>"Selective hard gold Type I on edge contacts (see detail A); ENIG per IPC-4552A on all SMD pads"</td><td>IPC-4552 + IPC-4552A</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Cost Warning:</strong> Selective hard gold + ENIG on the same board requires two separate plating processes (electrolytic gold for edge connectors, then mask, then ENIG for pads). This adds $30-50 per panel and 1-2 days to lead time versus single-finish boards. If your design can avoid mixed finishes, do so. If it can't, budget the extra cost and lead time into your procurement plan — do not expect standard ENIG pricing.</p>
+  </div>
+
+  <h2>Gold Plating Quality Control — What to Check at Incoming Inspection</h2>
+
+  <p>When you receive gold-plated PCBs, three measurements separate acceptable product from latent field failures:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>XRF thickness measurement — non-negotiable for every lot</h4>
+      <p>An X-ray fluorescence (XRF) analyzer measures gold thickness non-destructively in seconds. For hard gold PCBAs, our <a href="/blog/pcb-incoming-quality-inspection.html">IQC process</a> samples 5 points per panel and rejects any lot with a single measurement below the minimum specified thickness. Gold at 0.6 μm instead of 0.75 μm may look identical but will wear through in half the cycles.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Porosity test for hard gold (nitric acid vapor per ASTM B735)</h4>
+      <p>Porosity in the gold layer exposes the nickel underlayer to the atmosphere, causing NiO formation that increases contact resistance. The nitric acid vapor test exposes any pores: nickel corrodes through pores and stains the gold surface. For Type II/III hard gold connectors, specify "Porosity Class A per ASTM B735" on your procurement document.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Solderability test per J-STD-003 for ENIG/ENEPIG pads</h4>
+      <p>Immersion gold that's too thin (&lt;0.03 μm) allows nickel oxidation before soldering. J-STD-003 dip-and-look testing catches this. At Huaxing PCBA, we perform solderability coupons on every ENIG batch — a quick dip in SAC305 solder at 255°C must produce &gt;95% wetting. Batches below 90% are re-plated. For an overview of all PCB testing methods, see our <a href="/blog/pcb-testing-methods.html">testing methods comparison</a>.</p>
+    </div>
+  </div>
+
+  <p>Gold plating is one of the few PCB manufacturing processes where the difference between "works" and "fails in the field" is measured in microns. Specify the process, the thickness, and the acceptance criteria — and verify with XRF at receiving inspection. At Huaxing PCBA, our process engineers <a href="/blog/pcb-certifications-compliance.html">certify every gold-plated lot</a> with thickness reports and porosity test results before shipment, so your IQC team knows exactly what arrived.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-surface-finish-selection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Complete Surface Finish Selection Guide</a></li>
+    <li><a href="/blog/enig-vs-hasl.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">ENIG vs HASL vs OSP Comparison</a></li>
+    <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods Explained</a></li>
+    <li><a href="/blog/pcb-certifications-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Certifications & Compliance</a></li>
+    <li><a href="/blog/pcb-incoming-quality-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Incoming Quality Inspection Guide</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-gold-plating.webp)">
+      <h2>Need Gold-Plated PCBs? Get a Quote With Full Plating Specifications</h2>
+      <p>Upload your Gerber files and fabrication notes. Our CAM team verifies your gold plating specification, confirms Type/Class per IPC-4552, and delivers a detailed quote in 24 hours with XRF thickness verification.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
