@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMT Stencil Design Guide — Aperture Geometry, Thickness &amp; Nano-Coating for Zero-Defect Printing | Huaxing PCBA</title>
+<meta name="description" content="Complete SMT stencil design guide: aperture ratio rules, thickness selection by pitch, step stencil design, nano-coating ROI, and how stencil quality affects first-pass yield. For PCB procurement and NPI engineers.">
+<meta property="og:title" content="SMT Stencil Design Guide — Aperture Geometry, Thickness &amp; Nano-Coating for Zero-Defect Printing">
+<meta property="og:description" content="Complete SMT stencil design guide: aperture rules, thickness selection, step stencils, nano-coating ROI, and yield optimization.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/smt-stencil-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-smt-stencil.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/smt-stencil-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SMT Stencil Design Guide — Aperture Geometry, Thickness & Nano-Coating for Zero-Defect Printing",
+  "description": "Complete SMT stencil design guide: aperture ratio rules, thickness selection, step stencils, nano-coating ROI, and yield optimization.",
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "image": "https://huaxingpcba.com/generated/blog-cover-smt-stencil.webp",
+  "url": "https://huaxingpcba.com/blog/smt-stencil-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/smt-stencil-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-smt-stencil.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">SMT Assembly</p>
+      <h1 class="reveal">SMT Stencil Design Guide:<br><em>Aperture Geometry, Thickness &amp; Nano-Coating for Zero-Defect Printing</em></h1>
+      <p class="reveal">The stencil is the single most underappreciated tool in SMT assembly — get its design wrong and every downstream process suffers. Here's the engineering data behind stencil decisions that determine your first-pass yield.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>SMT Stencil Design</span></div>
+
+  <p>Solder paste printing accounts for <span class="data-point">60–70%</span> of all SMT assembly defects, and the stencil is the root cause in the overwhelming majority of those cases. Yet stencil design is often treated as an afterthought — a default 0.1mm laser-cut stainless steel foil ordered from the lowest bidder. The difference between a properly engineered stencil and a generic one can be <span class="data-point">3–8% first-pass yield</span> on fine-pitch assemblies — translating to tens of thousands of dollars in rework costs per production run. This guide covers the four stencil design decisions that directly control your solder paste transfer efficiency: aperture geometry, foil thickness, step stencil strategy, and surface coating.</p>
+
+  <p>At Huaxing PCBA, our <span class="data-point">8 SMT lines</span> run stencils from multiple qualified suppliers, with in-house SPI (solder paste inspection) providing closed-loop feedback on every stencil's real-world performance. We've correlated stencil design parameters to actual defect rates across component pitches from 0.3mm BGA to 2512 passives. Here's what the data shows.</p>
+
+  <img class="article-img" src="../generated/blog-smt-stencil-hero.webp" alt="Close-up macro photo of laser-cut SMT stencil foil with precisely machined apertures over PCB pad pattern, industrial lighting" loading="lazy">
+
+  <h2>The Area Ratio Rule — The Physics That Governs Paste Release</h2>
+
+  <p>Every stencil aperture decision traces back to one equation: the area ratio. This is the ratio of the aperture's open area (where paste exits) to its wall area (where paste sticks). It determines whether solder paste releases cleanly from the aperture or leaves residue that builds up into bridging defects.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Area Ratio Formula and Thresholds</h4>
+      <p>For a rectangular aperture: <strong>Area Ratio = (L × W) / [2 × T × (L + W)]</strong>, where L and W are aperture dimensions and T is foil thickness. The industry-standard minimum is <span class="data-point">0.66</span> for electroformed stencils and <span class="data-point">0.75</span> for laser-cut stainless steel. Below 0.66, paste release becomes unreliable regardless of printing parameters. For 0201 passive components (0.25mm × 0.125mm pads) on a standard 0.1mm foil: AR = (0.25×0.125) / [2×0.1×(0.25+0.125)] = 0.031 / 0.075 = <span class="data-point">0.42</span> — well below threshold. This is why 0201 designs require thinner foil or modified aperture shapes. See our <a href="/blog/pcb-assembly-process.html">PCB assembly process guide</a> for the complete SMT workflow.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>What Happens When Area Ratio Fails</h4>
+      <p>Below the threshold ratio, solder paste adheres to the aperture walls instead of the PCB pad. The result: inconsistent paste volume, insufficient solder on fine-pitch leads, and opens on BGAs. SPI data from our lines shows that apertures with AR < 0.60 produce <span class="data-point">2.3× more volume variation</span> (CoV > 15%) compared to AR > 0.75 designs. The defect doesn't appear at every print cycle — it's stochastic, appearing on 5–15% of boards — which makes it especially dangerous because it passes AOI on some boards and fails on others. For <a href="/blog/pcb-testing-methods.html">PCB testing methods</a> that catch these intermittent defects, our guide covers AOI, SPI, and X-ray strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Aperture Shape Modifications to Improve Release</h4>
+      <p>When area ratio is marginal (0.55–0.70), aperture shape modifications can rescue paste release without changing foil thickness. Common techniques: <strong>home-plate</strong> (rounded rectangular with one pointed end — reduces wall contact by 15%), <strong>radiused corners</strong> (R ≥ 0.05mm — eliminates the sharp corners where paste most readily adheres), and <strong>trapezoidal wall angles</strong> (wider at squeegee side, narrower at board side — electroformed stencils achieve this natively, laser-cut requires post-processing). For our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a>, we specify home-plate apertures for 0.4mm pitch BGAs on 0.1mm foil to maintain transfer efficiency above 85%.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> You cannot fix a bad area ratio with better printing parameters. Squeegee pressure, speed, and separation speed help — but if the AR is below 0.55, no amount of printer tuning will deliver consistent paste volume. The fix is thinner foil, step stencil, or electroformed technology.</p>
+  </div>
+
+  <h2>Stencil Thickness Selection — The Tradeoff Every Design Faces</h2>
+
+  <p>Thicker foil deposits more paste volume, which is good for large components that need robust solder joints. But thicker foil also reduces the area ratio for fine-pitch apertures. Every PCB design with mixed component sizes forces a thickness compromise.</p>
+
+  <table class="spec-table">
+    <tr><th>Foil Thickness</th><th>Smallest Reliable Pitch</th><th>Typical Paste Volume</th><th>Best For</th></tr>
+    <tr><td>0.08mm (3.2 mil)</td><td>0.3mm BGA / 0201</td><td>Low (60–80% pad coverage)</td><td>Mobile, wearables, high-density</td></tr>
+    <tr><td>0.10mm (4 mil)</td><td>0.4mm BGA / 0402</td><td>Standard (80–100%)</td><td>General-purpose, mixed-pitch</td></tr>
+    <tr><td>0.12mm (5 mil)</td><td>0.5mm QFP / 0603</td><td>Moderate (100–120%)</td><td>Automotive, industrial controls</td></tr>
+    <tr><td>0.15mm (6 mil)</td><td>0.8mm QFP / 0805</td><td>High (120–150%)</td><td>Power electronics, connectors</td></tr>
+    <tr><td>0.20mm (8 mil)</td><td>1.27mm SOIC / 1206</td><td>Very High (150–200%)</td><td>Heavy copper, through-hole fill</td></tr>
+  </table>
+
+  <p>The conflict arises when one board has both a 0.4mm BGA (requiring ≤0.10mm foil) and large QFN thermal pads (wanting ≥0.12mm for adequate paste). This is where step stencils enter the picture. For <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB designs</a> that combine fine-pitch ADCs with large power MOSFETs, this thickness conflict is routine.</p>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> Always include your smallest component pitch and largest pad size in the stencil RFQ. The stencil supplier needs both to determine whether a single-thickness foil can work or a step stencil is required. Omitting either leads to a stencil that fails on one end of your component spectrum.</p>
+  </div>
+
+  <h2>Step Stencils — When One Thickness Isn't Enough</h2>
+
+  <p>A step stencil has two (rarely three) foil thicknesses on the same frame. The thinner area covers fine-pitch components; the thicker area deposits more paste on large pads. Step stencils add <span class="data-point">$80–$150</span> to stencil cost but can be the difference between viable and unmanufacturable for mixed-technology boards.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Step-Down Design (Most Common)</h4>
+      <p>The fine-pitch area is etched or coined to be thinner than the base foil. Example: base foil 0.12mm, step-down area 0.10mm for the 0.4mm BGA region. The step transition zone should be at least <span class="data-point">2–3mm</span> wide and positioned away from component pads — squeegee blades catch on abrupt thickness transitions, causing pressure fluctuations that affect paste volume. Our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> discusses how component placement affects stencil step placement.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Step-Up Design (Less Common)</h4>
+      <p>The thick-paste area is built up, typically by electroplating additional metal onto the base foil in specific regions. Used when the majority of the board is fine-pitch (0.10mm base) but a few large components need extra paste. Step-up adds <span class="data-point">$150–$250</span> to stencil cost and is not supported by all stencil suppliers. Verify capability before designing for step-up.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Step Stencil Print Validation</h4>
+      <p>Step stencils require a dedicated SPI program that applies different volume limits to different board regions. A single global SPI limit will flag the thin region (under-volume) or thick region (over-volume) as defects. Our NPI process includes <span class="data-point">20–30 print cycles</span> of SPI data collection with the step stencil before releasing it to production. For <a href="/blog/pcb-design-for-testability.html">PCB design for testability</a> considerations, step stencils add validation complexity that should be accounted for in your test plan.</p>
+    </div>
+  </div>
+
+  <h2>Nano-Coating — The ROI Case for Surface Treatment</h2>
+
+  <p>Nano-coating applies a <span class="data-point">50–100nm</span> fluoropolymer layer to the stencil surface and aperture walls. The coating reduces the surface energy of the stainless steel, making it harder for solder paste to adhere. The claimed benefits: less underside wiping, longer stencil life, better fine-pitch release. But at <span class="data-point">$60–$120</span> adder per stencil, is it worth it?</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 1</div>
+    <div class="checklist-content">
+      <h4>When Nano-Coating Pays for Itself — Fine-Pitch and Long Runs</h4>
+      <p>For assemblies with 0.4mm pitch or finer components, nano-coating reduces the underside wipe frequency from every <span class="data-point">5–8 prints</span> to every <span class="data-point">15–25 prints</span>. On a line running 200 boards/day, that saves 30–40 minutes of line downtime per shift. For production runs above <span class="data-point">5,000 boards</span> per stencil, the labor savings alone exceed the coating cost. Nano-coating also extends stencil life from ~25,000 to ~50,000 prints by reducing the abrasive effect of solder paste on aperture edges. Read our <a href="/blog/pcb-cost-factors.html">PCB cost factors guide</a> for the full manufacturing economics.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 2</div>
+    <div class="checklist-content">
+      <h4>When to Skip Nano-Coating</h4>
+      <p>For prototype runs (< 200 boards), boards with only 0603-and-larger passives, or pure through-hole wave-soldered assemblies, nano-coating provides no measurable ROI. The stencil will be retired long before the coating's benefits materialize. Similarly, if your paste chemistry is aggressive (high-activity flux, halogenated), the coating degrades faster — typically <span class="data-point">40–60%</span> of its rated life. Check paste-coating compatibility with your stencil supplier.</p>
+    </div>
+  </div>
+
+  <h2>Stencil Material and Manufacturing Method Comparison</h2>
+
+  <table class="spec-table">
+    <tr><th>Method</th><th>Min. Aperture</th><th>Wall Quality</th><th>Cost (400×500mm)</th><th>Best Use Case</th></tr>
+    <tr><td>Laser-Cut SS</td><td>0.10mm</td><td>Moderate (rough walls)</td><td>$80–150</td><td>General production, ≥0.5mm pitch</td></tr>
+    <tr><td>Laser-Cut + Electropolish</td><td>0.08mm</td><td>Good (smooth walls)</td><td>$120–200</td><td>Fine-pitch, improved paste release</td></tr>
+    <tr><td>Electroformed Nickel</td><td>0.05mm</td><td>Excellent (tapered walls)</td><td>$250–450</td><td>0.3mm BGA, 0201, micro-BGA</td></tr>
+    <tr><td>Chemical Etch</td><td>0.15mm</td><td>Poor (undercut)</td><td>$40–80</td><td>Prototypes, non-critical designs</td></tr>
+  </table>
+
+  <p>For <span class="data-point">95%</span> of production assemblies, laser-cut stainless steel with electropolishing is the sweet spot — good release characteristics at a reasonable cost. Electroformed nickel stencils are reserved for designs with 0.3mm pitch BGAs or 0201 passives where area ratio demands the tapered wall geometry. Our <a href="/blog/hdi-technology.html">HDI PCB technology guide</a> discusses when microvia and fine-pitch requirements push you into electroformed stencil territory.</p>
+
+  <h2>Stencil Tension and Frame Selection</h2>
+
+  <p>A stencil that loses tension during printing causes aperture misalignment. The industry standard is <span class="data-point">35–48 N/cm²</span> of tension, measured at the center of the foil after mounting. Tension below 30 N/cm² causes the stencil to lift unevenly during the snap-off phase of printing, leaving paste smeared across pads. Our incoming stencil inspection includes tension measurement at five points — center and four corners. Stencils that fail the tension spec are returned to the supplier before they reach the SMT line. For <a href="/blog/pcb-supplier-audit.html">PCB supplier audit</a> best practices, stencil quality checks should be part of your factory evaluation checklist.</p>
+
+  <h2>Stencil Design Checklist for Your Next RFQ</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Specify Your Smallest Pitch and Largest Pad</h4>
+      <p>Include both in the RFQ so the stencil supplier can validate area ratio across your entire component spectrum. Example: "Smallest: 0.4mm BGA (0.25mm pad), Largest: TO-263 thermal pad (9.5×8.2mm)." This single data point determines whether single-thickness foil works.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Define Aperture Reduction for Critical Components</h4>
+      <p>For BGAs and QFNs, apertures are typically reduced to <span class="data-point">85–95%</span> of pad size to prevent solder bridging. For chip components (0402, 0603), apertures are often oversized to <span class="data-point">105–110%</span> for adequate fillet formation. Specify these reductions per component type in your stencil notes — don't assume the supplier knows your solder joint requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Request Fiducial Marks on the Stencil</h4>
+      <p>Stencil fiducials (separate from PCB fiducials) enable the printer to align the stencil to the board independently. Without them, alignment relies solely on board fiducials, which may be obscured by the stencil frame. Add <span class="data-point">2–3 stencil fiducials</span> at frame corners — this costs $0 but eliminates an entire class of alignment errors. See our <a href="/blog/gerber-files-guide.html">Gerber files preparation guide</a> for fiducial placement rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Include a Stencil Life Specification</h4>
+      <p>Define the expected number of print cycles before stencil retirement. Laser-cut stainless steel with electropolishing typically lasts <span class="data-point">25,000–50,000 prints</span> with proper cleaning. Nano-coated stencils extend to <span class="data-point">50,000–100,000 prints</span>. For high-volume automotive or consumer electronics programs, stencil replacement intervals should be built into the production schedule. Learn about volume planning in our <a href="/blog/prototype-vs-production.html">prototype vs production guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Summary: The Stencil Is a Precision Tool, Not a Commodity</h2>
+
+  <p>The $80–$200 you spend on a properly designed stencil is the highest-ROI investment in your SMT assembly process. An engineered stencil — with validated area ratios, the right thickness for your component mix, nano-coating when justified by volume, and proper tension — directly eliminates <span class="data-point">50–70%</span> of the printing defects that downstream AOI and rework stations would otherwise catch. The alternative — a generic 0.1mm foil ordered on price alone — guarantees a higher rework rate, lower first-pass yield, and longer NPI debug cycles.</p>
+
+  <p>At Huaxing PCBA, every stencil that enters our SMT lines is validated against the specific component mix of the PCB it will print. Our engineering team reviews aperture designs against SPI data from similar assemblies to predict transfer efficiency before the stencil is cut. <a href="/blog/pcb-quote-comparison-guide.html">Learn how to compare PCB quotes</a> that include proper stencil tooling, or <a href="/contact/">contact us with your Gerber files</a> for a stencil design review and assembly quote within 24 hours.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-smt-stencil.webp)">
+      <h2>Need a Stencil Design Validated Before Production?</h2>
+      <p>Send your Gerber files and BOM — our NPI team will review your stencil design for area ratio, thickness, and coating decisions, with DFM feedback within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Stencil DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+const FORM_ENDPOINT = 'https://inquiry-proxy.huaxingpcba.workers.dev';
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch(FORM_ENDPOINT,{method:'POST',body:d});if(r.ok){f.reset();closeModal();alert('Thank you! We will respond within 24 hours.')}else{alert('Error submitting. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+
+</body>
+</html>

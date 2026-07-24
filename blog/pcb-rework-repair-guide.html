@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Rework &amp; Repair Guide — BGA Reballing, Pad Repair &amp; Conformal Coating Removal for Prototype and Production Boards | Huaxing PCBA</title>
+<meta name="description" content="Practical PCB rework and repair guide for hardware engineers: BGA reballing techniques, lifted pad repair methods, conformal coating removal, through-hole rework, and when rework costs exceed replacement. IPC-7711/7721 standards explained.">
+<meta property="og:title" content="PCB Rework &amp; Repair Guide — BGA Reballing, Pad Repair &amp; Conformal Coating Removal">
+<meta property="og:description" content="Practical PCB rework guide: BGA reballing, pad repair, conformal coating removal, through-hole rework, IPC-7711/7721 standards, and cost-break analysis.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-rework-repair-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-rework.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-rework-repair-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Rework & Repair Guide — BGA Reballing, Pad Repair & Conformal Coating Removal for Prototype and Production Boards",
+  "description": "Practical PCB rework and repair guide: BGA reballing, lifted pad repair, conformal coating removal, through-hole rework techniques, IPC-7711/7721 standards, and cost-break analysis.",
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-rework.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-rework-repair-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-rework-repair-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pcb-rework.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">PCB Repair &amp; Rework</p>
+      <h1 class="reveal">PCB Rework &amp; Repair Guide:<br><em>BGA Reballing, Pad Repair &amp; Conformal Coating Removal for Prototype and Production Boards</em></h1>
+      <p class="reveal">A failed rework attempt destroys more value than the component it's trying to save. Here's when to rework, when to replace, and how to execute each common repair correctly — from BGA reballing to lifted pad reconstruction.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Rework &amp; Repair</span></div>
+
+  <p>Every hardware engineer eventually faces the same dilemma: a <span class="data-point">$60</span> BGA on a <span class="data-point">$400</span> prototype board has failed, and you have exactly one shot to replace it without destroying the board. Rework is the highest-risk operation in electronics assembly — a single lifted pad, a single solder bridge under a BGA, or a single overheated via can turn a repairable board into scrap. Yet with the right technique, most common failures — damaged BGAs, lifted pads, failed through-hole components, conformal-coated assemblies — are repairable with high first-pass success rates. This guide covers the four most common rework scenarios, the IPC-7711/7721 standards that define acceptable repair, and the cost-break analysis that tells you when repair is cheaper than respin.</p>
+
+  <p>At Huaxing PCBA, our rework station handles <span class="data-point">200–400 rework operations per month</span> across prototype, NPI, and production boards. We train every rework technician to IPC-7711 Class 3 standards — the same certification required for aerospace and medical device rework. Here's the practical knowledge from thousands of rework cycles, distilled into actionable procedures.</p>
+
+  <img class="article-img" src="../generated/blog-pcb-rework-hero.webp" alt="Macro photography of precision hot-air rework nozzle positioned over BGA component on PCB, with solder balls visible at component edge" loading="lazy">
+
+  <h2>BGA Rework — Reballing vs Replacement</h2>
+
+  <p>BGA rework is the most technically demanding repair because every solder joint is hidden under the component body. You cannot visually inspect the joint during reflow, and a single open or short under a 1,000-ball BGA turns the entire operation into a failure. The decision tree: is the BGA itself faulty (replace the component), or has the solder joint degraded (reball and reattach the same component)?</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>BGA Removal — Profile Before You Pull</h4>
+      <p>The removal profile is the most critical step in BGA rework. Unlike SMT reflow, where the entire board follows a controlled oven profile, BGA removal uses localized heating from a nozzle aimed only at the component. The challenge: the BGA body acts as a thermal insulator — the solder balls underneath can be <span class="data-point">20–40°C</span> cooler than the package top surface. Use a thermocouple embedded in a sacrificial board (same stackup, same BGA) to profile the actual solder joint temperature. Target: <span class="data-point">217°C liquidus for 45–75 seconds</span> (SAC305 lead-free). Undershoot = pads rip out with the BGA. Overshoot = popcorn cracking in the package, delamination in the PCB. Our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> covers initial placement and reflow profiling for comparison.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Site Preparation — Pad Cleanup Without Damage</h4>
+      <p>After BGA removal, the pads carry residual solder that must be leveled before placing a new component. The standard tool: solder wick (desoldering braid) with a temperature-controlled iron at <span class="data-point">315–340°C</span>. Critical technique: do not press the wick into the pads — the capillary action of the braid alone should lift the solder. Pressing flattens or lifts the copper pad from the laminate. After wicking, inspect every pad under <span class="data-point">10–20× magnification</span> for pad lifting, solder mask damage, or residual solder spikes that would prevent the new BGA from sitting flat. For <a href="/blog/pcb-testing-methods.html">PCB testing</a>, X-ray inspection after BGA placement is mandatory — there's no other way to verify joint quality.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Reballing — When to Save the BGA</h4>
+      <p>If the BGA itself is functional but has been removed for board-level repair (e.g., to access a damaged trace underneath), reballing saves the component cost. Process: clean residual solder from BGA pads with wick, apply flux, position a stencil aligned to the BGA pads, squeegee solder paste through the stencil apertures, and reflow the BGA alone (component-side up) to form new solder balls. Reballing requires a BGA-specific stencil — the aperture pattern must match the BGA ball map exactly. A reballing stencil costs <span class="data-point">$30–$80</span> (far less than a new BGA). Success rate on experienced rework: <span class="data-point">90–95%</span> for ≤0.8mm pitch, <span class="data-point">70–85%</span> for 0.5mm and below. For <a href="/blog/low-volume-pcb-assembly.html">low-volume PCB assembly</a>, reballing is routine when expensive FPGAs or ASICs need to be transferred between prototype board revisions.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Cost Decision Rule:</strong> If the BGA cost exceeds $150 AND the rework technician is IPC-7711 certified, attempt reballing. If the BGA cost is under $50, replace the component — the labor cost of reballing (30–45 minutes) exceeds the component cost. For BGAs under 0.5mm pitch, replacement is almost always the better choice — the reballing failure rate makes it false economy.</p>
+  </div>
+
+  <h2>Lifted Pad Repair — Reconstructing a Connection from Scratch</h2>
+
+  <p>A lifted pad — where the copper pad separates from the laminate, usually from excessive heat or mechanical stress during desoldering — is the nightmare scenario. The trace that connected to that pad still exists, but there's no landing surface for the replacement component. IPC-7711 defines four repair methods depending on pad damage severity.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 1</div>
+    <div class="checklist-content">
+      <h4>Method 1: Epoxy Bond the Original Pad (Least Invasive)</h4>
+      <p>If the pad lifted cleanly without tearing, bond it back with high-temperature epoxy (rated to <span class="data-point">≥300°C</span>). Apply epoxy under the lifted pad with a fine-tip applicator, press flat with a Teflon-tipped tool (epoxy won't bond to PTFE), cure at <span class="data-point">120–150°C for 15–30 minutes</span>. After curing, verify electrical continuity from the pad to its via or trace. This method preserves the original pad geometry and is the preferred repair when possible. Our <a href="/blog/pcb-supplier-audit.html">PCB supplier audit guide</a> covers how fabricators should handle pad adhesion testing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 2</div>
+    <div class="checklist-content">
+      <h4>Method 2: Lap Solder a Replacement Conductor (Most Common)</h4>
+      <p>When the original pad is destroyed or missing, fabricate a replacement conductor from copper foil (0.035–0.07mm thickness, matching the original copper weight). Cut a small rectangle larger than the original pad, bond it to the board surface with high-temperature epoxy at the pad location, overlap the foil onto the exposed trace by <span class="data-point">≥2× the trace width</span>, and lap-solder the overlap joint. After soldering, trim excess foil with a scalpel. The replacement pad must be the same diameter as the original — too small and the component won't solder properly; too large and it may short to adjacent pads. For <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 3 assemblies</a>, this repair requires jumper verification and documentation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 3</div>
+    <div class="checklist-content">
+      <h4>Method 3: Jumper Wire to an Accessible Node (Last Resort)</h4>
+      <p>When the pad and its connecting trace are both destroyed and there's no surface to bond a replacement pad, run a <span class="data-point">30–36 AWG</span> insulated jumper wire from the component lead to the nearest accessible node on the same net — typically a via, test point, or another component pad. Secure the wire with epoxy dots every <span class="data-point">5–10mm</span> and at both termination points. This is the least elegant repair but the most reliable when pad reconstruction isn't viable. For IPC Class 3, jumper wires must be documented on the rework traveler and may be limited to a maximum of <span class="data-point">3 per board</span> depending on the customer's repair specification.</p>
+    </div>
+  </div>
+
+  <h2>Conformal Coating Removal — The Obstacle Before the Repair</h2>
+
+  <p>Conformal coating — acrylic, silicone, polyurethane, or parylene — protects PCBs from moisture, dust, and chemical exposure. But it also prevents access to the components and pads you need to rework. Removing it without damaging the board underneath is as critical as the rework itself.</p>
+
+  <table class="spec-table">
+    <tr><th>Coating Type</th><th>Removal Method</th><th>Tooling</th><th>Risk to Board</th></tr>
+    <tr><td>Acrylic (AR)</td><td>Solvent (acetone, MEK, or proprietary stripper)</td><td>Cotton swab, acid brush</td><td>Low — dissolves easily</td></tr>
+    <tr><td>Silicone (SR)</td><td>Mechanical peel + solvent cleanup</td><td>Tweezers, micro-brush</td><td>Moderate — mechanical stress on pads</td></tr>
+    <tr><td>Polyurethane (UR)</td><td>Thermal ablation or aggressive solvent</td><td>Hot-air pencil, methylene chloride</td><td>High — heat and chemicals can damage board</td></tr>
+    <tr><td>Parylene (XY)</td><td>Micro-abrasion or plasma etching</td><td>Micro-abrader, oxygen plasma</td><td>High — specialized equipment required</td></tr>
+    <tr><td>Epoxy (ER)</td><td>Not removable — destructive only</td><td>Dremel, scalpel (sacrificial)</td><td>Very High — pad damage almost certain</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Field Rule:</strong> Acrylic and silicone coatings are rework-friendly — specify these for prototype and NPI boards where rework is expected. Polyurethane and parylene are selected for environmental protection, not reworkability — expect higher rework failure rates. Epoxy coating means the board is non-repairable by design; budget a spare board.</p>
+  </div>
+
+  <p>For acrylic removal, apply solvent with a cotton swab to the specific component area only — don't flood the board. The coating will soften within <span class="data-point">30–60 seconds</span>. Gently wipe away with a clean swab, reapplying solvent as needed. After rework, reapply conformal coating to the repaired area using a brush-on or aerosol version of the same coating chemistry. For <a href="/blog/pcb-conformal-coating-guide.html">conformal coating selection and application</a>, our dedicated guide covers coating types, IPC-CC-830 standards, and masking techniques.</p>
+
+  <h2>Through-Hole Rework — Desoldering Without Pad Damage</h2>
+
+  <p>Through-hole components — connectors, electrolytic capacitors, transformers — are mechanically anchored in plated holes, making them harder to remove than surface-mount parts. The solder fills the entire barrel, and the component leads extend through the board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Desoldering Pump Method (Manual, Low-Cost)</h4>
+      <p>Heat the joint to <span class="data-point">315–340°C</span> with a soldering iron, wait for full solder melt (2–3 seconds after visible liquification), then trigger the desoldering pump nozzle directly over the pad. The vacuum should remove <span class="data-point">80–95%</span> of solder in one shot. Repeat once if needed. For multi-pin connectors, work pin by pin — attempting to heat all pins simultaneously with a solder pot is industrial-scale and risks board warpage. See our <a href="/blog/wave-vs-selective-soldering.html">wave vs selective soldering comparison</a> for how these joints are made in production.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Desoldering Station Method (Professional)</h4>
+      <p>A vacuum desoldering station combines a heated hollow tip with continuous vacuum. Place the tip over the component lead (the tip ID must match the lead diameter), wait for solder melt, and activate vacuum. The solder is pulled through the hollow tip into a collection chamber. This method is faster and cleaner than manual pumps, reduces pad thermal stress by <span class="data-point">40–60%</span> (faster heat application = less heat conducted into the board), and is the standard for professional rework. For <a href="/blog/pcb-thermal-management.html">thermal management considerations</a> during rework, localized heating always beats prolonged board-wide heating.</p>
+    </div>
+  </div>
+
+  <h2>The Cost-Break Analysis — When to Rework vs When to Respin</h2>
+
+  <p>Rework is not always cheaper than building a new board. The analysis must account for technician labor, rework success probability, test/validation after rework, and the risk of latent damage from the rework process itself.</p>
+
+  <table class="spec-table">
+    <tr><th>Scenario</th><th>Board Value</th><th>Rework Labor</th><th>Success Rate</th><th>Expected Cost</th><th>Decision</th></tr>
+    <tr><td>Prototype (qty 3), $400/board, BGA swap</td><td>$400</td><td>$120 (2 hrs)</td><td>85%</td><td>$141 expected</td><td>Rework — cheaper than $400 respin</td></tr>
+    <tr><td>Production (qty 500), $60/board, lifted pad</td><td>$60</td><td>$80 (1.5 hrs)</td><td>75%</td><td>$107 expected</td><td>Replace — rework costs > new board</td></tr>
+    <tr><td>Lead-time-critical, $800/board, any fault</td><td>$800</td><td>$200 (3 hrs)</td><td>70%</td><td>$286 expected</td><td>Rework — 4-week lead time loss > rework cost</td></tr>
+  </table>
+
+  <p>The general rule: rework is economically justified when <strong>(rework labor ÷ success rate) < (replacement board cost + missed opportunity cost)</strong>. For prototypes and NPI boards where replacement lead time is 2–4 weeks, the opportunity cost of delay (missed testing, slipped schedule) dwarfs the rework labor — rework almost always wins. For high-volume production where boards cost under $100, replacement is usually cheaper. Our <a href="/blog/prototype-vs-production.html">prototype vs production cost guide</a> has the full economics.</p>
+
+  <h2>IPC-7711/7721 — The Rework Standard You Should Reference</h2>
+
+  <p>IPC-7711/7721 ("Rework, Modification and Repair of Electronic Assemblies") is the industry standard for acceptable rework procedures. It defines five procedure levels — from simple component removal to complex laminate repair — with specific tooling, materials, and inspection criteria for each. When you send a board for rework, specify: <strong>"Rework per IPC-7711 Class 3"</strong>. This tells the rework technician the expected quality level (Class 3 = high reliability, same as aerospace/medical) and holds them to documented procedures rather than "whatever works." For <a href="/blog/ipc-standards-comparison.html">IPC standards comparison</a>, our guide covers the full hierarchy from IPC-A-600 to IPC-J-STD-001.</p>
+
+  <h2>Summary: Rework Is a Skill, Not a Gamble</h2>
+
+  <p>PCB rework succeeds or fails on <span class="data-point">three factors</span>: thermal profiling (know the actual solder joint temperature, not the nozzle setting), mechanical precision (tweezer and micro-brush control under magnification), and honest cost-break analysis (don't spend $200 in labor to save a $60 board). The decision to rework should be data-driven, not emotional — and the execution should follow documented procedures, not improvisation.</p>
+
+  <p>At Huaxing PCBA, our rework technicians are IPC-7711 certified and operate under documented work instructions for every rework type we handle. For boards that are beyond economical repair, our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection process</a> catches these failures at the fabrication level before they reach assembly. If you have boards needing professional rework — or want to understand whether rework is worth it for your specific situation — <a href="/blog/quick-turn-pcb-manufacturing.html">our quick-turn service</a> includes rework assessment and execution, or <a href="/contact/">contact us with photos of the damage</a> for a rework feasibility evaluation within 24 hours.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-pcb-rework.webp)">
+      <h2>Got a Board That Needs Professional Rework?</h2>
+      <p>Send photos of the damage — our IPC-7711 certified rework team will evaluate feasibility and provide a cost estimate within 24 hours. Prototype and NPI boards welcome.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Rework Assessment <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+const FORM_ENDPOINT = 'https://inquiry-proxy.huaxingpcba.workers.dev';
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch(FORM_ENDPOINT,{method:'POST',body:d});if(r.ok){f.reset();closeModal();alert('Thank you! We will respond within 24 hours.')}else{alert('Error submitting. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+
+</body>
+</html>

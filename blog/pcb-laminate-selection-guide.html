@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Laminate Selection Guide — Isola vs Panasonic vs Shengyi: Which High-Performance Base Material for Your Application | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB laminate selection guide comparing Isola FR408HR, Panasonic Megtron 6, Shengyi S1000-2, Rogers RO4003C, and ITEQ IT-968G. Dk/Df values, Tg ratings, cost comparison, and application-specific recommendations for high-speed, RF, and high-reliability designs.">
+<meta property="og:title" content="PCB Laminate Selection Guide — Isola vs Panasonic vs Shengyi: Which High-Performance Base Material">
+<meta property="og:description" content="Complete PCB laminate comparison: Dk/Df, Tg, cost, and application recommendations for Isola, Panasonic Megtron, Shengyi, Rogers, and ITEQ materials.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-laminate-selection-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-laminate.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-laminate-selection-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Laminate Selection Guide — Isola vs Panasonic vs Shengyi: Which High-Performance Base Material for Your Application",
+  "description": "Complete PCB laminate selection guide comparing Isola FR408HR, Panasonic Megtron 6, Shengyi S1000-2, Rogers RO4003C, and ITEQ IT-968G on Dk/Df, Tg, cost, and applications.",
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-laminate.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-laminate-selection-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-laminate-selection-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pcb-laminate.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">PCB Materials</p>
+      <h1 class="reveal">PCB Laminate Selection Guide:<br><em>Isola vs Panasonic vs Shengyi — Which High-Performance Material for Your Application</em></h1>
+      <p class="reveal">Choosing the wrong laminate costs you signal integrity at GHz speeds or wastes budget on over-specified materials. Here's the data on Dk, Df, Tg, and cost across the five laminate families that dominate high-performance PCB fabrication.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Laminate Selection</span></div>
+
+  <p>The laminate — the glass-reinforced epoxy or hydrocarbon-ceramic composite that forms your PCB's dielectric layers — is the foundation that every trace, via, and plane is built on. At frequencies below <span class="data-point">1 GHz</span>, standard FR-4 (Tg 130–140°C) works fine. Above that, dielectric constant (Dk) stability and dissipation factor (Df) become the dominant variables controlling signal loss, impedance consistency, and eye diagram closure. The wrong laminate choice on a 25 Gbps SerDes channel can eat your entire loss budget before the signal reaches the connector — and fixing it means a complete board respin. This guide compares the five laminate families most commonly specified on high-performance PCB fabrication orders, with real Dk/Df data and cost-per-panel numbers so you can make a data-driven material decision.</p>
+
+  <p>At Huaxing PCBA, we stock and process <span class="data-point">14 laminate grades</span> across FR-4, mid-loss, low-loss, and RF/microwave categories. Our Shenzhen facility handles hybrid stackups — combining Rogers RF laminates on outer layers with FR-4 cores — and high-Tg materials up to <span class="data-point">Tg 200°C</span> for automotive and aerospace applications. Here's a practical field guide to laminate selection based on our experience fabricating PCBs for telecom, datacom, automotive, and industrial customers.</p>
+
+  <img class="article-img" src="../generated/blog-pcb-laminate-hero.webp" alt="Photorealistic 3D cross-section render of multi-layer PCB showing distinct copper and laminate dielectric layers with different material colors" loading="lazy">
+
+  <h2>The Three Numbers That Define a Laminate</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dk (Dielectric Constant, εr) — Controls Impedance and Propagation Speed</h4>
+      <p>Dk determines the characteristic impedance of your traces and the velocity at which signals propagate. Standard FR-4 has Dk ≈ <span class="data-point">4.2–4.6</span> at 1 GHz. The problem: FR-4's Dk varies significantly with frequency and temperature — dropping 0.1–0.3 units between 1 GHz and 10 GHz as the resin matrix responds differently to changing electric fields. For digital designs above 5 Gbps, this Dk variation across frequency causes dispersion — different frequency components of the same signal travel at different speeds, smearing the eye diagram. Low-loss laminates maintain Dk within <span class="data-point">±0.05</span> from DC to 40 GHz. See our <a href="/blog/pcb-signal-integrity.html">PCB signal integrity guide</a> for how Dk stability affects channel loss budgets.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Df (Dissipation Factor, Loss Tangent) — Controls Signal Attenuation</h4>
+      <p>Df is the fraction of signal energy converted to heat in the dielectric. Standard FR-4 has Df ≈ <span class="data-point">0.020</span> at 1 GHz. Every 10°C temperature rise increases Df by 5–10%, meaning your signal loss gets worse as the board heats up. Low-loss materials bring Df below 0.005 at 10 GHz, reducing dielectric loss proportionally. For a 25 Gbps NRZ signal on a 500mm trace, FR-4 (Df 0.020) introduces <span class="data-point">~8–12 dB</span> of dielectric loss alone — exceeding most receiver equalization budgets. A mid-loss laminate (Df 0.008) drops this to ~3–5 dB. Our <a href="/blog/impedance-control.html">impedance control guide</a> covers how Dk and Df interact for controlled-impedance designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Tg (Glass Transition Temperature) — Controls Thermal Reliability</h4>
+      <p>Tg is the temperature at which the resin transitions from rigid to soft. Above Tg, the CTE (coefficient of thermal expansion) on the Z-axis increases <span class="data-point">3–5×</span>, causing the laminate to expand vertically and stress plated through-holes. Standard FR-4 (Tg 130°C) is fine for consumer electronics that see ambient temperatures. For lead-free soldering (peak reflow 245–260°C), automotive under-hood (125°C ambient), or high-layer-count boards that see multiple reflow cycles, specify <span class="data-point">Tg ≥ 170°C</span>. The IPC-4101 slash sheet system classifies laminates primarily by Tg and filler content — your fabricator needs this slash sheet number to quote correctly.</p>
+    </div>
+  </div>
+
+  <h2>Laminate Family Comparison — Dk, Df, Tg, and Cost</h2>
+
+  <table class="spec-table">
+    <tr><th>Laminate</th><th>Dk @ 10 GHz</th><th>Df @ 10 GHz</th><th>Tg (°C)</th><th>Relative Cost</th><th>Best Application</th></tr>
+    <tr><td>Standard FR-4 (Shengyi S1141)</td><td>4.2–4.6</td><td>0.018–0.022</td><td>130–140</td><td>1× (baseline)</td><td>Consumer, <1 GHz digital</td></tr>
+    <tr><td>High-Tg FR-4 (Shengyi S1000-2)</td><td>3.9–4.2</td><td>0.014–0.018</td><td>170–180</td><td>1.2–1.5×</td><td>Automotive, industrial, lead-free</td></tr>
+    <tr><td>Mid-Loss (Isola FR408HR)</td><td>3.6–3.8</td><td>0.008–0.010</td><td>180–190</td><td>1.8–2.5×</td><td>10–25 Gbps digital, servers</td></tr>
+    <tr><td>Low-Loss (Panasonic Megtron 6)</td><td>3.4–3.6</td><td>0.002–0.004</td><td>185–195</td><td>3–5×</td><td>25–56 Gbps, 5G base stations</td></tr>
+    <tr><td>Very Low-Loss (ITEQ IT-968G)</td><td>3.2–3.4</td><td>0.001–0.002</td><td>190–200</td><td>4–7×</td><td>56–112 Gbps, data center</td></tr>
+    <tr><td>RF/Microwave (Rogers RO4003C)</td><td>3.38 ±0.05</td><td>0.0027 @ 10 GHz</td><td>>280 (decomp)</td><td>8–15×</td><td>RF, mmWave, antenna arrays</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Decision Heuristic:</strong> For every 10 dB of total channel loss budget, allocate 3 dB to dielectric loss (laminate) and 7 dB to conductor loss (copper roughness, trace geometry). If your dielectric loss exceeds 3 dB at Nyquist frequency, move up one laminate grade.</p>
+  </div>
+
+  <h2>Manufacturer-by-Manufacturer Deep Dive</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 1</div>
+    <div class="checklist-content">
+      <h4>Shengyi S1000-2 — The Workhorse High-Tg FR-4 (China)</h4>
+      <p>Shengyi is the world's largest PCB laminate manufacturer by volume. The S1000-2 is their premium high-Tg FR-4: Tg 175°C, Dk 3.9–4.2, Df 0.014–0.018, with phenolic-cured epoxy and woven E-glass. It's the default laminate for <span class="data-point">90%</span> of the high-Tg boards fabricated in Shenzhen. Key advantage: massive availability — every fabricator stocks it, lead times are days not weeks, and cost is only 20–50% above standard FR-4. For designs up to ~5 Gbps where Df isn't yet the limiting factor, S1000-2 is the cost-optimal choice. Shengyi also offers S7439 (mid-loss, Df 0.008) and Synamic series (low-loss, Df 0.002) for higher-speed applications. For <a href="/blog/pcb-cost-factors.html">PCB cost factors</a>, laminate grade drives 15–40% of total bare-board cost.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 2</div>
+    <div class="checklist-content">
+      <h4>Isola FR408HR — The Mid-Loss Standard (US)</h4>
+      <p>Isola FR408HR (Tg 185°C, Dk 3.6–3.8, Df 0.008–0.010) is the most commonly specified mid-loss laminate worldwide. The naming is deliberate: "408" = 40 series with Df ~0.008, "HR" = high reliability. It uses a proprietary multifunctional epoxy resin with low-Dk E-glass reinforcement. FR408HR bridges the gap between standard FR-4 (Df 0.020) and expensive low-loss materials (Df <0.004) — and it does so at roughly <span class="data-point">1.8–2.5×</span> FR-4 cost. For 10–25 Gbps designs, FR408HR is the standard recommendation from most SI engineers. Our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> includes FR408HR stackup templates for 8, 12, and 16-layer boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 3</div>
+    <div class="checklist-content">
+      <h4>Panasonic Megtron 6 — The Low-Loss Gold Standard (Japan)</h4>
+      <p>Megtron 6 (R-5775, Tg 185°C, Dk 3.4–3.6, Df 0.002–0.004) is the laminate that dominates 25–56 Gbps designs in telecom, datacom, and high-performance computing. Its halogen-free polyphenylene ether (PPE) resin system delivers significantly lower Df than epoxy-based systems while maintaining good CAF (conductive anodic filament) resistance and thermal reliability. Megtron 6 costs <span class="data-point">3–5×</span> FR-4 but is still cost-competitive against Rogers materials for digital applications. Panasonic also offers Megtron 7 (Df 0.001, for 112 Gbps PAM4) and Megtron 8 (Df <0.001). For <a href="/blog/telecom-5g-pcb.html">telecom and 5G PCBs</a>, Megtron 6 is the workhorse laminate for baseband and backplane applications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 4</div>
+    <div class="checklist-content">
+      <h4>ITEQ IT-968G — The Emerging Very-Low-Loss Contender (Taiwan)</h4>
+      <p>ITEQ IT-968G (Tg 195°C, Dk 3.2–3.4, Df 0.001–0.002) is positioned as a Megtron 6/7 competitor at a <span class="data-point">10–20%</span> lower price point. It uses a modified PPE resin with high-Tg filler system and spread glass for improved dimensional stability. IT-968G is gaining adoption in server and switch applications at 56–112 Gbps where designers want Megtron-level Df without Megtron pricing. Supply chain note: ITEQ availability in China is excellent (ITEQ has major manufacturing in Zhongshan and Suzhou), but European and North American fabricators may have longer lead times. For <a href="/blog/ai-edge-computing-pcb.html">AI edge computing PCBs</a> running high-speed interconnects, IT-968G is increasingly the laminate specified on fabrication notes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 5</div>
+    <div class="checklist-content">
+      <h4>Rogers RO4003C — RF and Microwave (US)</h4>
+      <p>RO4003C (Dk 3.38 ±0.05, Df 0.0027, Tg >280°C decomposition) is a hydrocarbon-ceramic laminate, not epoxy-based. It offers exceptional Dk stability across both frequency and temperature — critical for RF filters, antenna arrays, and power amplifiers where impedance drift directly degrades performance. Unlike PTFE-based laminates (Rogers RT/duroid series), RO4003C is process-compatible with standard FR-4 fabrication (no sodium etching or plasma treatment required), making it practical for hybrid stackups. Cost: <span class="data-point">8–15×</span> FR-4. For <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB design and manufacturing</a>, RO4003C is the standard for sub-6 GHz and mmWave applications up to 30 GHz. Above 30 GHz, consider RO3003 or RT/duroid 5880.</p>
+    </div>
+  </div>
+
+  <h2>Application-Specific Laminate Recommendations</h2>
+
+  <table class="spec-table">
+    <tr><th>Application</th><th>Signal Speed</th><th>Recommended Laminate</th><th>Why</th></tr>
+    <tr><td>Consumer IoT / Wearables</td><td><1 Gbps</td><td>Standard FR-4 (S1141)</td><td>Cost-sensitive, short traces, low layer count</td></tr>
+    <tr><td>Automotive ECU / BMS</td><td>0.1–1 Gbps (CAN/LIN)</td><td>High-Tg FR-4 (S1000-2)</td><td>Thermal reliability, IATF compliance</td></tr>
+    <tr><td>Industrial PLC / Motor Drive</td><td><1 Gbps</td><td>High-Tg FR-4 (S1000-2)</td><td>Multiple reflow cycles, wide temp range</td></tr>
+    <tr><td>Server / Switch Backplane</td><td>25–56 Gbps</td><td>Megtron 6 or IT-968G</td><td>Df driven — loss budget dominant</td></tr>
+    <tr><td>5G Base Station / RRU</td><td>10–25 Gbps + RF</td><td>Megtron 6 + Rogers hybrid</td><td>Digital speed + RF PA on same board</td></tr>
+    <tr><td>Data Center 112G Switch</td><td>56–112 Gbps PAM4</td><td>Megtron 7 or IT-988G</td><td>Ultra-low Df, extremely tight Dk control</td></tr>
+    <tr><td>mmWave Radar / 77 GHz</td><td>24–81 GHz RF</td><td>RO3003 / RT5880</td><td>Lowest Df at mmWave, stable Dk</td></tr>
+    <tr><td>Medical Implant / Aerospace</td><td>Varies</td><td>Polyimide or High-Tg FR-4</td><td>Reliability, outgassing, thermal cycling</td></tr>
+  </table>
+
+  <h2>Hybrid Stackups — Mixing Laminates in One Board</h2>
+
+  <p>Many high-frequency designs use a hybrid stackup: RF materials on the outer layers (where antenna elements and transmission lines sit) and standard or mid-loss FR-4 on inner layers (for power/ground planes and low-speed digital). This cuts the board cost by <span class="data-point">40–60%</span> compared to an all-RF-laminate stackup while delivering the same RF performance where it matters.</p>
+
+  <p>The key constraint: the CTE mismatch between different laminate types. Rogers RO4003C has a Z-axis CTE of ~46 ppm/°C; FR-4 is ~60–70 ppm/°C. This differential expansion stresses the resin-to-resin bond at the laminate interface. For reliability, the prepreg bonding the dissimilar materials must be selected to absorb the CTE difference — typically a high-resin-content (60–70%) prepreg with low-flow characteristics. For <a href="/blog/pcb-thermal-management.html">PCB thermal management</a> considerations in hybrid stackups, the CTE differential also affects via reliability under thermal cycling.</p>
+
+  <h2>How to Specify Laminate on Your Fabrication Drawing</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use the IPC-4101 Slash Sheet Number</h4>
+      <p>Instead of specifying "Panasonic Megtron 6," write: <strong>"IPC-4101/102"</strong> (for high-Tg FR-4) or specify by manufacturer + grade: <strong>"Panasonic R-5775 (Megtron 6) or equivalent"</strong>. The "or equivalent" clause lets your fabricator substitute a comparable material if your preferred laminate has supply chain delays — which saves weeks of lead time. For Shenzhen fabricators, IT-968G is a common Megtron 6 equivalent. For <a href="/blog/pcb-materials-guide.html">PCB materials selection</a>, this slash-sheet equivalency is standard industry practice.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Specify Dk/Df Tolerance, Not Just the Nominal Value</h4>
+      <p>Writing "Dk = 3.5" is insufficient — your fabricator needs the tolerance: <strong>"Dk = 3.5 ±0.05 @ 10 GHz"</strong>. Different laminate batches from the same manufacturer can vary ±0.04–0.08 in Dk. If your impedance budget demands tighter control, specify "impedance test coupons required" and let the fabricator adjust line widths based on actual laminate batch Dk — this is standard practice for controlled-impedance orders. See our <a href="/blog/pcb-certifications-compliance.html">PCB certifications guide</a> for IPC-4101 compliance requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Include UL Recognition Requirements</h4>
+      <p>For products requiring UL listing, the laminate must be UL-recognized with a minimum RTI (Relative Thermal Index) appropriate for your operating temperature. Most mid-loss and low-loss laminates carry UL recognition with RTI ratings of <span class="data-point">130–150°C</span>. Specify "UL 94 V-0, UL-recognized laminate required" on your fab drawing. This is non-negotiable for products sold in North America. Our <a href="/blog/pcb-rohs-compliance-guide.html">RoHS compliance guide</a> covers the related material restrictions.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Match the Laminate to Your Frequency and Reliability Needs</h2>
+
+  <p>Laminate selection boils down to <span class="data-point">three questions</span>: What's your maximum signal frequency? What's your operating temperature range? What's your acceptable cost multiplier over baseline FR-4? For consumer designs under 1 GHz, standard FR-4 is the answer — and spending more on laminate is wasted budget. For automotive and industrial electronics, high-Tg FR-4 with Tg ≥170°C is the minimum — for thermal reliability during lead-free assembly. For 25 Gbps and above, you're in mid-loss or low-loss territory where laminate cost jumps 3–7× but is still a fraction of the total BOM. And for RF/microwave, the laminate is your circuit — the cost premium is non-negotiable.</p>
+
+  <p>At Huaxing PCBA, we stock Shengyi S1000-2, Isola FR408HR, Panasonic Megtron 6, ITEQ IT-968G, and Rogers RO4003C as standard inventory items — no long-lead-time special orders for these materials. If your design specifies a laminate we don't stock, we can source it from our supplier network, typically adding <span class="data-point">3–5 business days</span> to lead time. <a href="/blog/pcb-supplier-audit.html">Learn how to audit PCB suppliers</a> for laminate handling capability, or <a href="/contact/">submit your stackup requirements</a> for a material-specific fabrication quote.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-pcb-laminate.webp)">
+      <h2>Not Sure Which Laminate Your Design Needs?</h2>
+      <p>Send your stackup requirements and signal speed targets — our engineering team will recommend the optimal laminate with cost comparison for your volume within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Laminate Recommendation <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+const FORM_ENDPOINT = 'https://inquiry-proxy.huaxingpcba.workers.dev';
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch(FORM_ENDPOINT,{method:'POST',body:d});if(r.ok){f.reset();closeModal();alert('Thank you! We will respond within 24 hours.')}else{alert('Error submitting. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+
+</body>
+</html>
