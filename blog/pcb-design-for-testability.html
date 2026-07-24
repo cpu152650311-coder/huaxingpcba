@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Design for Testability (DFT) — Test Point Placement, Boundary Scan &amp; ICT Access Strategies | Huaxing PCBA</title>
+<meta name="description" content="Complete DFT guide for PCB designers: test point placement rules, boundary scan (JTAG 1149.1) implementation, ICT fixture design considerations, flying probe access requirements, and how to achieve >95% test coverage without adding cost.">
+<meta property="og:title" content="PCB Design for Testability (DFT) — Test Point Placement, Boundary Scan &amp; ICT Access">
+<meta property="og:description" content="Poor DFT adds 30-40% to test costs and misses 15% of assembly defects. This guide covers test point placement, boundary scan strategies, and ICT fixture design for high coverage at low cost.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-design-for-testability.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-dft.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-design-for-testability.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Design for Testability (DFT) — Test Point Placement, Boundary Scan & ICT Access Strategies",
+  "description": "Complete DFT guide for PCB designers: test point placement rules, boundary scan (JTAG 1149.1) implementation, ICT fixture design considerations, flying probe access requirements, and how to achieve >95% test coverage without adding cost.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-dft.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-design-for-testability.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-design-for-testability.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-dft.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Design for Testability (DFT):<br><em>Test Point Placement, Boundary Scan &amp; ICT Access Strategies</em></h1>
+      <p class="reveal">Poor DFT adds 30–40% to your test budget and still misses 15% of assembly defects. Here is a practical DFT framework that achieves >95% coverage — without increasing layer count or board size.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Design for Testability</span></div>
+
+  <p>Every PCB that leaves a factory is tested. The question is how thoroughly — and at what cost. A board designed without testability in mind forces the manufacturer into expensive workarounds: custom ICT fixtures that take 4 weeks to build, flying probe programs that run 20 minutes per board, or worst of all, functional test escapes that ship defects to your customer. DFT is not an afterthought you hand off to the test engineer after layout is frozen. It is a set of design decisions made during schematic capture and layout that determine whether your board can be tested efficiently — or at all.</p>
+
+  <p>At Huaxing PCBA, our test engineering team processes over <span class="data-point">8,000</span> unique PCB designs per year across 8 SMT lines. The number one recurring issue we see in DFM reviews is insufficient test access — boards where critical nets have no test points, where BGA escape routing blocks probe access, or where JTAG chains are broken by mixed-voltage domains with no level translation. This guide covers the DFT decisions that matter most, organized by test methodology: ICT, flying probe, boundary scan, and functional test.</p>
+
+  <img class="article-img" src="../generated/blog-dft-hero.webp" alt="Close-up of PCB test probe landing on a gold-plated test pad, precision spring-loaded pogo pin in sharp focus against green solder mask" loading="lazy" style="max-width:80%">
+
+  <h2>Why DFT Matters: The Economics of Test Coverage</h2>
+
+  <p>The cost of finding a defect rises exponentially the further downstream it escapes. A solder bridge caught by AOI costs $0.02 to rework. The same bridge missed by AOI but caught at ICT costs $0.15. If ICT also misses it and functional test catches it, the cost jumps to $5–15. And if it reaches the field? Return costs average $350–1,200 per incident for an industrial PCB, not counting reputational damage. DFT is fundamentally about shifting defect detection as far left as possible.</p>
+
+  <table class="spec-table">
+    <tr><th>Test Stage</th><th>Detects</th><th>Coverage (Good DFT)</th><th>Coverage (Poor DFT)</th><th>Cost per Board</th></tr>
+    <tr><td>ICT</td><td>Shorts, opens, wrong/missing component, reversed polarity</td><td>85–95%</td><td>50–65%</td><td>$0.08–0.25</td></tr>
+    <tr><td>Boundary Scan (JTAG)</td><td>BGA opens/shorts, interconnects between scan-chain devices</td><td>60–80% of digital nets</td><td>0–20%</td><td>$0.02–0.05</td></tr>
+    <tr><td>Functional Test</td><td>System-level failures, timing, analog accuracy, firmware bugs</td><td>90–99%</td><td>70–85%</td><td>$5–15</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> Boards designed with proper DFT achieve >98% defect coverage at an average test cost of $0.35/board (ICT + boundary scan). Boards without DFT average $4.20/board — a 12× difference — because they depend almost entirely on expensive functional test. For a 5,000-unit production run, that is a $19,250 penalty for skipping DFT.</p>
+  </div>
+
+  <h2>Rule 1: Test Point Placement — The 100-Mil Rule and Beyond</h2>
+
+  <p>Test points are the physical landing pads where ICT fixtures or flying probes make electrical contact. The single most important DFT rule: every net on the board should have at least one accessible test point. Power and ground planes can be probed at their vias, but every signal net, every passive component node, and every IC pin that is not accessible from the bottom side needs a dedicated test pad.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Minimum Test Pad Size: 35 mil (0.89 mm) for ICT, 20 mil (0.5 mm) for Flying Probe</h4>
+      <p>ICT fixtures use spring-loaded pogo pins with 25–50 mil tip diameters. They need a flat, solder-mask-free landing area of at least 35 mil diameter for reliable contact. Flying probe machines can hit smaller targets — down to 12 mil on premium systems — but 20 mil is the practical minimum for consistent first-pass contact. Avoid placing test points on component pads; the solder paste and component body block probe access. Place them on dedicated traces stubbed off the net.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Center-to-Center Spacing: 100 mil (2.54 mm) Minimum</h4>
+      <p>ICT fixture pins are physically large — the spring barrel is typically 50–75 mil in diameter. You cannot pack test points at the same density as 0402 components. The industry standard is 100 mil center-to-center spacing, which allows standard ICT probe heads (75 mil body diameter) without mechanical interference. If you need tighter spacing, 75 mil is possible with micro-probes, but fixture cost increases 40–60% and probe lifetime drops from 500,000 cycles to 150,000.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep All Test Points on One Side (Bottom)</h4>
+      <p>Single-sided ICT fixtures cost $2,000–5,000. Double-sided fixtures — needed when test points are scattered across top and bottom — cost $8,000–15,000 and take 5–6 weeks to manufacture. Route all test points to the bottom side during layout. If a net only exists on the top layer, drop a via to bring it to the bottom and place the test pad there. The via itself can serve as a test point if it meets the size and spacing rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Test Point to Component Clearance: 50 mil Minimum</h4>
+      <p>ICT fixture probes come down vertically — they need clearance from tall components (capacitors, connectors, inductors) to avoid collisions. Maintain at least 50 mil edge-to-edge between any test pad and a component body taller than 2 mm. For components taller than 5 mm (large electrolytics, relays), increase to 100 mil. The fixture designer will add machined relief pockets for tall parts, but you must give them the space to do it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Test Point Marking: Solder Mask Opening + Silkscreen ID</h4>
+      <p>Every test point needs a solder mask opening (to expose the copper) and ideally a silkscreen reference designator (TP1, TP2, etc.) matching the schematic. This lets the ICT programmer cross-reference the netlist and fixture pin map. Without silkscreen markings, the fixture builder has to manually probe and beep-test every pad to identify nets — adding 8–12 hours of labor per fixture.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-dft-testpoints.webp" alt="Macro photograph of a PCB bottom side showing an array of gold-plated circular test pads with surrounding probe clearance zones, precision manufacturing detail" loading="lazy" style="max-width:80%">
+
+  <h2>Rule 2: Boundary Scan (JTAG IEEE 1149.1) — Free Test Coverage</h2>
+
+  <p>Boundary scan is the most underutilized DFT technique in mid-complexity PCB design. If your board has a microprocessor, FPGA, CPLD, or any device with JTAG pins (TDI, TDO, TMS, TCK, and optionally TRST), you already have the hardware for boundary scan testing — you just need to design the scan chain correctly. Boundary scan can test BGA interconnects, SMD opens/shorts, and even verify memory bus connections without a single physical test point. And it adds zero recurring cost: no fixture, no probe wear, just a one-time test program.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Create a Single, Unbroken JTAG Chain</h4>
+      <p>Daisy-chain all JTAG-compatible devices in one scan path: TDO of device 1 → TDI of device 2 → TDO of device 2 → TDI of device 3, and so on. The chain must be contiguous — any break and the entire chain stops working. If you have devices from different voltage domains (1.8V, 3.3V), insert level translators on TDI/TDO between domains. A single broken chain is the most common JTAG DFT failure we see. See our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> for how ICT and boundary scan complement each other.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Provide Dedicated JTAG Header (Not Just Edge Connector)</h4>
+      <p>A standard 10-pin or 14-pin 0.1" header with TDI, TDO, TMS, TCK, TRST, and ground pins lets the test engineer connect a boundary scan controller in seconds. If your only JTAG access is through a high-density board-to-board connector, you add $500–1,200 in custom fixturing cost and 2–3 weeks lead time for the adapter. A $0.08 header saves all of that. Place it on the board edge with 200 mil clearance for the ribbon cable connector body.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Include Pull-Up/Pull-Down Resistors on TCK, TMS, TRST</h4>
+      <p>JTAG signals must be in a defined state when the tester is not actively driving them. TCK needs a pull-down (10kΩ to GND) to prevent false clocking from noise. TMS and TRST need pull-ups (10kΩ to VCC) to keep the TAP controller in a known state. Missing these resistors = intermittent boundary scan failures that are nearly impossible to debug because they vanish when you connect a scope probe. This is a $0.03 BOM cost that prevents hours of debug.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When selecting microcontrollers or FPGAs for a new design, check the BSDL (Boundary Scan Description Language) file availability before committing. Most major vendors provide BSDL files, but some low-cost MCUs with JTAG pins do not implement the full 1149.1 boundary scan register — they use JTAG only for debug/programming. Without a BSDL file, boundary scan testing is not possible regardless of your DFT effort. Cross-check the vendor's BSDL library at design-in, not at test development.</p>
+  </div>
+
+  <h2>Rule 3: ICT Fixture Design — What the Fixture Builder Needs from You</h2>
+
+  <p>ICT fixtures are custom mechanical assemblies with hundreds of spring-loaded probes that press against your board's test points simultaneously. A good ICT program catches 85–95% of manufacturing defects in under 30 seconds. But the fixture can only test what it can reach. Every design decision that reduces probe access also reduces test coverage.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Provide Tooling Holes: 3.2 mm Diameter, at Least 3 Places</h4>
+      <p>ICT fixtures align your board using tooling pins that mate with non-plated through-holes in the PCB. You need at least three tooling holes (preferably in corners, outside the board outline if using rails) for stable mechanical registration. Standard diameter: 3.2 mm (0.125"). Tooling holes must be non-plated (NPTH) — plated holes have tolerance variation from the plating process that reduces alignment precision. The fixture can achieve ±2 mil alignment with proper tooling holes; without them, alignment drops to ±8–10 mil and probe contact reliability plummets.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Keep a 100-mil Keep-Out Zone Around Board Edges</h4>
+      <p>ICT fixtures use a vacuum seal gasket around the board perimeter. Any test point or tall component within 100 mil of the board edge interferes with the gasket seal, causing vacuum loss and unreliable probe contact. This is a hard rule — the fixture vendor will ask you to respin the layout if you violate it. For board outlines with irregular shapes, the keep-out zone follows the contour.</p>
+    </div>
+  </div>
+
+  <h2>Rule 4: Flying Probe vs ICT — When Each Makes Sense</h2>
+
+  <p>Flying probe testers use 4–8 robotic arms that move probes across the board, making contact with test points sequentially. There is no fixture — the probes navigate programmatically. This eliminates fixture cost and lead time but increases test time per board: 20–120 seconds for flying probe vs 15–30 seconds for ICT. The economic crossover is around 200–500 units for a simple board and 50–100 units for a complex one. If your production volume exceeds these thresholds, the one-time fixture cost (typically $3,000–8,000) is recovered through faster per-board test time within the first production run. Our <a href="/blog/pcb-assembly-process.html">PCB assembly process guide</a> covers where ICT fits in the full production flow.</p>
+
+  <p>At Huaxing PCBA, we operate both ICT and flying probe systems. For prototype and low-volume orders, flying probe provides 85–92% coverage with zero tooling cost and 24-hour turnaround. For production volumes above 500 units, we recommend ICT — the fixture cost is amortized over the run, and the 30-second test time keeps the SMT line moving. Design your board for both: if you follow the DFT rules above, your board is compatible with either test methodology, and you can choose based on volume economics rather than design constraints.</p>
+
+  <img class="article-img" src="../generated/blog-dft-fixture.webp" alt="ICT test fixture with an array of gold spring-loaded pogo pins aligned to a PCB, precision mechanical assembly on factory workbench under bright industrial lighting" loading="lazy" style="max-width:80%">
+
+  <h2>Summary: The DFT Checklist Before Layout Freeze</h2>
+
+  <p>Before you send Gerber files to your PCB manufacturer, verify these ten DFT requirements. Each one missed is either a direct cost increase or a test coverage gap that ships risk to your customer.</p>
+
+  <table class="spec-table">
+    <tr><th>#</th><th>Requirement</th><th>Cost if Missed</th></tr>
+    <tr><td>1</td><td>Every signal net has ≥1 test point on bottom side</td><td>$3–5/board (functional test instead of ICT)</td></tr>
+    <tr><td>2</td><td>Test pads ≥35 mil for ICT, ≥20 mil for flying probe</td><td>Fixture yield loss 5–8% (re-test cycles)</td></tr>
+    <tr><td>3</td><td>100 mil center-to-center test point spacing</td><td>Custom micro-probe fixture: +$3,000–5,000</td></tr>
+    <tr><td>4</td><td>JTAG chain continuous with level translators for mixed-voltage</td><td>Zero boundary scan coverage: +$2–4/board</td></tr>
+    <tr><td>5</td><td>Dedicated JTAG header with pull-up/pull-down resistors</td><td>Custom fixturing: +$500–1,200</td></tr>
+    <tr><td>6</td><td>≥3 tooling holes, 3.2 mm NPTH, in corners</td><td>Alignment drift ±10 mil: probe contact failures</td></tr>
+    <tr><td>7</td><td>100-mil keep-out zone from board edges</td><td>Vacuum seal failure: fixture redesign required</td></tr>
+    <tr><td>8</td><td>50 mil clearance from test pad to components >2 mm tall</td><td>Probe collision: fixture pocket machining +$800</td></tr>
+    <tr><td>9</td><td>Solder mask opening + silkscreen ID on every test point</td><td>Manual net identification: +8–12 hours fixture labor</td></tr>
+    <tr><td>10</td><td>BSDL file availability confirmed for all JTAG devices</td><td>Boundary scan not possible: lost coverage</td></tr>
+  </table>
+
+  <p>DFT is not a constraint on creativity — it is a set of mechanical and electrical rules that ensure your design can be verified at production scale. A board designed for testability costs less to manufacture, ships fewer defects, and gives you confidence that every unit leaving the line matches the design intent. At Huaxing PCBA, our DFM review checks all ten DFT rules before fabrication begins — whether you are prototyping 50 boards or ramping to 50,000. <a href="/blog/pcb-signal-integrity.html">Read our guide on signal integrity design rules</a> for the next step after DFT, or <a href="/contact/">contact our engineering team</a> to discuss test strategy for your specific design.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods: AOI, X-Ray, ICT & Functional Test</a></li>
+      <li><a href="/blog/pcb-assembly-process.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Assembly Process Step by Step</a></li>
+      <li><a href="/blog/ipc-class-2-vs-class-3.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Class 2 vs Class 3: Which Standard to Specify</a></li>
+      <li><a href="/blog/pcb-via-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Via Technology: Blind, Buried & Microvias</a></li>
+      <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity: Design Rules Above 100 MHz</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-dft.webp)">
+      <h2>Get a Free DFT Review with Your PCB Order</h2>
+      <p>Upload your Gerber files. Our test engineers check test point access, JTAG chain integrity, and fixture compatibility — included with every quote, 24-hour response.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Your Design <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
