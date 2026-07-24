@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceramic vs PTFE vs Polyimide PCB Substrates — High-Temperature &amp; High-Frequency Material Selection for Extreme Environments | Huaxing PCBA</title>
+<meta name="description" content="Compare ceramic (Al₂O₃, AlN), PTFE (Teflon), and polyimide PCB substrates: Dk/Df, thermal conductivity, Tg, cost, and application fit for RF, aerospace, downhole, and high-temperature electronics.">
+<meta property="og:title" content="Ceramic vs PTFE vs Polyimide PCB Substrates — High-Temperature &amp; High-Frequency Material Selection">
+<meta property="og:description" content="When FR-4 melts and Rogers isn't enough: comparing ceramic, PTFE, and polyimide PCB substrates for extreme environments. Dk/Df, thermal conductivity, cost, and application fit — with real data.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/ceramic-ptfe-polyimide-pcb-substrates.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ceramic-ptfe-polyimide.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/ceramic-ptfe-polyimide-pcb-substrates.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ceramic vs PTFE vs Polyimide PCB Substrates — High-Temperature & High-Frequency Material Selection for Extreme Environments",
+  "description": "Comparing ceramic (Al₂O₃, AlN), PTFE (Teflon), and polyimide PCB substrates for extreme environments — Dk/Df, thermal conductivity, Tg, cost, and application fit with real data points.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ceramic-ptfe-polyimide.webp",
+  "url": "https://huaxingpcba.com/blog/ceramic-ptfe-polyimide-pcb-substrates.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/ceramic-ptfe-polyimide-pcb-substrates.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ceramic-ptfe-polyimide.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Materials &amp; Process</p>
+      <h1 class="reveal">Ceramic vs PTFE vs Polyimide PCB Substrates:<br><em>High-Temperature &amp; High-Frequency Material Selection for Extreme Environments</em></h1>
+      <p class="reveal">When your PCB operates where FR-4 fails — 260°C downhole, 77 GHz radar, or the vacuum of space — the substrate material decides whether your design survives the first hour.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Ceramic, PTFE &amp; Polyimide PCB Substrates</span></div>
+
+  <p>FR-4 is the default PCB material for <span class="data-point">90%+</span> of all designs — and that's exactly the problem. When your design specification calls for continuous operation at 200°C, dielectric loss below <span class="data-point">0.002</span> at 30 GHz, or thermal conductivity above <span class="data-point">100 W/m·K</span>, FR-4 isn't just suboptimal — it's physically incapable. The substrate itself becomes the limiting factor. This guide compares the three specialty materials that engineers reach for when FR-4 and standard high-Tg laminates hit their limits: ceramic, PTFE, and polyimide.</p>
+
+  <p>At Huaxing PCBA, we process all three substrate families across our manufacturing lines — ceramic circuits for aerospace sensors, PTFE multilayer boards for 5G base station antenna arrays, and polyimide flex and rigid-flex for downhole drilling tools. Each material demands different fabrication processes, and understanding those differences is essential before you commit to a stackup. For a baseline understanding of standard materials, start with our <a href="/blog/pcb-materials-guide.html">comprehensive PCB materials guide</a> covering FR-4, High-Tg, Rogers, and aluminum substrates.</p>
+
+  <img class="article-img" src="../generated/blog-ceramic-ptfe-polyimide-hero.webp" alt="Three PCB substrates side by side — white ceramic, tan PTFE composite, and amber polyimide film — on a dark technical surface" loading="lazy" style="max-width:85%">
+
+  <h2>The Material Properties That Actually Matter</h2>
+
+  <p>Datasheets are full of numbers. The four that determine substrate selection for extreme environments:</p>
+
+  <table class="spec-table">
+    <tr><th>Property</th><th>FR-4 (baseline)</th><th>Ceramic (Al₂O₃ 96%)</th><th>PTFE (woven glass)</th><th>Polyimide</th></tr>
+    <tr><td>Dk @ 10 GHz</td><td>4.2–4.8</td><td>9.6–9.9</td><td>2.2–3.0</td><td>3.2–3.5</td></tr>
+    <tr><td>Df @ 10 GHz</td><td>0.017–0.025</td><td>0.0001–0.0004</td><td>0.0009–0.002</td><td>0.003–0.008</td></tr>
+    <tr><td>Tg (°C)</td><td>130–180</td><td>N/A (melts >2,000°C)</td><td>N/A (Td ~400°C)</td><td>250–400</td></tr>
+    <tr><td>Thermal conductivity (W/m·K)</td><td>0.3–0.4</td><td>20–170</td><td>0.2–0.3</td><td>0.12–0.35</td></tr>
+    <tr><td>CTE X-Y (ppm/°C)</td><td>12–16</td><td>6–8</td><td>12–24</td><td>12–20</td></tr>
+    <tr><td>Relative cost (1× = FR-4)</td><td>1×</td><td>50–200×</td><td>10–50×</td><td>8–30×</td></tr>
+  </table>
+
+  <p>The numbers tell the story: ceramic dominates thermal performance, PTFE dominates RF loss, and polyimide fills the gap where flex and moderate high-temperature performance intersect. But the numbers don't capture fabrication complexity — and that's where cost overruns happen.</p>
+
+  <h2>Ceramic PCB Substrates: When "Hot" Means 400°C, Not 150°C</h2>
+
+  <p>Ceramic PCBs aren't a single material — they span a family with dramatically different properties depending on composition. The three mainstream options:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Alumina (Al₂O₃, 96% or 99.6%) — The Workhorse Ceramic</h4>
+      <p>96% alumina is the most common ceramic PCB substrate, offering thermal conductivity of <span class="data-point">20–24 W/m·K</span> — roughly 60× better than FR-4. 99.6% alumina pushes this to <span class="data-point">28–35 W/m·K</span> with lower dielectric loss. The Dk of 9.6–9.9 means your transmission lines will be much narrower than on FR-4 (impedance scales with 1/√Dk), which is actually an advantage for miniaturization. Alumina handles continuous operation at <span class="data-point">350°C+</span> and survives soldering temperatures that would carbonize organic substrates. Applications: LED modules (the dominant use case), power hybrid circuits, high-temperature sensors, automotive exhaust gas sensors, and downhole drilling electronics.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Aluminum Nitride (AlN) — Thermal Performance King</h4>
+      <p>AlN delivers thermal conductivity of <span class="data-point">140–170 W/m·K</span> — approaching the performance of some metals — with a Dk of 8.6–8.9 and a CTE of <span class="data-point">4.5 ppm/°C</span> that closely matches silicon. This CTE match makes AlN the default substrate for direct-bond-copper (DBC) power modules where semiconductor die are soldered directly to the substrate. Cost is <span class="data-point">3–5× higher</span> than alumina — expect $500–1,500/m² vs $100–300/m² for 96% alumina. Applications: IGBT power modules, RF power amplifiers above 50W, laser diode submounts, and satellite power conditioning where the absence of organic outgassing matters in vacuum. See our <a href="/blog/power-electronics-pcb.html">power electronics PCB guide</a> for thermal management strategies that pair with ceramic substrates.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Fabrication Reality: Why Ceramic PCBs Take 3× Longer</h4>
+      <p>Ceramic substrates are brittle. They cannot be mechanically drilled with standard PCB tooling — laser drilling (CO₂ or UV) is required for vias, adding <span class="data-point">$50–150</span> per design to NRE. Copper is applied via thick-film printing (screen-printed conductive paste fired at 850°C) or thin-film sputtering (vacuum deposition + photolithography). Minimum trace width on thick-film ceramic is typically <span class="data-point">125–150µm</span> (5–6 mil), vs 75µm (3 mil) for standard PCB etching. Thin-film ceramic achieves <span class="data-point">10µm</span> traces — essential for RF circuits at mmWave frequencies above 30 GHz. Our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB design guide</a> covers impedance requirements that make thin-film ceramic attractive for 5G and radar applications.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-ceramic-ptfe-polyimide-comparison.webp" alt="Macro photography of three substrate surfaces — white ceramic with thick-film gold conductors, tan PTFE laminate with copper traces, and amber polyimide flex circuit" loading="lazy" style="max-width:90%">
+
+  <h2>PTFE (Teflon) Substrates: RF Performance Above 20 GHz</h2>
+
+  <p>PTFE-based laminates — most famously the Rogers RO3000 and RO4000 families — are the gold standard for RF and microwave PCBs. The ultra-low dielectric constant (Dk <span class="data-point">2.2–3.0</span>) and dissipation factor (Df <span class="data-point">0.0009–0.002</span>) mean signal loss per inch at 30 GHz is a fraction of what you'd see on FR-4, where Df above 0.02 makes anything beyond 5 GHz impractical for long traces.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Pure PTFE vs Ceramic-Filled PTFE — The Tradeoff</h4>
+      <p>Pure PTFE (woven glass-reinforced, e.g., Rogers RT/duroid 5880) offers the lowest Df (<span class="data-point">0.0009</span> at 10 GHz) and lowest Dk (<span class="data-point">2.20</span>) — ideal for mmWave antennas and satellite communications above 30 GHz. But pure PTFE has a CTE of <span class="data-point">~24 ppm/°C</span> in the Z-axis, which can cause plated-through-hole barrel cracking under thermal cycling. Ceramic-filled PTFE (e.g., Rogers RO3003, RO3035) loads the PTFE with ceramic powder to bring the CTE down to <span class="data-point">~17 ppm/°C</span> — closer to copper's 17 ppm/°C — dramatically improving PTH reliability, at the cost of slightly higher Dk (3.0 vs 2.2) and Df (0.0013 vs 0.0009). For most designs below 40 GHz, ceramic-filled PTFE is the pragmatic choice. See our <a href="/blog/telecom-5g-pcb.html">telecom and 5G PCB guide</a> for the specific material requirements of base station and antenna designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>PTFE Fabrication Challenges — Why Many Shops Won't Touch It</h4>
+      <p>PTFE is soft, chemically inert, and cold-flows under pressure. Standard PCB drilling generates smeared, hairy hole walls that conventional desmear chemistry cannot clean — PTFE resists almost all solvents by design. Fabrication requires <strong>plasma etching</strong> (fluorine-based gas plasma, typically CF₄/O₂) to activate the hole wall surface before copper plating. This adds <span class="data-point">$200–500</span> per panel in processing cost and requires equipment that many PCB shops don't have. Multilayer PTFE boards need <strong>bonding films</strong> (low-melt PTFE or hydrocarbon thermoset prepregs) rather than standard FR-4 prepregs, and lamination cycles run <span class="data-point">3–6 hours</span> at precisely controlled temperatures vs 1–2 hours for FR-4.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> PTFE is a fabrication-difficult material, not an exotic one. The material cost is 10–50× FR-4, but the processing cost — plasma etch, specialized bonding films, longer lamination cycles, and lower first-pass yield — often exceeds the material premium. Budget <span class="data-point">3–5× the total board cost</span> of an equivalent-layer-count FR-4 board, not just 10× the laminate price.</p>
+  </div>
+
+  <h2>Polyimide Substrates: The Flex and High-Temperature Bridge</h2>
+
+  <p>Polyimide straddles the space between standard organic laminates and exotic ceramics. With a Tg of <span class="data-point">250°C</span> (standard polyimide) to <span class="data-point">400°C</span> (high-performance grades like Upilex-S), it handles soldering temperatures easily and survives continuous operation at 200°C — well beyond FR-4's limit but below ceramic territory.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Polyimide Flex — The Ubiquitous Option</h4>
+      <p>Polyimide flex circuits — a sandwich of polyimide film (25–125µm thick) with rolled-annealed copper foil and acrylic or epoxy adhesive — are the standard for dynamic flex applications. Bend reliability exceeds <span class="data-point">100 million cycles</span> at bend radii above 10× the total thickness. The Dk of 3.2–3.5 and Df of 0.003–0.008 make polyimide flex suitable for digital signals up to <span class="data-point">~5 Gbps</span> — fine for most consumer and industrial applications, but lossy for high-frequency RF above 10 GHz. For detailed flex design rules, our <a href="/blog/flex-pcb-design-manufacturing.html">flex PCB design guide</a> covers bend radius calculations and stiffener placement.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Rigid Polyimide Laminates — High-Temp Without the Flex</h4>
+      <p>Polyimide resin systems are also available as rigid laminates (e.g., Arlon 85N, Isola P95) for high-temperature rigid PCBs. Unlike flex polyimide, these use woven glass reinforcement and a polyimide resin matrix. Tg ranges from <span class="data-point">250–280°C</span> with decomposition temperature (Td) above 400°C. Z-axis CTE is typically lower than FR-4 (<span class="data-point">~45 ppm/°C</span> vs 55–70 for standard FR-4), improving PTH reliability under thermal cycling. Rigid polyimide boards are the go-to for downhole drilling tools (180–225°C continuous), jet engine sensor electronics, and military avionics requiring MIL-PRF-31032 qualification. Cost premium: <span class="data-point">8–15×</span> over FR-4 for the laminate alone. Our <a href="/blog/aerospace-defense-pcb.html">aerospace & defense PCB guide</a> covers the qualification requirements for these applications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Rigid-Flex With Polyimide — The Best of Both Worlds</h4>
+      <p>Polyimide is the flex layer in every rigid-flex PCB. The rigid sections use FR-4 or polyimide rigid laminates, and the flex layers use polyimide film. This combines the high-density routing of rigid boards with the three-dimensional packaging flexibility of flex circuits — critical for aerospace, medical implants, and military wearable electronics where space constraints are extreme. The fabrication complexity is high: rigid-flex requires sequential lamination with precisely aligned flex layer openings in the rigid sections. Typical yield on a 6-layer rigid-flex with 2 flex layers is <span class="data-point">85–92%</span>, compared to <span class="data-point">96–99%</span> for an equivalent rigid-only board. Our <a href="/blog/rigid-flex-pcb.html">rigid-flex manufacturing guide</a> covers the design rules and cost factors in detail.</p>
+    </div>
+  </div>
+
+  <h2>How to Choose: The Decision Matrix</h2>
+
+  <p>The substrate decision comes down to three questions, answered in order:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>What's Your Maximum Operating Temperature?</h4>
+      <p>&lt;130°C → FR-4 is fine. 130–180°C → High-Tg FR-4 or polyimide. 180–250°C → Polyimide (rigid or flex). 250–400°C → Ceramic (alumina). &gt;400°C → Ceramic (alumina or AlN), but note that solder melts at ~220°C (SAC305), so attach methods shift to sintered silver, gold-germanium eutectic, or wire bonding at these temperatures. Read our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> for heat dissipation strategies that work across substrate types.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>What's Your Maximum Frequency?</h4>
+      <p>&lt;1 GHz → Any material works, including FR-4. 1–5 GHz → High-performance FR-4 or polyimide if traces are kept short. 5–20 GHz → PTFE (ceramic-filled) or thin-film ceramic. &gt;20 GHz → Pure PTFE or thin-film ceramic. At 77 GHz (automotive radar), the difference between Df=0.002 (PTFE) and Df=0.008 (polyimide) is approximately <span class="data-point">4× the insertion loss</span> per inch — your 2-inch trace that loses 1 dB on PTFE loses 4 dB on polyimide, cutting your effective range in half. For high-frequency design rules, see our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> and <a href="/blog/impedance-control.html">impedance control deep-dive</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Do You Need Flexibility?</h4>
+      <p>Yes → Polyimide flex or rigid-flex is the only game in town. Neither ceramic nor PTFE supports dynamic flex — ceramic shatters, and PTFE cold-flows and deforms permanently. If the flex requirement is static (form-in-place only, not dynamic), PTFE flex materials exist but are rare and expensive. For most designs, polyimide is the flex substrate, period.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Decision Shortcut:</strong> Ceramic = thermal conductivity above 20 W/m·K or temperature above 250°C. PTFE = frequency above 20 GHz with loss below 1 dB/inch. Polyimide = flex required OR temperature 180–250°C without needing ceramic-level thermal conductivity. Most designs beyond FR-4 land on polyimide.</p>
+  </div>
+
+  <h2>Summary: Pick the Substrate That Matches Your Physics, Not Your Comfort Zone</h2>
+
+  <p>The substrate decision is ultimately a physics problem, not a preference. The temperature at which your dielectric decomposes, the dielectric loss that turns your 77 GHz signal into noise, and the thermal resistance that cooks your power transistors — these are hard limits set by material properties, not by your PCB vendor's capabilities.</p>
+
+  <p>At Huaxing PCBA, we fabricate across all three substrate families: alumina and AlN ceramic circuits (thick-film and thin-film), PTFE multilayer RF boards (including mixed-stackup designs with FR-4 sub-cores for cost optimization), and polyimide flex and rigid-flex assemblies. Our engineering team can review your stackup and recommend the most cost-effective substrate that meets your electrical and thermal requirements. <a href="/contact/">Submit your design specifications</a> for a material selection review — we'll confirm whether your chosen substrate is right, or recommend a better one.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ceramic-ptfe-polyimide.webp)">
+      <h2>Need a Specialty Substrate PCB Quote?</h2>
+      <p>Ceramic, PTFE, or polyimide — send us your stackup and Gerber files. Our engineering team will review material compatibility and deliver a quote with fabrication notes within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',body:d});if(r.ok){alert('Thank you! We will respond within 24 hours.');f.reset();closeModal()}else{alert('Submission failed. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')};return false}
+</script>
+</body>
+</html>

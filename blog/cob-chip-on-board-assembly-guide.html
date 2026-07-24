@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COB vs COG vs SMT Assembly — Chip-on-Board Technologies for Miniaturized &amp; High-Reliability Electronics | Huaxing PCBA</title>
+<meta name="description" content="Complete comparison of COB (Chip-on-Board), COG (Chip-on-Glass), and SMT assembly technologies. Learn when to use each — wire bonding, encapsulation, miniaturization limits, and reliability data for medical, aerospace, and consumer electronics.">
+<meta property="og:title" content="COB vs COG vs SMT Assembly — Chip-on-Board Technologies for Miniaturized &amp; High-Reliability Electronics">
+<meta property="og:description" content="COB vs COG vs SMT: which chip assembly technology fits your miniaturization needs? Wire bonding, encapsulation, and reliability comparison for medical, aerospace, and IoT applications.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/cob-chip-on-board-assembly-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-cob-assembly.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/cob-chip-on-board-assembly-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "COB vs COG vs SMT Assembly — Chip-on-Board Technologies for Miniaturized & High-Reliability Electronics",
+  "description": "Complete comparison of COB (Chip-on-Board), COG (Chip-on-Glass), and SMT assembly technologies for miniaturized and high-reliability electronic products.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-cob-assembly.webp",
+  "url": "https://huaxingpcba.com/blog/cob-chip-on-board-assembly-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/cob-chip-on-board-assembly-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-cob-assembly.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Assembly Technology</p>
+      <h1 class="reveal">COB vs COG vs SMT Assembly:<br><em>Chip-on-Board Technologies for Miniaturized &amp; High-Reliability Electronics</em></h1>
+      <p class="reveal">When PCB space shrinks to the last square millimeter, your assembly technology choice determines whether the product works — or fails in the field.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>COB &amp; COG Assembly Guide</span></div>
+
+  <p>Most PCB designers live in the SMT world. It's the default, the comfortable choice. But when your product demands a <span class="data-point">50%</span> reduction in footprint, better thermal performance, or the kind of reliability that keeps a pacemaker beating for 10 years, surface-mount technology hits its ceiling. That's where chip-on-board (COB) and chip-on-glass (COG) enter the conversation — assembly technologies that mount bare semiconductor die directly onto substrates, eliminating the package entirely. This guide compares COB, COG, and SMT across the dimensions that matter: size, cost, thermal performance, and long-term reliability.</p>
+
+  <p>At Huaxing PCBA, we operate dedicated COB bonding lines alongside our <span class="data-point">8 SMT lines</span>, giving us the rare ability to offer all three technologies under one roof. Whether you need 25µm gold wire bonds for an implantable medical sensor or high-volume COB for LED arrays, understanding the tradeoffs starts here.</p>
+
+  <img class="article-img" src="../generated/blog-cob-assembly-hero.webp" alt="Close-up macro view of gold wire bonds on a chip-on-board assembly, semiconductor die attached to PCB substrate" loading="lazy" style="max-width:85%">
+
+  <h2>What Is Chip-on-Board (COB) Assembly?</h2>
+
+  <p>COB mounts a bare, unpackaged semiconductor die directly onto a PCB or ceramic substrate. The die is attached with conductive or non-conductive epoxy, then wire-bonded — typically with <span class="data-point">25µm gold or aluminum wire</span> — to connect the die pads to the substrate traces. Finally, a glob of black epoxy (glob-top encapsulation) seals the die and bond wires against moisture and mechanical damage.</p>
+
+  <p>The key number: COB reduces the total footprint of a packaged IC by <span class="data-point">40–70%</span> compared to the same die in a QFN or BGA package. That's not an incremental improvement — it's the difference between fitting a design into a hearing aid versus needing a larger enclosure.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Die Attach — The Foundation Step</h4>
+      <p>The bare die is picked from wafer and placed onto the substrate with <span class="data-point">±5µm</span> placement accuracy. Conductive silver epoxy provides both mechanical attachment and electrical connection for the die backside (common for power devices); non-conductive epoxy is used when the die backside must remain electrically isolated. Cure time: <span class="data-point">1–2 hours</span> at 150°C. The quality of this bond directly affects thermal resistance and long-term reliability.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Wire Bonding — Gold vs Aluminum vs Copper</h4>
+      <p>Ultrasonic or thermosonic bonding welds <span class="data-point">25µm–50µm</span> diameter wire from die pad to substrate pad at speeds up to <span class="data-point">15 bonds/second</span>. Gold wire (99.99% Au) dominates for high-reliability applications due to corrosion resistance. Aluminum wire suits power devices where larger diameters (up to 500µm) carry higher currents. Copper wire — growing in cost-sensitive consumer applications — offers <span class="data-point">30%</span> better electrical conductivity than gold at one-tenth the material cost, though it requires forming gas (95% N₂ / 5% H₂) during bonding to prevent oxidation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Encapsulation — Glob-Top vs Dam-and-Fill</h4>
+      <p>The bonded die and wires must be protected. Glob-top — a single dome of liquid epoxy encapsulant dispensed over the entire die area — is the most common method, adding approximately <span class="data-point">0.5–1.5mm</span> of height. Dam-and-fill uses a higher-viscosity epoxy to build a perimeter dam first, then fills the cavity with a lower-viscosity encapsulant — better for dies with sensitive surface structures (MEMS sensors, SAW filters). Both methods achieve <span class="data-point">IPC Class 3</span> reliability when properly cured. For context on IPC classification, see our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 comparison</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> COB eliminates the IC package — wire bonds connect the bare die directly to your PCB. The result is 40–70% smaller footprint, shorter signal paths (less parasitic inductance), and better thermal coupling to the substrate. But it requires controlled cleanroom bonding and encapsulation processes that most PCB assembly houses don't have.</p>
+  </div>
+
+  <h2>COG (Chip-on-Glass): When the Substrate Is the Display</h2>
+
+  <p>Chip-on-Glass is a specialized subset of COB where the substrate is glass — almost always an LCD or OLED display panel. The driver IC is mounted directly onto the glass edge using anisotropic conductive film (ACF) rather than wire bonds. This is the technology behind every smartphone, smartwatch, and automotive instrument cluster display.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>COB</th><th>COG</th><th>SMT</th></tr>
+    <tr><td>Substrate</td><td>PCB, ceramic, metal-core</td><td>Glass (display panels)</td><td>PCB (any)</td></tr>
+    <tr><td>Connection method</td><td>Wire bonding (Au/Al/Cu)</td><td>ACF bonding (gold bumps)</td><td>Solder reflow</td></tr>
+    <tr><td>Typical bond pitch</td><td>60–100µm</td><td>30–50µm</td><td>0.4–0.8mm (BGA/QFN)</td></tr>
+    <tr><td>Encapsulation</td><td>Glob-top epoxy</td><td>Edge sealant + bezel</td><td>None (package = protection)</td></tr>
+    <tr><td>Footprint reduction vs SMT</td><td>40–70%</td><td>60–80%</td><td>N/A (baseline)</td></tr>
+    <tr><td>Reworkability</td><td>Very difficult</td><td>Essentially impossible</td><td>Standard rework</td></tr>
+    <tr><td>Typical volume</td><td>1K–10M units</td><td>100K–100M units</td><td>1–1M+ units</td></tr>
+  </table>
+
+  <p>The ACF process is fundamentally different from wire bonding. An anisotropic conductive film — a thermoset epoxy film loaded with conductive micro-particles — is placed between the driver IC's gold bumps and the glass ITO traces. Heat and pressure (typically <span class="data-point">180–200°C</span> at 50–100N/cm² for 10–20 seconds) cure the epoxy and trap conductive particles between the bumps and traces, creating Z-axis-only electrical connections. The result is a bond pitch as fine as <span class="data-point">30µm</span> — tighter than any solder-based process.</p>
+
+  <p>COG's primary tradeoff: it's a one-way street. Once bonded, the driver IC cannot be reworked. A defective bond means the entire display panel is scrap. This drives the economics toward very high volumes where process yield exceeds <span class="data-point">99.95%</span> — the territory of display fabs, not general-purpose assembly houses.</p>
+
+  <h2>When to Choose COB Over SMT</h2>
+
+  <p>The decision tree is simpler than most engineers think. COB wins in three scenarios, loses in two, and competes on cost in one.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Scenario 1: Extreme Miniaturization</h4>
+      <p>When your PCB real estate budget is exhausted and you've already pushed SMT to 0201 passives and 0.3mm pitch BGA, the next step is eliminating packages entirely. A bare die with COB wire bonding occupies <span class="data-point">30–60%</span> of the area of the same silicon in its smallest available package. This is the driving force behind COB in hearing aids, injectable medical sensors, and in-ear wearables. Read our <a href="/blog/medical-device-pcb.html">medical device PCB guide</a> for Class 3 reliability requirements in these applications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Scenario 2: Superior Thermal Performance</h4>
+      <p>In a packaged IC, heat travels through: die → die attach → leadframe → solder → PCB copper → thermal vias → heatsink. Each interface adds thermal resistance. In COB, the die is bonded directly to the substrate with a thin (<span class="data-point">25–50µm</span>) epoxy layer — eliminating the leadframe and solder interfaces. Junction-to-board thermal resistance (θ<sub>JB</sub>) drops by <span class="data-point">30–50%</span> compared to an equivalent QFN package. For power LED arrays and high-brightness laser diodes, this is the difference between needing a heatsink and not. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> covers substrate-level heat dissipation strategies in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Scenario 3: High-Shock and Vibration Environments</h4>
+      <p>Solder joints are fatigue failure points under cyclic stress. COB wire bonds — properly encapsulated — eliminate dozens of solder joints per IC. The glob-top epoxy distributes mechanical stress across the die surface rather than concentrating it at the package-solder-PCB interface. Military and aerospace electronics — where MIL-STD-810 vibration profiles must be survived — routinely specify COB for this reason. See our <a href="/blog/aerospace-defense-pcb.html">aerospace & defense PCB requirements</a> for the full qualification framework.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>When SMT Still Wins:</strong> (1) Component variety — a design with 50 different IC types cannot economically source all as bare die. Bare die availability is limited to high-volume parts (microcontrollers, LED drivers, sensor ASICs). (2) Rework requirements — if field repair is part of your product strategy, COB is the wrong choice. Glob-topped assemblies are essentially non-reworkable without specialized laser decapsulation equipment.</p>
+  </div>
+
+  <h2>COB Cost Economics: When Bare Die Beats Packaged ICs</h2>
+
+  <p>The unit economics flip at surprisingly low volumes. A bare die typically costs <span class="data-point">15–40%</span> less than the same silicon in its smallest QFN package — before assembly. But COB assembly adds wire bonding cost per die. The crossover point depends on die complexity:</p>
+
+  <table class="spec-table">
+    <tr><th>Die Type</th><th>Bond Pads</th><th>COB Assembly Cost/Die</th><th>Package Cost/Die</th><th>COB Advantage at Volume</th></tr>
+    <tr><td>LED (2 pads)</td><td>2</td><td>$0.003–0.008</td><td>$0.02–0.05 (PLCC)</td><td>>5K units</td></tr>
+    <tr><td>Simple MCU (8–32 pads)</td><td>8–32</td><td>$0.03–0.12</td><td>$0.15–0.50 (QFN)</td><td>>10K units</td></tr>
+    <tr><td>Complex ASIC (80–200 pads)</td><td>80–200</td><td>$0.50–2.00</td><td>$2.00–8.00 (BGA)</td><td>>50K units</td></tr>
+    <tr><td>Sensor/MEMS (4–16 pads)</td><td>4–16</td><td>$0.02–0.06</td><td>$0.30–1.00 (LGA)</td><td>>3K units</td></tr>
+  </table>
+
+  <p>For LED arrays — a COB sweet spot — the economics are decisive. A 100-LED COB array costs approximately <span class="data-point">$0.30–0.80</span> in assembly labor vs <span class="data-point">$2.00–5.00</span> for individually packaged SMT LEDs, plus the PCB area savings. For general-purpose electronics, the break-even is around <span class="data-point">5,000–10,000 units</span> for simple dies. Below that, the NRE for bonding tooling (typically <span class="data-point">$2,000–8,000</span> per die type for the bonding capillary and program) dominates. Our <a href="/blog/pcb-nre-tooling-costs.html">PCB NRE and tooling costs guide</a> covers these setup charges in detail.</p>
+
+  <img class="article-img" src="../generated/blog-cob-assembly-comparison.webp" alt="Side-by-side visual comparison of COB wire-bonded die, COG ACF-bonded driver IC on glass, and standard SMT BGA package on PCB" loading="lazy" style="max-width:90%">
+
+  <h2>Design Rules for COB: What Your PCB Layout Needs</h2>
+
+  <p>COB doesn't just change assembly — it changes PCB design. The bond pads on your substrate must match the die pad layout exactly, and the routing constraints are unforgiving:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Bond Finger Design — Length, Width, and Plating</h4>
+      <p>Each die pad maps to a gold-plated bond finger on the PCB. Finger width: minimum <span class="data-point">2× wire diameter</span> (50µm for 25µm wire). Finger length: <span class="data-point">150–300µm</span> beyond the bond point. Surface finish: <strong>ENIG or soft gold</strong> — ENEPIG also acceptable. HASL and OSP are incompatible (surface roughness and oxidation prevent reliable bonding). The bond finger must be connected to a via within <span class="data-point">1mm</span> of the bond point to minimize stub inductance. For surface finish selection, see our <a href="/blog/pcb-surface-finish-selection.html">complete surface finish guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep-Out Zones Around the Die</h4>
+      <p>The die attach area requires a <span class="data-point">clean, flat surface</span> — no vias, no solder mask openings, no silkscreen within 0.5mm of the die edge. The wire bond loop extends above the PCB surface by <span class="data-point">150–250µm</span>, and the glob-top encapsulant spreads beyond the bond fingers by approximately <span class="data-point">1.0–1.5mm</span> in all directions. Any component within this keep-out zone risks being buried in epoxy or interfering with the bonding capillary. Design your layout with the encapsulant keep-out first, then place passives outside it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Substrate Flatness — The Hidden Requirement</h4>
+      <p>Wire bonding requires substrate flatness better than <span class="data-point">±25µm</span> across the die area. Standard FR-4 at elevated temperature (bonding stage operates at 120–150°C) can warp beyond this limit, especially on thin boards below 0.8mm. For COB on thin PCBs, specify <strong>High-Tg FR-4 (Tg ≥170°C)</strong> or use a metal-core substrate for dimensional stability. Ceramic substrates (Al₂O₃ or AlN) offer the best flatness — <span class="data-point">±5µm</span> — and are the default choice for high-reliability COB in aerospace applications.</p>
+    </div>
+  </div>
+
+  <h2>COB vs BGA: The Packaging Decision Framework</h2>
+
+  <p>Many designs oscillate between COB and fine-pitch BGA. The right answer depends on three factors beyond the obvious cost comparison:</p>
+
+  <p><strong>Signal integrity at the die-to-board interface:</strong> A BGA package adds <span class="data-point">1–3nH</span> of parasitic inductance per connection (package leadframe + solder ball). A 25µm gold wire bond adds <span class="data-point">0.5–1.0nH</span> — roughly one-third the parasitic inductance. For RF and high-speed digital above 5 Gbps, this difference matters. <strong>Testability:</strong> A packaged IC can be tested before assembly — you know it works. A bare die must be trusted from the wafer probe data, and the first time you know the assembly is good is after COB and encapsulation. <strong>Supply chain:</strong> Bare die availability is a fraction of packaged IC availability. If your MCU is only sold in QFN, COB isn't an option — period. See our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> for the SMT alternative's full requirements.</p>
+
+  <h2>Getting Started With COB Assembly</h2>
+
+  <p>If your product roadmap is pushing toward miniaturization limits, COB is the logical next step. Start with these three actions: (1) Identify the one or two ICs in your BOM that consume the most PCB area and check whether bare die versions exist — your semiconductor vendor's field application engineer can help. (2) Request a bondability assessment from your assembly partner — not every PCB finish supports wire bonding, and your stackup may need revision. (3) Budget for NRE: bonding tooling (capillary + program) runs <span class="data-point">$2,000–8,000</span> per die type, and first-article qualification typically requires 10–20 assemblies with cross-section analysis.</p>
+
+  <p>At Huaxing PCBA, our COB line handles die sizes from <span class="data-point">0.5mm × 0.5mm</span> to <span class="data-point">15mm × 15mm</span> with up to 200 wire bonds per die. We support gold, aluminum, and copper wire bonding with in-house encapsulation and IPC Class 3 inspection. <a href="/blog/pcb-assembly-process.html">Explore our full PCB assembly capabilities</a> or <a href="/contact/">contact our engineering team</a> with your die specifications for a COB feasibility assessment.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-cob-assembly.webp)">
+      <h2>Ready to Explore COB for Your Next Design?</h2>
+      <p>Send us your die specifications and PCB layout — our wire bonding engineering team will provide a COB feasibility assessment and assembly quote within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request COB Assessment <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',body:d});if(r.ok){alert('Thank you! We will respond within 24 hours.');f.reset();closeModal()}else{alert('Submission failed. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')};return false}
+</script>
+</body>
+</html>
