@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Laser Drilling vs Mechanical Drilling — Microvia Technology &amp; Cost-Per-Hole Analysis for HDI Boards | Huaxing PCBA</title>
+<meta name="description" content="When to specify laser-drilled microvias vs mechanical through-holes on your PCB fabrication drawing. Covers CO2 vs UV laser types, aspect ratio limits, cost-per-hole comparison at 5k/50k/200k volumes, and the design rules that determine which technology your board actually needs.">
+<meta property="og:title" content="PCB Laser Drilling vs Mechanical Drilling — Microvia Technology &amp; Cost-Per-Hole Analysis">
+<meta property="og:description" content="CO2 vs UV laser types, aspect ratio limits, cost-per-hole at 5k/50k/200k volumes, and design rules for HDI boards.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-laser-vs-mechanical-drilling.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-drilling.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-laser-vs-mechanical-drilling.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Laser Drilling vs Mechanical Drilling — Microvia Technology & Cost-Per-Hole Analysis for HDI Boards",
+  "description": "When to specify laser-drilled microvias vs mechanical through-holes on your PCB fabrication drawing. Covers CO2 vs UV laser types, aspect ratio limits, cost-per-hole comparison at 5k/50k/200k volumes.",
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "image": "https://huaxingpcba.com/generated/blog-cover-drilling.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-laser-vs-mechanical-drilling.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-laser-vs-mechanical-drilling.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-drilling.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Laser vs Mechanical PCB Drilling:<br><em>When to Pay for Microvias &amp; When Standard Through-Holes Still Win</em></h1>
+      <p class="reveal">A fabrication engineer's guide to choosing the right hole-forming technology — with real cost-per-hole data at prototype, mid-volume, and high-volume quantities.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Laser vs Mechanical Drilling</span></div>
+
+  <p>The drill file you send to your PCB fabricator contains a simple list of X-Y coordinates and tool sizes. But whether those holes are formed by a mechanical drill bit spinning at 200,000 RPM or a CO2 laser ablating copper one pulse at a time determines your board's layer count, minimum trace width, and cost per panel. On a 10-layer smartphone main board with 8,000 laser vias, the drilling step alone accounts for <span class="data-point">18–25%</span> of total fabrication cost. Here's how to specify the right technology — and avoid paying for microvias where a mechanical drill works fine.</p>
+
+  <p>At Huaxing PCBA, our Shenzhen facility runs <span class="data-point">12 mechanical drilling</span> spindles alongside dedicated CO2 and UV laser drilling stations, giving us the flexibility to match the process to the design — not the other way around. Here's what every PCB designer and procurement engineer should know before checking the "laser drill" box on their fabrication drawing.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-drilling-machine.webp" alt="Close-up of PCB laser drilling machine head with focused beam on copper surface" loading="lazy">
+
+  <h2>Mechanical Drilling: The Workhorse for Through-Holes Above 0.15 mm</h2>
+
+  <p>Mechanical drilling uses solid tungsten carbide bits rotating at 160,000–300,000 RPM to physically cut through the entire PCB stack-up in a single pass. It's been the standard since the 1960s and remains the only option for through-hole vias, component lead holes, and any hole deeper than 0.3 mm.</p>
+
+  <h3>What Mechanical Drilling Does Well</h3>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Through-Holes in a Single Pass: 0.15 mm to 6.35 mm Diameter</h4>
+      <p>A mechanical bit drills all layers — copper, laminate, and prepreg — in one continuous motion at 2–3 meters per second feed rate. This makes it fundamentally faster than laser for any hole that goes through the entire board. The practical minimum is 0.15 mm (6 mil) with advanced spindles; below that, the bit's aspect ratio (length/diameter) exceeds 15:1 and bit breakage becomes economically unacceptable. For deeper boards (≥ 2.4 mm total thickness), the minimum increases to 0.25 mm.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Lowest Cost Per Hole at Scale: $0.0002–0.0008 per Hole</h4>
+      <p>Once you amortize the drill bit (500–3,000 hits per bit for standard FR-4), mechanical drilling costs $0.0002–0.0008 per hole at 50,000+ panel volumes. This is 5–10x cheaper than laser. The cost comes from the bit itself ($2–15 per bit depending on diameter), spindle time, and tool change downtime. Our <a href="/blog/pcb-cost-factors.html">PCB cost drivers guide</a> breaks down the full manufacturing cost stack.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Works on All Materials: FR-4, Polyimide, PTFE, Ceramic-Filled</h4>
+      <p>Mechanical bits don't care about the material's laser absorption spectrum. For PTFE-based RF laminates (which are nearly transparent to CO2 lasers) or ceramic-filled hydrocarbon materials (which require extremely high UV fluence), mechanical drilling is often the only practical option. Our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB manufacturing guide</a> covers material-specific drilling parameters.</p>
+    </div>
+  </div>
+
+  <h3>Limitations That Push You Toward Laser</h3>
+
+  <table class="spec-table">
+    <tr><th>Limitation</th><th>Mechanical Limit</th><th>When Laser Takes Over</th></tr>
+    <tr><td>Min hole diameter</td><td>0.15 mm (6 mil)</td><td>Below 0.15 mm → laser mandatory</td></tr>
+    <tr><td>Max aspect ratio</td><td>12:1 (bit length/dia)</td><td>AR > 10:1 and hole < 0.2 mm → laser</td></tr>
+    <tr><td>Min land diameter</td><td>Hole + 0.25 mm annular ring</td><td>Land = hole + 0.15 mm → laser</td></tr>
+    <tr><td>Blind/buried vias</td><td>Requires sequential lamination</td><td>Laser can stop on inner copper layer</td></tr>
+    <tr><td>Positional accuracy</td><td>±25 µm (advanced)</td><td>±10 µm (laser, with fiducial alignment)</td></tr>
+    <tr><td>Hole wall roughness</td><td>10–25 µm Ra (smeared)</td><td>2–5 µm Ra (cleaner for plating)</td></tr>
+    <tr><td>Stacked vias (via-in-pad)</td><td>Impossible</td><td>Laser + copper fill → standard HDI</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Design Rule:</strong> If your smallest hole ≥ 0.2 mm and goes through the entire board, use mechanical drilling. You'll save 30–50% on the drilling step at mid-volume (5,000 panels) with no quality trade-off. If any hole is < 0.15 mm, blind (doesn't go through the full stack), or stacked on a pad, you need laser — there's no mechanical alternative.</p>
+  </div>
+
+  <h2>Laser Drilling: CO2 vs UV for Microvias and HDI</h2>
+
+  <p>Laser drilling uses focused light energy to ablate (vaporize) material one pulse at a time. Unlike mechanical drilling, a laser can stop precisely at an inner-layer copper pad — this is the fundamental capability that enables blind vias, buried vias, and the HDI stackups found in every modern smartphone, tablet, and automotive ADAS module.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-drilling-via.webp" alt="Cross-section of laser-drilled microvia with clean sidewalls under electron microscope" loading="lazy">
+
+  <h3>CO2 Laser (9.4–10.6 µm wavelength)</h3>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>How It Works: Ablates Dielectric, Stops at Copper</h4>
+      <p>CO2 laser energy is strongly absorbed by FR-4 epoxy/glass but reflected by copper (> 98% at 10.6 µm). This makes CO2 the default choice for drilling through the outer dielectric layer to reach an inner copper pad — the laser self-terminates when it hits copper, creating a clean microvia floor ready for direct metallization. Via diameters range from 50 µm to 150 µm, with a maximum dielectric thickness of ~100 µm per pass.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Cost: $0.001–0.003 per Via at Volume</h4>
+      <p>CO2 laser drilling costs roughly 3–5x more than mechanical on a per-hole basis, but the via count is typically much lower (hundreds to low thousands per panel vs tens of thousands of mechanical holes). At 50,000 panels, a board with 2,000 CO2 microvias adds $100–300 to the total fabrication cost — significant but manageable. Our <a href="/blog/hdi-technology.html">HDI PCB technology guide</a> covers the complete cost model for HDI stackups.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Process Limitation: Copper Pre-Treatment Required</h4>
+      <p>CO2 cannot ablate the outer copper foil — the beam reflects off it. Before laser drilling, the fabricator must chemically etch a "conformal mask" window in the outer copper at each via location, exposing the dielectric underneath. This adds a photolithography step that increases total drilling cycle time by ~20%. For boards with very dense via patterns, this pre-treatment cost can exceed the laser drilling cost itself.</p>
+    </div>
+  </div>
+
+  <h3>UV Laser (355 nm wavelength — Nd:YAG, frequency-tripled)</h3>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>How It Works: Ablates Both Copper and Dielectric</h4>
+      <p>At 355 nm, the photon energy (3.5 eV) exceeds the bond energy of most PCB materials. UV lasers can drill through copper and dielectric in the same pass, enabling diameters as small as 20–25 µm. This is the technology behind "any-layer" HDI (ALIVH) and substrate-like PCBs (SLP) used in flagship smartphones. UV is the only option for drilling through copper directly without pre-treatment.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Cost: $0.005–0.015 per Via</h4>
+      <p>UV laser is 5–10x more expensive per hole than CO2 due to slower ablation rate (~1/5 the speed of CO2) and higher equipment cost. It's only economically justified when via diameters are below 50 µm or when drilling through copper directly (eliminating the conformal mask step). For most HDI designs with 75–100 µm microvias, CO2 is the cost-effective choice.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Which Laser for Your Design?</strong> If your microvias are 75–150 µm in outer-layer dielectric → CO2. If < 50 µm or need to drill through copper → UV. At Huaxing PCBA, our laser drilling capability covers both types, and our CAM engineers review every drill file to flag designs where the specified laser type isn't optimal for the via geometry.</p>
+  </div>
+
+  <h2>Cost Comparison: Real Numbers at Three Volume Levels</h2>
+
+  <p>Here is the actual cost-per-hole comparison for a production PCB fabricator, based on a 450 × 600 mm panel with 2.0 mm total board thickness:</p>
+
+  <table class="spec-table">
+    <tr><th>Technology</th><th>Min Hole</th><th>5,000 Panels</th><th>50,000 Panels</th><th>200,000 Panels</th></tr>
+    <tr><td>Mechanical (0.25 mm)</td><td>0.15 mm</td><td>$0.003/hole</td><td>$0.0006/hole</td><td>$0.00025/hole</td></tr>
+    <tr><td>Mechanical (0.35 mm)</td><td>0.20 mm</td><td>$0.002/hole</td><td>$0.0004/hole</td><td>$0.00015/hole</td></tr>
+    <tr><td>CO2 Laser (100 µm via)</td><td>0.05 mm</td><td>$0.008/via</td><td>$0.002/via</td><td>$0.001/via</td></tr>
+    <tr><td>UV Laser (40 µm via)</td><td>0.02 mm</td><td>$0.025/via</td><td>$0.008/via</td><td>$0.004/via</td></tr>
+  </table>
+
+  <p><em>Note: Costs include consumables (bits, laser gas, mask materials), machine amortization, and operator labor. Does not include the conformal mask photo-step for CO2, which adds ~$0.0003/via at volume.</em></p>
+
+  <p>For a typical 8-layer smartphone HDI board with 3,000 CO2 microvias and 8,000 mechanical through-holes at 50,000-panel volume:</p>
+  <ul style="list-style-type:disc;padding-left:2rem;margin-bottom:var(--space-md)">
+    <li><strong>Mechanical: 8,000 × $0.0006 = $4.80/panel</strong></li>
+    <li><strong>CO2 Laser: 3,000 × $0.002 = $6.00/panel</strong></li>
+    <li><strong>Total drilling cost: $10.80/panel ≈ 12% of total fab cost ($90/panel)</strong></li>
+  </ul>
+
+  <h2>Backdrilling: Where Mechanical Meets Precision</h2>
+
+  <p>Backdrilling is a specialized mechanical operation that removes the unused portion of a plated through-hole stub that acts as an antenna at high frequencies. While the initial through-hole is mechanically drilled, backdrilling requires a larger-diameter bit to counterbore the stub from the back side of the board with controlled depth — typically to within 100–150 µm of the inner-layer pad without breaking through it.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Backdrill Oversize: Nominal Hole + 0.15 mm Minimum</h4>
+      <p>The backdrill bit must be larger than the plated hole to avoid damaging the via barrel plating. At a minimum: backdrill diameter = finished hole size + 0.15 mm. For a 0.25 mm via, the backdrill is 0.40 mm. This enlarges the annular ring requirement on the back side of the board — not a problem if designed in from the start, but a common oversight in first-time high-speed designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Depth Tolerance: ±75 µm at Production Volume</h4>
+      <p>The backdrill must stop before the inner-layer pad but close enough that the remaining stub is electrically negligible. Modern CNC drilling machines with capacitive height sensing achieve ±75 µm depth tolerance. Our <a href="/blog/pcb-backdrilling-guide.html">PCB backdrilling guide</a> covers how to specify backdrill depth, stub length targets, and the cost adder (typically $0.50–2.00 per panel for the additional drill pass).</p>
+    </div>
+  </div>
+
+  <h2>Design Rules: What to Put on Your Fabrication Drawing</h2>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-drilling-comparison.webp" alt="Side-by-side comparison of PCB panels with mechanical drill holes and laser microvias" loading="lazy">
+
+  <p>When you send your PCB design to fabrication, the drill drawing should explicitly state these parameters rather than leaving them to the fabricator's default interpretation:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Specify "Laser Drill" or "Mechanical" Per Hole Type in the Drill Table</h4>
+      <p>Don't assume the fabricator will choose the right technology based on hole size. Mark microvias, blind vias, and buried vias explicitly as "LASER" in the drill table. Through-holes ≥ 0.2 mm = "MECHANICAL." Holes 0.15–0.2 mm = "MECHANICAL (advanced spindle required)." Refer to our <a href="/blog/pcb-via-technology.html">PCB via technology guide</a> for the full via type taxonomy.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>State Annular Ring Requirements for Laser Vias</h4>
+      <p>IPC-6012 Class 2 requires a 50 µm minimum annular ring for laser microvias (measured at the target pad). Class 3 tightens this to 75 µm. For stacked microvias (via-in-pad with copper fill), specify "stacked via structure — no annular ring breakout allowed" and expect the fabricator to use a 100% AOI check on the via-to-pad alignment. Our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 guide</a> covers the full quality grade differences.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>If Using CO2 Laser, Note the Copper Conformal Mask Step</h4>
+      <p>The fabricator's CAM engineer needs to know whether to generate the conformal mask artwork from your outer-layer copper data or whether you want them to optimize the mask openings for laser alignment tolerance. For dense via fields (pitch < 0.5 mm), let the fabricator set mask opening sizes — their process experience with alignment tolerance beats a generic rule. See <a href="/blog/pcb-stackup-design.html">our stackup design guide</a> for layer-to-layer registration tolerances.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Call Out Via Fill Requirements: Plugged, Capped, or Copper-Filled</h4>
+      <p>Laser microvias in via-in-pad applications must be copper-filled and planarized to support SMT component placement. Mechanical through-holes can be epoxy-plugged and capped (IPC-4761 Type VI) for via-in-pad use but with lower reliability than copper-filled laser vias. Our <a href="/blog/pcb-via-fill-types.html">PCB via fill types guide</a> covers every IPC-4761 type with application recommendations.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, we process drill files through a CAM review that checks every hole against our <span class="data-point">12-spindle mechanical + CO2 + UV laser</span> capability matrix before releasing to production. If your design calls for UV laser where CO2 would work (or vice versa), we flag it with a cost-saving recommendation before cutting a single panel. Whether you're prototyping a 4-layer board with 500 mechanical holes or ramping a 10-layer smartphone HDI with 8,000 laser microvias, understanding the drilling technology behind your Gerber file is the difference between an optimized quote and a surprise cost adder. For more on the full fabrication process, see our <a href="/blog/pcb-assembly-process.html">PCB assembly process guide</a> and <a href="/blog/dfm-tips.html">DFM tips for cost reduction</a>.</p>
+
+</article>
+
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/hdi-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">HDI PCB Technology — When to Upgrade to Microvia Design</a></li>
+    <li><a href="/blog/pcb-backdrilling-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Backdrilling Guide — Stub Removal &amp; Signal Integrity Above 5 Gbps</a></li>
+    <li><a href="/blog/pcb-via-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Via Technology Guide — Blind, Buried, Via-in-Pad &amp; Backdrilling</a></li>
+    <li><a href="/blog/pcb-via-fill-types.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Via Fill Types — Conductive vs Non-Conductive Epoxy &amp; Copper Fill</a></li>
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Count, Materials &amp; Impedance Planning</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-drilling.webp)">
+      <h2>Send Your Drill Files — We'll Optimize the Process</h2>
+      <p>Our CAM team reviews every design for drilling cost optimization before production. Upload Gerber + drill files — receive a DFM report with hole technology recommendations and your quote within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Start Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
