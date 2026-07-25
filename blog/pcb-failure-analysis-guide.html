@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Failure Analysis Guide — Root Cause Investigation, Cross-Sectioning & Prevention for High-Reliability Electronics | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB failure analysis guide: cross-sectioning microscopy, SEM/EDS elemental mapping, X-ray CT, dye-and-pry testing, and solder joint reliability analysis. How to investigate PCB failures and prevent recurrence in production.">
+<meta property="og:title" content="PCB Failure Analysis Guide — Root Cause Investigation & Cross-Sectioning">
+<meta property="og:description" content="How procurement engineers and quality managers investigate PCB failures: cross-sectioning, SEM/EDS, X-ray CT, dye-and-pry, and thermal imaging. Prevent field failures with systematic root cause analysis.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-failure-analysis-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-failure-analysis.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-failure-analysis-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Failure Analysis Guide — Root Cause Investigation, Cross-Sectioning & Prevention for High-Reliability Electronics",
+  "description": "Complete PCB failure analysis guide: cross-sectioning microscopy, SEM/EDS elemental mapping, X-ray CT, dye-and-pry testing, and solder joint reliability analysis. How to investigate PCB failures and prevent recurrence in production.",
+  "datePublished": "2026-07-26",
+  "dateModified": "2026-07-26",
+  "image": "https://huaxingpcba.com/generated/blog-cover-failure-analysis.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-failure-analysis-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-failure-analysis-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-failure-analysis.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Failure Analysis Guide:<br><em>Cross-Sectioning, SEM/EDS & Root Cause Investigation for High-Reliability Electronics</em></h1>
+      <p class="reveal">A procurement engineering guide to PCB failure investigation — from microsection preparation and SEM elemental mapping to dye-and-pry solder joint analysis. Learn the 5 analytical methods that prevent recurring field failures.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Failure Analysis Guide</span></div>
+
+  <p>When a PCB fails in the field — a cracked BGA solder joint, a delaminated inner layer, an electrochemical migration short — the cost of not knowing the root cause is measured in product recalls, warranty claims, and lost customer trust. Systematic PCB failure analysis is the difference between guessing at a fix and eliminating a failure mechanism permanently. A well-equipped failure analysis lab can identify the exact initiation point, propagation mode, and contributing factors of a PCB failure within <span class="data-point">48 hours</span>, providing actionable data to prevent recurrence across the entire product line.</p>
+
+  <p>Huaxing PCBA operates a dedicated failure analysis laboratory at our <span class="data-point">ISO 9001 & IATF 16949</span> certified Shenzhen facility. Our FA capabilities include metallographic cross-sectioning with optical microscopy to 1000× magnification, SEM/EDS for elemental composition analysis, real-time X-ray CT for 3D internal inspection, dye-and-pry testing for BGA and QFN solder joint integrity, and thermal imaging for hotspot localization. Every failure analysis report includes SEM micrographs, EDS spectra, cross-section measurements against IPC-A-600 acceptance criteria, and a corrective action plan.</p>
+
+  <img class="article-img" src="../generated/blog-failure-analysis-hero.webp" alt="PCB cross-section under optical microscope showing via barrel crack and copper layer delamination with bright field illumination, metallographic microsection sample in epoxy mount" loading="lazy" style="max-width:80%">
+
+  <h2>The 5 Core PCB Failure Analysis Methods</h2>
+
+  <p>PCB failure analysis is a layered investigation. Each method answers a specific question, and the methods are applied in a logical sequence — starting with non-destructive techniques and progressing to destructive analysis only when necessary. The five core methods used in modern PCB FA laboratories are:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Optical Microscopy & Visual Inspection (Non-Destructive)</h4>
+      <p>Initial examination under stereomicroscope at 10×-50× identifies gross defects: solder bridging, lifted pads, component misalignment, charring, and mechanical damage. Digital imaging with measurement overlay documents defect size and location before any further analysis. This step alone identifies approximately <strong>30-40%</strong> of PCB failure root causes — especially process-related defects like insufficient solder, tombstoning, and solder balling. See our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection guide</a> for standard visual acceptance criteria.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>X-Ray Inspection & 3D CT Scanning (Non-Destructive)</h4>
+      <p>Real-time X-ray imaging (2D) reveals hidden solder joint defects in BGA, QFN, and flip-chip packages — head-in-pillow, voiding percentage, insufficient collapse, and solder ball bridging. 3D computed tomography (CT) goes further, reconstructing the entire PCB in three dimensions to visualize inner-layer delamination, via cracking, buried void clusters, and foreign material inclusions. For high-reliability applications, <strong>IPC-7095 Class A</strong> requires BGA voiding below 15% of joint area per single void, which X-ray CT can measure with ±2% accuracy. Our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> details void acceptance criteria by class.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Metallographic Cross-Sectioning (Destructive)</h4>
+      <p>The gold standard for via reliability, plating thickness measurement, and intermetallic compound (IMC) layer analysis. A targeted region is cut, potted in epoxy, ground through sequential abrasive grits (240 → 600 → 1200 → 2400), and polished to 0.05 μm finish for optical microscopy at 100×-1000×. Measurements include: copper plating thickness (IPC-6012 minimum <strong>20 μm</strong> for Class 3), via wall taper angle, IMC layer thickness (target <strong>1-3 μm</strong> for SAC305 solder on ENIG), and crack length in barrel walls. Our <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a> covers plating requirements by application.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>SEM/EDS — Scanning Electron Microscopy with Energy Dispersive Spectroscopy (Destructive)</h4>
+      <p>SEM provides resolution down to <strong>10 nm</strong>, revealing fracture surface morphology — ductile dimple fracture, brittle intergranular fracture, or fatigue striations — that tells the failure mechanism story. EDS elemental mapping identifies contamination sources: chlorine from flux residue causing electrochemical migration, sulfur from packaging materials attacking silver finishes, or tin whiskers from pure tin plating. This is the definitive method for identifying the chemical root cause when optical inspection is inconclusive.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Dye-and-Pry Testing for Solder Joint Integrity (Destructive)</h4>
+      <p>A fluorescent dye penetrant is wicked into any cracks or voids in solder joints under vacuum, then the component is pried off after the dye cures. UV illumination reveals dye-stained fracture surfaces — <strong>red dye = pre-existing crack before prying, metallic shine = intact joint broken during prying</strong>. Dye-and-pry is the definitive test for BGA and QFN solder joint quality, detecting cracks as narrow as 0.1 μm that escape X-ray and visual inspection. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> compares dye-and-pry against other solder joint evaluation techniques.</p>
+    </div>
+  </div>
+
+  <h2>Common PCB Failure Mechanisms and Their Signatures</h2>
+
+  <p>Understanding failure mechanisms is essential for selecting the right analysis method. Each mechanism leaves a characteristic signature that an experienced FA engineer can identify:</p>
+
+  <div class="highlight-box">
+    <p><strong>Field Data:</strong> Analysis of 500+ PCB failure investigations across automotive, industrial, and aerospace applications reveals the top 5 failure mechanisms: solder joint fatigue (34%), conductor/plating defects (22%), dielectric/laminate failures (18%), electrochemical migration (14%), and component-level failures (12%). Over 60% of field failures trace back to a manufacturing process deviation, not a design error.</p>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 1</div>
+    <div class="checklist-content">
+      <h4>Solder Joint Fatigue — Thermal Cycling Creep Rupture</h4>
+      <p>Repeated thermal expansion mismatch between component (CTE ~3-6 ppm/°C for silicon) and PCB (CTE ~14-17 ppm/°C for FR-4) causes cyclic shear strain in solder joints. Failure signature: intergranular crack propagation through the bulk solder with a characteristic "beach mark" fatigue pattern visible under SEM. Barrel-shaped crack path near the component interface. IMC layer growth beyond 5 μm accelerates failure. Prevention: underfill for large BGAs, high-Tg laminate (Tg ≥ 170°C) for high-temperature applications, and solder alloy selection with <a href="/blog/pcb-solder-mask-types.html">proper thermal fatigue resistance</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 2</div>
+    <div class="checklist-content">
+      <h4>Conductive Anodic Filament (CAF) — Electrochemical Migration Between Adjacent Conductors</h4>
+      <p>Moisture absorption in the laminate combined with DC bias voltage drives copper ions from the anode to the cathode through glass fiber interfaces, forming a conductive filament that creates a resistive short. Failure signature: dark copper-rich dendrite visible in cross-section, spanning between plated through-holes or traces with bias voltage >50V. EDS confirms copper composition of the filament. Prevention: <strong>Tg ≥ 170°C</strong> laminate with low moisture absorption (<0.1%), minimum 0.5mm hole-to-hole spacing for voltages above 100V, and conformal coating per our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> for humid environments.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Type 3</div>
+    <div class="checklist-content">
+      <h4>Inner Layer Delamination — PCB Laminate Separation</h4>
+      <p>Separation between copper foil and prepreg, or between prepreg layers, caused by: insufficient resin flow during lamination, moisture trapped in the laminate that vaporizes during soldering (popcorning), or thermal overstress exceeding the material's Tg. Failure signature: planar void visible in X-ray (2D) or cross-section micrograph, crescent-shaped delamination around vias, and resin recession >25 μm (IPC-A-600 Class 3 reject). Cross-section measurement confirms gap width. Prevention: <strong>6-hour bake at 125°C</strong> before reflow for moisture-sensitive boards, proper press cycle with sufficient resin flow time, and laminate selection with <a href="/blog/pcb-materials-guide.html">Tg rating 30°C above maximum operating temperature</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-failure-analysis-cross-section.webp" alt="Metallographic cross-section of multilayer PCB showing copper barrel plating of plated through-hole with bright copper layers, dark epoxy fill, and glass fiber weave pattern in laminate" loading="lazy" style="max-width:80%">
+
+  <h2>Building a Failure Analysis Workflow: from Field Return to Corrective Action</h2>
+
+  <p>A disciplined FA workflow ensures consistency, prevents evidence destruction, and produces actionable corrective actions. The standard workflow follows a 7-step sequence:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Document Failure Circumstances</h4>
+      <p>Record the operating environment (temperature, humidity, vibration), time-to-failure, failure mode (open circuit, short, intermittent, functional degradation), and any preceding events. This context narrows the list of candidate failure mechanisms before any analysis begins.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Non-Destructive Examination First</h4>
+      <p>Optical microscopy → X-ray 2D → X-ray CT 3D. Never proceed to destructive analysis without exhausting non-destructive methods — you cannot un-cut a cross-section. Image documentation at every step.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Electrical Characterization</h4>
+      <p>Curve tracer I-V measurement, time-domain reflectometry (TDR) for impedance faults, and microprobing of suspect nets to localize the fault to a specific component, trace segment, or via. Our <a href="/blog/pcb-testing-methods.html">testing methods comparison</a> covers electrical test techniques in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Targeted Destructive Analysis</h4>
+      <p>Cross-section at the precise location identified by X-ray/electrical testing → SEM imaging of the fracture surface → EDS elemental analysis of contaminants. Multiple cross-sections may be needed to capture the full failure path.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Root Cause Determination & Replication</h4>
+      <p>Once the mechanism is identified, replicate the failure under controlled laboratory conditions — thermal cycling to induce solder fatigue, biased humidity testing for CAF, or reflow simulation for delamination. Replication confirms the root cause hypothesis. See our <a href="/blog/pcb-dual-sourcing-strategy.html">dual sourcing strategy guide</a> for risk management during FA investigations.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Corrective Action Implementation</h4>
+      <p>FA report issued with: root cause statement, supporting micrographs/SEM images/EDS spectra, containment actions for affected production lots, and permanent corrective actions (process parameter change, material specification update, design rule modification).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Verification & Closed-Loop Monitoring</h4>
+      <p>Monitor production for 3 months post-corrective action to confirm zero recurrence. Update PFMEA documentation and supplier quality requirements to prevent the failure mechanism from reappearing in new designs.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> When evaluating PCB suppliers, ask for their failure analysis lab capabilities and request a sample FA report. A supplier who cannot produce a cross-section micrograph with IPC-6012 measurement annotations is not equipped to support high-reliability programs. The difference between a supplier with in-house SEM/EDS and one that outsources FA to a third-party lab is typically <strong>5-10 business days</strong> in investigation turnaround time.</p>
+  </div>
+
+  <h2>FA Equipment Investment: What Defines a Competent PCB Failure Analysis Laboratory</h2>
+
+  <p>A properly equipped PCB failure analysis laboratory represents a capital investment of <span class="data-point">$250,000 to $1.2M</span> depending on automation level. For procurement professionals evaluating supplier quality infrastructure, the minimum viable FA lab should include:</p>
+
+  <div class="spec-table">
+    <table>
+      <tr><th>Equipment</th><th>Minimum Specification</th><th>What It Detects</th></tr>
+      <tr><td>Stereo Microscope</td><td>10×-50× zoom, ring light, digital camera</td><td>Solder bridges, lifted pads, contamination, mechanical damage</td></tr>
+      <tr><td>Metallographic Microscope</td><td>50×-1000×, bright/dark field, polarizer</td><td>IMC layer thickness, via plating uniformity, glass fiber distribution</td></tr>
+      <tr><td>X-Ray System (2D)</td><td>90 kV microfocus tube, 5 μm resolution</td><td>BGA voiding, head-in-pillow, hidden solder joint defects</td></tr>
+      <tr><td>X-Ray CT (3D)</td><td>130 kV, voxel size ≤ 5 μm</td><td>Inner layer delamination, 3D void mapping, via crack propagation</td></tr>
+      <tr><td>SEM/EDS</td><td>≤10 nm resolution, EDS detector</td><td>Fracture surface morphology, elemental contamination identification</td></tr>
+      <tr><td>Cross-Sectioning Station</td><td>Precision saw + auto-polisher to 0.05 μm</td><td>Sample preparation for all destructive analysis methods</td></tr>
+      <tr><td>Thermal Chamber</td><td>-70°C to +180°C, ramp ≥15°C/min</td><td>Thermal cycling for solder joint reliability testing</td></tr>
+    </table>
+  </div>
+
+  <p>Huaxing PCBA maintains all seven equipment categories in-house. This means failure analysis is performed by the same engineers who built the boards — no third-party lab turnaround delays, no chain-of-custody issues, and direct feedback from FA findings to the production floor within hours, not weeks.</p>
+
+  <h2>Summary: Failure Analysis as a Competitive Advantage</h2>
+
+  <p>For high-reliability electronics — automotive ECUs, medical implants, aerospace avionics, industrial safety systems — PCB failure is not an option. A systematic failure analysis capability transforms field failures from liabilities into learning opportunities. The five core methods — optical microscopy, X-ray/CT, cross-sectioning, SEM/EDS, and dye-and-pry — provide a complete investigative toolkit that, when applied in the correct sequence, identifies root causes with >95% confidence.</p>
+
+  <p>At Huaxing PCBA, failure analysis is integrated into our quality management system, not treated as a separate after-the-fact service. Every production lot includes cross-section coupons for plating thickness verification. Our FA laboratory supports rapid-turn investigation (<strong>48-hour reports</strong> for standard cases) and our corrective action system is audited to IATF 16949 requirements. <a href="/blog/pcb-supplier-audit.html">Use our supplier audit checklist</a> to evaluate your current PCB partner's FA capabilities, or <a href="/contact/">contact our quality engineering team</a> to discuss a failure analysis investigation.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods Guide</a></li>
+      <li><a href="/blog/pcb-incoming-quality-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Incoming Quality Inspection</a></li>
+      <li><a href="/blog/bga-assembly-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">BGA Assembly Guide</a></li>
+      <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+      <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit Checklist</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-failure-analysis.webp)">
+      <h2>Need Root Cause Analysis on a Failed PCB?</h2>
+      <p>Send us your failed board with a failure description. Our in-house FA lab delivers a complete investigation report — cross-section micrographs, SEM/EDS analysis, and corrective action plan — within 48 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

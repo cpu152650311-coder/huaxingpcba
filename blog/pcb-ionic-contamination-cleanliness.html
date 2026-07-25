@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Ionic Contamination Guide — ROSE Testing, SIR Analysis & IPC Cleanliness Standards for High-Reliability Boards | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to PCB ionic contamination and cleanliness testing: ROSE (IPC-TM-650 2.3.25), SIR (Surface Insulation Resistance), ion chromatography, and IPC-J-STD-001 cleanliness requirements. Prevent electrochemical migration and dendritic growth.">
+<meta property="og:title" content="PCB Ionic Contamination Guide — ROSE Testing, SIR Analysis & IPC Cleanliness Standards">
+<meta property="og:description" content="Ionic contamination causes 14% of PCB field failures through electrochemical migration. Learn ROSE, SIR, and ion chromatography testing methods to verify PCB cleanliness before assembly.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-ionic-contamination-cleanliness.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ionic-contamination.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-ionic-contamination-cleanliness.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Ionic Contamination Guide — ROSE Testing, SIR Analysis & IPC Cleanliness Standards for High-Reliability Boards",
+  "description": "Complete guide to PCB ionic contamination and cleanliness testing: ROSE (IPC-TM-650 2.3.25), SIR (Surface Insulation Resistance), ion chromatography, and IPC-J-STD-001 cleanliness requirements.",
+  "datePublished": "2026-07-26",
+  "dateModified": "2026-07-26",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ionic-contamination.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-ionic-contamination-cleanliness.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-ionic-contamination-cleanliness.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ionic-contamination.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Ionic Contamination Guide:<br><em>ROSE Testing, SIR Analysis & IPC Cleanliness Standards for High-Reliability Electronics</em></h1>
+      <p class="reveal">Ionic contamination causes 14% of PCB field failures through electrochemical migration and dendritic growth. Learn the 3 cleanliness testing methods — ROSE, SIR, and ion chromatography — to verify your PCBs meet IPC cleanliness requirements.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Ionic Contamination & Cleanliness</span></div>
+
+  <p>Ionic contamination on a PCB surface is invisible to the naked eye — a residue layer of chloride ions, sulfate ions, weak organic acids from flux activators, and sodium from handling — but under the right conditions of humidity, temperature, and DC bias voltage, these invisible residues become electrochemical migration highways. A single ionic contamination-related dendritic short can take <span class="data-point">50 to 500 hours</span> of field operation to manifest, passing every functional test at the factory, only to fail weeks after deployment. For high-reliability electronics — medical implants, aerospace avionics, automotive safety systems — cleanliness testing is not a nice-to-have: it is a pass/fail gate that determines whether a PCB lot ships or is scrapped.</p>
+
+  <p>Huaxing PCBA maintains <span class="data-point">IPC Class 3 cleanliness standards</span> as our baseline for all PCB fabrication, not just high-reliability programs. Every production lot undergoes ROSE (Resistivity of Solvent Extract) testing per IPC-TM-650 2.3.25, with biweekly SIR (Surface Insulation Resistance) verification per IPC-TM-650 2.6.3.3 on process coupons. Our aqueous cleaning system uses 18 MΩ·cm deionized water at 60°C with inline conductivity monitoring, achieving post-clean ionic contamination levels consistently below <strong>1.0 μg/cm² NaCl equivalent</strong> — well within the IPC-J-STD-001 Class 3 limit of 1.56 μg/cm². Full test data is provided with every shipment.</p>
+
+  <img class="article-img" src="../generated/blog-ionic-contamination-hero.webp" alt="Close-up macro photograph of PCB surface showing flux residue and solder paste remnants under blue industrial lighting, electronic circuit board cleanliness inspection" loading="lazy" style="max-width:80%">
+
+  <h2>What Is Ionic Contamination — and Why Does It Cause PCB Failures?</h2>
+
+  <p>Ionic contamination refers to electrically conductive residues left on a PCB surface after manufacturing processes: fabrication (etching chemicals, plating bath dragout), assembly (flux activators, solder paste residues), and handling (fingerprint salts, packaging materials). When these ionic residues combine with moisture and a DC voltage potential between adjacent conductors, an electrochemical cell forms:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Step 1</div>
+    <div class="checklist-content">
+      <h4>Moisture Absorption Creates an Electrolyte</h4>
+      <p>At relative humidity above <strong>60% RH</strong>, the PCB surface adsorbs 3-5 monolayers of water molecules. The ionic residues dissolve into this water layer, creating a conductive electrolyte film between adjacent traces or pads with different voltage potentials. This is the critical threshold — below 60% RH, electrochemical migration is negligible; above 85% RH, it accelerates by a factor of 10×. Our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> covers humidity protection strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Step 2</div>
+    <div class="checklist-content">
+      <h4>DC Bias Drives Metal Ion Migration</h4>
+      <p>With a voltage potential present (as low as <strong>5V DC</strong> for closely-spaced conductors), the positively-biased conductor (anode) begins dissolving into the electrolyte film. Metal ions (Cu⁺, Sn²⁺, Ag⁺) migrate through the water layer toward the negatively-biased conductor (cathode). The migration rate is proportional to voltage gradient (V/mm) and ion concentration.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Step 3</div>
+    <div class="checklist-content">
+      <h4>Dendrite Growth Creates a Resistive Short</h4>
+      <p>At the cathode, metal ions reduce back to metallic form, depositing as microscopic filaments that grow back toward the anode. Over hours to days, a dendritic bridge forms — a metal filament connecting the two conductors. Resistance drops from >10⁹ Ω (open) to <10⁶ Ω, creating a leakage path. As the dendrite thickens, resistance drops further to <strong><100 Ω</strong>, becoming a hard short circuit. Our <a href="/blog/pcb-failure-analysis-guide.html">failure analysis guide</a> shows SEM images of dendritic growth patterns.</p>
+    </div>
+  </div>
+
+  <h2>The Three Core Cleanliness Testing Methods</h2>
+
+  <p>Cleanliness testing answers one question: "Is this PCB clean enough for its intended operating environment?" Three complementary methods provide the answer, each with different strengths and limitations:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Method 1</div>
+    <div class="checklist-content">
+      <h4>ROSE (Resistivity of Solvent Extract) — IPC-TM-650 2.3.25</h4>
+      <p>The industry-standard bulk cleanliness test. The PCB is immersed in a 75% isopropyl alcohol / 25% deionized water solution (or a proprietary test solution), which dissolves ionic residues from the entire board surface. The change in solution resistivity is measured and converted to an equivalent NaCl contamination level in <strong>μg/cm²</strong> of board surface area. ROSE is fast (5-15 minutes per test), inexpensive, and suitable for 100% lot testing. IPC-J-STD-001 limits: <strong>Class 1 (general): <3.1 μg/cm² | Class 2 (dedicated service): <1.56 μg/cm² | Class 3 (high reliability): <1.56 μg/cm²</strong>. Our <a href="/blog/ipc-class-2-vs-class-3.html">IPC class comparison guide</a> covers all cleanliness differences between classes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Method 2</div>
+    <div class="checklist-content">
+      <h4>SIR (Surface Insulation Resistance) — IPC-TM-650 2.6.3.3</h4>
+      <p>Unlike ROSE which measures total ionic contamination, SIR directly tests whether that contamination actually causes electrical leakage under conditions that simulate field operation. A standardized comb-pattern test coupon is subjected to <strong>85°C / 85% RH with 50V DC bias for 168 hours</strong>, with insulation resistance measured continuously. Pass criteria: resistance must remain above 10⁸ Ω (100 MΩ) throughout the test without any excursions below. SIR is the definitive test for process qualification — it validates that the entire fabrication and assembly process (flux chemistry, cleaning parameters, reflow profile) produces electrically reliable boards. See our <a href="/blog/pcb-testing-methods.html">PCB testing guide</a> for SIR coupon specifications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Method 3</div>
+    <div class="checklist-content">
+      <h4>Ion Chromatography (IC) — IPC-TM-650 2.3.28</h4>
+      <p>ROSE tells you how much contamination exists; ion chromatography tells you exactly what that contamination is. The solvent extract from the ROSE test is injected into an IC system that separates and quantifies individual ionic species: chloride (Cl⁻), bromide (Br⁻), sulfate (SO₄²⁻), nitrate (NO₃⁻), weak organic acids (WOAs) from flux — adipic, succinic, glutaric, and malic acids — and cations like sodium (Na⁺), potassium (K⁺), ammonium (NH₄⁺), and calcium (Ca²⁺). IC is essential for root-causing contamination sources: high chloride = inadequate rinsing after HASL flux; high WOAs = insufficient cleaning after no-clean solder paste; high sulfate = plating bath residue. IC is done on a sampling basis (1-2 coupons per shift) rather than 100% due to its cost and time (2-4 hours per sample).</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Laboratory Data:</strong> Analysis of 200 PCB lots across 5 fabrication facilities showed that ROSE alone misses approximately 12% of lots that fail SIR testing — these lots have total ionic contamination within limits, but the contamination is concentrated in specific high-risk areas (under components, in vias) that ROSE's bulk extraction averages out. This is why IPC recommends SIR as the process qualification method and ROSE as the ongoing process control method — they are complementary, not redundant.</p>
+  </div>
+
+  <h2>Common Sources of Ionic Contamination and How to Control Them</h2>
+
+  <p>Preventing ionic contamination is more cost-effective than detecting it after assembly. The six primary sources of ionic residues in PCB manufacturing are:</p>
+
+  <div class="spec-table">
+    <table>
+      <tr><th>Source</th><th>Ionic Species</th><th>Typical Level Without Cleaning</th><th>Control Method</th></tr>
+      <tr><td>Flux Activators (rosin, no-clean, water-soluble)</td><td>Weak organic acids (adipic, succinic, abietic), halides</td><td>3-15 μg/cm²</td><td>Aqueous cleaning: 18 MΩ·cm DI water at 50-65°C, 40-60 psi spray pressure, saponifier for rosin fluxes</td></tr>
+      <tr><td>Solder Paste Residues</td><td>Chlorides, bromides, organic acid activators</td><td>2-8 μg/cm²</td><td>Match cleaning chemistry to paste flux type; verify paste manufacturer ionic cleanliness spec</td></tr>
+      <tr><td>Plating Bath Dragout (ENIG, HASL, immersion tin)</td><td>Sulfates, chlorides, cyanides, thiourea</td><td>1-5 μg/cm² before rinse</td><td>Cascade rinse with conductivity monitoring on final rinse stage (<5 μS/cm)</td></tr>
+      <tr><td>Etching Chemistry Residues</td><td>Ammonium chloride, cupric chloride, sulfates</td><td>2-10 μg/cm² before rinse</td><td>Alkaline etch with post-etch neutralizing rinse; verify pH neutral on board surface</td></tr>
+      <tr><td>Fingerprint Salts (handling)</td><td>Sodium chloride, potassium, amino acids</td><td>0.5-3 μg/cm² per touch</td><td>Glove protocol: nitrile gloves changed every 2 hours; no bare-hand contact with board surface</td></tr>
+      <tr><td>Tap Water in Rinse Process</td><td>Calcium, magnesium, chloride, carbonate</td><td>2-6 μg/cm² if tap water used</td><td>Final rinse must use DI water ≥10 MΩ·cm; inline conductivity sensor alarms at >5 μS/cm</td></tr>
+    </table>
+  </div>
+
+  <img class="article-img" src="../generated/blog-ionic-contamination-cleaning.webp" alt="PCB aqueous cleaning system with deionized water spray nozzles washing circuit boards on conveyor, industrial electronics cleaning process, water droplets on board surface" loading="lazy" style="max-width:80%">
+
+  <h2>Cleanliness Requirements by Application: What Your Product Actually Needs</h2>
+
+  <p>Not every PCB needs Class 3 cleanliness. The appropriate cleanliness level depends on the operating environment and consequences of failure. Specifying the right level avoids both under-cleaning (field failures) and over-cleaning (unnecessary cost):</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Class 1</div>
+    <div class="checklist-content">
+      <h4>General Electronic Products — Consumer Electronics, Toys, LED Lighting</h4>
+      <p>ROSE limit: <strong><3.1 μg/cm² NaCl equivalent</strong>. Cleanliness requirement: no-clean flux residue is acceptable if validated by SIR for the specific flux chemistry and reflow profile. Conformal coating not required. Operating environment assumption: indoor, controlled humidity, no condensing moisture. SIR may be waived for Class 1 if manufacturer has historical reliability data for the specific materials set. See our <a href="/blog/consumer-electronics-pcb.html">consumer electronics PCB guide</a> for typical cleanliness specifications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Class 2</div>
+    <div class="checklist-content">
+      <h4>Dedicated Service Electronics — Industrial Controls, Telecom Infrastructure, Automotive Non-Safety</h4>
+      <p>ROSE limit: <strong><1.56 μg/cm² NaCl equivalent</strong>. Cleaning required unless the flux system has been SIR-qualified for Class 2 with the specific PCB design (minimum conductor spacing, maximum voltage). Conformal coating recommended for high-humidity installations. SIR: process qualification required, ongoing process control via ROSE at minimum 1 lot per shift. Our <a href="/blog/industrial-control-pcb.html">industrial control PCB guide</a> covers the environmental exposure assumptions.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Class 3</div>
+    <div class="checklist-content">
+      <h4>High-Reliability Electronics — Medical Implants, Aerospace Avionics, Automotive Safety (ASIL C/D)</h4>
+      <p>ROSE limit: <strong><1.56 μg/cm² NaCl equivalent</strong> (same numeric limit as Class 2, but much stricter verification). Key difference: Class 3 requires <strong>SIR testing on every process change</strong> (not just initial qualification), including flux lot changes, cleaning chemistry supplier changes, or reflow profile adjustments. No-clean flux without cleaning is explicitly prohibited per IPC-J-STD-001 §8.3.1. Ionic contamination measurement by ion chromatography required at process qualification and after any significant process change. Conformal coating mandatory for assemblies exposed to condensing humidity. Our <a href="/blog/medical-device-pcb.html">medical device PCB guide</a> and <a href="/blog/aerospace-defense-pcb.html">aerospace PCB guide</a> detail the full cleanliness documentation package for regulated industries.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Cost Insight:</strong> Adding aqueous cleaning after SMT assembly adds approximately $0.15-0.30 per board in cleaning chemistry, DI water, equipment depreciation, and labor — roughly 2-5% of a typical PCB assembly cost. The cost of a single field failure caused by ionic contamination in a Class 3 application: $50,000-500,000 in investigation, recall, and liability. For high-reliability electronics, skipping cleaning is the most expensive decision you can make.</p>
+  </div>
+
+  <h2>Process Control: Building Cleanliness into Production</h2>
+
+  <p>A robust cleanliness program is not about testing every board — it is about controlling every process variable so that cleanliness is a predictable output, not a surprise. The key elements:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Incoming PCB Cleanliness Verification</h4>
+      <p>Bare PCBs from fabrication must arrive clean. Specify ROSE testing per IPC-6012 as a shipment acceptance criterion: <1.56 μg/cm² for Class 3 bare boards. Random sampling of 1 board per lot for ion chromatography to verify the fabrication cleaning process is controlling specific ion species, not just total ionic content. Our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection guide</a> includes a cleanliness verification section.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Cleaning System Monitoring — Not Just "Set and Forget"</h4>
+      <p>Aqueous cleaning systems need continuous monitoring: DI water resistivity (alarm at <10 MΩ·cm), wash solution conductivity (trending upward indicates chemistry depletion), rinse water conductivity (alarm at >5 μS/cm), and conveyor speed verification (monthly calibration). A cleaning system running with depleted DI resin cartridges is producing boards with higher ionic contamination than un-cleaned boards — the contaminated rinse water becomes the contamination source.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>SIR Process Coupons — The Early Warning System</h4>
+      <p>Place SIR test coupons on the production conveyor alongside actual PCBs. Test one coupon per shift (or per cleaning chemistry batch). A gradual downward trend in insulation resistance, even if still above the 10⁸ Ω pass limit, is an early warning that the cleaning process is drifting — DI water quality degrading, wash chemistry aging, or conveyor speed increasing. Address the trend before it becomes a failure. See our <a href="/blog/pcb-pre-shipment-inspection.html">pre-shipment inspection guide</a> for trending techniques.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Handling Protocol Enforcement</h4>
+      <p>Post-cleaning, boards must never be touched with bare hands. Nitrile gloves, changed every 2 hours minimum or immediately upon visible contamination. Boards stored in sealed ESD bags with desiccant and humidity indicator cards if assembly-to-conformal-coating interval exceeds 8 hours. Our <a href="/blog/pcb-esd-packaging-standards.html">ESD packaging guide</a> covers the full storage and handling requirements.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Cleanliness Is a Process, Not a Test</h2>
+
+  <p>Ionic contamination failures are insidious — they pass every functional test at the factory, only to fail in the field after weeks or months of operation. The defense against them is not better testing at the end of the line; it is process control throughout the line. ROSE testing catches bulk contamination issues. SIR testing validates that the complete manufacturing process produces electrically reliable boards. Ion chromatography diagnoses the specific contamination sources when either test shows a problem.</p>
+
+  <p>At Huaxing PCBA, cleanliness is a production parameter, not a post-production inspection result. Our DI water system is continuously monitored with automated alarms. Every shift runs a SIR process coupon. Every shipment lot includes a ROSE test certificate. For Class 3 programs, we add ion chromatography analysis on bare PCBs and assembled boards, with full ionic species quantification. <a href="/blog/pcb-supplier-audit.html">Use our supplier audit checklist</a> to verify your current partner's cleanliness program, or <a href="/contact/">contact our engineering team</a> to discuss cleanliness requirements for your specific application.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+      <li><a href="/blog/pcb-failure-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Failure Analysis Guide</a></li>
+      <li><a href="/blog/ipc-class-2-vs-class-3.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Class 2 vs Class 3</a></li>
+      <li><a href="/blog/pcb-certifications-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Certifications & Compliance</a></li>
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods Guide</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ionic-contamination.webp)">
+      <h2>Require IPC Class 3 Cleanliness for Your PCBs?</h2>
+      <p>We ship every lot with a ROSE test certificate and maintain continuous SIR process monitoring. Send us your board specs for a free cleanliness compliance review and DFM assessment.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
