@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Agriculture PCB Design — Environmental Sensing, Power &amp; Connectivity for Precision Farming | Huaxing PCBA</title>
+<meta name="description" content="PCB design for smart agriculture and precision farming. Covers outdoor environmental challenges, soil/weather sensor integration, ultra-low-power architecture for remote deployments, LoRaWAN vs NB-IoT connectivity, and conformal coating strategies for year-round field operation.">
+<meta property="og:title" content="Smart Agriculture PCB Design — Environmental Sensing, Power &amp; Connectivity for Precision Farming">
+<meta property="og:description" content="Designing PCBs that survive in a field for 5 years on a coin cell. Sensor integration, power architecture, and protection strategies for precision agriculture electronics.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/smart-agriculture-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-agritech.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/smart-agriculture-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Smart Agriculture PCB Design — Environmental Sensing, Power & Connectivity for Precision Farming",
+  "description": "PCB design strategies for smart agriculture: outdoor durability, soil/weather sensor integration, ultra-low-power architecture, LoRaWAN/NB-IoT connectivity, and conformal coating for year-round field operation.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-agritech.webp",
+  "url": "https://huaxingpcba.com/blog/smart-agriculture-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/smart-agriculture-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-agritech.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">Smart Agriculture PCB Design:<br><em>Environmental Sensing, Power Architecture &amp; Connectivity for Precision Farming at Scale</em></h1>
+      <p class="reveal">Precision agriculture is adding electronics to soil, water, and air — at scale. Here's how PCB design adapts when your circuit board has to survive a Nebraska winter, a Gujarat monsoon, and 5 years on a coin cell battery.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="container" style="max-width:800px">
+
+    <div class="breadcrumb" style="margin-bottom:var(--space-lg);font-size:var(--text-sm);color:var(--text-muted)">
+      <a href="/blog/" style="color:var(--text-muted);text-decoration:none">Blog</a> / <span>Smart Agriculture PCB Design</span>
+    </div>
+
+    <p>The global precision farming market is projected to reach <span class="data-point">$23 billion</span> by 2030, driven by soil sensors, weather stations, drone-mounted multispectral cameras, livestock trackers, and automated irrigation controllers. Every one of these devices has a PCB at its core — and every one of those PCBs faces conditions that would destroy a consumer electronics board within weeks. Designing for agriculture is not a special case of industrial PCB design. It is its own discipline, with its own rules.</p>
+
+    <figure>
+      <img src="../generated/blog-agritech-1.webp" alt="Soil moisture sensor PCB installed in agricultural field with crops in background" class="article-img" style="max-width:85%" loading="lazy" width="1024" height="1024">
+    </figure>
+
+    <h2>The Environmental Challenge: What Outdoor PCBs Actually Face</h2>
+
+    <p>An indoor PCB lives at 25°C and 40% RH, give or take. An agricultural PCB cycles between -20°C pre-dawn frost and 65°C direct sun on the same day. It sees condensation every morning, fertilizer chemicals in irrigation water, UV radiation at altitude, and vibration from tractors. Here is what each stressor does to a board:</p>
+
+    <table class="spec-table" style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0">
+      <thead>
+        <tr style="background:var(--bg-surface)">
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Stressor</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Failure Mechanism</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Design Countermeasure</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Temperature cycling (-20°C to +65°C)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">CTE mismatch → solder joint fatigue, pad lifting</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">TG 170+ laminate, matched-CTE components</td></tr>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Condensation / humidity (80-100% RH)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Dendrite growth, CAF, electrochemical migration</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Conformal coating (acrylic or parylene), wider trace spacing</td></tr>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Fertilizer / chemical exposure</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Copper corrosion, connector contact degradation</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">ENIG finish, gold-plated contacts, sealed connectors</td></tr>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)">UV radiation (outdoor exposure)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Solder mask degradation, silkscreen fading</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">UV-stable solder mask, opaque enclosure</td></tr>
+        <tr><td style="padding:8px 14px">Vibration / mechanical shock</td><td style="padding:8px 14px">Component detachment, connector fretting</td><td style="padding:8px 14px">Underfill on BGA, locking connectors, strain relief</td></tr>
+      </tbody>
+    </table>
+
+    <p>The standard consumer PCB — FR-4 TG 130, HASL finish, no coating — fails within <strong>6-12 months</strong> in outdoor agricultural deployment. The agricultural-grade version of the same board — FR-4 TG 170, ENIG finish, acrylic conformal coating, sealed IP67 enclosure — runs for <strong>5-7 years</strong> without failure. The bill of materials difference is roughly 15-25%. The field replacement cost of a failed sensor is 10-50× that difference.</p>
+
+    <h2>Sensor Integration: Building the Data Pipeline from Soil to Cloud</h2>
+
+    <p>An agricultural IoT node typically measures 3-6 parameters: soil moisture (capacitive or TDR), soil temperature (thermistor or digital), ambient temperature/humidity (I²C sensor), light/PAR (photodiode), and sometimes soil pH or electrical conductivity. Each sensor type imposes different PCB layout constraints.</p>
+
+    <div class="checklist-item">
+      <span class="checklist-num">1</span>
+      <div class="checklist-content">
+        <h4>Capacitive Soil Moisture: Guard Rings Are Not Optional</h4>
+        <p>Capacitive moisture sensing works by measuring the dielectric constant of the soil between two electrodes on the PCB. Stray capacitance from nearby traces, ground planes, or even the PCB substrate itself can swamp the soil signal. <strong>PCB rule:</strong> surround the sensing electrodes with an active guard ring driven at the same potential as the sensor input. Keep digital traces (I²C, SPI) at least 5mm away from the analog front-end. Use a separate ground pour for the analog section, connected to digital ground at exactly one point under the ADC.</p>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <span class="checklist-num">2</span>
+      <div class="checklist-content">
+        <h4>Analog Front-End: Low-Speed, High-Precision Layout</h4>
+        <p>Soil parameters change over hours, not microseconds. Your ADC can sample at 1 Hz and still capture every agronomically relevant event. This means you can use heavy analog filtering — RC low-pass with a 10 Hz cutoff is completely appropriate — to reject 50/60 Hz mains hum and RF interference. <strong>Layout rule:</strong> place the ADC as close as possible to the sensor connector. Keep the analog path under 20mm total length. Surround with a guard trace tied to VREF/2.</p>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <span class="checklist-num">3</span>
+      <div class="checklist-content">
+        <h4>Sensor Connector Strategy: Assume Replacement</h4>
+        <p>In consumer electronics, you solder the sensor to the board and ship it. In agriculture, sensors fail — a pH probe wears out, a soil moisture electrode corrodes. <strong>PCB rule:</strong> every external sensor connects through a sealed, keyed connector (M8 or M12 industrial circular, or JST with silicone seal). Never solder sensors directly to the board. The connector itself must be rated IP67 or better when mated.</p>
+      </div>
+    </div>
+
+    <figure>
+      <img src="../generated/blog-agritech-2.webp" alt="Close-up macro photo of PCB with capacitive soil moisture sensing electrodes and guard ring" class="article-img" style="max-width:85%" loading="lazy" width="1024" height="1024">
+    </figure>
+
+    <h2>Power Architecture for Remote Deployments: Battery, Solar, and Ultra-Low-Power Design</h2>
+
+    <p>An agricultural sensor deployed in a cornfield in Iowa does not have access to mains power. It runs on a battery — typically a 3.6V lithium thionyl chloride (Li-SOCl₂) primary cell with <span class="data-point">19,000 mAh</span> capacity — supplemented by a small solar panel (1-5W) if it transmits frequently. The PCB power architecture determines whether that battery lasts 6 months or 6 years.</p>
+
+    <p><strong>The power budget for a typical agricultural sensor node:</strong></p>
+
+    <table class="spec-table" style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0">
+      <thead>
+        <tr style="background:var(--bg-surface)">
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">State</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Current Draw</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Duty Cycle</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Daily Energy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Deep sleep (MCU + sensors off, RTC only)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">2-5 µA</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">99.7%</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">0.1 mAh</td></tr>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Sensor measurement (60s wake)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">8-15 mA</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">0.07% (once/hr)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">0.4 mAh</td></tr>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)">LoRaWAN TX (3s burst at +14 dBm)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">40-120 mA</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">0.003% (once/hr)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">0.15 mAh</td></tr>
+        <tr><td style="padding:8px 14px"><strong>Total daily consumption</strong></td><td style="padding:8px 14px"></td><td style="padding:8px 14px"></td><td style="padding:8px 14px"><strong>~0.65 mAh/day</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p>At 0.65 mAh/day, a 19,000 mAh Li-SOCl₂ cell lasts <strong>29,000 days</strong> — over 79 years, limited by the battery's own shelf life (10-15 years). In practice, solar charging with a small Li-Po buffer and more frequent transmissions (every 15 minutes instead of hourly) brings the practical field life to 5-8 years.</p>
+
+    <div class="highlight-box" style="background:var(--bg-surface);border:1px solid var(--accent);border-left:4px solid var(--accent);padding:var(--space-md) var(--space-lg);margin:var(--space-lg) 0;border-radius:0 var(--radius-md) var(--radius-md) 0">
+      <strong style="color:var(--accent)">PCB Power Design Rule:</strong> Use a dedicated PMIC with load switches per rail — not an LDO running continuously. Turn off sensors, radio, and analog front-end when not measuring. The MCU wakes every hour, enables the 3.3V sensor rail for 60 seconds, takes measurements, enables the RF rail for 3 seconds, transmits, and returns to sleep. A well-designed PMIC + load switch architecture saves 80-90% of the power budget compared to an always-on design.
+    </div>
+
+    <h2>Connectivity Without Compromise: LoRaWAN vs NB-IoT vs Satellite</h2>
+
+    <p>An agricultural sensor's connectivity choice determines its PCB layout in fundamental ways — antenna placement, impedance control, ground plane requirements, and EMI isolation from the sensor analog front-end.</p>
+
+    <table class="spec-table" style="width:100%;border-collapse:collapse;margin:var(--space-lg) 0">
+      <thead>
+        <tr style="background:var(--bg-surface)">
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Technology</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">Range</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid var(--accent)">PCB Implication</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)"><strong>LoRaWAN</strong> (868/915 MHz)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">2-15 km (rural)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Sub-GHz antenna: keep-out zone around chip antenna, no ground plane under antenna. 50Ω impedance on RF trace. Simple 2-layer PCB sufficient.</td></tr>
+        <tr><td style="padding:8px 14px;border-bottom:1px solid var(--border)"><strong>NB-IoT / LTE-M</strong> (cellular)</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Wherever there is cell coverage</td><td style="padding:8px 14px;border-bottom:1px solid var(--border)">Requires SIM (eSIM or nano-SIM holder). Cellular modem draws 500mA+ peak during TX — needs bulk capacitance (100µF+) near modem VCC. 4-layer PCB recommended for controlled impedance.</td></tr>
+        <tr><td style="padding:8px 14px"><strong>Satellite</strong> (Swarm, Iridium)</td><td style="padding:8px 14px">Global</td><td style="padding:8px 14px">Patch or helical antenna, clear sky view required. TX power can be 1-2W — needs dedicated power rail and thermal relief. Most expensive option, reserved for truly remote deployments.</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Antenna placement rule for all three:</strong> the antenna must be at the board edge, with no copper pours, components, or mounting holes within the antenna keep-out zone (typically 5-10mm in all directions for a chip antenna, larger for PCB trace antennas). The RF trace from the radio to the antenna must be a controlled-impedance microstrip — 50Ω, as short as possible, with continuous ground plane underneath. Avoid routing digital traces parallel to or crossing the RF trace.</p>
+
+    <figure>
+      <img src="../generated/blog-agritech-3.webp" alt="IoT agriculture sensor node PCB with solar panel and weatherproof enclosure in field" class="article-img" style="max-width:85%" loading="lazy" width="1024" height="1024">
+    </figure>
+
+    <h2>PCB Materials and Protection for Year-Round Outdoor Operation</h2>
+
+    <p>The material stack for an agricultural PCB is more important than for any other IoT application — because the board sees continuous temperature cycling and near-100% humidity for weeks at a time during growing season.</p>
+
+    <div class="checklist-item">
+      <span class="checklist-num">1</span>
+      <div class="checklist-content">
+        <h4>Laminate: TG 170 Minimum</h4>
+        <p>Standard FR-4 (TG 130) softens at 130°C — far above operating temperature, but the glass transition matters because CTE accelerates sharply above TG. During assembly (reflow at 240-260°C), a TG 130 laminate expands significantly more in the Z-axis than TG 170, stressing plated through-holes. After 500 thermal cycles (roughly 18 months of daily outdoor cycling), TG 130 boards show measurable PTH barrel cracking. TG 170 shows none at 1,000 cycles. <strong>Spec:</strong> Shengyi S1000-2 or equivalent, TG 170+, Td 340°C+.</p>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <span class="checklist-num">2</span>
+      <div class="checklist-content">
+        <h4>Surface Finish: ENIG, Not HASL</h4>
+        <p>HASL (hot air solder leveling) produces a slightly uneven surface — fine for 0.8mm pitch components, problematic for 0.5mm BGA or fine-pitch QFN. More importantly in agriculture: the tin-lead or pure tin surface of HASL is more susceptible to corrosion in humid, fertilizer-exposed environments than the nickel-gold barrier of ENIG. <strong>Spec:</strong> ENIG per IPC-4552, 3-5 µm Ni, 0.05-0.12 µm Au.</p>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <span class="checklist-num">3</span>
+      <div class="checklist-content">
+        <h4>Solder Mask: Matte Green, UV-Stable</h4>
+        <p>Glossy solder mask reflects more UV and shows scratches more visibly — not a functional issue, but matte green provides better contrast for AOI during manufacturing and better UV resistance over years of sun exposure. <strong>Spec:</strong> Taiyo PSR-4000 or equivalent, LPI (liquid photoimageable), matte green.</p>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <span class="checklist-num">4</span>
+      <div class="checklist-content">
+        <h4>Conformal Coating: Acrylic for Accessibility, Parylene for Maximum Protection</h4>
+        <p>Acrylic coating (applied by spray or brush, 25-75µm thickness) provides good moisture and chemical resistance at low cost, and can be reworked — important for prototype and low-volume agricultural devices. Parylene (vacuum-deposited, 5-25µm) provides near-perfect moisture barrier but cannot be reworked without mechanical removal. <strong>Decision rule:</strong> acrylic for field-trial and mid-volume (<10,000 units); parylene for high-volume, long-deployment products where field replacement is impossible.</p>
+      </div>
+    </div>
+
+    <h2>From Prototype to Field: Testing and Deployment</h2>
+
+    <p>An agricultural PCB that passes bench testing at 25°C has proven nothing. The real test is a soybean field in July. Before deploying at scale, run these validation steps:</p>
+
+    <div class="checklist-item">
+      <span class="checklist-num">1</span>
+      <div class="checklist-content">
+        <h4>Accelerated Environmental Test</h4>
+        <p>85°C / 85% RH for 1,000 hours (roughly 6 weeks) with the board powered and measuring. This accelerates the failure mechanisms of condensation, corrosion, and dendrite growth. A board that survives 1,000 hours of 85/85 will typically survive 5+ years in a temperate agricultural environment.</p>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <span class="checklist-num">2</span>
+      <div class="checklist-content">
+        <h4>Field Pilot: One Full Growing Season</h4>
+        <p>Deploy 10-20 units across different microclimates within the target region. Monitor every unit weekly for data quality and physical condition. The #1 failure in agricultural IoT is not electronics — it is <strong>physical ingress</strong>: water finds a way into the enclosure through a compromised gasket, a cracked cable gland, or condensation from thermal cycling. Your pilot will expose these before you ship 10,000 units.</p>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <span class="checklist-num">3</span>
+      <div class="checklist-content">
+        <h4>EMC: You Are in a Rural Area, But You Still Radiate</h4>
+        <p>Agricultural sensors operate near electric fence controllers, variable-frequency irrigation pump drives, and — increasingly — neighboring LoRaWAN and Wi-Fi networks. Pre-compliance EMC testing (radiated emissions 30 MHz-1 GHz) is not optional. A sensor that interferes with a neighbor's LoRaWAN gateway will generate support tickets faster than any hardware failure.</p>
+      </div>
+    </div>
+
+    <p>The precision agriculture PCB market is growing at <span class="data-point">12% CAGR</span> — faster than the overall PCB industry. The factories that understand outdoor environmental design, ultra-low-power architecture, and sensor integration will capture this demand. Those that treat agriculture boards as generic industrial PCBs will see field failures and lost customers. The design rules in this article are the difference.</p>
+
+  </div>
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design & Manufacturing</a></li>
+    <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+    <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Strategies</a></li>
+    <li><a href="/blog/low-volume-pcb-assembly.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Low-Volume PCB Assembly for Startups</a></li>
+    <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods Guide</a></li>
+  </ul>
+</div>
+
+<section class="cta-section" style="--cta-bg:url(../generated/blog-cta-agritech.webp)">
+  <div class="container">
+    <div class="cta-card" style="position:relative;z-index:1">
+      <h2>Building Agricultural IoT? Let's Talk About Your PCB</h2>
+      <p>From soil sensor prototypes to 50,000-unit field deployments. We manufacture PCBs for outdoor environments — TG 170+, ENIG, conformal coating, and full DFM review included with every quote.</p>
+      <a href="/quote/" class="btn btn-primary btn-lg" style="display:inline-block;margin-top:var(--space-md)">Request Quote</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',body:d});if(r.ok){alert('Thank you! We will respond within 24 hours.');closeModal();f.reset()}else{alert('Submission failed. Please email us directly at info@huaxingpcba.com.')}}catch(err){alert('Network error. Please email us at info@huaxingpcba.com.')}}
+</script>
+
+</body>
+</html>
