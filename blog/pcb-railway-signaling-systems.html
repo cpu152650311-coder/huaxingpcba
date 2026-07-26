@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Design for Railway Signaling and Train Control — Rugged Electronics for Rail Applications | Huaxing PCBA</title>
+<meta name="description" content="PCB requirements for railway signaling systems: EN 50155 compliance, extended temperature operation, shock and vibration resistance, and 20+ year service life. From a Shenzhen manufacturer serving rail industry suppliers.">
+<meta property="og:title" content="PCB Design for Railway Signaling and Train Control — Rugged Electronics for Rail Applications">
+<meta property="og:description" content="The PCB-level engineering behind railway electronics: why standard industrial PCBs fail in rail environments, and what design rules, materials, and testing protocols actually work.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-railway-signaling-systems.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-railway-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-railway-signaling-systems.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Design for Railway Signaling and Train Control — Rugged Electronics for Rail Applications",
+  "description": "EN 50155 compliance, extended temperature PCB design, shock and vibration resistance, and 20-year service life requirements for railway electronics — from a manufacturer supplying rail industry OEMs.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-railway-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-railway-signaling-systems.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-railway-signaling-systems.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-railway-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">PCB Design for Railway Signaling and Train Control:<br><em>Rugged Electronics That Survive 20 Years on the Track</em></h1>
+      <p class="reveal">EN 50155 compliance, -40C to +85C operation, shock and vibration resistance, and the PCB-level engineering decisions that separate rail-grade electronics from failures waiting to happen.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Railway Signaling PCB Design</span></div>
+
+  <p>Railway electronics operate in one of the harshest environments in industrial engineering. A PCB inside a trackside signaling cabinet experiences temperature swings of <span class="data-point">50°C</span> in a single day, sustained vibration from passing trains at <span class="data-point">5-150 Hz</span>, and must maintain fail-safe operation for <span class="data-point">20+ years</span> without field replacement. Standard industrial-grade PCBs — even well-made ones — fail predictably under these conditions.</p>
+
+  <p>This article covers the PCB-level design rules, material selections, and testing protocols required for railway signaling and train control applications. It is written for electronics engineers and procurement teams supplying signaling OEMs — not for general-interest readers. Every specification references EN 50155, the European standard for electronic equipment used on rolling stock, which has become the de facto global benchmark for rail electronics.</p>
+
+  <h2>Why Standard Industrial PCBs Fail in Railway Environments</h2>
+
+  <img src="../generated/blog-railway-track-electronics.webp" alt="Railway trackside signaling cabinet with electronic control systems" loading="lazy" class="article-img">
+
+  <p>Industrial-grade PCBs are typically designed for <span class="data-point">-20°C to +70°C</span> ambients, with occasional excursions tolerated but not sustained. Railway applications routinely demand <span class="data-point">-40°C to +85°C</span> (EN 50155 Class TX, the most demanding category). This is not a minor delta — it is the difference between a solder joint surviving 5 years and surviving 25.</p>
+
+  <div class="highlight-box">
+    <p><strong>The physics of failure:</strong> At -40°C, CTE mismatch between FR-4 substrate (14-16 ppm/°C in Z-axis) and copper plating (17 ppm/°C) places barrel cracks at the top of the failure pyramid. At +85°C with high humidity, CAF (Conductive Anodic Filament) growth accelerates exponentially — a failure mode almost never seen in office-temperature electronics but common in trackside cabinets after 5-7 years of condensation cycling.</p>
+  </div>
+
+  <p>Railway PCBs also face mechanical stressors that industrial boards rarely encounter. A signaling cabinet <span class="data-point">3 meters</span> from a passing freight train experiences acceleration levels that, while below the threshold for immediate fracture, accumulate fatigue damage in solder joints and plated through-holes over thousands of train-pass events. This is not simulated in standard IPC-TM-650 thermal cycling — it requires railway-specific test profiles.</p>
+
+  <h2>EN 50155: The Standard That Defines Rail-Grade Electronics</h2>
+
+  <p>EN 50155 is not a PCB standard — it is a system-level standard for electronic equipment on railway vehicles. However, its requirements cascade directly into PCB design rules across six domains:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Temperature Classes</h4>
+      <p>Class TX mandates <span class="data-point">-40°C to +85°C</span> ambient operating temperature, with PCB internal temperatures typically <span class="data-point">10-15°C</span> above ambient. This pushes FR-4 to its Tg limit: standard FR-4 (Tg 130-140°C) softens above Tg, causing Z-axis expansion that ruptures PTH barrels. High-Tg FR-4 (Tg 170-180°C) is the minimum acceptable substrate. For the most demanding applications — axle counters, balise readers, hot-box detectors — polyimide (Tg 250°C+) is preferred despite its higher cost. Our <a href="/blog/pcb-materials-guide.html">PCB materials guide</a> covers substrate selection in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Shock and Vibration</h4>
+      <p>EN 50155 references EN 61373 for shock and vibration testing. Category 2 (bogie-mounted) equipment endures <span class="data-point">5-150 Hz</span> random vibration at up to <span class="data-point">11.4 m/s² RMS</span>. For the PCB, this means: minimum <span class="data-point">1.6mm</span> board thickness for rigidity, staggered PTH placement to prevent crack propagation lines, and conformal coating to dampen component lead resonance. Heavy components (>5g) require additional mechanical fixation — adhesive staking or brackets — beyond solder alone.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Humidity and Condensation</h4>
+      <p>Trackside cabinets experience condensation when ambient temperature rises faster than the cabinet interior — a daily occurrence in temperate climates. PCBs must pass <span class="data-point">240 hours</span> at 93% RH / 40°C without CAF formation or insulation resistance degradation. This requires: minimum <span class="data-point">0.4mm</span> conductor spacing in high-voltage areas, solder mask with <span class="data-point">>1×10¹² Ω</span> surface insulation resistance, and, critically, no bare copper exposed at solder mask edges — a common defect in boards that pass electrical test but fail humidity aging.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>EMC: The Railway-Specific Challenge</h4>
+      <p>Railway signaling operates adjacent to <span class="data-point">25 kV AC</span> overhead catenary lines. The induced electromagnetic field at the PCB level can reach field strengths that saturate unshielded analog front-ends. EN 50121-4 specifies railway-specific EMC limits stricter than generic industrial EN 61000 standards. PCB-level mitigations include: <span class="data-point">4-layer minimum</span> stackup with dedicated ground plane, guard rings around high-impedance nodes, and — for mixed-signal designs — split ground planes with single-point bridge connection. See our <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI compliance guide</a> for implementation details.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Supply Voltage Variations</h4>
+      <p>Railway battery systems deliver anywhere from <span class="data-point">0.7×Vn to 1.25×Vn</span> (EN 50155 Class S2), with short-duration transients up to <span class="data-point">1.4×Vn</span>. For a nominal 24V system, that is 16.8V to 33.6V continuous. PCB power distribution must handle this range without derating; trace widths calculated at nominal voltage will overheat at the upper limit. Minimum <span class="data-point">2oz</span> copper on power layers is recommended.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Service Life: 20 Years Minimum</h4>
+      <p>EN 50155 requires a useful life of <span class="data-point">20 years</span> for Class L4 equipment. For the PCB, this means every failure mechanism with a time-dependent activation energy must be suppressed. Solder joint fatigue (Coffin-Manson model) and CAF growth (Peck's model) are the dominant time-dependent failures. Accelerated life testing per IEC 62506 validates the design, but the margin is built in at the design stage — not tested in afterward.</p>
+    </div>
+  </div>
+
+  <h2>PCB Material Selection for Railway Applications</h2>
+
+  <img src="../generated/blog-railway-pcb-cross-section.webp" alt="Photorealistic 3D cross-section render of high-reliability PCB showing multiple copper layers with thick dielectric for railway application" loading="lazy" class="article-img">
+
+  <p>Material selection for railway PCBs is a three-axis decision: thermal performance, CAF resistance, and cost. The table below summarizes the trade space:</p>
+
+  <table>
+    <tr><th>Material</th><th>Tg (°C)</th><th>CTE Z-axis (ppm/°C)</th><th>CAF Resistance</th><th>Relative Cost</th><th>Rail Application</th></tr>
+    <tr><td>Standard FR-4</td><td>130-140</td><td>4.0-5.0 (above Tg)</td><td>Moderate</td><td>1×</td><td>Not recommended for rail</td></tr>
+    <tr><td>High-Tg FR-4</td><td>170-180</td><td>2.5-3.5 (above Tg)</td><td>Good</td><td>1.3×</td><td>Indoor signaling, passenger info</td></tr>
+    <tr><td>Polyimide</td><td>250+</td><td>1.5-2.0 (above Tg)</td><td>Excellent</td><td>4-6×</td><td>Bogie-mounted, trackside, safety-critical</td></tr>
+    <tr><td>PTFE (Rogers)</td><td>280+</td><td>1.0-1.5</td><td>Excellent</td><td>8-12×</td><td>RF balise readers, GSM-R modules</td></tr>
+    <tr><td>Ceramic-filled hydrocarbon</td><td>280+</td><td>1.0-1.5</td><td>Excellent</td><td>5-8×</td><td>High-frequency axle counters</td></tr>
+  </table>
+
+  <p>For most signaling applications, <strong>high-Tg FR-4 is the cost-performance sweet spot</strong>. The <span class="data-point">1.3×</span> premium over standard FR-4 buys thermal margin that eliminates the dominant failure mode (PTH barrel cracking) at minimal added BOM cost. Polyimide only becomes necessary when the operating environment includes sustained >85°C ambients — engine compartment electronics, traction control units, or desert-region trackside cabinets without active cooling.</p>
+
+  <p>Rogers and ceramic-filled materials enter the picture when RF performance is the primary constraint — balise readers at <span class="data-point">4.2 MHz</span> (uplink) and <span class="data-point">27.1 MHz</span> (downlink), GSM-R equipment at <span class="data-point">876-925 MHz</span>, and future FRMCS (Future Railway Mobile Communication System) equipment at <span class="data-point">1900 MHz</span>. These applications need controlled dielectric constant (Dk ±0.05) and low loss tangent — properties that FR-4 cannot deliver at these frequencies. For RF-specific design, see our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB design guide</a>.</p>
+
+  <h2>Design Rules That Railway OEMs Require</h2>
+
+  <p>Beyond material selection, railway PCB designs follow a set of rules that go well beyond standard IPC Class 3:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">R1</div>
+    <div class="checklist-content">
+      <h4>Minimum Annular Ring: 0.25mm</h4>
+      <p>IPC Class 3 requires <span class="data-point">0.05mm</span> minimum annular ring for drilled holes. Railway signaling OEMs commonly specify <span class="data-point">0.25mm</span> — a 5× margin. The rationale: vibration-induced drill wander accumulates over 20 years, and a 0.05mm ring that passes electrical test at day 0 may be an open circuit at year 15. This is not excessive conservatism; it is economic calculation — the cost of a signaling failure (train delay, emergency maintenance callout) exceeds the cost of a slightly larger pad by orders of magnitude.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">R2</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating: Mandatory, Not Optional</h4>
+      <p>Every railway PCB — without exception — requires conformal coating. The standard choice is acrylic (AR) for reworkability or silicone (SR) for high-temperature applications. Coating thickness: <span class="data-point">25-75 μm</span> for acrylic, <span class="data-point">50-200 μm</span> for silicone. Masking of connectors and test points must be specified in the fabrication drawing — the PCB manufacturer cannot guess which areas to leave uncoated. See our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> for process details.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">R3</div>
+    <div class="checklist-content">
+      <h4>Copper Weight: 2oz Minimum on Power Layers</h4>
+      <p>As noted in the supply voltage section, railway power systems operate across wide voltage ranges. At the lower voltage limit, current increases to maintain constant power — a <span class="data-point">43%</span> increase at 0.7×Vn. Traces calculated for nominal voltage with standard <span class="data-point">1oz</span> copper will overheat. <span class="data-point">2oz</span> copper on power distribution layers provides the thermal margin. Our <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a> covers trace width calculation in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">R4</div>
+    <div class="checklist-content">
+      <h4>Surface Finish: ENIG Over HASL</h4>
+      <p>HASL's uneven surface creates coplanarity issues for fine-pitch components. Under thermal cycling, the uneven solder thickness introduces differential stress. ENIG provides a <span class="data-point">flat, solderable surface</span> with documented reliability in extended thermal cycling. For gold wire bonding applications (common in hermetic railway modules), <span class="data-point">ENEPIG</span> is specified — the palladium layer prevents nickel diffusion into the gold wire bond. Our <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a> compares all six options.</p>
+    </div>
+  </div>
+
+  <h2>Testing Beyond IPC Class 3</h2>
+
+  <img src="../generated/blog-railway-pcb-testing.webp" alt="Railway PCB undergoing thermal shock testing in environmental chamber with measurement probes attached" loading="lazy" class="article-img">
+
+  <p>IPC Class 3 acceptance testing is the baseline for railway PCBs — not the ceiling. Railway OEMs typically require additional test protocols:</p>
+
+  <div class="highlight-box">
+    <p><strong>IST (Interconnect Stress Testing):</strong> Unlike standard thermal cycling (air-to-air, slow ramp), IST uses DC current to heat copper interconnects internally, producing rapid temperature deltas (<span class="data-point">3 minutes</span> per cycle). This is much closer to actual rail operating conditions — where a PCB heats rapidly when a train passes (induced currents, power supply load) and cools rapidly afterward. IST to failure identifies the weakest interconnect in the design, not just pass/fail at a fixed cycle count. We run IST on every railway PCB prototype at our Shenzhen facility.</p>
+  </div>
+
+  <table>
+    <tr><th>Test</th><th>Standard Industrial</th><th>Railway-Specific</th></tr>
+    <tr><td>Thermal cycling</td><td>IPC-TM-650 2.6.7 (−40/+125°C, 100 cycles)</td><td>EN 61373 with operational bias (−40/+85°C, 500 cycles minimum)</td></tr>
+    <tr><td>Vibration</td><td>Sine sweep 10-500 Hz</td><td>Random vibration per EN 61373 Cat 2 (5-150 Hz, 11.4 m/s² RMS, 5 hours/axis)</td></tr>
+    <tr><td>Humidity</td><td>85°C/85% RH, 1000h (THB)</td><td>93% RH/40°C, 240h + insulation resistance monitoring at 10-min intervals</td></tr>
+    <tr><td>IST</td><td>Often skipped for industrial</td><td>Mandatory for safety-critical PCBs: 150°C, cycles to failure recorded</td></tr>
+  </table>
+
+  <h2>Production Qualification: What Railway OEMs Audit</h2>
+
+  <p>When a railway signaling OEM qualifies a new PCB supplier, they don't just check certifications. They audit specific production capabilities that directly impact rail-grade reliability:</p>
+
+  <p><strong>1. Plating uniformity.</strong> A PTH barrel with <span class="data-point">20 μm</span> copper on one side and <span class="data-point">15 μm</span> on the other will crack at the thin spot under thermal cycling. Railway auditors measure plating thickness at multiple points across a panel — not just the test coupon. Our in-house plating process targets <span class="data-point">25 μm minimum</span> in the barrel center, with <span class="data-point"><10%</span> variation across a <span class="data-point">600×800mm</span> panel.</p>
+
+  <p><strong>2. Solder mask registration.</strong> Misregistration that leaves a <span class="data-point">0.1mm</span> strip of bare copper between mask and pad is common in high-volume production — and it is the #1 initiation site for CAF growth in humid environments. Railway auditors inspect registration under microscopy on every layer of a cross-sectioned coupon.</p>
+
+  <p><strong>3. Traceability.</strong> Every railway PCB must be traceable to its production lot, date, and process parameters. If a field failure occurs at year 12, the OEM needs to know whether it is an isolated defect or a lot-wide problem affecting hundreds of installed units. Our lot traceability system records <a href="/blog/pcb-certifications-compliance.html">certification data</a> from incoming laminate inspection through final electrical test.</p>
+
+  <p>For a complete supplier evaluation framework, see our <a href="/blog/pcb-supplier-audit.html">PCB supplier audit checklist</a>.</p>
+
+  <h2>Cost Realities: What Rail-Grade Adds to PCB Cost</h2>
+
+  <p>Railway-grade PCB requirements do add cost — but the magnitude is often overestimated by teams new to the sector. Here is the breakdown for a typical <span class="data-point">6-layer, 160×100mm</span> signaling PCB:</p>
+
+  <table>
+    <tr><th>Cost Driver</th><th>Incremental Cost vs. Industrial</th><th>What You Get</th></tr>
+    <tr><td>High-Tg FR-4 (vs. standard FR-4)</td><td>+15-20%</td><td>20,000+ thermal cycles to PTH failure vs. 5,000</td></tr>
+    <tr><td>2oz copper on power layers</td><td>+10-15%</td><td>43% overcurrent margin at minimum supply voltage</td></tr>
+    <tr><td>Conformal coating (acrylic, both sides)</td><td>+8-12%</td><td>CAF suppression, condensation immunity</td></tr>
+    <tr><td>ENIG finish (vs. HASL)</td><td>+5-10% (offset by higher yield)</td><td>Flat pad surface, 15+ year solder joint reliability</td></tr>
+    <tr><td>IST + extended reliability testing</td><td>+3-5% (amortized over production volume)</td><td>Quantified reliability margin, not just pass/fail</td></tr>
+  </table>
+
+  <p>Total rail-grade premium: approximately <span class="data-point">40-60%</span> over an equivalent industrial PCB. For a <span class="data-point">$15</span> industrial board, the rail version costs <span class="data-point">$21-24</span>. In the context of a signaling system where a single PCB failure causes a <span class="data-point">$5,000-50,000</span> service disruption, the <span class="data-point">$6-9</span> incremental cost is not an expense — it is the cheapest insurance a railway OEM can buy.</p>
+
+  <h2>Summary: The Three Non-Negotiables</h2>
+
+  <p>If you take nothing else from this article, remember these three rules for railway PCB design:</p>
+
+  <div class="highlight-box">
+    <p><strong>1. High-Tg FR-4 is the floor, not the ceiling.</strong> Standard FR-4 has no place in railway electronics. High-Tg FR-4 (170°C+) is the minimum. Polyimide is the default for safety-critical, trackside, and bogie-mounted applications.</p>
+    <p><strong>2. Conformal coating is mandatory.</strong> An uncoated railway PCB is a field failure in progress. No exceptions, no cost-saving arguments.</p>
+    <p><strong>3. Test to EN 50155, not just IPC Class 3.</strong> IPC Class 3 is the baseline — railway environments require additional thermal cycling, random vibration, and humidity testing with operational bias. If your PCB supplier treats Class 3 as the finish line rather than the starting point, they are not a railway-grade supplier.</p>
+  </div>
+
+  <p>At Huaxing PCBA, our <span class="data-point">IATF 16949</span> and <span class="data-point">ISO 9001</span> certified <span class="data-point">15,000㎡</span> facility has produced PCBs for railway signaling, passenger information, and trackside monitoring systems. Our 8 SMT lines support prototyping through volume production, and our <a href="/blog/pcb-testing-methods.html">in-house testing</a> includes IST, thermal shock, and humidity aging — so you do not need to outsource reliability qualification to a third-party lab. <a href="/contact/">Contact our engineering team</a> with your Gerber files and EN 50155 compliance requirements for a DFM review within 24 hours.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-railway-pcb.webp)">
+      <h2>Developing Railway Electronics?</h2>
+      <p>Send your Gerber files with EN 50155 requirements. Our engineering team returns a DFM report focused on rail-specific reliability — thermal cycling margins, CAF risk assessment, and conformal coating recommendations — within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get a Railway PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

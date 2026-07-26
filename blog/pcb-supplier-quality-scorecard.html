@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Build a PCB Supplier Quality Scorecard — KPIs That Predict Manufacturing Performance | Huaxing PCBA</title>
+<meta name="description" content="A practical framework for scoring PCB suppliers on quality, delivery, cost, and responsiveness. Includes weighted KPI formulas, scorecard template, and red-flag thresholds from a Shenzhen manufacturer's perspective.">
+<meta property="og:title" content="How to Build a PCB Supplier Quality Scorecard — KPIs That Predict Manufacturing Performance">
+<meta property="og:description" content="Stop evaluating PCB suppliers on price alone. This scorecard framework weights quality, delivery, cost, and responsiveness into a single actionable score — with real thresholds from a factory that undergoes 50+ supplier audits per year.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-supplier-quality-scorecard.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-scorecard.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-supplier-quality-scorecard.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Build a PCB Supplier Quality Scorecard — KPIs That Predict Manufacturing Performance",
+  "description": "Weighted KPI framework for PCB supplier evaluation: quality metrics, delivery performance, cost trend analysis, and responsiveness scoring — with real thresholds from a manufacturer that undergoes 50+ audits per year.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-scorecard.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-supplier-quality-scorecard.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-supplier-quality-scorecard.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-scorecard.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Intelligence</p>
+      <h1 class="reveal">How to Build a PCB Supplier Quality Scorecard:<br><em>KPIs That Actually Predict Performance — Not Just Rear-View Metrics</em></h1>
+      <p class="reveal">A weighted 4-pillar scoring framework that turns subjective supplier assessments into a single, defensible number. Built from the receiving end of 50+ audits per year.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Supplier Quality Scorecard</span></div>
+
+  <p>Most companies evaluate PCB suppliers the wrong way. They compare price per board, check if the delivery was on time, and call it supplier management. When a quality problem surfaces — and it always does — they have no quantitative basis for deciding whether this is an anomaly or a pattern. The result: suppliers are fired too late, kept too long, or replaced for the wrong reasons.</p>
+
+  <p>A supplier quality scorecard solves this. It converts the four dimensions of supplier performance — quality, delivery, cost, and responsiveness — into weighted scores that trend over time. A single bad month doesn't trigger a panic. A slow decline across three quarters is visible six months before it becomes a crisis. This article provides the framework, formulas, and thresholds we use at Huaxing PCBA — refined from evaluating our own material suppliers and from the scorecards our largest automotive and medical customers use to evaluate us.</p>
+
+  <h2>Why Price-Per-Board Is an Incomplete Metric for PCB Sourcing</h2>
+
+  <img src="../generated/blog-scorecard-metrics.webp" alt="PCB quality inspection data being reviewed on screen with manufacturing metrics dashboard" loading="lazy" class="article-img">
+
+  <p>The unit price of a PCB captures approximately <span class="data-point">60%</span> of its total cost of ownership. The remaining <span class="data-point">40%</span> is hidden in quality failures, late deliveries, rework, line-down costs, and procurement overhead. A supplier quoting <span class="data-point">$8.50</span> per board with a <span class="data-point">2%</span> defect rate actually costs <span class="data-point">$9.35</span> per good board when factoring in rework and scrap. A supplier at <span class="data-point">$9.00</span> with a <span class="data-point">0.5%</span> defect rate costs <span class="data-point">$9.05</span> per good board — cheaper in practice despite the higher unit price.</p>
+
+  <div class="highlight-box">
+    <p><strong>The cost of quality formula:</strong> True cost per board = <code>Unit Price ÷ (1 − Defect Rate) + (Rework Cost × Defect Rate)</code>. For a <span class="data-point">$10</span> board with <span class="data-point">3%</span> defects and <span class="data-point">$5</span> rework cost: <code>$10 ÷ 0.97 + $5 × 0.03 = $10.31 + $0.15 = $10.46</code>. That <span class="data-point">$0.46</span> difference looks small — until you multiply it by <span class="data-point">50,000</span> boards per year. Then it is <span class="data-point">$23,000</span> of hidden cost that never appears on any invoice.</p>
+  </div>
+
+  <p>This is why a proper scorecard weights quality <em>above</em> cost. If your scorecard doesn't, you're optimizing the wrong variable. For a complete cost analysis framework, see our <a href="/blog/pcb-cost-factors.html">PCB cost factors guide</a>.</p>
+
+  <h2>The 4-Pillar Scorecard Framework</h2>
+
+  <p>The scorecard uses four weighted pillars, each scored <span class="data-point">0-100</span> and combined into a single composite score. The weightings below are our recommended defaults for a PCB/PCBA supplier; adjust them based on your product's risk profile.</p>
+
+  <table>
+    <tr><th>Pillar</th><th>Weight</th><th>What It Measures</th><th>Data Source</th></tr>
+    <tr><td>Quality</td><td>40%</td><td>Defect rate, first-pass yield, field returns, CAPA effectiveness</td><td>IQC records, production data, RMA logs</td></tr>
+    <tr><td>Delivery</td><td>25%</td><td>On-time delivery, lead time accuracy, quantity accuracy</td><td>ERP purchase order data</td></tr>
+    <tr><td>Cost</td><td>20%</td><td>Price trend, cost reduction initiatives, NRE transparency</td><td>Quote history, invoice data</td></tr>
+    <tr><td>Responsiveness</td><td>15%</td><td>Quote turnaround, problem resolution speed, engineering support quality</td><td>Internal tracking, email response metrics</td></tr>
+  </table>
+
+  <p><strong>Composite Score = (Quality × 0.40) + (Delivery × 0.25) + (Cost × 0.20) + (Responsiveness × 0.15)</strong></p>
+
+  <p>The result is a single number between <span class="data-point">0 and 100</span>. Track it quarterly. Trend it over 4+ quarters. A supplier dropping from 85 to 78 over two quarters is a conversation. A supplier dropping from 85 to 65 in one quarter is an escalation.</p>
+
+  <h2>Pillar 1: Quality (Weight: 40%)</h2>
+
+  <p>Quality is the highest-weighted pillar because quality failures in PCB supply have the longest tail of consequences. A late board delays a shipment. A defective board that passes incoming inspection and fails in the field costs <span class="data-point">10-100×</span> the board price in warranty claims, reputation damage, and — for regulated industries — regulatory exposure.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Q1</div>
+    <div class="checklist-content">
+      <h4>Incoming Lot Acceptance Rate (ILAR) — 40% of Quality Score</h4>
+      <p><code>ILAR = (Accepted Lots ÷ Total Received Lots) × 100</code></p>
+      <p>Score: <span class="data-point">≥99% = 100</span> | 98-98.9% = 85 | 97-97.9% = 70 | 95-96.9% = 50 | <95% = 25</p>
+      <p>This is the bluntest instrument in the quality toolkit — and the most important. A supplier whose lots are rejected <span class="data-point">3%</span> of the time is creating <span class="data-point">re-inspection, MRB meetings, NCMRs, and supplier corrective action requests</span> on <span class="data-point">3%</span> of everything they ship. Our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection guide</a> covers sampling plans and acceptance criteria.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Q2</div>
+    <div class="checklist-content">
+      <h4>Defective Parts Per Million (DPPM) — 30% of Quality Score</h4>
+      <p><code>DPPM = (Defective Units Found ÷ Total Units Inspected) × 1,000,000</code></p>
+      <p>Score: <span class="data-point"><500 DPPM = 100</span> | 500-1,000 = 85 | 1,001-2,500 = 70 | 2,501-5,000 = 50 | >5,000 = 25</p>
+      <p>DPPM captures defects within accepted lots — the subtle quality erosion that ILAR misses. A supplier shipping lots that pass AQL sampling but have an underlying DPPM trend rising from 800 to 1,200 over three quarters is in trouble, even if every lot passes incoming inspection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Q3</div>
+    <div class="checklist-content">
+      <h4>Corrective Action Effectiveness — 20% of Quality Score</h4>
+      <p>Score: <span class="data-point">All CAPAs closed on time with verified effectiveness = 100</span> | >90% closed on time = 80 | 75-89% closed on time = 60 | <75% closed = 30</p>
+      <p>This measures whether the supplier actually fixes problems — not whether they write a nice 8D report. The test: when you reject a lot for a specific defect, does that defect recur in the next three shipments? If yes, the CAPA was paperwork, not process improvement. Our <a href="/blog/pcb-failure-analysis-guide.html">PCB failure analysis guide</a> covers root cause methodologies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">Q4</div>
+    <div class="checklist-content">
+      <h4>Field Return Rate — 10% of Quality Score</h4>
+      <p><code>Field Return Rate = (Field Returns ÷ Total Shipped Units) × 100</code> (12-month rolling)</p>
+      <p>Score: <span class="data-point"><0.1% = 100</span> | 0.1-0.3% = 80 | 0.31-0.5% = 60 | 0.51-1.0% = 40 | >1.0% = 20</p>
+      <p>The lagging indicator. A quality problem that escapes IQC and reaches the field is a system failure — not just a supplier failure. For PCB failure modes that reach the field, see our <a href="/blog/pcb-rework-repair-guide.html">PCB rework and repair guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Pillar 2: Delivery (Weight: 25%)</h2>
+
+  <img src="../generated/blog-scorecard-delivery.webp" alt="PCB production scheduling board with delivery tracking and shipment preparation in factory" loading="lazy" class="article-img">
+
+  <p>Delivery performance in PCB supply is not binary (on time / late). A shipment that arrives on the right date with the wrong quantity is a partial failure. A shipment that arrives early — filling your warehouse before you're ready — is also a failure. The scorecard must capture nuance.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">D1</div>
+    <div class="checklist-content">
+      <h4>On-Time Delivery (OTD) — 50% of Delivery Score</h4>
+      <p><code>OTD = (Line Items Delivered On Time ÷ Total Line Items) × 100</code></p>
+      <p>Score: <span class="data-point">≥98% = 100</span> | 95-97.9% = 85 | 90-94.9% = 70 | 85-89.9% = 50 | <85% = 25</p>
+      <p>"On time" means within the agreed delivery window — typically <span class="data-point">±1 business day</span> for domestic shipments, <span class="data-point">±2 days</span> for international. Early delivery counts as on-time only if pre-approved. A surprise early shipment that arrives before your receiving team is staffed is a nuisance, not a favor.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">D2</div>
+    <div class="checklist-content">
+      <h4>Quantity Accuracy — 30% of Delivery Score</h4>
+      <p><code>Quantity Accuracy = (Line Items with Correct Quantity ÷ Total Line Items) × 100</code></p>
+      <p>Score: <span class="data-point">≥99% = 100</span> | 97-98.9% = 85 | 95-96.9% = 70 | 90-94.9% = 50 | <90% = 25</p>
+      <p>PCB suppliers commonly ship <span class="data-point">±10%</span> of ordered quantity — the industry convention is that overage/underage within this band is acceptable. But if your MRP system doesn't handle variable receipt quantities well, a <span class="data-point">5%</span> shortfall can cause a line-down situation. Negotiate quantity tolerance with your supplier and bake it into the scorecard.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">D3</div>
+    <div class="checklist-content">
+      <h4>Lead Time Stability — 20% of Delivery Score</h4>
+      <p>Measured as standard deviation of actual lead time over <span class="data-point">6 rolling orders</span></p>
+      <p>Score: <span class="data-point">σ < 1 day = 100</span> | σ 1-2 days = 85 | σ 2-3 days = 70 | σ 3-5 days = 50 | σ >5 days = 25</p>
+      <p>A supplier with a stable <span class="data-point">10-day</span> lead time is more valuable than one with an average <span class="data-point">7-day</span> lead time that varies between <span class="data-point">4 and 18 days</span>. Predictability enables your production planning. Average lead time that you cannot plan around creates buffer inventory costs that more than offset the faster nominal lead time.</p>
+    </div>
+  </div>
+
+  <h2>Pillar 3: Cost (Weight: 20%)</h2>
+
+  <p>Cost scoring is a trap if done wrong. The most common error: scoring the lowest-price supplier at 100 and everyone else proportionally lower. This drives supplier selection toward the cheapest option — which is exactly what the quality and delivery pillars are there to prevent.</p>
+
+  <div class="highlight-box">
+    <p><strong>Correct approach:</strong> Score cost on <em>value trend</em>, not absolute price. A supplier whose unit price increases <span class="data-point">2%</span> annually with documented material cost justification scores higher than one whose price stays flat but whose quality is deteriorating. The cheapest supplier gets a 70, not a 100, unless they also lead on quality and delivery. The scorecard is designed to reward balanced performance, not cost minimization.</p>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">C1</div>
+    <div class="checklist-content">
+      <h4>Price Competitiveness — 40% of Cost Score</h4>
+      <p>Benchmark against <span class="data-point">3 comparable quotes</span> for the same specification. Score: within <span class="data-point">5%</span> of median = 100 | within <span class="data-point">5-10%</span> above = 80 | <span class="data-point">10-15%</span> above = 60 | <span class="data-point">>15%</span> above = 40. Being <span class="data-point">>10%</span> below median is also scored at 80 — abnormally low pricing signals corner-cutting or unsustainably thin margins. Our guide to <a href="/blog/pcb-price-negotiation.html">PCB price negotiation</a> covers quote benchmarking in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">C2</div>
+    <div class="checklist-content">
+      <h4>Cost Reduction Initiative — 30% of Cost Score</h4>
+      <p>Has the supplier proposed <span class="data-point">≥2</span> cost reduction ideas in the past <span class="data-point">12 months</span>? Score: <span class="data-point">2+ implemented ideas saving ≥3% = 100</span> | 1-2 proposed = 70 | none = 40</p>
+      <p>A supplier who proactively suggests panelization optimization, material substitution, or test strategy changes that reduce your total cost is worth more than a supplier who simply holds price. The best PCB suppliers think about your cost structure, not just their invoice. Our <a href="/blog/pcb-panelization-cost-optimization.html">PCB panelization cost optimization guide</a> is one example of what a good supplier should be proposing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">C3</div>
+    <div class="checklist-content">
+      <h4>NRE and Quote Transparency — 30% of Cost Score</h4>
+      <p>Score: NRE charges itemized with justification = 100 | lump sum NRE with verbal explanation = 70 | NRE appears to include hidden margin = 40</p>
+      <p>Tooling, test fixtures, and engineering charges are legitimate costs. But when NRE is a lump sum with no breakdown, it is often a margin opportunity for the supplier. A transparent quote separates one-time costs from recurring costs — and explains why each NRE line item exists. For a deep dive on NRE structure, see <a href="/blog/pcb-nre-tooling-costs.html">PCB NRE and tooling costs</a>.</p>
+    </div>
+  </div>
+
+  <h2>Pillar 4: Responsiveness (Weight: 15%)</h2>
+
+  <p>Responsiveness is the lowest-weighted pillar — not because it's unimportant, but because it is the most subjective. Raw response speed without quality is dangerous; a supplier who answers every email in 10 minutes but ships defective boards is worse than one who responds in 4 hours and ships good product. Weight responsiveness less than quality, delivery, and cost.</p>
+
+  <table>
+    <tr><th>Metric</th><th>Weight in Pillar</th><th>100 Points</th><th>50 Points</th><th>0 Points</th></tr>
+    <tr><td>Quote turnaround (RFQ to formal quote)</td><td>35%</td><td><24 hours</td><td>24-48 hours</td><td>>72 hours</td></tr>
+    <tr><td>Quality issue response (acknowledgment + containment plan)</td><td>35%</td><td><24 hours</td><td>24-48 hours</td><td>>72 hours</td></tr>
+    <tr><td>Engineering support (DFM feedback on new designs)</td><td>20%</td><td><2 business days, with specific recommendations</td><td>2-4 days, general comments</td><td>>1 week or no feedback</td></tr>
+    <tr><td>Proactive communication (schedule changes, material shortages)</td><td>10%</td><td>Notified before you discover the problem</td><td>Notified after you ask</td><td>Never notified</td></tr>
+  </table>
+
+  <h2>Scorecard Thresholds: When to Act</h2>
+
+  <img src="../generated/blog-scorecard-dashboard.webp" alt="Manufacturing quality dashboard with KPI charts showing supplier performance trends over multiple quarters" loading="lazy" class="article-img">
+
+  <p>The composite score is not the end product — the trend is. A supplier at <span class="data-point">82</span> and flat for four quarters is healthy. A supplier at <span class="data-point">85</span> but declining <span class="data-point">3 points per quarter</span> is a problem you need to address now, not when they hit 70.</p>
+
+  <table>
+    <tr><th>Score Range</th><th>Classification</th><th>Action</th></tr>
+    <tr><td>90-100</td><td>Strategic Partner</td><td>Increase volume share, involve in NPI, negotiate long-term agreement. These suppliers are rare — protect the relationship.</td></tr>
+    <tr><td>80-89</td><td>Preferred Supplier</td><td>Maintain volume, conduct annual business review, identify one joint improvement initiative per year.</td></tr>
+    <tr><td>70-79</td><td>Approved — Watch</td><td>Cap volume at current level, increase incoming inspection sampling, require monthly quality data submission. Flag for quarterly review.</td></tr>
+    <tr><td>60-69</td><td>Conditional — Improvement Required</td><td>Formal improvement plan with 90-day milestones. Reduce order volume <span class="data-point">30-50%</span>. Begin qualifying alternative supplier. Our <a href="/blog/pcb-supplier-transition-guide.html">supplier transition guide</a> covers the qualification process.</td></tr>
+    <tr><td><60</td><td>Disqualification Candidate</td><td>Stop new PO placement. Complete outstanding orders under heightened inspection (AQL tightened by one level). Execute transition to qualified alternative. See our <a href="/blog/pcb-dual-sourcing-strategy.html">dual-sourcing strategy</a> for transition planning.</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>The one-quarter rule:</strong> A scorecard is a <span class="data-point">4-quarter trailing</span> tool, not a single-quarter snapshot. Never disqualify a supplier based on one bad quarter — a single major customer order going wrong can tank quality metrics temporarily. But also never let a supplier explain away three consecutive declining quarters as "temporary." Three quarters is a trend. A trend requires a corrective action plan with defined milestones. If the milestones are missed, the fourth quarter triggers escalation.</p>
+  </div>
+
+  <h2>Implementation: Start Simple, Add Sophistication Over Time</h2>
+
+  <p>Do not build a perfect scorecard before you start using one. The version 1.0 scorecard needs only: lot acceptance rate, on-time delivery, and price trend. These three metrics — tracked monthly, reviewed quarterly — will surface <span class="data-point">80%</span> of supplier performance issues. The remaining <span class="data-point">20%</span> (DPPM, CAPA effectiveness, lead time stability) can be added as your data collection matures.</p>
+
+  <p>The most common implementation failure: building a beautiful scorecard in Excel, populating it with one quarter of data, and never updating it. A scorecard updated once and abandoned is worse than no scorecard at all — it creates the illusion of supplier management without the substance. Schedule a recurring calendar event. Assign ownership to one person. Review at quarterly business reviews with the supplier present. Our <a href="/blog/pcb-supplier-audit.html">supplier audit checklist</a> provides the on-site verification that scorecard data alone cannot deliver.</p>
+
+  <p>At Huaxing PCBA, we apply this framework internally — to our material suppliers — and we are evaluated against it by our largest automotive and medical customers. A supplier who understands how they are being scored is a supplier who can improve. A supplier who has no idea how you evaluate them is a supplier you haven't really managed.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-scorecard.webp)">
+      <h2>Evaluating PCB Suppliers?</h2>
+      <p>Send your current supplier's quality and delivery data. We'll benchmark their performance against industry norms from a manufacturer that undergoes 50+ customer audits per year — and show you where your scorecard should flag concern.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request a Supplier Benchmark <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Design for EV Charging Infrastructure — Power Electronics for AC and DC Fast Charging Stations | Huaxing PCBA</title>
+<meta name="description" content="PCB requirements for AC Level 2 and DC fast charging stations: high-current power distribution, thermal management for 350kW+ chargers, galvanic isolation, and IEC 61851 compliance. From a Shenzhen PCB manufacturer serving EV infrastructure OEMs.">
+<meta property="og:title" content="PCB Design for EV Charging Infrastructure — Power Electronics for AC and DC Fast Charging Stations">
+<meta property="og:description" content="The PCB-level engineering behind EV charger power modules: why 4oz+ copper, thermal vias, and partial discharge protection matter when you're pushing 500A through a PCB inside a sealed outdoor enclosure.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-ev-charging-infrastructure.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ev-charger-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-ev-charging-infrastructure.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Design for EV Charging Infrastructure — Power Electronics for AC and DC Fast Charging Stations",
+  "description": "High-current PCB design, thermal management for 350kW DC fast chargers, galvanic isolation, and IEC 61851 compliance — from a manufacturer supplying EV charging OEMs.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ev-charger-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-ev-charging-infrastructure.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-ev-charging-infrastructure.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ev-charger-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">PCB Design for EV Charging Infrastructure:<br><em>Power Electronics That Handle 350kW Without Melting</em></h1>
+      <p class="reveal">From 7kW AC wall boxes to 350kW DC ultra-fast chargers — the PCB-level engineering decisions that determine whether your charger survives 10 years in an outdoor enclosure or fails at month 14.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>EV Charging Infrastructure PCB Design</span></div>
+
+  <p>The global EV charger market is installing hardware at a rate of <span class="data-point">20,000+ public charging points per week</span>. Every one of those chargers contains at least one power electronics PCB — and in DC fast chargers, typically <span class="data-point">8-12</span> power modules, each with its own high-current PCB. The total addressable PCB market for EV charging infrastructure passed <span class="data-point">$1.2 billion</span> in 2025 and is growing at 25% CAGR. But the PCB requirements are unlike anything in conventional power electronics.</p>
+
+  <p>This article covers the PCB-level design rules for EV charger power modules: AC Level 2 (3.3-22kW), DC fast charging (50-350kW), and the emerging megawatt charging system (MCS) for heavy-duty vehicles. It is written for power electronics engineers designing charger hardware and procurement teams sourcing PCB manufacturing for charger OEMs.</p>
+
+  <h2>The PCB Challenge: High Power Density in a Sealed Outdoor Enclosure</h2>
+
+  <img src="../generated/blog-ev-charger-power-module.webp" alt="EV DC fast charger power module PCB with heavy copper traces and power semiconductors" loading="lazy" class="article-img">
+
+  <p>An EV charger power module is a study in conflicting requirements. It must deliver <span class="data-point">30-60kW</span> per module (stacked for higher total output) in a form factor that fits inside a sealed, fan-cooled outdoor enclosure. The PCB is simultaneously a structural element (supporting heavy magnetics and heatsinks), a thermal path (conducting heat away from SiC MOSFETs switching at <span class="data-point">50-100 kHz</span>), and a high-voltage isolation barrier (separating <span class="data-point">800V</span> DC bus from control electronics).</p>
+
+  <div class="highlight-box">
+    <p><strong>The thermal math:</strong> A 30kW power module operating at 96% efficiency dissipates <span class="data-point">1,200W</span> of heat. On a <span class="data-point">250×150mm</span> PCB, that is <span class="data-point">3.2 W/cm²</span> — roughly the heat flux of a stovetop burner at medium setting. Natural convection in a sealed enclosure cannot remove this. The PCB itself must serve as a thermal spreader, moving heat from semiconductor junctions to heatsink interfaces through copper pours, thermal vias, and — in the highest-power designs — embedded copper coins.</p>
+  </div>
+
+  <p>Unlike indoor industrial electronics, EV chargers face outdoor environmental stress: <span class="data-point">-30°C to +50°C</span> ambient, IP54 or IP65 enclosure sealing, direct solar radiation adding <span class="data-point">10-15°C</span> to internal temperature, and condensation when ambient temperature rises faster than the enclosure interior. These conditions accelerate every PCB degradation mechanism — CAF growth, solder joint fatigue, and partial discharge in high-voltage clearances.</p>
+
+  <h2>AC Level 2 Charger PCBs (3.3-22kW)</h2>
+
+  <p>AC chargers are the simpler case — they deliver AC mains power to the vehicle's onboard charger. The PCB primarily handles: contactor control, residual current detection (RCD), PWM communication per IEC 61851-1, and safety interlocks. Power levels are modest (<span class="data-point">32A</span> at 240V single-phase or <span class="data-point">32A</span> at 400V three-phase).</p>
+
+  <p>But "simpler" does not mean trivial. The PCB must:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Maintain Creepage Distances for 400VAC</h4>
+      <p>IEC 61851-23 requires <span class="data-point">6mm</span> creepage for reinforced insulation at 400VAC (pollution degree 2, material group IIIa). This is significantly larger than standard PCB design rules allow between adjacent pins on a relay or contactor footprint. Layout must explicitly verify creepage paths — not just clearance — around every high-voltage node.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Survive 6kV Surge (IEC 61000-4-5)</h4>
+      <p>AC chargers connect directly to the grid and face lightning-induced surges. The PCB must withstand <span class="data-point">6kV</span> common-mode and <span class="data-point">3kV</span> differential-mode surges without arc-over. This requires surge-rated clearance distances and, critically, spark gaps or gas discharge tubes at the AC input — not something a standard industrial PCB design includes by default.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Functional Safety Isolation</h4>
+      <p>The control PCB straddles two domains: the high-voltage AC side (contactor coil drivers, voltage sense dividers) and the SELV (Safety Extra-Low Voltage) side (microcontroller, communication interfaces). The isolation barrier between them must withstand <span class="data-point">3,750 VAC</span> for 1 minute per IEC 61851-23. This is typically implemented with a physical isolation slot in the PCB — a routed air gap — not just creepage distance on a continuous substrate.</p>
+    </div>
+  </div>
+
+  <h2>DC Fast Charger PCBs (50-350kW)</h2>
+
+  <img src="../generated/blog-ev-dc-charger-stack.webp" alt="Stack of DC fast charger power modules with heavy copper PCB and liquid cooling plates visible" loading="lazy" class="article-img">
+
+  <p>DC fast chargers bypass the vehicle's onboard charger and deliver DC power directly to the battery. This requires power conversion from grid AC to high-voltage DC — typically <span class="data-point">200-1000V</span> at <span class="data-point">100-500A</span>. The PCB inside each power module handles this conversion and faces challenges that push PCB manufacturing to its limits.</p>
+
+  <div class="highlight-box">
+    <p><strong>Heavy copper is not optional.</strong> At 500A output current, even a <span class="data-point">10mm-wide, 6oz</span> copper trace has a resistance of <span class="data-point">0.5 mΩ/cm</span>, dissipating <span class="data-point">125W per meter</span> of trace. Standard <span class="data-point">1oz</span> copper (35 μm) is simply not in the conversation — the trace would need to be <span class="data-point">60mm wide</span> to carry 500A at a 10°C temperature rise, which is wider than many power module PCBs. <span class="data-point">4oz to 6oz</span> copper on outer layers is the baseline for DC charger power stages.</p>
+  </div>
+
+  <p>Huaxing PCBA's heavy copper capability supports up to <span class="data-point">6oz</span> copper on outer layers and <span class="data-point">4oz</span> on inner layers, with <a href="/blog/heavy-copper-pcb.html">heavy copper PCB processes</a> optimized for uniform plating thickness — a critical quality metric when trace cross-section directly determines current-carrying capacity.</p>
+
+  <h3>SiC and GaN: The Semiconductor Shift Reshaping PCB Design</h3>
+
+  <p>DC fast charger power modules are transitioning from silicon IGBTs to silicon carbide (SiC) MOSFETs and, increasingly, gallium nitride (GaN) HEMTs for the auxiliary power supplies. SiC switches at <span class="data-point">50-100 kHz</span> (vs. <span class="data-point">8-20 kHz</span> for IGBTs), which reduces magnetics size but introduces new PCB challenges:</p>
+
+  <table>
+    <tr><th>Parameter</th><th>Si IGBT (Legacy)</th><th>SiC MOSFET (Current)</th><th>PCB Impact</th></tr>
+    <tr><td>Switching frequency</td><td>8-20 kHz</td><td>50-100 kHz</td><td>Gate drive loop inductance must be <span class="data-point"><5 nH</span> — requires tight Kelvin-source PCB layout</td></tr>
+    <tr><td>dv/dt</td><td>5-10 kV/μs</td><td>50-100 kV/μs</td><td>Common-mode noise couples through parasitic PCB capacitance; guard traces with grounded shield planes are essential</td></tr>
+    <tr><td>Junction temperature</td><td>150°C max</td><td>175°C max</td><td>PCB substrate must survive higher local temperatures under the device; polyimide or high-Tg FR-4 with thermal vias</td></tr>
+    <tr><td>Power density</td><td>3-5 kW/L</td><td>8-12 kW/L</td><td>Higher density demands embedded copper coin or IMS (insulated metal substrate) for die-level heat extraction</td></tr>
+  </table>
+
+  <p>For mixed-signal designs with high-voltage power stages and sensitive control electronics on the same PCB, see our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a>.</p>
+
+  <h2>Thermal Management: The Make-or-Break Design Constraint</h2>
+
+  <p>Thermal management of EV charger PCBs is not about picking a heatsink. It is about designing the PCB itself as a thermal system:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">T1</div>
+    <div class="checklist-content">
+      <h4>Thermal Vias Under Every Power Semiconductor</h4>
+      <p>A <span class="data-point">0.3mm</span> diameter thermal via with <span class="data-point">25 μm</span> copper plating has a thermal resistance of approximately <span class="data-point">120°C/W</span> from top to bottom of a 1.6mm board. A <span class="data-point">10×10</span> array of such vias under a TO-247 package footprint provides a combined thermal resistance of <span class="data-point">~1.2°C/W</span> — essential when the device junction-to-case thermal resistance is <span class="data-point">0.5-1.0°C/W</span> and the total thermal budget from junction to ambient is perhaps <span class="data-point">30°C</span>. Our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a> covers via sizing and placement in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">T2</div>
+    <div class="checklist-content">
+      <h4>Embedded Copper Coins for 350kW+ Modules</h4>
+      <p>At power levels above <span class="data-point">30kW per module</span>, thermal vias alone cannot extract heat fast enough from SiC MOSFETs switching at the upper end of their frequency range. Embedded copper coins — solid copper inserts pressed into the PCB directly under the semiconductor die — provide a thermal conductivity of <span class="data-point">385 W/m·K</span>, compared to <span class="data-point">0.3-0.4 W/m·K</span> for FR-4. This is a <span class="data-point">1,000×</span> improvement and the difference between a 175°C Tj max SiC MOSFET running at 120°C or failing thermal shutdown at full load.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">T3</div>
+    <div class="checklist-content">
+      <h4>IMS (Insulated Metal Substrate) for Single-Layer Power Boards</h4>
+      <p>For the simplest power stages — a single-layer high-current PCB bonded to an aluminum baseplate — IMS construction eliminates the FR-4 thermal bottleneck entirely. The dielectric layer between copper and aluminum is <span class="data-point">75-150 μm</span> thick with a thermal conductivity of <span class="data-point">1-3 W/m·K</span>, providing an order-of-magnitude better heat spreading than FR-4. IMS is well-suited to AC charger power boards and DC charger auxiliary supplies. Our <a href="/blog/metal-core-pcb.html">metal core PCB guide</a> covers IMS design rules.</p>
+    </div>
+  </div>
+
+  <h2>Partial Discharge: The Hidden Killer in High-Voltage DC PCBs</h2>
+
+  <p>At DC bus voltages above <span class="data-point">500V</span>, partial discharge (PD) becomes a real failure mechanism in PCB insulation. PD occurs when small voids in the dielectric — air gaps in the resin, delamination at the glass-resin interface, or voids in the solder mask — experience electric field strengths above the breakdown threshold of air (<span class="data-point">3 kV/mm</span>). Each PD event erodes the surrounding insulation, and over thousands of events, creates a conductive carbon track that eventually results in a hard short circuit.</p>
+
+  <div class="highlight-box">
+    <p><strong>Design rule:</strong> For 800V DC bus designs, minimum clearance between high-voltage and low-voltage domains should be <span class="data-point">4mm</span> on outer layers and <span class="data-point">2mm</span> on inner layers — well above the IPC-2221 generic values. These numbers come from IEC 60664-1 for reinforced insulation at 800V with pollution degree 2. If your PCB supplier cannot maintain these clearances with <span class="data-point"><0.1mm</span> registration accuracy, they cannot produce reliable 800V PCBs.</p>
+  </div>
+
+  <p>Mitigation strategies: vacuum lamination to minimize resin voids (standard in our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection process</a>), conformal coating to fill surface voids (see <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a>), and — for 1500V MCS designs — potting of the entire high-voltage section. Partial discharge inception voltage (PDIV) testing per IEC 60270 verifies the design margin.</p>
+
+  <h2>IEC 61851 Compliance: What the PCB Must Deliver</h2>
+
+  <p>IEC 61851 is the international standard for EV conductive charging systems. Its PCB-level requirements include:</p>
+
+  <table>
+    <tr><th>Requirement</th><th>IEC 61851 Reference</th><th>PCB Implementation</th></tr>
+    <tr><td>Dielectric withstand</td><td>61851-23 §9.2</td><td>3,750 VAC / 1 min between HV and SELV; routed isolation slot ≥2mm width</td></tr>
+    <tr><td>Touch current limit</td><td>61851-23 §8.5</td><td><3.5mA AC / <10mA DC; Y-cap placement on PCB must minimize leakage</td></tr>
+    <tr><td>Over-temperature protection</td><td>61851-23 §10.3</td><td>NTC thermistor placed directly adjacent to hottest SiC MOSFET on PCB</td></tr>
+    <tr><td>Residual current detection</td><td>61851-1 §11.3</td><td>6mA DC + 30mA AC RCD; sense winding PCB layout critical for noise immunity</td></tr>
+    <tr><td>CP / PP signal integrity</td><td>61851-1 Annex A</td><td>±12V PWM at 1kHz; analog front-end PCB routing with guard traces against 800V switching noise</td></tr>
+  </table>
+
+  <h2>Production and Testing: What EV Charger OEMs Should Demand</h2>
+
+  <img src="../generated/blog-ev-charger-testing.webp" alt="EV charger power module PCB undergoing high-voltage hipot testing in production environment" loading="lazy" class="article-img">
+
+  <p>Standard PCB acceptance testing — electrical test (continuity/isolation), AOI, and visual inspection — is insufficient for EV charger PCBs. Additional production tests required:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>HiPot Testing on Every Board</h4>
+      <p><span class="data-point">100%</span> hipot testing at <span class="data-point">3,750 VAC</span> for 1 second (production time constraint) between HV and SELV domains. Not sampling — every board. A single hipot failure in the field means a charger that trips its RCD at installation or, worse, one that doesn't and creates a shock hazard. Our <a href="/blog/pcb-incoming-quality-inspection.html">quality inspection process</a> includes hipot as mandatory for high-voltage designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Partial Discharge Screening</h4>
+      <p>For 800V+ designs, PD screening at <span class="data-point">1.5× Vmax</span> (1,200V for 800V bus) per IEC 60270. PD magnitude <span class="data-point"><10 pC</span> is the acceptance threshold. Boards exceeding this threshold are not necessarily failed — they may pass hipot — but they carry a latent defect that will manifest as a field failure in months 18-36.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Thermal Imaging of Power Stage</h4>
+      <p>At full load, a thermal camera scan of the populated PCB identifies hot spots that simulation missed — a misplaced thermal via, a component too close to a heat source, a copper pour with an unexpected current constriction. Temperature deviation from simulation by <span class="data-point">>10°C</span> triggers a design review. See our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> for more.</p>
+    </div>
+  </div>
+
+  <h2>The PCB Manufacturer's Capability Checklist</h2>
+
+  <p>When sourcing PCBs for EV charger production, verify that your manufacturer can demonstrate — not claim — the following capabilities:</p>
+
+  <table>
+    <tr><th>Capability</th><th>Minimum Spec</th><th>Why It Matters</th></tr>
+    <tr><td>Heavy copper</td><td>4-6oz outer, 3-4oz inner</td><td>500A+ current paths at acceptable temperature rise</td></tr>
+    <tr><td>Copper coin embedding</td><td>Thermal conductivity >300 W/m·K</td><td>SiC MOSFET die-level heat extraction for 350kW modules</td></tr>
+    <tr><td>HiPot testing</td><td>3,750 VAC, 100% of boards</td><td>Zero field failures from insulation defects</td></tr>
+    <tr><td>PD screening</td><td>IEC 60270, <10 pC at 1.5× Vmax</td><td>Eliminates latent insulation failures at 800V+</td></tr>
+    <tr><td>Impedance control</td><td>±5% on gate drive traces</td><td>Prevents SiC/GaN gate oscillation and shoot-through</td></tr>
+    <tr><td>High-Tg laminates</td><td>Tg 170°C+, Td >325°C</td><td>Survives reflow + 175°C Tj operation + safety margin</td></tr>
+  </table>
+
+  <p>Huaxing PCBA's <span class="data-point">15,000㎡</span> Shenzhen facility supports <span class="data-point">2-32 layer</span> PCBs with heavy copper up to <span class="data-point">6oz</span>, embedded copper coin technology, and <span class="data-point">100%</span> electrical test plus hipot on every high-voltage board. Our <span class="data-point">IATF 16949</span> quality system provides the traceability and process control that EV charger OEMs require. For designs incorporating battery management, see our <a href="/blog/ev-bms-pcb-design.html">EV BMS PCB design guide</a>.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ev-charger-pcb.webp)">
+      <h2>Building EV Charger Hardware?</h2>
+      <p>Send your power stage Gerber files and IEC 61851 compliance requirements. Our engineering team returns a DFM review focused on high-voltage clearances, thermal via placement, and partial discharge risk — within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get an EV Charger PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
