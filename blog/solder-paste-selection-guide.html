@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solder Paste Selection for PCB Assembly — SAC305 vs SnPb vs Low-Temp Alloys for Every Application | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to solder paste selection for PCB assembly: SAC305 lead-free, SnPb, low-temperature alloys, no-clean vs water-soluble flux, powder size Type 3-6, and application-specific recommendations.">
+<meta property="og:title" content="Solder Paste Selection for PCB Assembly — SAC305 vs SnPb vs Low-Temp Alloys">
+<meta property="og:description" content="Which solder paste is right for your board? Alloy composition, flux chemistry, and powder size comparison — from a Shenzhen PCBA manufacturer.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/solder-paste-selection-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-solder-paste.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/solder-paste-selection-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Solder Paste Selection for PCB Assembly — SAC305 vs SnPb vs Low-Temp Alloys for Every Application",
+  "description": "Complete comparison of solder paste alloys, flux chemistries, and powder sizes for PCB assembly. Application-specific recommendations for automotive, medical, consumer, and high-reliability electronics.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-solder-paste.webp",
+  "url": "https://huaxingpcba.com/blog/solder-paste-selection-guide.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/solder-paste-selection-guide.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-solder-paste.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">Solder Paste Selection for PCB Assembly:<br><em>SAC305 vs SnPb vs Low-Temp — What to Specify on Your BOM</em></h1>
+      <p class="reveal">The solder paste you choose determines joint reliability, process yield, and long-term field performance. Here is how to match alloy, flux, and powder size to your application.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Solder Paste Selection Guide</span></div>
+
+  <p>Solder paste is one of the most under-specified materials in a PCB assembly BOM. Buyers spend weeks negotiating laminate grades and surface finishes, then default to "lead-free solder paste" without specifying alloy composition, flux type, or powder particle size. Yet solder paste directly controls three things that determine whether your boards work: joint mechanical strength, electrical conductivity after thermal cycling, and voiding rates under BGAs and QFNs.</p>
+
+  <p>Our Shenzhen facility runs <span class="data-point">8</span> SMT lines processing over 2 million solder joints per day across automotive, medical, industrial, and consumer assemblies. Here is the framework our process engineers use to match solder paste to application requirements — and the mistakes we see procurement teams make when they leave this decision to default settings.</p>
+
+  <div class="highlight-box">
+    <p><strong>Bottom line up front:</strong> SAC305 (Sn96.5/Ag3.0/Cu0.5) is the correct default for 80% of lead-free assemblies. The other 20% — high-reliability automotive, low-temperature substrates, step-soldering processes, and ultra-fine-pitch — need deliberate deviation from that default. This guide tells you when and why.</p>
+  </div>
+
+  <img src="../generated/blog-solder-paste-stencil-printing.webp" alt="Solder paste stencil printing on PCB with metal squeegee and laser-cut stencil" loading="lazy" class="article-img">
+
+  <h2>SAC305 (SnAgCu): The Industry Default — and Its Limits</h2>
+
+  <p>SAC305 — 96.5% tin, 3.0% silver, 0.5% copper — emerged as the lead-free industry standard after RoHS eliminated SnPb in 2006. It melts at 217–220°C with a peak reflow temperature of 240–250°C, provides good wetting on OSP, ENIG, and immersion silver finishes, and offers acceptable thermal fatigue resistance for most commercial and industrial applications.</p>
+
+  <p>Its dominance is not because it is the best alloy for every situation. It is the best compromise: good enough for most, widely available, and compatible with standard reflow profiles. SAC305 works reliably when three conditions are met: the PCB laminate can withstand 250°C peak reflow without delamination, your components are rated for 260°C peak body temperature, and your board thickness and copper distribution allow uniform heating without warpage.</p>
+
+  <p>The limitations emerge when you push beyond these conditions. SAC305 forms brittle intermetallic compounds (Cu6Sn5 and Ag3Sn) at the solder-pad interface that grow thicker over time and thermal cycles. In automotive under-hood applications cycling from -40°C to +150°C, these IMC layers can exceed 5μm within 1,000 cycles — the point where joint strength drops measurably. For these applications, doped SAC alloys with nickel, bismuth, or antimony additions outperform standard SAC305.</p>
+
+  <div class="highlight-box">
+    <p><strong>Procurement rule:</strong> If your assembly will experience more than 1,000 thermal cycles with a ΔT above 100°C, specify SAC305 + dopant (e.g., SAC305+Ni or Innolot) rather than standard SAC305. The per-syringe cost difference is approximately $0.50 — and the field reliability difference is measured in years of service life.</p>
+  </div>
+
+  <h2>SnPb (Tin-Lead): Still Relevant for Specific Applications</h2>
+
+  <p>Sn63/Pb37 (63% tin, 37% lead) and Sn62/Pb36/Ag2 (with 2% silver to reduce silver leaching from component terminations) remain in active use despite two decades of RoHS restrictions. The exemptions are specific: military and aerospace (where tin whisker risk is unacceptable), medical devices with long qualification cycles that cannot change materials without re-certification, and high-reliability industrial equipment operating in environments where lead-free joint reliability data is insufficient.</p>
+
+  <p>SnPb melts at 183°C — 35°C lower than SAC305. That lower processing temperature matters for three reasons: it reduces thermal stress on temperature-sensitive components and substrates, it allows wider process windows on boards with large thermal mass variations, and it produces joints with a characteristic dull-grain appearance that trained inspectors can evaluate visually for process consistency. The lower surface tension of molten SnPb also produces better wetting on difficult finishes like OSP that has aged beyond its shelf life.</p>
+
+  <div class="highlight-box">
+    <p><strong>Compliance note:</strong> RoHS exemption 7(a) — lead in high-melting-temperature solders — and exemption 15 — lead in solders for specific applications — are under periodic review. If your product life cycle extends beyond 2028, plan a SAC305 transition even if you currently operate under an exemption. We have helped automotive tier-1 suppliers manage this transition; see our <a href="/blog/pcb-rohs-compliance-guide.html">RoHS compliance guide</a> for the full regulatory timeline.</p>
+  </div>
+
+  <img src="../generated/blog-solder-paste-reflow-oven.webp" alt="PCB assemblies entering reflow oven with visible solder paste deposits before melting" loading="lazy" class="article-img">
+
+  <h2>Low-Temperature Solder Pastes: When 260°C Is Too Hot</h2>
+
+  <p>Low-temperature solder (LTS) pastes — primarily SnBi (tin-bismuth) and SnBiAg alloys — melt at 138–180°C with peak reflow at 170–200°C. This 60–80°C reduction in processing temperature solves three problems simultaneously: it eliminates warpage on thin, high-layer-count boards where CTE mismatch causes PCB deformation at SAC305 temperatures, it protects heat-sensitive components like MEMS sensors optical modules and polymer capacitors, and it cuts reflow energy consumption by approximately 30% — a meaningful cost saving at production scale.</p>
+
+  <p>The trade-off is joint brittleness. Bismuth-tin intermetallics are inherently less ductile than tin-silver-copper compounds. Drop-test performance of SnBi joints is approximately 40–60% lower than SAC305. For handheld consumer devices that will be dropped repeatedly, SnBi is the wrong choice. For a server motherboard that sits in a rack its entire service life, SnBi can be perfectly adequate — and the reduced warpage may actually improve overall reliability by preventing BGA corner-joint opens that warp-induced stress would cause.</p>
+
+  <p>A newer class of low-temperature alloys — SnBiAg with 1–2% silver, or SnInAg (tin-indium-silver) — bridges the gap. These alloys melt at 165–190°C but achieve drop-test performance within 15% of SAC305. The cost premium is significant (SnInAg can be 3–5× SAC305 per gram), but for applications where both low processing temperature and high mechanical reliability are non-negotiable, they are the correct specification.</p>
+
+  <h2>Flux Chemistry: No-Clean vs Water-Soluble vs RMA</h2>
+
+  <p>The flux inside the solder paste is as important as the metal alloy. Flux removes oxides from the pad and component termination surfaces, enables wetting, and then either volatilizes or remains as a residue. Three families dominate production:</p>
+
+  <table class="spec-table">
+    <tr><th>Flux Type</th><th>Activity Level</th><th>Post-Process Cleaning</th><th>Best For</th></tr>
+    <tr><td>No-Clean (ROL0/ROL1)</td><td>Low–Medium</td><td>Not required for most applications</td><td>Consumer electronics, general industrial, 80% of assemblies</td></tr>
+    <tr><td>Water-Soluble (ORH1)</td><td>High</td><td>Mandatory — DI water wash within 24h</td><td>High-reliability: automotive ECU, medical implant, aerospace</td></tr>
+    <tr><td>RMA (RO Moderately Activated)</td><td>Medium</td><td>Optional but recommended for Class 3</td><td>Mixed-technology boards, legacy designs, hand soldering touch-up</td></tr>
+  </table>
+
+  <p>No-clean flux dominates production volume — probably 85% or more of all PCB assemblies worldwide. But its name is misleading: no-clean flux leaves residue. The difference is that the residue is designed to be non-conductive and non-corrosive at operating conditions below 85°C and 85% RH. Above those thresholds, no-clean residues can absorb moisture, become slightly conductive, and cause leakage currents that degrade analog circuit performance over time.</p>
+
+  <p>For any assembly that will operate in condensing humidity, experience board temperatures above 85°C in service, or carry microampere-level signals where nanoamp leakage matters — specify water-soluble flux and a verified DI water wash process. The cleaning step adds approximately $0.15–0.30 per board at production volume. The alternative is field failures that cost orders of magnitude more.</p>
+
+  <img src="../generated/blog-solder-paste-powder-comparison.webp" alt="Close-up comparison of different solder paste powder sizes on PCB pads showing Type 3 through Type 5 particle distribution" loading="lazy" class="article-img">
+
+  <h2>Powder Size: Type 3, 4, 5, and When It Matters</h2>
+
+  <p>Solder paste powder is classified by particle size distribution per IPC J-STD-005. The "Type" number tells you the mesh size the powder passes through:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">T3</div>
+    <div class="checklist-content">
+      <h4>Type 3 (25–45μm): General-Purpose Workhorse</h4>
+      <p>Suitable for component pitches down to 0.5mm (20 mil). Handles 0402 passives, SOICs, QFPs with 0.5mm lead spacing. Lower cost, longer stencil life, less susceptible to humidity-induced slump. If your board's finest-pitch component is 0.5mm QFP or 0.8mm BGA, Type 3 is the right call. Specifying Type 4 where Type 3 would work costs 20–30% more per syringe with no process benefit.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">T4</div>
+    <div class="checklist-content">
+      <h4>Type 4 (20–38μm): Fine-Pitch Standard</h4>
+      <p>Required for 0.4mm pitch QFP, 0.5mm pitch BGA, 0201 passives, and any stencil aperture below 0.25mm width. Type 4 is now the most commonly specified paste for new designs because component miniaturization has pushed most boards into this requirement zone. Our facility defaults to Type 4 for all designs unless the BOM specifies otherwise — it costs marginally more but eliminates aperture clogging as a defect source.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">T5</div>
+    <div class="checklist-content">
+      <h4>Type 5 (15–25μm): Ultra-Fine-Pitch and Micro-BGA</h4>
+      <p>Required for 0.3–0.4mm pitch BGA, 01005 passives, and flip-chip applications with bump pitch below 150μm. Type 5 powder oxidizes faster than Type 3 or 4 — shelf life is shorter (typically 4–6 months refrigerated vs 6–12 for Type 3), and it is more sensitive to humidity exposure during printing. Cost is approximately 2× Type 4. Do not over-specify — Type 5 on a board with 0.5mm pitch components wastes money and introduces process sensitivity you do not need.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">T6</div>
+    <div class="checklist-content">
+      <h4>Type 6 (5–15μm): Advanced Packaging Only</h4>
+      <p>For wafer-level packaging, system-in-package (SiP), and advanced flip-chip with bump pitch below 100μm. Type 6 paste is a specialty material with limited suppliers, 2–3 month typical shelf life, and strict cold-chain logistics requirements. If you need Type 6, you already know — and you are working with an assembly partner that has dedicated Type 6 process qualification.</p>
+    </div>
+  </div>
+
+  <h2>Application-Specific Recommendations</h2>
+
+  <p>The correct solder paste specification varies by end-use environment. Here are the starting-point recommendations our process engineers use, subject to adjustment based on your specific board design:</p>
+
+  <table class="spec-table">
+    <tr><th>Application</th><th>Alloy</th><th>Flux</th><th>Powder</th><th>Key Concern</th></tr>
+    <tr><td>Consumer Electronics</td><td>SAC305</td><td>No-Clean</td><td>Type 4</td><td>Cost, drop-test reliability</td></tr>
+    <tr><td>Automotive (Cabin)</td><td>SAC305</td><td>No-Clean</td><td>Type 4</td><td>Thermal cycling -40/+85°C</td></tr>
+    <tr><td>Automotive (Under-Hood)</td><td>SAC305+Ni / Innolot</td><td>Water-Soluble</td><td>Type 4</td><td>IMC growth, 150°C soak</td></tr>
+    <tr><td>Medical (Class III Implant)</td><td>SAC305</td><td>Water-Soluble</td><td>Type 4</td><td>Residue-free, ionic contamination</td></tr>
+    <tr><td>Military / Aerospace</td><td>Sn63/Pb37 (exemption)</td><td>Water-Soluble or RMA</td><td>Type 3/4</td><td>Tin whisker prevention</td></tr>
+    <tr><td>LED Lighting</td><td>SAC305 or SnBiAg</td><td>No-Clean</td><td>Type 4</td><td>Low temp if MCPCB, thermal fatigue</td></tr>
+    <tr><td>Server / Data Center</td><td>SAC305 or SnBi (LTS)</td><td>No-Clean</td><td>Type 4</td><td>Warpage on large BGAs</td></tr>
+    <tr><td>Telecom / 5G Base Station</td><td>SAC305</td><td>No-Clean or Water-Soluble</td><td>Type 4/5</td><td>High-layer-count CTE mismatch</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Process engineering note:</strong> The alloy-flux-powder combination is a system — changing one variable affects the others. Type 5 powder with a high-activity water-soluble flux may slump during preheat because the flux activates before the solvents evaporate from the higher surface-area particles. Always run a DOE on new paste-process combinations before production release. Our standard qualification run is 50 boards with X-ray voiding analysis, cross-section on 10 BGAs, and ionic contamination testing per IPC-TM-650 2.3.25.</p>
+  </div>
+
+  <h2>What to Put on Your BOM</h2>
+
+  <p>Most PCB assembly BOMs do not specify solder paste at all — they leave it to the assembly house default. That is fine for consumer prototypes. For production volumes above 500 units, or any regulated-industry assembly, the BOM line for solder paste should specify at minimum:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Alloy composition</h4>
+      <p>Example: "SAC305 per IPC J-STD-006" or "Innolot (Sn/Ag3.8/Cu0.7/Bi3.0/Sb1.4/Ni0.15)"</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Flux type and classification</h4>
+      <p>Example: "ROL0 per IPC J-STD-004C" or "ORH1 — DI water wash required within 24 hours of reflow"</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Powder size</h4>
+      <p>Example: "Type 4 per IPC J-STD-005" — include the standard reference so there is no ambiguity between supplier grading systems</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Metal content by weight</h4>
+      <p>Typically 88.5% for Type 3/4 stencil printing, 89.5% for Type 5. This number affects deposit volume — a change from 88.5% to 89.5% is a 1.1% increase in post-reflow solder volume that can push BGA standoff heights out of specification</p>
+    </div>
+  </div>
+
+  <p>For high-reliability programs, go one step further: name the specific solder paste product. "Indium 8.9HF SAC305 Type 4" or "Alpha OM-340 SAC305 Type 4" tells your assembly house exactly what to use and eliminates the risk of substitution with an equivalent that is not actually equivalent. If your end customer or regulatory body audits your supply chain, having the paste named on the BOM is a mark of manufacturing maturity that auditors look for. See our <a href="/blog/pcb-certifications-compliance.html">certifications compliance guide</a> for documentation requirements by industry sector.</p>
+
+  <h2>Storage, Handling, and Shelf Life</h2>
+
+  <p>Solder paste is a perishable material. Unopened syringes and cartridges stored at 0–10°C have a typical shelf life of 6 months from the date of manufacture for Type 3 and 4 powders, and 3–4 months for Type 5. Once opened, the clock accelerates — moisture absorption, flux solvent evaporation, and powder oxidation all begin immediately. A syringe left at 25°C and 60% RH for 48 hours can degrade to the point where print definition drops measurably.</p>
+
+  <p>Three handling rules that prevent most solder-paste-related defects:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Refrigerated storage at 0–10°C</h4>
+      <p>Do not freeze (below 0°C). Freezing separates flux from alloy powder through differential contraction. Thawed paste will never re-homogenize — its print rheology is permanently altered.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>4-hour warm-up before opening</h4>
+      <p>Remove from refrigeration and let the sealed container reach room temperature naturally. Opening cold paste causes moisture condensation on the cold metal powder — the added water becomes steam in reflow, creating solder balls and voiding. This is the most common process defect we see in factory audits of new assembly partners.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>First-in-first-out (FIFO) inventory rotation</h4>
+      <p>Use the oldest paste first. Mark each cartridge with the date it was removed from refrigeration and the number of hours it has been on the printer. Paste that has been at room temperature for more than 24 cumulative hours should be evaluated with a solder paste inspection (SPI) print test before use on production boards.</p>
+    </div>
+  </div>
+
+  <p>At our facility, we track every solder paste cartridge through a barcode system that logs refrigeration entry/exit time, cumulative room-temperature exposure, and the production lot it was used for. For regulated-industry customers, this data is included in the lot traceability report — satisfying ISO 13485 and IATF 16949 traceability requirements without additional documentation burden. For more on quality documentation, see our guide on <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection procedures</a>.</p>
+
+  <h2>Making the Decision</h2>
+
+  <p>Solder paste selection reduces to three questions, answered in order:</p>
+
+  <p><strong>First, what temperature can your board and components survive?</strong> If your laminate is FR-4 with Tg 130°C and your components are rated for 260°C peak, SAC305 at 240–250°C reflow is straightforward. If your board is a 20-layer controlled-impedance design that warps above 220°C, or your components include MEMS microphones rated for 250°C peak, you need a low-temperature alloy — SnBiAg or SnInAg.</p>
+
+  <p><strong>Second, what environment will the finished assembly operate in?</strong> Condensing humidity, salt spray, or operating temperatures above 85°C mandate water-soluble flux with verified cleaning. Indoor, climate-controlled operation with board temperatures below 75°C can use no-clean flux reliably. When in doubt, see our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> — coating and flux chemistry decisions are interrelated.</p>
+
+  <p><strong>Third, what is the finest-pitch component on your BOM?</strong> 0.5mm or coarser → Type 3. 0.4mm → Type 4. Below 0.4mm or 01005 passives → Type 5. Match powder size to the tightest requirement on the board — specifying a finer powder than needed increases cost and process sensitivity with no quality benefit.</p>
+
+  <p>Answer those three questions and you have an alloy-flux-powder specification that is defensible to your engineering team, auditable by your customers, and producible by a competent assembly house. The remaining decisions — specific brand, metal content percentage, viscosity — are process-optimization details your assembly partner should handle.</p>
+
+  <p>At Huaxing PCBA, we stock SAC305 Type 3/4/5, SnPb Type 3/4 for exempt applications, and SnBiAg Type 4 low-temperature paste as standard inventory. Uncommon alloys (Innolot, SnInAg, SAC305+Ni) are available within 5 business days through our supply chain. We provide a solder paste recommendation as part of every DFM review — upload your Gerber files and BOM for a joint-specific analysis, or <a href="/blog/pcb-testing-methods.html">read our guide on verifying joint quality</a> after assembly.</p>
+
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-surface-finish-selection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Surface Finish Selection Guide</a></li>
+      <li><a href="/blog/smt-stencil-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMT Stencil Design Guide</a></li>
+      <li><a href="/blog/wave-vs-selective-soldering.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Wave vs Selective Soldering</a></li>
+      <li><a href="/blog/pcb-rohs-compliance-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB RoHS Compliance Guide</a></li>
+      <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="cta" style="--cta-bg:url(../generated/blog-cta-solder-paste.webp)">
+  <div class="container">
+    <div class="cta-content reveal">
+      <h2>Get a Solder-Joint-Level DFM Review</h2>
+      <p>Upload your Gerber files, BOM, and paste specification (or let us recommend one). We provide a joint-by-joint process review including stencil aperture optimization, reflow profile recommendation, and paste selection rationale — free, within 24 hours. <strong>Upload your files and start the review.</strong></p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Upload Your Files <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').style.display='flex'}
+function closeModal(){document.getElementById('inquiryModal').style.display='none'}
+async function handleInquiry(e){e.preventDefault();const f=e.target;const d={name:f.name.value,email:f.email.value,message:f.message.value};try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});if(r.ok){alert('Inquiry sent successfully! We will respond within 24 hours.');closeModal();f.reset()}else{alert('Error sending inquiry. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')};return false}
+</script>
+</body>
+</html>

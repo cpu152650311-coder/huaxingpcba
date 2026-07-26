@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Burn-In Testing & Environmental Stress Screening — HASS, HALT & Reliability Verification Guide | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to PCB burn-in testing and environmental stress screening: HASS vs HALT, burn-in duration by industry, MTBF prediction, and how to specify reliability testing requirements for your PCB assembly purchase order.">
+<meta property="og:title" content="PCB Burn-In Testing & Environmental Stress Screening — HASS, HALT & Reliability Guide">
+<meta property="og:description" content="When and how to specify burn-in testing for your PCB assemblies. HASS/HALT, thermal cycling, vibration screening — what reliability engineers need procurement to know.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-burn-in-ess-testing.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-burn-in.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-burn-in-ess-testing.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Burn-In Testing & Environmental Stress Screening — HASS, HALT & Reliability Verification Guide",
+  "description": "When to specify PCB burn-in and environmental stress screening, how to choose between HASS and HALT, and what burn-in duration means for field reliability in automotive, medical, aerospace, and industrial applications.",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "image": "https://huaxingpcba.com/generated/blog-cover-burn-in.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-burn-in-ess-testing.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": { "@type": "Organization", "name": "Huaxing PCBA", "url": "https://huaxingpcba.com", "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-burn-in-ess-testing.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-burn-in.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Burn-In Testing & Environmental Stress Screening:<br><em>How to Specify Reliability Verification That Actually Prevents Field Failures</em></h1>
+      <p class="reveal">Burn-in catches the 2–5% of assemblies that would fail in the first 200 hours of operation. Here is how to decide when burn-in is necessary, which stress profile to use, and what the data means for your warranty costs.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Burn-In & ESS Testing Guide</span></div>
+
+  <p>Every PCB assembly has an infant mortality zone — the first 50 to 200 operating hours where latent manufacturing defects, marginal components, and process escapes reveal themselves as field failures. Burn-in testing and environmental stress screening (ESS) are the two primary methods for pushing assemblies through this zone before they leave the factory. The decision to burn-in is a cost-benefit equation: the cost of testing, versus the cost of a field failure multiplied by the probability that a given assembly harbors a latent defect.</p>
+
+  <p>We operate a <span class="data-point">1,200㎡</span> dedicated testing facility in Shenzhen with 12 thermal chambers capable of -70°C to +180°C cycling, 6-axis random vibration tables, and automated functional test integration. Here is the framework our reliability engineers use to determine when burn-in pays for itself — and when it does not.</p>
+
+  <div class="highlight-box">
+    <p><strong>Decision rule:</strong> If the cost of a single field failure exceeds $500 in warranty claims, rework, and reputation damage, and your production volume exceeds 1,000 units per year, burn-in screening of 100% of production units will almost certainly have a positive return on investment. The math: a 2% latent defect rate × 1,000 units × $500 per failure = $10,000 annual failure cost. Burn-in at $15 per board × 1,000 units = $15,000 — nearly break-even on hard costs alone, without pricing in the avoided reputation damage, customer downtime, and requalification expense that a single field failure triggers in regulated industries.</p>
+  </div>
+
+  <img src="../generated/blog-burn-in-thermal-chamber.webp" alt="PCB assemblies inside environmental thermal chamber undergoing burn-in testing with monitoring cables connected" loading="lazy" class="article-img">
+
+  <h2>HALT vs HASS: The Two Approaches to Stress Screening</h2>
+
+  <p>Highly Accelerated Life Testing (HALT) and Highly Accelerated Stress Screening (HASS) are often conflated. They serve fundamentally different purposes and occur at different points in the product lifecycle:</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>HALT</th><th>HASS</th></tr>
+    <tr><td>Purpose</td><td>Discover design weaknesses — find the failure limits</td><td>Screen production units — weed out manufacturing defects</td></tr>
+    <tr><td>When</td><td>During design validation, before production</td><td>During production, on every unit or sampled lots</td></tr>
+    <tr><td>Stress Level</td><td>Beyond specification — push to destruction</td><td>Within operating limits — must not damage good units</td></tr>
+    <tr><td>Sample Size</td><td>3–6 prototype units</td><td>100% of production (high-reliability) or statistical sampling</td></tr>
+    <tr><td>Temperature Range</td><td>-100°C to +200°C (step stress to failure)</td><td>Typically -40°C to +125°C (within spec margins)</td></tr>
+    <tr><td>Vibration</td><td>Random 6-DOF, 5–60 Grms (to destruction)</td><td>Random, typically 5–20 Grms (non-damaging)</td></tr>
+    <tr><td>Output</td><td>Operating and destruct limits, design margin data</td><td>Pass/fail: defective units identified and removed</td></tr>
+  </table>
+
+  <p>HALT happens once during product development. It tells you the weakest component, the poorest solder joint design, and the first failure mode — so you can fix it before production begins. HASS happens on every production unit (for high-reliability programs) or on a statistical sample. It applies stress levels calibrated from the HALT data: high enough to precipitate latent defects into actual failures within hours, but low enough that a properly manufactured unit will survive without accumulated damage.</p>
+
+  <div class="highlight-box">
+    <p><strong>Common procurement mistake:</strong> specifying "HALT testing on production units" or "HASS during design validation." These are different tools for different phases. Confusing them in a purchase order signals to your supplier that you do not understand reliability engineering — and worse, it can lead to good production units being destroyed by HALT-level stress or design weaknesses being missed by HASS-level screening that never pushes hard enough to find them.</p>
+  </div>
+
+  <h2>Thermal Cycling: The Workhorse of ESS</h2>
+
+  <p>Thermal cycling is the most common and cost-effective ESS method. Assemblies are cycled between temperature extremes while powered and monitored. The cycling accelerates solder joint fatigue, package delamination, wire bond failures, and PCB delamination — all driven by the coefficient of thermal expansion (CTE) mismatch between materials that expand and contract at different rates.</p>
+
+  <p>The key parameters in a thermal cycle profile:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Temperature range (ΔT)</h4>
+      <p>The wider the range, the more effective the screening. A cycle from -40°C to +85°C (ΔT = 125°C) screens approximately 4× faster than a cycle from 0°C to +70°C (ΔT = 70°C), per the Norris-Landzberg acceleration model. For high-reliability automotive and aerospace, specify -40°C to +125°C minimum. For commercial/industrial, -20°C to +85°C is typical and adequate.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Ramp rate</h4>
+      <p>Faster transitions create more thermal shock and detect defects sooner. 10–15°C per minute is typical for HASS screening. Below 5°C/minute, the stress is not "accelerated" — it is a slow simulation of real-world diurnal temperature swings, which takes weeks to detect defects that a fast ramp finds in hours.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Dwell time</h4>
+      <p>Time at each temperature extreme. Dwell must be long enough for the entire assembly — including the thermal mass of large BGAs, heatsinks, and thick copper layers — to reach equilibrium. Our standard dwell is 15 minutes at each extreme, verified by thermocouples on the largest BGA package and the board center.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Number of cycles</h4>
+      <p>This is the parameter most directly tied to cost. Each thermal cycle takes 45–90 minutes of chamber time depending on ramp rate and dwell. A 20-cycle profile at 60 minutes per cycle = 20 hours of chamber occupancy. For reference: our facility processes up to 200 assemblies simultaneously in a single chamber run, so the per-board cost of a 20-cycle burn-in can be as low as $12–18 at production volumes.</p>
+    </div>
+  </div>
+
+  <img src="../generated/blog-burn-in-vibration-table.webp" alt="PCB assembly mounted on electrodynamic vibration shaker table for random vibration stress screening" loading="lazy" class="article-img">
+
+  <h2>Vibration Screening: Catching Intermittent Connections</h2>
+
+  <p>Thermal cycling primarily stresses solder joints and material interfaces. Vibration screening primarily stresses connectors, press-fit components, socketed devices, and any mechanical joint that relies on normal force rather than metallurgical bond. The two stress types are complementary — assemblies that pass thermal cycling can still fail vibration, and vice versa, because the failure mechanisms are different.</p>
+
+  <p>Random vibration (6-degree-of-freedom) is preferred over swept-sine vibration for ESS because it excites all resonant frequencies simultaneously. A swept sine test spends most of its time at frequencies where nothing resonates, and milliseconds at frequencies where a marginal connection rattles into intermittent contact. Random vibration finds those weaknesses in minutes rather than hours.</p>
+
+  <p>Typical HASS vibration profiles range from 5 to 20 Grms — within the operating vibration specification for most industrial and automotive electronics. The assembly is powered and functionally monitored during vibration. Any interruption — even a single clock cycle glitch that self-recovers — is a failure. These are the defects that thermal cycling alone will never catch: a cold solder joint on a connector that makes contact at room temperature but opens under vibration, a press-fit pin that walked out during reflow and has marginal normal force, or a cracked MLCC that has not yet shorted but generates noise under mechanical excitation.</p>
+
+  <h2>Burn-In Duration: How Long Is Enough?</h2>
+
+  <p>The infant mortality curve for electronics follows a Weibull distribution with a shape parameter (β) typically between 0.3 and 0.7 — meaning the failure rate starts high and decreases over time. Most latent defects become detectable failures within the first 48 hours of powered operation at elevated temperature. Extending burn-in beyond 168 hours (7 days) yields rapidly diminishing returns — the failure rate approaches the random-failure region of the bathtub curve, where each additional hour finds progressively fewer defects.</p>
+
+  <p>Industry-specific burn-in norms:</p>
+
+  <table class="spec-table">
+    <tr><th>Industry</th><th>Typical Burn-In Duration</th><th>Temperature</th><th>Standard Reference</th></tr>
+    <tr><td>Consumer Electronics</td><td>4–8 hours (or skip entirely; sample-based audit)</td><td>+55°C</td><td>Internal specification</td></tr>
+    <tr><td>Industrial Control</td><td>24–48 hours</td><td>+70°C</td><td>IEC 61131-2, IPC-9701</td></tr>
+    <tr><td>Automotive (Cabin)</td><td>48–72 hours powered cycling</td><td>-40°C to +85°C</td><td>AEC-Q100 Grade 3, LV124</td></tr>
+    <tr><td>Automotive (Under-Hood)</td><td>100–168 hours</td><td>-40°C to +125°C</td><td>AEC-Q100 Grade 1, LV124</td></tr>
+    <tr><td>Medical (Life-Sustaining)</td><td>168 hours minimum</td><td>+55°C to +70°C</td><td>IEC 60601-1, ISO 13485 process validation</td></tr>
+    <tr><td>Aerospace / Defense</td><td>100–200 hours</td><td>-55°C to +125°C</td><td>MIL-STD-883 Method 1015, MIL-STD-810</td></tr>
+    <tr><td>Telecom Infrastructure</td><td>72–96 hours</td><td>+55°C to +85°C</td><td>Telcordia GR-63-CORE, NEBS</td></tr>
+  </table>
+
+  <p>These durations are starting points, not absolutes. The correct burn-in duration for your specific assembly is determined by running HALT on prototypes, identifying the weakest failure mode, and calculating how many thermal cycles at production ESS conditions are required to precipitate that failure mode in a defective unit. A competent reliability engineer can make this calculation from HALT data. A supplier that applies a fixed 48-hour burn-in to every assembly regardless of design is not doing reliability engineering — they are following a checklist, and your field failure rate will reflect the difference.</p>
+
+  <h2>Functional Monitoring During Burn-In: Powered vs Unpowered</h2>
+
+  <p>Unpowered burn-in — assemblies sitting in a hot chamber, unpowered, then tested after cooling — is better than nothing. But it misses the most common failure modes because it does not exercise the circuits. Powered burn-in with functional monitoring catches an additional 30–60% of defects according to reliability engineering literature, because it stresses the assembly electrically while thermal and mechanical stress are applied simultaneously.</p>
+
+  <p>The monitoring strategy depends on the assembly complexity:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">L1</div>
+    <div class="checklist-content">
+      <h4>Power-On Only (Basic)</h4>
+      <p>Assembly is powered at nominal voltage. Current draw is monitored — a deviation from nominal indicates a short, open, or latch-up condition. This catches catastrophic failures but not performance degradation. Cost: approximately $2–5 per board in fixture and monitoring hardware. Suitable for low-complexity, high-volume consumer assemblies.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">L2</div>
+    <div class="checklist-content">
+      <h4>Functional Exercising (Intermediate)</h4>
+      <p>Assembly runs a diagnostic test loop that exercises key interfaces: memory read/write, communication bus traffic, I/O toggling. The test loop logs errors with timestamps. An assembly that passes 48 hours of thermal cycling but accumulates 3 memory parity errors during that period has a marginal DRAM interface — it will fail in the field. Cost: approximately $8–15 per board for custom test fixture and software development, amortized over production volume. Standard for automotive and industrial assemblies.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">L3</div>
+    <div class="checklist-content">
+      <h4>Full System Simulation (Advanced)</h4>
+      <p>Assembly operates in a test rack that simulates its end-use environment: sensor inputs, actuator loads, communication with other system modules. Performance parameters — ADC noise floor, PLL lock time, Ethernet BER — are measured at each temperature extreme and compared against pre-burn-in baselines. Degradation of any parameter by more than the acceptable margin triggers a failure. Cost: $30–80 per board in NRE and chamber integration. Required for medical life-sustaining devices, aerospace flight hardware, and automotive safety-critical ECUs (ASIL C/D).</p>
+    </div>
+  </div>
+
+  <p>The level you specify depends on what a field failure costs. A consumer IoT sensor that costs $12 to replace at retail does not justify L3 monitoring. A medical infusion pump PCB where a field failure means patient harm justifies every dollar of L3 monitoring — and the regulatory submission will be stronger for having that data. See our <a href="/blog/medical-device-pcb.html">medical device PCB guide</a> for the full validation framework.</p>
+
+  <h2>Specifying ESS on Your Purchase Order</h2>
+
+  <p>Procurement teams often write "100% burn-in required" on a PO without specifying the burn-in profile. That is equivalent to telling a machine shop "tight tolerances" without providing numbers — the supplier will interpret it in the way that minimizes their cost and liability, not the way that maximizes your reliability.</p>
+
+  <p>A proper ESS specification on a purchase order includes at minimum:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Stress type and profile</h4>
+      <p>"Thermal cycling: -40°C to +125°C, ramp ≥10°C/min, dwell 15 min at each extreme, 40 cycles, powered at nominal +5V with functional monitoring per attached test procedure TP-ESS-001."</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Monitoring requirements</h4>
+      <p>"L2 functional exercising: assemblies shall run diagnostic loop continuously; any error logged during cycling constitutes a failure. Error log to be included in shipment documentation."</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Acceptance criteria</h4>
+      <p>"Zero functional failures permitted during ESS. Post-ESS electrical test per IPC-A-600 Class 2 acceptance criteria. Any unit failing ESS or post-ESS test shall be root-caused with 8D report provided to buyer within 5 business days."</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Data delivery</h4>
+      <p>"ESS lot report: chamber temperature profile chart (thermocouple data), powered current draw log for each serial number, pass/fail summary, and post-ESS functional test results. Deliver with shipment."</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Cost transparency:</strong> A 40-cycle thermal ESS with L2 monitoring on 100% of production units adds approximately $12–22 per board at volumes above 500 units. The cost comes from chamber time (amortized equipment + electricity), test fixture development, and technician labor for loading/unloading and data review. This number is useful for your own budget calculations — suppliers should be able to explain their burn-in cost as a separate line item rather than burying it in the unit price.</p>
+  </div>
+
+  <img src="../generated/blog-burn-in-test-rack.webp" alt="Rack of PCB assemblies with test cables and monitoring equipment in reliability testing laboratory" loading="lazy" class="article-img">
+
+  <h2>When Not to Burn-In</h2>
+
+  <p>Burn-in is not free, and it is not always necessary. Three scenarios where specifying burn-in is likely wasted cost:</p>
+
+  <p><strong>Mature, high-volume consumer products with established process capability.</strong> If your assembly has been in production for 5+ years, with a Cpk above 1.67 for critical processes (solder paste printing, reflow, AOI), and your field return rate is below 0.1%, burn-in is finding almost nothing. The money is better spent on process monitoring — Solder Paste Inspection (SPI) catch rate, AOI false-call analysis, and in-process functional test — which prevents defects rather than screening for them after the fact.</p>
+
+  <p><strong>Low-complexity, low-consequence assemblies.</strong> A 2-layer LED driver board with 20 components and a field failure consequence of "customer replaces the light bulb" does not justify burn-in. The $12 per board in ESS cost exceeds the $8 replacement cost. Statistical sampling — test 5 boards per lot of 500 — is adequate to detect a process shift without burning money on every unit.</p>
+
+  <p><strong>Assemblies where burn-in itself introduces risk.</strong> Every thermal cycle incrementally ages solder joints. For assemblies designed for a 20-year service life, burning through 40 thermal cycles that represent 2 years of accelerated aging in the field reduces remaining service life by 10%. If your reliability analysis shows that the assembly already has a 30-year predicted life and the application requires 15, this is fine. If the predicted life is 18 years and the application requires 15, those 40 cycles matter. A reliability engineer should perform this calculation — do not guess.</p>
+
+  <h2>Making the Decision: A Procurement Framework</h2>
+
+  <p>The burn-in decision can be structured as a sequential gate:</p>
+
+  <p><strong>Gate 1: Is a field failure unacceptable?</strong> If the answer is yes — because it threatens safety (medical, automotive braking, flight control), interrupts revenue (telecom infrastructure, data center), or triggers regulatory non-compliance — proceed to Gate 2. If no, consider skipping burn-in and relying on process control plus sample-based audit testing.</p>
+
+  <p><strong>Gate 2: Is the latent defect rate unknown or above target?</strong> If you have production data showing a stable field return rate below 0.05% for 12 consecutive months, and you trust that data, burn-in may not add value. If your product is new, your production process changed, or your supplier changed, the latent defect rate is unknown — proceed to Gate 3.</p>
+
+  <p><strong>Gate 3: Is HALT data available to calibrate the ESS profile?</strong> Without HALT data, you are guessing at temperature range, cycle count, and vibration level. If HALT has not been performed, run it on 3–6 prototype units first, then design the ESS profile from failure limit data. If HALT cannot be performed (budget, schedule), use the industry-standard profiles in the table above as a conservative starting point — but acknowledge that you are operating with incomplete information.</p>
+
+  <p>This framework prevents the two most common reliability engineering mistakes: burning-in assemblies that do not need it (wasting money), and not burning-in assemblies that do (accepting preventable field failures). For a broader discussion of PCB testing strategies including AOI, X-ray, and ICT, see our <a href="/blog/pcb-testing-methods.html">complete testing methods comparison</a>. For the quality documentation framework that supports reliability data, see our <a href="/blog/pcb-certifications-compliance.html">certifications and compliance guide</a>.</p>
+
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods Explained</a></li>
+      <li><a href="/blog/pcb-failure-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Failure Analysis Guide</a></li>
+      <li><a href="/blog/pcb-microsection-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Microsection Analysis Guide</a></li>
+      <li><a href="/blog/pcb-ionic-contamination-cleanliness.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Ionic Contamination & Cleanliness</a></li>
+      <li><a href="/blog/automotive-pcb-requirements.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Automotive PCB Design Requirements</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="cta" style="--cta-bg:url(../generated/blog-cta-burn-in.webp)">
+  <div class="container">
+    <div class="cta-content reveal">
+      <h2>Need Reliability Testing for Your PCB Assembly?</h2>
+      <p>Our 1,200㎡ test lab runs HALT, HASS, thermal cycling, and vibration screening with full functional monitoring — L1 through L3. Upload your Gerber, BOM, and reliability requirements. We will return a test plan with per-board cost within 24 hours. <strong>Start your reliability program today.</strong></p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Test Plan <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB & PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').style.display='flex'}
+function closeModal(){document.getElementById('inquiryModal').style.display='none'}
+async function handleInquiry(e){e.preventDefault();const f=e.target;const d={name:f.name.value,email:f.email.value,message:f.message.value};try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});if(r.ok){alert('Inquiry sent successfully! We will respond within 24 hours.');closeModal();f.reset()}else{alert('Error sending inquiry. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')};return false}
+</script>
+</body>
+</html>
