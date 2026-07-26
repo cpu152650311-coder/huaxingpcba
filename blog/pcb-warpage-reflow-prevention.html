@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Warpage During Reflow — Root Causes, IPC-TM-650 Standards & Prevention Strategies | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to PCB warpage control: root cause analysis, IPC-TM-650 measurement methodology, design and material strategies, and process controls that keep boards flat through reflow soldering.">
+<meta property="og:title" content="PCB Warpage During Reflow — Root Causes, IPC-TM-650 Standards & Prevention Strategies">
+<meta property="og:description" content="Warped PCBs cause tombstoning, open joints, and assembly rejects. Learn the IPC-TM-650 measurement method, root causes, and design rules that keep boards flat through 260°C reflow.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-warpage-reflow-prevention.html">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-warpage-reflow-prevention.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-warpage-reflow.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Quality & Reliability</p>
+      <h1 class="reveal">PCB Warpage During Reflow:<br><em>Root Causes, IPC-TM-650 Standards & Prevention Strategies</em></h1>
+      <p class="reveal">Why boards twist at 260°C, how to measure warpage per IPC standards, and proven design rules that keep PCBs flat through every thermal cycle.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Warpage Prevention</span></div>
+
+  <p>PCB warpage is the silent killer of SMT assembly yield. A board that's perfectly flat at room temperature can twist <span class="data-point">0.5–2.0mm</span> out of plane during the soldering thermal cycle — enough to cause tombstoning on 0402 passives, open joints on BGAs, and co-planarity failures that scrap entire panels. The IPC standard sets the maximum allowable warpage at <span class="data-point">0.75%</span> for surface mount boards — but many designs exceed this limit without the engineer ever knowing until assembly rejects arrive.</p>
+
+  <p>At Huaxing PCBA, we process <span class="data-point">8 million solder joints per day</span> across 8 SMT lines, and warpage-related defects account for <span class="data-point">3–7%</span> of all assembly failures on boards that weren't designed with warpage control in mind. This guide covers the physics behind warpage, the IPC-TM-650 measurement methodology, and the design, material, and process strategies that prevent it. For broader thermal management, see our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a>.</p>
+
+  <img class="article-img" src="../generated/blog-warpage-reflow-hero.webp" alt="Close-up of a PCB passing through a reflow oven with thermal imaging overlay showing temperature distribution across the board surface during the soldering process" loading="lazy">
+
+  <h2>What Causes PCB Warpage During Reflow?</h2>
+
+  <p>Warpage is fundamentally a <strong>CTE mismatch problem</strong> — the coefficient of thermal expansion (CTE) varies between the different materials in your PCB stackup, and when the entire assembly climbs to <span class="data-point">240–260°C</span> during reflow, those materials expand at different rates. The result is internal stress that deforms the board.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> Warpage isn't a single-mode failure. It manifests as bow (cylindrical curvature), twist (corners lifting diagonally), or a combination of both. IPC-TM-650 distinguishes between these modes because they have different root causes — and different prevention strategies.</p>
+  </div>
+
+  <h3>The Four Root Causes of PCB Warpage</h3>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Asymmetric Copper Distribution</h4>
+      <p>This is the number one cause. Copper has a CTE of ~<span class="data-point">17 ppm/°C</span> while FR-4 laminate is ~<span class="data-point">14 ppm/°C</span> in the X-Y plane — but <span class="data-point">50–70 ppm/°C</span> in the Z-axis. When copper distribution is asymmetric (e.g., 70% copper on layer 1, 30% on layer 4), the copper-heavy side constrains expansion while the resin-rich side expands freely → board bends toward the copper-heavy side at temperature. Our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> covers symmetry principles in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Unbalanced Laminate Construction</h4>
+      <p>Using different prepreg styles, resin content percentages, or glass weave styles on opposite sides of the core creates a built-in stress gradient. Even if copper distribution is symmetric, unequal resin flow during lamination produces residual stress that releases — visibly — during the first thermal excursion. Proper <a href="/blog/pcb-laminate-selection-guide.html">laminate selection</a> is critical for symmetric construction.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Non-Uniform Thermal Mass</h4>
+      <p>Large copper pours, heavy ground planes, and thermal pads act as heat sinks that slow local heating rates. During reflow ramp-up, areas with less copper reach peak temperature <span class="data-point">10–30 seconds</span> before heavy copper zones — creating a transient thermal gradient that temporarily warps the board. This effect is most pronounced on boards mixing 0.5oz signal layers with 2oz+ power planes. See our <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a> for design rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Tg Overshoot During Reflow</h4>
+      <p>FR-4 laminate undergoes a phase transition at its glass transition temperature (Tg). Below Tg, the material is rigid with low CTE. Above Tg — typically <span class="data-point">130–180°C</span> for standard FR-4 — the polymer matrix softens and CTE in the Z-axis jumps <span class="data-point">3–5×</span>. Standard FR-4 boards spending 60–90 seconds above Tg during lead-free reflow (peak 245–260°C) experience the most aggressive warpage. High-Tg materials (>170°C) reduce but don't eliminate this effect. For material selection guidance, see our <a href="/blog/pcb-materials-guide.html">PCB materials guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-warpage-reflow-detail.webp" alt="Precision measurement of a PCB on a flat granite surface plate with a feeler gauge checking warpage compliance against IPC-TM-650 maximum deviation limits" loading="lazy">
+
+  <h2>IPC-TM-650 Warpage Measurement: The Standard Method</h2>
+
+  <p>IPC-TM-650 Method 2.4.22 defines how to measure and quantify PCB warpage. Understanding this method is essential — it's what your assembly partner uses to accept or reject your boards, and what you'll reference in your fabrication specification.</p>
+
+  <h3>Measurement Setup</h3>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Reference Surface</h4>
+      <p>Place the PCB on a certified flat granite surface plate (flatness within <span class="data-point">0.001mm</span>). The board rests under its own weight — no clamping, no weights. For double-sided assemblies, measure both sides independently.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Measurement Points</h4>
+      <p>Measure the maximum vertical deviation (gap between board and surface plate) at the four corners and the center. For boards >150mm in any dimension, add measurement points at mid-span locations. Record the maximum gap in millimeters.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Calculation</h4>
+      <p>Warpage (%) = (Maximum Deviation in mm / Diagonal Length in mm) × 100. For a 200mm × 150mm board (diagonal = 250mm), a measured gap of 1.5mm gives: (1.5 / 250) × 100 = <span class="data-point">0.60%</span> — within the 0.75% limit for SMT. A gap of 2.5mm gives 1.0% — exceeding the limit and requiring corrective action.</p>
+    </div>
+  </div>
+
+  <h3>IPC Warpage Acceptance Criteria</h3>
+
+  <table class="spec-table">
+    <tr><th>Application</th><th>Maximum Bow & Twist</th><th>Standard Reference</th></tr>
+    <tr><td>Surface mount (SMT) components</td><td>0.75% of diagonal</td><td>IPC-A-600 Class 2</td></tr>
+    <tr><td>Through-hole only assemblies</td><td>1.50% of diagonal</td><td>IPC-A-600 Class 1</td></tr>
+    <tr><td>High-reliability / Class 3</td><td>0.50% of diagonal</td><td>IPC-6012 Class 3</td></tr>
+    <tr><td>BGA assemblies (all classes)</td><td>0.50% of diagonal</td><td>IPC-7095 (BGA design & assembly)</td></tr>
+    <tr><td>Flex and rigid-flex PCBs</td><td>Application-specific; consult IPC-6013</td><td>IPC-6013</td></tr>
+  </table>
+
+  <p>BGA assemblies impose the tightest constraint because a 0.5% warpage across a 45mm BGA package translates to <span class="data-point">0.225mm</span> of co-planarity deviation — enough to cause open joints on 0.8mm pitch devices. For the full acceptance criteria, see our <a href="/blog/ipc-a-600-acceptance-criteria.html">IPC-A-600 acceptance criteria guide</a>.</p>
+
+  <h2>Design Strategies to Minimize Warpage</h2>
+
+  <p>Warpage prevention starts at the CAD station. These design rules address the root causes before the board ever reaches the fab house.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Balance Copper Distribution Across the Stackup</h4>
+      <p>Aim for copper coverage within <span class="data-point">±15%</span> between symmetric layers (Layer 1 vs Layer N, Layer 2 vs Layer N-1). If Layer 2 is a ground plane with 85% copper fill, Layer N-1 (the symmetric partner) should also be a plane or high-fill signal layer — not a low-density routing layer. Most PCB CAD tools have a copper area calculator; use it during stackup planning. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> covers the full methodology.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use Thieving Patterns on Low-Density Layers</h4>
+      <p>If a layer must have low copper density (e.g., a routing layer with only a few traces), add copper thieving — non-functional copper shapes — to bring coverage above <span class="data-point">40%</span>. The thieving should be hatched (cross-hatch pattern) rather than solid to avoid creating a parasitic plane. Thieving adds no cost and dramatically improves symmetry.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Specify Symmetric Prepreg and Core Construction</h4>
+      <p>For a 4-layer board: Core (with layers 2–3) should be centered in the stackup, with identical prepreg types and resin content above and below. For example: Prepreg 2116 (60% resin) / 0.5mm Core / Prepreg 2116 (60% resin) — not Prepreg 2116 / Core / Prepreg 1080. The glass style, resin percentage, and cured thickness must be symmetric. Our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a> covers prepreg specifications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Add Panel Rails with Balanced Copper</h4>
+      <p>During fabrication, your board is part of a larger panel. If your design has asymmetric copper but the panel rails are bare FR-4, the rails don't contribute to symmetry — and the warpage you see at assembly is the panel-level warpage, not just your board. Specify that panel rails include copper balancing patterns (hatched fill) on all layers. Good fabricators do this by default; specify it explicitly in your fab notes.</p>
+    </div>
+  </div>
+
+  <h2>Material Selection for Warpage Reduction</h2>
+
+  <p>Not all laminates behave equally through the reflow thermal cycle. Material selection is especially critical for boards exceeding <span class="data-point">1.6mm</span> thickness or <span class="data-point">200mm</span> in any dimension.</p>
+
+  <table class="spec-table">
+    <tr><th>Material</th><th>Tg (°C)</th><th>CTE XY (ppm/°C)</th><th>CTE Z (ppm/°C)</th><th>Warpage Risk</th></tr>
+    <tr><td>Standard FR-4</td><td>130–140</td><td>14–16</td><td>50–70 (above Tg)</td><td>High</td></tr>
+    <tr><td>Mid-Tg FR-4</td><td>150–160</td><td>13–15</td><td>40–55 (above Tg)</td><td>Medium</td></tr>
+    <tr><td>High-Tg FR-4</td><td>170–180</td><td>12–14</td><td>30–45 (above Tg)</td><td>Low–Medium</td></tr>
+    <tr><td>Polyimide</td><td>250+</td><td>12–14</td><td>40–50</td><td>Low</td></tr>
+    <tr><td>Rogers 4350B (RF)</td><td>>280</td><td>10–14</td><td>32</td><td>Very Low</td></tr>
+    <tr><td>BT Epoxy (IC substrate)</td><td>180–220</td><td>12–14</td><td>35–45</td><td>Low</td></tr>
+  </table>
+
+  <p>High-Tg FR-4 is the sweet spot for most commercial and industrial applications — it reduces time above Tg during reflow from 90 seconds to approximately <span class="data-point">30–40 seconds</span>, cutting warpage risk by roughly half at a marginal cost increase of <span class="data-point">$0.50–1.00 per board</span>. For deeper material comparisons, see our <a href="/blog/pcb-materials-guide.html">PCB materials comparison guide</a>.</p>
+
+  <h2>Process Controls During Assembly</h2>
+
+  <p>Even a well-designed board can warp if the assembly process isn't controlled. These are the process-side countermeasures we apply on our SMT lines.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Optimize Reflow Profile Ramp Rate</h4>
+      <p>The preheat ramp rate should not exceed <span class="data-point">2–3°C/second</span>. Faster ramps create larger transient thermal gradients across the board — the edges heat faster than the center, causing temporary bow. A controlled ramp gives the entire board time to reach thermal equilibrium before the soldering zone. Most warpage problems we diagnose are traceable to aggressive ramp rates, not design flaws.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use Board Supports on the Conveyor</h4>
+      <p>For boards exceeding <span class="data-point">150mm</span> in the conveyor direction, center-support pins or a full-width support rail prevent sagging as the laminate softens above Tg. This is standard practice on our lines for boards over 200mm — the support rail cost is negligible compared to the yield gain.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Bake Boards Before Assembly (When Warranted)</h4>
+      <p>PCBs stored in uncontrolled humidity environments absorb moisture. During reflow, this moisture vaporizes and creates internal delamination pressure — which amplifies warpage. For boards stored >6 months or in >60% RH environments, a <span class="data-point">4-hour bake at 105°C</span> before assembly eliminates this variable. Our <a href="/blog/pcb-msl-moisture-sensitivity-guide.html">MSL handling guide</a> covers baking protocols.</p>
+    </div>
+  </div>
+
+  <h2>Inspection and Rework for Warped Boards</h2>
+
+  <p>If you receive boards that fail the IPC warpage criteria, don't scrap them immediately. Some warpage is recoverable — and some is permanent.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Thermal Re-Flattening (Recoverable Cases)</h4>
+      <p>Boards warped due to residual lamination stress — not asymmetric copper — can sometimes be re-flattened by pressing between flat plates at <span class="data-point">10–15°C above Tg</span> for 30–60 minutes, followed by controlled cooling. This re-stresses the polymer matrix in a flat configuration. Success rate is approximately <span class="data-point">60–70%</span> for FR-4, lower for polyimide.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Mechanical Flattening During Assembly (Last Resort)</h4>
+      <p>For boards with mild warpage (<0.5% over spec), a dedicated flattening fixture — essentially a weighted plate that holds the board flat during reflow — can salvage a production run. This adds process cost and is not a long-term solution, but it keeps the line running while you investigate the root cause.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>When to Reject: The 1.0% Rule</h4>
+      <p>If warpage exceeds <span class="data-point">1.0%</span> of diagonal on an SMT board, reject the lot. At this level, no amount of fixturing will produce reliable solder joints on fine-pitch components. The root cause is almost always a design or laminate problem that requires engineering change — not a process adjustment. For detailed inspection guidance, see our <a href="/blog/pcb-failure-analysis-guide.html">PCB failure analysis guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Warpage Is Preventable by Design</h2>
+
+  <p>PCB warpage during reflow is not an inevitable manufacturing defect — it's a design outcome. Symmetric copper distribution, balanced laminate construction, appropriate material selection for your thermal requirements, and controlled assembly process parameters together reduce warpage risk from "likely" to "rare." The cost of prevention — a few hours of stackup analysis and a marginal material upgrade — is orders of magnitude less than the cost of a rejected production lot.</p>
+
+  <p>At Huaxing PCBA, every new customer design receives a warpage risk assessment as part of our standard DFM review. We analyze copper symmetry, recommend material upgrades where needed, and optimize reflow profiles based on board dimensions and thermal mass. Our <span class="data-point">8 SMT lines</span> run with center-support fixturing as standard for boards over 200mm. <a href="/blog/pcb-stackup-design.html">Learn more about stackup design</a> or <a href="/contact/">send your Gerber files</a> for a free DFM and warpage risk assessment — delivered within 24 hours.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-warpage-reflow.webp)">
+      <h2>Concerned About Warpage on Your Next Board?</h2>
+      <p>Send us your Gerber files and stackup requirements. We'll include a free warpage risk assessment with your DFM report — flag asymmetric copper, recommend material upgrades, and confirm IPC compliance. 24-hour turnaround.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your DFM + Warpage Check <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
