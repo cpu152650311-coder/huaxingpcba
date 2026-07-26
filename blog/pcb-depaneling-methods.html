@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Depaneling Methods Comparison — Routing, V-Scoring, Laser & Punching: Which Method Fits Your Board Design | Huaxing PCBA</title>
+<meta name="description" content="Comprehensive comparison of PCB depaneling methods: router, V-score, laser, and punching. Edge quality, stress analysis, cost per panel, and design rules for each method. How to choose the right singulation process for your PCB design and volume.">
+<meta property="og:title" content="PCB Depaneling Methods — Routing vs V-Scoring vs Laser vs Punching Compared">
+<meta property="og:description" content="Router, V-score, laser, and punching depaneling: edge quality data, mechanical stress comparison, per-panel cost, and PCB design rules for each method.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-depaneling-methods.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-depaneling.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-depaneling-methods.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Depaneling Methods Comparison — Routing, V-Scoring, Laser & Punching: Which Method Fits Your Board Design",
+  "description": "Comprehensive comparison of PCB depaneling methods: router, V-score, laser, and punching. Edge quality data, stress analysis, cost per panel, and design rules for each method.",
+  "datePublished": "2026-07-26",
+  "dateModified": "2026-07-26",
+  "image": "https://huaxingpcba.com/generated/blog-cover-depaneling.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-depaneling-methods.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-depaneling-methods.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-depaneling.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">PCB Depaneling Methods Comparison:<br><em>Routing, V-Scoring, Laser & Punching — How to Choose</em></h1>
+      <p class="reveal">The depaneling method you specify affects edge quality, component stress, and per-unit cost — choosing wrong can crack MLCCs or delaminate the board edge.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Depaneling Methods</span></div>
+
+  <p>Depaneling — the process of separating individual PCBs from the manufacturing panel — is one of the last manufacturing steps and one of the most frequently overlooked in design reviews. Yet it has a direct impact on edge quality, component reliability, and per-unit cost. A poorly chosen depaneling method can crack ceramic capacitors, delaminate the board edge, or leave fiberglass splinters that cause assembly line stoppages. Choose correctly, and it becomes an invisible, trouble-free step in your production flow.</p>
+
+  <p>At Huaxing PCBA, we operate <span class="data-point">4</span> depaneling technologies across our SMT lines, processing over 25,000 panels per month across prototype and volume production. This article draws on that production experience to compare the four mainstream depaneling methods: routing, V-scoring, laser cutting, and die punching — with specific data on edge quality, component stress, design constraints, and cost per panel.</p>
+
+  <img class="article-img" src="../generated/blog-depaneling-comparison.webp" alt="Close-up macro shot of four PCB edges side by side showing the distinct surface finishes of router-cut, V-scored, laser-cut, and punched PCB edges, with visible fiberglass texture differences under studio lighting" loading="lazy">
+
+  <h2>Method 1: Router Depaneling — The Industry Standard</h2>
+
+  <p>Router depaneling uses a high-speed spindle (typically 30,000–60,000 RPM) with a carbide router bit to mill through the tabs or bridges connecting individual PCBs to the panel frame. It's the most widely adopted method in the industry for good reason: it handles nearly any board shape, produces clean edges, and works across all PCB materials.</p>
+
+  <table class="spec-table">
+    <tr><th>Router Depaneling Specs</th><th>Typical Value</th></tr>
+    <tr><td>Spindle Speed</td><td>30,000–60,000 RPM</td></tr>
+    <tr><td>Bit Diameter</td><td>0.8–2.0 mm</td></tr>
+    <tr><td>Feed Rate</td><td>10–30 mm/s</td></tr>
+    <tr><td>Edge Roughness (Ra)</td><td>1.5–3.0 μm</td></tr>
+    <tr><td>Minimum Keep-Out Zone</td><td>1.5 mm from component body</td></tr>
+    <tr><td>Dust Generation</td><td>Moderate — requires extraction</td></tr>
+    <tr><td>Tool Life per Bit</td><td>~30,000 linear mm (FR-4)</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Edge Quality: The Cleanest of the Mechanical Methods</h4>
+      <p>Router-cut edges show a characteristic spiral tool mark pattern with Ra values of 1.5–3.0 μm — clean enough that no secondary deburring is needed for most applications. The primary failure mode is <strong>fiber breakout</strong> on the bottom surface when the bit exits the laminate, which can be mitigated by using a backup board under the panel and maintaining sharp bits. For designs with <a href="/blog/impedance-control.html">controlled-impedance traces</a> near the board edge, router vibration can cause microscopic delamination if the keep-out zone is too tight.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Stress on Components: Lower Than Punching, Higher Than Laser</h4>
+      <p>The primary stress mechanism in router depaneling is vibration transmitted through the panel to soldered components. A 2019 Auburn University study measured peak acceleration of <span class="data-point">15–25 G</span> at component bodies 3 mm from the router path. MLCC capacitors are the most vulnerable — the vibration can induce micro-cracks in the ceramic dielectric that pass electrical test but fail after thermal cycling. The mitigation is straightforward: maintain a minimum 1.5 mm keep-out zone and avoid placing sensitive components near tab locations.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Design Constraints: Tab Placement Is Everything</h4>
+      <p>Tabs (also called bridges) must be designed into the panel layout. Standard practice is 3–5 tabs per board side, each 2–3 mm wide, with 1.5 mm clearance to nearest component. Tabs are typically placed on straight edges — curved board outlines can be routed but require more complex programming and slower feed rates. For <a href="/blog/flex-pcb-design-manufacturing.html">flex and rigid-flex PCBs</a>, router depaneling is the only practical mechanical option.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>When to Choose Router:</strong> Any board shape, any material, any volume. If you're not sure which method to use, router is the safest default. It's the only method that handles irregular board outlines and mixed materials without special tooling.</p>
+  </div>
+
+  <h2>Method 2: V-Score Depaneling — Fastest for Rectangular Boards</h2>
+
+  <p>V-scoring cuts a V-shaped groove approximately one-third of the board thickness from both top and bottom surfaces along straight lines. Individual boards are then separated by bending along the score line — either manually or with a V-score breaking machine (pizza-cutter style blade). V-scoring is by far the fastest depaneling method and the cheapest per panel, but its design constraints are severe.</p>
+
+  <img class="article-img" src="../generated/blog-vscore-edge-detail.webp" alt="Macro photograph of a V-scored PCB edge after separation, showing the characteristic rough fiberglass break surface with visible glass fiber strands along the fracture line" loading="lazy">
+
+  <table class="spec-table">
+    <tr><th>V-Score Depaneling Specs</th><th>Typical Value</th></tr>
+    <tr><td>Score Depth (per side)</td><td>30–35% of board thickness</td></tr>
+    <tr><td>Remaining Web Thickness</td><td>0.3–0.5 mm (for 1.6 mm board)</td></tr>
+    <tr><td>Score Angle</td><td>30° or 45°</td></tr>
+    <tr><td>Edge Quality After Break</td><td>Rough — FR-4 fibers visible</td></tr>
+    <tr><td>Minimum Keep-Out Zone</td><td>0.5 mm from score centerline</td></tr>
+    <tr><td>Processing Time per Panel</td><td>~3–5 seconds (breaking only)</td></tr>
+    <tr><td>Tooling Cost</td><td>Included in PCB fab cost</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>The Critical Limitation: Straight Lines Only</h4>
+      <p>V-scoring works on straight lines across the entire panel — it cannot turn corners, create curves, or handle irregular board outlines. This means every board on a V-scored panel must be rectangular, and all boards in a row must share the same height. Non-rectangular boards or mixed-size layouts require router depaneling instead. This constraint alone eliminates V-scoring for roughly 60% of non-trivial PCB designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Component Stress: The Bending Problem</h4>
+      <p>The separation process — bending the panel until the remaining web fractures — induces significant board flexure. Strain gauge measurements on 1.6 mm FR-4 panels show <span class="data-point">1,500–3,000 με</span> (microstrain) at the break line, dropping to 500–800 με at 10 mm distance. MLCC capacitors within 5 mm of the score line are at risk. The industry rule of thumb: no SMT components within 3 mm of the score centerline, and no tall components (electrolytic capacitors, connectors, transformers) within 8 mm. See our <a href="/blog/pcb-failure-analysis-guide.html">failure analysis guide</a> for diagnosing score-line-related cracks.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Edge Quality: Functionally Acceptable, Cosmetically Rough</h4>
+      <p>The fractured edge after V-score separation is rough — visible glass fiber strands protrude from the break surface. For most industrial and automotive applications, this is functionally acceptable. For consumer-facing products with exposed board edges, or for <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 3</a> applications, the rough edge may be unacceptable. Some manufacturers follow V-score breaking with a light router pass to clean the edge, but this adds a second operation and negates the cost advantage.</p>
+    </div>
+  </div>
+
+  <h2>Method 3: Laser Depaneling — Zero Mechanical Stress</h2>
+
+  <p>Laser depaneling uses a UV (355 nm) or CO₂ laser to ablate the PCB material along the cut path. Because there's no physical contact between tool and board, component stress is effectively zero — making laser the preferred method for densely populated boards with sensitive components near the edge, and for ultra-thin substrates (≤0.4 mm) that can't survive mechanical depaneling forces.</p>
+
+  <table class="spec-table">
+    <tr><th>Laser Depaneling Specs</th><th>Typical Value</th></tr>
+    <tr><td>Laser Type</td><td>UV (355 nm) or CO₂</td></tr>
+    <tr><td>Cut Width</td><td>20–50 μm</td></tr>
+    <tr><td>Cut Speed (1.6 mm FR-4)</td><td>5–15 mm/s</td></tr>
+    <tr><td>Edge Quality</td><td>Charred but smooth — no fibers</td></tr>
+    <tr><td>Heat-Affected Zone (HAZ)</td><td>50–150 μm</td></tr>
+    <tr><td>Minimum Keep-Out Zone</td><td>0.2 mm</td></tr>
+    <tr><td>Typical Equipment Cost</td><td>$150K–$400K</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Stress-Free Cutting: The Laser's Killer Advantage</h4>
+      <p>Because the laser removes material through ablation rather than mechanical force, there is zero vibration or bending stress transmitted to components. This makes laser depaneling mandatory for designs where MLCC capacitors, bare-die chips, or MEMS sensors are within 1 mm of the board edge. A 2020 IPC white paper documented <span class="data-point">zero</span> MLCC crack failures after laser depaneling across 10,000 test boards — compared to a 0.12% crack rate with router depaneling on the same design.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>The Heat-Affected Zone: FR-4 Burns, Ceramic Substrates Excel</h4>
+      <p>Laser ablation of FR-4 produces a charred edge — the epoxy resin carbonizes in a 50–150 μm zone along the cut. For most designs, this is functionally irrelevant: the carbonized layer is thin enough that it doesn't create a conductive path between layers. However, for high-voltage designs (>500V) or <a href="/blog/rf-pcb-design-manufacturing.html">RF/microwave PCBs</a> where edge carbonization could create a leakage path, UV laser with nitrogen assist gas (to suppress combustion) is preferred. Ceramic-substrate PCBs (alumina, aluminum nitride) handle laser depaneling beautifully with no charring.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Cost Reality: Capital-Intensive, Best for High-Value Boards</h4>
+      <p>Laser depaneling equipment costs 5–10× more than a router system, and the per-panel operating cost is higher due to slower cut speeds on thick laminates. The economics make sense for high-value, high-density designs where the cost of a single field failure dwarfs the depaneling cost premium — think medical devices, aerospace modules, and telecom infrastructure cards. For low-cost consumer boards, router or V-score remains the practical choice.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> Laser depaneling per-panel cost is typically <span class="data-point">$0.15–$0.35</span> depending on cut length and substrate thickness. For a $500 medical device PCB, that's noise. For a $3 consumer PCB, it's 10% of the board cost. Match the method to the product's value, not just its technical requirements.</p>
+  </div>
+
+  <h2>Method 4: Die Punching — Ultra-High Volume, Ultra-High Tooling Cost</h2>
+
+  <p>Die punching (also called die cutting or stamping) uses a hardened steel punch-and-die set to shear individual PCBs from the panel in a single press stroke. It's the fastest depaneling method by far — cycle times of 1–2 seconds per stroke — but the tooling cost and design constraints make it viable only for very high-volume production.</p>
+
+  <table class="spec-table">
+    <tr><th>Die Punching Specs</th><th>Typical Value</th></tr>
+    <tr><td>Cycle Time per Stroke</td><td>1–2 seconds</td></tr>
+    <tr><td>Tooling Cost (punch + die)</td><td>$3,000–$15,000</td></tr>
+    <tr><td>Tool Life</td><td>100K–500K strokes</td></tr>
+    <tr><td>Minimum Board Thickness</td><td>0.8 mm (1.6 mm optimal)</td></tr>
+    <tr><td>Edge Quality</td><td>Smooth shear zone + rough fracture zone</td></tr>
+    <tr><td>Component Stress</td><td>High — shock loading</td></tr>
+    <tr><td>Viable Volume</td><td>50K+ units/year</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Speed: Unmatched at Scale</h4>
+      <p>A single die press can depanel <span class="data-point">1,800–3,600</span> panels per hour — roughly 10–20× the throughput of router depaneling. For automotive ECU boards or consumer power supplies running at 500K+ units annually, die punching is the only economically viable method. The trade-off is complete inflexibility: any change to the board outline requires a new punch-and-die set, costing $3K–$15K and 4–6 weeks lead time.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Edge Quality: The Shear-Fracture Profile</h4>
+      <p>The punched edge shows two distinct zones: a smooth shear zone (top 30–40% of the thickness) where the punch cleanly cuts the laminate, and a rough fracture zone (bottom 60–70%) where the material tears. For <a href="/blog/pcb-panelization-cost-optimization.html">panelization optimization</a>, the shear zone can be maximized by maintaining sharp tooling and proper punch-to-die clearance (typically 5–8% of material thickness). Dull tooling increases the fracture zone ratio and can cause delamination.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Component Stress: The Shock Loading Problem</h4>
+      <p>The instantaneous shear force creates a shock wave through the panel — peak acceleration measured at component locations can exceed <span class="data-point">50 G</span>. This makes die punching unsuitable for boards with ceramic chip components, crystal oscillators, or MEMS sensors near the board edge. Designs intended for die punching must reserve a generous keep-out zone (≥5 mm) and should avoid placing any mechanically sensitive components within 10 mm of the punch line.</p>
+    </div>
+  </div>
+
+  <h2>Method Selection Matrix</h2>
+
+  <table class="spec-table">
+    <tr><th>Factor</th><th>Router</th><th>V-Score</th><th>Laser</th><th>Punching</th></tr>
+    <tr><td>Board Shape</td><td>Any</td><td>Rectangular only</td><td>Any</td><td>Rectangular only</td></tr>
+    <tr><td>Edge Quality</td><td>Good (1.5–3 μm Ra)</td><td>Rough (fibers exposed)</td><td>Charred but smooth</td><td>Shear + fracture</td></tr>
+    <tr><td>Component Stress</td><td>Moderate (15–25 G)</td><td>Moderate (bending)</td><td>None</td><td>High (50+ G)</td></tr>
+    <tr><td>Min Keep-Out</td><td>1.5 mm</td><td>0.5 mm (score) / 5 mm (bend)</td><td>0.2 mm</td><td>5 mm</td></tr>
+    <tr><td>Tooling Cost</td><td>$0 (programming)</td><td>$0 (included in PCB)</td><td>$0 (programming)</td><td>$3K–$15K</td></tr>
+    <tr><td>Per-Panel Cost</td><td>$0.05–$0.15</td><td>$0.01–$0.03</td><td>$0.15–$0.35</td><td>$0.005–$0.02</td></tr>
+    <tr><td>Best Volume Range</td><td>1–50K/year</td><td>5K–500K/year</td><td>100–20K/year</td><td>50K+/year</td></tr>
+    <tr><td>Design Flexibility</td><td>Excellent</td><td>Poor</td><td>Excellent</td><td>None</td></tr>
+  </table>
+
+  <img class="article-img" src="../generated/blog-depaneling-router-machine.webp" alt="Close-up detail photograph of a PCB router depaneling machine spindle cutting through FR-4 panel tabs, with visible dust extraction nozzle and the characteristic spiral tool path on the board edge" loading="lazy">
+
+  <h2>Summary: Match Method to Product Lifecycle</h2>
+
+  <p>For prototype and low-to-medium volume production (up to ~50K units/year), router depaneling is the safest choice — it handles any board shape and produces clean edges with manageable component stress. For high-volume rectangular boards (consumer electronics, power supplies), V-scoring's speed and near-zero per-panel cost make it the clear winner, as long as the design respects keep-out zones. Laser depaneling earns its premium on high-value, high-density boards where component stress is unacceptable and the cost of a single field failure justifies the investment. Die punching is reserved for the highest volumes where tooling amortization makes the per-unit cost unbeatable.</p>
+
+  <p>At Huaxing PCBA, our panelization engineering team reviews depaneling strategy as part of every DFM analysis — we'll recommend the optimal method based on your board design, component placement, and production volume. <a href="/blog/dfm-tips.html">Read our DFM guide</a> for more design-for-manufacturing recommendations, or <a href="/blog/pcb-panelization-cost-optimization.html">check our panelization cost optimization guide</a> for panel utilization strategies.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/dfm-tips.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">DFM Tips — Design for Manufacturing</a></li>
+      <li><a href="/blog/pcb-panelization-cost-optimization.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Panelization & Cost Optimization</a></li>
+      <li><a href="/blog/pcb-failure-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Failure Analysis Guide</a></li>
+      <li><a href="/blog/pcb-assembly-process.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Assembly Process Overview</a></li>
+      <li><a href="/blog/pcb-materials-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Materials Guide — Substrate Selection</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-depaneling.webp)">
+      <h2>Get a DFM Review With Depaneling Analysis</h2>
+      <p>Send us your Gerber files and panel drawing — our engineering team will recommend the optimal depaneling method for your board design and production volume. Free DFM report within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

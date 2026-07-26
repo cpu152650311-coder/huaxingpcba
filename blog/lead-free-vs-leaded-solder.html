@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead-Free vs Leaded Solder Assembly — SAC305 Reliability, Tin Whisker Risk & Long-Term Field Performance Data | Huaxing PCBA</title>
+<meta name="description" content="Data-driven comparison of lead-free (SAC305, SN100C) vs leaded (SnPb) solder for PCB assembly. Reliability testing results, tin whisker mitigation strategies, thermal fatigue data, and cost-per-joint analysis for procurement and engineering teams.">
+<meta property="og:title" content="Lead-Free vs Leaded Solder — SAC305 Reliability & Tin Whisker Risk Compared">
+<meta property="og:description" content="SAC305 vs SnPb: thermal cycling data, whisker mitigation, mixed-assembly risks, and 15-year field reliability comparison.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/lead-free-vs-leaded-solder.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-solder-alloy.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/lead-free-vs-leaded-solder.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Lead-Free vs Leaded Solder Assembly — SAC305 Reliability, Tin Whisker Risk & Long-Term Field Performance Data",
+  "description": "Data-driven comparison of lead-free (SAC305, SN100C) vs leaded (SnPb) solder for PCB assembly. Reliability testing results, tin whisker mitigation strategies, thermal fatigue data, and cost-per-joint analysis.",
+  "datePublished": "2026-07-26",
+  "dateModified": "2026-07-26",
+  "image": "https://huaxingpcba.com/generated/blog-cover-solder-alloy.webp",
+  "url": "https://huaxingpcba.com/blog/lead-free-vs-leaded-solder.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/lead-free-vs-leaded-solder.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-solder-alloy.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Lead-Free vs Leaded Solder Assembly:<br><em>SAC305 Reliability, Tin Whisker Risk & 15-Year Field Data</em></h1>
+      <p class="reveal">The solder alloy you specify determines field reliability, regulatory compliance, and manufacturing cost — here's what 20 years of transition data actually shows.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Lead-Free vs Leaded Solder Assembly</span></div>
+
+  <p>The solder alloy decision is one of the few PCB assembly choices that simultaneously affects regulatory compliance, long-term reliability, and per-board cost. Since the EU RoHS directive took effect in 2006, the industry has accumulated nearly two decades of field data on lead-free solder performance — and the picture is more nuanced than most procurement guides acknowledge. Lead-free isn't simply "worse" or "better" than traditional SnPb; it performs differently under specific stress conditions, and understanding those differences is what separates reliable products from field failures.</p>
+
+  <p>At Huaxing PCBA, we run both lead-free and leaded SMT lines across <span class="data-point">8</span> high-speed production lines, processing over 8 million solder joints per day. Our quality team has analyzed thousands of X-ray and cross-section samples from both alloy families. This article draws on that production data, published reliability studies, and IPC-9701 thermal cycling standards to give procurement managers and design engineers a clear, data-backed comparison.</p>
+
+  <img class="article-img" src="../generated/blog-solder-alloy-comparison.webp" alt="Macro photograph of two PCB pads side by side: one with bright silver SAC305 solder joint finish, one with matte grey SnPb solder joint showing different grain structure under studio lighting" loading="lazy">
+
+  <h2>Alloy Composition and Melting Behavior</h2>
+
+  <p>The fundamental difference between lead-free and leaded solder begins with chemistry — and that chemistry drives every downstream decision about reflow profiles, component compatibility, and inspection criteria.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Sn63Pb37 (Tin-Lead Eutectic) — The Baseline</h4>
+      <p>Melts sharply at 183°C with a single-phase transition. This eutectic behavior means SnPb goes directly from solid to liquid with no pasty range, producing smooth, predictable fillets. Peak reflow temperature typically runs at 205–220°C. The alloy has been studied for over 50 years; its failure modes, intermetallic growth rates, and grain structure evolution are exhaustively documented. SnPb remains legal for military, aerospace, medical implant, and automotive under-hood applications where exemptions apply.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>SAC305 (Sn96.5Ag3.0Cu0.5) — The Industry Workhorse</h4>
+      <p>Melts at approximately 217–220°C, roughly 34°C higher than SnPb. Unlike SnPb, SAC305 is near-eutectic — it has a narrow pasty range of about 3°C. The higher melting point forces peak reflow temperatures to 235–250°C, which stresses moisture-sensitive components and thin substrate laminates. On the plus side, SAC305 joints show superior tensile strength (approximately 45 MPa vs 35 MPa for SnPb at room temperature) and better creep resistance. Over <span class="data-point">85%</span> of RoHS-compliant consumer and industrial electronics worldwide use SAC305 or its close variants.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>SN100C (SnCuNi) and Low-Silver Alternatives</h4>
+      <p>SN100C (Sn-0.7Cu-0.05Ni) melts at 227°C and eliminates silver entirely, reducing raw material cost by 30–40% vs SAC305. The nickel addition stabilizes the intermetallic layer and produces a glossy post-reflow appearance that some OEMs prefer for cosmetic consistency. However, the higher melting point (10°C above SAC305) increases thermal stress further, and wetting performance on oxidized pads is measurably weaker — typically requiring nitrogen atmosphere reflow for acceptable results.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> If your product ships to the EU, you need lead-free. If it's for US military (MIL-PRF-38534) or NASA Class 3, you may still use SnPb under exemption. Don't guess — check the specific regulation that applies to your end market before committing to an alloy.</p>
+  </div>
+
+  <h2>Reliability: Thermal Cycling and Intermetallic Growth</h2>
+
+  <p>The reliability question is where most of the industry debate lives. SAC305 joints are mechanically stronger at room temperature, but under thermal cycling (−40°C to +125°C), the picture reverses in some conditions.</p>
+
+  <table class="spec-table">
+    <tr><th>Reliability Parameter</th><th>SnPb (Sn63Pb37)</th><th>SAC305</th><th>SN100C</th></tr>
+    <tr><td>Tensile Strength (RT)</td><td>~35 MPa</td><td>~45 MPa</td><td>~38 MPa</td></tr>
+    <tr><td>Creep Resistance (100°C)</td><td>Poor</td><td>Good</td><td>Moderate</td></tr>
+    <tr><td>−40/+125°C Thermal Cycles to 50% Failure (BGA, daisy chain)</td><td>~3,500 cycles</td><td>~2,800 cycles</td><td>~2,400 cycles</td></tr>
+    <tr><td>0/+100°C Thermal Cycles to 50% Failure</td><td>~6,000 cycles</td><td>~8,500 cycles</td><td>~7,200 cycles</td></tr>
+    <tr><td>IMC Thickness After 1,000h at 150°C</td><td>~3.5 μm</td><td>~2.8 μm</td><td>~2.2 μm</td></tr>
+    <tr><td>Drop-Shock Reliability (JEDEC JESD22-B111)</td><td>Excellent</td><td>Moderate</td><td>Good</td></tr>
+  </table>
+
+  <p>This table explains why the industry has a split personality about lead-free reliability. SAC305 outperforms SnPb in moderate-temperature cycling (0–100°C) — which covers most consumer and industrial environments — but under wide-temperature-range cycling (−40/+125°C, typical of automotive under-hood and aerospace), SnPb's superior ductility and slower intermetallic growth at extreme cold gives it the edge. The failure mechanism in SAC305 under wide-range cycling is predominantly <strong>interfacial fracture</strong> at the IMC-solder boundary, driven by CTE mismatch between the solder, intermetallic layer, and copper pad.</p>
+
+  <img class="article-img" src="../generated/blog-solder-thermal-cycling.webp" alt="Photorealistic 3D cross-section render of a BGA solder joint showing distinct intermetallic compound layers between copper pad and solder bulk, with microscopic crack propagation highlighted along the IMC boundary" loading="lazy">
+
+  <h2>Tin Whiskers: The Lead-Free Wildcard</h2>
+
+  <p>Pure tin finishes — including the tin-rich SAC alloys — are susceptible to tin whisker growth: microscopic, conductive filaments that spontaneously grow from tin surfaces and can bridge adjacent pads, causing short circuits. This is not a theoretical problem. A 2018 NASA study documented whisker-induced failures in commercial satellite power supplies; the culprit was pure-tin-plated component leads that had been flagged during incoming inspection but were processed anyway.</p>
+
+  <p>Whisker formation is driven by compressive stress in the tin plating, typically from intermetallic growth at the Cu-Sn interface. SnPb finishes resist whiskering because lead atoms disrupt the grain boundary stress gradient. For lead-free assemblies, the proven mitigation strategies include:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Matte Tin with Annealing (150°C for 1 hour within 24h of plating)</h4>
+      <p>Post-plate annealing relieves internal stress in the tin grain structure. This is the most widely adopted mitigation method in the industry and is specified by component manufacturers like Texas Instruments and Analog Devices for their lead-free IC packages.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating (≥50 μm Acrylic or Parylene)</h4>
+      <p>A continuous coating physically contains whisker growth. The coating must be thick enough that a whisker cannot penetrate it — 50 μm is the widely cited minimum. For space-grade hardware, parylene C at 75–100 μm is the standard. See our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> for application details.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Nickel Underplate Barrier (Minimum 1.27 μm)</h4>
+      <p>A nickel barrier between the copper substrate and tin finish suppresses Cu-Sn intermetallic growth, which is the primary compressive stress driver. This is standard for high-reliability applications and is required by GEIA-STD-0005-2 for aerospace lead-free electronics.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Tin whisker risk is real but manageable. For commercial electronics (consumer, industrial, automotive cabin), matte tin with standard annealing is adequate. For high-reliability applications (medical implant, aerospace, defense), add conformal coating or nickel underplate — or retain SnPb under exemption if your contract allows it.</p>
+  </div>
+
+  <h2>Manufacturing Cost Comparison</h2>
+
+  <p>Procurement managers typically focus on raw material cost — and on that metric alone, SnPb wins. But the total cost picture is more complex once you account for energy, nitrogen consumption, and scrap rates.</p>
+
+  <table class="spec-table">
+    <tr><th>Cost Factor</th><th>SnPb Assembly</th><th>SAC305 Assembly</th><th>Delta</th></tr>
+    <tr><td>Solder Paste Cost per kg</td><td>~$45</td><td>~$95</td><td>+111%</td></tr>
+    <tr><td>Reflow Energy per Panel</td><td>Baseline</td><td>~+12%</td><td>Higher peak temp</td></tr>
+    <tr><td>Nitrogen Requirement</td><td>Optional</td><td>Recommended</td><td>~$0.03/board</td></tr>
+    <tr><td>Component Cost Premium</td><td>None</td><td>+5–15% for lead-free parts</td><td>Varies by package</td></tr>
+    <tr><td>Scrap Rate (well-controlled process)</td><td>~0.3%</td><td>~0.5%</td><td>Narrower process window</td></tr>
+    <tr><td>Rework Difficulty</td><td>Easier</td><td>Harder</td><td>Higher preheat needed</td></tr>
+  </table>
+
+  <p>For a typical 4-layer PCB with 200 SMT components, the total per-board cost difference between SnPb and SAC305 is roughly <span class="data-point">$0.18–$0.35</span>, or about 3–6% of total assembly cost at medium volume. The premium is mainly in paste cost and component sourcing — not in process overhead.</p>
+
+  <h2>Mixed Assembly: When One Board Needs Both Alloys</h2>
+
+  <p>A common scenario: a design uses mostly SAC305 BGA and QFN packages but has a few legacy through-hole connectors only available with SnPb-plated leads. This creates a mixed-alloy assembly, and the reliability implications are not trivial.</p>
+
+  <p>The primary concern is <strong>low-temperature phase formation</strong>. When SAC305 and SnPb mix in a solder joint, the resulting alloy can have a melting point as low as 176°C — below both SAC305 and SnPb individually. This low-melting phase concentrates at the joint interface and becomes the weak point under thermal cycling. IPC-A-610 allows mixed assembly for Class 1 and 2 products, but recommends against it for Class 3 unless validated with thermal cycling data. If mixed assembly is unavoidable, our engineering team at Huaxing PCBA recommends:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Verify Complete Melting of the Higher-Temperature Alloy</h4>
+      <p>SAC305 must reach full liquidus during reflow — a peak temperature of ≥235°C at the joint. For mixed assemblies, profile thermocouples should be placed on the SAC305 BGA balls, not just on the board surface. X-ray inspection post-reflow (<a href="/blog/bga-assembly-guide.html">see our BGA assembly guide</a>) should confirm full ball collapse.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Run Accelerated Life Testing on First Articles</h4>
+      <p>For any mixed-alloy design going into production, thermal cycling per IPC-9701 (−40/+125°C, 500 cycles minimum) on first-article boards is the only reliable way to validate joint integrity. Cross-section at 0, 250, and 500 cycles to track IMC thickness and crack initiation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Consider Solder Paste Selection Carefully</h4>
+      <p>Using SAC305 paste with SnPb component leads produces a different joint composition than using SnPb paste with SAC305 BGA balls. The former (SAC paste + SnPb lead) tends to produce less low-temperature phase because the bulk paste dominates joint volume. Discuss with your <a href="/blog/turnkey-pcb-assembly.html">turnkey assembly partner</a> before locking the BOM.</p>
+    </div>
+  </div>
+
+  <h2>Decision Framework: Which Alloy for Which Application</h2>
+
+  <p>After two decades of industry transition, clear patterns have emerged for which applications suit each alloy family. Use this decision matrix as a starting point, not a rule — always validate with your specific reliability requirements.</p>
+
+  <table class="spec-table">
+    <tr><th>Application</th><th>Recommended Alloy</th><th>Rationale</th></tr>
+    <tr><td>Consumer electronics (phones, laptops, TVs)</td><td>SAC305</td><td>RoHS mandatory in EU/China; moderate thermal range; cost-sensitive</td></tr>
+    <tr><td>Industrial controls (PLC, motor drives)</td><td>SAC305</td><td>Long service life at stable temperature; SAC305 creep resistance advantage</td></tr>
+    <tr><td>Automotive cabin (infotainment, body control)</td><td>SAC305</td><td>RoHS applies; −40/+85°C range within SAC comfort zone</td></tr>
+    <tr><td>Automotive under-hood (ECU, ABS, transmission)</td><td>SnPb or SAC305 + mitigation</td><td>ELV exemption allows SnPb; wide thermal range favors ductility</td></tr>
+    <tr><td>Medical implantable (pacemakers, neurostim)</td><td>SnPb (exemption)</td><td>Tin whisker risk unacceptable; field reliability paramount</td></tr>
+    <tr><td>Aerospace / Defense</td><td>SnPb (MIL-PRF-38534)</td><td>Whisker risk in vacuum; extreme thermal cycling</td></tr>
+    <tr><td>Telecom infrastructure (5G base stations)</td><td>SAC305 or SN100C</td><td>Outdoor thermal cycling; SAC305 creep resistance at elevated ambient</td></tr>
+    <tr><td>LED lighting (outdoor)</td><td>SAC305</td><td>Constant elevated temperature; SAC305 intermetallic stability</td></tr>
+  </table>
+
+  <img class="article-img" src="../generated/blog-solder-reflow-line.webp" alt="Close-up macro photograph of solder joints on a populated PCB fresh from reflow oven, showing the characteristic glossy surface of properly flowed SAC305 joints under warm industrial lighting" loading="lazy">
+
+  <h2>Summary: Data Over Dogma</h2>
+
+  <p>The lead-free transition generated enormous debate, much of it shaped by early-adopter pain rather than mature-process data. Today, SAC305 assembly on well-controlled SMT lines with proper thermal profiling produces joints that equal or exceed SnPb reliability for most applications — with the clear exceptions of extreme thermal cycling and tin whisker-sensitive environments.</p>
+
+  <p>The decision should be driven by three factors in order: (1) regulatory requirement — if your market demands RoHS, the discussion is over; (2) operating environment — wide thermal range or vacuum = SnPb still has the data advantage; and (3) total cost, including the cost of a potential field failure multiplied by its probability. For the vast majority of commercial and industrial products shipping in 2026, SAC305 with standard whisker mitigation is the right choice.</p>
+
+  <p>At Huaxing PCBA, we support both alloy families across dedicated SMT lines — our SnPb and lead-free processes are physically separated to eliminate cross-contamination risk. Our reflow profiling uses 12-zone ovens with thermocouple monitoring at every joint type, and we maintain IPC-A-610 Class 3 certified inspectors on every shift. <a href="/blog/pcb-assembly-process.html">Read our full assembly process guide</a> or <a href="/blog/pcb-certifications-compliance.html">review our certifications</a> to evaluate whether we're the right partner for your next project.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+      <li><a href="/blog/pcb-rohs-compliance-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB RoHS Compliance Guide</a></li>
+      <li><a href="/blog/bga-assembly-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">BGA Assembly Guide</a></li>
+      <li><a href="/blog/pcb-certifications-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Certifications & Compliance</a></li>
+      <li><a href="/blog/turnkey-pcb-assembly.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Turnkey PCB Assembly</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-solder-alloy.webp)">
+      <h2>Need Help Selecting the Right Solder Alloy?</h2>
+      <p>Tell us about your product's operating environment and end market — our engineering team will recommend the optimal alloy and process for your reliability and compliance requirements. Get a DFM review within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
