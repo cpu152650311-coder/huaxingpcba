@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Solderability Testing Guide — J-STD-002, J-STD-003 &amp; Wetting Balance Methods | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB solderability testing guide: J-STD-002 component-level dip &amp; look, J-STD-003 board-level solderability, and wetting balance force measurement. Acceptance criteria, steam aging parameters, and how to specify solderability requirements in your PCB purchase order.">
+<meta property="og:title" content="PCB Solderability Testing — J-STD-002, J-STD-003 &amp; Wetting Balance Methods">
+<meta property="og:description" content="When poor solderability causes opens, shorts, and field failures, the root cause is almost always inadequate incoming testing. Learn the three methods that catch solderability defects before production starts.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-solderability-testing-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-solderability.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-solderability-testing-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Solderability Testing Guide — J-STD-002, J-STD-003 & Wetting Balance Methods",
+  "description": "Complete PCB solderability testing guide: J-STD-002 component-level dip & look, J-STD-003 board-level solderability, and wetting balance force measurement. Acceptance criteria, steam aging parameters, and how to specify solderability requirements in your PCB purchase order.",
+  "datePublished": "2026-07-28",
+  "dateModified": "2026-07-28",
+  "image": "https://huaxingpcba.com/generated/blog-cover-solderability.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-solderability-testing-guide.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-solderability-testing-guide.html"
+  }
+}
+</script>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-solderability.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Solderability Testing:<br><em>J-STD-002, J-STD-003 &amp; Wetting Balance Methods Explained</em></h1>
+      <p class="reveal">Poor solderability is the silent killer of PCB assembly yield — causing opens, shorts, and latent field failures that no amount of AOI or X-ray can fully catch. Here's how the three industry-standard test methods work, when to use each, and how to write solderability requirements into your procurement spec.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Solderability Testing Guide</span></div>
+
+  <p>Every PCB assembly line has seen it: a component that looks fine under the microscope, passes incoming visual inspection, but refuses to wet during reflow. The solder balls up, the joint opens, and suddenly you're chasing a <span class="data-point">15%</span> first-pass yield drop with no obvious root cause. That's solderability failure — and it's almost entirely preventable with the right incoming testing protocol.</p>
+
+  <p>At Huaxing PCBA, our <span class="data-point">8 SMT lines</span> process boards from 2 to 32 layers across automotive, medical, industrial, and telecom sectors — and solderability-related defects consistently rank among the top three causes of assembly rework when incoming inspection is skipped. This guide covers the three methods that IPC standards define for verifying solderability before a single component hits the placement machine: J-STD-002 for component terminals, J-STD-003 for PCB pads, and wetting balance analysis for when you need quantitative pass/fail data instead of subjective visual judgment.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-solderability-defects.webp" alt="Macro photography of PCB pads showing poor wetting and dewetting solder defects under inspection microscope" loading="lazy">
+
+  <!-- ── Section 1 ── -->
+  <h2>Why Solderability Testing Matters — The Cost of Skipping It</h2>
+
+  <p>Solderability is the ability of a metallic surface to be wetted by molten solder. It degrades over time as terminal finishes oxidize, intermetallic compounds grow, and contaminants accumulate. The failure mode is deceptively simple: a surface that should accept solder instead repels it. The consequences are not.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Assembly-Level Failures Cascade Quickly</h4>
+      <p>A single component with poor solderability on an <span class="data-point">8,000-placement</span> board can generate multiple open joints. On a high-mix line running 50 boards per batch, that's hundreds of rework touch-ups — each introducing thermal stress to adjacent components and risking pad lifting. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> covers the full inspection chain downstream of assembly, but none of those tests can compensate for a solderability problem at the source.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Field Failures Are 10× More Expensive Than In-Line Rework</h4>
+      <p>A marginal solder joint that passes ICT and functional test can still fail after thermal cycling in the field — especially in automotive under-hood environments ( –40°C to +125°C ) or industrial control panels with vibration exposure. Industry data from IPC shows that the cost multiplier for field failures vs. in-factory detection ranges from <span class="data-point">10×</span> for accessible consumer devices to over <span class="data-point">100×</span> for safety-critical automotive ECUs once recall logistics are factored in.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Storage Conditions Accelerate Degradation</h4>
+      <p>Components stored in non-climate-controlled warehouses in humid coastal regions — common across Shenzhen's electronics supply chain — can lose solderability in as little as <span class="data-point">6 months</span> even with sealed packaging. ENIG-finished PCBs stored beyond their 12-month shelf life develop nickel oxide layers that standard flux chemistries cannot penetrate. This is why <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection</a> protocols that include solderability testing are not optional — they're the only gate between degraded inventory and your production line.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> The cost of solderability testing is approximately $50–150 per lot — roughly the cost of reworking two BGA packages. For an annual production volume of 10,000 boards, skipping incoming solderability testing to save $1,500/year is gambling with a rework and field-return exposure that routinely exceeds $50,000.</p>
+  </div>
+
+  <!-- ── Section 2 ── -->
+  <h2>J-STD-002 — Component Terminal Solderability Testing</h2>
+
+  <p>J-STD-002 is the industry-standard test method for evaluating the solderability of component terminations — leads, terminations, solder balls, and castellations on SMD and through-hole parts. It's a "dip and look" test: immerse the component terminal in molten solder, then visually inspect for wetting coverage. The standard is jointly published by IPC and EIA, and it's referenced by virtually every major OEM procurement specification.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-solderability-dip-test.webp" alt="Industrial photography of a PCB component being dipped into molten solder pot for J-STD-002 solderability testing in quality control laboratory" loading="lazy">
+
+  <h3>Test Categories and Steam Aging Requirements</h3>
+
+  <p>J-STD-002 defines four test categories based on the intended assembly process and reliability requirements. The key differentiator is steam aging duration — a controlled oxidation step that simulates the natural degradation components experience during storage.</p>
+
+  <table class="spec-table">
+    <tr><th>Category</th><th>Steam Aging</th><th>Assembly Process</th><th>Typical Application</th></tr>
+    <tr><td>Category 1</td><td>None (as-received)</td><td>Reflow or wave solder</td><td>Just-in-time production, fresh inventory</td></tr>
+    <tr><td>Category 2</td><td>8 hours ±15 min</td><td>Reflow or wave solder</td><td>Standard production — most common spec</td></tr>
+    <tr><td>Category 3</td><td>8 hours ±15 min</td><td>Wave solder only (more aggressive flux)</td><td>Through-hole components, lower activation flux</td></tr>
+    <tr><td>Category 4</td><td>16 hours ±15 min</td><td>Reflow or wave solder</td><td>High-reliability: automotive, medical, aerospace</td></tr>
+  </table>
+
+  <p>Steam aging is performed at <span class="data-point">93°C ± 3°C</span> with deionized water. After aging, components are dried and tested within 72 hours. The 16-hour Category 4 aging is roughly equivalent to 12–18 months of ambient storage in an uncontrolled environment — which is exactly the scenario many procurement teams face when components sit in inventory between purchase order placement and actual PCBA production.</p>
+
+  <h3>Acceptance Criteria: What "Good" Looks Like</h3>
+
+  <p>After immersion (typically 4–5 seconds at 245°C ± 5°C for SnPb or 255°C for lead-free SAC305), the component is inspected under 10× magnification. The pass/fail standard is unambiguous:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✓</div>
+    <div class="checklist-content">
+      <h4>Pass: ≥ 95% of the immersed surface area shows clean, continuous solder coating</h4>
+      <p>The solder must form a smooth, uniform film with a contact angle below 90°. The meniscus should be concave, indicating good wetting. Small pinholes or voids occupying less than 5% of the total area are acceptable, provided they don't concentrate at a single connection point.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">✗</div>
+    <div class="checklist-content">
+      <h4>Fail: Non-wetting, dewetting, or &lt; 95% coverage</h4>
+      <p>Non-wetting appears as bare base metal with solder balled up nearby — the surface simply refuses to accept solder. Dewetting shows irregular patches where solder initially coated the surface then retreated, leaving a thin film with thick solder ridges at the edges. Both are rejection criteria regardless of coverage percentage. For SMD components with multiple terminations, every single termination must individually meet the 95% threshold.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> J-STD-002 is a qualitative test — it tells you pass or fail, but not how close to the edge a passing part is. For mission-critical applications where you need numerical margin data, wetting balance testing (covered below) provides quantitative force measurements that let you track solderability degradation trends over time.</p>
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>J-STD-003 — Board-Level Solderability Testing</h2>
+
+  <p>J-STD-003 addresses solderability from the board side — specifically the pads, lands, and plated through-holes on bare PCBs. While J-STD-002 tests whether your components will solder, J-STD-003 tests whether your boards are ready to receive them. Both are necessary; neither is sufficient alone.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-solderability-steam-aging.webp" alt="Environmental steam aging chamber with PCB test coupons for accelerated solderability degradation testing to J-STD-003 standard" loading="lazy">
+
+  <h3>Why PCB Solderability Degrades Over Time</h3>
+
+  <p>PCB surface finishes are chemically active by design. The entire purpose of ENIG, immersion silver, and OSP is to present a clean, oxidation-free surface for soldering. But that surface is thermodynamically unstable — it wants to react with oxygen, sulfur, and moisture in the air. The degradation timeline depends heavily on the finish chemistry:</p>
+
+  <table class="spec-table">
+    <tr><th>Surface Finish</th><th>Typical Shelf Life (Sealed)</th><th>Degradation Mechanism</th><th>Field Failure Mode</th></tr>
+    <tr><td>ENIG (Electroless Nickel Immersion Gold)</td><td>12 months</td><td>Nickel oxidation through gold pores, NiO layer formation</td><td>Black pad syndrome, brittle intermetallic</td></tr>
+    <tr><td>Immersion Silver</td><td>6–9 months</td><td>Silver sulfide tarnish from airborne sulfur</td><td>Non-wetting, high contact resistance</td></tr>
+    <tr><td>OSP (Organic Solderability Preservative)</td><td>6 months (1 reflow)</td><td>OSP film degradation, copper oxidation</td><td>Dewetting on second-side reflow, poor hole fill</td></tr>
+    <tr><td>Immersion Tin</td><td>6 months</td><td>Tin whisker growth, Cu-Sn IMC thickening</td><td>Shorts (whiskers), non-wetting at thin-tin areas</td></tr>
+    <tr><td>HASL (Lead-Free)</td><td>12+ months</td><td>Surface oxidation, planarization issues</td><td>Uneven wetting on fine-pitch pads</td></tr>
+  </table>
+
+  <p>Our <a href="/blog/enig-vs-hasl.html">ENIG vs HASL comparison guide</a> and <a href="/blog/pcb-surface-finish-selection.html">PCB surface finish selection guide</a> cover the trade-offs in detail. The critical point for J-STD-003 is that <strong>every</strong> finish degrades — the question is how fast and whether your incoming inspection catches it.</p>
+
+  <h3>J-STD-003 Test Method and Acceptance Criteria</h3>
+
+  <p>Like J-STD-002, the board-level standard uses a dip-and-look methodology with steam aging as a preconditioning step. Test coupons or actual production boards are dipped into molten solder using a dip-and-look or solder float method:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Edge Dip Method (Most Common for Production QC)</h4>
+      <p>A test coupon with representative pads is dipped vertically into a solder pot at <span class="data-point">255°C</span> (lead-free) to a depth of 2–5mm for 4–5 seconds. After cooling, the dipped edge is inspected under 10× magnification. This is the fastest method and is suitable for routine lot acceptance testing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Solder Float Method (For Through-Hole PTH Integrity)</h4>
+      <p>The board floats on a molten solder bath at <span class="data-point">260°C</span> for 10 seconds, testing both pad solderability and plated through-hole integrity. This method also serves as a thermal stress test — delamination or barrel cracking during float is an automatic rejection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Acceptance: Clean Wetting with Full Pad Coverage</h4>
+      <p>Per J-STD-003, the solder must cover the entire pad surface with a smooth, bright coating. Any evidence of non-wetting or dewetting on pads designated as solderable is a failure. The standard also specifies that plated through-holes must show solder rise through the barrel — a critical check that many labs skip.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> If you're sourcing PCBs from a supplier that stores bare boards for more than 3 months before assembly, specifically request J-STD-003 Category 3 testing (8-hour steam aging) on each incoming lot. Boards with OSP finish should be tested per-lot regardless of storage duration — OSP degradation is faster and less predictable than metallic finishes.</p>
+  </div>
+
+  <!-- ── Section 4 ── -->
+  <h2>Wetting Balance Testing — The Quantitative Alternative</h2>
+
+  <p>While dip-and-look tests are simple and widely used, they have an inherent limitation: they're subjective. Two inspectors can look at the same 95%-coverage pad and disagree on pass/fail. When you need objective, repeatable data — for process capability studies, supplier qualification, or high-reliability traceability — wetting balance testing provides numerical force measurements that remove human judgment from the equation.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-solderability-wetting-balance.webp" alt="Professional wetting balance solderability test machine with force sensor measuring specimen immersion into solder bath" loading="lazy">
+
+  <h3>How Wetting Balance Works</h3>
+
+  <p>A wetting balance measures the vertical force exerted on a specimen as it's immersed into and withdrawn from a molten solder bath. The instrument records force (in millinewtons) against time, producing a characteristic curve:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Initial Buoyancy Phase (t₀ to t₁)</h4>
+      <p>As the specimen enters the solder, buoyancy pushes it upward — the force reading goes positive. This phase typically lasts less than <span class="data-point">0.2 seconds</span> for clean surfaces and verifies that the instrument is calibrated correctly.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Wetting Transition (t₁ to t₂)</h4>
+      <p>The solder begins to wet the specimen surface. The upward buoyancy force transitions to a downward wetting force as the molten solder pulls on the specimen through surface tension. The slope and smoothness of this transition are direct indicators of wetting speed. A fast, smooth transition = excellent solderability; a slow, erratic transition = marginal.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Equilibrium Wetting Force (t₂ onward)</h4>
+      <p>The wetting force stabilizes at its maximum value, representing the full wetting of the immersed surface. The key measurement is <strong>F<sub>max</sub></strong> — maximum wetting force at equilibrium. Higher F<sub>max</sub> = better wetting. The time to reach 2/3 of F<sub>max</sub> (T<sub>2/3</sub>) is the most commonly reported metric for wetting speed.</p>
+    </div>
+  </div>
+
+  <h3>What Good vs. Bad Wetting Balance Curves Look Like</h3>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Excellent Solderability</th><th>Marginal (Investigate)</th><th>Fail (Reject)</th></tr>
+    <tr><td>F<sub>max</sub> (relative to theoretical)</td><td>&gt; 90%</td><td>70–90%</td><td>&lt; 70%</td></tr>
+    <tr><td>T<sub>2/3</sub> (wetting speed)</td><td>&lt; 1.0 second</td><td>1.0–2.0 seconds</td><td>&gt; 2.0 seconds</td></tr>
+    <tr><td>Curve shape</td><td>Smooth, monotonic, no inflections</td><td>Minor irregularities, hesitations</td><td>Erratic, multiple zero-crossings, no clear equilibrium</td></tr>
+    <tr><td>Reproducibility (σ on 5 samples)</td><td>&lt; 5% of F<sub>max</sub></td><td>5–15% of F<sub>max</sub></td><td>&gt; 15% of F<sub>max</sub></td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>When to Require Wetting Balance Instead of Dip &amp; Look:</strong> (1) Supplier qualification — you need numerical baseline data to compare vendors objectively. (2) Process capability studies (Cpk) — you can't calculate statistical process control limits from pass/fail visual data. (3) Root cause analysis — when a lot fails dip-and-look, wetting balance tells you whether the problem is wetting force, wetting speed, or both. (4) High-reliability traceability — automotive customers increasingly require wetting balance data in PPAP documentation as evidence of process control.</p>
+  </div>
+
+  <!-- ── Section 5 ── -->
+  <h2>How to Include Solderability Requirements in Your PCB Purchase Order</h2>
+
+  <p>Writing solderability testing into your procurement specification is the single highest-leverage action you can take to reduce assembly defects. A well-written solderability clause on a purchase order doesn't just communicate expectations — it creates legal and commercial accountability for your supplier to perform the testing. Here's what to specify:</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-solderability-comparison.webp" alt="Side-by-side macro comparison of good solder wetting versus poor dewetting on PCB pads after solderability testing" loading="lazy">
+
+  <table class="spec-table">
+    <tr><th>Requirement Element</th><th>Recommended Specification</th><th>Why It Matters</th></tr>
+    <tr><td>Test Standard (Components)</td><td>J-STD-002, Category 2 minimum; Category 4 for automotive/medical</td><td>Ensures steam aging is performed; "as-received" testing is nearly worthless</td></tr>
+    <tr><td>Test Standard (PCBs)</td><td>J-STD-003, edge dip method, per-lot testing</td><td>Catches batch-to-batch finish variations; per-lot is non-negotiable for OSP</td></tr>
+    <tr><td>Inspection Frequency</td><td>100% of incoming lots; sample size per ANSI/ASQ Z1.4, AQL 0.65 Level II</td><td>AQL 0.65 is tight enough to catch infrequent defects; Level II provides adequate sample sizes for production lots</td></tr>
+    <tr><td>Acceptance Criteria</td><td>≥ 95% wetting coverage, no non-wetting or dewetting on any termination or pad</td><td>Removes ambiguity — zero tolerance for non-wetting regardless of coverage elsewhere</td></tr>
+    <tr><td>Wetting Balance (if required)</td><td>F<sub>max</sub> ≥ 90% theoretical, T<sub>2/3</sub> ≤ 1.0s, report per lot</td><td>Adds $200–400/lot but provides numerical traceability for PPAP</td></tr>
+    <tr><td>Documentation</td><td>Test report with lot number, date, steam aging duration, results per sample, inspector sign-off</td><td>Creates audit trail; critical for <a href="/blog/pcb-supplier-audit.html">supplier audits</a></td></tr>
+  </table>
+
+  <h3>Questions to Ask Your PCB Supplier About Solderability</h3>
+
+  <p>Before placing an order, verify that your supplier has the capability and the process discipline to perform these tests. The answers to these questions reveal more about quality culture than any certificate on the wall:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>"Do you have an in-house solderability lab, or do you outsource?"</h4>
+      <p>In-house capability means faster turnaround and tighter integration with production. Outsourced testing adds 2–5 days and creates a gap between test results and lot release. At Huaxing PCBA, our in-house lab performs J-STD-002/003 testing as part of our <a href="/blog/pcb-incoming-quality-inspection.html">IQC (Incoming Quality Control)</a> process, with results linked directly to lot traceability in our MES system.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>"What steam aging equipment do you use, and how do you verify chamber uniformity?"</h4>
+      <p>A steam aging chamber with temperature gradients can produce false passes — one coupon ages properly while another in a cooler zone doesn't. The chamber should have multiple thermocouples and temperature uniformity within ±1°C across all coupon positions. This level of detail is exactly what a <a href="/blog/pcb-supplier-audit.html">comprehensive supplier audit</a> should verify on-site.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>"What is your disposition process for a failed lot — do you notify the customer before rework or scrap?"</h4>
+      <p>This is the acid test of quality transparency. A supplier who retests in-house without notifying you is hiding failure data. The correct process: fail notification within 24 hours → root cause analysis → corrective action plan → customer approval before lot disposition. This is especially critical for boards covered by <a href="/blog/ipc-standards-comparison.html">IPC Class 3</a> requirements, where traceability to the lot level is mandatory.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>"Can you provide wetting balance data if our end customer requires it for PPAP?"</h4>
+      <p>Not every project needs wetting balance, but the supplier should have access to the equipment — either in-house or through an accredited partner lab. If the answer is "we don't offer that," it's a signal that the supplier's quality infrastructure may not support the documentation demands of automotive or medical OEMs.</p>
+    </div>
+  </div>
+
+  <!-- ── Summary ── -->
+  <h2>The Bottom Line: Solderability Testing Pays for Itself</h2>
+
+  <p>Solderability testing sits at an uncomfortable intersection in PCB procurement: it's not legally required (unlike UL or RoHS), it adds upfront cost and lead time, and its value is invisible when it works — because nothing went wrong. But the data is clear: the cost of one recall, one field-return investigation, or even one production line stoppage exceeds years of solderability testing budgets. For any project shipping to an OEM that cares about reliability — and increasingly, that's every OEM — J-STD-002, J-STD-003, and wetting balance testing are not optional line items. They're the cheapest insurance policy in electronics manufacturing.</p>
+
+  <p>At Huaxing PCBA, solderability testing is integrated into our standard IQC workflow for every incoming component lot and PCB batch. Our in-house lab runs J-STD-002/003 with programmable steam aging chambers, and we provide wetting balance data on request for PPAP packages. Coupled with <a href="/blog/pcb-testing-methods.html">full-spectrum electrical and AOI testing</a> and <a href="/blog/pcb-pre-shipment-inspection.html">pre-shipment inspection</a>, our quality chain is designed to catch solderability issues before they reach the placement machine — not after. <a href="/contact/">Contact our engineering team</a> to discuss solderability requirements for your next project, or <a href="/blog/pcb-supplier-audit.html">read our supplier audit guide</a> to learn how to evaluate any PCB manufacturer's quality infrastructure.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-solderability.webp)">
+      <h2>Need Solderability Testing on Your Next PCB Order?</h2>
+      <p>Get J-STD-002 / J-STD-003 testing included as standard with every production lot — plus wetting balance data on request for PPAP documentation. Upload your Gerber files and BOM for a 24-hour quote with free DFM review.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Quote With Testing <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods — Full Guide</a></li>
+      <li><a href="/blog/pcb-incoming-quality-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Incoming Quality Inspection</a></li>
+      <li><a href="/blog/pcb-surface-finish-selection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Surface Finish Selection Guide</a></li>
+      <li><a href="/blog/enig-vs-hasl.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">ENIG vs HASL — Surface Finish Comparison</a></li>
+      <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit Checklist</a></li>
+      <li><a href="/blog/ipc-standards-comparison.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Standards Comparison</a></li>
+      <li><a href="/blog/pcb-pre-shipment-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Pre-Shipment Inspection Guide</a></li>
+    </ul>
+  </div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

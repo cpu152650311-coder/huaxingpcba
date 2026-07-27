@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Interpret PCB Cross-Section &amp; Microsection Reports — A Buyer's Visual Guide | Huaxing PCBA</title>
+<meta name="description" content="Learn how to read PCB cross-section and microsection reports like a quality engineer. Visual guide to spotting plating voids, IMC layer issues, inner-layer separation, and IPC-A-600 acceptance criteria.">
+<meta property="og:title" content="How to Interpret PCB Cross-Section &amp; Microsection Reports — A Buyer's Visual Guide">
+<meta property="og:description" content="Learn how to read PCB cross-section reports like a quality engineer. Spot plating voids, IMC defects, and verify IPC-A-600 compliance before accepting a shipment.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-cross-section-report-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-cross-section-report-guide.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-cross-section-report-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Interpret PCB Cross-Section & Microsection Reports — A Buyer's Visual Guide",
+  "description": "Learn how to read PCB cross-section and microsection reports like a quality engineer. Visual guide to spotting plating voids, IMC layer issues, inner-layer separation, and IPC-A-600 acceptance criteria.",
+  "datePublished": "2026-07-28",
+  "dateModified": "2026-07-28",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-cross-section-report-guide.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-cross-section-report-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-cross-section-report-guide.html" }
+}
+</script>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pcb-cross-section-report-guide.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">PCB Quality &amp; Inspection</p>
+      <h1 class="reveal">How to Read a PCB Cross-Section Report:<br><em>A Buyer's Visual Guide to Metallographic Microsection Images</em></h1>
+      <p class="reveal">A practical guide to interpreting microsection images, spotting quality defects, and verifying IPC-A-600 compliance — so you can make informed acceptance decisions without being a metallurgist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Cross-Section Report Guide</span></div>
+
+  <p>When you receive a PCB shipment, visual inspection tells you surface-level quality — solder mask alignment, silkscreen legibility, pad cleanliness. But the structures that determine long-term reliability are buried inside the board, invisible to any camera or AOI system. The only way to see them is destructive: cutting a cross-section, mounting it in epoxy, polishing it to a mirror finish, and examining it under a metallographic microscope. This is the cross-section report — and if you are buying PCBs from overseas, it is the single most powerful quality verification tool you have.</p>
+
+  <p>A cross-section report reveals what no other QC method can: the actual copper thickness inside every via, the uniformity of plating, the integrity of inner-layer bonds, and the quality of the intermetallic compound (IMC) layer at every solder joint. At Huaxing PCBA, we perform cross-section analysis as part of our standard quality control for <span class="data-point">100%</span> of production lots requiring IPC Class 2 or Class 3 certification, using calibrated metallographic microscopes with digital measurement systems capable of resolving features down to <span class="data-point">0.1 µm</span>. If your supplier sends you a microsection report, you need to know what you are looking at — because a report that looks professional can still mask serious quality problems.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-pcb-cross-section-report-guide-pth.webp" alt="3D cross-section render of plated through-hole showing copper barrel, capture pad, and dielectric layers in a multilayer PCB" loading="lazy">
+
+  <!-- ── Section 1 ── -->
+  <h2>What a Cross-Section Report Tells You (That Other QC Reports Don't)</h2>
+
+  <p>Most PCB quality reports focus on what can be measured non-destructively: electrical continuity, impedance values, dimensional accuracy, and visual appearance under AOI. These are necessary but insufficient. A board can pass flying-probe test with perfect electrical continuity and still fail in the field within months — because the copper inside a via was too thin, or a micro-void was waiting to become a crack under thermal cycling.</p>
+
+  <p>Cross-section analysis is the gold standard for internal quality verification precisely because it is destructive and direct. Instead of inferring internal quality from surface measurements, you physically cut the board open and look. Here is what a well-executed cross-section report gives you that other QC methods cannot:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Actual Plating Thickness (Not Design-Nominal)</h4>
+      <p>Your Gerber file specifies a finished hole size and copper weight, but the actual plated thickness inside a via depends on bath chemistry, current density distribution, and aspect ratio effects. A cross-section lets you measure the copper barrel wall directly at multiple points along the hole — typically top, middle, and bottom. IPC-A-600 specifies minimum average plating thickness of <strong>20 µm</strong> for Class 2 and <strong>25 µm</strong> for Class 3. If your supplier's process drifts below these thresholds, only a cross-section catches it. See our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 comparison</a> for the full acceptance criteria breakdown.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Inner-Layer Registration Accuracy</h4>
+      <p>In a multilayer board, each inner layer must align precisely with every other layer. Misregistration of even <strong>50 µm</strong> can cause annular ring breakout — where the drilled hole misses the inner-layer pad, reducing or eliminating the electrical connection. Cross-section images show the relationship between the drilled hole and every inner-layer pad in a single field of view, making misregistration instantly visible. This is particularly critical for <a href="/blog/pcb-microsection-analysis-guide.html">HDI and high-layer-count boards</a> where annular ring margins are tight by design.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>IMC Layer Thickness at Solder Joints</h4>
+      <p>When solder wets a copper pad, an intermetallic compound layer forms at the interface — primarily Cu<sub>6</sub>Sn<sub>5</sub> and Cu<sub>3</sub>Sn. This IMC is essential for a strong bond, but the thickness matters enormously. Too thin (&lt;0.5 µm) means insufficient wetting and a mechanically weak joint. Too thick (&gt;4 µm) means the joint has become brittle and will crack under thermal stress. Cross-section microscopy at 500× to 1000× magnification lets you measure the IMC layer directly — information no electrical test can provide.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Dielectric Integrity Between Layers</h4>
+      <p>The FR-4 or high-speed laminate between copper layers is supposed to be a solid, continuous insulator. Cross-sections reveal whether delamination, resin-starved areas, or glass-fiber protrusion has compromised that insulation. These defects are invisible from the outside and cannot be detected by flying-probe or ICT — but they create paths for conductive anodic filament (CAF) growth that leads to field failures months later. Our <a href="/blog/pcb-failure-analysis-guide.html">PCB failure analysis guide</a> covers CAF mechanisms in detail.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> A cross-section report is the only QC document that directly measures internal copper quality, registration accuracy, IMC integrity, and dielectric condition. If your supplier does not provide cross-section reports — or provides them without actual micrograph images and measurements — you are flying blind on internal quality.</p>
+  </div>
+
+  <!-- ── Section 2 ── -->
+  <h2>The 5 Critical Structures Every Cross-Section Examines</h2>
+
+  <p>When you open a cross-section report, the images will show polished PCB slices at magnifications ranging from 50× (overview) to 1000× (detail). A competent report systematically examines five structures. Knowing what each one should look like turns you from a passive report recipient into an informed quality gatekeeper.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-pcb-cross-section-report-guide-coupons.webp" alt="Five PCB cross-section coupons mounted in clear epoxy resin, polished and ready for metallographic microscopy inspection" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>PTH Copper Plating Thickness &amp; Uniformity</h4>
+      <p>This is the most common measurement. Under the microscope, the plated through-hole barrel appears as a bright copper ring. A good PTH shows uniform thickness from top to bottom with no thinning at the knee (where the barrel meets the surface pad). The minimum average copper thickness must meet IPC-A-600 requirements: <strong>20 µm (Class 2) or 25 µm (Class 3)</strong>, with no single measurement point below <strong>18 µm or 20 µm</strong> respectively. Aspect ratio matters — vias deeper than 8:1 (hole depth ÷ diameter) are harder to plate uniformly, and cross-sections of these should be scrutinized most carefully.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Via Fill Quality (for Filled &amp; Capped Vias)</h4>
+      <p>HDI boards and high-reliability designs often use filled and capped vias — where the hole is plugged with conductive or non-conductive epoxy and then plated over. Cross-section examination reveals whether the fill material is void-free and fully cured, whether it has adhered to the hole wall, and whether the cap plating is continuous and properly bonded. Even small voids in via fill act as moisture traps and stress concentrators during reflow — <a href="/blog/pcb-microsection-analysis-guide.html">our microsection analysis guide</a> shows examples of both good and defective via fill cross-sections.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Inner-Layer Registration (Annular Ring)</h4>
+      <p>For each drilled hole that connects to an inner-layer pad, the cross-section should show the hole centered on the pad with adequate annular ring remaining on both sides. IPC-A-600 Class 2 allows <strong>90° breakout</strong> (the hole edge can touch the pad edge, but the connection must still exist), while Class 3 requires a minimum <strong>50 µm annular ring</strong> with no breakout permitted. Cross-sections through vias in different board regions (center vs. edge) reveal whether registration drift is uniform or localized — the latter suggesting a lamination or drilling setup problem.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Solder Joint IMC Layer</h4>
+      <p>At high magnification (500×–1000×), the intermetallic compound layer appears as a thin, continuous band between the solder and the copper pad. A healthy IMC is <strong>1–3 µm thick</strong>, uniform, and scallop-shaped (for Sn-based solders). If the IMC is too thin, the joint may not have formed properly — suspect insufficient reflow time or temperature. If it is too thick (especially if dominated by Cu<sub>3</sub>Sn rather than Cu<sub>6</sub>Sn<sub>5</sub>), the joint has been over-aged and is brittle. This is a common issue with boards that have undergone multiple reflow cycles.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Dielectric Thickness Between Layers</h4>
+      <p>The insulating material between copper layers must meet the minimum thickness specified in the stackup. Cross-section measurement verifies this directly. This is particularly important for controlled-impedance designs, where dielectric thickness directly affects the impedance value. A deviation of more than <strong>±10%</strong> from the designed prepreg/core thickness can shift impedance outside the specified tolerance. Our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection guide</a> includes a checklist for verifying stackup conformance from cross-section data.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>How to Spot Red Flags in Microsection Images</h2>
+
+  <p>Even if you are not a trained metallurgist, certain defects in cross-section images are visually obvious once you know what to look for. Here are the six most common red flags — and what each one means for board reliability.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-pcb-cross-section-report-guide-good-pth.webp" alt="Cross-section of a perfectly formed plated through-hole with uniform thick copper barrel plating and smooth inner surface" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Voids in Copper Plating</h4>
+      <p>Voids appear as dark spots or gaps inside the copper barrel wall. Small isolated voids (&lt;10% of the wall cross-section) may be acceptable under Class 2, but any void that spans more than <strong>25% of the copper thickness</strong> is a reject per IPC-A-600 for Class 3. Clusters of small voids are equally concerning — they indicate poor plating bath chemistry or contamination. When you see voids, ask whether the report includes measurements of void size relative to wall thickness, not just the presence/absence of voids.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Cracks or Knee Fractures at Via Base</h4>
+      <p>The transition where the plated barrel meets the surface pad (the "knee") is the highest-stress point in a PTH. Under thermal cycling, the CTE mismatch between copper (~17 ppm/°C) and FR-4 (~14 ppm/°C in Z-axis) concentrates stress here. Cracks visible in the cross-section at this location — even hairline cracks — indicate that the barrel is on the path to fatigue failure. For high-reliability applications, any visible crack at the knee is cause for lot rejection, regardless of Class designation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Inner-Layer Separation (Delamination)</h4>
+      <p>Delamination appears as a dark gap or line between a copper foil and the adjacent dielectric layer — or between prepreg layers within the dielectric itself. It is unmistakable under the microscope: instead of a clean, continuous interface, you see a physical separation. Causes include insufficient lamination pressure or temperature, contaminated copper surfaces before lamination, or moisture trapped in the prepreg. Delamination is a zero-tolerance defect for all IPC classes — even a small separation is grounds for lot rejection and should trigger a <a href="/blog/pcb-failure-analysis-guide.html">full failure analysis investigation</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>IMC Too Thick or Too Thin</h4>
+      <p>Under 1000× magnification, the IMC layer should be visible but not dominant. If the IMC appears as a thick, dark band that occupies more than <strong>25%</strong> of the total joint thickness, the joint is over-aged — expect brittle fracture under mechanical stress. If you cannot see a distinct IMC layer at all (or it is thinner than 0.5 µm), the solder never properly wet the copper — this is a cold joint that may be electrically connected but mechanically unsound. Both conditions are reliability risks that electrical test alone cannot detect.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-pcb-cross-section-report-guide-defect-pth.webp" alt="Defective plated through-hole cross-section showing thin uneven copper plating with visible voids and dark spots indicating poor plating quality" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Resin Recession</h4>
+      <p>Resin recession appears as a withdrawal of the dielectric material away from the copper plating inside the hole — you will see a dark gap between the copper barrel and the surrounding laminate. This is typically caused by aggressive desmear or etchback processes that remove too much resin. Resin recession creates a stress concentration point and a potential path for plating solution entrapment, which leads to corrosion over time. IPC-A-600 limits resin recession to <strong>80 µm maximum depth</strong> for Class 2 and <strong>50 µm</strong> for Class 3.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Wicking</h4>
+      <p>Wicking is the absorption of plating solution or moisture along the glass fibers that protrude from the drilled hole wall. Under the microscope, it appears as dark, finger-like projections extending outward from the copper barrel into the dielectric — following the glass weave pattern. Wicking exceeding <strong>100 µm (Class 2) or 80 µm (Class 3)</strong> is a reject because it creates conductive paths between adjacent vias or layers, eventually leading to CAF failure. This defect is particularly common in boards with high glass-transition-temperature (Tg) materials processed at aggressive drill parameters.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> Never accept a cross-section report that shows only "good" images. A credible supplier's report will include at least one "worst-case" coupon — the thinnest plating, the deepest resin recession, the most marginal annular ring — with measurements demonstrating that even the worst case meets your acceptance criteria. Reports showing only pristine images suggest selective sampling, which is itself a red flag worth investigating in your next <a href="/blog/pcb-supplier-audit.html">supplier audit</a>.</p>
+  </div>
+
+  <!-- ── Section 4 ── -->
+  <h2>IPC-A-600 Acceptance Criteria for Cross-Sections</h2>
+
+  <p>IPC-A-600 (Acceptability of Printed Boards) is the industry-standard reference for interpreting cross-section images. It defines what is acceptable for Class 1 (general electronic products), Class 2 (dedicated service), and Class 3 (high reliability). For most B2B PCB buyers, the relevant comparison is Class 2 vs. Class 3. Here is what the standard says about the key cross-section measurements:</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Class 2 (Dedicated Service)</th><th>Class 3 (High Reliability)</th></tr>
+    <tr><td>Minimum avg. copper in PTH</td><td>20 µm</td><td>25 µm</td></tr>
+    <tr><td>Minimum copper at any point</td><td>18 µm</td><td>20 µm</td></tr>
+    <tr><td>Wrap plating (surface to knee)</td><td>Not required</td><td>Required, 25 µm min</td></tr>
+    <tr><td>Annular ring (internal layers)</td><td>90° breakout permitted</td><td>50 µm min, no breakout</td></tr>
+    <tr><td>Voids in copper (max size)</td><td>Not specified (by agreement)</td><td>&lt;25% of wall thickness</td></tr>
+    <tr><td>Resin recession (max depth)</td><td>80 µm</td><td>50 µm</td></tr>
+    <tr><td>Wicking (max length)</td><td>100 µm</td><td>80 µm</td></tr>
+    <tr><td>IMC layer thickness</td><td>Continuous &amp; uniform</td><td>1–3 µm, scallop-shaped</td></tr>
+  </table>
+
+  <p>The critical difference between Class 2 and Class 3 is <strong>wrap plating</strong>. Class 3 requires that the copper plating extends continuously from the hole barrel onto the surface of the external pad — this wrap provides mechanical anchoring that prevents barrel cracking under thermal stress. Class 2 does not mandate wrap plating, which means a Class 2 board can have the copper barrel terminate at the knee (the junction of the hole wall and the internal surface of the pad) with no extension onto the external pad surface. If your application involves thermal cycling, vibration, or long service life, specifying Class 3 with wrap plating verification in the cross-section report is essential — and our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 guide</a> covers every difference that matters for procurement decisions.</p>
+
+  <img class="article-img" style="max-width:85%" src="../generated/blog-pcb-cross-section-report-guide-microscope.webp" alt="Professional metallographic microscope with PCB cross-section sample positioned on the stage for quality control inspection" loading="lazy">
+
+  <p>When reviewing a cross-section report against IPC-A-600, pay attention to what the report <em>does not</em> include. A complete report should state: (1) the IPC class being verified, (2) the magnification used for each measurement, (3) the specific IPC-A-600 paragraph(s) referenced for each accept/reject decision, and (4) whether the measurements are from production coupons or from the actual production board. Coupon-based measurements are standard practice, but the coupon must be from the same production panel as your boards — not a generic test coupon from a different run. This is a detail you should verify during <a href="/blog/pcb-supplier-audit.html">supplier audits</a>.</p>
+
+  <!-- ── Section 5 ── -->
+  <h2>What to Ask Your PCB Supplier About Their Cross-Section Process</h2>
+
+  <p>Not all cross-section reports are created equal. The quality and credibility of a report depend heavily on the supplier's sampling methodology, microscope calibration, and reporting discipline. Before you rely on a supplier's cross-section data for acceptance decisions, ask these five questions:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>What Is Your Sampling Frequency?</h4>
+      <p>Cross-section analysis is destructive — you cannot test every board. The industry norm is one coupon per panel, with one panel sampled per production lot. For high-reliability lots (aerospace, medical, automotive), ask for <strong>one coupon from the first panel and one from the last panel</strong> of the run — this captures any process drift during the production batch. If your supplier samples only one coupon per lot from a single panel, you have no visibility into variation within the lot. For reference, Huaxing PCBA's standard sampling for Class 3 lots follows IPC-6012 frequency tables, with additional coupons taken from panel edges where plating uniformity is hardest to maintain.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Where Are the Coupons Located on the Panel?</h4>
+      <p>Plating thickness and registration accuracy vary across a production panel — edges typically see different current density than the center during electroplating, and thermal gradients during lamination affect registration differently at corners vs. center. A credible cross-section report identifies the coupon location (e.g., "Panel A, position C-3, left edge"). If the report does not specify coupon location, assume the supplier sampled from the most favorable position — and ask for edge-position coupons on your next order. This is one of the most common shortcuts we uncover during <a href="/blog/pcb-supplier-audit.html">on-site supplier assessments</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>What Magnification and Calibration Standard Are You Using?</h4>
+      <p>Copper thickness measurements at 200× and 500× can differ by several microns due to edge detection differences at different magnifications. A professional lab uses a calibrated stage micrometer to verify the microscope's measurement scale before each session, and the report should state the calibration standard (e.g., "NIST-traceable stage micrometer, calibrated 2026-06-15"). For IMC layer measurements, magnification below 500× is insufficient — the IMC band is too thin for accurate measurement at lower magnification.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Do You Include Micrograph Images With Scale Bars?</h4>
+      <p>A report that lists copper thickness numbers without the corresponding micrograph images is essentially unverifiable. Every measurement should be accompanied by a labeled micrograph showing exactly where the measurement was taken, with a visible scale bar. Without this, you cannot verify whether the measurement was taken at the thinnest point of the copper barrel (as IPC-A-600 requires) or at a conveniently thicker location. For your <a href="/blog/pcb-pre-shipment-inspection.html">pre-shipment inspection</a>, insist on image-supported measurements — not just a table of numbers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>What Does a Complete Report Include?</h4>
+      <p>A credible cross-section report should contain, at minimum: micrograph images with scale bars for every measurement; a summary table comparing measured values to the specified IPC class limits; identification of the specific production lot, panel, and coupon location; the microscope model and calibration date; the name of the technician who performed the analysis; and an explicit accept/reject statement for each measured parameter. If your supplier's report is missing any of these elements, treat it as a starting point for discussion — not as a final quality certificate. Our <a href="/blog/pcb-incoming-quality-inspection.html">incoming inspection guide</a> provides a complete checklist for evaluating third-party QC documentation.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> A supplier that is transparent about its cross-section process — sharing coupon locations, calibration records, and worst-case images — is demonstrating the quality culture you want in a long-term manufacturing partner. The suppliers who push back on these questions or provide only summary numbers without supporting images are the ones whose cross-section reports you should verify independently.</p>
+  </div>
+
+  <!-- ── Closing Section ── -->
+  <h2>Summary: Using Cross-Section Reports to Make Better Buying Decisions</h2>
+
+  <p>Cross-section analysis is not an academic exercise — it is a practical tool that directly affects whether the boards you buy will survive soldering, thermal cycling, and years of field operation. The key insight is this: <strong>electrical test confirms what is connected; cross-section analysis confirms what will stay connected.</strong></p>
+
+  <p>The three most important things to take away from any cross-section report are: (1) copper plating thickness and uniformity in the PTH barrel — this is your primary defense against barrel fatigue; (2) the condition of the IMC layer at solder joints — this determines mechanical strength through every thermal cycle; and (3) the absence of delamination, resin recession, and wicking — these are the early warning signs of insulation failure that electrical test cannot see until it is too late.</p>
+
+  <p>At Huaxing PCBA, we include cross-section analysis as a standard deliverable for all IPC Class 2 and Class 3 production orders, with images, scale bars, and IPC-A-600 compliance statements for every measured parameter. Our metallographic laboratory maintains NIST-traceable calibration, and our quality team performs cross-section verification on every production lot — not just first-article samples. <a href="/blog/pcb-supplier-audit.html">Learn more about our quality systems</a> or <a href="/contact/">contact our engineering team</a> to discuss cross-section requirements for your next PCB order.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-microsection-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Microsection Analysis Guide</a></li>
+      <li><a href="/blog/ipc-a-600-acceptance-criteria.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC-A-600 Acceptance Criteria</a></li>
+      <li><a href="/blog/pcb-failure-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Failure Analysis Guide</a></li>
+      <li><a href="/blog/ipc-class-2-vs-class-3.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Class 2 vs Class 3</a></li>
+      <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit Checklist</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-pcb-cross-section-report-guide.webp)">
+      <h2>Get Cross-Section Reports With Every Order</h2>
+      <p>Upload your Gerber files and BOM. Receive a complete quality package including microsection images, IPC-A-600 compliance statements, and calibrated measurements — within 24 hours. Free DFM review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
