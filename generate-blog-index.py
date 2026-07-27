@@ -113,14 +113,66 @@ def build_card(article):
 
 
 def build_pagination(page, total_pages):
-    """Build pagination navigation HTML."""
+    """Build pagination with First/Prev/numbers/Next/Last, showing 5 pages around current."""
     parts = ['      <nav class="blog-pagination" aria-label="Blog pages">']
+    
+    # URL helper
+    def page_url(p):
+        return 'index.html' if p == 0 else f'blog-page-{p+1}.html'
+    
+    # « First
     if page > 0:
-        prev = 'index.html' if page == 1 else f'blog-page-{page}.html'
-        parts.append(f'        <a href="/blog/{prev}" class="page-prev">← Previous</a>')
-    parts.append(f'        <span class="page-info">Page {page+1} of {total_pages}</span>')
+        parts.append(f'        <a href="/blog/{page_url(0)}" class="page-btn page-first" title="First page">«</a>')
+    else:
+        parts.append(f'        <span class="page-btn page-first disabled">«</span>')
+    
+    # ← Previous
+    if page > 0:
+        parts.append(f'        <a href="/blog/{page_url(page-1)}" class="page-btn page-prev" title="Previous page">←</a>')
+    else:
+        parts.append(f'        <span class="page-btn page-prev disabled">←</span>')
+    
+    # Page numbers: show pages around current (window of ~7 pages)
+    window = 5
+    start_page = max(0, page - window)
+    end_page = min(total_pages - 1, page + window)
+    
+    # Adjust window to always show ~11 pages when possible
+    if end_page - start_page < 10:
+        if start_page == 0:
+            end_page = min(total_pages - 1, start_page + 10)
+        elif end_page == total_pages - 1:
+            start_page = max(0, end_page - 10)
+    
+    if start_page > 0:
+        parts.append(f'        <a href="/blog/{page_url(0)}" class="page-num">1</a>')
+        if start_page > 1:
+            parts.append(f'        <span class="page-dots">…</span>')
+    
+    for p in range(start_page, end_page + 1):
+        num = p + 1
+        if p == page:
+            parts.append(f'        <span class="page-num active">{num}</span>')
+        else:
+            parts.append(f'        <a href="/blog/{page_url(p)}" class="page-num">{num}</a>')
+    
+    if end_page < total_pages - 1:
+        if end_page < total_pages - 2:
+            parts.append(f'        <span class="page-dots">…</span>')
+        parts.append(f'        <a href="/blog/{page_url(total_pages-1)}" class="page-num">{total_pages}</a>')
+    
+    # Next →
     if page < total_pages - 1:
-        parts.append(f'        <a href="/blog/blog-page-{page+2}.html" class="page-next">Next →</a>')
+        parts.append(f'        <a href="/blog/{page_url(page+1)}" class="page-btn page-next" title="Next page">→</a>')
+    else:
+        parts.append(f'        <span class="page-btn page-next disabled">→</span>')
+    
+    # Last »
+    if page < total_pages - 1:
+        parts.append(f'        <a href="/blog/{page_url(total_pages-1)}" class="page-btn page-last" title="Last page">»</a>')
+    else:
+        parts.append(f'        <span class="page-btn page-last disabled">»</span>')
+    
     parts.append('      </nav>')
     return '\n'.join(parts)
 
