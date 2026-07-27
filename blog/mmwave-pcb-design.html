@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Design for 5G mmWave Applications — 28 GHz &amp; 39 GHz Material Selection, Antenna-in-Package &amp; Launch Design | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to PCB design for 5G mmWave at 28 GHz and 39 GHz. Covers low-loss laminate selection, antenna integration, launch design, and fabrication tolerances that make or break mmWave performance.">
+<meta property="og:title" content="PCB Design for 5G mmWave Applications — 28 GHz &amp; 39 GHz Material Selection &amp; Antenna-in-Package">
+<meta property="og:description" content="How to design PCBs for 5G mmWave: material selection at 28/39 GHz, antenna integration strategies, launch design, and fabrication tolerances that matter at millimeter-wave frequencies.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/mmwave-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-mmwave.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/mmwave-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Design for 5G mmWave Applications — 28 GHz & 39 GHz Material Selection, Antenna-in-Package & Launch Design",
+  "description": "Complete guide to PCB design for 5G mmWave at 28 GHz and 39 GHz. Covers low-loss laminate selection, antenna integration, launch design, and fabrication tolerances that make or break mmWave performance.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-mmwave.webp",
+  "url": "https://huaxingpcba.com/blog/mmwave-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/mmwave-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-mmwave.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">5G / mmWave Design</p>
+      <h1 class="reveal">PCB Design for 5G mmWave Applications:<br><em>28 GHz &amp; 39 GHz Material Selection &amp; Antenna Integration</em></h1>
+      <p class="reveal">How to select laminates, design launches, and control fabrication tolerances when every micron of copper roughness and every degree of dielectric variation kills your link budget at millimeter-wave frequencies.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>5G mmWave PCB Design</span></div>
+
+  <p>5G networks are rolling out millimeter-wave (mmWave) spectrum globally — 28 GHz in the US and Japan, 39 GHz in the US, and 26 GHz across Europe and China. Unlike sub-6 GHz FR1 bands where standard FR-4 still works, mmWave frequencies demand a fundamentally different approach to PCB design. Copper surface roughness, dielectric constant variation across temperature, and even the weave pattern of your glass fabric become first-order performance variables. This guide covers the material selection, antenna integration, and fabrication decisions that determine whether your mmWave PCB meets its link budget — or loses 3 dB before the signal reaches the antenna.</p>
+
+  <p>At Huaxing PCBA, we manufacture mmWave PCBs on low-loss laminates including Rogers RO3003, RO4835, and Isola Astra MT77 across <span class="data-point">8 SMT lines</span> with automated impedance testing to ±5% tolerance. Our facility holds IATF 16949 and ISO 9001 certifications, supporting 5G infrastructure OEMs from prototype through volume production.</p>
+
+  <img class="article-img" src="../generated/blog-mmwave-hero.webp" alt="Close-up macro photograph of a 5G mmWave antenna array PCB with gold-plated patch elements on dark Rogers laminate substrate" loading="lazy">
+
+  <h2>Why mmWave PCB Design Is Fundamentally Different</h2>
+
+  <p>At 28 GHz, the free-space wavelength is approximately 10.7 mm. On a PCB with a dielectric constant (Dk) of ~3.5, the guided wavelength shrinks to roughly 5.7 mm. This means a quarter-wave stub — a structure that's millimeters long on a sub-6 GHz board — is now under 1.5 mm. Transmission line losses that designers ignore at 2.4 GHz become the dominant loss mechanism at mmWave. There are three phenomena that drive this transition:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copper Surface Roughness Becomes a Dielectric Loss Amplifier</h4>
+      <p>At sub-6 GHz, current flows through the bulk cross-section of a trace. At mmWave, skin depth shrinks to under 0.4 µm — meaning all current travels along the copper surface. Standard electrodeposited (ED) copper with 2–4 µm RMS roughness forces the signal through a jagged path that increases effective conductor length by 30–60%, directly translating to insertion loss. Reverse-treated foil (RTF) or rolled annealed copper with roughness below 0.5 µm RMS is essential. See our <a href="/blog/pcb-materials-guide.html">PCB materials selection guide</a> for laminate roughness comparisons.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Glass Weave Skew Creates Differential Phase Error</h4>
+      <p>Standard 1080 or 2116 glass fabric has a non-uniform weave pattern — glass bundles and resin-rich regions alternate every 1–2 mm. At mmWave, a differential pair routed over these alternating regions sees a Dk that fluctuates between ~3.0 (resin-rich) and ~6.5 (glass bundle). This creates intra-pair skew that can exceed 5° per cm at 39 GHz — enough to destroy the null depth of a phased array beamformer. Spread glass or mechanically spread fabric with flat Dk distribution is mandatory. Our <a href="/blog/impedance-control.html">impedance control guide</a> covers the fabrication side of managing Dk uniformity.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Fabrication Tolerances That Were "Close Enough" Now Kill Performance</h4>
+      <p>A ±0.025 mm (1 mil) trace width variation on a 50 Ω line creates roughly 1 Ω of impedance shift at any frequency. At sub-6 GHz, the resulting return loss is manageable. At 39 GHz, the same 1 Ω shift from a 0.5 mm-wide grounded coplanar waveguide drops return loss from −25 dB to −15 dB — enough to violate the link budget of a 64-QAM OFDM signal. Etching tolerance must be specified at ±10 µm or tighter, with automated optical inspection (AOI) on every panel. Read our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> for fabrication tolerance specifications.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> At mmWave, you are no longer designing a PCB — you are designing a distributed RF structure where every material parameter and every fabrication tolerance is a first-order electrical variable. Standard FR-4 boards lose 3–5 dB/inch at 28 GHz; the right laminate keeps loss under 0.8 dB/inch.</p>
+  </div>
+
+  <h2>Material Selection: Low-Loss Laminates for 28 GHz and 39 GHz</h2>
+
+  <p>The laminate is the single largest lever for mmWave PCB performance. Three material properties dominate the decision: dielectric constant (Dk) and its temperature coefficient (TCDk), dissipation factor (Df), and the copper foil profile. Here is how the leading mmWave-grade laminates compare at 28 GHz:</p>
+
+  <table class="spec-table">
+    <tr><th>Laminate</th><th>Dk @ 28 GHz</th><th>Df @ 28 GHz</th><th>TCDk (ppm/°C)</th><th>Copper Foil</th><th>Best For</th></tr>
+    <tr><td>Rogers RO3003</td><td>3.00 ± 0.04</td><td>0.0010</td><td>−3</td><td>ED (standard)</td><td>Phased arrays, beamformers</td></tr>
+    <tr><td>Rogers RO4835</td><td>3.48 ± 0.05</td><td>0.0037</td><td>+50</td><td>RTF (optional)</td><td>CPE, small cells</td></tr>
+    <tr><td>Isola Astra MT77</td><td>3.00 ± 0.04</td><td>0.0017</td><td>−30</td><td>RTF (standard)</td><td>Base stations, backhaul</td></tr>
+    <tr><td>Panasonic M6G</td><td>3.40 ± 0.05</td><td>0.0020</td><td>+40</td><td>HVLP</td><td>Multi-layer mmWave HDI</td></tr>
+    <tr><td>Taconic RF-35TC</td><td>3.50 ± 0.05</td><td>0.0018</td><td>−45</td><td>RTF</td><td>Power amplifiers</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Dk Stability Across Temperature Is the Hidden Parameter</h4>
+      <p>A phased array antenna designed for 28 GHz will shift its beam angle if the substrate Dk changes with temperature. RO3003's TCDk of −3 ppm/°C means a 60°C temperature rise shifts Dk by only 0.00018 — negligible. RO4835's +50 ppm/°C shifts Dk by 0.002 over the same range, enough to detune resonant antenna elements by 30–40 MHz. For outdoor base station equipment that cycles from −20°C to +70°C, TCDk matters as much as Df. For more on laminate selection trade-offs, see our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Hybrid Stackups: RF Laminate on FR-4 Core</h4>
+      <p>Pure Rogers or Isola boards are expensive — a 4-layer RO3003 board costs 5–8× more than FR-4. The industry standard for cost-sensitive mmWave products (CPE, small cells) is a hybrid stackup: Rogers RO4835 or Isola MT77 for the top RF layers (microstrip patches, feed networks, ground plane) bonded to an FR-4 core for power distribution and digital routing. The critical rule: never route controlled-impedance traces through a transition between different laminate types. See our <a href="/blog/pcb-cost-factors.html">PCB cost factors guide</a> for hybrid stackup cost modeling.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-mmwave-detail.webp" alt="Photorealistic 3D cross-section render of a hybrid mmWave PCB stackup showing Rogers top layer bonded to FR-4 core with gold-plated microstrip lines" loading="lazy">
+
+  <h2>Antenna Integration: Antenna-in-Package vs Antenna-on-PCB</h2>
+
+  <p>At mmWave, the antenna array is no longer a separate component — it is integrated into the PCB stackup. Two architectures dominate: Antenna-on-PCB (AoP) where patch arrays are etched directly onto the top copper layer, and Antenna-in-Package (AiP) where the antenna array is embedded in the IC package substrate. The choice between them shapes your entire PCB design.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Antenna-on-PCB (AoP)</th><th>Antenna-in-Package (AiP)</th></tr>
+    <tr><td>Feed loss (28 GHz)</td><td>2–4 dB (long trace from IC)</td><td>0.5–1 dB (short bond)</td></tr>
+    <tr><td>Design flexibility</td><td>High — any array geometry</td><td>Low — fixed by package</td></tr>
+    <tr><td>PCB cost</td><td>RF laminate cost (full panel)</td><td>FR-4 OK (package handles RF)</td></tr>
+    <tr><td>Thermal management</td><td>Spread across PCB plane</td><td>Concentrated in package</td></tr>
+    <tr><td>Manufacturing complexity</td><td>Moderate (tight PCB tol.)</td><td>Low (PCB is digital/routing)</td></tr>
+  </table>
+
+  <p>For infrastructure applications (base stations, backhaul links) with link budgets that can tolerate 3 dB of feed loss, AoP on a low-loss laminate is the cost-optimal choice. For mobile handsets and small CPE devices where every 0.1 dB of link margin matters, AiP is the standard — the PCB then carries only DC power, digital control, and IF signals, and can be built on standard materials. For mixed-signal designs that combine both approaches, read our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB design guide</a>.</p>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> If your design uses AiP modules (e.g., Qualcomm QTM525, Murata 1ZM), your PCB requirements drop dramatically — the mmWave challenge is solved in the package. Your PCB fabricator only needs standard HDI capability for the digital interconnect. But you pay $8–15 per AiP module vs. essentially zero incremental cost for AoP. For 16-element phased arrays, this is a $130–240 BOM cost decision.</p>
+  </div>
+
+  <h2>Launch Design: Getting the Signal Off the Board</h2>
+
+  <p>The transition from PCB transmission line to antenna or connector — the "launch" — is the single largest source of insertion loss in mmWave systems. A poorly designed launch can lose more signal than the entire rest of the feed network combined. Three launch topologies dominate at 28/39 GHz:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>End-Launch Connector Transitions</h4>
+      <p>End-launch connectors (e.g., Southwest Microwave 1092-series, Rosenberger 32K-series) mount at the board edge with the center pin soldered directly to the top-layer microstrip. The critical parameter is the ground via fence spacing — vias must be placed within λ/8 (0.67 mm at 28 GHz) of the center pin to maintain a continuous ground return path. A missing ground via at the launch creates an impedance discontinuity that reflects 15–20% of incident power. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> covers S-parameter verification for connector launches.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Probe-Fed Patch Antenna Launches</h4>
+      <p>When the antenna is etched onto the PCB (AoP), the transition from microstrip feed line to patch radiator uses either a direct edge feed or a probe feed through the ground plane. Edge feeds are simple but create spurious radiation at the microstrip-to-patch junction — a problem below 30 GHz but significant above 35 GHz. Probe feeds (via through ground plane to a contact pad under the patch) eliminate this but require precise via placement within ±50 µm to maintain the correct input impedance. See our <a href="/blog/pcb-via-technology.html">PCB via technology guide</a> for blind and buried via design rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Waveguide Transitions (For >39 GHz)</h4>
+      <p>Above 50 GHz, even the best coaxial connectors introduce unacceptable loss. The alternative is a substrate-integrated waveguide (SIW) transition: two rows of closely spaced plated through-holes form the waveguide sidewalls inside the PCB dielectric, and a tapered microstrip-to-SIW transition couples the signal in. SIW transitions require extremely precise via drilling — the sidewall via pitch must be under 0.5 mm with positional tolerance within ±25 µm. This pushes fabrication into the same class as <a href="/blog/hdi-technology.html">HDI PCB technology</a> with mechanical or laser microvias.</p>
+    </div>
+  </div>
+
+  <h2>Fabrication Specification Checklist for mmWave PCBs</h2>
+
+  <p>When you send an RFQ to your PCB fabricator for a 28/39 GHz board, the following specifications must be explicitly called out on the fabrication drawing. These are not "nice to have" — omitting them means your fabricator defaults to standard FR-4 tolerances that will destroy mmWave performance.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Standard PCB</th><th>mmWave Requirement</th></tr>
+    <tr><td>Trace width tolerance</td><td>±20%</td><td>±10 µm absolute</td></tr>
+    <tr><td>Impedance control</td><td>±10%</td><td>±5% (measured, not calculated)</td></tr>
+    <tr><td>Copper surface roughness</td><td>2–4 µm RMS</td><td>&lt;0.5 µm RMS (RTF or rolled)</td></tr>
+    <tr><td>Dielectric thickness tolerance</td><td>±10%</td><td>±5%</td></tr>
+    <tr><td>Glass fabric</td><td>1080 / 2116</td><td>1035 spread glass / 1067</td></tr>
+    <tr><td>Solder mask on RF traces</td><td>Full coverage</td><td>Removed (liquid photoimageable Dk ~3.8 kills impedance)</td></tr>
+    <tr><td>Via stub length</td><td>Unspecified</td><td>&lt;0.15 mm (<a href="/blog/pcb-backdrilling-guide.html">backdrilled</a>)</td></tr>
+    <tr><td>Surface finish</td><td>HASL</td><td><a href="/blog/pcb-surface-finish-selection.html">ENIG or ENEPIG</a> (flatness critical)</td></tr>
+    <tr><td>Panel AOI</td><td>Sample-based</td><td>100% AOI on RF layers</td></tr>
+  </table>
+
+  <p>Many fabricators will accept these specifications but default to their standard process unless you explicitly write them into the fab notes. A single uncontrolled parameter — particularly copper roughness or dielectric thickness — can increase insertion loss by 2 dB/inch, turning a board that meets spec into one that fails the link budget.</p>
+
+  <h2>Testing and Validation: What Passes at DC Fails at 28 GHz</h2>
+
+  <p>Standard bare-board electrical test (continuity and isolation) tells you nothing about mmWave performance. Two tests are mandatory for mmWave PCB validation:</p>
+
+  <p>First, <strong>impedance TDR testing</strong> on a dedicated coupon built into the panel edge. The coupon must use the exact same stackup, copper weight, and etch process as the production board. A TDR measurement gives you the impedance profile along the transmission line — any deviation greater than ±5% from the target (usually 50 Ω) indicates a process issue. Second, <strong>vector network analyzer (VNA) S-parameter measurement</strong> of a through line on the coupon measures insertion loss (S21) and return loss (S11) at the operating frequency. A 50 mm microstrip on RO3003 should show S21 better than −0.5 dB at 28 GHz and S11 better than −20 dB.</p>
+
+  <p>At Huaxing PCBA, we provide TDR impedance reports and VNA S-parameter data as standard deliverables for every mmWave PCB order. Our <a href="/blog/pcb-first-article-inspection-guide.html">first article inspection process</a> includes cross-section micrographs to verify copper roughness and dielectric thickness on RF layers.</p>
+
+  <p>Designing for 5G mmWave is about controlling physics at the micron scale — copper roughness, glass weave distribution, and etch tolerance become your circuit parameters. Select your laminate with TCDk in mind, specify RTF copper and spread glass in your fab notes, and budget for hybrid stackups if your design includes digital routing. For the next step in your mmWave design, read our <a href="/blog/telecom-5g-pcb.html">telecom and 5G PCB manufacturing guide</a> for sub-6 GHz design rules that complement mmWave front-end design, or <a href="/contact/">contact our engineering team</a> for a DFM review of your mmWave stackup.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-mmwave.webp)">
+      <h2>Get a DFM Review for Your mmWave PCB Design</h2>
+      <p>Send your mmWave stackup and Gerber files. We'll verify impedance, copper roughness specs, and fabrication tolerances — with a full TDR/VNA report. 24-hour engineering response.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Your mmWave Design <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
