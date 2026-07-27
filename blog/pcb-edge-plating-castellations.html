@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Edge Plating &amp; Castellations Guide — Sidewall Metallization for IoT Modules, Bluetooth &amp; Carrier Boards | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB edge plating and castellated holes design guide: when to use sidewall metallization vs half-holes, minimum web specs, copper-to-edge clearance, plating thickness, routing sequence, and production data from an ISO 9001-certified Shenzhen manufacturer.">
+<meta property="og:title" content="PCB Edge Plating &amp; Castellations Guide — Sidewall Metallization for IoT Modules">
+<meta property="og:description" content="Edge plating vs castellated holes: when each technology makes sense for IoT modules, Bluetooth/WiFi boards, and carrier PCBs. Real design rules and manufacturing data from a factory that runs 80,000m²/month.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-edge-plating-castellations.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-edge-plating.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-edge-plating-castellations.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Edge Plating & Castellations Guide — Sidewall Metallization for IoT Modules, Bluetooth & Carrier Boards",
+  "description": "Complete PCB edge plating and castellated holes design guide: when to use sidewall metallization vs half-holes, minimum web specs, copper-to-edge clearance, plating thickness, routing sequence, and manufacturing data for IoT modules, Bluetooth/WiFi boards and carrier PCBs.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-edge-plating.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-edge-plating-castellations.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-edge-plating-castellations.html"
+  }
+}
+</script>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-edge-plating.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Edge Plating &amp; Castellations:<br><em>Sidewall Metallization for IoT Modules, Bluetooth &amp; Carrier Boards</em></h1>
+      <p class="reveal">When your module PCB needs solderable edges for SMT mounting on a carrier board, edge plating and castellated holes are the two primary sidewall metallization technologies — and choosing wrong can add 30% to your assembly cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Edge Plating &amp; Castellations</span></div>
+
+  <p>If you've ever designed an IoT sensor module, a Bluetooth LE breakout board, or a WiFi-enabled carrier PCB, you've encountered the same decision: how do you get signals from the module edge to the carrier board pads? The answer sits at the intersection of two distinct PCB fabrication technologies — edge plating (continuous copper wrapping the board perimeter) and castellated holes (half-cut plated through-holes along the edge). Both achieve sidewall metallization, but the design rules, cost structures, and failure modes are fundamentally different.</p>
+
+  <p>At Huaxing PCBA, we process over <span class="data-point">80,000</span> square meters of PCBs monthly across 8 SMT lines, and module boards with edge metallization represent a growing share — driven by IoT, wearables, and modular electronics. This guide covers the design rules you need, the manufacturing sequence that determines yield, and how to specify the right approach for your project before you send Gerber files.</p>
+
+  <img class="article-img" src="../generated/blog-edge-plating-hero.webp" alt="Macro close-up of a PCB edge showing continuous copper sidewall plating with smooth metallic finish on a dark substrate board" loading="lazy" style="max-width:85%">
+
+  <!-- ── Section 1 ── -->
+  <h2>Edge Plating vs. Castellated Holes: What's the Difference?</h2>
+
+  <p>Both technologies put copper on the PCB sidewall, but the manufacturing process and resulting geometry are distinct. Understanding this difference is critical because <strong>it determines your minimum web width, the reliability of the solder joint, and which panelization strategy your fabricator can use</strong>.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Edge Plating</th><th>Castellated Holes (Half-Holes)</th></tr>
+    <tr><td>Geometry</td><td>Continuous copper wrapping the PCB edge profile — top, sidewall, and bottom surfaces all metallized in one continuous layer</td><td>Individual plated half-cylinders at discrete locations along the board edge, created by routing through a plated through-hole</td></tr>
+    <tr><td>Typical Plating Thickness</td><td>25-35 μm copper (IPC Class 2 standard)</td><td>20-25 μm copper in the barrel (same as standard PTH spec)</td></tr>
+    <tr><td>Minimum Web</td><td>0.30 mm between edge and nearest copper feature</td><td>0.25 mm between castellation centers; 0.15 mm residual copper after routing</td></tr>
+    <tr><td>Copper-to-Edge Clearance</td><td>0.15-0.20 mm</td><td>Not applicable — half-hole is the edge feature itself</td></tr>
+    <tr><td>Solder Joint Inspection</td><td>Visual from top only — sidewall joint hidden after reflow</td><td>Visual from side — residual half-barrel provides inspectable fillet</td></tr>
+    <tr><td>Best For</td><td>EMI shielding, grounding perimeters, thermal conduction edges, carrier-board module outlines</td><td>SMT-mountable module I/O (ESP32-style), pluggable daughterboards, panelized SMT sub-assemblies</td></tr>
+    <tr><td>Relative Cost</td><td>+15-25% over standard PCB (extra plating + routing step)</td><td>+10-20% over standard PCB (castellation routing + deburring)</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Distinction:</strong> Edge plating wraps the <em>entire</em> board perimeter in copper — think of it as a continuous shield or ground ring. Castellated holes are <em>discrete</em> half-vias at specific pad locations. If you need 40 I/O pads along the edge, you need castellated holes. If you need a ground reference that runs the full board perimeter, you need edge plating. Some designs use both.</p>
+  </div>
+
+  <!-- ── Section 2 ── -->
+  <h2>When to Use Edge Plating: EMI Shielding, Grounding &amp; Thermal Management</h2>
+
+  <p>Edge plating — also called sidewall metallization or wrap-around plating — is not an I/O solution. You don't route signals through it. Its three primary use cases are electromagnetic, electrical, and thermal.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>EMI Shielding — The Faraday Cage Perimeter</h4>
+      <p>When a PCB module plugs into a metal enclosure or mates with a shielding can, the edge plating provides a <strong>360° continuous ground contact</strong> around the entire board perimeter. This is standard practice in RF modules where stray emissions must be contained. The continuous copper wrap creates a low-impedance path to ground that discrete grounding vias cannot match. For RF-specific design considerations including impedance control and material selection, see our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Ground Reference for Carrier-Board Modules</h4>
+      <p>In modular electronics — think an automotive ECU carrier board with plug-in sensor modules — edge plating on the module PCB provides a <strong>low-inductance ground path</strong> to the carrier's ground plane. This is especially important above 100 MHz, where discrete ground pins introduce parasitic inductance that degrades signal integrity. The continuous perimeter contact keeps the ground potential stable across the full module footprint.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Thermal Conduction at the Board Edge</h4>
+      <p>Copper is 1.7× better at conducting heat than aluminum PCB substrates, and edge plating creates a <strong>direct thermal path from internal copper planes to the board edge</strong>. In power modules where heat must be drawn to the enclosure wall, edge plating provides up to 385 W/m·K of thermal conductivity along the copper wrap — far more effective than FR-4's 0.3 W/m·K through-plane conduction. For high-power designs, combine edge plating with the strategies in our <a href="/blog/power-electronics-pcb.html">power electronics PCB guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>ESD Protection Perimeter</h4>
+      <p>For handheld and wearable devices, edge plating connected to chassis ground creates a <strong>controlled discharge path</strong> for electrostatic events. Rather than an ESD strike finding its way through sensitive IC pins, the edge plating intercepts the discharge at the board perimeter and routes it directly to ground — a technique borrowed from military-grade avionics and increasingly common in consumer IoT products with metal enclosures.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>When to Use Castellated Holes: SMT-Mountable Module I/O</h2>
+
+  <p>Castellated holes — also called half-holes or castellation vias — are the workhorse of module-based electronics. Every ESP32 dev board, every BLE module, and every LoRaWAN sensor node you've ever soldered onto a carrier PCB uses them. They transform the PCB edge into a set of solderable pads that function exactly like a surface-mount component footprint.</p>
+
+  <img class="article-img" src="../generated/blog-edge-plating-castellations.webp" alt="Extreme close-up macro photograph of castellated holes along a PCB edge showing copper half-cylinders with solder fillets after reflow assembly" loading="lazy" style="max-width:85%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>IoT Module SMT Assembly (ESP32, nRF52, CC25xx Style)</h4>
+      <p>When your IoT module needs to be picked, placed, and reflowed by a standard SMT line, castellated holes are the only practical option. The half-barrel geometry creates a <strong>three-sided solder fillet</strong> (pad, barrel wall, and top pad) that produces a mechanically robust joint with inspectable fillet formation. This is exactly how Espressif, Nordic, and TI package their wireless modules. For end-to-end module design guidelines including antenna keep-out zones and impedance considerations, see our <a href="/blog/iot-pcb-design-manufacturing.html">IoT PCB design and manufacturing guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Panelized SMT Sub-Assemblies</h4>
+      <p>High-volume production often panelizes small PCBs in an array, assembles components on the full panel, and then singulates individual modules. Castellated holes work well here because the routing step that separates modules <em>creates</em> the castellated features — the plated holes are drilled in the panel, and the depaneling router cuts through them. For cost-optimized panelization strategies including V-score vs. tab-routing tradeoffs, read our <a href="/blog/pcb-panelization-cost-optimization.html">PCB panelization cost optimization guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Bluetooth &amp; WiFi Carrier-Board Ecosystems</h4>
+      <p>The carrier-board model — where a wireless module solders onto a larger application board — relies entirely on castellated I/O. The castellation pads must handle <strong>both mechanical retention and electrical connectivity</strong>. Designers need to account for CTE mismatch between the module substrate and carrier board, particularly when the module uses a different laminate (e.g., high-Tg FR-4 on the module vs. standard FR-4 on the carrier). For surface finish compatibility considerations, see our <a href="/blog/pcb-surface-finish-selection.html">PCB surface finish selection guide</a>.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 4 ── -->
+  <h2>Critical Design Rules: Web Width, Clearance, and Pad Geometry</h2>
+
+  <p>Castellation yield starts with the design file. These are the rules our CAM engineers enforce before any castellated board enters production — and the numbers that determine whether your board ships on time or gets flagged for engineering review.</p>
+
+  <table class="spec-table">
+    <tr><th>Design Parameter</th><th>Minimum (Standard)</th><th>Recommended (High Yield)</th><th>Advanced Capability</th></tr>
+    <tr><td>Castellation Pad Diameter (finished)</td><td>0.50 mm</td><td>0.70 mm</td><td>0.40 mm</td></tr>
+    <tr><td>Castellation Hole Diameter (drill)</td><td>0.30 mm</td><td>0.40 mm</td><td>0.20 mm (laser)</td></tr>
+    <tr><td>Castellation-to-Castellation Pitch</td><td>0.80 mm</td><td>1.00 mm</td><td>0.65 mm</td></tr>
+    <tr><td>Residual Copper Web (after routing)</td><td>0.15 mm</td><td>0.25 mm</td><td>0.10 mm</td></tr>
+    <tr><td>Copper-to-Board-Edge Clearance (edge plating)</td><td>0.20 mm</td><td>0.30 mm</td><td>0.15 mm</td></tr>
+    <tr><td>Edge Plating Width (wrap-around band)</td><td>0.50 mm</td><td>0.80 mm</td><td>0.35 mm</td></tr>
+    <tr><td>Minimum Web Between Edge Feature and Via</td><td>0.30 mm</td><td>0.40 mm</td><td>0.25 mm</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> The #1 cause of castellation rejection at CAM review is insufficient residual copper web. When the router cuts through a plated hole, it must leave at least 0.15 mm of copper barrel on each side. If your pad diameter minus router diameter leaves less than that, the half-hole collapses during routing — and you get an open circuit at that pad. Always design with 0.25 mm residual minimum for production margin.</p>
+  </div>
+
+  <p>The most common pitfall we see in incoming Gerber files is <strong>routing tolerance stack-up</strong>. The router bit has a ±0.10 mm positional tolerance, and the castellation drill has its own ±0.05 mm positional tolerance. If you design with the absolute minimum residual web (0.15 mm), these two tolerances can consume your entire margin. For HDI designs where castellated features couple with microvias, see our <a href="/blog/hdi-technology.html">HDI technology guide</a> for advanced stackup strategies.</p>
+
+  <!-- ── Section 5 ── -->
+  <h2>The Manufacturing Sequence: Why Routing Order Determines Yield</h2>
+
+  <p>Edge plating and castellated holes require a <strong>non-standard fabrication sequence</strong>. Standard PCB manufacturing routes the board profile as the final step. But sidewall metallization inverts this — you must plate <em>after</em> profiling, not before. Here's the actual sequence our factory uses:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Inner Layer Imaging &amp; Etch (Standard)</h4>
+      <p>Inner layer patterns are imaged and etched as normal. Copper features that will connect to edge plating must extend to the board outline with the specified copper-to-edge clearance. This is also the stage where internal ground planes are designed to contact the future edge plating — critical for EMI shielding modules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Lamination &amp; Through-Hole Drilling (Standard)</h4>
+      <p>Layers are pressed and standard through-holes (including future castellated holes) are drilled. At this stage, castellated holes are just regular plated through-holes — they haven't been cut in half yet. <strong>Critical:</strong> the castellation drill must be in the drill file with the same tool number as the mechanical drills, not as a separate routing pass.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Electroless Copper &amp; Panel Plating (Standard)</h4>
+      <p>The entire panel — including the future edge-plated surfaces — receives electroless copper deposition followed by electrolytic panel plating. At this stage, the board edges are still part of the panel frame, so the sidewalls are not yet exposed. The plating thickness target is 25 μm in the barrel (IPC Class 2) with a minimum of 20 μm.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Outer Layer Imaging, Etching &amp; Solder Mask (Standard)</h4>
+      <p>Outer layers are patterned, etched, and solder mask is applied. The solder mask opening for edge-plated features follows special design rules: the mask dam must be at least 0.10 mm from the board edge to avoid peeling during the subsequent routing step.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Surface Finish Application (Pre-Routing)</h4>
+      <p>ENIG, HASL, or OSP surface finish is applied to exposed copper — including the pads that will become castellated half-holes. For edge-plated perimeter features, the surface finish extends onto the top and bottom copper pads but <em>not</em> onto the raw sidewall, which receives copper-only plating. For gold-plating requirements on edge contacts, see our <a href="/blog/pcb-gold-plating-hard-vs-soft.html">gold plating guide — hard vs. soft gold</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Profile Routing — The Castellation Cut</h4>
+      <p><strong>This is the step that makes or breaks castellation yield.</strong> The CNC router follows the board outline, cutting through the plated through-holes that become castellated features. A 1.6 mm or 2.0 mm router bit is used, and the routing path must bisect the plated holes cleanly. After routing, each hole is now a half-cylinder of copper bonded to the PCB edge. For edge-plated boards, this routing also exposes the board sidewall — which is raw FR-4 at this point and has no copper yet.</p>
+      <p>Deburring follows immediately: the cut edges are mechanically brushed to remove fiberglass splinters and copper burrs that would cause solder bridging during assembly. This is a manual or semi-automated step that adds labor cost — one reason castellation boards carry a premium.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Edge Plating — Post-Routing Metallization (Edge-Plated Boards Only)</h4>
+      <p><strong>For edge-plated PCBs, the plating happens AFTER routing.</strong> The routed boards (now individual pieces or small sub-panels) are re-fixtured and run through a secondary electroless copper + electrolytic plating cycle. This deposits 25-35 μm of copper on the freshly exposed sidewalls. Because the boards are already separated from the panel frame, this is a manual fixturing-intensive process — hence the 15-25% cost adder. For castellated-only boards, this step is skipped; the half-hole copper is already present from the original PTH plating in step 3.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Electrical Test &amp; Final Inspection</h4>
+      <p>Flying probe or bed-of-nails testing verifies continuity through every castellated pad and edge-plated segment. For castellated boards, each half-hole is probed from both the top pad and the residual barrel to confirm the plated connection is intact after routing. Edge-plated boards receive a perimeter continuity test — a probe sweep around the board edge verifies the copper wrap is unbroken. Depaneling methods for panelized castellation modules are covered in our <a href="/blog/pcb-depaneling-methods.html">PCB depaneling methods guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-edge-plating-detail.webp" alt="Photorealistic macro rendering of a PCB cross-section at the edge showing multiple copper layers wrapping around the board sidewall profile with ENIG gold finish" loading="lazy" style="max-width:85%">
+
+  <!-- ── Section 6 ── -->
+  <h2>Surface Finish Compatibility with Sidewall Metallization</h2>
+
+  <p>Not all surface finishes play well with edge-plated or castellated features. The post-routing plating bath for edge plating is an aggressive chemical environment, and certain finishes degrade when exposed to it.</p>
+
+  <table class="spec-table">
+    <tr><th>Surface Finish</th><th>Edge Plating Compatible?</th><th>Castellated Holes Compatible?</th><th>Notes</th></tr>
+    <tr><td>ENIG (Electroless Nickel Immersion Gold)</td><td>✅ Yes — apply before edge routing, nickel barrier protects copper</td><td>✅ Yes — gold on half-barrel provides excellent solderability</td><td>Most common for module PCBs. 3-5 μm Ni, 0.05-0.12 μm Au</td></tr>
+    <tr><td>HASL (Hot Air Solder Leveling)</td><td>⚠️ Conditional — solder can wick onto sidewall during HASL, creating uneven edge thickness</td><td>✅ Yes — but half-barrel solder thickness varies ±30%</td><td>Avoid for fine-pitch castellations (&lt;0.8 mm pitch)</td></tr>
+    <tr><td>Immersion Silver</td><td>❌ Not recommended — silver tarnishes on exposed sidewall edge during post-routing plating bath</td><td>⚠️ Acceptable if assembled within 48h of fabrication</td><td>Shelf life concern; tarnish creates solderability issues on half-holes</td></tr>
+    <tr><td>OSP (Organic Solderability Preservative)</td><td>❌ Not compatible — OSP is applied as final step, destroyed by post-routing plating chemistry</td><td>✅ Yes — OSP applied after castellation routing works fine</td><td>Good budget option for castellated-only boards</td></tr>
+    <tr><td>Hard Gold (Edge Connector)</td><td>✅ Yes — gold-plated edge fingers with nickel underplate; apply before routing</td><td>N/A — hard gold is for mating cycles, not solder joints</td><td>Use for pluggable modules with 100+ insertion cycles</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> If your module PCB uses both edge plating (for EMI) and castellated holes (for I/O) on the same board, ENIG is the only finish that reliably supports both. Budget +18-22% over HASL pricing. The nickel barrier layer in ENIG is what survives the secondary plating bath for edge plating — immersion silver and OSP do not.</p>
+  </div>
+
+  <!-- ── Section 7 ── -->
+  <h2>Cost Drivers and Procurement Considerations</h2>
+
+  <p>Sidewall metallization adds cost, but the cost varies significantly by volume, technology choice, and design complexity. Here's what procurement teams should understand before requesting quotes:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Volume Sensitivity</h4>
+      <p>Below <span class="data-point">1,000</span> units, the setup cost for edge plating (secondary fixturing + plating bath preparation) dominates — expect a 40-60% premium over a standard PCB of equivalent layer count. Above 5,000 units, the per-unit adder drops to 12-18% because the fixturing cost is amortized. Castellation-only boards (without edge plating) have a flatter cost curve: 15-20% premium at any volume above 100 units, since the primary cost driver is the extra routing + deburring labor.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Castellation Count Affects Price</h4>
+      <p>Each castellated hole requires the router to make a precision cut. A module with 48 castellations costs more to fabricate than one with 16, even if the board dimensions are identical. The difference is in routing time (more precision cuts = longer CNC cycle) and deburring labor (more edges to clean). A 40-castellation board typically carries a 25-30% total premium; a 12-castellation board might be only 10-12% over standard.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Layer Count Interaction</h4>
+      <p>Edge plating on a 2-layer board is straightforward. On an 8-layer board, the post-routing plating bath must deposit copper that bonds to <strong>all 8 internal copper layers</strong> exposed on the sidewall. This requires tighter process control and longer plating dwell time. An 8-layer edge-plated PCB typically costs 30-35% more than standard; a 2-layer version costs 15-20% more. For high-layer-count HDI boards, the interplay between edge plating and microvia structures is non-trivial — see our <a href="/blog/hdi-technology.html">HDI technology guide</a> for layer-stack planning.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 8 ── -->
+  <h2>Common Failure Modes and How to Prevent Them</h2>
+
+  <p>After processing thousands of castellated and edge-plated boards, our quality team has catalogued the repeat failure patterns. Here are the top three — and the design fixes that eliminate them:</p>
+
+  <img class="article-img" src="../generated/blog-edge-plating-module.webp" alt="An IoT wireless module PCB with castellated edges mounted on a dark green carrier board, showing clean SMT solder joints along the half-hole perimeter, studio lighting" loading="lazy" style="max-width:85%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copper Peel at the Half-Hole Interface</h4>
+      <p><strong>Symptom:</strong> After reflow, the copper barrel separates from the FR-4 substrate at the castellation edge. <strong>Root Cause:</strong> Insufficient annular ring on the castellation pad. When the router cuts through the plated hole, the remaining copper must be anchored by a pad on both the top and bottom layers. If the pad diameter is too close to the hole diameter, the copper barrel lacks mechanical support. <strong>Fix:</strong> Maintain a minimum 0.15 mm annular ring (pad radius minus hole radius) on every castellation pad. For 0.50 mm finished holes, use 0.80 mm pads minimum. This gives the routing operation enough material to grip.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Edge Plating Delamination During Thermal Cycling</h4>
+      <p><strong>Symptom:</strong> The edge-plated copper layer separates from the board sidewall after 500-1,000 thermal cycles (-40°C to +125°C). <strong>Root Cause:</strong> CTE mismatch between copper (17 ppm/°C) and FR-4 (14-16 ppm/°C in-plane, 50-70 ppm/°C through-thickness). The sidewall interface experiences the through-thickness CTE of FR-4, which is 3-4× higher than in-plane — this is the most thermally stressed interface on the entire board. <strong>Fix:</strong> Specify a minimum 30 μm edge plating thickness (not the standard 25 μm). The extra 5 μm of copper provides enough mechanical strength to survive the CTE mismatch through 1,000 cycles. Also, specify high-Tg FR-4 (Tg ≥ 170°C) for any design expecting thermal cycling — standard FR-4 (Tg 130°C) will delaminate earlier.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Solder Bridging Between Adjacent Castellations</h4>
+      <p><strong>Symptom:</strong> During SMT reflow, solder bridges form between neighboring castellated pads, creating shorts. <strong>Root Cause:</strong> Castellation pitch below 0.80 mm with insufficient solder mask dam between pads. The half-barrel geometry creates a concave surface that draws solder by capillary action — and at fine pitch, adjacent half-barrels pull solder toward each other. <strong>Fix:</strong> For pitches below 0.80 mm, add a 0.10 mm solder mask dam between castellation pads. This dam acts as a physical barrier that breaks the capillary bridge. Also, reduce stencil aperture by 10-15% for castellation pads to limit solder paste volume. For 0.65 mm pitch, both the mask dam and the reduced aperture are mandatory.</p>
+    </div>
+  </div>
+
+  <!-- ── Closing Section ── -->
+  <h2>Specifying Your Edge-Plated or Castellated PCB: What to Include in Your RFQ</h2>
+
+  <p>When you send a quote request for a module PCB with sidewall metallization, including these details in your initial email eliminates two rounds of engineering back-and-forth and typically cuts 24 hours from the quoting cycle:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Specify the Technology Clearly</h4>
+      <p>State "edge plating required — full perimeter" or "castellated holes — 28 positions at 1.0 mm pitch" in the first paragraph of your RFQ. Include a mechanical drawing layer in your Gerber files that marks every castellation location and the edge-plated perimeter zone. A marked fabrication drawing prevents the CAM engineer from guessing your intent.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Declare Surface Finish and Plating Thickness</h4>
+      <p>Don't leave these as defaults. Specify "ENIG per IPC-4552, edge plating thickness 30 μm minimum" or "HASL with lead-free alloy, castellation pads per standard barrel plating." The surface finish choice interacts with the manufacturing sequence (see table above) — an incompatible finish will cause a mid-production stop and delay.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Provide the Panelization Intent</h4>
+      <p>If your module boards will be panelized for SMT assembly, tell your fabricator. The panelization strategy (V-score vs. tab-routing, number of modules per panel, tooling holes) affects how the castellation routing is programmed. Providing this upfront avoids a situation where the fabricator panelizes the array one way and your assembly house expects a different configuration.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Request a DFM Report with First-Article Cross-Sections</h4>
+      <p>For any new castellated or edge-plated design, request a Design for Manufacturability (DFM) report <em>before</em> production release. The report should include cross-section micrographs of test coupons showing the plating thickness on the sidewall and the residual copper web at the castellation cut line. A competent manufacturer will provide this as standard for first-article qualification — if your supplier pushes back on cross-sections, find a different supplier.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, our edge plating and castellation process is qualified under ISO 9001:2015 with <span class="data-point">100%</span> AOI inspection on every castellated board before shipment. We run 8 SMT lines capable of assembling modules from 0201 passives to 0.4 mm pitch BGAs, with full flying-probe electrical test on every panel. Our engineering team provides free DFM reviews on all castellated and edge-plated designs, with cross-section micrographs included in first-article reports. Whether you're prototyping a new BLE sensor module or scaling an ESP32-class IoT product to 50,000 units, <a href="/contact/">contact our engineering team</a> for a project-specific consultation.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  Related Reading        -->
+<!-- ═══════════════════════ -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/hdi-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">HDI Technology Guide</a></li>
+      <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design &amp; Manufacturing</a></li>
+      <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing</a></li>
+      <li><a href="/blog/pcb-gold-plating-hard-vs-soft.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Gold Plating: Hard vs. Soft</a></li>
+      <li><a href="/blog/pcb-depaneling-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Depaneling Methods Guide</a></li>
+    </ul>
+  </div>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-edge-plating.webp)">
+      <h2>Need Edge-Plated or Castellated PCBs for Your IoT Module?</h2>
+      <p>Send us your Gerber files and fabrication notes — our engineering team provides a free DFM review within 24 hours, including cross-section analysis for first-article qualification. ISO 9001 certified, 8 SMT lines, 80,000m²/month capacity.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
