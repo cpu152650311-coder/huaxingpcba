@@ -174,6 +174,7 @@ def build_pagination(page, total_pages):
         parts.append(f'        <span class="page-btn page-last disabled">»</span>')
     
     parts.append('      </nav>')
+    parts.append(f'      <div class="page-position">Page {page+1} of {total_pages}</div>')
     return '\n'.join(parts)
 
 
