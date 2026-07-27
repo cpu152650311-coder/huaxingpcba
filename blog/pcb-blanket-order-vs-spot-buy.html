@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Blanket Orders vs Spot Buys — Which Procurement Strategy Saves More | Huaxing PCBA</title>
+<meta name="description" content="Compare blanket order vs spot buy for PCB procurement: unit cost savings, inventory carrying cost, flexibility trade-offs, and a decision framework for which strategy fits your production profile.">
+<meta property="og:title" content="PCB Blanket Orders vs Spot Buys — Which Procurement Strategy Saves More">
+<meta property="og:description" content="Blanket orders can save 12-18% on unit cost but add inventory risk. Spot buys offer flexibility at a premium. Here's the math and a decision framework.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-blanket-order-vs-spot-buy.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-blanket-spot.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-blanket-order-vs-spot-buy.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Blanket Orders vs Spot Buys — Which Procurement Strategy Saves More",
+  "description": "Compare blanket order vs spot buy for PCB procurement: unit cost savings, inventory carrying cost, flexibility trade-offs, and a decision framework.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-blanket-spot.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-blanket-order-vs-spot-buy.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-blanket-order-vs-spot-buy.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pcb-blanket-spot.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">PCB Blanket Orders vs Spot Buys:<br><em>Which Strategy Actually Saves More for Your Program</em></h1>
+      <p class="reveal">A procurement decision framework comparing blanket purchase orders against ad-hoc spot buying — with real cost models, risk analysis, and when to use each approach.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Blanket vs Spot Buy</span></div>
+
+  <p>Every PCB procurement manager faces the same quarterly decision: commit to a blanket order for 12 months of volume, or buy spot as demand materializes. The blanket order promises lower unit cost and guaranteed capacity. The spot buy offers flexibility and zero inventory carrying cost. Both strategies have vocal advocates. But the right answer depends on your production profile — and the math isn't always intuitive. This guide breaks down the cost models, risk factors, and decision framework that determines which strategy wins for your program.</p>
+
+  <p>Over the past three years, Huaxing PCBA has fulfilled both blanket orders (up to <span class="data-point">250,000</span> units per quarter) and spot buys (as low as 50 units with 5-day turnaround) for customers across automotive, medical, and industrial sectors. The data reveals patterns that most procurement textbooks miss.</p>
+
+  <img class="article-img" src="../generated/blog-pcb-blanket-spot-hero.webp" alt="PCB panels stacked on warehouse shelving with inventory management label showing batch number and quantity" loading="lazy" style="max-width:80%">
+
+  <h2>The Real Cost Difference — Beyond the Unit Price</h2>
+
+  <p>Blanket orders typically deliver <span class="data-point">12-18%</span> lower unit cost than spot buys. This is well-known. What's less understood is that unit cost is only one component of total procurement cost. The full picture includes:</p>
+
+  <table class="spec-table">
+    <tr><th>Cost Component</th><th>Blanket Order</th><th>Spot Buy</th><th>Δ</th></tr>
+    <tr><td>Unit PCB price (8-layer, 100×120 mm, 5,000 pcs)</td><td>$4.85</td><td>$5.70</td><td>+17.5%</td></tr>
+    <tr><td>NRE / tooling amortization</td><td>$0.12/unit (over 50k)</td><td>$0.60/unit (over 5k)</td><td>+400%</td></tr>
+    <tr><td>Inventory carrying cost (20% annual)</td><td>$0.24/unit (avg 3 months)</td><td>$0</td><td>N/A</td></tr>
+    <tr><td>Incoming QC cost per batch</td><td>$0.03/unit (1 batch/quarter)</td><td>$0.15/unit (per-order QC)</td><td>+400%</td></tr>
+    <tr><td>Expediting / premium freight</td><td>$0.02/unit (planned logistics)</td><td>$0.18/unit (frequent rush)</td><td>+800%</td></tr>
+    <tr><td>Engineering change cost risk</td><td>$0.50/unit (revision scrap)</td><td>$0.05/unit (small batches)</td><td>-90%</td></tr>
+    <tr><td><strong>Total Landed Cost</strong></td><td><strong>$5.76</strong></td><td><strong>$6.68</strong></td><td><strong>+16%</strong></td></tr>
+  </table>
+
+  <p>The landed cost gap narrows from 17.5% at unit level to 16% after accounting for all cost components — but blanket orders still win on pure cost. The catch: this model assumes zero engineering changes. If your design undergoes one revision during the 12-month blanket period, the scrap cost of obsolete inventory can wipe out the entire savings. <a href="/blog/pcb-nre-tooling-costs.html">Understanding NRE cost amortization</a> is critical to building accurate total-cost models.</p>
+
+  <h2>When Blanket Orders Win — 4 Conditions</h2>
+
+  <p>Blanket purchase orders are the right strategy when four conditions are met simultaneously:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design Stability — No Planned Revisions for ≥12 Months</h4>
+      <p>If your PCB design has gone through 3+ production runs without a single Gerber change, it's likely stable. But if you're still on revision B and engineering has a revision C in the pipeline, a blanket order is a liability. The cost of scrapping <span class="data-point">5,000</span> boards at revision B when revision C drops is $24,250 in raw material alone — far exceeding any unit-price savings. <a href="/blog/pcb-cost-factors.html">Our cost drivers guide</a> covers the economics of revision management in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Predictable Demand — Forecast Accuracy ≥80% for 6+ Months</h4>
+      <p>Blanket orders require committing to volume bands. A typical structure: 12-month blanket for 50,000 units with quarterly releases of 12,500. If your demand forecast accuracy is below 80%, you're either over-committing (excess inventory) or under-committing (paying overage premiums). Medical device and automotive programs with firm production schedules are ideal blanket-order candidates; consumer electronics with volatile demand are not. <a href="/blog/pcb-lead-time-reduction.html">Lead time reduction strategies</a> can help bridge the flexibility gap.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Supplier Stability — Single-Source Risk is Acceptable</h4>
+      <p>A 12-month blanket order typically ties you to one supplier. Before committing, verify: has this supplier delivered on-time for the last 6 consecutive orders? Is their financial position stable? Do they have experience with your technology level? If the answer to any of these is "no," maintain a <a href="/blog/pcb-dual-sourcing-strategy.html">dual-sourcing strategy</a> and use spot buys until the supplier relationship matures.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Volume Sufficient to Justify Tooling Dedication</h4>
+      <p>At volumes below 10,000 units per year, the tooling amortization benefit of a blanket order is negligible. The breakeven point for dedicated tooling (dedicated drill files, dedicated test fixtures) is approximately <span class="data-point">8,000-12,000</span> units per year depending on layer count and test point density. Below that threshold, spot buying with shared-tooling setups is cost-competitive. <a href="/blog/pcb-quote-comparison-guide.html">Our quote comparison guide</a> includes a tooling cost calculator.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> The most expensive procurement mistake we see is blanket orders placed before design freeze. One industrial customer lost $41,000 in scrapped inventory when a component EOL forced a board respin at month 8 of a 12-month blanket. The unit-cost savings over spot buying would have been $32,000 — a net loss of $9,000. Design freeze first, blanket order second.</p>
+  </div>
+
+  <h2>When Spot Buys Win — The Flexibility Premium</h2>
+
+  <p>Spot buying — placing orders as needed, without long-term commitment — isn't just the "small company" option. It's strategically correct in several common scenarios:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>New Product Introduction (NPI) and Ramp-Up Phase</h4>
+      <p>During the first 6-12 months of production, design changes are frequent, demand is uncertain, and production processes are being tuned. Spot buys allow you to iterate without inventory liability. As the product moves from NPI to steady-state production, transition to blanket ordering. The NPI-to-blanket transition typically happens at <span class="data-point">3-5</span> production runs when yield stabilizes above 95%.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Multi-Supplier Qualification Programs</h4>
+      <p>If you're qualifying a second source or transitioning from an incumbent supplier, spot buys let you test supplier capability with low financial exposure. Place 3-5 spot orders of increasing complexity before committing to a blanket. <a href="/blog/pcb-supplier-transition-guide.html">Supplier transition</a> is risky enough without adding volume commitment to the equation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>High-Mix, Low-Volume (HMLV) Production</h4>
+      <p>If your product portfolio includes 20+ unique PCB designs with annual volumes below 1,000 units each, blanket orders per design are impractical. Instead, consolidate spot buys with a single supplier who can handle the mix — you gain relationship leverage without design-level commitment. <a href="/blog/low-volume-pcb-assembly.html">Low-volume PCB assembly</a> strategies can complement this approach.</p>
+    </div>
+  </div>
+
+  <h2>Hybrid Strategy: The Best of Both Worlds</h2>
+
+  <p>The most sophisticated PCB procurement programs don't choose between blanket and spot — they use both, applied to different parts of the portfolio:</p>
+
+  <table class="spec-table">
+    <tr><th>Program Profile</th><th>Recommended Strategy</th><th>Rationale</th></tr>
+    <tr><td>Stable design, >15k units/yr, single supplier qualified</td><td>Blanket order (12 months)</td><td>Maximize unit cost savings; risk is low</td></tr>
+    <tr><td>Stable design, >15k units/yr, qualifying second source</td><td>Blanket (70%) + Spot (30%)</td><td>Keep incumbent relationship while testing new supplier</td></tr>
+    <tr><td>Design in flux, >10k units/yr</td><td>Quarterly blanket with design-freeze clause</td><td>3-month commitment windows reduce revision scrap risk</td></tr>
+    <tr><td>Stable design, 5-15k units/yr</td><td>Semi-annual blanket</td><td>6-month windows balance savings with flexibility</td></tr>
+    <tr><td>Any design, <5k units/yr</td><td>Spot buy</td><td>Tooling amortization benefits are negligible at low volume</td></tr>
+    <tr><td>NPI / first production runs</td><td>Spot buy until run #5</td><td>Design changes are near-certain in early production</td></tr>
+  </table>
+
+  <img class="article-img" src="../generated/blog-pcb-blanket-spot-decision.webp" alt="Supply chain planning desk with PCB samples, contract documents, and quarterly forecast spreadsheet" loading="lazy" style="max-width:80%">
+
+  <h2>How to Structure a Blanket Order for PCB Procurement</h2>
+
+  <p>If the analysis points toward a blanket order, the structure matters as much as the decision. Here's what a well-structured PCB blanket PO includes:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Tiered Pricing With Volume Bands — Not a Single Price</h4>
+      <p>A good blanket order specifies unit pricing at 3-4 volume bands: e.g., $5.20 at 5,000-9,999 units, $4.85 at 10,000-19,999, $4.50 at 20,000+. This protects both parties — if your demand exceeds forecast, you capture additional savings; if it falls short, the supplier isn't locked into a loss-making price. <a href="/blog/pcb-price-negotiation.html">Learn more about PCB price negotiation</a> tactics.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Quarterly Release Mechanism — Not a Single Delivery</h4>
+      <p>Never take delivery of a full year's volume at once. A standard blanket structure: commit to 12 months, release quarterly (or monthly) with 30-day lead time per release. This limits inventory carrying cost to 3 months of stock while preserving the blanket's pricing advantage. The supplier benefits from production planning visibility; you benefit from working capital efficiency.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Raw Material Price Adjustment Clause</h4>
+      <p>Copper and laminate prices fluctuate. Over a 12-month period, a 15% copper price swing can shift PCB unit cost by 3-5%. A fair blanket order includes a quarterly material price review: if the LME copper price moves more than ±10% from the baseline, unit pricing adjusts by a pre-agreed formula. This prevents either party from getting caught on the wrong side of commodity swings.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Engineering Change Provision</h4>
+      <p>Specify what happens when the Gerber files change: how much in-process inventory the supplier can charge for (typically WIP not exceeding 30 days of forecast), who pays for new tooling (minor changes absorbed; major redesigns renegotiated), and how quickly the new revision enters production (target: first article within 15 working days of revised Gerber release).</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Negotiation Leverage:</strong> The single most valuable concession in a blanket order isn't unit price — it's capacity reservation. A supplier who commits to "15% of one SMT line dedicated to your program" has skin in the game beyond pricing. Ask for capacity commitment in the contract, not just pricing.</p>
+  </div>
+
+  <h2>Decision Framework: Blanket or Spot?</h2>
+
+  <p>Run your program through this 5-question filter. If you answer "yes" to all five, go blanket. If you answer "no" to two or more, stay spot:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Is the design frozen with no planned revisions for 12 months?</h4>
+      <p>If engineering has a revision in the backlog, the answer is no. Wait until after that revision ships.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Is annual volume above 10,000 units?</h4>
+      <p>Below this threshold, tooling amortization benefits are too small to justify the commitment.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Is demand forecast accuracy ≥80% for the next 6 months?</h4>
+      <p>If your last 3 quarterly forecasts were off by more than 20%, you don't have the predictability a blanket order requires.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Has the supplier delivered on-time for ≥6 consecutive orders?</h4>
+      <p>One late delivery in the last 6 orders is a warning. Two is a disqualifier for blanket commitment.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Can your organization absorb 3 months of inventory carrying cost?</h4>
+      <p>If cash flow is tight, the working capital advantage of spot buying may outweigh unit-cost savings. Run the numbers with your finance team — a 17% unit cost saving means nothing if it strains your credit line.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Match Strategy to Product Maturity</h2>
+
+  <p>The blanket-vs-spot decision isn't binary and it isn't permanent. The right strategy evolves with your product lifecycle: spot buying during NPI, transitioning to semi-annual blankets at production ramp, moving to 12-month blankets at steady-state, and potentially reverting to spot buys during end-of-life when volumes decline. The procurement teams that get this right aren't the ones with the lowest unit prices — they're the ones with the lowest total cost of ownership across the full production lifecycle.</p>
+
+  <p>At Huaxing PCBA, we support both models — from <span class="data-point">50-unit</span> spot buys with 5-day turnaround to 250,000-unit annual blankets with quarterly releases and dedicated production capacity. Our pricing structure is transparent across volume bands, and we'll help you model the total-cost comparison for your specific program. <a href="/blog/pcb-dual-sourcing-strategy.html">Read our dual-sourcing guide</a> for supply chain resilience strategies, or <a href="/contact/">contact us</a> to discuss which procurement model fits your program.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-cost-factors.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Cost Factors</a></li>
+      <li><a href="/blog/pcb-price-negotiation.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Price Negotiation Guide</a></li>
+      <li><a href="/blog/pcb-lead-time-reduction.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Lead Time Reduction</a></li>
+      <li><a href="/blog/pcb-nre-tooling-costs.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB NRE &amp; Tooling Costs</a></li>
+      <li><a href="/blog/pcb-dual-sourcing-strategy.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Dual Sourcing Strategy</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-pcb-blanket-spot.webp)">
+      <h2>Ready to Model Your Procurement Strategy?</h2>
+      <p>Send us your annual volume forecast and we'll provide a blanket vs. spot total-cost comparison — with transparent pricing across all volume bands. Response within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Analysis <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').style.display='flex'}
+function closeModal(){document.getElementById('inquiryModal').style.display='none'}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',headers:{Accept:'application/json'},body:d});if(r.ok){alert('Thank you! We will respond within 24 hours.');closeModal();f.reset()}else{alert('Submission failed. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+</body>
+</html>

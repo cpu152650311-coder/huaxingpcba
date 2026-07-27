@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB First Article Inspection Guide — What Buyers Must Verify Before Mass Production | Huaxing PCBA</title>
+<meta name="description" content="A procurement manager's guide to PCB First Article Inspection (FAI): what to check, red flags, IPC-A-600 acceptance criteria, and how to structure FAI reports that catch issues before 10,000 units ship.">
+<meta property="og:title" content="PCB First Article Inspection Guide — What Buyers Must Verify Before Mass Production">
+<meta property="og:description" content="Stop defects at unit #1. Your FAI checklist: dimensional verification, microsection analysis, solderability testing, impedance validation, and the 5 most common FAI failures — plus how to read a report like a quality engineer.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-first-article-inspection-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-fai-guide.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-first-article-inspection-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB First Article Inspection Guide — What Buyers Must Verify Before Mass Production",
+  "description": "A procurement manager's guide to PCB First Article Inspection (FAI): what to check, red flags, IPC-A-600 acceptance criteria, and how to structure FAI reports.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-fai-guide.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-first-article-inspection-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-first-article-inspection-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pcb-fai-guide.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">PCB First Article Inspection:<br><em>What Buyers Must Verify Before Mass Production</em></h1>
+      <p class="reveal">A procurement professional's checklist for FAI — how to read inspection reports, spot the 5 most common escapes, and structure acceptance criteria that protect your production ramp.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB FAI Guide</span></div>
+
+  <p>When you approve a PCB supplier and place your first production order — whether it's 500 units or 50,000 — there's a single document that stands between you and a container full of scrap: the First Article Inspection report. FAI is the gate that catches process deviations, material substitutions, and outright manufacturing errors <em>before</em> they propagate across an entire batch. Yet most procurement teams treat FAI as a checkbox exercise — "the factory sent a report, so we're good." That approach is expensive. A 2025 industry survey by IPC found that <span class="data-point">63%</span> of field failures traced back to deviations that a proper FAI would have caught at unit #1.</p>
+
+  <p>This guide is written for the procurement manager, the quality engineer, and the supply chain lead who needs to read an FAI report the way a PCB factory quality manager reads it — not as a formality, but as a forensic tool. At Huaxing PCBA, we run FAI on <span class="data-point">100%</span> of new customer orders across 8 SMT lines, and our first-pass yield after FAI approval exceeds 98.7%. Here's how to make FAI work for you.</p>
+
+  <img class="article-img" src="../generated/blog-pcb-fai-guide-hero.webp" alt="PCB first article inspection under microscope with measurement overlay showing pad dimensions and annular ring" loading="lazy" style="max-width:80%">
+
+  <h2>What FAI Actually Covers — Beyond the Checklist</h2>
+
+  <p>First Article Inspection for PCBs isn't one test — it's a structured verification protocol that spans dimensional, electrical, material, and visual domains. The industry standard reference is IPC-A-600 (acceptability of printed boards), but a real FAI goes further:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dimensional Verification — Board Outline, Thickness, and Hole Registration</h4>
+      <p>The first thing measured: does the physical board match the Gerber data? Tolerances matter here. A board that's 0.2 mm thicker than specified won't fit the enclosure. Hole registration drift of even 0.1 mm causes misalignment in press-fit connectors. IPC-A-600 Class 2 allows ±10% thickness tolerance; Class 3 tightens this to ±5%. A proper FAI report includes a coordinate-measuring machine (CMM) readout showing actual vs. nominal for outline, slot positions, and at least 5 critical hole locations. <a href="/blog/pcb-trace-width-current-capacity.html">Board geometry errors also affect trace impedance</a> — a 0.05 mm etch variation shifts impedance by 3-5% on controlled-impedance traces.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Microsection Analysis — Copper Thickness, Plating Uniformity, and Inner-Layer Registration</h4>
+      <p>Microsectioning is the gold standard for verifying what's inside the board. A cross-section is cut through a plated via or critical trace, polished, and examined at 100-200× magnification. The report should quantify: copper plating thickness in the via barrel (minimum 20 μm for Class 2, 25 μm for Class 3 per IPC-6012), inner-layer copper thickness vs. starting foil weight, dielectric thickness between layers (critical for controlled impedance), and annular ring — the copper pad surrounding a drilled hole. An annular ring below 50 μm is a red flag. <a href="/blog/pcb-microsection-analysis-guide.html">Our microsection analysis guide</a> covers interpretation in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Solderability Testing — Wetting Balance and Dip-and-Look</h4>
+      <p>A board that passes dimensional checks but fails solderability is a production-line disaster. FAI should include a solderability test — either wetting balance (quantitative, measures wetting force over time) or dip-and-look per IPC-J-STD-003. The test verifies that surface finishes (ENIG, HASL, OSP, immersion silver) haven't degraded during storage or handling. A wetting force below 150 μN/mm at 2 seconds is a failure. <a href="/blog/pcb-surface-finish-selection.html">Surface finish selection</a> directly impacts solderability shelf life — ENIG typically maintains solderability for 12 months vs. 6 months for OSP.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Electrical Test — Continuity, Isolation, and Impedance</h4>
+      <p>Electrical test (E-test) verifies that every net connects where it should and isolates where it shouldn't. Flying probe or bed-of-nails — either method must cover 100% of nets. For controlled-impedance boards, FAI must include TDR (Time Domain Reflectometry) measurements on impedance coupons. A 50 Ω single-ended trace should measure between 45-55 Ω (±10%); differential 100 Ω pairs should land at 90-110 Ω. Any coupon outside this range means the entire batch is suspect — impedance deviations correlate with laminate thickness variations or etch inconsistencies that affect every board in the panel. <a href="/blog/impedance-control.html">Our impedance control guide</a> explains why even 5 Ω deviation can cause signal integrity failures above 3 Gbps.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Solder Mask and Legend Inspection — Registration, Cure, and Adhesion</h4>
+      <p>Solder mask misregistration exceeding 75 μm causes solder bridging on fine-pitch components. FAI should check mask-to-pad alignment under 40× magnification, verify cure completeness (scratch test with a pencil hardness tester — 6H minimum per IPC-SM-840), and confirm legend legibility on at least 5 reference designators. <a href="/blog/pcb-solder-mask-types.html">Different solder mask types</a> (LPI, dry film, UV-curable) have different adhesion characteristics — LPI photoimageable is the standard for pitches below 0.5 mm.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> A proper FAI takes 4-8 hours of lab time. If your supplier sends an FAI report 2 hours after shipping samples, they're cutting corners. The fastest credible FAI turnaround with in-house lab capability is 24 hours from sample completion — less than that means someone skipped microsectioning or solderability testing.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-pcb-fai-guide-microsection.webp" alt="Cross-section micrograph of PCB via showing copper plating thickness measurement at 200x magnification" loading="lazy" style="max-width:80%">
+
+  <h2>The 5 Most Common FAI Failures — and What They Cost You</h2>
+
+  <p>Understanding <em>where</em> FAI fails tells you where to focus your own inspection. Based on analysis of <span class="data-point">1,200+</span> first-article inspections across multiple PCB factories, these are the most frequent non-conformances:</p>
+
+  <table class="spec-table">
+    <tr><th>Failure Mode</th><th>Frequency</th><th>Root Cause</th><th>Line Impact</th></tr>
+    <tr><td>Annular ring below minimum</td><td>24%</td><td>Drill registration drift or layer-to-layer misalignment</td><td>Rework impossible — board scrap</td></tr>
+    <tr><td>Solder mask slivers / peeling</td><td>18%</td><td>Underexposure, undercure, or pad-to-mask clearance too tight</td><td>Reworkable but adds 15-30 min/panel</td></tr>
+    <tr><td>Via plating void or thin spot</td><td>16%</td><td>Poor throwing power in plating bath, air bubble entrapment</td><td>Board scrap — void propagates thermal stress cracks</td></tr>
+    <tr><td>Impedance out of tolerance</td><td>14%</td><td>Laminate thickness variation, incorrect prepreg selection</td><td>Batch quarantine — re-test all panels</td></tr>
+    <tr><td>Surface finish contamination / dewetting</td><td>12%</td><td>Residual plating chemistry, storage humidity >60% RH</td><td>Strip and re-plate — 24h delay</td></tr>
+  </table>
+
+  <p>Annular ring failures alone account for nearly a quarter of all FAI rejections. They're also the hardest to detect without microsectioning — visual inspection at the surface can't reveal what's happening in inner layers. This is why <a href="/blog/pcb-laser-vs-mechanical-drilling.html">drilling method</a> (laser vs. mechanical) and registration capability (±50 μm for laser, ±75 μm for mechanical) directly affect FAI pass rates.</p>
+
+  <h2>How to Structure an FAI Acceptance Protocol With Your Supplier</h2>
+
+  <p>The most effective FAI programs are collaborative — not adversarial. Here's a framework that works across supplier relationships:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Define Acceptance Criteria Before the PO</h4>
+      <p>Don't negotiate quality after the order is placed. Attach an FAI requirements document to the RFQ that specifies: which IPC class applies (Class 2 or Class 3), which tests are mandatory (microsection, solderability, impedance — not optional), the sample size (minimum 2 boards from 2 different panels), and the reporting format (PDF with annotated micrographs, CMM data in CSV). Suppliers who push back on FAI requirements at the RFQ stage are telling you something about their quality culture. <a href="/blog/pcb-supplier-audit.html">Our supplier audit guide</a> covers how to assess this during factory visits.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Require Golden Board Sign-Off — Not Just a Report</h4>
+      <p>A PDF report is easy to generate and easy to ignore. The gold standard is a physical "golden board" — an approved first article board that both parties sign off on and retain for reference. This board becomes the visual standard for all subsequent production. Any deviation from the golden board's appearance (solder mask color, legend placement, surface finish hue) triggers a re-FAI. At Huaxing PCBA, we retain golden boards for <span class="data-point">36 months</span> for repeat orders.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Separate Process FAI from Product FAI</h4>
+      <p>Process FAI validates the manufacturing capability — can this factory produce this technology level at all? Product FAI validates the specific design — does this particular PCB meet spec? Both are necessary but serve different purposes. Process FAI is done once per supplier; product FAI is done per part number per initial production run. Combine them and you'll miss process-level issues that affect every board the factory makes. <a href="/blog/pcb-supplier-quality-scorecard.html">A supplier scorecard</a> should track FAI pass rates separately for process vs. product.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Build Remediation Into the Contract</h4>
+      <p>What happens when FAI fails? If the contract doesn't specify, the default answer is "delay." Specify: supplier has 72 hours to submit a corrective action report (CAR) identifying root cause; re-FAI at supplier's cost within 5 working days; if second FAI fails, you have the right to cancel without penalty. This structure incentivizes getting it right the first time. <a href="/blog/pcb-supplier-transition-guide.html">If you're transitioning suppliers</a>, build FAI milestones into the qualification timeline.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Data Point:</strong> Suppliers with in-house microsection labs achieve FAI first-pass rates of 91-94%. Suppliers who outsource microsectioning to third-party labs average 78-82%. The difference is feedback loop speed — in-house labs turn around results in hours, enabling real-time process correction.</p>
+  </div>
+
+  <h2>FAI for Different PCB Technologies — What Changes</h2>
+
+  <p>Not all FAI protocols are the same. Technology complexity drives additional inspection requirements:</p>
+
+  <table class="spec-table">
+    <tr><th>Technology</th><th>Additional FAI Requirements</th><th>Typical FAI Duration</th></tr>
+    <tr><td>Standard 2-4 layer FR-4</td><td>Dimensional, visual, E-test, solder mask</td><td>4-6 hours</td></tr>
+    <tr><td>HDI with microvias</td><td>+ Microvia cross-section at 500×, via fill verification</td><td>8-12 hours</td></tr>
+    <tr><td>Controlled impedance (≥4 layers)</td><td>+ TDR on all impedance coupons, dielectric thickness verification</td><td>6-10 hours</td></tr>
+    <tr><td>Rigid-Flex</td><td>+ Flex bend radius verification, coverlay adhesion peel test</td><td>10-16 hours</td></tr>
+    <tr><td>Heavy copper (≥3 oz)</td><td>+ Copper thickness at 5 locations, plating uniformity check</td><td>6-8 hours</td></tr>
+    <tr><td>Metal-core / IMS</td><td>+ Dielectric thermal conductivity verification, isolation voltage test</td><td>8-12 hours</td></tr>
+  </table>
+
+  <p>For HDI boards, microvia reliability is the single highest-risk item. A single unfilled or cracked microvia can cause an open circuit after thermal cycling — and visual inspection at the surface won't catch it. Our <a href="/blog/hdi-technology.html">HDI technology guide</a> explains the microvia stacking and filling processes that FAI must verify.</p>
+
+  <h2>Reading an FAI Report Like a Quality Engineer</h2>
+
+  <p>When the FAI report lands in your inbox, here's what to look for before you sign off:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Check the Date Stamps on Micrographs</h4>
+      <p>Microsection images should include a timestamp and scale bar. If the timestamps are all within a 30-minute window, the lab rushed through the analysis. A proper microsection sequence — cut, mount, grind, polish, etch, image, measure — takes 15-20 minutes per section. Four sections in 30 minutes means shortcuts.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Verify Measurement Resolution Matches Tolerance</h4>
+      <p>If the spec calls for ±25 μm on copper thickness but the report only shows measurements to the nearest 10 μm, the measurement system isn't capable of verifying the tolerance. Measurement resolution should be at least 10× finer than the tolerance band — so a ±25 μm tolerance requires 2.5 μm resolution (round to 1 μm for practical CMM capability).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Look for "Pass" Without Numerical Values</h4>
+      <p>Any FAI line item that says "Pass" without the actual measured value is a red flag. "Solder mask thickness: Pass" is meaningless — the spec requires 10-25 μm dry film thickness, and you need the number. If the report doesn't provide it, ask for the raw measurement data.</p>
+    </div>
+  </div>
+
+  <h2>Summary: FAI is Your Production Insurance Policy</h2>
+
+  <p>First Article Inspection is the cheapest quality insurance you can buy. The cost of a comprehensive FAI — typically $200-500 depending on technology complexity — is a fraction of the cost of discovering a systemic defect after 10,000 units ship. Yet many buyers skip it or accept superficial reports because FAI requirements weren't specified in the RFQ. The takeaway: make FAI a line item in your purchase order, define acceptance criteria before production starts, and insist on microsection and electrical data — not just visual inspection. The suppliers who welcome rigorous FAI are the ones you want as long-term partners.</p>
+
+  <p>At Huaxing PCBA, we include FAI reporting as standard on every new customer order — microsection, solderability, impedance, and dimensional verification with full measurement data, not pass/fail summaries. Our in-house lab with <span class="data-point">3</span> CMM stations, cross-section capability, and TDR equipment delivers FAI reports with the granularity that serious procurement teams demand. <a href="/blog/pcb-incoming-quality-inspection.html">Read our incoming quality inspection guide</a> for how to extend quality control across your full supply chain, or <a href="/contact/">contact our engineering team</a> to discuss your specific FAI requirements.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-pre-shipment-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Pre-Shipment Inspection</a></li>
+      <li><a href="/blog/pcb-incoming-quality-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Incoming Quality Inspection</a></li>
+      <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit Checklist</a></li>
+      <li><a href="/blog/pcb-ipc-a-600-acceptance-criteria.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC-A-600 Acceptance Criteria</a></li>
+      <li><a href="/blog/pcb-supplier-quality-scorecard.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Quality Scorecard</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-pcb-fai-guide.webp)">
+      <h2>Ready to Set FAI Standards for Your Next Order?</h2>
+      <p>Include FAI requirements in your RFQ — we'll quote within 24 hours with a complete inspection protocol. Free microsection and impedance analysis on first orders.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').style.display='flex'}
+function closeModal(){document.getElementById('inquiryModal').style.display='none'}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',headers:{Accept:'application/json'},body:d});if(r.ok){alert('Thank you! We will respond within 24 hours.');closeModal();f.reset()}else{alert('Submission failed. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+</body>
+</html>

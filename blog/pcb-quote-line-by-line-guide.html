@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Read a PCB Quotation — Line-by-Line Cost Breakdown | Huaxing PCBA</title>
+<meta name="description" content="Learn to decode every line in a PCB quotation: where hidden costs hide, which line items are negotiable, what a competitive price looks like per square inch for 2-16 layer boards, and red flags that signal inflated quotes.">
+<meta property="og:title" content="How to Read a PCB Quotation — Line-by-Line Cost Breakdown">
+<meta property="og:description" content="Tooling, testing, surface finish, panel utilization — decode every line in your PCB quote. Plus: benchmark pricing per layer count and a red-flag checklist.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-quote-line-by-line-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-quote-guide.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-quote-line-by-line-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=28">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Read a PCB Quotation — Line-by-Line Cost Breakdown",
+  "description": "Learn to decode every line in a PCB quotation: hidden costs, negotiable line items, competitive benchmarks per layer count, and red flags.",
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-quote-guide.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-quote-line-by-line-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-quote-line-by-line-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-pcb-quote-guide.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">How to Read a PCB Quotation:<br><em>Line-by-Line Cost Breakdown Every Buyer Should Know</em></h1>
+      <p class="reveal">Decode 16 standard line items in a PCB quotation — which costs are real, which are negotiable, and how to spot a quote that's 30% above market before you place the order.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Quote Guide</span></div>
+
+  <p>A PCB quotation arrives in your inbox — 16 line items, a unit price, and a total. You forward it to your manager with "looks reasonable." But reasonable compared to what? PCB quotes contain layers of cost structure that experienced procurement teams learn to decode over years. The line that says "Tooling: $850" — is that one-time or per-order? "Surface Finish: Included" — included in what, exactly? "Testing: Flying Probe" — but does it cover 100% of nets or just a sample? This guide walks through every standard line item in a PCB quotation, what it should cost, what's negotiable, and the 5 red flags that signal an inflated quote.</p>
+
+  <p>Huaxing PCBA processes over <span class="data-point">1,200</span> quotations per year across 2-layer to 32-layer boards. The patterns we see — from the line items buyers overlook to the costs suppliers inflate — form the basis of this guide.</p>
+
+  <img class="article-img" src="../generated/blog-pcb-quote-guide-hero.webp" alt="Printed PCB quotation document on a desk next to a PCB sample, calculator, and engineering drawings under warm office lighting" loading="lazy" style="max-width:80%">
+
+  <h2>The Anatomy of a PCB Quote — 16 Standard Line Items</h2>
+
+  <p>A comprehensive PCB quotation breaks into three sections: one-time costs, recurring unit costs, and adders (premiums for specific requirements). Here's every line item, what it means, and what a competitive price looks like for a standard 4-layer FR-4 board, 100×120 mm, Qty 5,000:</p>
+
+  <table class="spec-table">
+    <tr><th>Line Item</th><th>What It Covers</th><th>Fair Price (Qty 5k)</th><th>Negotiable?</th></tr>
+    <tr><td><strong>1. Tooling / NRE</strong></td><td>Drill files, routing programs, test fixtures, solder mask artwork films</td><td>$350-650 (one-time)</td><td>✅ Yes — waive at 10k+ qty</td></tr>
+    <tr><td><strong>2. Film / Artwork</strong></td><td>Photoplotter films for each layer; sometimes bundled into tooling</td><td>$0 (included in tooling)</td><td>⚠️ Should not appear separately — if it does, it's double-counting</td></tr>
+    <tr><td><strong>3. Bare Board Unit Price</strong></td><td>Raw PCB fabrication: laminate, copper, drilling, plating, etching</td><td>$2.80-3.80</td><td>✅ Yes — 10-15% range</td></tr>
+    <tr><td><strong>4. Surface Finish</strong></td><td>ENIG, HASL (lead-free), OSP, immersion silver, immersion tin</td><td>ENIG: +$0.18/unit; HASL: included</td><td>⚠️ ENIG premium varies by gold thickness — 0.05μm vs 0.125μm</td></tr>
+    <tr><td><strong>5. Solder Mask Color (non-green)</strong></td><td>Black, blue, red, white, yellow solder mask instead of standard green</td><td>+$0.05-0.15/unit</td><td>✅ Yes — black is cheapest non-green</td></tr>
+    <tr><td><strong>6. Legend / Silkscreen (2 sides)</strong></td><td>Component outlines, reference designators, polarity marks</td><td>Included</td><td>❌ Should be standard; extra for 2nd side</td></tr>
+    <tr><td><strong>7. Electrical Test (Flying Probe)</strong></td><td>Continuity and isolation test; flying probe for prototypes/small batches</td><td>$0.08-0.18/unit</td><td>⚠️ Verify: 100% net coverage or sample only?</td></tr>
+    <tr><td><strong>8. Impedance Control</strong></td><td>TDR measurement on impedance coupons; process control for controlled impedance</td><td>+$0.20-0.45/unit</td><td>✅ Yes — especially at higher volumes</td></tr>
+    <tr><td><strong>9. Controlled Dielectric</strong></td><td>Specified laminate Dk/Df values; tighter thickness tolerance on prepreg/core</td><td>+$0.15-0.30/unit</td><td>⚠️ Only needed for RF/high-speed designs</td></tr>
+    <tr><td><strong>10. Blind / Buried Vias</strong></td><td>Laser-drilled microvias between specific layers (not through-all)</td><td>+$0.40-1.20/unit per via type</td><td>✅ Yes — reduces with volume</td></tr>
+    <tr><td><strong>11. Copper Weight Premium</strong></td><td>Copper above 1 oz (35 μm); 2 oz = +25%, 3 oz = +50%, 4 oz = +80%</td><td>1 oz: included; 2 oz: +$0.15/unit</td><td>❌ Material cost — limited negotiation</td></tr>
+    <tr><td><strong>12. Via Fill (Conductive / Non-Conductive)</strong></td><td>Epoxy or copper-filled vias for via-in-pad designs</td><td>+$0.12-0.25/unit (non-conductive)</td><td>✅ Yes — volume-dependent</td></tr>
+    <tr><td><strong>13. Scoring / Rout &amp; Retain</strong></td><td>Panel depanelization method; V-scoring or routed tabs</td><td>Included</td><td>❌ Standard process cost</td></tr>
+    <tr><td><strong>14. Final Inspection / AOI</strong></td><td>Automated optical inspection of outer layers</td><td>Included</td><td>❌ Should be standard — if it's a line item, ask why</td></tr>
+    <tr><td><strong>15. Packaging / Export Packing</strong></td><td>Vacuum-sealed with desiccant + humidity indicator card; export carton</td><td>$0.03-0.08/unit</td><td>❌ Minimal — standard cost</td></tr>
+    <tr><td><strong>16. Freight / Logistics</strong></td><td>Air freight (3-5 days), sea freight (15-30 days), or express courier</td><td>Air: $0.15-0.40/unit; Sea: $0.03-0.08</td><td>✅ Yes — use your own forwarder if cheaper</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> The three line items that most frequently contain hidden margin — and that buyers rarely scrutinize — are electrical test, impedance control, and surface finish. A 20% markup on each of these can add $0.25/unit to a quote that looks competitive on bare-board price. Always ask for the test coverage report and the ENIG gold thickness spec.</p>
+  </div>
+
+  <h2>Line Item #1: Tooling / NRE — The One-Time Cost Trap</h2>
+
+  <p>Tooling is the most misunderstood line item in PCB procurement. It represents the fixed cost of preparing the factory to manufacture your specific design: generating drill and routing programs from your Gerber files, fabricating test fixtures (for bed-of-nails testing), and creating solder mask exposure artwork. Here's what you need to know:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Tooling Should Be a One-Time Charge — Verify It's Not Recurring</h4>
+      <p>Some suppliers embed tooling costs into every order rather than charging it once. Look for language like "tooling amortization" or "engineering fee" on every invoice — that's tooling being charged repeatedly. A fair quote shows tooling as a single line item, charged once, with a note: "Tooling retained for 24 months for repeat orders." At Huaxing PCBA, we store tooling for <span class="data-point">36 months</span> at no additional cost. <a href="/blog/pcb-nre-tooling-costs.html">Our NRE cost guide</a> covers tooling economics in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Tooling Waiver Thresholds</h4>
+      <p>At volumes above 10,000 units, tooling costs should be waived or deeply discounted. The supplier recovers tooling cost through unit margin over the production run. If a quote includes $650 tooling on a 50,000-unit order, that's $0.013/unit — immaterial to total cost and the supplier should absorb it as a relationship investment. Ask: "Can tooling be waived at this volume?" The answer tells you about the supplier's long-term orientation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>What Tooling Actually Costs the Factory</h4>
+      <p>Factory cost for a 4-layer board's tooling — drill file generation (30 min engineer time), test fixture fabrication (materials + 2 hours), and photo tooling (films + exposure) — is approximately $180-300 in direct cost. The quote price of $350-650 includes overhead, margin, and a buffer for complexity. This means tooling is genuinely negotiable — you're negotiating margin, not cost recovery. <a href="/blog/pcb-price-negotiation.html">Our price negotiation guide</a> covers supplier margin dynamics.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-pcb-quote-guide-negotiation.webp" alt="Business meeting scene with PCB samples on table, quote document being reviewed with pen annotations highlighting specific line items" loading="lazy" style="max-width:80%">
+
+  <h2>Benchmark Pricing: What Your PCB Should Cost Per Square Inch</h2>
+
+  <p>Unit price per square inch is the quickest sanity check on any quote. These benchmarks are for standard FR-4, 1 oz copper, green solder mask, HASL finish, 2-week lead time, no impedance control:</p>
+
+  <table class="spec-table">
+    <tr><th>Layers</th><th>Qty 100</th><th>Qty 1,000</th><th>Qty 5,000</th><th>Qty 20,000</th></tr>
+    <tr><td>2 layers</td><td>$0.08-0.12/sq in</td><td>$0.04-0.06</td><td>$0.02-0.04</td><td>$0.015-0.025</td></tr>
+    <tr><td>4 layers</td><td>$0.18-0.25</td><td>$0.09-0.13</td><td>$0.06-0.08</td><td>$0.04-0.06</td></tr>
+    <tr><td>6 layers</td><td>$0.28-0.38</td><td>$0.14-0.20</td><td>$0.09-0.13</td><td>$0.07-0.10</td></tr>
+    <tr><td>8 layers</td><td>$0.42-0.55</td><td>$0.22-0.30</td><td>$0.14-0.20</td><td>$0.11-0.15</td></tr>
+    <tr><td>10 layers</td><td>$0.60-0.80</td><td>$0.32-0.45</td><td>$0.20-0.30</td><td>$0.16-0.22</td></tr>
+    <tr><td>12 layers</td><td>$0.80-1.10</td><td>$0.45-0.60</td><td>$0.28-0.40</td><td>$0.22-0.30</td></tr>
+    <tr><td>16 layers</td><td>$1.20-1.60</td><td>$0.65-0.90</td><td>$0.42-0.60</td><td>$0.32-0.45</td></tr>
+  </table>
+
+  <p><strong>How to use this table:</strong> Calculate your board area (length × width in inches), multiply by the price per square inch for your layer count and quantity, then add surface finish premium and any technology adders. If a quote is more than 20% above the high end of the range, either the board has unusual complexity or the supplier is testing your price sensitivity. <a href="/blog/pcb-cost-factors.html">Our cost factors guide</a> breaks down what drives deviations from these benchmarks.</p>
+
+  <div class="highlight-box">
+    <p><strong>Panel Utilization Matters:</strong> Board area pricing assumes 85%+ panel utilization. If your board is an odd shape that wastes laminate (e.g., a 45×45 mm board that only fits 4-up on a standard 18×24" panel), actual pricing can be 30-50% above the benchmarks. Good DFM includes panel optimization. <a href="/blog/pcb-panelization-cost-optimization.html">Read our panelization guide</a> for cost-saving layout strategies.</p>
+  </div>
+
+  <h2>5 Red Flags That Signal an Inflated Quote</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>"Surface Finish: Included" Without Specifying Type or Thickness</h4>
+      <p>ENIG at 0.05 μm gold thickness costs half what ENIG at 0.125 μm costs. If the quote says "ENIG included" without specifying the IPC-4552 class (Class 1 = 0.05 μm min; Class 2 = 0.08 μm; Class 3 = 0.125 μm), the supplier is likely quoting the cheapest grade while your design may require Class 2 or 3 for wire bonding or press-fit reliability. <a href="/blog/pcb-surface-finish-selection.html">Surface finish selection</a> should be explicitly specified in your RFQ, not left to supplier interpretation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>"Testing: Electrical Test" Without Net Coverage Percentage</h4>
+      <p>"Electrical test included" without specifying coverage is the most common hidden cost in PCB quotes. Flying probe testing at 100% net coverage costs $0.08-0.18/unit. A "sample test" covering 10% of nets costs $0.02-0.04/unit. If the quote doesn't specify, you're almost certainly getting sample-only testing. For <a href="/blog/pcb-testing-methods.html">PCB testing methods</a> comparison, flying probe 100% is the minimum acceptable standard for production boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Film / Artwork Charges in Addition to Tooling</h4>
+      <p>Photoplotter film generation is part of tooling — it should never appear as a separate line item. If a quote has both "Tooling: $550" and "Film Charge: $120," you're paying for the same work twice. Ask the supplier to bundle it into tooling or remove it. This is a well-known industry practice in less transparent markets and an immediate trust signal — or warning — depending on how the supplier responds when challenged.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Impedance Control Premium on Non-Impedance Designs</h4>
+      <p>If your design has no impedance requirements (no specified trace widths for 50 Ω or 100 Ω differential pairs), there should be zero impedance control line item. Some suppliers add it by default because most buyers don't question it. Check your design files: if there's no impedance coupon on the panel drawing and no controlled-impedance notes in the fab drawing, reject the adder. <a href="/blog/impedance-control.html">Our impedance control guide</a> explains when it's actually needed.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Lead Time Surcharge Exceeding 15% of Unit Price</h4>
+      <p>Expedited lead times (7 days instead of 14, or 3 days instead of 7) legitimately cost more — the factory must prioritize your job, potentially disrupting scheduled production. But an expedite surcharge above 15-20% of unit price is excessive. At 15%, a $3.80 board becomes $4.37. At 30%, it becomes $4.94 — and at that premium, you're better off adjusting your production schedule. Our <a href="/blog/pcb-lead-time-reduction.html">lead time reduction guide</a> covers how to get faster turns without paying surcharge premiums.</p>
+    </div>
+  </div>
+
+  <h2>How to Request Quotes That Suppliers Can't Inflate</h2>
+
+  <p>The best defense against inflated quotes is an RFQ that leaves no room for interpretation:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Specify the IPC Performance Class in the RFQ</h4>
+      <p>IPC Class 2 and Class 3 have different annular ring, plating thickness, and inspection requirements. Class 3 PCBs cost 20-30% more than Class 2 because of tighter tolerances and mandatory microsection inspection. If you don't specify the class, suppliers default to Class 2 — which may be inadequate for aerospace, medical, or automotive applications. <a href="/blog/ipc-class-2-vs-class-3.html">Our IPC Class 2 vs Class 3 guide</a> helps you determine which class your product requires.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Request Itemized Quotes — Never Accept a Single "Unit Price"</h4>
+      <p>A quote that says "4-layer PCB, Qty 5,000: $4.25/unit" with no breakdown is impossible to evaluate. Require all suppliers to provide the 16-line breakdown shown above. The suppliers who push back on itemization are almost certainly the ones with something to hide. <a href="/blog/pcb-quote-comparison-guide.html">Our quote comparison guide</a> includes a supplier comparison spreadsheet template.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Include Volume Bands in the Initial RFQ</h4>
+      <p>Instead of requesting a quote at a single quantity, request pricing at 3 volumes: 1,000 / 5,000 / 20,000. This reveals the supplier's cost structure — a supplier with high fixed costs will have a steeper volume discount curve; one with low fixed costs will have flatter pricing. You're not just comparing prices; you're comparing business models. <a href="/blog/pcb-cost-factors.html">Understanding cost structure</a> gives you negotiation leverage.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Read the Quote, Don't Just Scan the Total</h2>
+
+  <p>The difference between a well-negotiated PCB quote and an unexamined one is typically <span class="data-point">12-25%</span> of total cost — not because suppliers are dishonest, but because buyers don't know which line items to question. The three highest-impact actions you can take: always request itemized quotes, verify electrical test coverage is 100%, and confirm surface finish specifications (type + thickness) are explicitly stated. The suppliers who respond to these requests with detailed, transparent breakdowns are the ones you want as long-term partners. The ones who push back or offer vague "all-inclusive" pricing are signaling how they'll handle quality discussions down the road.</p>
+
+  <p>At Huaxing PCBA, every quote includes a full 16-line breakdown with specifications — not because customers always ask, but because transparency builds trust that drives repeat business. Our average customer relationship spans <span class="data-point">4.7 years</span>, and quote transparency is one of the top three reasons customers cite for staying. <a href="/blog/pcb-supplier-audit.html">Read our supplier audit guide</a> to evaluate your current partners, or <a href="/contact/">submit your Gerber files</a> for a transparent, itemized quote within 24 hours.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-quote-comparison-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Quote Comparison Guide</a></li>
+      <li><a href="/blog/pcb-cost-factors.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Cost Factors Explained</a></li>
+      <li><a href="/blog/pcb-nre-tooling-costs.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB NRE &amp; Tooling Costs</a></li>
+      <li><a href="/blog/pcb-import-duty-tariff-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Import Duty &amp; Tariff Guide</a></li>
+      <li><a href="/blog/pcb-incoterms-shipping-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Incoterms &amp; Shipping Guide</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-pcb-quote-guide.webp)">
+      <h2>Ready for a Transparent PCB Quote?</h2>
+      <p>Upload your Gerber files and receive a fully itemized 16-line quotation within 24 hours — with all specifications, tolerances, and test coverage explicitly stated. Free DFM review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').style.display='flex'}
+function closeModal(){document.getElementById('inquiryModal').style.display='none'}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev',{method:'POST',headers:{Accept:'application/json'},body:d});if(r.ok){alert('Thank you! We will respond within 24 hours.');closeModal();f.reset()}else{alert('Submission failed. Please email us directly.')}}catch(err){alert('Network error. Please email us directly.')}return false}
+</script>
+</body>
+</html>
