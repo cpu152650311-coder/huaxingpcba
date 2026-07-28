@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireless Power Transfer &amp; Inductive Charging PCB Manufacturing — Qi, AirFuel &amp; EV Wireless Charging Design Guide | Huaxing PCBA</title>
+<meta name="description" content="Wireless power transfer PCBs for Qi chargers, AirFuel resonant systems, and EV inductive charging require precision coil alignment, EMI shielding, and high-frequency magnetics. Complete PCB manufacturing guide for WPT applications from 5W to 11kW.">
+<meta property="og:title" content="Wireless Power Transfer &amp; Inductive Charging PCB Manufacturing — Qi, AirFuel &amp; EV Wireless Charging">
+<meta property="og:description" content="From 5W Qi phone chargers to 11kW EV wireless charging — how to specify PCB manufacturing for wireless power transfer systems at every power level.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/wireless-power-transfer-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-wireless-power.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/wireless-power-transfer-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Wireless Power Transfer & Inductive Charging PCB Manufacturing — Qi, AirFuel & EV Wireless Charging Design Guide",
+  "description": "PCB manufacturing guide for wireless power transfer — Qi, AirFuel, and EV inductive charging from 5W to 11kW. Coil PCB design, ferrite shielding, Litz wire integration, and EMI compliance.",
+  "datePublished": "2026-07-28",
+  "dateModified": "2026-07-28",
+  "image": "https://huaxingpcba.com/generated/blog-cover-wireless-power.webp",
+  "url": "https://huaxingpcba.com/blog/wireless-power-transfer-pcb.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/wireless-power-transfer-pcb.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-wireless-power.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technology Deep-Dive</p>
+      <h1 class="reveal">Wireless Power Transfer &amp; Inductive Charging PCB Manufacturing:<br><em>Qi, AirFuel &amp; EV Wireless Charging Design Guide</em></h1>
+      <p class="reveal">How to specify PCB fabrication and assembly for wireless power systems — from 5W Qi smartphone chargers to 11kW EV inductive charging pads. Coil PCB design, ferrite shielding, and high-frequency magnetics.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Wireless Power Transfer &amp; Inductive Charging PCB Manufacturing</span></div>
+
+  <p>The wireless power transfer market is accelerating across three fronts: consumer (Qi2 chargers shipping in <span class="data-point">500 million+</span> devices annually), industrial (automated guided vehicle wireless charging in warehouses), and automotive (SAE J2954 inductive charging for EVs at 11kW). What unites all three is the PCB — specifically, the transmitter and receiver coil boards, the inverter/resonant converter PCB, and the foreign object detection (FOD) and communication overlay. Your PCB is not just a carrier for components; it's the magnetic interface where kilowatts of power cross an air gap.</p>
+
+  <p>At Huaxing PCBA, we manufacture wireless power transfer PCBs for consumer electronics brands, industrial automation OEMs, and EV charging infrastructure suppliers across <span class="data-point">9 countries</span>. Our capabilities span the full WPT stack: single-layer coil PCBs with 4 oz copper for Qi transmitters, 4-6 layer FR-4 inverter boards with GaN FET switching at 6.78 MHz (AirFuel), and heavy-copper (6-10 oz) Litz-wire-integrated PCBs for EV wireless charging pads. Here's how to specify PCB manufacturing for each power level.</p>
+
+  <img class="article-img" src="/generated/blog-wireless-power-coil-pcb.webp" alt="Wireless power transmitter PCB with planar spiral coil and ferrite backing" loading="lazy" style="max-width:80%">
+
+  <h2>The PCB as a Magnetic Component: Planar Coil Design for Qi and AirFuel</h2>
+
+  <p>In a wireless power system, the transmitter and receiver coils are often implemented directly as PCB traces — a planar spiral coil etched into the copper layer. This eliminates a separate wound coil component, reduces BOM cost, and provides repeatable inductance (±3% vs ±10% for hand-wound coils). But it also means the PCB manufacturer is now manufacturing a magnetic component — and the copper thickness, trace width, and spacing tolerances directly affect the coil's quality factor (Q) and coupling coefficient (k).</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copper Thickness: 2 oz Minimum for Qi Transmitters, 4 oz for 15W+ Designs</h4>
+      <p>The coil's AC resistance at the WPT operating frequency (110-205 kHz for Qi, 6.78 MHz for AirFuel) is dominated by skin effect and proximity effect — not DC resistance. At 200 kHz, the skin depth in copper is approximately <span class="data-point">150 μm</span> (6 mils). A 1 oz (35 μm) copper trace uses only 35 μm of the 150 μm skin depth, wasting two-thirds of the current-carrying capacity. 2 oz (70 μm) doubles the effective cross-section. For 15W Qi Extended Power Profile transmitters, we recommend 4 oz copper on the coil layer. Our <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a> includes the skin depth calculator for every frequency and copper thickness combination.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Trace Width and Spacing: 0.5mm Trace, 0.5mm Gap (Qi Baseline Profile)</h4>
+      <p>The coil's inductance is determined by the number of turns, the trace width, the spacing between turns, and the outer diameter. For a Qi-compliant A11 transmitter coil (50mm outer diameter, 10 turns), the standard geometry is <span class="data-point">0.5mm trace width</span> with 0.5mm spacing. The PCB manufacturer must hold trace width tolerance to ±10% on the coil layer — a ±20% variation changes the inductance by ±8%, pushing the resonant tank out of the Qi specification and causing interoperability failures. We 100% verify coil inductance with an LCR meter on every production panel. See our <a href="/blog/impedance-control.html">impedance control guide</a> for specifying inductance tolerances in fabrication notes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ferrite Shielding: Integrate During PCB Assembly, Not as a Post-Process</h4>
+      <p>The planar coil on the PCB must be backed by a ferrite sheet (typically MnZn for Qi at 100-200 kHz, NiZn for AirFuel at 6.78 MHz) that shapes the magnetic field toward the receiver and shields the electronics behind the coil. The ferrite sheet is bonded to the back of the PCB using a thermally conductive adhesive — the assembly process must ensure zero air gaps between the ferrite and the PCB, as even a 0.1mm air gap reduces the coil inductance by <span class="data-point">15-20%</span> and increases stray field emissions. Our assembly line includes automated ferrite sheet lamination with vacuum pressing for bubble-free bonding.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Via Placement: Outside the Coil Area, Connected with Wide Traces</h4>
+      <p>The inner and outer terminals of the planar coil must route to the resonant capacitor and inverter circuit through vias. These vias must be placed outside the coil area — any via inside the coil creates a local eddy current hot spot that reduces Q by <span class="data-point">5-15%</span>. The routing traces from the coil terminals to the vias must be at least 2x the coil trace width to avoid localized resistance increases. For multi-layer coils (common in AirFuel designs), the vias connecting the inner turns between layers must use 0.3mm drill with 0.6mm pad — any larger and the via ring encroaches into the magnetic field.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-wireless-power-inverter-pcb.webp" alt="GaN-based wireless power inverter PCB with resonant tank and EMI filtering" loading="lazy" style="max-width:85%">
+
+  <h2>The Inverter/Resonant Converter PCB: Where the High-Frequency Switching Happens</h2>
+
+  <p>On the transmitter side, the inverter PCB converts DC input (5V USB, 12-24V industrial, or 400V EV battery) to the high-frequency AC that drives the transmitter coil. This is the most electrically demanding PCB in the WPT system — it combines high-frequency switching (110 kHz to 6.78 MHz), high current (up to 30A for 11kW EV charging), and the resonant tank's reactive power that can exceed the real power by a factor of 3-5x.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>5W Qi (BPP)</th><th>15W Qi (EPP)</th><th>AirFuel Resonant (70W)</th><th>EV WPT (11kW)</th></tr>
+    <tr><td>Frequency</td><td>110-205 kHz</td><td>110-205 kHz</td><td>6.78 MHz</td><td>85 kHz</td></tr>
+    <tr><td>Switching device</td><td>Si MOSFET</td><td>Si MOSFET</td><td>GaN FET</td><td>SiC MOSFET</td></tr>
+    <tr><td>Layer count</td><td>2-4</td><td>4</td><td>4-6</td><td>6-8</td></tr>
+    <tr><td>Copper weight (power)</td><td>2 oz</td><td>2-3 oz</td><td>3 oz</td><td>6-10 oz</td></tr>
+    <tr><td>Resonant capacitor</td><td>SMD NP0/C0G</td><td>SMD NP0/C0G</td><td>SMD NP0 + film</td><td>Film capacitor bank</td></tr>
+    <tr><td>EMI standard</td><td>EN 303 417</td><td>EN 303 417</td><td>FCC Part 18</td><td>CISPR 11 / SAE J2954</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The resonant capacitor placement is the single most critical layout decision on the inverter PCB. The loop formed by the switching FETs → resonant capacitor → transmitter coil must have minimum area (<span class="data-point">< 5mm²</span> loop for Qi, < 2mm² for 6.78 MHz AirFuel) to minimize radiated EMI. Use a solid ground plane on layer 2 (directly under the switching loop) to provide a low-inductance return path — a split or gapped ground plane under a WPT switching loop will radiate harmonics that fail FCC/CISPR emissions testing on the first attempt. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI design guide</a> covers the switching loop optimization rules.</p>
+  </div>
+
+  <h2>EV Wireless Charging: The Heavy-Copper, High-Power Frontier</h2>
+
+  <p>SAE J2954 defines three power levels for wireless EV charging: WPT1 (3.7 kW), WPT2 (7.7 kW), and WPT3 (11 kW). At 11 kW with 85 kHz operation, the transmitter pad PCB carries <span class="data-point">30A RMS</span> through the coil — requiring 6-10 oz copper that's far beyond standard PCB fabrication. But the real challenge is not just the copper weight; it's the integration of Litz wire terminations with the PCB and the thermal management of the ferrite core that sits between the coil and the aluminum shielding plate.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Litz Wire Integration: Soldered to Heavy-Copper PCB Pads</h4>
+      <p>For EV-level power, a pure PCB coil would need impractical copper thickness (20+ oz). The industry solution is a hybrid: Litz wire for the main coil, terminated to heavy-copper PCB pads that carry the connection to the resonant capacitor bank. The terminations require <span class="data-point">8 oz copper pads</span> at least 15mm × 15mm with multiple thermal vias to a bottom-side heatsink plane. The Litz wire is hand-soldered or resistance-welded to these pads. Our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB guide</a> covers the design rules for 6-10 oz inner and outer layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Ferrite Core Thermal Management: Keep Tc Below 120°C</h4>
+      <p>MnZn ferrite cores in the EV transmitter pad experience core losses of <span class="data-point">50-150W</span> at 11 kW operation, heating the core to 100-130°C. The PCB underneath the ferrite must use a high-Tg laminate (≥ 170°C) to avoid delamination, and the copper ground plane under the ferrite should include thermal vias to conduct heat to an aluminum heatsink backplate. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> covers the via pattern density calculations for different heat fluxes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Foreign Object Detection (FOD) Coil: A Second PCB Layer for Safety</h4>
+      <p>SAE J2954 requires FOD to detect metallic objects (coins, paperclips, cans) between the vehicle pad and ground pad that could heat to dangerous temperatures. The FOD system uses an array of small sensing coils — typically implemented as a separate 2-layer PCB with 1 oz copper, with the coil array patterned on the top layer and a shield plane on the bottom. The FOD PCB sits directly above the main power coil PCB, separated by a thin (0.5-1mm) insulation layer. The manufacturing challenge is flatness — any warpage in the FOD PCB creates air gaps that degrade the magnetic coupling. We specify <span class="data-point">≤ 0.5%</span> warpage per IPC-TM-650 2.4.22 for all WPT PCBs. See <a href="/blog/pcb-warpage-reflow-prevention.html">our PCB warpage guide</a> for the process controls that achieve this.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-wireless-power-ev-pad-pcb.webp" alt="EV wireless charging ground pad PCB with heavy copper and ferrite core integration" loading="lazy" style="max-width:80%">
+
+  <h2>How to Specify Wireless Power Transfer PCBs: 6 Requirements Across All Power Levels</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Coil Layer: 100% AOI + Inductance Measurement on Every Panel</h4>
+      <p>The coil layer must pass 100% automated optical inspection (AOI) for trace width, spacing, and opens/shorts. Additionally, every production panel must have the coil inductance measured at the WPT operating frequency using an LCR meter — the reading must be within ±5% of the nominal value. Out-of-spec panels are rejected before component assembly. <a href="/blog/pcb-testing-methods.html">Our PCB testing guide</a> covers all inspection methods.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Dielectric Strength: 1.5kV Hi-Pot Test Between Coil and Shield Layers</h4>
+      <p>The isolation between the power coil (carrying up to 400V peak in EV applications) and the shield/ground layer must withstand 1.5kV AC for 60 seconds per IEC 60950-1. This requires a minimum dielectric thickness of 0.4mm for FR-4 (dielectric strength ≈ 20 kV/mm). Our <a href="/blog/high-voltage-pcb-design.html">high-voltage design guide</a> covers the creepage and clearance requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Surface Finish: ENIG for Flatness; OSP if Cost-Sensitive</h4>
+      <p>The coil trace surface finish affects the AC resistance at high frequency — ENIG's nickel layer adds magnetic losses at 6.78 MHz that reduce Q by <span class="data-point">3-8%</span> compared to bare copper. For AirFuel designs at 6.78 MHz, we recommend OSP (Organic Solderability Preservative) on the coil layer for lowest AC resistance. For Qi designs at 100-200 kHz where nickel losses are negligible, ENIG provides the best flatness and shelf life. See <a href="/blog/pcb-surface-finish-selection.html">our surface finish selection guide</a> for the frequency-dependent loss data.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Solder Mask: Openings Over Coil Traces for Reduced Parasitic Capacitance</h4>
+      <p>The solder mask over the coil traces adds a parasitic capacitance of <span class="data-point">3-5 pF/cm²</span> between adjacent turns, which detunes the resonant tank and reduces efficiency. For Qi and AirFuel designs, we recommend no solder mask over the coil area — leave the traces as bare copper with ENIG or OSP finish. For harsh-environment applications (outdoor EV pads), apply a thin (15-25μm) conformal coating instead of solder mask over the coil. Our <a href="/blog/pcb-solder-mask-types.html">solder mask guide</a> compares the dielectric properties.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>EMI Compliance: Pre-Compliance Scan Before Shipping</h4>
+      <p>Every wireless power product must pass radiated and conducted EMI limits (EN 303 417 for Qi, FCC Part 18 for AirFuel, CISPR 11 for EV). We offer a pre-compliance EMI scan on every first-article WPT PCB — using a near-field probe and spectrum analyzer to identify switching harmonics above the limit before the product goes to the accredited test lab. This typically identifies <span class="data-point">2-3 layout issues</span> that, once fixed, result in a first-pass certification. See <a href="/blog/pcb-emc-emi-compliance.html">our EMC/EMI guide</a> for the full pre-compliance checklist.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Traceability: Unique ID on Every WPT PCB for Interoperability Testing</h4>
+      <p>The Qi and AirFuel certification programs require that each PCB variant tested is traceable to the specific production lot. We laser-mark a 2D data matrix with lot code, date code, and serial number on every WPT PCB — linking each certification test report to the exact production batch. <a href="/blog/pcb-first-article-inspection-guide.html">Our FAI guide</a> covers the complete traceability documentation.</p>
+    </div>
+  </div>
+
+  <h2>Wireless Power Transfer PCB Trends: GaN, Higher Frequencies, and Multi-Device Charging</h2>
+
+  <p>Three technology shifts are reshaping wireless power transfer PCB requirements:</p>
+
+  <p><strong>GaN FETs Enabling Higher Frequencies:</strong> The transition from silicon MOSFETs to GaN (Gallium Nitride) FETs in WPT inverters reduces switching losses by <span class="data-point">60-80%</span> and enables operation at 6.78 MHz and 13.56 MHz for AirFuel resonant systems. GaN's fast switching edges (1-2 ns rise time) demand PCB layout with extremely low parasitic inductance in the gate drive loop — the gate driver must be within 5mm of the GaN FET, with a 4-layer PCB using layer 2 as a solid ground reference. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> covers the high-speed layout rules that apply to GaN gate drivers.</p>
+
+  <p><strong>Multi-Device Free-Position Charging:</strong> The Qi2 standard's Magnetic Power Profile (MPP) uses a magnetically-aligned single-coil design, but the next step is free-position charging — a surface where you can place multiple devices anywhere and they all charge simultaneously. This requires a PCB with an array of overlapping hexagonal coils, each individually driven, with complex multiplexing of the inverter to different coil subsets. The PCB becomes a multi-layer coil array with 6-8 layers and significant via density — similar to what we cover in our <a href="/blog/hdi-technology.html">HDI PCB guide</a> and <a href="/blog/pcb-via-technology.html">via technology guide</a>.</p>
+
+  <p><strong>In-Flight Wireless Charging for Drones and Robotics:</strong> Industrial drones and warehouse robots are adopting wireless charging pads for autonomous opportunity charging — landing on a pad between missions for a 10-15 minute fast charge. These systems operate at 100-500W with tight size constraints, requiring the coil PCB to double as the mechanical landing surface. We apply an additional 0.5mm FR-4 stiffener layer and specify <a href="/blog/pcb-panelization-cost-optimization.html">panelization optimization</a> to handle the combined electrical and mechanical requirements.</p>
+
+  <h2>Getting Started with Your Wireless Power Transfer PCB Project</h2>
+
+  <p>Wireless power transfer PCB manufacturing spans the full range of PCB technology — from simple 2-layer Qi charger coils to 8-layer GaN-based AirFuel inverters to heavy-copper EV charging pads with integrated Litz wire and ferrite. The common thread is that the PCB is a magnetic component, not just an interconnect — and the manufacturing tolerances that are "good enough" for a digital PCB are not good enough for a resonant tank operating at 85 kHz or 6.78 MHz.</p>
+
+  <p>At Huaxing PCBA, we've manufactured wireless power transfer PCBs across all three power tiers — consumer (Qi, Qi2), industrial (AirFuel resonant, AGV charging), and automotive (SAE J2954 EV charging). Our in-house coil inductance verification (LCR on every panel), ferrite lamination (vacuum pressing for zero air gaps), and pre-compliance EMI scanning ensure your WPT PCB meets the certification requirements on the first submission. <a href="/blog/pcb-certifications-compliance.html">See our certifications</a> or <a href="/contact/">send your coil design files and inverter schematic to our engineering team</a> for a 24-hour quote with WPT-specific DFM review.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-wireless-power.webp)">
+      <h2>Building a Wireless Power Product?</h2>
+      <p>Send your coil PCB design and inverter schematic — we'll return a quote with WPT-specific DFM review, including coil inductance verification and EMI pre-compliance recommendations. 24-hour turnaround.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Wireless Power PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script>
+</body>
+</html>
