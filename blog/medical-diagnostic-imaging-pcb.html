@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Diagnostic &amp; Imaging Equipment PCB — CT, MRI &amp; Ultrasound System Manufacturing Requirements | Huaxing PCBA</title>
+<meta name="description" content="PCB design and manufacturing guide for medical diagnostic and imaging equipment. Covers CT scanner detector boards, MRI gradient amplifier PCBs, ultrasound transducer interfaces, and ISO 13485 compliance requirements.">
+<meta property="og:title" content="Medical Diagnostic &amp; Imaging Equipment PCB — CT, MRI &amp; Ultrasound System Manufacturing Requirements">
+<meta property="og:description" content="Complete PCB manufacturing guide for medical imaging systems: CT detectors, MRI gradient amplifiers, and ultrasound transducers. ISO 13485 & IPC Class 3.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/medical-diagnostic-imaging-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/medical-diagnostic-imaging-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-medical-diagnostic-imaging.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Medical Electronics</p>
+      <h1 class="reveal">Medical Diagnostic &amp; Imaging Equipment PCB:<br><em>CT, MRI &amp; Ultrasound System Manufacturing Requirements</em></h1>
+      <p class="reveal">Engineering and procurement guide to PCB design standards, material requirements, and manufacturing protocols for medical diagnostic imaging systems — from CT detector arrays to MRI gradient amplifier boards, with ISO 13485 and IPC Class 3 compliance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Medical Diagnostic Imaging PCB</span></div>
+
+  <p>A computed tomography scanner generates <span class="data-point">2,000-3,000</span> projection images per rotation, each captured by a detector array with <span class="data-point">16 to 320 rows</span> of scintillator elements. Behind every detector element sits an analog front-end channel on a PCB that must digitize sub-picoampere photodiode currents with <span class="data-point">24-bit</span> resolution at thousands of samples per second — while sitting inside a gantry rotating at <span class="data-point">0.3 seconds per revolution</span> under X-ray radiation. Medical imaging PCBs operate at the intersection of extreme analog precision, high-voltage isolation, radiation tolerance, and regulatory traceability that no other industry demands simultaneously.</p>
+
+  <p>At Huaxing PCBA, we manufacture medical-grade PCBs under <span class="data-point">ISO 13485</span> quality management and <span class="data-point">IPC Class 3</span> acceptance criteria — the standards required for life-critical medical devices. Our facility handles boards up to <span class="data-point">32 layers</span> with <span class="data-point">3/3 mil</span> trace/space, laser-drilled microvias at <span class="data-point">0.075 mm</span>, and full lot traceability from laminate receipt through final electrical test. This guide covers the PCB design and manufacturing requirements specific to the three most common medical imaging modalities — CT, MRI, and ultrasound — based on engineering experience supporting medical OEMs.</p>
+
+  <img class="article-img" src="../generated/blog-medical-diagnostic-imaging-hero.webp" alt="High-density medical imaging PCB with multi-channel analog front-end and gold-plated detector interface contacts under inspection" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 1: CT Detector PCB ── -->
+  <h2>CT Scanner Detector PCBs: Ultra-Low-Noise Analog Design at Scale</h2>
+
+  <p>The detector board in a modern CT scanner is an engineering marvel of miniaturization — it converts X-ray photons into electrical signals across hundreds of channels in parallel, then multiplexes and digitizes the results in real time as the gantry spins. The PCB must maintain signal fidelity at noise levels measured in femtocoulombs while surviving sustained radiation exposure and repeated mechanical stress from 0.3-second rotational cycles, 24 hours a day in hospital environments.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Analog Front-End Architecture: 64-256 Channels per Board</h4>
+      <p>A typical CT detector PCB routes <span class="data-point">64-256</span> photodiode channels through transimpedance amplifiers, integrators, and ADCs — all on a single board less than <span class="data-point">200 × 50 mm</span>. The channel-to-channel crosstalk must remain below <span class="data-point">-80 dB</span> across all channels, which requires individual guard traces between adjacent analog inputs and dedicated ground return paths that do not share vias with neighboring channels. A single poorly-routed return path can couple enough charge from an adjacent saturated channel to create a <span class="data-point">2-3 HU</span> (Hounsfield Unit) artifact visible in the reconstructed image. For detailed analog-digital partitioning strategies, see our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Material Selection for Radiation Environment</h4>
+      <p>CT detector PCBs are exposed to scattered X-ray radiation throughout their service life — typically <span class="data-point">5-10 years</span> of continuous hospital operation. Standard FR-4 substrates can experience gradual embrittlement and dielectric property drift under cumulative radiation dose. Medical imaging OEMs increasingly specify polyimide or high-Tg FR-4 (Tg &ge; <span class="data-point">170°C</span>) with documented radiation tolerance testing. Polyimide substrates offer superior radiation resistance but cost <span class="data-point">3-5×</span> more than high-Tg FR-4. For substrate selection across different operating environments, consult our <a href="/blog/pcb-materials-guide.html">PCB materials selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Gold-Plated Detector Interface Contacts</h4>
+      <p>The connection between the scintillator array and the PCB detector channels is typically made through spring-loaded contacts or conductive epoxy bonds on gold-plated pads. The gold plating must meet <span class="data-point">IPC-4552 Type II</span> specifications — minimum <span class="data-point">0.5 μm</span> gold thickness over <span class="data-point">3-5 μm</span> nickel — to prevent oxidation and maintain consistent contact resistance across all channels for the device lifetime. Any channel with elevated contact resistance creates a gain error that appears as ring artifacts in the reconstructed image. For gold plating specifications and process control, see our <a href="/blog/pcb-gold-plating-hard-vs-soft.html">PCB gold plating guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Engineering Reality Check:</strong> A 256-channel CT detector board with 0.4 mm pitch photodiode pads typically requires stacked microvias and at least <span class="data-point">8-10 routing layers</span> to fan out all channels. The via aspect ratio for laser-drilled microvias (75 μm diameter through 50 μm dielectric) is <span class="data-point">0.67:1</span> — well within standard manufacturing capability, but the registration tolerance between the laser drill and the capture pad must be held to <span class="data-point">±25 μm</span>. Suppliers quoting ±50 μm registration will produce boards where 5-10% of microvias partially miss their capture pads — functionally invisible on electrical test but failing after 6 months of thermal cycling in the gantry.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-medical-diagnostic-imaging-detail.webp" alt="Medical MRI gradient amplifier PCB with heavy copper power traces and high-voltage isolation barriers" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 2: MRI Gradient Amplifier PCB ── -->
+  <h2>MRI Gradient Amplifier PCBs: High-Current, High-Voltage Power Electronics</h2>
+
+  <p>MRI gradient amplifiers generate precisely-controlled current pulses of <span class="data-point">300-600A</span> at voltages up to <span class="data-point">2,000V</span> to drive the X, Y, and Z gradient coils that spatially encode the MRI signal. These are fast-switching power electronic circuits — typical slew rates of <span class="data-point">200 T/m/s</span> require di/dt values that produce significant electromagnetic interference, all while the board itself sits in the fringe field of a <span class="data-point">1.5T or 3T</span> static magnetic field.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>IGBT/SiC MOSFET Gate Driver PCB Layout</h4>
+      <p>The gate driver PCB for MRI gradient amplifiers switches IGBT or SiC MOSFET modules with gate charges of <span class="data-point">2-5 μC</span> at frequencies from DC to <span class="data-point">10 kHz</span>. The gate drive loop inductance must stay below <span class="data-point">10 nH</span> to achieve the required switching speed without overshoot — this translates to a gate drive trace length of less than <span class="data-point">50 mm</span> from driver IC to power module, with the return path directly adjacent on the next layer. Every additional millimeter of gate loop adds approximately <span class="data-point">1 nH</span> of inductance. For high-voltage PCB design rules including creepage and clearance, see our <a href="/blog/high-voltage-pcb-design.html">high-voltage PCB design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Heavy Copper for 600A Current Paths</h4>
+      <p>The main current-carrying traces in a gradient amplifier PCB must handle <span class="data-point">600A</span> peak currents with acceptable I²R losses. Using standard 1 oz copper would require trace widths exceeding <span class="data-point">200 mm</span> — physically impossible on a standard PCB. The practical solution uses <span class="data-point">6-12 oz</span> copper on the power layers, often with busbar augmentation for the highest-current sections. Heavy copper PCBs require specialized etching compensation — the etch factor (ratio of lateral to vertical etch) for 6 oz copper is typically <span class="data-point">1:1.5 to 1:2</span>, meaning a 6 oz trace designed at 5 mm width will emerge from etching at approximately <span class="data-point">4.2 mm</span>. Our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB guide</a> covers the design rules and manufacturing constraints for thick copper boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Thermal Management: 2-5 kW Dissipation per Amplifier Channel</h4>
+      <p>A single gradient amplifier channel dissipates <span class="data-point">2-5 kW</span> during high-duty-cycle sequences like diffusion-weighted imaging. The PCB must conduct this heat away from the power semiconductors to a liquid-cooled cold plate — typically using a metal-core or aluminum-backed PCB construction. Thermal vias under each IGBT module should use <span class="data-point">0.3 mm</span> diameter with <span class="data-point">0.8 mm</span> pitch, filled and capped, with thermal resistance below <span class="data-point">0.5°C/W</span> from junction to cold plate interface. For comprehensive thermal management strategies, refer to our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a>.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Ultrasound Transducer PCB ── -->
+  <h2>Ultrasound Transducer Interface PCBs: High-Channel-Count Acoustic Arrays</h2>
+
+  <p>Modern ultrasound transducers contain <span class="data-point">128-256</span> piezoelectric elements in a phased array, each requiring an independent transmit/receive channel. The PCB inside the transducer handle — or in the system's front-end processing board — must route all these channels through transmit beamformers, T/R switches, and low-noise amplifiers in a constrained form factor. The challenge is density: 256 channels of analog processing on a board that may be only <span class="data-point">40 × 100 mm</span> in the transducer handle.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Flex-to-Rigid Interface for Transducer Handle PCBs</h4>
+      <p>The connection from the transducer elements to the PCB typically uses a <a href="/blog/rigid-flex-pcb.html">rigid-flex PCB</a> design: a flex tail with <span class="data-point">128-256</span> traces at <span class="data-point">0.2 mm</span> pitch bonds directly to the piezoelectric array, while the rigid section houses the transmit/receive ASICs. The flex section must survive <span class="data-point">millions</span> of flex cycles as the transducer is manipulated during scanning. Trace pitch at 0.2 mm requires laser-direct imaging (LDI) for patterning, and the flex-to-rigid transition zone must include strain relief features to prevent trace cracking at the rigidity boundary.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Transmit Pulser: ±100V High-Voltage Isolation per Channel</h4>
+      <p>Ultrasound transmit pulsers generate <span class="data-point">±50 to ±100V</span> pulses with rise times of <span class="data-point">5-10 ns</span> to excite the piezoelectric elements. Each channel must be isolated from its neighbors — parasitic capacitance between adjacent transmit traces causes element-to-element coupling that degrades beamforming accuracy. The isolation requirement between adjacent channels at 5 MHz is typically <span class="data-point">-40 dB</span> minimum crosstalk, achieved through ground-guard traces and dedicated return paths. At 0.2 mm pitch, fitting ground guards between every signal trace leaves only <span class="data-point">75 μm</span> trace width — at the limit of standard PCB fabrication and requiring specialized controlled-depth routing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Receive Path: Sub-1 nV/√Hz Noise Floor</h4>
+      <p>The ultrasound receiver LNA (low-noise amplifier) must achieve noise figures below <span class="data-point">1 nV/√Hz</span> at the operating frequency (typically <span class="data-point">2-15 MHz</span>) to detect weak echoes from deep tissue. Achieving this on a production PCB requires: dedicated analog power planes with Pi-filter decoupling at each LNA, no switching power supply traces within <span class="data-point">5 mm</span> of the analog input section, and continuous ground planes with no splits under the signal path. A digital ground plane slot inadvertently placed under 16 of 256 channels will raise the noise floor of those channels by <span class="data-point">3-6 dB</span> — producing a visible stripe artifact in the B-mode image.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 4: ISO 13485 Compliance ── -->
+  <h2>Regulatory Compliance: ISO 13485 &amp; FDA Design Controls for Medical PCBs</h2>
+
+  <p>Medical diagnostic equipment PCBs are subject to regulatory requirements that go far beyond standard IPC specifications. The key differences between industrial-grade and medical-grade PCB manufacturing come down to documentation, traceability, and process validation.</p>
+
+  <table class="spec-table">
+    <tr><th>Requirement</th><th>Industrial (IPC Class 2)</th><th>Medical (IPC Class 3 + ISO 13485)</th></tr>
+    <tr><td>Lot traceability</td><td>Date code on board</td><td>Full chain: laminate lot → drilling → plating → etching → solder mask → electrical test, with documented lot genealogy</td></tr>
+    <tr><td>Microsection</td><td>Monthly qualification coupon</td><td>Per-lot cross-section on production panel, photomicrographs archived for device lifetime</td></tr>
+    <tr><td>Cleanliness</td><td>Visual inspection</td><td>ROSE test &lt;1.56 μg/cm² NaCl per IPC-6012, documented per lot</td></tr>
+    <tr><td>Change control</td><td>Supplier discretion</td><td>Formal PCN (Process Change Notification) 90 days before any material, process, or equipment change</td></tr>
+    <tr><td>First article</td><td>Sample inspection</td><td>AS9102-style FAIR (First Article Inspection Report) with CMM data on all critical dimensions</td></tr>
+    <tr><td>Process validation</td><td>Not required</td><td>IQ/OQ/PQ (Installation/Operational/Performance Qualification) for all critical processes</td></tr>
+  </table>
+
+  <p>For a detailed comparison of IPC quality standards and how they map to medical device requirements, see our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 guide</a>. For the full regulatory framework covering medical PCBs, read our <a href="/blog/medical-device-pcb.html">medical device PCB manufacturing guide</a>.</p>
+
+  <div class="highlight-box">
+    <p><strong>Regulatory Pitfall:</strong> Many PCB suppliers claim "ISO 13485 compliant" when they actually mean "we have read the standard." True ISO 13485 certification requires an audit by a Notified Body (e.g., BSI, TÜV SÜD) and the certificate scope must explicitly include PCB manufacturing. Before engaging a supplier for a medical imaging program, validate the certificate directly on the Notified Body's public database — do not accept a PDF from the supplier.</p>
+  </div>
+
+  <!-- ── Section 5: Supplier Selection ── -->
+  <h2>Selecting a PCB Supplier for Medical Imaging Programs</h2>
+
+  <p>Medical imaging OEMs evaluating PCB suppliers should assess these five dimensions beyond the standard quality audit:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Device History Record (DHR) Infrastructure</h4>
+      <p>Under FDA 21 CFR Part 820, every production lot of a medical device PCB must have a Device History Record that demonstrates the lot was manufactured in accordance with the Device Master Record. A supplier who cannot produce a DHR — or who produces one that is a photocopy of the traveler with "passed" checked on every operation — will fail an FDA inspection. Our quality system maintains <a href="/blog/pcb-certifications-compliance.html">full DHR documentation</a> with process parameter recordings, inspection data, and material certificates for every production lot.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Single-Lot Integrity</h4>
+      <p>Medical PCB lots smaller than a full production panel are often combined with other customers' boards on a shared panel — a practice called "batching." While cost-effective, batching breaks lot traceability and can introduce cross-contamination if another customer's board uses incompatible materials or processes. For Class 3 medical PCBs, insist on dedicated panels with single-lot integrity, even if this increases unit cost by <span class="data-point">15-25%</span> for low-volume builds. For low-volume PCB assembly strategies, see our <a href="/blog/low-volume-pcb-assembly.html">low-volume PCB assembly guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>In-House Microsection and Failure Analysis</h4>
+      <p>When a CT detector board shows elevated noise on channels 47-52 after 18 months in the field, the root cause investigation requires cross-sectioning through those specific channels and SEM/EDS analysis of any anomalies found. A supplier who outsources failure analysis to a third-party lab will take <span class="data-point">4-6 weeks</span> to return results — during which time your field service team cannot provide answers to the hospital. In-house microsection and <a href="/blog/pcb-failure-analysis-guide.html">PCB failure analysis capability</a> reduces this to <span class="data-point">3-5 days</span>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Long-Term Process Stability for 10+ Year Product Lifecycles</h4>
+      <p>Medical imaging equipment has product lifecycles of <span class="data-point">10-15 years</span> — far longer than consumer electronics. A PCB supplier who changes etching chemistry, laminate suppliers, or solder mask formulations without formal PCN (Process Change Notification) creates a regulatory risk. Medical OEMs should require: documented process stability over a minimum <span class="data-point">3-year</span> lookback period, contractual commitment to <span class="data-point">90-day</span> advance PCN for any process or material change, and EOL (end-of-life) buy notification for laminate or chemical discontinuation. See our <a href="/blog/component-obsolescence-management.html">component obsolescence management guide</a> for EOL planning strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>IPC Class 3 Acceptance Rate on First Article</h4>
+      <p>Many suppliers claim Class 3 capability but their first-article yield on a complex medical board tells a different story. A board with 12+ layers, stacked microvias, and <span class="data-point">3/3 mil</span> line/space should achieve <span class="data-point">>90%</span> first-pass yield on Class 3 electrical test and <span class="data-point">>85%</span> on microsection acceptance. Suppliers offering Class 3 at Class 2 pricing are often gambling that you won't actually perform the Class 3 microsection inspection — always audit the first production lot yourself or through a third-party inspection service. Our <a href="/blog/pcb-supplier-audit.html">PCB supplier audit guide</a> provides a structured framework for on-site quality assessment.</p>
+    </div>
+  </div>
+
+  <!-- ── Closing ── -->
+  <h2>Starting Your Medical Imaging PCB Project</h2>
+
+  <p>Medical diagnostic imaging PCBs operate under constraints that no other industry combines: sub-picoampere analog precision next to 600A power stages, multi-year radiation exposure, regulatory traceability from laminate lot to finished device, and product lifecycles measured in decades. The margin for error is zero — an artifact in a CT image leads to a misdiagnosis; a gradient amplifier failure during an MRI scan interrupts a procedure that may have required sedation for a pediatric patient.</p>
+
+  <p>At Huaxing PCBA, we manufacture medical-grade PCBs under ISO 13485 quality management with IPC Class 3 acceptance criteria. Our facility provides full lot traceability, per-lot microsection and ionic cleanliness testing, and Device History Record documentation that supports FDA 21 CFR Part 820 compliance. <a href="/blog/medical-device-pcb.html">Read our full medical device PCB guide</a> or <a href="/contact/">contact our engineering team</a> with your stackup and design files for a compliance-focused feasibility review.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-medical-diagnostic-imaging.webp);--cta-bg:url(../generated/blog-cta-medical-diagnostic-imaging.webp)">
+      <h2>Start Your Medical PCB Project</h2>
+      <p>Submit your Gerber files and design specifications. Our ISO 13485 certified team provides a same-day DFM review with Class 3 compliance assessment, material recommendations, and full lot traceability documentation.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Medical PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

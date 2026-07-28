@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADAS &amp; Autonomous Driving PCB Requirements — Sensor Fusion, Radar &amp; LiDAR Module Manufacturing | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB design and manufacturing guide for ADAS and autonomous driving systems. Covers radar PCB (24/77 GHz), LiDAR receiver boards, camera module substrates, and sensor fusion controller requirements. IATF 16949 certified.">
+<meta property="og:title" content="ADAS &amp; Autonomous Driving PCB Requirements — Sensor Fusion, Radar &amp; LiDAR Module Manufacturing">
+<meta property="og:description" content="Complete PCB manufacturing guide for ADAS sensor modules: radar, LiDAR, camera, and fusion controllers. IATF 16949 certified.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/adas-autonomous-driving-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/adas-autonomous-driving-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-adas-autonomous-driving.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Automotive Electronics</p>
+      <h1 class="reveal">ADAS &amp; Autonomous Driving PCB Requirements:<br><em>Sensor Fusion, Radar &amp; LiDAR Module Manufacturing</em></h1>
+      <p class="reveal">A procurement engineer's guide to PCB design constraints, material selection, and manufacturing tolerances for ADAS sensor modules — from 77 GHz radar to high-density LiDAR receiver arrays.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>ADAS &amp; Autonomous Driving PCB</span></div>
+
+  <p>Every modern vehicle rolling off the assembly line in 2026 carries between 8 and 14 ADAS sensor modules. Behind each radar dome, camera housing, and LiDAR unit sits at least one PCB that must maintain signal integrity at <span class="data-point">77 GHz</span> while surviving <span class="data-point">-40°C to +125°C</span> thermal cycling for the vehicle's entire service life. Getting these boards right isn't just about hitting a spec sheet — it's about understanding what happens when a 3/3 mil trace carrying a millimeter-wave signal encounters a microvoid that passed standard AOI but fails under automotive thermal shock.</p>
+
+  <p>Huaxing PCBA manufactures ADAS-grade PCBs across <span class="data-point">8 SMT lines</span> under IATF 16949 certified quality management — the same standard required by Tier-1 automotive suppliers worldwide. Our facility handles <span class="data-point">32-layer</span> boards with impedance control at <span class="data-point">±5%</span> tolerance across the full -40°C to +125°C operating range, with 100% automated optical inspection and 4-wire Kelvin testing on every lot. For procurement managers evaluating PCB suppliers for ADAS programs, this guide covers the technical requirements that separate production-ready boards from qualification failures.</p>
+
+  <img class="article-img" src="../generated/blog-adas-autonomous-driving-hero.webp" alt="Automotive radar PCB with 77 GHz antenna array and high-frequency substrate under inspection" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 1: Radar PCB ── -->
+  <h2>Radar Sensor PCB: 24 GHz and 77 GHz Design Requirements</h2>
+
+  <p>Automotive radar is the workhorse of ADAS — adaptive cruise control, blind-spot detection, and automatic emergency braking all depend on radar PCBs that can transmit and receive millimeter-wave signals with minimal insertion loss. The gap between a functional prototype and a production-grade radar PCB comes down to substrate selection, copper profile control, and layer-to-layer registration tolerance.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Substrate Selection: Rogers RO3003, RO4835, or Isola Astra MT77</h4>
+      <p>Standard FR-4 is unusable at 77 GHz — its dielectric constant (Dk) varies too much with temperature and frequency. Radar PCB substrates require Dk tolerance within <span class="data-point">±0.05</span> across -40°C to +125°C and dissipation factor (Df) below <span class="data-point">0.003</span> at 77 GHz. Rogers RO3003G2 (Dk 3.00 ±0.04) and RO4835 (Dk 3.48) are the industry standards for long-range radar. For cost-sensitive short-range radar (24 GHz), hybrid constructions with Rogers RF layer on FR-4 core layers can reduce material cost by <span class="data-point">30-40%</span> while maintaining acceptable performance. See our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB design guide</a> for detailed substrate comparison data.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Copper Surface Roughness: Why 2 μm RMS Matters at 77 GHz</h4>
+      <p>At millimeter-wave frequencies, signal current travels almost entirely within <span class="data-point">0.2 μm</span> of the copper surface — the skin effect depth shrinks as frequency increases. Any surface roughness above <span class="data-point">2 μm RMS</span> creates additional conductor loss that degrades radar range and resolution. Production radar PCBs must use low-profile (LP) or very-low-profile (VLP) copper foil — standard electrodeposited (ED) copper with 5-8 μm RMS roughness can increase insertion loss by <span class="data-point">2-3 dB</span> at 77 GHz, effectively halving the radar's effective detection range.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Impedance Control: ±5% at Operating Temperature</h4>
+      <p>Radar antenna feed lines are typically designed for <span class="data-point">50Ω</span> single-ended or <span class="data-point">100Ω</span> differential impedance. A 10% impedance mismatch at 77 GHz creates a return loss of only -20 dB in simulation but can degrade to -12 dB after manufacturing tolerances stack up — enough to trigger VSWR faults during module-level testing. Our <a href="/blog/impedance-control.html">impedance control process</a> uses TDR verification on every panel, not just coupon sampling, to guarantee ±5% across all operating temperatures. For differential pairs, line width tolerance is held to <span class="data-point">±0.5 mil</span> and spacing to <span class="data-point">±0.75 mil</span>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> When quoting radar PCBs, always specify "controlled impedance with TDR report per panel" rather than just "controlled impedance." The difference is the difference between a statistical process control approach (coupons only) and 100% verification. For ADAS safety-critical applications, per-panel TDR data is increasingly a non-negotiable deliverable in RFQs from Tier-1 suppliers.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-adas-autonomous-driving-detail.webp" alt="LiDAR receiver PCB with photodiode array and high-density interconnect under microscope inspection" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 2: LiDAR PCB ── -->
+  <h2>LiDAR Receiver &amp; Transmitter PCB: High-Density Optical Sensor Arrays</h2>
+
+  <p>LiDAR modules present a different set of PCB challenges from radar — instead of millimeter-wave RF constraints, the dominant requirements are extreme interconnect density for photodiode arrays, ultra-low noise analog front-ends, and precise mechanical alignment between the PCB and optical elements. A 128-channel LiDAR receiver board packs <span class="data-point">128 analog channels</span> plus digitization and serialization into a board often smaller than a credit card.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>HDI Microvia Architecture for Photodiode Fan-Out</h4>
+      <p>LiDAR photodiode arrays use pad pitches as tight as <span class="data-point">0.4 mm</span>, requiring laser-drilled microvias (75 μm diameter) with stacked or staggered architecture. A 128-element array needs <span class="data-point">256+ microvias</span> for signal and ground within a few square centimeters. Stacked microvias reduce the routing footprint by 40% compared to staggered, but require more careful copper plating control to avoid barrel cracks during thermal cycling. Our <a href="/blog/hdi-technology.html">HDI PCB technology guide</a> covers the trade-offs between stacked and staggered microvia designs for different reliability requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Analog Front-End: Sub-100 μV Noise Floor Requirements</h4>
+      <p>The transimpedance amplifier (TIA) stage that converts photodiode current to voltage must operate with input-referred noise below <span class="data-point">2 pA/√Hz</span>. Achieving this on a production PCB requires: dedicated analog ground planes separated from digital ground with a single-point connection at the ADC, guard rings around high-impedance TIA inputs, and no digital traces crossing the analog section on any layer. One poorly placed via carrying a 50 MHz SPI clock under the TIA section can couple enough noise to degrade the LiDAR's minimum detectable signal by <span class="data-point">6-10 dB</span>. See our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a> for grounding and partitioning strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Laser Driver PCB: Managing 40A Peak Currents in Nanosecond Pulses</h4>
+      <p>The laser transmitter side of LiDAR drives VCSEL or edge-emitting laser arrays with current pulses reaching <span class="data-point">30-40A</span> in <span class="data-point">5-10 ns</span> rise times. These di/dt values create ground bounce and electromagnetic interference that can couple into the sensitive receiver side if not managed. The laser driver PCB requires: heavy copper traces (<span class="data-point">4-6 oz</span>) for the main current path, low-ESL capacitor banks within <span class="data-point">2 mm</span> of the laser anode, and a dedicated power plane with stitching vias every <span class="data-point">2 mm</span>. For high-current PCB design beyond typical limits, consult our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB guide</a>.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Camera Module PCB ── -->
+  <h2>Camera Module PCB: High-Speed Serial Links &amp; Thermal Management</h2>
+
+  <p>ADAS cameras have evolved from simple NTSC analog outputs to multi-megapixel digital imagers streaming raw video over GMSL2 or FPD-Link III serializers at <span class="data-point">6 Gbps</span> per lane. The PCB inside an automotive camera module must handle this high-speed serial data while fitting into a housing often no larger than <span class="data-point">25 × 25 mm</span> — and dissipating heat from an image sensor and serializer that together generate <span class="data-point">2-4W</span> in a sealed enclosure.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>GMSL2/FPD-Link III Serial Links: 6 Gbps Differential Pair Routing</h4>
+      <p>A 6 Gbps serial link requires intra-pair skew below <span class="data-point">2 ps</span> — that translates to a length mismatch tolerance of less than <span class="data-point">0.3 mm</span> on standard FR-4 substrates after accounting for weave effect. Production camera PCBs should specify spread-glass or low-Dk laminate in the serializer routing layer to minimize glass-weave skew, a phenomenon that can cause 5-15 ps of deterministic jitter on longer differential pairs. The serializer output pair should be routed on a single layer with no vias between the chip and the FAKRA/HSD connector — each via adds <span class="data-point">0.5-1.0 dB</span> of insertion loss at 3 GHz (the Nyquist frequency for 6 Gbps NRZ).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Thermal Management in Sealed Camera Enclosures</h4>
+      <p>Automotive camera modules are IP69K sealed — no airflow, no ventilation. The image sensor alone dissipates <span class="data-point">1-2W</span> and the serializer adds another <span class="data-point">1-1.5W</span>. In direct sunlight on a 40°C day, the internal temperature can reach <span class="data-point">95-105°C</span>. The PCB design must incorporate: thermal vias under the image sensor BGA (0.3 mm diameter, 1.0 mm pitch, filled and capped), a copper coin or metal-core layer for the serializer, and high-Tg laminate (Tg &ge; 170°C) to prevent delamination under sustained thermal load. For comprehensive thermal design strategies, see our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Flex and Rigid-Flex for Multi-Board Camera Stacks</h4>
+      <p>Many ADAS camera modules use a stacked PCB architecture: a rigid image sensor board connected to a rigid serializer/connector board via a short flex section that folds around the optical assembly. This requires <a href="/blog/rigid-flex-pcb.html">rigid-flex PCB manufacturing</a> with tight bend radius control — typically <span class="data-point">2-3 mm</span> minimum bend radius for a 2-layer flex with 0.5 oz copper and polyimide substrate. The flex section must survive <span class="data-point">100,000+</span> dynamic bend cycles if the camera includes an auto-focus or optical stabilization mechanism.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 4: Sensor Fusion Controller ── -->
+  <h2>Sensor Fusion ECU: The Central Compute Platform</h2>
+
+  <p>The sensor fusion ECU ingests raw data from 8-14 sensor modules simultaneously — radar point clouds, LiDAR voxel maps, and camera video streams — and runs CNN-based perception algorithms in real time. These boards sit at the intersection of high-speed digital, power delivery, and automotive qualification, often using processors like the Mobileye EyeQ6 or NVIDIA Orin with <span class="data-point">200+ TOPS</span> of AI compute.</p>
+
+  <p>The fusion ECU PCB is typically a <span class="data-point">16-24 layer</span> HDI board with: multiple 10/25 Gbps SerDes lanes connecting to each sensor module, LPDDR5 memory interfaces running at <span class="data-point">6400 MT/s</span>, and a power delivery network that must supply <span class="data-point">50-80W</span> to the SoC while keeping voltage ripple below <span class="data-point">±2%</span> across all load transients. For high-layer-count PCB stackup design, refer to our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a>.</p>
+
+  <div class="highlight-box">
+    <p><strong>Qualification Reality Check:</strong> A sensor fusion ECU PCB must pass the same AEC-Q100 and ISO 16750 environmental stress tests as the ICs mounted on it — including 1,000 thermal cycles (-40°C to +125°C), 85°C/85% RH biased humidity for 1,000 hours, and mechanical shock at 50g. Boards that pass electrical test at room temperature but delaminate or develop CAF (conductive anodic filament) failures during environmental stress are the #1 cause of ADAS program delays at the Tier-1 level.</p>
+  </div>
+
+  <!-- ── Section 5: Automotive Qualification ── -->
+  <h2>Automotive Qualification: What Your PCB Supplier Must Demonstrate</h2>
+
+  <p>An ADAS PCB isn't qualified just because the supplier claims automotive capability. Procurement managers should verify the following before placing a production order:</p>
+
+  <table class="spec-table">
+    <tr><th>Requirement</th><th>Standard</th><th>What to Verify</th></tr>
+    <tr><td>Quality system</td><td>IATF 16949:2016</td><td>Valid certificate, not expired, scope includes PCB manufacturing</td></tr>
+    <tr><td> cleanliness</td><td>IPC-6012 Class 3 + ionic contamination &lt;1.56 μg/cm² NaCl equivalent</td><td>Per-lot ROSE test data, not just annual qualification coupon</td></tr>
+    <tr><td>CAF resistance</td><td>IPC-TM-650 2.6.25</td><td>500-hour test at 85°C/85% RH with 100V DC bias, resistance &gt;100 MΩ</td></tr>
+    <tr><td>Thermal reliability</td><td>IPC-TM-650 2.6.7 (IST) or 2.6.27 (thermal shock)</td><td>Minimum 6 cycles of IST testing at 150°C or 100 cycles air-to-air thermal shock (-40/+125°C)</td></tr>
+    <tr><td>Microsection</td><td>IPC-6012 Class 3 Table 3-2</td><td>Per-lot cross-section on production panel, not just qualification sample</td></tr>
+    <tr><td>Impedance TDR</td><td>IPC-TM-650 2.5.5.7</td><td>±5% across full operating temperature range, measured on production panel coupons</td></tr>
+  </table>
+
+  <p>For a comprehensive overview of PCB quality standards, including the differences between IPC-A-600, IPC-6012, and IPC-A-610, read our <a href="/blog/ipc-standards-comparison.html">IPC standards comparison</a>. For automotive-specific certification requirements beyond what's covered here, see our <a href="/blog/automotive-pcb-requirements.html">automotive PCB requirements guide</a>.</p>
+
+  <!-- ── Section 6: Supplier Selection ── -->
+  <h2>Selecting a PCB Supplier for ADAS Programs: 5 Decision Criteria</h2>
+
+  <p>After the technical requirements are defined, procurement teams need a structured way to evaluate potential PCB suppliers. Based on lessons learned from multiple Tier-1 supplier transitions, here are the criteria that separate suppliers who deliver production-ready boards from those who pass the audit but fail the first PPAP submission.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>In-House RF Testing Capability</h4>
+      <p>Suppliers who outsource impedance TDR or VNA measurements to a third-party lab add <span class="data-point">3-5 days</span> to the NPI cycle and lose the ability to correlate process parameters with RF performance in real time. For ADAS radar and high-speed camera serial links, insist on in-house TDR and VNA equipment with documented correlation to customer reference measurements. Our facility performs <a href="/blog/impedance-control.html">100% impedance TDR verification</a> on every production panel.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Proven High-Frequency Material Inventory Management</h4>
+      <p>Rogers and Isola high-frequency laminates have shelf lives — typically <span class="data-point">6-12 months</span> from date of manufacture under controlled temperature and humidity storage. A supplier who buys material per-order rather than maintaining strategic inventory will cause lead time spikes when laminate lead times extend. Ask potential suppliers to show their Rogers material inventory log with lot traceability back to the manufacturer date code. For laminate selection guidance, see our <a href="/blog/pcb-materials-guide.html">PCB materials selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>PPAP Experience: Not All Level 3 Submissions Are Equal</h4>
+      <p>A meaningful PPAP Level 3 submission for an ADAS PCB includes: dimensional report with CMM data on every critical feature (not just the 3 easiest-to-measure dimensions), material certificates with actual test values (not just "conforms to specification"), full TDR data for controlled-impedance traces on the production panel (not a separate test coupon panel), and microsection photographs with measurement annotations. Suppliers who have never completed a PPAP for a Tier-1 automotive customer often underestimate the documentation depth required. Our <a href="/blog/pcb-cross-section-report-guide.html">cross-section report interpretation guide</a> helps buyers understand what a proper microsection report should contain.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Cleanliness Control Beyond Visual Inspection</h4>
+      <p>ADAS PCBs operating in under-hood or external vehicle locations face condensation, road salt, and temperature cycling that accelerate electrochemical migration if ionic contamination remains on the board. The supplier's standard process should include <a href="/blog/pcb-ionic-contamination-cleanliness-testing.html">ROSE ( Resistivity of Solvent Extract) testing</a> at &lt;1.56 μg/cm² NaCl equivalent per IPC-6012, not just an annual qualification test. Per-lot cleanliness data should be part of the standard Certificate of Analysis, not an optional add-on.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating Capability for Exterior-Mounted Sensors</h4>
+      <p>Radar and LiDAR modules mounted behind the front bumper or grille are exposed to water spray, salt, and de-icing chemicals. The PCB assembly must include <a href="/blog/pcb-conformal-coating-guide.html">conformal coating</a> — typically acrylic or silicone-based — applied at <span class="data-point">25-75 μm</span> thickness with documented coverage verification (UV inspection). Suppliers without in-house conformal coating must subcontract this step, adding cost, lead time, and a quality handoff point that often fails during production ramp.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 7: Production Scaling ── -->
+  <h2>From NPI to Production: Scaling ADAS PCB Manufacturing</h2>
+
+  <p>The transition from 50-unit NPI builds to 50,000-unit annual production volumes is where many ADAS PCB programs encounter delays. Three areas demand early attention from procurement teams planning volume ramp:</p>
+
+  <p><strong>Panel Utilization Optimization</strong> — A radar PCB that fits 48-up on an 18×24" panel during NPI may only fit 36-up when production fiducials, tooling holes, and test coupon areas are added. This <span class="data-point">25%</span> drop in panel utilization directly increases unit cost — but discovering it after tooling is fabricated creates a 4-6 week delay. Engage your supplier's CAM engineering team during the prototyping phase for panelization optimization. Our <a href="/blog/pcb-panelization-cost-optimization.html">panelization cost optimization guide</a> covers strategies to maximize yield per panel.</p>
+
+  <p><strong>Test Strategy Alignment</strong> — NPI builds often use flying probe testing for flexibility, but volume production typically transitions to bed-of-nails fixtures for throughput. The test point layout must be designed for both methods from the start — adding test points after the design is frozen requires a board re-spin. See our <a href="/blog/pcb-design-for-testability.html">design for testability guide</a> for test point placement rules that support both flying probe and ICT.</p>
+
+  <p><strong>Second Source Qualification</strong> — Automotive OEMs increasingly require a qualified second-source PCB supplier before SOP (Start of Production). The qualification timeline — from audit to PPAP approval — typically takes <span class="data-point">16-20 weeks</span>. Procuring teams should initiate second-source qualification at least 6 months before the planned SOP date, not after the primary supplier demonstrates consistent production quality. For supplier transition strategies, see our <a href="/blog/pcb-supplier-transition-guide.html">PCB supplier transition guide</a>.</p>
+
+  <!-- ── Closing ── -->
+  <h2>Getting Started with ADAS PCB Manufacturing</h2>
+
+  <p>ADAS and autonomous driving PCB requirements span RF design, HDI fabrication, thermal management, and automotive qualification — a combination that demands a supplier with both technical depth and production process discipline. The key takeaway for procurement managers: the most expensive PCB is not the one with the highest unit price but the one that passes electrical test at the factory and fails during thermal cycling qualification at the module level, triggering a 12-week re-spin and delaying your SOP by a full quarter.</p>
+
+  <p>At Huaxing PCBA, we manufacture ADAS-grade PCBs under IATF 16949 certified quality management with in-house impedance TDR, microsection analysis, and ionic cleanliness testing on every production lot. Our engineering team has supported PPAP Level 3 submissions for Tier-1 automotive suppliers across radar, LiDAR, and camera module programs. <a href="/blog/automotive-pcb-requirements.html">Read our automotive PCB requirements guide</a> for the full qualification framework or <a href="/contact/">contact our engineering team</a> with your Gerber files and stackup requirements for a same-day feasibility review.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-adas-autonomous-driving.webp);--cta-bg:url(../generated/blog-cta-adas-autonomous-driving.webp)">
+      <h2>Start Your ADAS PCB Project</h2>
+      <p>Upload your Gerber files and stackup requirements. Our IATF 16949 certified team delivers a same-day DFM review with impedance analysis, material recommendations, and a production timeline — free for qualified projects.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Your Gerber Files <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

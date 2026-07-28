@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV On-Board Charger &amp; DC-DC Converter PCB — High-Voltage, High-Current Design for Electric Vehicle Power Electronics | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB design and manufacturing guide for EV on-board chargers (OBC) and DC-DC converters. Covers 800V high-voltage isolation, SiC MOSFET gate drivers, planar transformer PCBs, and automotive qualification. IATF 16949 certified.">
+<meta property="og:title" content="EV On-Board Charger &amp; DC-DC Converter PCB — High-Voltage, High-Current Design for Electric Vehicle Power Electronics">
+<meta property="og:description" content="PCB manufacturing guide for EV on-board chargers and DC-DC converters: 800V isolation, SiC gate drivers, planar transformers. IATF 16949 certified.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/ev-obc-dcdc-converter-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/ev-obc-dcdc-converter-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SUB-HERO — cover image + dark overlay + H1  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ev-obc-dcdc-converter.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Automotive Electronics</p>
+      <h1 class="reveal">EV On-Board Charger &amp; DC-DC Converter PCB:<br><em>High-Voltage, High-Current Design for Electric Vehicle Power Electronics</em></h1>
+      <p class="reveal">Engineering and procurement guide to PCB design, material selection, and manufacturing requirements for 800V on-board chargers, 400V-to-12V DC-DC converters, and SiC-based power stages — designed for IATF 16949 automotive qualification.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  ARTICLE BODY          -->
+<!-- ═══════════════════════ -->
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>EV OBC &amp; DC-DC Converter PCB</span></div>
+
+  <p>Every electric vehicle on the road carries two power conversion modules that most drivers never think about: the on-board charger (OBC) that converts AC grid power to high-voltage DC for the traction battery, and the DC-DC converter that steps down <span class="data-point">400-800V</span> from the high-voltage bus to <span class="data-point">12V</span> for the vehicle's low-voltage systems. Together, these modules process <span class="data-point">3.3-22 kW</span> of power continuously, switching at frequencies from <span class="data-point">50 kHz to 500 kHz</span>, inside an aluminum housing that sees under-hood temperatures from <span class="data-point">-40°C to +105°C</span>. The PCB inside these modules is the difference between a power converter that delivers its rated efficiency for 150,000 miles and one that fails at 30,000 miles from delamination under thermal cycling.</p>
+
+  <p>Huaxing PCBA manufactures automotive power PCBs under <span class="data-point">IATF 16949</span> certified quality management, with capabilities spanning <span class="data-point">6 oz</span> heavy copper, <span class="data-point">high-Tg laminate (Tg ≥ 170°C)</span>, and <span class="data-point">8-layer</span> metal-core constructions for power modules. Our facility processes <span class="data-point">8 million solder joints per day</span> across 8 SMT lines and supports the full automotive qualification chain from PPAP Level 3 submission through production ramp. This guide covers the PCB design and manufacturing decisions that determine whether your OBC and DC-DC converter designs make it from prototype to volume production on schedule.</p>
+
+  <img class="article-img" src="../generated/blog-ev-obc-dcdc-converter-hero.webp" alt="EV on-board charger PCB with SiC MOSFET power stage, planar transformer, and high-voltage isolation barriers on aluminum substrate" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 1: OBC PCB Architecture ── -->
+  <h2>On-Board Charger PCB: AC-DC Power Stage Design for 800V Systems</h2>
+
+  <p>The on-board charger converts single-phase or three-phase AC mains (110-240V or 400V AC) to the traction battery's DC voltage — increasingly <span class="data-point">800V</span> in next-generation EV platforms. A bidirectional OBC (capable of vehicle-to-grid or V2G operation) uses a two-stage architecture: an AC-DC PFC (Power Factor Correction) front end followed by an isolated DC-DC converter using a resonant LLC or CLLC topology. The PCB must handle the full power path with efficiency above <span class="data-point">95%</span> to minimize thermal management burden.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>SiC MOSFET Power Stage: 1200V Devices on 800V Bus</h4>
+      <p>Modern OBC designs use silicon carbide (SiC) MOSFETs rated at <span class="data-point">1200V</span> to handle the 800V bus with adequate voltage margin. SiC devices switch at <span class="data-point">10-20 V/ns</span> — 5-10× faster than silicon IGBTs — which reduces switching losses but demands extremely low-inductance gate drive and power loop layouts. The commutation loop inductance between the DC-link capacitor, high-side SiC MOSFET, low-side SiC MOSFET, and return path must stay below <span class="data-point">5 nH</span> to avoid voltage overshoot that can exceed the device rating. Achieving this requires placing the DC-link capacitor within <span class="data-point">10 mm</span> of the half-bridge and using a laminated busbar or 4-layer PCB with power and return on adjacent layers separated by only <span class="data-point">0.2 mm</span> of prepreg.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>High-Voltage Isolation: 800V Bus to Chassis Ground</h4>
+      <p>The PCB must provide reinforced isolation between the high-voltage traction bus and the low-voltage control circuits and chassis ground. IEC 60664-1 requires <span class="data-point">8 mm</span> creepage distance for reinforced isolation at 800V with Pollution Degree 2 and Material Group IIIa (standard FR-4). This is the minimum spacing between any HV trace and any LV trace, connector pin, or mounting hole connected to chassis. For compact OBC designs where 8 mm creepage is impractical, conformal coating can reduce the required creepage to <span class="data-point">4 mm</span> (Pollution Degree 1 equivalent). See our <a href="/blog/high-voltage-pcb-design.html">high-voltage PCB design guide</a> for the complete creepage and clearance calculation methodology, and our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> for coating selection and application requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Planar Transformer PCB: Integrating Magnetics into the Board</h4>
+      <p>The isolated DC-DC stage in a modern OBC often uses a planar transformer — where the primary and secondary windings are implemented as copper traces on the PCB itself, with a ferrite core clamped through cutouts in the board. A <span class="data-point">6.6 kW</span> LLC converter at <span class="data-point">200-300 kHz</span> typically uses an 8-10 layer planar transformer section with <span class="data-point">4 oz</span> copper on the winding layers. The inter-winding capacitance between primary and secondary must be minimized to reduce common-mode EMI — this is achieved by increasing the separation between primary and secondary winding layers (using thicker prepreg) and avoiding overlapping copper areas between primary and secondary on adjacent layers. A properly designed planar transformer PCB can achieve <span class="data-point">98-99%</span> transformer efficiency with <span class="data-point">50%</span> lower profile than a conventional wire-wound transformer.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Reality:</strong> Planar transformer PCBs with 4 oz copper and 8+ layers require a supplier with proven heavy copper lamination capability. The lamination cycle for a 4 oz multilayer board takes <span class="data-point">2-3×</span> longer than standard 1 oz copper and requires vacuum lamination presses with precise temperature profiling to ensure complete resin fill between thick copper features. Suppliers who quote heavy copper multilayer at the same lead time as standard boards are likely skipping steps — the result is resin-starved areas that fail during the first thermal shock test.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-ev-obc-dcdc-converter-detail.webp" alt="EV DC-DC converter PCB with synchronous rectification, output filtering, and thermal management features on metal-core substrate" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section 2: DC-DC Converter PCB ── -->
+  <h2>DC-DC Converter PCB: 400V-to-12V Step-Down for Vehicle Low-Voltage Systems</h2>
+
+  <p>The DC-DC converter replaces the alternator in an EV — it supplies <span class="data-point">1-3 kW</span> at 12V (or 48V in some architectures) to power everything from the infotainment system and headlights to the ABS controller and ADAS computers. While the OBC operates only during charging, the DC-DC converter runs continuously whenever the vehicle is in drive mode, accumulating <span class="data-point">5,000-10,000 hours</span> of operation per year in commercial fleet vehicles.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Synchronous Rectification: Sub-Milliohm RDS(on) Requires Kelvin Sensing</h4>
+      <p>To achieve <span class="data-point">>96%</span> efficiency in a 400V-to-12V converter, the output synchronous rectifier MOSFETs must use devices with RDS(on) below <span class="data-point">1 mΩ</span>. At 250A load current, even 1 mΩ of parasitic resistance in the PCB trace between the MOSFET source and the output connector creates <span class="data-point">62.5W</span> of wasted heat. The PCB layout must implement Kelvin (4-wire) sensing connections to the output terminals — a dedicated sense trace pair that measures the output voltage at the connector, not at the converter PCB, to compensate for IR drop in the output cables. Placing the sense point on the wrong side of a connector interface can introduce <span class="data-point">50-100 mV</span> of load regulation error — enough to trigger under-voltage faults in downstream ECUs during load transients.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Output Filtering: LC Filter Design for Automotive EMI Compliance</h4>
+      <p>Automotive DC-DC converters must meet CISPR 25 Class 3 conducted and radiated EMI limits — significantly more stringent than industrial or commercial standards. The output LC filter on the 12V rail typically uses a multi-stage design: a first stage at the switching frequency with <span class="data-point">1-10 μH</span> inductance and <span class="data-point">100-470 μF</span> capacitance, followed by a second stage for high-frequency attenuation. The filter inductor's core material must avoid saturation at the maximum DC bias current (typically <span class="data-point">200-300A</span> for a 3 kW converter). Ferrite core materials with distributed air gaps (e.g., Kool Mμ or Sendust) provide better DC bias performance than gapped ferrite but cost <span class="data-point">2-3×</span> more. For EMC design strategies across the full vehicle platform, see our <a href="/blog/pcb-emc-emi-compliance.html">PCB EMC and EMI compliance guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Metal-Core PCB for Single-Package Thermal Solution</h4>
+      <p>Many DC-DC converter designs use a metal-core PCB (MCPCB) — typically <span class="data-point">1.5-3.0 mm</span> aluminum substrate — to conduct heat from the power semiconductors directly to the converter housing without requiring a separate heatsink. The dielectric layer between the copper circuit layer and the aluminum base must have thermal conductivity of at least <span class="data-point">2.0 W/m·K</span> (compared to <span class="data-point">0.3 W/m·K</span> for standard FR-4) and withstand <span class="data-point">2.5 kV</span> AC hipot testing for 800V bus applications. Our <a href="/blog/metal-core-pcb.html">metal-core PCB manufacturing guide</a> covers the design rules for aluminum and copper-core substrates, including the trade-off between thermal performance and single-layer routing constraints.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Automotive Qualification ── -->
+  <h2>Automotive Reliability: What Separates Production PCBs from Prototype Failures</h2>
+
+  <p>An OBC or DC-DC converter PCB that passes room-temperature functional test on the bench is not production-ready. The following automotive-specific failure modes account for the majority of field returns in power conversion modules:</p>
+
+  <table class="spec-table">
+    <tr><th>Failure Mode</th><th>Root Cause</th><th>Prevention</th></tr>
+    <tr><td>CAF (Conductive Anodic Filament)</td><td>Ionic contamination + moisture + DC voltage bias between adjacent plated features</td><td>ROSE testing &lt;1.56 μg/cm² NaCl per IPC-6012, high-Tg laminate, ≥0.4 mm hole-to-hole spacing under voltage bias</td></tr>
+    <tr><td>Barrel cracking in PTH vias</td><td>CTE mismatch between copper (17 ppm/°C) and FR-4 (50-70 ppm/°C z-axis) during thermal cycling</td><td>Minimum 25 μm copper plating in via barrel, high-Tg laminate (Tg ≥ 170°C) to reduce z-axis expansion</td></tr>
+    <tr><td>Inner layer delamination</td><td>Incomplete resin cure or moisture absorbed in prepreg before lamination</td><td>Vacuum lamination with documented temperature profile, post-lamination TMA (Tg verification on production panels)</td></tr>
+    <tr><td>Solder joint fatigue under power cycling</td><td>CTE mismatch between component and PCB, exacerbated by repeated 100°C+ ΔT cycles</td><td>Underfill for large BGA packages, IMS (Insulated Metal Substrate) for power devices, derate component Tj max by 25°C</td></tr>
+    <tr><td>Surface tracking / carbonization</td><td>Dust + humidity + high voltage between adjacent traces creates conductive carbon path</td><td>Conformal coating (acrylic or silicone, ≥50 μm), CTI ≥ 600V laminate material</td></tr>
+  </table>
+
+  <p>For the full automotive qualification framework — including thermal cycling profiles, IST (Interconnect Stress Testing) requirements, and PPAP documentation — read our <a href="/blog/automotive-pcb-requirements.html">automotive PCB requirements guide</a>. For EV-specific power electronics design, our <a href="/blog/ev-bms-pcb-design.html">EV BMS PCB design guide</a> covers the battery management side of the high-voltage system.</p>
+
+  <!-- ── Section 4: Manufacturing Considerations ── -->
+  <h2>PCB Manufacturing for EV Power Modules: Process Decisions That Impact Yield</h2>
+
+  <p>EV power module PCBs push the limits of standard PCB manufacturing — combining features that individually are routine but together create yield challenges. Procurement managers should understand which design decisions drive manufacturing complexity and cost.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copper Thickness Transitions on the Same Layer</h4>
+      <p>An OBC PCB often has 4 oz copper on the power path and 1 oz copper on the control section of the same layer. This requires a "step-down" etching process that adds <span class="data-point">15-20%</span> to the PCB fabrication cost and requires the supplier to have dedicated etching equipment calibrated for thick copper. The transition zone between 4 oz and 1 oz copper must include a gradual taper — abrupt thickness transitions create stress concentration points during thermal cycling. For copper weight selection across different circuit sections, consult our <a href="/blog/pcb-copper-weight-selection.html">PCB copper weight selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>High-Tg Laminate Inventory Management</h4>
+      <p>High-Tg FR-4 (Tg ≥ 170°C) and polyimide laminates have limited shelf lives — typically <span class="data-point">6 months</span> from date of manufacture for polyimide under controlled storage (23°C, 50% RH). A supplier who buys laminate per-order from distributors adds <span class="data-point">4-8 weeks</span> to lead time and risks receiving material near the end of its shelf life. Suppliers serving the automotive power electronics market should maintain strategic inventory of common high-Tg laminates (Isola IS410, ITEQ IT-180A, Shengyi S1000-2) with documented lot traceability. For a comprehensive laminate comparison across all material families, see our <a href="/blog/pcb-laminate-selection-guide.html">PCB laminate selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Press-Fit Pin Technology for Connectorless Power Interfaces</h4>
+      <p>Many EV power modules use press-fit pins instead of soldered connectors for the high-current interfaces — press-fit eliminates solder joint fatigue under thermal cycling and provides lower contact resistance. The PCB plated through-holes for press-fit pins require finished hole diameter tolerance of <span class="data-point">±0.05 mm</span> and copper plating thickness of <span class="data-point">25-50 μm</span> to maintain consistent insertion and retention force across production volumes. Our <a href="/blog/pcb-press-fit-technology-guide.html">PCB press-fit technology guide</a> covers the design rules and process validation requirements for solderless interconnection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>100% Electrical Test: 4-Wire Kelvin for Power Traces</h4>
+      <p>Standard flying probe or bed-of-nails electrical test uses 2-wire measurements that include probe contact resistance (<span class="data-point">50-200 mΩ</span>) in the measurement. For power traces where the design resistance may be as low as <span class="data-point">2-5 mΩ</span>, 2-wire testing cannot reliably detect trace narrowing or partial opens. EV power module PCBs should specify <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">4-wire Kelvin testing</a> on all traces carrying >10A — the cost adder is approximately <span class="data-point">5-8%</span> of the PCB price and detects defects that 2-wire testing would miss until the board fails under load during functional test.</p>
+    </div>
+  </div>
+
+  <!-- ── Section 5: Cost Optimization ── -->
+  <h2>Cost Drivers in EV Power Module PCBs: What Procurement Teams Control</h2>
+
+  <p>OBC and DC-DC converter PCBs typically cost <span class="data-point">3-8×</span> more per square centimeter than standard automotive PCBs due to heavy copper, high-Tg laminate, and specialized testing. Understanding the cost drivers helps procurement teams make informed trade-offs:</p>
+
+  <table class="spec-table">
+    <tr><th>Cost Driver</th><th>Impact on PCB Unit Cost</th><th>Optimization Strategy</th></tr>
+    <tr><td>Heavy copper (4-6 oz vs 1 oz)</td><td>+50-100%</td><td>Limit heavy copper to power path layers only; use 1-2 oz on control layers</td></tr>
+    <tr><td>High-Tg laminate (Tg ≥ 170°C)</td><td>+20-40% vs standard FR-4</td><td>Standardize on one laminate across all EV power modules to aggregate volume</td></tr>
+    <tr><td>Metal-core substrate (MCPCB)</td><td>+80-150% vs FR-4</td><td>Use only when thermal analysis confirms FR-4 with thermal vias is insufficient</td></tr>
+    <tr><td>4-wire Kelvin test</td><td>+5-8%</td><td>Apply only to traces carrying >10A; standard 2-wire test on control sections</td></tr>
+    <tr><td>Conformal coating</td><td>+10-20%</td><td>Specify selective coating (power section only) rather than full-board coating</td></tr>
+  </table>
+
+  <p>For strategies to optimize overall PCB procurement cost without sacrificing quality, including volume aggregation and supplier consolidation, refer to our <a href="/blog/pcb-cost-factors.html">PCB cost factors guide</a> and <a href="/blog/pcb-panelization-cost-optimization.html">panelization cost optimization guide</a>.</p>
+
+  <div class="highlight-box">
+    <p><strong>Volume Planning Insight:</strong> EV power module programs typically follow a steep ramp: <span class="data-point">50-200</span> units for DV (Design Validation), <span class="data-point">500-2,000</span> for PV (Production Validation), then <span class="data-point">10,000-50,000</span> annually for SOP. The NRE cost for tooling, test fixtures, and PPAP submission is amortized over the first year of production — engaging the production supplier during the DV phase (not just PV) eliminates the cost and schedule penalty of re-qualifying tooling when transitioning from a prototype supplier to a production supplier. For sourcing strategy across different volume phases, see our <a href="/blog/pcb-dual-sourcing-strategy.html">PCB dual sourcing strategy guide</a>.</p>
+  </div>
+
+  <!-- ── Closing ── -->
+  <h2>Starting Your EV Power Module PCB Project</h2>
+
+  <p>The PCB inside an EV on-board charger or DC-DC converter is the foundation on which silicon carbide efficiency gains and automotive reliability requirements either succeed or fail. A 1200V SiC MOSFET can switch in 20 nanoseconds — but only if the gate drive loop inductance on the PCB is below 5 nH. A planar transformer can achieve 99% efficiency — but only if the 4 oz copper winding layers are laminated with complete resin fill and zero voids. These are not simulation problems; they are manufacturing execution problems that separate production-ready designs from qualification failures.</p>
+
+  <p>At Huaxing PCBA, we manufacture automotive power PCBs under IATF 16949 certified quality management, with in-house heavy copper capability up to <span class="data-point">6 oz</span>, high-Tg laminate inventory (Isola, ITEQ, Shengyi), and 4-wire Kelvin electrical test capability. Our engineering team has supported PPAP Level 3 submissions for Tier-1 EV power electronics suppliers. <a href="/blog/automotive-pcb-requirements.html">Read our automotive PCB requirements guide</a> for the full qualification framework, or <a href="/contact/">submit your Gerber files and stackup</a> for a same-day feasibility review with DFM analysis.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ev-obc-dcdc-converter.webp);--cta-bg:url(../generated/blog-cta-ev-obc-dcdc-converter.webp)">
+      <h2>Launch Your EV Power Module PCB</h2>
+      <p>Submit your Gerber files and power stage requirements. Our IATF 16949 certified team provides a free DFM review with thermal analysis, impedance calculation, and a PPAP-ready production timeline within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Submit Gerber Files for Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ -->
+<!--  INQUIRY MODAL         -->
+<!-- ═══════════════════════ -->
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
