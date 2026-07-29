@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Inspection Methods — AOI vs X-Ray vs SPI for Zero-Defect Electronics Manufacturing | Huaxing PCBA</title>
+<meta name="description" content="Compare Automated Optical Inspection (AOI), X-Ray, and Solder Paste Inspection (SPI) for PCB assembly quality control. Coverage rates, defect types caught, cost per board, and how to build an inspection strategy that prevents escapes.">
+<meta property="og:title" content="PCB Inspection Methods — AOI vs X-Ray vs SPI for Zero-Defect Electronics Manufacturing">
+<meta property="og:description" content="AOI, X-Ray, and SPI: which combination catches the defects that matter for your product class. A procurement engineer's inspection strategy guide.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-inspection-aoi-xray-spi.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-aoi-inspection.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-inspection-aoi-xray-spi.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Inspection Methods — AOI vs X-Ray vs SPI for Zero-Defect Electronics Manufacturing",
+  "description": "Compare Automated Optical Inspection (AOI), X-Ray, and Solder Paste Inspection (SPI) for PCB assembly quality control. Coverage rates, defect types caught, cost per board, and how to build an inspection strategy that prevents escapes.",
+  "datePublished": "2026-07-30",
+  "dateModified": "2026-07-30",
+  "image": "https://huaxingpcba.com/generated/blog-cover-aoi-inspection.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-inspection-aoi-xray-spi.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-inspection-aoi-xray-spi.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-aoi-inspection.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">PCB Inspection Methods:<br><em>AOI vs X-Ray vs SPI for Zero-Defect Manufacturing</em></h1>
+      <p class="reveal">Which inspection technologies actually catch your defect profile — and how to build a layered QC strategy that prevents escapes before they reach your customer.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>AOI vs X-Ray vs SPI Inspection</span></div>
+
+  <p>Every PCB assembly line has inspection stations. But not every inspection station catches the defects that matter for <em>your</em> product. A Class 2 consumer board and a Class 3 aerospace board might pass through the same AOI machine — yet one customer receives a perfectly functional product while the other discovers intermittent opens three months into field deployment. The difference isn't the equipment. It's the inspection <em>strategy</em>: which technologies you deploy, at which process steps, with which acceptance criteria.</p>
+
+  <p>At Huaxing PCBA, our eight SMT lines integrate AOI, SPI, and X-Ray inspection at multiple process gates — not as checkbox items, but as a layered defense that has reduced customer-visible defect escapes to below <span class="data-point">50 DPPM</span> across production volumes exceeding 1.2 million assemblies per month. This guide breaks down what each inspection method actually sees, what it misses, and how to combine them for your product class.</p>
+
+  <img class="article-img" src="../generated/blog-aoi-inspection-hero.webp" alt="Automated optical inspection machine scanning a populated PCB with multi-angle camera array in electronics factory" loading="lazy" style="max-width:80%">
+
+  <h2>Why One Inspection Method Is Never Enough</h2>
+
+  <p>Every inspection technology has a physics-defined blind spot. AOI sees surface features — component presence, polarity, solder fillet shape — but cannot see through a BGA to check ball collapse. X-Ray penetrates hidden joints but cannot measure solder paste volume before reflow. SPI quantifies paste deposition but has no visibility into post-reflow joint quality. Deploying only one method is like securing one door of a building with three entrances.</p>
+
+  <p>The cost of single-method inspection compounds with product complexity. A 1,200-component automotive ECU with 14 BGAs and 22 QFN packages may pass AOI with zero flagged defects — yet harbor a 15% void under a BGA that X-Ray would have caught. That single missed defect becomes a field failure with warranty costs exceeding the entire assembly run margin. This is why IPC-A-610 Class 3 explicitly requires X-Ray for hidden solder joints, and why the <a href="/blog/ipc-class-2-vs-class-3.html">IPC class your product targets</a> should dictate your inspection mix.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> The most dangerous defect is not the one your inspection misses — it's the one your inspection <em>cannot physically detect</em>. Building an inspection strategy starts with mapping your product's defect profile against each technology's detection envelope.</p>
+  </div>
+
+  <h2>Automated Optical Inspection (AOI): The First Line of Defense</h2>
+
+  <p>AOI uses high-resolution cameras — typically 2D, increasingly 3D with laser triangulation or fringe projection — to capture images of every solder joint and component placement on an assembled PCB. The system compares captured images against a golden board reference or a CAD-derived digital model, flagging deviations in solder fillet geometry, component offset, tombstoning, missing components, and polarity errors.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>2D AOI — Fast Coverage at Low Cost</h4>
+      <p>Multi-angle LED lighting (top, side, angled) captures solder joint reflections from 3-5 angles. Modern systems achieve inspection speeds of 25-40 cm²/s with 10-15 μm pixel resolution. Best for: visible solder joints (SOIC, QFP, chip components), polarity checks, bridging detection. Typical defect coverage: 85-92% of all SMT defects. Per-board cost: $0.15-0.40 depending on board complexity and panel utilization. Huaxing runs 2D AOI on all 8 SMT lines as the primary post-reflow gate.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>3D AOI — Measuring Solder Joint Co-Planarity</h4>
+      <p>Adds height measurement via laser triangulation or Moiré fringe projection, enabling detection of lifted leads, insufficient solder volume, and co-planarity violations that 2D systems miss. Particularly valuable for QFN packages where side fillet visibility is limited. 3D AOI increases defect coverage to 93-96% for visible joints. The trade-off: inspection speed drops ~30% vs 2D, and the system cost is 2-3× higher. We deploy 3D AOI selectively on automotive and medical product lines where co-planarity is critical.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>What AOI Cannot See</h4>
+      <p>Hidden solder joints under BGAs, QFNs with full bottom termination, and press-fit connectors with internal pins. AOI also struggles with: mirror-like surface finishes (ENIG pads can cause false positives), components with transparent bodies (LEDs), and boards with heavy conformal coating applied before inspection. For these defect categories, X-Ray is the required complement — see our guide on <a href="/blog/bga-assembly-guide.html">BGA assembly inspection requirements</a> for the full picture.</p>
+    </div>
+  </div>
+
+  <h2>X-Ray Inspection: Seeing Through the Board</h2>
+
+  <p>X-Ray inspection uses transmission imaging — firing X-rays through the PCB and capturing the absorption pattern on a digital detector — to visualize internal structures that no optical system can access. Modern systems use computed tomography (CT) or laminography to create 2D slice images at specific depths, isolating individual BGA ball layers from PCB pads and component bodies.</p>
+
+  <img class="article-img" src="../generated/blog-xray-inspection-detail.webp" alt="Close-up of X-ray inspection monitor showing BGA solder ball cross-section with void analysis overlay in electronics quality lab" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>BGA & QFN Void Detection</h4>
+      <p>X-Ray quantifies void percentage within each solder ball — the primary acceptance criterion for BGA joints per IPC-7095. A single ball with >25% void area can reduce thermal cycling lifetime by 40-60%. Our 3D X-Ray systems measure voids to ±2% accuracy across every ball in a 1,152-ball BGA in under 90 seconds. For designs with via-in-pad or microvia structures, X-Ray also verifies that vias are fully filled and plated-over — a defect class invisible to AOI. See our <a href="/blog/pcb-via-fill-types.html">via fill technology comparison</a> for related quality requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Head-in-Pillow & Non-Wet Open Detection</h4>
+      <p>Head-in-pillow (HiP) defects — where the BGA ball and solder paste make physical contact but fail to form a metallurgical bond — are nearly impossible to detect with AOI because the joint looks physically connected from the outside. X-Ray with oblique-angle imaging reveals the tell-tale gap line between ball and pad. HiP is the most dangerous BGA defect class because it passes electrical test at room temperature but fails after thermal cycling. Detection requires 3D X-Ray with at least 5-degree tilt capability.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>2D vs 3D X-Ray: When the Upgrade Pays For Itself</h4>
+      <p>2D X-Ray (transmission only) costs $80-150K and handles 80% of BGA/QFN inspection needs. 3D/CT X-Ray ($250-500K) becomes necessary when: your product has double-sided BGA placement, you're stacking package-on-package (PoP), or your end-customer requires CT slice images in the FAIR documentation package. For most industrial and automotive products, 2D X-Ray with oblique viewing angle is sufficient. Our facility runs both — 2D as the standard post-reflow gate, 3D CT for first-article inspection and failure analysis. Read about <a href="/blog/pcb-failure-analysis-guide.html">PCB failure analysis workflows</a> for when to escalate.</p>
+    </div>
+  </div>
+
+  <h2>SPI: Catching Defects Before They're Baked In</h2>
+
+  <p>Solder Paste Inspection (SPI) measures every paste deposit <em>before</em> component placement — when rework costs $0.02 instead of $20. 3D SPI systems scan the entire stencil-printed board in 15-25 seconds, measuring paste height, area, volume, and positional offset for every pad.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Volume, Area, Height — Which Parameter Matters Most</h4>
+      <p>SPI measures three dimensions of every paste deposit. Volume is the primary metric: IPC-J-STD-005 recommends ±30% volume tolerance for Class 2, ±20% for Class 3. Paste area drives the stencil aperture design and correlates with solder coverage. Height is the early warning for stencil wear — when mean paste height drops below 85% of stencil thickness across 20 consecutive boards, it's time to clean or replace the stencil. Our SPI systems flag boards that exceed any of these limits before a single component is placed, preventing entire batches of rework. For proper stencil design that maximizes SPI pass rates, see our <a href="/blog/smt-stencil-design-guide.html">SMT stencil design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>SPI + AOI Closed-Loop: The IPC-CFX Vision</h4>
+      <p>When SPI and AOI systems share data through a common database (IPC-CFX or proprietary MES), the factory achieves closed-loop process control. SPI detects a trend of insufficient paste on a specific QFP footprint → the system alerts the stencil printer to increase pressure on that zone → AOI at the end of the line confirms the correction worked. Without closed-loop, each inspection station is an island; with it, the line self-corrects. This is the direction the industry is moving, and it's the only way to sustain sub-50 DPPM defect rates at high volume.</p>
+    </div>
+  </div>
+
+  <h2>Building Your Inspection Strategy: A Decision Matrix</h2>
+
+  <table class="spec-table">
+    <tr><th>Product Requirement</th><th>Minimum Inspection Mix</th><th>Estimated DPPM</th><th>Cost/Board</th></tr>
+    <tr><td>Class 2 consumer, no BGA</td><td>SPI + 2D AOI</td><td>200-500</td><td>$0.30-0.60</td></tr>
+    <tr><td>Class 2 industrial, BGA present</td><td>SPI + 2D AOI + 2D X-Ray</td><td>100-200</td><td>$0.80-1.50</td></tr>
+    <tr><td>Class 3 automotive/medical</td><td>SPI + 3D AOI + 2D X-Ray + ICT</td><td>20-50</td><td>$2.00-4.00</td></tr>
+    <tr><td>Class 3 aerospace/defense</td><td>SPI + 3D AOI + 3D X-Ray CT + ICT + functional test</td><td>&lt;10</td><td>$5.00-12.00</td></tr>
+  </table>
+
+  <p>The table above represents statistical averages across our production data. Actual DPPM depends heavily on board complexity, component mix, and volume. A 200-BOM-count IoT board with a single BGA will have lower defect rates than a 1,500-BOM-count server board with 18 BGAs — even with identical inspection equipment. The inspection strategy must be calibrated to the product, not copied from a generic standard.</p>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When evaluating a PCBA supplier, ask not just "Do you have AOI and X-Ray?" but "What is your inspection gate sequence, and what are the acceptance criteria at each gate?" A supplier with AOI before reflow (inspecting placement accuracy) and after reflow (inspecting solder joint quality) is doing twice the value of a supplier running AOI only post-reflow.</p>
+  </div>
+
+  <h2>Electrical Test: The Final Verification Layer</h2>
+
+  <p>Inspection finds physical anomalies. Electrical test confirms they actually matter. Flying probe, ICT, and functional test are the downstream gates that catch what upstream inspection missed — and critically, they catch defects that are electrically significant but visually subtle. A BGA ball with 12% voiding passes X-Ray but may have reduced current-carrying capacity that only a four-wire Kelvin measurement can detect. See our full breakdown of <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">electrical test methods and when each applies</a>.</p>
+
+  <h2>What This Means for Your Next PCB Order</h2>
+
+  <p>Inspection is not a line item on a quote — it's the difference between receiving boards that work and boards that fail in the field. The right inspection mix for your product depends on component technology, end-use environment, and the cost of failure. At Huaxing PCBA, we deploy SPI, 2D/3D AOI, and 2D/3D X-Ray across our eight SMT lines, with inspection data feeding into a centralized quality database that tracks defect trends by product, by line, and by shift. Every board ships with a digital inspection record — not just a "QC passed" stamp.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-aoi-inspection.webp)">
+      <h2>Get a QC Strategy Review With Your Quote</h2>
+      <p>Upload your BOM and Gerber files. Our engineering team will recommend the inspection mix — SPI, AOI, X-Ray — that matches your product class and defect risk profile. Free DFM review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Send Your Files <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  RELATED READING       -->
+<!-- ═══════════════════════ -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Flying Probe vs ICT vs Functional Test</a></li>
+    <li><a href="/blog/bga-assembly-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">BGA Assembly & X-Ray Inspection Guide</a></li>
+    <li><a href="/blog/pcb-failure-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Failure Analysis Methods</a></li>
+    <li><a href="/blog/smt-stencil-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMT Stencil Design for SPI Optimization</a></li>
+    <li><a href="/blog/ipc-class-2-vs-class-3.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Class 2 vs Class 3 Requirements</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
