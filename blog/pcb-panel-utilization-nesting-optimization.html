@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Panel Utilization &amp; Nesting Optimization — How to Reduce Per-Unit Cost by 15-25% | Huaxing PCBA</title>
+<meta name="description" content="PCB panel utilization directly impacts your per-unit cost. Learn how rail width, nesting algorithms, V-score vs tab-routing, and mixed-panel strategies can reduce your PCB cost by 15-25% with zero quality trade-off.">
+<meta property="og:title" content="PCB Panel Utilization &amp; Nesting Optimization — How to Reduce Per-Unit Cost by 15-25%">
+<meta property="og:description" content="The most overlooked PCB cost lever: panel utilization. How to optimize rail width, board rotation, mixed nesting, and depanelization method to maximize boards per panel and minimize per-unit cost.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-panel-utilization-nesting-optimization.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-panel-utilization.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-panel-utilization-nesting-optimization.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=31">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Panel Utilization & Nesting Optimization — How to Reduce Per-Unit Cost by 15-25%",
+  "description": "Complete guide to PCB panel utilization and nesting optimization: rail width trade-offs, V-score vs tab-routing, mixed-panel strategies, and depanelization method selection for maximum boards per panel.",
+  "datePublished": "2026-07-29",
+  "dateModified": "2026-07-29",
+  "image": "https://huaxingpcba.com/generated/blog-cover-panel-utilization.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-panel-utilization-nesting-optimization.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-panel-utilization-nesting-optimization.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-panel-utilization.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Cost Optimization</p>
+      <h1 class="reveal">PCB Panel Utilization &amp; Nesting Optimization:<br><em>How to Reduce Per-Unit Cost by 15-25% With Zero Quality Trade-Off</em></h1>
+      <p class="reveal">The single biggest cost lever that most PCB buyers never touch: panel utilization. Changing your rail width from 15mm to 10mm, rotating boards by 90°, or combining two designs on one panel can save $0.50-2.00 per board. Here's how the math works, with real examples.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Panel Utilization &amp; Nesting Optimization</span></div>
+
+  <p>When you request a PCB quote, the manufacturer prices by the panel — not by the individual board. A standard PCB production panel measures <span class="data-point">18 × 24 inches</span> (457 × 610 mm), and every square inch you leave as rail, gap, or empty space is square inches you're paying for but not shipping. Panel utilization — the percentage of the panel area occupied by actual PCB units — is the quiet margin-killer in PCB procurement. A design with 65% utilization vs 85% utilization on the same panel costs 30% more per board. Not because the board is more complex. Because you're throwing away one-third of the panel.</p>
+
+  <p>At Huaxing PCBA, our CAM engineers run nesting optimization on every order before quoting, but the biggest gains come from decisions made during PCB layout — long before the Gerber files reach us. This guide explains the four variables that determine panel utilization, how to make layout decisions that maximize boards per panel, and when a custom panel size (non-standard 18×24") is worth the tooling investment. We manufacture over <span class="data-point">80,000 m²</span> of PCBs monthly — the difference between 70% and 90% utilization over that volume is measured in hectares of saved laminate.</p>
+
+  <img class="article-img" src="/generated/blog-panel-utilization-nesting-example.webp" alt="PCB panel nesting layout showing optimized board placement with V-score lines" loading="lazy" style="max-width:85%">
+
+  <h2>The Four Variables That Determine Boards Per Panel</h2>
+
+  <p>Panel utilization is a geometry problem with four degrees of freedom. Changing any one of them can add or remove entire rows or columns of boards from the panel — and each row on a 18×24" panel represents thousands of dollars at production volume.</p>
+
+  <table class="spec-table">
+    <tr><th>Variable</th><th>Typical Range</th><th>Impact on Utilization</th><th>Who Controls It</th></tr>
+    <tr><td>Board dimensions (X × Y)</td><td>From 10×10mm to 600×800mm</td><td>Primary — determines the integer fit into 18×24"</td><td>PCB designer / layout engineer</td></tr>
+    <tr><td>Rail width (panel border)</td><td>8mm (tight) to 20mm (generous)</td><td>2-8% per 5mm reduction</td><td>Manufacturer (but specifiable)</td></tr>
+    <tr><td>Board-to-board gap</td><td>1.6mm (V-score) to 5mm (tab-route)</td><td>3-6% depending on depanel method</td><td>Manufacturer → driven by depanel choice</td></tr>
+    <tr><td>Board rotation (0°/90°)</td><td>0° vs 90° nesting</td><td>0-15% — can be dramatic for rectangular boards</td><td>CAM engineer at manufacturer</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>The golden rule of panel utilization:</strong> The standard panel is 18 × 24 inches. If your board's X and Y dimensions (including the board-to-board gap) divide evenly into 18 and 24, you get near-perfect utilization. If they don't, you pay for the remainder. A board that is 48.5mm wide will fit 9 across a 457mm panel (9 × 48.5 = 436.5mm, leaving 20.5mm for rails and gaps). A board that is 49.0mm wide will still fit 9 — but a board that is 51.0mm wide now fits only 8. That 2.5mm dimension difference costs you 11% of your boards per panel. This is why we recommend you <a href="/blog/dfm-tips.html">run a panelization check during layout</a>, not after.</p>
+  </div>
+
+  <h2>Rail Width: The Invisible Cost Driver</h2>
+
+  <p>The panel rail (also called the frame or border) is the unused perimeter of the panel that provides mechanical rigidity during automated SMT assembly. It hosts tooling holes, fiducial marks, and sometimes test coupons. Every millimeter of rail width is a millimeter of panel space that cannot contain PCB units — and it's applied to all four sides of the panel.</p>
+
+  <p>A standard rail width of 15mm on all four sides consumes <span class="data-point">15 × (457+610) × 2 = 32,010 mm²</span> — about 11.5% of the 278,770 mm² panel area. Reducing rail width from 15mm to 10mm recovers 10,670 mm², which on a panel yielding 24 boards of 10,000 mm² each, adds one full extra board. At a panel cost of $40, that's $1.67 saved per board — and for an annual volume of 100,000 boards, the saving is $167,000 with zero change to the PCB design.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Rail Width by Assembly Technology — When You Can Go Narrow</h4>
+      <p><strong>Standard SMT (12-15mm rail):</strong> Required for conveyor-edge clearance on automated placement machines. This is the safe default for any design.<br><br>
+      <strong>Narrow rail (8-10mm):</strong> Feasible if your board has no edge-mounted connectors within 5mm of the board edge, and the SMT line uses edge-clamping rather than conveyor-belt transport. Discuss with your manufacturer — most can accommodate 10mm rails for standard designs.<br><br>
+      <strong>Rail-less (0mm on non-conveyor edges):</strong> The two edges perpendicular to the conveyor direction can have near-zero rail — only 2-3mm for the V-score clearance groove. This is standard practice for high-volume consumer electronics PCBs where every cent counts. Specify "rail only on conveyor edges" in your fabrication notes.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-panel-utilization-vscore.webp" alt="Close-up of V-score grooves on PCB panel with boards ready for depanelization" loading="lazy" style="max-width:80%">
+
+  <h2>V-Score vs Tab-Routing: How Depanelization Method Drives Utilization</h2>
+
+  <p>The method used to separate individual boards from the panel determines the minimum board-to-board gap — and different gaps mean different boards-per-panel counts. The choice isn't purely mechanical; it has a direct financial consequence.</p>
+
+  <table class="spec-table">
+    <tr><th>Depanelization Method</th><th>Board-to-Board Gap</th><th>Best For</th><th>Utilization Impact</th></tr>
+    <tr><td>V-Score</td><td>0 mm (boards touch, ±0.1mm score line)</td><td>Rectangular boards, straight edges</td><td>Maximum — no gap wasted</td></tr>
+    <tr><td>Tab-Route with mouse bites</td><td>2.0-3.0mm routing channel</td><td>Odd-shaped boards, internal cutouts</td><td>Moderate — 2-3mm per row/column lost</td></tr>
+    <tr><td>Tab-Route with full perimeter route</td><td>3.0-5.0mm routing channel</td><td>Boards with edge connectors or castellated holes</td><td>Significant — up to 8% of panel area lost</td></tr>
+    <tr><td>Laser depaneling (no tabs)</td><td>0.5-1.0mm (laser kerf)</td><td>Ultra-thin (0.2-0.5mm) or fragile boards</td><td>Near-V-score — minimal gap loss</td></tr>
+  </table>
+
+  <p>V-score is the utilization champion: boards are fabricated as one contiguous piece with a V-shaped groove cut one-third of the way through from both sides, and they snap apart after assembly. But V-score only works for straight-line edges — you can't V-score a curve, an internal cutout, or a board with castellated half-holes along the edge. For those, tab-routing is necessary, and the 2-3mm routing channel between boards becomes unavoidable dead space. If your design permits V-score (rectangular outline, no edge connectors on the V-score edges), specify it — the zero-gap adjacency typically adds <span class="data-point">1-2 extra boards</span> per row compared to tab-routing. Our <a href="/blog/pcb-depaneling-methods.html">depaneling methods guide</a> covers the full selection matrix including stress limits for each method.</p>
+
+  <div class="highlight-box">
+    <p><strong>Mixed-method panels:</strong> You can combine V-score on straight edges with tab-routing on irregular sections. A common pattern: V-score the X-axis separation (straight board edges) and tab-route the Y-axis (boards with cutouts on the top/bottom edge). This hybrid approach captures most of V-score's utilization advantage while handling non-rectangular outlines. Discuss with your CAM engineer during the <a href="/blog/pcb-quote-comparison-guide.html">quote review process</a>.</p>
+  </div>
+
+  <h2>Mixed-Panel Strategy: When to Nest Two Different Designs Together</h2>
+
+  <p>If your product has two PCBs — say, a main board (45 × 60mm) and a small connector board (15 × 20mm) — putting them on separate panels means each panel carries only one design. The small board's panel utilization will be terrible: a 15×20mm board is tiny compared to a 457×610mm panel, and even with optimal nesting, you might only reach <span class="data-point">50-60% utilization</span>. The better approach: nest both designs on the same panel.</p>
+
+  <p>A mixed panel fills the gaps that would otherwise be dead space. The main boards are laid out in a regular grid, and the small connector boards fill the remaining rectangles between them. The result: combined utilization can reach 85-92%, where separate panels might achieve 80% and 55% respectively. The constraint: both designs must use the same laminate material, copper weight, layer count, and surface finish — and both must be ordered in the same quantity ratio. If you need 1,000 main boards and 500 connector boards, a mixed panel can produce them in exact proportion (e.g., 4 main + 2 connector per panel, 250 panels total).</p>
+
+  <p>The cost math is compelling. Assume a standard 4-layer panel costs $42. With separate panels: main board at 80% utilization = 72 boards/panel = $0.58/board; connector board at 55% utilization = 850 boards/panel = $0.05/board. With a mixed panel at 88% utilization: 64 main + 32 connector per panel = $0.44/main + $0.04/connector. The saving is $0.14/main board. At 100,000 main boards/year, that's $14,000 — for a change that requires no redesign, only a different panelization instruction. For more on the economics of production scaling, see our <a href="/blog/prototype-vs-production.html">prototype vs production cost breakdown</a>.</p>
+
+  <img class="article-img" src="/generated/blog-panel-utilization-mixed-panel.webp" alt="Mixed PCB panel showing large and small boards nested together for maximum utilization" loading="lazy" style="max-width:80%">
+
+  <h2>Custom Panel Sizes: When to Break the 18×24″ Rule</h2>
+
+  <p>The standard 18×24″ panel exists because laminate manufacturers produce sheets in 36×48″ and 40×48″ formats that are cut into four 18×24″ or four 20×24″ panels. But if your board dimensions result in poor utilization on 18×24″, a custom panel size can be worth the tooling investment — especially at production volumes above 10,000 units.</p>
+
+  <p>Example: Your board is 52 × 78mm. On 18×24″ (457×610mm) with 12mm rails and V-score: you fit 7 × 7 = 49 boards, utilization = 74%. On a custom 16×22″ (406×559mm) panel: you still fit 7 × 7 = 49 boards, but the panel costs 18% less because it's smaller. OR: on a custom 20×26″ (508×660mm) cut from a 40×52″ laminate sheet: you fit 9 × 8 = 72 boards at 81% utilization — that's 47% more boards per panel, and the panel cost only increases by 32%. The net per-board cost drops by ~10%. The break-even on the custom panel tooling fee (typically <span class="data-point">$200-500</span>) is usually under 1,000 units.</p>
+
+  <p>Ask your PCB supplier: "What panel size gives the best boards-per-panel yield for our board dimensions?" A good CAM engineer can run this optimization in under 30 seconds — the nesting algorithm tries every standard and semi-standard panel dimension and reports the highest yield. Most buyers never ask this question, and they leave 10-15% on the table. For guidance on evaluating supplier capabilities, see our <a href="/blog/pcb-supplier-audit.html">PCB supplier audit checklist</a> and our <a href="/blog/pcb-cost-factors.html">comprehensive cost factors guide</a>.</p>
+
+  <h2>The Panelization Checklist for Maximum Utilization</h2>
+
+  <p>Before you send Gerber files to your PCB manufacturer, run through this checklist. Each "yes" answer adds boards per panel and subtracts cost per board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Board dimensions: Is either X or Y a multiple of the panel dimension minus rails?</h4>
+      <p>Target: (board_dimension + gap) × N ≈ (457mm − 2 × rail_width). For 10mm rails, that's 437mm usable. If your board+gap is 48mm, you fit 9 across (432mm) with 5mm spare. If it's 50mm, you fit 8 (400mm) with 37mm wasted. That 2mm decision during layout is worth <span class="data-point">12.5%</span> more boards. Run this calculation during PCB layout — not after the design is frozen.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Can you use V-score instead of tab-routing for at least two edges?</h4>
+      <p>V-score eliminates the 2-3mm routing channel between boards, adding 1-2 extra boards per row. Check: are all four board edges straight? Are there no edge connectors or castellated holes on the X-axis edges? If yes to both, specify V-score on the straight edges. Even partial V-score (two edges V-score, two edges tab-route) improves utilization vs full tab-routing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Can rail width be reduced from 15mm to 10mm on non-conveyor edges?</h4>
+      <p>Confirm with your assembler that their SMT line supports 10mm rails and that no edge-mounted components are within 5mm of the board edge. If confirmed, specify "10mm rails on conveyor edges, 8mm rails on non-conveyor edges." The 5mm reduction on two edges recovers ~5,350 mm² — enough for half a board on many designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Do you have two or more PCB designs using the same stackup?</h4>
+      <p>If yes, ask your manufacturer to quote a mixed panel. The utilization gain from filling gaps with a second design is typically <span class="data-point">5-12 percentage points</span>. This is especially powerful when one board is much smaller than the other — the small board acts as a "gap filler" that would otherwise be dead laminate. See our <a href="/blog/pcb-panelization-cost-optimization.html">panelization cost optimization guide</a> for mixed-panel design rules.</p>
+    </div>
+  </div>
+
+  <h2>The ROI: What 10% Better Utilization Is Worth</h2>
+
+  <p>Let's put real numbers on it. A medium-complexity 4-layer PCB (100×80mm, ENIG, green solder mask) in 10,000-unit annual volume. At 75% panel utilization: 42 boards per 18×24″ panel, panel cost $38, per-board cost <span class="data-point">$0.90</span>. At 85% utilization (achievable with V-score + 10mm rails + board dimension optimization): 48 boards per panel, panel cost $38, per-board cost <span class="data-point">$0.79</span>. Annual saving: $1,100. That pays for the engineering time to run the optimization 10 times over. At 100,000 units: saving is $11,000. For high-layer-count boards ($120/panel), the absolute saving is 3-4× larger.</p>
+
+  <p>The best part: none of these optimizations require changing the PCB's electrical design. The schematic, layout, component placement, and routing all stay exactly the same. Panel utilization is a manufacturing optimization that pays for itself in the first production run — and keeps paying on every reorder. For buyers managing <a href="/blog/pcb-supply-chain-risk-management.html">PCB supply chain costs</a>, it's the highest-ROI cost reduction lever available.</p>
+
+  <p>Send us your board outline — we'll run the nesting optimization and return a panel utilization report with cost at 3 utilization levels, within 24 hours. No charge, no commitment. Just math.</p>
+
+</article>
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-panel-utilization.webp)">
+      <h2>Want a Panel Utilization Report for Your PCB Design?</h2>
+      <p>Send your board outline (DXF or Gerber) — our CAM team will run nesting optimization and return a report showing boards per panel at 75%, 80%, and 85%+ utilization with specific recommendations. Free, 24-hour turnaround.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Free Panel Optimization <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script>
+</body>
+</html>

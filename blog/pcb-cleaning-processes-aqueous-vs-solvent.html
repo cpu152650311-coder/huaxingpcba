@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Cleaning Processes: Aqueous vs Solvent Cleaning — Which Cleanliness Level for Your Assembly | Huaxing PCBA</title>
+<meta name="description" content="PCB cleaning is not optional for high-reliability assemblies. Compare aqueous vs solvent cleaning processes, IPC cleanliness standards, ionic contamination limits, and how to specify the right cleaning method for your PCB assembly.">
+<meta property="og:title" content="PCB Cleaning Processes: Aqueous vs Solvent Cleaning — Which Cleanliness Level for Your Assembly">
+<meta property="og:description" content="The complete guide to PCB cleaning: aqueous, semi-aqueous, and solvent cleaning processes compared. Ionic contamination limits per IPC standards, flux residue risks, and how to specify cleaning in your assembly RFQ.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-cleaning-processes-aqueous-vs-solvent.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-cleaning.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-cleaning-processes-aqueous-vs-solvent.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=31">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Cleaning Processes: Aqueous vs Solvent Cleaning — Which Cleanliness Level for Your Assembly",
+  "description": "Complete comparison of aqueous, semi-aqueous, and solvent PCB cleaning processes. IPC cleanliness standards, ionic contamination limits, flux residue types, and how to specify the right cleaning method for high-reliability PCB assembly.",
+  "datePublished": "2026-07-29",
+  "dateModified": "2026-07-29",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-cleaning.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-cleaning-processes-aqueous-vs-solvent.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-cleaning-processes-aqueous-vs-solvent.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-pcb-cleaning.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Quality</p>
+      <h1 class="reveal">PCB Cleaning Processes: Aqueous vs Solvent Cleaning:<br><em>Which Cleanliness Level Does Your Assembly Actually Need?</em></h1>
+      <p class="reveal">Flux residue is the silent killer of PCB reliability — it causes dendritic growth, electrochemical migration, and intermittent field failures that pass electrical test. Here's how to choose the right cleaning process for your assembly, from no-clean to military-grade cleanliness.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Cleaning Processes: Aqueous vs Solvent</span></div>
+
+  <p>Every solder joint on a PCB assembly leaves behind flux residue — a mixture of organic acids, rosins, and activators that enabled the solder to wet the pad but now sits on your board as a conductive contaminant. Under heat, humidity, and voltage bias, this residue absorbs moisture from the air and forms a weak electrolyte. Given enough time and a DC voltage differential between adjacent traces, metal ions begin migrating across the surface — a failure mechanism called electrochemical migration (ECM) that can take weeks to develop in the field but passes 100% of in-factory electrical test. This is why cleaning matters.</p>
+
+  <p>At Huaxing PCBA, we operate <span class="data-point">3 cleaning lines</span> — aqueous, semi-aqueous, and solvent-based — to match the cleaning method to the flux chemistry, the component density, and the reliability requirement. Our ionic contamination testing (per IPC-TM-650 2.3.25) verifies every cleaned batch to the specified limit, typically <span class="data-point">< 1.56 μg/cm²</span> NaCl equivalent for Class 3 assemblies. Here's the decision framework for specifying the right cleaning process in your assembly RFQ.</p>
+
+  <img class="article-img" src="/generated/blog-pcb-cleaning-machine.webp" alt="Industrial aqueous PCB cleaning machine with spray-in-air nozzles processing assembled boards" loading="lazy" style="max-width:80%">
+
+  <h2>Why Flux Residue Is a Reliability Problem: The Chemistry</h2>
+
+  <p>Solder flux is a reactive chemical that strips oxides from the PCB pad and component lead surfaces so the molten solder can form a proper intermetallic bond. The flux does its job in the 3-5 seconds of the reflow soldering zone — but it doesn't evaporate. The non-volatile fraction — rosin, modified rosin, or synthetic resin plus the activator compounds — remains on the board as a residue that is hygroscopic (moisture-attracting) and, when combined with absorbed water, electrically conductive.</p>
+
+  <p>The failure chain is well documented in IPC and military reliability standards: flux residue → moisture absorption → surface insulation resistance (SIR) degradation → dendritic growth between biased conductors → leakage current → intermittent failure or hard short. This is not theoretical. A <span class="data-point">2018 NASA study</span> (NESC-RP-17-01224) documented ECM failures on supposedly "no-clean" assemblies after as little as 96 hours of 85°C/85% RH biased humidity testing — conditions that a tropical shipping container or an un-air-conditioned equipment room can replicate in the real world. For a deep dive into ionic contamination measurement, see our <a href="/blog/pcb-ionic-contamination-cleanliness.html">ionic contamination and cleanliness testing guide</a>.</p>
+
+  <h2>The Three Cleaning Processes: How They Work and What They Remove</h2>
+
+  <table class="spec-table">
+    <tr><th>Process</th><th>Cleaning Medium</th><th>Best For Removing</th><th>Typical Throughput</th><th>Environmental Profile</th></tr>
+    <tr><td>Aqueous (water-based)</td><td>Deionized water + saponifier (alkaline detergent)</td><td>Water-soluble (OA) flux, RMA flux, general ionic contamination</td><td>High — in-line systems process 200+ boards/hour</td><td>Low VOC, wastewater requires treatment for heavy metals</td></tr>
+    <tr><td>Semi-aqueous</td><td>Organic solvent + water rinse</td><td>Rosin-based (R, RMA) flux, no-clean flux with high solids content</td><td>Medium — batch process, 40-80 boards/hour</td><td>Solvent recovery ~95%, minimal waste</td></tr>
+    <tr><td>Solvent (vapor degreasing)</td><td>Engineered solvent (HFE, HFO, modified alcohol)</td><td>Heavy rosin flux, no-clean residues, low-standoff components (BGA, QFN)</td><td>Medium-high — vapor phase, 60-120 boards/hour</td><td>Low GWP solvents available, zero wastewater</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>The fundamental choice:</strong> Aqueous cleaning is the industry workhorse — cheaper to operate, higher throughput, and effective on the most common flux types (water-soluble OA). Solvent cleaning is the specialist — it penetrates under low-standoff components (BGAs, QFNs, 0201 passives) where aqueous solutions can't reach due to surface tension, and it dissolves rosin-based fluxes that are insoluble in water. The semi-aqueous process is a hybrid: use an organic solvent to dissolve the flux, then rinse with DI water. It combines the penetration of solvent with the rinsing effectiveness of water.</p>
+  </div>
+
+  <h2>When "No-Clean" Isn't Clean Enough</h2>
+
+  <p>The term "no-clean" in solder paste and flux specifications is misleading. It means the flux residue is designed to be non-conductive and non-corrosive under normal operating conditions — so the assembly <em>can</em> skip cleaning without immediate failure. It does not mean the residue is invisible or benign under all conditions. No-clean residues are typically <span class="data-point">1.5-3.5%</span> of the solder paste weight by solids content — that's 3-7 mg of residue on a typical QFP-100 package footprint.</p>
+
+  <p>No-clean residue becomes a problem when: (1) the assembly operates above 60°C (residue softens and becomes more hygroscopic), (2) the assembly is conformally coated (traps residue under the coating, accelerating ECM), (3) the assembly uses high-impedance circuits (>10 MΩ — even picoamp leakage currents matter), or (4) the assembly must pass IPC Class 3 cleanliness requirements. For any of these conditions, "no-clean" flux still requires cleaning. The decision is not no-clean vs clean — it's whether your operating environment can tolerate the residue level that remains after soldering.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>IPC Cleanliness Requirements by Class</h4>
+      <p><strong>Class 1 (General Electronic Products):</strong> No specific ionic cleanliness limit. Visual cleanliness is adequate. Typical for consumer toys, disposable electronics.<br><br>
+      <strong>Class 2 (Dedicated Service Electronic Products):</strong> Ionic contamination < 1.56 μg/cm² NaCl equivalent per IPC-TM-650 2.3.25 (ROSE test). This is the standard for industrial controls, telecom equipment, and most commercial electronics.<br><br>
+      <strong>Class 3 (High-Performance Electronic Products):</strong> Ionic contamination < 1.56 μg/cm², plus SIR testing (IPC-TM-650 2.6.3.3) with a minimum of <span class="data-point">100 MΩ</span> resistance after 168 hours at 85°C/85% RH under bias. Required for medical devices, aerospace, and military electronics. See our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 comparison</a> for the full reliability framework.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcb-cleaning-contamination-test.webp" alt="Ionic contamination tester measuring PCB cleanliness with ROSE test method" loading="lazy" style="max-width:80%">
+
+  <h2>Aqueous Cleaning: When Water Is the Right Answer</h2>
+
+  <p>Aqueous cleaning uses deionized (DI) water — typically at <span class="data-point">18 MΩ·cm</span> resistivity — combined with an alkaline saponifier (detergent) that chemically reacts with the acidic flux activators to form water-soluble soaps. The process works in three stages: wash (heated DI water + saponifier sprayed at 40-80 PSI), rinse (pure DI water to remove saponifier and dissolved flux), and dry (heated air knife + convection drying at 80-100°C).</p>
+
+  <p>Aqueous cleaning excels on water-soluble (OA — organic acid) fluxes, which are designed specifically to be cleaned with water. OA fluxes contain aggressive activators (typically dicarboxylic acids like succinic, glutaric, or adipic acid) that provide excellent wetting — better than no-clean fluxes for difficult surfaces like OSP-finished pads — but must be completely removed within 24-48 hours of soldering. If OA flux residue remains on the board, the acids will corrode copper traces within days, especially in humid environments. A properly configured aqueous line removes OA flux to below detection limits in a single pass.</p>
+
+  <p>The limitation: aqueous solutions have high surface tension (~72 mN/m for pure water, ~35-40 mN/m with saponifier), which prevents penetration into gaps smaller than <span class="data-point">~0.1mm</span> (4 mils). Under a BGA with 0.3mm standoff, aqueous solution can reach the outer rows of balls but not the inner rows — leaving flux residue in the center of the BGA that will cause ECM failures over time. For assemblies with BGAs, QFNs, or flip-chip components, solvent or semi-aqueous cleaning provides better under-component penetration. See our <a href="/blog/pcb-assembly-process.html">PCB assembly process guide</a> for how cleaning fits into the full manufacturing flow.</p>
+
+  <h2>Solvent Cleaning: Penetration Where Water Can't Reach</h2>
+
+  <p>Solvent cleaning — specifically vapor degreasing with engineered solvents — solves the surface tension problem. Modern vapor degreasing solvents (HFE-7100, HFO-1233zd, Novec 72DA, modified alcohols) have surface tensions of <span class="data-point">13-18 mN/m</span> — roughly one-quarter that of water. This allows the solvent to penetrate under components with standoff heights as low as 0.05mm (2 mils), reaching flux residue in the interior rows of BGAs and under QFN thermal pads that aqueous cleaning cannot access.</p>
+
+  <p>The vapor degreasing process is elegantly simple: the solvent is boiled in a sump, creating a vapor zone above the liquid. The PCB assembly — cooler than the vapor — is lowered into the vapor zone. Solvent vapor condenses on the board surface, dissolving flux residue, and the liquid solvent drips back into the sump for re-boiling. Because the solvent is continuously distilled (vaporized and re-condensed), the board is always exposed to pure, clean solvent — not solvent that's been progressively contaminated with dissolved flux, which is a limitation of immersion cleaning. After a 2-5 minute vapor exposure, the board is raised into the freeboard zone where residual solvent evaporates, leaving a dry, residue-free surface.</p>
+
+  <p>The historical knock against solvent cleaning was environmental: CFC-113 and 1,1,1-trichloroethane (banned under the Montreal Protocol) and nPB (listed as a carcinogen under California Prop 65). Modern engineered solvents avoid these issues: HFE and HFO solvents have zero ozone depletion potential (ODP), global warming potentials (GWP) under 10 (compared to CO₂ = 1, CFCs = 4,000+), and are exempt from VOC regulations under the US EPA's SNAP program. The cost: engineered solvents run <span class="data-point">$40-80 per liter</span>, but with 95%+ recovery in modern vapor degreasers, solvent consumption is ~0.5-1 liter per 1,000 boards — making the per-board solvent cost competitive with aqueous cleaning chemistry costs.</p>
+
+  <img class="article-img" src="/generated/blog-pcb-cleaning-solvent-degreaser.webp" alt="Vapor degreasing machine with PCB assembly entering the solvent vapor zone" loading="lazy" style="max-width:85%">
+
+  <h2>Semi-Aqueous: The Best of Both Worlds?</h2>
+
+  <p>Semi-aqueous cleaning splits the cleaning task into two sequential stages: first, an organic solvent (typically a terpene-based or hydrocarbon-based solvent) dissolves the flux residue, penetrating under low-standoff components just as effectively as pure solvent cleaning. Second, a DI water rinse removes the solvent-and-dissolved-flux mixture from the board surface. The water rinse is necessary because the semi-aqueous solvent is not volatile — it won't evaporate cleanly like a vapor degreasing solvent.</p>
+
+  <p>The advantage: semi-aqueous cleaning handles the widest range of flux types — rosin (R, RMA, RA), no-clean, and water-soluble — in a single process. The water rinse also removes any remaining ionic contaminants that the solvent might leave behind. The disadvantage: it's a batch process (not in-line), and the effluent from the water rinse contains dissolved solvent, requiring wastewater treatment before discharge. Throughput is lower than aqueous, and the per-board cleaning cost is <span class="data-point">15-30% higher</span> than aqueous for the same board volume. Semi-aqueous is the right choice when you have a mix of difficult residues (heavy rosin flux) and low-standoff components (BGAs, QFNs), and you can accept batch processing throughput.</p>
+
+  <h2>How to Specify Cleaning in Your Assembly RFQ</h2>
+
+  <p>The most common mistake: writing "clean per IPC standards" without specifying which cleanliness class or test method. That's like telling a machinist "make it accurate" without giving a tolerance. Here's what to put in your assembly specification:</p>
+
+  <div class="highlight-box">
+    <p><strong>Recommended cleaning specification for RFQ:</strong><br><br>
+    "Post-solder cleaning: [Aqueous / Solvent vapor degreasing / Semi-aqueous / No-clean — no cleaning]. Cleanliness requirement: ionic contamination < 1.56 μg/cm² NaCl equivalent per IPC-TM-650 2.3.25 (ROSE test), tested on [every lot / per AQL sampling plan / first article only]. For Class 3 assemblies: SIR testing per IPC-TM-650 2.6.3.3, minimum 100 MΩ after 168 hours at 85°C/85% RH, 50V DC bias. Cleaning must be completed within [4 / 12 / 24] hours of soldering. No visible flux residue under 10× magnification. Conformal coating to be applied within [2 / 4 / 8] hours of cleaning to prevent re-contamination."</p>
+  </div>
+
+  <p>If you're specifying conformal coating as well — which many high-reliability assemblies require — the cleaning process becomes doubly important. Conformal coating applied over flux residue traps the residue under the coating, concentrating any electrochemical activity in a confined space directly on the PCB surface. The result: ECM failures that develop faster under the coating than they would on an uncoated board. The rule: never coat an uncleaned assembly. For assemblies getting conformal coating, specify the same cleanliness level as the end-use reliability requirement, regardless of the flux type. Our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> covers the coating-cleaning interaction in detail.</p>
+
+  <h2>Choosing Your Cleaning Process: A Decision Matrix</h2>
+
+  <table class="spec-table">
+    <tr><th>Your Situation</th><th>Recommended Process</th><th>Why</th></tr>
+    <tr><td>Water-soluble (OA) flux, no BGAs, Class 2</td><td>Aqueous (in-line spray)</td><td>OA flux is designed for water cleaning. Fast, low-cost, high throughput. No under-component penetration needed.</td></tr>
+    <tr><td>No-clean flux, consumer product, benign environment</td><td>No cleaning</td><td>No-clean residue is acceptable for low-reliability, low-humidity applications. Confirm with SIR testing.</td></tr>
+    <tr><td>Rosin flux, BGA/QFN components, Class 2+</td><td>Solvent (vapor degreasing)</td><td>Penetrates under low-standoff components. Dissolves rosin. No water exposure for moisture-sensitive components.</td></tr>
+    <tr><td>Mixed flux types, high mix/low volume, Class 2-3</td><td>Semi-aqueous (batch)</td><td>Handles any flux chemistry. Batch process suits lower volume. Water rinse provides final ionic cleanliness verification.</td></tr>
+    <tr><td>Military/aerospace, Class 3, conformally coated</td><td>Solvent → ionic test → coat immediately</td><td>Maximum cleanliness required before coating. Solvent for penetration. Ionic verification with ROSE on every lot. Coat within 2 hours.</td></tr>
+    <tr><td>High-volume consumer, OA flux, lowest cost</td><td>Aqueous (in-line) or no-clean</td><td>Cost-driven. Aqueous if reliability matters. No-clean if environment is benign and cost is the dominant factor.</td></tr>
+  </table>
+
+  <p>For most B2B and industrial assemblies, aqueous cleaning with a properly specified flux type delivers the best balance of cost, throughput, and reliability. But the decision must start with the flux, not the cleaning process — because the flux determines what cleaning chemistry is needed. If you're designing a new product and know you'll need Class 2+ reliability, specify a water-soluble (OA) flux and aqueous cleaning from the start. Don't design with no-clean flux and then try to clean it — no-clean fluxes are formulated to be <em>harder</em> to remove, because they're designed to remain on the board. Our <a href="/blog/solder-paste-selection-guide.html">solder paste selection guide</a> and <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a> cover the upstream decisions that determine cleaning requirements.</p>
+
+  <h2>Verification: How to Confirm Your Boards Are Actually Clean</h2>
+
+  <p>Visual inspection under 10× magnification is the minimum — it catches gross residues (white residue around solder joints, flux spatter on the board surface) but cannot detect the ionic contamination that causes ECM. For that, you need quantitative testing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>ROSE Test (Resistivity of Solvent Extract) — The Standard for Production Monitoring</h4>
+      <p>Per IPC-TM-650 2.3.25: the cleaned PCB is immersed in a 75% isopropanol / 25% DI water test solution, and the change in solution resistivity over time is measured. Ionic contamination extracted from the board increases the solution's conductivity. The result is expressed as μg/cm² NaCl equivalent. Pass: < 1.56 μg/cm². This is the standard production-line cleanliness test — fast (5-10 minutes per board), quantitative, and correlated to field reliability. Our in-house ROSE tester runs on every lot for Class 2 and 3 assemblies. For more on cleanliness measurement methods, see our <a href="/blog/pcb-ionic-contamination-cleanliness-testing.html">ionic contamination cleanliness testing guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>SIR Testing (Surface Insulation Resistance) — For Process Qualification</h4>
+      <p>Per IPC-TM-650 2.6.3.3: a dedicated test coupon (interdigitated comb pattern on the PCB) is processed through the same assembly and cleaning process as the production boards, then placed in an environmental chamber at 85°C/85% RH with 50V DC bias applied between adjacent conductors. Resistance is measured continuously for 168 hours. Pass: resistance remains above 100 MΩ throughout the test, with no excursions below 100 MΩ. SIR testing is typically done for process qualification (when you first set up a new flux-cleaning combination), not for every production lot. But for Class 3 assemblies, periodic SIR re-qualification (every 6-12 months) is prudent. See our <a href="/blog/pcb-testing-methods.html">PCB testing methods comparison</a> for where SIR testing fits in the overall test strategy.</p>
+    </div>
+  </div>
+
+  <p>The bottom line: cleaning is not a commodity step that all PCB assemblers perform identically. The process chemistry, equipment capability, and verification rigor vary enormously between suppliers. At Huaxing, every cleaned assembly lot includes a ROSE test certificate with the shipment — because you can't see the difference between a clean board and a contaminated one, but your product's field reliability will reveal it within months. For evaluating whether your supplier's cleaning process meets your requirements, our <a href="/blog/pcb-supplier-quality-scorecard.html">supplier quality scorecard guide</a> includes cleaning process verification as a scored audit item.</p>
+
+</article>
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-pcb-cleaning.webp)">
+      <h2>Need a Cleaning Process Recommendation for Your Assembly?</h2>
+      <p>Tell us your flux type, component mix, and reliability class — we'll recommend the optimal cleaning process and include ROSE test certification with every shipment. 24-hour quote with cleaning spec analysis.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Assembly Quote with Cleaning <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script>
+</body>
+</html>
