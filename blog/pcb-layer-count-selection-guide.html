@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Layer Count Selection Guide — Cost, Performance &amp; Manufacturability at 2–16 Layers | Huaxing PCBA</title>
+<meta name="description" content="How to choose the right PCB layer count — a procurement and design guide covering cost curves, signal integrity, thermal performance, and DFM tradeoffs for 2-layer through 16+ layer boards.">
+<meta property="og:title" content="PCB Layer Count Selection Guide — Cost, Performance &amp; Manufacturability at 2–16 Layers">
+<meta property="og:description" content="How to choose the right PCB layer count — cost curves, signal integrity, thermal, and DFM tradeoffs for every layer step.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-layer-count-selection-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-layer-count-selection-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .layer-cost-chart { width:100%; border-collapse:collapse; margin:2rem 0; font-size:0.9rem; }
+  .layer-cost-chart th { background:var(--accent); color:#fff; padding:10px 12px; text-align:left; }
+  .layer-cost-chart td { padding:10px 12px; border-bottom:1px solid var(--border-color); }
+  .layer-cost-chart tr:nth-child(even) td { background:rgba(255,255,255,0.03); }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-layer-count.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">PCB Design &amp; Procurement</p>
+      <h1 class="reveal">PCB Layer Count Selection Guide:<br><em>Cost, Performance &amp; Manufacturability at Every Layer Step</em></h1>
+      <p class="reveal">A data-driven framework for choosing between 2-layer and 16+ layer PCBs — balancing BOM cost, signal integrity, thermal performance, and supplier capability.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Layer Count Selection</span></div>
+
+  <p>One of the most expensive mistakes in PCB procurement is over-specifying — or under-specifying — the layer count. A design that could run on 4 layers but is built on 8 wastes <span class="data-point">35–50%</span> in per-unit cost over a production run. Conversely, cramming high-speed signals and power distribution onto 2 layers creates EMC failures that cost far more to debug than an extra layer pair would have cost upfront. Making the right call requires understanding the actual cost curve, not just the conventional wisdom.</p>
+
+  <p>At Huaxing PCBA, we manufacture everything from <span class="data-point">2-layer prototype</span> boards to <span class="data-point">32-layer</span> high-density interconnect (HDI) panels with blind and buried vias across 8 SMT lines. This guide compresses our DFM team's layer-count recommendations — drawn from thousands of customer designs — into a practical decision framework you can apply before sending your next Gerber package. For the full stackup design specifics, see our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a>.</p>
+
+  <img class="article-img" src="../generated/blog-layer-count-cross-section.webp" alt="Photorealistic cross-section render of a multi-layer PCB showing alternating copper and prepreg layers with plated through-hole vias connecting different layer pairs" loading="lazy" style="max-width:80%">
+
+  <h2>Why Layer Count Is the First Decision — Before Stackup, Before Materials</h2>
+
+  <p>Layer count determines nearly everything downstream: material choice, via technology, minimum trace/space, impedance control strategy, and — most critically — which suppliers can build your board. A 16-layer design automatically disqualifies factories that max out at 12 layers. A 2-layer flex design may need a completely different supplier than your rigid boards. Getting this decision right at the RFQ stage prevents redesign loops, requotes, and 4–6 week schedule slips.</p>
+
+  <p>Many design teams jump straight to stackup planning without first asking: <em>do I actually need this many layers?</em> The answer often surprises them. Our DFM engineers routinely reduce layer counts by 2–4 layers during pre-production review — without compromising signal integrity — by optimizing plane assignments and routing density. Consult our <a href="/blog/dfm-tips.html">8 DFM rules that cut costs by 30%</a> for additional pre-submission checks.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Layer count is a procurement decision as much as an engineering one. The cost difference between 6 and 8 layers is typically <span class="data-point">25–35%</span>, not the 10% many designers assume. Choose based on validated requirements, not design habits.</p>
+  </div>
+
+  <h2>The Layer Count Cost Curve: Real Numbers Per Square Inch</h2>
+
+  <p>PCB pricing is non-linear with layer count. Each additional layer pair requires an extra lamination cycle, drilling pass, and plating step — adding fixed process costs that don't scale down with board area. The table below shows relative costs for a standard FR-4, 1.6mm, HASL-Lead-Free finish board at medium volume (1,000 units).</p>
+
+  <table class="layer-cost-chart">
+    <tr><th>Layers</th><th>Relative Cost</th><th>Typical Turn Time</th><th>Supplier Availability</th><th>Common Applications</th></tr>
+    <tr><td>1–2</td><td>1.0× (baseline)</td><td>3–5 days</td><td>Universal</td><td>Power supplies, LED drivers, simple control boards</td></tr>
+    <tr><td>4</td><td>1.8–2.2×</td><td>5–7 days</td><td>Universal</td><td>Microcontroller boards, IoT sensors, consumer remotes</td></tr>
+    <tr><td>6</td><td>2.8–3.5×</td><td>7–10 days</td><td>Most suppliers</td><td>Industrial control, automotive body electronics, audio</td></tr>
+    <tr><td>8</td><td>4.0–5.0×</td><td>10–14 days</td><td>Mid-tier+</td><td>Telecom basebands, FPGA boards, medical instruments</td></tr>
+    <tr><td>10–12</td><td>6.0–8.0×</td><td>14–21 days</td><td>Advanced only</td><td>Server backplanes, ATE load boards, aerospace</td></tr>
+    <tr><td>14–16</td><td>9.0–12×</td><td>18–28 days</td><td>Specialist</td><td>Data center switches, radar DSP, satellite payloads</td></tr>
+    <tr><td>18–32</td><td>15–25×</td><td>25–40+ days</td><td>Top-tier only</td><td>Supercomputing, 5G massive MIMO, military avionics</td></tr>
+  </table>
+
+  <p>These multipliers assume the same board area. In practice, higher layer counts often come with larger form factors and tighter tolerances, compounding the cost further. For a deeper dive into how these process costs break down, read our <a href="/blog/pcb-cost-factors.html">PCB manufacturing cost drivers guide</a>.</p>
+
+  <img class="article-img" src="../generated/blog-layer-count-manufacturing.webp" alt="Macro photograph of a PCB lamination press with copper foil sheets being aligned between prepreg layers, industrial manufacturing environment" loading="lazy" style="max-width:80%">
+
+  <h2>When 2 Layers Are Enough — And When They're Not</h2>
+
+  <p>Two-layer boards account for roughly <span class="data-point">40%</span> of global PCB volume, but many designs running on 2 layers today would benefit from moving to 4. The decision hinges on three factors:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Power Distribution Quality</h4>
+      <p>A 2-layer board has no dedicated power and ground planes — you route power as traces. This creates voltage drop, ground bounce, and higher EMI. If your board has more than <span class="data-point">3–4</span> different voltage rails or any analog section, 4 layers with a solid ground plane is almost always worth the cost. The improvement in signal quality alone often eliminates an entire EMC re-spin cycle — see our <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI compliance guide</a> for the engineering rationale.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Signal Edge Rates, Not Just Clock Frequency</h4>
+      <p>A common misconception: "My clock is only 16 MHz, so I don't need impedance control." But if your MCU has <span class="data-point">1–2 ns</span> rise times (typical for modern ARM Cortex-M devices), the signal harmonics extend well into the hundreds of MHz. Without a continuous return path (ground plane), these edges radiate. A 4-layer board provides that return path at roughly <span class="data-point">1.8–2.2×</span> the cost of 2 layers — far cheaper than an FCC re-test.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Routing Density and Board Area</h4>
+      <p>If your 2-layer board is <span class="data-point">80%+</span> routed and you still need to add connectors or features, moving to 4 layers often lets you shrink the board area by <span class="data-point">30–40%</span>. The smaller board area partially offsets the higher per-square-inch cost of 4 layers. Our <a href="/blog/pcb-panel-utilization-nesting-optimization.html">panel utilization guide</a> explains how board size reduction improves nesting efficiency.</p>
+    </div>
+  </div>
+
+  <h2>4–8 Layers: The Sweet Spot for Most Professional Electronics</h2>
+
+  <p>The 4-to-8-layer range covers roughly <span class="data-point">70%</span> of commercial and industrial electronics. Within this range, each additional layer pair adds a dedicated plane — either for power distribution, signal routing, or isolation. The key decision points:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>4 Layers: The Modern Baseline</h4>
+      <p>Standard stackup: Signal – Ground – Power – Signal (S-G-P-S). This gives you one solid reference plane for controlled impedance and one power plane for low-inductance distribution. Suitable for mixed-signal designs with proper partitioning. If you're designing anything with DDR memory, USB 3.0, or an ADC above <span class="data-point">12 bits</span>, start at 4 layers. For the materials that work best at this layer count, see our <a href="/blog/pcb-materials-guide.html">PCB materials guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>6 Layers: When You Need Two Routing Layers or Split Planes</h4>
+      <p>Typical stackup: S – G – S – S – P – S. This provides two internal routing layers plus dedicated power and ground planes. The extra routing layer is essential when you have a BGA package with <span class="data-point">>200 pins</span> or need to separate analog and digital routing on different layers. BGA escape routing is the single most common reason our customers move from 4 to 6 layers — read our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> for the manufacturing side of that equation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>8 Layers: The High-Speed Entry Point</h4>
+      <p>Stackup options multiply at 8 layers. A common arrangement: S – G – S – P – P – S – G – S, providing two solid ground references and two power planes. This is the minimum we recommend for any design with <span class="data-point">DDR4</span>, PCIe Gen 3+, or multi-gigabit SerDes lanes. The dual ground planes provide clean return paths for high-speed signals regardless of which routing layer they occupy — critical for <a href="/blog/pcb-signal-integrity.html">signal integrity above 100 MHz</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-layer-count-stackup-render.webp" alt="3D render of a PCB cross-section with 8 distinct copper layers visible, alternating copper and dielectric materials with microvias connecting layers" loading="lazy" style="max-width:80%">
+
+  <h2>10–16+ Layers: When Complexity Justifies Cost</h2>
+
+  <p>Above 10 layers, each additional layer starts to require more advanced manufacturing techniques — sequential lamination, laser-drilled microvias, and tighter registration tolerances. These are not incremental upgrades; they're step changes in both capability requirements and cost.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Signal Isolation for Mixed-Technology Boards</h4>
+      <p>Boards combining high-speed digital (PCIe Gen 4/5, 100G Ethernet), sensitive analog (24-bit ADC front-ends), and high-current power (50A+ phases) demand layer counts of 12+ simply to provide adequate isolation. Each domain needs its own reference planes — sharing a ground plane between a <span class="data-point">16 GHz</span> SerDes lane and a precision analog section is asking for noise coupling. For mixed-signal design strategies, see our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>BGA Fanout with >1000 Pins</h4>
+      <p>Large FPGAs and SoCs with <span class="data-point">1,000+ balls</span> at 0.8mm pitch or finer often require 12+ layers just to escape all signals. At this density, you're likely using blind and buried vias, which add sequential lamination steps. The via technology choice becomes as important as the layer count itself — consult our <a href="/blog/pcb-via-technology.html">via technology guide</a> for the full breakdown of blind, buried, and via-in-pad approaches.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Thermal Management Through Layer Stack</h4>
+      <p>At 14+ layers, internal copper planes serve double duty: electrical reference and thermal spreader. Designs with multiple high-power components (GaN FETs, high-current PoL converters) can use internal <span class="data-point">2oz–4oz</span> copper planes to conduct heat laterally, reducing hot-spot temperatures by <span class="data-point">15–25°C</span> compared to relying on top-layer pours alone. For the full thermal design strategy, see our <a href="/blog/pcb-thermal-management.html">thermal management guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When requesting quotes for 12+ layer boards, always specify whether you need sequential lamination or standard lamination. Sequential lamination adds <span class="data-point">40–60%</span> to the per-panel cost and 10–15 additional days of lead time. Many designs can be restructured to avoid it — ask your supplier's DFM team before finalizing.</p>
+  </div>
+
+  <h2>How to Decide: A 5-Question Decision Framework</h2>
+
+  <p>Before sending your next Gerber package, answer these five questions. If you answer "yes" to any, you likely need more layers than your current design uses:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Does your design have more than 3 voltage rails?</h4>
+      <p>Each additional rail needs either a dedicated copper pour (costs board area on 2 layers) or a dedicated power plane (costs a layer). At 4+ rails, a power plane layer is almost always cheaper than the board area required for wide pours. Our <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a> covers the current capacity side of this equation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Are any signals above 50 MHz or with rise times below 2 ns?</h4>
+      <p>These signals need controlled impedance with a continuous reference plane. On 2 layers, you can create coplanar waveguide structures, but they're sensitive to manufacturing variation and consume routing space. 4+ layers with a dedicated ground plane is the reliable path — see our <a href="/blog/impedance-control.html">impedance control guide</a> for the ±5% tolerance we maintain.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Are you using BGA packages with more than 200 balls?</h4>
+      <p>BGA escape routing is the #1 driver of layer count escalation. A 484-ball BGA at 1.0mm pitch typically needs <span class="data-point">4 routing layers</span> alone — add power and ground planes and you're at 6–8 layers minimum. Our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> details the complete manufacturing process.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Do you need to pass conducted/radiated emissions testing?</h4>
+      <p>FCC Part 15, CISPR 32, and MIL-STD-461 all become dramatically easier to pass with solid ground planes. A 4-layer board with a continuous ground plane typically shows <span class="data-point">10–15 dB</span> lower radiated emissions than the same circuit on 2 layers — often the difference between pass and fail. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI compliance guide</a> covers design-for-compliance strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Is your routing density above 70% on your current layer count?</h4>
+      <p>If your autorouter or manual routing is at <span class="data-point">70%+</span> completion and you still have unrouted nets, adding layers is cheaper than increasing board area. A larger board area on the same layer count increases per-unit material cost and reduces panel utilization — often netting zero savings. Use our <a href="/blog/pcb-panelization-cost-optimization.html">panelization cost optimization guide</a> to compare scenarios.</p>
+    </div>
+  </div>
+
+  <h2>Layer Count and Your Supplier: Why Capability Matters as Much as Cost</h2>
+
+  <p>Not every PCB supplier can build every layer count. As you move up the stack, supplier qualification becomes more selective:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Registration Tolerance Tightens with Layers</h4>
+      <p>A 4-layer board might tolerate <span class="data-point">±100µm</span> layer-to-layer registration. At 16 layers, that tolerance drops to <span class="data-point">±50µm</span> — and misregistration between any two layers can cause open circuits in high-aspect-ratio vias. This requires laser-direct imaging (LDI) equipment and climate-controlled lamination environments that not all factories maintain. Verify your supplier's capability before placing a high-layer-count order. Our <a href="/blog/pcb-supplier-audit.html">supplier audit checklist</a> includes the key questions to ask.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Sequential Lamination Adds Process Steps — and Risk</h4>
+      <p>Boards requiring blind/buried vias need multiple lamination cycles. Each cycle adds <span class="data-point">4–6 hours</span> of processing and exposes the partially-completed board to handling and contamination risk. A supplier experienced with sequential lamination will have dedicated cleanroom areas for each lamination stage and documented process controls — don't assume every factory quoting 12+ layers has this infrastructure.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Aspect Ratio Limits Your Layer Count for a Given Board Thickness</h4>
+      <p>The plated through-hole aspect ratio (board thickness ÷ hole diameter) is typically limited to <span class="data-point">10:1</span> for reliable plating. A 1.6mm thick board with 0.2mm vias hits this limit quickly. Higher layer counts at the same board thickness require smaller vias — which require laser drilling — which requires different equipment. This is the physical constraint that determines whether a given design is manufacturable at a given supplier, regardless of cost. Our <a href="/blog/pcb-laser-vs-mechanical-drilling.html">laser vs mechanical drilling comparison</a> covers the tradeoffs.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Choose Layers Like a Procurement Engineer</h2>
+
+  <p>Layer count is not a free variable — it's the single largest cost driver in PCB fabrication, and it locks in your supplier options, lead time, and yield rates before you've even chosen a material. The right number is <em>the minimum that satisfies your signal integrity, power distribution, and routing density requirements with a comfortable margin</em> — not the number your last design used, and not the number your competitor's datasheet shows.</p>
+
+  <p>At Huaxing PCBA, our DFM team reviews layer count as the first check in every pre-production engineering review. We've helped customers reduce 10-layer designs to 8 layers without performance loss, saving <span class="data-point">30%</span> on per-unit PCB cost over 5,000-unit production runs. <a href="/blog/pcb-stackup-design.html">Start with our stackup design guide</a> for the next step after layer count, or if you're evaluating suppliers for a high-layer-count project, <a href="/blog/pcb-supplier-rfp-guide.html">use our supplier RFP framework</a> to compare capabilities apples-to-apples.</p>
+
+  <p>Ready to get a quote on your multi-layer design? <a href="/contact/">Contact our engineering team</a> with your layer count, material preference, and quantity — we'll return a detailed quotation with DFM feedback within 24 hours.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-layer-count.webp)">
+      <h2>Get a DFM Review on Your Layer Stack</h2>
+      <p>Send us your Gerber files and layer stackup — our engineers will review your layer count, material selection, and impedance targets with detailed feedback. Free DFM report within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Send Your Gerber Files <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

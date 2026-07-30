@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB for Hydrogen Fuel Cell &amp; Green Hydrogen Systems — Power Electronics for Electrolyzers and Fuel Cell Stacks | Huaxing PCBA</title>
+<meta name="description" content="PCB requirements for hydrogen fuel cell power electronics — high-current DC-DC converters, cell voltage monitoring, and stack control systems for PEM electrolyzers and fuel cell stacks.">
+<meta property="og:title" content="PCB for Hydrogen Fuel Cell &amp; Green Hydrogen Systems — Power Electronics for Electrolyzers and Fuel Cell Stacks">
+<meta property="og:description" content="PCB requirements for hydrogen fuel cell power electronics — high-current DC-DC converters, cell voltage monitoring, and stack control for PEM electrolyzers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-hydrogen-fuel-cell-systems.html">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-hydrogen-fuel-cell-systems.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-hydrogen-fuel-cell.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">New Energy &amp; Power Electronics</p>
+      <h1 class="reveal">PCB for Hydrogen Fuel Cell &amp; Green Hydrogen Systems:<br><em>Power Electronics for Electrolyzers and Fuel Cell Stacks</em></h1>
+      <p class="reveal">Designing PCB assemblies for the hydrogen economy — from PEM electrolyzer power supplies to fuel cell stack monitoring and high-current DC-DC conversion.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Hydrogen Fuel Cell PCB</span></div>
+
+  <p>The global green hydrogen market is projected to exceed <span class="data-point">$100 billion</span> by 2030, driven by electrolyzer deployments scaling from megawatts to gigawatts. Behind every PEM electrolyzer stack and hydrogen fuel cell system is a suite of power electronics — DC-DC converters handling hundreds of amps, precision cell voltage monitoring across dozens of series-connected cells, and control boards operating in humid, hydrogen-rich environments. These PCBs face a unique combination of electrical, thermal, and environmental challenges that standard industrial electronics don't encounter.</p>
+
+  <p>At Huaxing PCBA, our <span class="data-point">8 SMT lines</span> and heavy-copper PCB capability (up to <span class="data-point">6oz</span> copper weight) position us to support hydrogen equipment manufacturers scaling from pilot production to volume deployment. This guide maps the PCB requirements across the hydrogen value chain — from electrolyzer power stacks to fuel cell monitoring — and provides procurement specifications you can use in your next RFQ. For broader new energy applications, see our <a href="/blog/new-energy-pcb.html">new energy PCB manufacturing overview</a>.</p>
+
+  <img class="article-img" src="../generated/blog-hydrogen-electrolyzer-render.webp" alt="Photorealistic 3D cross-section of a PEM electrolyzer stack showing bipolar plates, membrane electrode assembly layers, and adjacent power electronics PCB with thick copper bus bars" loading="lazy" style="max-width:80%">
+
+  <h2>The PCB Demands of Hydrogen Systems: Three Domains, Three Challenges</h2>
+
+  <p>Hydrogen power electronics span three distinct domains, each with different PCB requirements. Understanding which domain your design falls into is the first step toward specifying the right board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Electrolyzer Power Supply: High-Current DC at Industrial Scale</h4>
+      <p>PEM electrolyzers operate at low voltage (<span class="data-point">1.8–2.2V per cell</span>, 50–200V per stack) but high current (<span class="data-point">500A–5,000A</span> per stack). The rectifier and DC-DC converter PCBs that drive these stacks need heavy copper layers (4oz–6oz), wide traces, and often bus bar integration. Thermal management is critical — I²R losses at 1,000A can produce <span class="data-point">50–200W</span> of heat on the PCB alone. For high-current design fundamentals, see our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB guide</a> and <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Cell Voltage Monitoring (CVM): Precision Analog in a Noisy Environment</h4>
+      <p>A fuel cell stack with <span class="data-point">200–400 cells</span> requires per-cell voltage monitoring with <span class="data-point">±5mV</span> accuracy — while sitting centimeters away from switching converters generating substantial EMI. CVM boards must combine high-impedance analog front-ends, isolated communication (CAN or RS-485), and robust grounding strategies. The PCB must handle common-mode voltages that can reach <span class="data-point">400V+</span> across the cell string. Our <a href="/blog/high-voltage-pcb-design.html">high-voltage PCB design guide</a> and <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI compliance guide</a> cover the isolation and noise mitigation strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>System Control and Balance-of-Plant: Environmental Hardening</h4>
+      <p>The hydrogen environment introduces corrosion risks not present in standard electronics. Trace amounts of hydrogen peroxide can form in PEM systems, creating a mildly oxidizing atmosphere. PCB surface finishes must resist degradation — ENIG or immersion silver are preferred over HASL, which can develop surface oxidation. Conformal coating is strongly recommended for any board near the stack enclosure. For coating selection, consult our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> and <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Hydrogen power electronics span three domains — high current (electrolyzer power), precision analog (CVM), and environmental hardening (control). A single PCB rarely covers all three. Design separate boards optimized for each domain rather than compromising with a unified design.</p>
+  </div>
+
+  <img class="article-img" src="../generated/blog-hydrogen-stack-detail.webp" alt="Macro photography of a hydrogen fuel cell bipolar plate with intricate flow field channels, metallic surface texture under industrial lighting" loading="lazy" style="max-width:80%">
+
+  <h2>Electrolyzer Power Electronics: Where PCB Meets Power Conversion</h2>
+
+  <p>The electrolyzer power supply chain — AC grid → rectifier → DC bus → DC-DC converter → electrolyzer stack — involves multiple PCB assemblies, each with distinct requirements. The DC-DC converter stage is the most PCB-intensive and the most demanding.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>High-Current DC-DC Converter Topologies</h4>
+      <p>Electrolyzer DC-DC converters typically use interleaved buck or full-bridge topologies operating at <span class="data-point">20–100 kHz</span>. At these frequencies and current levels, PCB layout directly determines efficiency. Key requirements: <span class="data-point">4–6oz</span> copper on power layers, <span class="data-point">10mm+</span> trace widths for 100A+ paths, and Kelvin-sensing traces for accurate current measurement. IGBT or SiC MOSFET gate drive loops must be under <span class="data-point">20mm</span> circumference to minimize parasitic inductance. For power stage layout strategies, see our <a href="/blog/power-electronics-pcb.html">power electronics PCB design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Thermal Management for Continuous Operation</h4>
+      <p>Unlike EV chargers that operate intermittently, electrolyzer power supplies run <span class="data-point">24/7</span> at near-rated load during production campaigns. This continuous duty cycle means thermal design must target steady-state temperatures, not peak transient. Metal-core PCBs (aluminum or copper base) are common for the power stage, with thermal vias under each power semiconductor. Expected power dissipation: <span class="data-point">1–3%</span> of throughput power — at 500kW electrolyzer input, that's 5–15kW of heat to manage across the power electronics enclosure. Our <a href="/blog/metal-core-pcb.html">metal core PCB guide</a> covers thermal substrate selection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Safety Isolation: Reinforced vs Basic Insulation</h4>
+      <p>Electrolyzer stacks float at the DC bus potential — typically <span class="data-point">200–800V DC</span>. Any PCB that bridges the primary (grid) and secondary (stack) sides must provide reinforced isolation rated for the working voltage plus transient overvoltages. Creepage distances per IEC 60664-1 for 800V DC in pollution degree 2 environments require <span class="data-point">8mm+</span> spacing — a constraint that often necessitates wider board outlines or slot cuts in the PCB. See our <a href="/blog/high-voltage-pcb-design.html">high-voltage design guide</a> for creepage and clearance calculations.</p>
+    </div>
+  </div>
+
+  <h2>Fuel Cell Stack Monitoring: Precision Measurement at Scale</h2>
+
+  <p>Fuel cell systems — whether for stationary power, heavy transport, or marine applications — require real-time monitoring of every individual cell in the stack. A commercial fuel cell stack may contain <span class="data-point">200–400 cells</span> in series, each needing voltage, temperature, and sometimes impedance measurement.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Cell Voltage Monitoring Architecture</h4>
+      <p>CVM systems typically use multiplexed ADC architectures, scanning each cell sequentially at <span class="data-point">1–10ms</span> per measurement. The PCB must handle input voltages that range from 0V (near shorted cell) to 1.2V (open circuit) with <span class="data-point">±5mV</span> accuracy — requiring precision resistor dividers or dedicated cell-monitoring ASICs (e.g., Linear Technology LTC680x family). The challenge is common-mode: cell #200 sits at <span class="data-point">~200V</span> above ground. Our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a> covers the grounding and partitioning strategies that prevent common-mode errors.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Galvanic Isolation and Communication</h4>
+      <p>CVM data must cross the isolation barrier between the high-voltage stack and the low-voltage system controller. Isolated CAN or SPI interfaces using digital isolators (TI ISO774x, ADI ADuM series) are standard. The PCB must maintain the isolation barrier in layout: <span class="data-point">8mm+</span> creepage between high-side and low-side domains, with no copper pours bridging the gap. Slot cuts in the PCB are often used to guarantee creepage distance mechanically. Our <a href="/blog/pcb-emc-emi-compliance.html">EMI design guide</a> covers managing the noise that high dv/dt switching couples across the isolation barrier.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Impedance Spectroscopy for Cell Health</h4>
+      <p>Advanced BMS designs add electrochemical impedance spectroscopy (EIS) — injecting a small AC current (<span class="data-point">1–10A</span> at 1–10kHz) and measuring the voltage response to detect membrane degradation before it causes failure. This requires a precision AC current source and synchronous detection on the PCB — essentially a lock-in amplifier per cell group. The PCB must maintain <span class="data-point">0.1%</span> gain accuracy across the measurement chain. This level of precision demands careful component selection and layout — see our <a href="/blog/pcb-laboratory-analytical-instruments.html">laboratory instrument PCB guide</a> for relevant low-noise design techniques.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-hydrogen-control-board.webp" alt="Close-up macro shot of a populated PCB with green solder mask, gold ENIG pads, precision analog components and isolated CAN transceivers, industrial electronics aesthetic" loading="lazy" style="max-width:80%">
+
+  <h2>Material Selection for Hydrogen Environment PCBs</h2>
+
+  <p>The hydrogen-rich, potentially humid environment inside a fuel cell enclosure places specific demands on PCB materials that generic FR-4 may not satisfy:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Substrate: High-Tg FR-4 Minimum, Polyimide for Extended Life</h4>
+      <p>Operating temperatures near the stack can reach <span class="data-point">80–105°C</span> continuously. Standard FR-4 (Tg 130°C) is marginal; high-Tg FR-4 (Tg <span class="data-point">170–180°C</span>) is the minimum recommendation. For systems targeting <span class="data-point">40,000+ hour</span> service life (stationary power), polyimide substrates provide superior thermal stability and lower moisture absorption — critical since moisture accelerates CAF (conductive anodic filament) growth in the presence of DC voltage bias. Our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a> compares substrate options across all performance dimensions.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Surface Finish: ENIG Preferred, Avoid HASL and Immersion Tin</h4>
+      <p>The mildly oxidizing atmosphere (trace H₂O₂) in PEM systems attacks exposed copper and tin-based finishes. ENIG (electroless nickel immersion gold) provides a noble metal barrier that resists oxidation. Hard gold is specified for edge connectors that may see insertion cycles during stack maintenance. Immersion tin and HASL are not recommended — tin whisker risk increases in humid environments with thermal cycling. Our <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a> covers the full comparison.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating: Acrylic or Silicone for Moisture and Corrosion Protection</h4>
+      <p>Any PCB inside the stack enclosure or within <span class="data-point">1 meter</span> of hydrogen plumbing should receive conformal coating. Acrylic coatings (AR, ER types per IPC-CC-830) provide good moisture resistance and are reworkable. Silicone coatings (SR type) offer better high-temperature performance and flexibility but are difficult to remove for rework. Apply after all SMT assembly and test — coating over untested boards hides defects. Our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> details application methods and IPC standards.</p>
+    </div>
+  </div>
+
+  <h2>Procurement Specifications for Hydrogen System PCBs</h2>
+
+  <p>When issuing RFQs for hydrogen power electronics PCBs, include these specification points beyond standard fabrication requirements:</p>
+
+  <table class="spec-table">
+    <tr><th>Specification</th><th>Electrolyzer Power Board</th><th>CVM Board</th><th>System Controller</th></tr>
+    <tr><td>Copper weight (outer)</td><td>4–6oz</td><td>1–2oz</td><td>1–2oz</td></tr>
+    <tr><td>Copper weight (inner)</td><td>3–4oz</td><td>1oz</td><td>1oz</td></tr>
+    <tr><td>Min substrate Tg</td><td>170°C</td><td>150°C</td><td>150°C</td></tr>
+    <tr><td>Surface finish</td><td>ENIG (0.05µm Au)</td><td>ENIG (0.05µm Au)</td><td>ENIG or OSP</td></tr>
+    <tr><td>Conformal coating</td><td>Required (silicone)</td><td>Required (acrylic)</td><td>Optional</td></tr>
+    <tr><td>Creepage (pri-sec)</td><td>8mm+</td><td>8mm+</td><td>n/a</td></tr>
+    <tr><td>IPC class</td><td>Class 2 minimum</td><td>Class 2 minimum</td><td>Class 2</td></tr>
+    <tr><td>Thermal vias</td><td>Required under all power FETs</td><td>Not required</td><td>Not required</td></tr>
+  </table>
+
+  <p>For volume production, specify an <span class="data-point">IPC Class 3</span> option for the CVM board if your system targets automotive (ISO 26262) or stationary power applications with required uptime guarantees. The incremental cost is typically <span class="data-point">15–25%</span> above Class 2. See our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 comparison</a> for when the upgrade is justified.</p>
+
+  <h2>Scaling from Prototype to Production: PCB Supply Chain for Hydrogen</h2>
+
+  <p>Hydrogen equipment manufacturers face a PCB supply chain challenge: prototype volumes are small (<span class="data-point">10–100 units</span>) but production volumes can scale rapidly as electrolyzer capacity targets increase. A PCB supplier that handles both low-volume NPI builds and high-volume production — without requiring requalification between runs — reduces scaling friction significantly.</p>
+
+  <p>At Huaxing PCBA, we support hydrogen system developers through the full scaling curve: quick-turn prototypes with <span class="data-point">5–7 day</span> lead times for design validation, then seamless transition to volume production across our 8 SMT lines. Our <a href="/blog/low-volume-pcb-assembly.html">low-volume assembly guide</a> covers the NPI phase, and our <a href="/blog/quick-turn-pcb-manufacturing.html">quick-turn manufacturing guide</a> details how we accelerate prototype delivery without sacrificing DFM review quality.</p>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When sourcing PCBs for hydrogen systems, include hydrogen embrittlement testing requirements in your RFQ for any copper bus bars or press-fit connectors. Standard copper plating processes can introduce hydrogen into the copper lattice, causing embrittlement over time. Specify <span class="data-point">baking at 190°C for 4+ hours</span> post-plating per ASTM B849 to drive out absorbed hydrogen.</p>
+  </div>
+
+  <h2>Summary: PCBs Are the Quiet Enabler of the Hydrogen Economy</h2>
+
+  <p>While electrolyzer membranes and fuel cell catalysts capture the headlines, the power electronics PCBs that drive, monitor, and control these systems are equally critical to system efficiency and reliability. The specific demands — heavy copper for high current, precision analog for cell monitoring, environmental hardening for hydrogen-rich atmospheres — require PCB suppliers who understand the application, not just the fabrication process.</p>
+
+  <p>At Huaxing PCBA, we're actively supporting hydrogen equipment manufacturers with PCB assemblies that meet these requirements. From electrolyzer DC-DC converter boards with <span class="data-point">6oz copper</span> and silicone conformal coating to precision CVM boards with isolated CAN communication, our engineering team can review your design for manufacturability before you commit to tooling. <a href="/blog/new-energy-pcb.html">Explore our new energy PCB capabilities</a> or <a href="/contact/">send us your Gerber files</a> for a 24-hour DFM review and quotation.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-hydrogen.webp)">
+      <h2>Powering the Hydrogen Transition</h2>
+      <p>Need PCBs for electrolyzer power stages or fuel cell monitoring? Send us your design files — our engineers will review for manufacturability, material selection, and environmental hardening. Free DFM report within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Start Your Hydrogen PCB Project <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
