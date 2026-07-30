@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embedded Passive Components in PCB — Buried Capacitance &amp; Resistor Technology for Miniaturized Electronics | Huaxing PCBA</title>
+<meta name="description" content="When should you replace discrete SMD passives with embedded components inside PCB layers? Compare planar capacitance, buried resistors, and trade-offs in cost, space, and reliability for advanced designs.">
+<meta property="og:title" content="Embedded Passive Components in PCB — Buried Capacitance &amp; Resistor Technology for Miniaturized Electronics">
+<meta property="og:description" content="When to move from SMD passives to embedded components inside PCB layers — planar capacitance, buried resistors, cost trade-offs, and reliability data.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-embedded-passive-components.html">
+<meta property="og:image" content="https://huaxingpcba.com/images/logo.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-embedded-passive-components.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-embedded-passive.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Advanced PCB Technology</p>
+      <h1 class="reveal">Embedded Passive Components in PCB:<br><em>When Buried Capacitance &amp; Resistors Replace SMD</em></h1>
+      <p class="reveal">Planar capacitance layers, buried thin-film resistors, and embedded inductors — the manufacturing technology that shrinks board area by 30-50% while improving signal integrity at GHz speeds.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Embedded Passive Components</span></div>
+
+  <p>Every PCB designer knows the frustration: your layout is perfect, but <span class="data-point">40-60%</span> of your board area is consumed by passive components — decoupling capacitors, termination resistors, pull-up networks. On a dense HDI board, passives can outnumber active ICs <span class="data-point">10 to 1</span>. Embedded passive technology moves these components inside the PCB substrate itself, freeing surface space for more functional circuitry while improving electrical performance. But the manufacturing process is fundamentally different from standard multilayer fabrication — and not every design benefits.</p>
+
+  <p>At Huaxing PCBA, our <span class="data-point">32-layer</span> HDI capability and <span class="data-point">3/3 mil</span> trace/space precision enable embedded passive manufacturing for aerospace, medical implant, and 5G infrastructure applications. Here's what PCB designers and procurement managers need to know before specifying buried capacitance or embedded resistors in their next stackup.</p>
+
+  <img class="article-img" src="../generated/blog-embedded-passive-hero.webp" alt="Cross-section of multilayer PCB showing embedded passive component layers" loading="lazy" style="max-width:80%">
+
+  <h2>What Are Embedded Passives? Three Technology Categories</h2>
+
+  <p>Embedded passives fall into three distinct manufacturing approaches, each with different materials, processes, and cost implications:</p>
+
+  <table class="spec-table">
+    <tr><th>Technology</th><th>What It Replaces</th><th>How It's Built</th><th>Typical Density Gain</th></tr>
+    <tr><td>Planar Capacitance</td><td>Decoupling capacitors (0201–0805)</td><td>Thin dielectric laminate (8–25μm) between power/ground planes</td><td>Eliminates 60-80% of decoupling caps</td></tr>
+    <tr><td>Buried Resistors</td><td>Termination, pull-up/down, series resistors</td><td>Thin-film resistive foil (NiP, NiCr) laminated and etched into internal layers</td><td>Eliminates 30-50% of discrete resistors</td></tr>
+    <tr><td>Embedded Inductors</td><td>RF chokes, filter inductors</td><td>Spiral patterns etched on internal layers using ferrite-filled substrates</td><td>Application-specific (RF front-ends)</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Planar capacitance is the most mature and cost-effective embedded passive technology — it's been in volume production for over 15 years in smartphones and servers. Buried resistors are gaining traction in automotive and medical. Embedded inductors remain niche (RF/microwave only).</p>
+  </div>
+
+  <h2>Planar Capacitance: Eliminating Decoupling Caps Layer by Layer</h2>
+
+  <p>The fundamental problem with discrete decoupling capacitors is parasitic inductance. An 0402 capacitor might have <span class="data-point">0.5–1.0 nH</span> of equivalent series inductance (ESL) from its mounting structure alone — traces, vias, and pad geometry. At frequencies above <span class="data-point">100 MHz</span>, that inductance dominates, and the capacitor stops behaving like a capacitor. The result: your simulation says the PDN impedance is fine, but your board fails EMI compliance.</p>
+
+  <p>Planar capacitance solves this by replacing discrete capacitors with an ultra-thin dielectric layer (<span class="data-point">8–25 μm</span>) sandwiched between power and ground planes. Because the "capacitor" is distributed across the entire plane pair — with essentially zero lead inductance — it provides effective decoupling up to <span class="data-point">several GHz</span>. This is why every smartphone motherboard and server CPU substrate uses embedded planar capacitance: no discrete capacitor technology can match its high-frequency impedance profile.</p>
+
+  <p>Materials matter enormously here. Standard FR-4 has a dielectric constant (Dk) around <span class="data-point">4.2–4.5</span> and a minimum practical thickness of <span class="data-point">100 μm</span> (4 mil) for reliable lamination. Planar capacitance laminates use materials like <span class="data-point">3M C-Ply</span> or <span class="data-point">Oak-Mitsui FaradFlex</span> with Dk values from <span class="data-point">4 to 16+</span> and thicknesses down to <span class="data-point">8 μm</span>. The capacitance density ranges from <span class="data-point">0.2 nF/cm²</span> (standard FR-4 at 100 μm) to over <span class="data-point">10 nF/cm²</span> (high-Dk thin film at 8 μm). At 10 nF/cm², a <span class="data-point">10 cm × 10 cm</span> board segment provides <span class="data-point">1,000 nF</span> of distributed decoupling — equivalent to dozens of discrete capacitors, with far lower ESL.</p>
+
+  <img class="article-img" src="../generated/blog-embedded-passive-xsection.webp" alt="Microscopic cross-section showing planar capacitance layer between copper planes" loading="lazy" style="max-width:80%">
+
+  <h2>Buried Resistors: Thin-Film Precision Inside the PCB</h2>
+
+  <p>Buried resistor technology embeds a thin layer of resistive material — typically nickel-phosphorus (NiP) at <span class="data-point">25–250 Ω/sq</span> or nickel-chromium (NiCr) at <span class="data-point">50–250 Ω/sq</span> — between laminate layers. After lamination, the resistive foil is photolithographically patterned and etched to create individual resistors, then covered by the next prepreg layer. The result: resistors that exist entirely within the PCB, with no solder joints, no tombstoning risk, and no assembly labor.</p>
+
+  <p>The electrical advantages are significant. Buried resistors eliminate the parasitic inductance of vias and solder pads — typically <span class="data-point">0.5–1.5 nH</span> per termination. For high-speed series terminations at <span class="data-point">10 Gbps+</span>, that inductance causes impedance discontinuities that degrade eye diagrams. By placing the termination resistor directly at the receiver input pad — inside the PCB, not on the surface — you eliminate the stub that ruins signal integrity. For more on high-speed design, see our <a href="/blog/pcb-signal-integrity.html">PCB signal integrity guide</a>.</p>
+
+  <p>Resistance tolerance is the critical specification. As-etched NiP resistors typically achieve <span class="data-point">±10–15%</span> without trimming. For precision applications (<span class="data-point">±5% or better</span>), laser trimming is required — a post-etch process that adds cost but achieves tolerances down to <span class="data-point">±1%</span>. For pull-up/pull-down and series termination applications, ±10–15% is usually sufficient. For reference voltage dividers or gain-setting networks, specify laser-trimmed to ±5% or use discrete thin-film chip resistors instead.</p>
+
+  <h2>Cost Analysis: When Do Embedded Passives Make Financial Sense?</h2>
+
+  <p>This is the question that determines whether your design uses embedded passives or stays with discrete SMD. The cost equation has three components:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>PCB Fabrication Cost Increase</h4>
+      <p>Adding a planar capacitance layer increases the layer count by <span class="data-point">2</span> (dedicated power/ground pair with thin dielectric). A 10-layer board becomes a 12-layer board. At approximately <span class="data-point">$2–4 per layer per sq. inch</span> in volume, this adds <span class="data-point">$4–8/sq. inch</span>. Buried resistor foil adds <span class="data-point">$3–6/sq. inch</span> depending on material (NiP is cheaper than NiCr). For a <span class="data-point">100 cm²</span> board, expect a <span class="data-point">$60–120</span> fabrication cost increase for planar capacitance, or <span class="data-point">$45–90</span> for buried resistors. Read our <a href="/blog/pcb-cost-factors.html">PCB cost factors breakdown</a> for full pricing context.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Component &amp; Assembly Cost Savings</h4>
+      <p>Each discrete 0402 capacitor costs approximately <span class="data-point">$0.002–0.01</span> in volume, plus <span class="data-point">$0.001–0.003</span> placement cost. A board with <span class="data-point">200 decoupling capacitors</span> saves <span class="data-point">$0.60–2.60</span> per board in components and assembly. Buried resistors save even more: thin-film chip resistors cost <span class="data-point">$0.01–0.05</span> each in precision grades. Savings scale with volume — at <span class="data-point">10,000 units</span>, component and assembly savings can fully offset the fabrication cost increase.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Board Area Reduction &amp; System-Level Savings</h4>
+      <p>This is where embedded passives win even when the direct BOM comparison is neutral. Eliminating <span class="data-point">200 capacitors and 100 resistors</span> frees <span class="data-point">3–6 cm²</span> of board area. On a dense design, that can mean reducing the layer count (fewer routing layers needed), fitting into a smaller enclosure (cheaper housing, lower shipping weight), or adding features without growing the board. At the system level, a <span class="data-point">10% board area reduction</span> often saves far more than the embedded passive fabrication cost.</p>
+    </div>
+  </div>
+
+  <p>The break-even analysis typically favors embedded passives when your board has <span class="data-point">more than 150–200 discrete passives</span> on a dense layout, operates above <span class="data-point">500 MHz</span> (where parasitic inductance matters), or has severe space constraints (wearables, implantables, smartphone-sized enclosures). For low-density, low-frequency designs, discrete SMD remains more cost-effective.</p>
+
+  <div class="highlight-box">
+    <p><strong>Design Rule:</strong> Don't embed every passive. Keep high-power resistors (above 100 mW dissipation), precision components (±1% or tighter), large-value capacitors (above 100 nF for decoupling, above 1 μF for bulk), and components that may need value changes during prototyping on the surface. Embed only what benefits from elimination of parasitic inductance or board space savings. Our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a> covers partitioning strategies.</p>
+  </div>
+
+  <h2>Manufacturing Challenges Unique to Embedded Passives</h2>
+
+  <p>Embedded passive manufacturing introduces process steps that standard PCB fabrication doesn't require — and each step carries yield risks:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Resistive Foil Registration &amp; Etching</h4>
+      <p>Buried resistor foil must be registered to inner layer artwork with <span class="data-point">±25–50 μm</span> accuracy. Misregistration shifts resistor geometries, changing resistance values. After etching, every resistor on the panel must be electrically tested — a process that adds <span class="data-point">30–60 minutes</span> of test time per panel. Failed resistors cannot be reworked; the entire inner layer core is scrapped.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Thin Dielectric Handling &amp; Lamination</h4>
+      <p>Planar capacitance laminates at <span class="data-point">8–25 μm</span> thickness are fragile — they wrinkle, tear, or trap air bubbles during layup far more easily than standard <span class="data-point">100 μm+</span> prepreg. A single air void between power and ground planes creates a potential short-circuit path. Lamination must be done in a <span class="data-point">Class 10,000 cleanroom</span> with vacuum-assisted presses and carefully controlled heat ramps. For our lamination quality standards, see <a href="/blog/pcb-laminate-selection-guide.html">PCB laminate selection</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Via Interconnection to Embedded Layers</h4>
+      <p>Connecting surface components to buried resistors requires blind vias that stop precisely on the resistive layer — not drill through it. This demands controlled-depth drilling or laser via technology with <span class="data-point">±10 μm</span> depth accuracy. A via drilled <span class="data-point">5 μm</span> too deep cuts the resistor trace and creates an open circuit. See our <a href="/blog/pcb-via-technology.html">PCB via technology guide</a> for blind/buried via capabilities.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Testing &amp; Rework Limitations</h4>
+      <p>Once laminated, embedded passives cannot be probed individually for troubleshooting. If a buried resistor drifts out of tolerance, the entire board is scrap — you cannot cut it out and solder a replacement. This makes first-pass yield critical. Designs should include <span class="data-point">10–20%</span> extra test coupons on the panel edge for destructive testing before committing production panels.</p>
+    </div>
+  </div>
+
+  <h2>Applications Where Embedded Passives Are Already Standard</h2>
+
+  <p>Embedded passives are not experimental technology. They are standard practice in several high-volume applications:</p>
+
+  <p><strong>Smartphone Main Boards:</strong> Every iPhone and flagship Android phone since approximately <span class="data-point">2014</span> uses planar capacitance in the processor power delivery network. The space saved by eliminating hundreds of decoupling caps is non-negotiable in a <span class="data-point">7 mm</span> thick device. Apple's latest A-series processor substrates use <span class="data-point">4–6 layers</span> of embedded passives.</p>
+
+  <p><strong>Server CPU Substrates:</strong> AMD EPYC and Intel Xeon processor packages use embedded planar capacitance and buried resistors to manage the PDN impedance requirements of <span class="data-point">200W+</span> processors switching at GHz speeds. Without embedded passives, the discrete capacitor count would exceed what can physically fit around the socket. Our <a href="/blog/data-center-server-pcb.html">data center server PCB guide</a> covers related high-layer-count requirements.</p>
+
+  <p><strong>Implantable Medical Devices:</strong> Pacemakers, neurostimulators, and cochlear implants use embedded passives to achieve the extreme miniaturization required for implantable form factors. The reliability advantage — no solder joints to fail inside a patient — is as important as the size reduction. These applications typically use <span class="data-point">IPC Class 3</span> manufacturing standards. See our <a href="/blog/medical-device-pcb.html">medical device PCB manufacturing guide</a>.</p>
+
+  <h2>Design Checklist: Is Your Board Ready for Embedded Passives?</h2>
+
+  <p>Before specifying embedded passives in your next design, verify these prerequisites:</p>
+
+  <p><strong>1. Your board already uses HDI technology.</strong> Embedded passives require sequential lamination and laser microvias — the same process infrastructure as HDI. If you're designing a standard through-hole board with <span class="data-point">6–8 layers</span>, the manufacturing complexity jump is too large. Start with HDI first (<a href="/blog/hdi-technology.html">HDI upgrade guide</a>), then add embedded passives on the next revision.</p>
+
+  <p><strong>2. Your passive count justifies the investment.</strong> Below approximately <span class="data-point">150 discrete passives</span> on a single board, the fabrication cost increase exceeds component and space savings. Run the numbers with your CM before committing.</p>
+
+  <p><strong>3. Your signal frequencies exceed 500 MHz.</strong> Below this threshold, discrete capacitor ESL is not the dominant PDN impedance contributor, and the electrical benefit of planar capacitance is marginal.</p>
+
+  <p><strong>4. Your production volume is above 5,000 units/year.</strong> At prototype volumes (<span class="data-point">50–500 units</span>), the NRE for resistive foil tooling and test fixture development makes embedded passives uneconomical. Our <a href="/blog/low-volume-pcb-assembly.html">low-volume assembly guide</a> covers alternatives for smaller runs.</p>
+
+  <p>At Huaxing PCBA, we manufacture embedded passive PCBs for applications ranging from <span class="data-point">5G mmWave</span> antenna arrays to <span class="data-point">implantable neurostimulators</span>. Our <span class="data-point">32-layer</span> capability with <span class="data-point">3/3 mil</span> trace/space, laser microvias, and in-house impedance TDR testing provides the precision manufacturing that embedded passive technology demands. <a href="/contact/">Contact our engineering team</a> with your stackup requirements for a feasibility assessment and quote.</p>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-embedded-passive.webp)">
+      <h2>Ready to Explore Embedded Passives for Your Next Design?</h2>
+      <p>Send your preliminary stackup and BOM. Our engineers will assess whether planar capacitance or buried resistors can reduce your board size and improve signal integrity — with a detailed cost comparison.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Feasibility Assessment <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<div class="related-reading" style="max-width:var(--content-width);margin:0 auto;padding:0 var(--space-md)">
+  <h3>Continue Reading</h3>
+  <ul>
+    <li><a href="/blog/hdi-technology.html">HDI PCB Technology: When to Upgrade from Standard to Microvia Design</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html">PCB Signal Integrity — Design Rules for Clean High-Speed Signals Above 100 MHz</a></li>
+    <li><a href="/blog/pcb-stackup-design.html">PCB Stackup Design Guide — Layer Count, Material Selection &amp; Impedance Planning</a></li>
+    <li><a href="/blog/pcb-laminate-selection-guide.html">PCB Laminate Selection Guide — Isola vs Panasonic vs Shengyi</a></li>
+    <li><a href="/blog/pcb-via-technology.html">PCB Via Technology Guide — Blind, Buried, Via-in-Pad &amp; Backdrilling</a></li>
+    <li><a href="/blog/mixed-signal-pcb-design.html">Mixed-Signal PCB Design — Grounding, Partitioning &amp; Noise Control</a></li>
+    <li><a href="/blog/medical-device-pcb.html">Medical Device PCB Manufacturing — IPC Class 3, ISO 13485 Compliance</a></li>
+  </ul>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
