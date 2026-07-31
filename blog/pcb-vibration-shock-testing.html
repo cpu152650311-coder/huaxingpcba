@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Vibration &amp; Shock Testing — JESD22-B103/B104, MIL-STD-810 &amp; Failure Prevention | Huaxing PCBA</title>
+<meta name="description" content="PCB vibration and shock testing guide: JESD22-B103/B104 and MIL-STD-810 test methods, fixture design, acceleration levels, failure modes like cracked BGA balls, and qualification planning for automotive, drone and industrial electronics.">
+<meta property="og:title" content="PCB Vibration &amp; Shock Testing — JESD22-B103/B104 &amp; MIL-STD-810 Methods">
+<meta property="og:description" content="Vibration and shock test methods for PCBs: standards, fixture design, acceleration levels, and how to qualify assemblies for automotive, drone and industrial environments.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-vibration-shock-testing.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-vibration-shock.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-vibration-shock-testing.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Vibration & Shock Testing — JESD22-B103/B104, MIL-STD-810 & Failure Prevention",
+  "description": "PCB vibration and shock testing guide: JESD22-B103/B104 and MIL-STD-810 test methods, fixture design, acceleration levels, failure modes like cracked BGA balls, and qualification planning for automotive, drone and industrial electronics.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-vibration-shock.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-vibration-shock-testing.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-vibration-shock-testing.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-vibration-shock.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Vibration &amp; Shock Testing:<br><em>Standards, Fixtures &amp; Failure Modes That Matter</em></h1>
+      <p class="reveal">If your board rides in a vehicle, drone, or industrial machine, it will be shaken — here's how to qualify it before it fails in the field.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Vibration &amp; Shock Testing</span></div>
+
+  <p>Vibration and mechanical shock are responsible for a disproportionate share of field failures in automotive, drone, rail, and industrial electronics — yet they are the most commonly skipped qualification tests in prototype-to-production programs. A board that passes every electrical test at the bench can develop cracked BGA balls, lifted pads, or fractured through-hole barrels after a few thousand kilometers on a vehicle. The reason is simple: bench testing applies zero mechanical stress, and most vibration damage is cumulative.</p>
+
+  <p>At Huaxing PCBA, we qualify assemblies for automotive (IATF 16949), drone, and industrial customers using electrodynamic shaker systems with sine, random, and shock profiles per JESD22 and MIL-STD-810. Our reliability lab has supported <span class="data-point">120+</span> qualification programs over the past three years, with vibration-induced failure rates at first qualification dropping from 18% to under 4% as test fixtures and design-for-vibration rules matured. This guide covers the standards, the test setup decisions that actually change results, and the failure modes to watch for.</p>
+
+  <img class="article-img" src="../generated/blog-vibration-shock-hero.webp" alt="Electrodynamic vibration shaker system with circuit board mounted on rigid aluminum fixture in electronics reliability laboratory" loading="lazy" style="max-width:80%">
+
+  <h2>Which Vibration Standard Applies to Your Product?</h2>
+
+  <p>The first decision in any vibration test program is the governing standard, and the wrong choice means either over-testing (wasted schedule and cost) or under-testing (field failures). Three standards dominate electronics qualification, and they answer different questions.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>JEDEC JESD22-B103 — The Component and Board-Level Baseline</h4>
+      <p>JESD22-B103 covers sinusoidal vibration for semiconductor and board-level qualification. It specifies frequency sweeps from 20 Hz to 2,000 Hz at acceleration levels typically 1.5-20 G, with test durations of 4 hours per axis (often reduced to 20 minutes in accelerated variants). This is the standard to cite when your customer or component vendor requires a baseline vibration rating — it is the most commonly referenced board-level vibration document in the electronics industry.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>JEDEC JESD22-B104 — Mechanical Shock</h4>
+      <p>JESD22-B104 defines mechanical shock testing using half-sine pulses, typically 1,500 G at 0.5 ms duration (Condition C) or 500 G at 1.0 ms (Condition B), applied 5 times per axis across 6 axes — 30 total pulses. This simulates handling drops, rough assembly, and transportation impacts. Note that JESD22-B104 is a <em>component-level</em> test; for populated board assemblies, many programs use the drop and impact profiles from IEC 60068-2-27 instead, which allow the fixture and board mass to be included in the calculation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>MIL-STD-810 — System-Level Real-World Profiles</h4>
+      <p>MIL-STD-810H Method 514.8 (vibration) and Method 516.8 (shock) define system-level profiles based on real transport and operational environments: wheeled vehicle, tracked vehicle, helicopter, jet aircraft, and loose cargo. Random vibration profiles are specified as power spectral density (PSD) curves in G²/Hz across 10-2,000 Hz. Automotive ECU programs commonly reference a modified wheeled-vehicle profile; drone customers reference helicopter or jet profiles depending on mounting location. This is the standard to specify when the product will be mounted on a moving platform.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Component-level standards (JESD22) answer "does this package survive vibration?" while system-level standards (MIL-STD-810) answer "does this assembly survive <em>its</em> environment?" — most field failures come from the assembly-level interactions the system profiles are designed to catch.</p>
+  </div>
+
+  <h2>Random vs Sine vs Shock: What Each Test Actually Proves</h2>
+
+  <p>Three excitation types appear in vibration programs, and each exposes a different class of weakness. Choosing the right mix is more important than choosing the highest G number.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Sine Sweep — Finding Resonances</h4>
+      <p>A sine sweep excites one frequency at a time, sweeping logarithmically from low to high (e.g., 10-2,000 Hz at 1 octave/min). Its purpose is resonance discovery: at the board's natural frequency, response acceleration can amplify 5-20× the input, concentrating strain at specific solder joints. A 0.5 mm-thick BGA board clamped on two edges typically resonates between 150-400 Hz — exactly the range where automotive engine and road inputs are strongest. Identifying resonance frequencies lets your design team add stiffeners or adjust mounting points before random testing begins.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Random Vibration — Simulating Real Environments</h4>
+      <p>Random vibration excites all frequencies simultaneously with amplitudes distributed per a PSD profile. It is the best simulation of real-world transport and operation, and it is what drives most cumulative fatigue damage. A typical automotive profile runs 2-4 hours per axis at 1.5-4 G RMS; a helicopter profile can reach 6-8 G RMS. Random testing is where marginal solder joints fail — which is precisely why it is the backbone of most qualification programs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Shock / Drop — Transient Impact Survivability</h4>
+      <p>Shock testing applies high-amplitude, short-duration pulses (half-sine 30-100 G at 6-11 ms for board-level; up to 1,500 G at component level) to verify survivability of handling and impact events. Unlike vibration, which damages cumulatively, shock failure is usually immediate and catastrophic: cracked ceramic capacitors, fractured BGA balls at package corners, and sheared connector solder joints. Board mass and mounting stiffness dominate shock response — a heavy heatsink can multiply local G forces 3-5× at its mounting points. See our guide on <a href="/blog/pcb-failure-analysis-guide.html">PCB failure analysis methods</a> for how these cracks are identified after testing.</p>
+    </div>
+  </div>
+
+  <h2>The Test Fixture: The Most Underrated Variable</h2>
+
+  <p>Two laboratories running the "same" vibration profile on the "same" board can produce completely different results if their fixtures differ. The fixture transfers shaker motion to the board, and a poorly designed fixture absorbs energy, adds resonances, or constrains the board differently than its real-world mounting — invalidating the test.</p>
+
+  <img class="article-img" src="../generated/blog-vibration-shock-shaker.webp" alt="Populated PCB clamped onto electrodynamic shaker head expander with metal bolts and visible copper traces" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="../generated/blog-vibration-shock-fixture.webp" alt="Rigid aluminum vibration test fixture holding green FR4 PCB with accelerometer cable attached in dark studio" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Rigid Aluminum Fixtures With a First Resonance Above 2,000 Hz</h4>
+      <p>The fixture's own first resonant frequency must sit above the test frequency range — otherwise the fixture amplifies or filters the input spectrum. A machined aluminum plate with 20-25 mm thickness and bolted standoffs typically achieves a first resonance of 1,500-2,500 Hz; bolted steel frames are heavier and shift the resonance lower. For automotive work we use hard-anodized aluminum fixtures with a verified first resonance above 2,000 Hz and document the fixture resonance survey in the test report.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Mounting Replicates Real-World Constraint</h4>
+      <p>A board bolted at all four corners responds differently than one held at two edges or one center standoff. The fixture must reproduce the product's actual mounting pattern — including any gaskets, isolators, or brackets — or the strain distribution across the board will not match reality. This is the most common source of false pass: the test fixture stiffens the board, hiding a resonance that will appear in the field. Drones are a good example: their carbon-fiber frames are far more flexible than an aluminum test plate, so we mount drone boards on a compliant fixture to reproduce frame flex. See our <a href="/blog/drone-uav-pcb-manufacturing.html">drone &amp; UAV PCB manufacturing guide</a> for the design rules that complement this.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Accelerometer Placement and Control Strategy</h4>
+      <p>Control accelerometers should be mounted on the fixture near the board (not on the shaker table) for closed-loop control, with response accelerometers on the board at the highest-strain locations — typically corners of large BGAs and heavy component mounting points. A control loop running at the fixture while the board resonates at 20× input can over-drive the fixture to compensate, producing test levels far above specification. Modern systems use multi-point averaging control (up to 8 channels) to prevent this. This is a detail worth auditing in any supplier's test report.</p>
+    </div>
+  </div>
+
+  <h2>Vibration Failure Modes: What Breaks and Why</h2>
+
+  <p>Understanding failure modes turns a vibration test from a pass/fail gate into a design-improvement tool. The failure mechanisms below account for the large majority of vibration-induced PCB failures in our qualification history.</p>
+
+  <table class="spec-table">
+    <tr><th>Failure Mode</th><th>Typical Location</th><th>Common Trigger</th><th>Detection Method</th></tr>
+    <tr><td>BGA ball crack (corner balls)</td><td>Package corners, largest BGAs</td><td>Board flex at resonance</td><td>X-Ray / cross-section</td></tr>
+    <tr><td>MLCC capacitor crack</td><td>Large 1206/1210 ceramics</td><td>Shock impulse, board flex</td><td>Acoustic micro-imaging</td></tr>
+    <tr><td>Through-hole barrel fracture</td><td>Connectors, heavy components</td><td>Cyclic bending at plated barrel</td><td>Resistance monitoring</td></tr>
+    <tr><td>Lifted / fractured pad</td><td>High-strain board edges</td><td>Resonance amplification</td><td>Visual / X-Ray</td></tr>
+    <tr><td>Connector solder joint fatigue</td><td>Board edge connectors</td><td>Mass × acceleration leverage</td><td>Event detector / functional</td></tr>
+  </table>
+
+  <p>Continuous resistance monitoring during vibration — using event detectors set to flag opens above 1,000 Ω for 1 μs or longer (per IPC/JEDEC-9702) — is essential. Intermittent opens that only occur under vibration disappear the moment the shaker stops; without in-situ monitoring, a cracked ball that passes post-test functional checks will fail in the field within months. Pair this with <a href="/blog/pcb-burn-in-ess-testing.html">burn-in and environmental stress screening</a> to catch early-life failures before shipment.</p>
+
+  <h2>Design Rules That Reduce Vibration Risk Before Testing</h2>
+
+  <p>Every vibration failure we have analyzed traced back to a design decision that increased strain concentration. Applying these rules at layout time is dramatically cheaper than discovering them on a shaker.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Keep Large Components Away From Board Edges</h4>
+      <p>Board flex is highest between mounting points, not at the edge clamps themselves — but heavy components amplify local strain wherever they sit. Rule of thumb: keep components over 5 g in mass at least 10 mm from mounting holes and board edges, and avoid placing tall components (connectors, electrolytic capacitors, transformers) at board corners. When a heavy part cannot move, add a standoff or stiffener under it to reduce local flex.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Use Through-Hole for High-Mass Components</h4>
+      <p>For parts above roughly 10 g that face sustained vibration, through-hole mounting with a full plated barrel distributes load through the board thickness instead of concentrating it on surface pads. Where SMT is mandatory, larger pad sizes, glue dots, or underfill for BGAs and QFNs dramatically improve survival — underfilled BGA assemblies in our tests survive 3-5× more vibration cycles than non-underfilled equivalents. Automotive programs routinely require underfill for packages above a defined mass threshold. Our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> covers underfill selection and process windows.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">12</div>
+    <div class="checklist-content">
+      <h4>Add Stiffeners and Reduce Board Aspect Ratio</h4>
+      <p>A stiffening rib, metal-core section, or thicker board (1.6 mm vs 1.0 mm) raises the first resonant frequency and reduces deflection under load. Increasing board thickness from 1.0 to 1.6 mm roughly doubles bending stiffness (stiffness scales with thickness cubed). For large boards, moving mounting points inward from the corners — or adding a center standoff — cuts the unsupported span where resonance develops. If your design already uses metal-core technology, see our <a href="/blog/metal-core-pcb.html">metal core PCB guide</a> — MCPCB's aluminum base also provides inherent vibration damping.</p>
+    </div>
+  </div>
+
+  <h2>How to Build a Vibration Qualification Plan</h2>
+
+  <p>A pragmatic qualification plan scales with product risk and volume. For a low-volume industrial sensor, a reduced sine sweep plus a 2-hour random profile per axis may be sufficient; for an automotive ECU bound for production, the full sequence below is standard.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">13</div>
+    <div class="checklist-content">
+      <h4>Step 1: Define the Environment and Reference Standard</h4>
+      <p>Identify the mounting location, expected input spectrum, and the customer's governing standard. For automotive, capture the OEM's own vibration spec — most OEMs define PSD profiles tighter than the generic MIL-STD-810 wheeled-vehicle curve. Document the test conditions (temperature, whether the board is powered, monitoring method) before the first shaker run; changing conditions mid-program invalidates comparability.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">14</div>
+    <div class="checklist-content">
+      <h4>Step 2: Fixture Survey and Low-Level Debug</h4>
+      <p>Run a fixture resonance survey and a low-level (0.5 G) sine sweep on the populated board to identify resonances and validate the control strategy. This is also the moment to confirm event-detector channels are working and to baseline resistance values. Fix any fixture issue now — a full random profile run with a bad fixture wastes days and produces meaningless data.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">15</div>
+    <div class="checklist-content">
+      <h4>Step 3: Full Profile Runs With In-Situ Monitoring</h4>
+      <p>Run the full random (and/or sine) profile per axis with continuous resistance monitoring, then the shock sequence. After each axis, run functional test and document any failures with photographs and X-Ray. Track failures by mode — if the same mode appears on multiple samples, the fix is a design change, not a test adjustment. Escalating failures into the <a href="/blog/pcb-failure-analysis-guide.html">root-cause analysis workflow</a> at this stage is what separates a qualification program from a checkbox exercise.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When a supplier claims "vibration tested," ask for three things: the standard and profile used (PSD curves, not just "5G"), the fixture design and its resonance survey, and the in-situ monitoring data — not just the final pass/fail. These three details separate real qualification from a shaker running with no one watching.</p>
+  </div>
+
+  <h2>What This Means for Your Next PCB Order</h2>
+
+  <p>Vibration testing is not an optional checkbox for boards that ride on moving platforms — it is the cheapest insurance against the most common class of field failure. The standards are clear, the failure modes are known, and the fixture details are auditable. At Huaxing PCBA, our reliability lab runs sine, random, and shock profiles with continuous resistance monitoring and documents every parameter in the qualification report. Our engineering team reviews your mechanical environment at the DFM stage — recommending mounting patterns, component placement adjustments, and test profiles before you spend a single dollar on tooling. <a href="/blog/pcb-testing-methods.html">Read our testing methods overview</a> to see how vibration fits the full qualification flow, or <a href="/contact/">contact our engineering team</a> to discuss your product's environment.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-vibration-shock.webp)">
+      <h2>Qualify Your Board for Real-World Vibration</h2>
+      <p>Send your Gerber files and mechanical environment details. Our reliability lab will recommend the right test profile — JESD22 or MIL-STD-810 — and include vibration qualification in your quote. Free DFM review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Start Your Qualification <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  RELATED READING       -->
+<!-- ═══════════════════════ -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-burn-in-ess-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Burn-In &amp; Environmental Stress Screening</a></li>
+    <li><a href="/blog/pcb-failure-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Failure Analysis Methods</a></li>
+    <li><a href="/blog/aerospace-defense-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Aerospace &amp; Defense PCB Requirements</a></li>
+    <li><a href="/blog/automotive-pcb-requirements.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Automotive PCB Reliability Testing</a></li>
+    <li><a href="/blog/drone-uav-pcb-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Drone &amp; UAV PCB Manufacturing</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Thermal Cycling Testing — IPC-9701, JESD22-A104 &amp; Solder Joint Life Prediction | Huaxing PCBA</title>
+<meta name="description" content="PCB thermal cycling testing guide: IPC-9701 and JESD22-A104 methods, temperature ranges, dwell times, Weibull analysis, solder joint fatigue prediction, and how to plan thermal qualification for automotive, aerospace and industrial boards.">
+<meta property="og:title" content="PCB Thermal Cycling Testing — IPC-9701, JESD22-A104 &amp; Fatigue Life">
+<meta property="og:description" content="Thermal cycling test methods for PCB assemblies: IPC-9701 and JESD22-A104 profiles, Weibull analysis, solder joint fatigue, and qualification planning for demanding environments.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-thermal-cycling-testing.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-thermal-cycling.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-thermal-cycling-testing.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Thermal Cycling Testing — IPC-9701, JESD22-A104 & Solder Joint Life Prediction",
+  "description": "PCB thermal cycling testing guide: IPC-9701 and JESD22-A104 methods, temperature ranges, dwell times, Weibull analysis, solder joint fatigue prediction, and how to plan thermal qualification for automotive, aerospace and industrial boards.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-thermal-cycling.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-thermal-cycling-testing.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-thermal-cycling-testing.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-thermal-cycling.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Thermal Cycling Testing:<br><em>Profiles, Weibull Analysis &amp; Solder Joint Life Prediction</em></h1>
+      <p class="reveal">Every temperature swing your board experiences is a fatigue cycle — here's how thermal cycling tests predict real field life before production.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Thermal Cycling Testing</span></div>
+
+  <p>Temperature cycling is the most powerful accelerated aging tool available for PCB assemblies — and the most frequently mis-specified. A board in an automotive engine bay can see 10,000+ thermal cycles over its life; an outdoor telecom radio sees daily swings of 60°C or more for a decade. Each cycle drives differential expansion between the PCB, solder, and components, progressively fatiguing solder joints until they crack. Thermal cycling testing compresses years of field temperature history into weeks so you can find those cracks in the lab instead of the warranty period.</p>
+
+  <p>At Huaxing PCBA, our thermal cycling chambers run IPC-9701 and JESD22-A104 profiles around the clock, supporting qualification for automotive (IATF 16949), aerospace, and industrial customers. Across <span class="data-point">80+</span> thermal qualification programs, we have correlated chamber cycles to field life for common board types — and the single biggest driver of early failures is not temperature range, but the <em>choice of test profile and the interpretation of the data</em>. This guide explains how thermal cycling actually damages solder joints, how to read a Weibull plot, and how to specify a test that answers your real question.</p>
+
+  <img class="article-img" src="../generated/blog-thermal-cycling-hero.webp" alt="Thermal cycling test chamber with circuit boards inside, temperature-controlled environment in electronics reliability laboratory" loading="lazy" style="max-width:80%">
+
+  <h2>How Thermal Cycling Damages Solder Joints</h2>
+
+  <p>Thermal cycling failure is a fatigue process driven by mismatched thermal expansion. The PCB laminate (CTE 14-17 ppm/°C in-plane), solder (CTE ~21-25 ppm/°C), and component packages (ceramic CTE ~6-8 ppm/°C, molded plastic ~10-17 ppm/°C) all expand at different rates when temperature changes. In a BGA, the ball connects a package that expands slowly to a board that expands faster; every degree of temperature change shears the ball slightly. Hundreds or thousands of cycles accumulate this shear strain into micro-cracks that grow until the joint opens.</p>
+
+  <p>Two material properties dominate the failure rate: the CTE <em>mismatch</em> between adjacent materials, and the solder's fatigue resistance. This is why ceramic packages (high mismatch to FR-4) fail thermal cycling far earlier than molded plastic packages, and why <a href="/blog/lead-free-vs-leaded-solder.html">lead-free vs leaded solder</a> selection matters — SAC305 and SnPb have different fatigue curves, and the transition to lead-free changed expected lifetimes for many product classes.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> The damage per cycle scales roughly with the temperature swing (ΔT) raised to a power between 1.5 and 2.5 (Coffin-Manson relationship). A test at −40°C to +125°C (ΔT = 165°C) does roughly 4-8× the damage per cycle of a test at 0°C to +70°C (ΔT = 70°C) — which is why the profile must match your real environment, not just the "harshest number that fits on the datasheet."</p>
+  </div>
+
+  <h2>IPC-9701 vs JESD22-A104: Which Profile Should You Specify?</h2>
+
+  <p>Two standards dominate thermal cycling qualification, and they serve different purposes. Understanding the difference prevents both over-testing and false confidence.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>IPC-9701 — Assembly-Level Solder Joint Reliability</h4>
+      <p>IPC-9701 is the assembly-level standard for solder joint reliability, defining temperature cycling tests with recommended profiles: TC1 (0 to +100°C), TC2 (−25 to +100°C), TC3 (−40 to +125°C), and TC4 (−55 to +125°C). It specifies dwell times of 10-14 minutes at each extreme, ramp rates of 10-20°C/min, and sample sizes (typically 32 assemblies per condition for Weibull analysis). Crucially, IPC-9701 emphasizes <em>monitoring solder joint resistance continuously</em> and analyzing failure data with Weibull statistics — it is a data-generation standard, not just a pass/fail box.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>JESD22-A104 — Component-Level Temperature Cycling</h4>
+      <p>JESD22-A104 is the JEDEC component-level standard, defining conditions A through N with temperature ranges from −55 to +150°C and specifying 1,000 cycles as the typical test duration. It is the standard cited by semiconductor vendors for package qualification. Component-level results (a single package on a test coupon) generally overstate assembly-level life because the real board's constraint, adjacent components, and assembly process all add stress. Use JESD22-A104 for component selection data; use IPC-9701 for assembly qualification.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>When to Use IEC 60068-2-14 Instead</h4>
+      <p>For system-level or non-electronics customers, IEC 60068-2-14 (temperature change) is often the referenced document, with profiles like Nb (rapid change between two specified temperatures). It is functionally similar to JESD22-A104 but structured for general equipment. Many European industrial customers specify IEC 60068-2-14, so confirm the governing standard with your customer before quoting test quantities — the cycle counts and acceptance criteria differ from IPC-9701.</p>
+    </div>
+  </div>
+
+  <h2>The Test Parameters That Actually Change Results</h2>
+
+  <p>Two labs running the "same" −40 to +125°C test can produce 3× different failure times if these parameters differ. When you review a supplier's thermal test data, check these four details first.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Typical Range</th><th>Effect on Result</th></tr>
+    <tr><td>Temperature range (ΔT)</td><td>−55 to +150°C extremes</td><td>Dominant driver — damage scales with ΔT^1.5-2.5</td></tr>
+    <tr><td>Dwell time at extremes</td><td>10-14 min (IPC-9701)</td><td>Longer dwell → more creep per cycle → faster failure</td></tr>
+    <tr><td>Ramp rate</td><td>10-20°C/min</td><td>Faster ramp adds mechanical shock component</td></tr>
+    <tr><td>In-situ monitoring</td><td>Continuous (IPC/JEDEC-9702)</td><td>Captures intermittent opens; post-test checks miss them</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Dwell Time: The Under-Appreciated Fatigue Driver</h4>
+      <p>At high temperature, solder creeps — it slowly deforms under constant stress. Longer dwell at the hot extreme allows more creep relaxation per cycle, which paradoxically can either increase or decrease damage depending on the mechanism. IPC-9701's 10-14 minute dwell is calibrated to produce realistic creep damage; cutting dwell to 5 minutes to "accelerate" the test actually changes the failure mechanism and produces optimistic life predictions. Always confirm the dwell time in any test report you receive.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Air-to-Air vs Liquid-to-Liquid: Speed Has a Cost</h4>
+      <p>Liquid-to-liquid thermal shock (e.g., MIL-STD-883 Method 1011) achieves ramp rates of 30-60°C/min by moving boards between hot and cold liquid baths, testing in minutes what takes hours in air chambers. But the rapid transfer adds a mechanical shock component and stresses conformal coatings and enclosures differently. For solder joint fatigue prediction, air-to-air thermal cycling is the standard; liquid-to-liquid is reserved for hermeticity and package-level screening. Mixing the two methods in one qualification program invalidates comparability.</p>
+    </div>
+  </div>
+
+  <h2>Reading a Weibull Plot: The Data Behind the Pass/Fail</h2>
+
+  <p>A thermal cycling report that says "passed 1,000 cycles" is nearly meaningless without the failure distribution. IPC-9701 requires Weibull analysis of time-to-failure data precisely because solder joint failures follow a distribution — some joints fail at 500 cycles, most fail around 2,000, and the "characteristic life" (η) and slope (β) tell you the risk profile.</p>
+
+  <img class="article-img" src="../generated/blog-thermal-cycling-weibull.webp" alt="Close-up of thermal cycling data plot on laboratory monitor showing solder joint failure distribution curve" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="../generated/blog-thermal-cycling-chamber.webp" alt="Populated PCB with thermocouple wires attached to BGA packages inside temperature cycling chamber" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="../generated/blog-thermal-cycling-detail.webp" alt="Extreme close-up of BGA solder balls on circuit board surface with golden amber accent lighting" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Characteristic Life (η) and Shape Parameter (β)</h4>
+      <p>The characteristic life η is the cycle count at which 63.2% of the population has failed; the shape parameter β describes the failure rate behavior. β &gt; 1 indicates wear-out (increasing failure rate) — typical for solder fatigue, with values of 3-8 common. A report stating "η = 3,200 cycles, β = 4.2" tells you the design's median life and how tightly failures cluster. Two designs with the same η but different β have very different warranty risk at a 10-year horizon. This is the number your reliability engineer should quote, not "passed 1,000 cycles."</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Sample Size and Confidence</h4>
+      <p>IPC-9701 recommends 32 assemblies per condition — enough to fit a two-parameter Weibull with reasonable confidence bounds. A test on 3-5 boards gives a Weibull plot with confidence intervals so wide the result is advisory at best. When a supplier quotes a "qualified" result from fewer than 10 samples, ask for the confidence bounds. Our standard automotive qualification uses 32 assemblies per condition with 90% confidence interval reporting, per IATF requirements. See our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 guide</a> for how acceptance criteria scale with product class.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Thermal cycling data is only as good as its failure detection. Intermittent opens that appear only at temperature extremes — and heal at room temperature — require continuous in-situ resistance monitoring (IPC/JEDEC-9702 event detection). Post-test functional checks will miss the majority of these.</p>
+  </div>
+
+  <h2>Design Choices That Extend Thermal Cycling Life</h2>
+
+  <p>Every thermal cycling failure we have analyzed had a design contributor. These four changes have the largest measured impact on solder joint fatigue life.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Match CTE Where It Matters Most</h4>
+      <p>The largest CTE mismatch in most assemblies is between ceramic components (6-8 ppm/°C) and FR-4 (14-17 ppm/°C). Options: switch large ceramic packages (BGAs, MLCCs) to molded plastic alternatives where possible; use a low-CTE laminate like a filled or polyimide system for boards with many ceramic parts; or add strain-relief. For boards running in extreme environments, our <a href="/blog/ceramic-ptfe-polyimide-pcb-substrates.html">ceramic, PTFE &amp; polyimide substrate guide</a> details which laminates cut CTE mismatch most effectively.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Control Solder Joint Strain With Package and Board Geometry</h4>
+      <p>Larger solder joints tolerate more strain before cracking: increasing BGA ball pitch from 0.5 mm to 0.8 mm roughly doubles the fatigue life of the joint under identical cycling. Similarly, thinner boards (0.8-1.0 mm) flex more and relieve strain at the joint, extending life vs a stiff 1.6 mm board — the opposite of the vibration design rule, which is why thermal and vibration requirements must be balanced together. Standoff height and solder volume also matter; our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> covers the process controls that maximize joint volume and consistency.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Underfill and Edge-Bonding for Extreme Profiles</h4>
+      <p>For TC3 (−40 to +125°C) and harsher profiles, capillary underfill around BGAs distributes the CTE mismatch across a compliant adhesive layer instead of concentrating it in the solder balls — our tests show 3-5× life extension for underfilled 0.5 mm-pitch BGAs. Edge-bonding (applying adhesive along package edges) is a lower-cost alternative that captures 50-70% of the benefit for corner-dominant failures. Both add process cost and complicate rework — see our <a href="/blog/pcb-rework-repair-guide.html">PCB rework &amp; repair guide</a> for how underfilled assemblies are handled when repair is unavoidable.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Avoid Placing Large Components at Board Edges and Corners</h4>
+      <p>Board edges experience the highest strain during thermal cycling because the laminate's in-plane expansion accumulates over the full board dimension — the corners of a 300 mm board move roughly 5× more relative to the center than a 100 mm board's corners. Large BGAs, ceramic capacitors, and connectors placed near edges or corners fail earliest. The same placement rule serves both thermal cycling and <a href="/blog/pcb-vibration-shock-testing.html">vibration testing</a> — keep heavy and high-CTE-mismatch parts within the central 60% of the board footprint.</p>
+    </div>
+  </div>
+
+  <h2>How to Plan a Thermal Qualification Program</h2>
+
+  <p>An effective thermal qualification program is sized to the product's environment and risk. The framework below scales from a low-volume industrial sensor to a high-volume automotive ECU.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">12</div>
+    <div class="checklist-content">
+      <h4>Step 1: Define the Field Environment and Target Life</h4>
+      <p>Convert the product's field temperature history into a test profile: count the expected thermal cycles over the design life (e.g., automotive underhood: 10,000+ cycles between −40 and +125°C; indoor industrial: 1,000-3,000 cycles between 0 and +70°C), then select the IPC-9701 or JESD22-A104 condition whose ΔT brackets your worst-case field exposure. Document the acceleration factor you are relying on — most programs target 2-3× field life in chamber cycles.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">13</div>
+    <div class="checklist-content">
+      <h4>Step 2: Choose Sample Size and Monitoring Strategy</h4>
+      <p>Use 32 assemblies per condition for Weibull-quality data (automotive/medical), or 10-16 for lower-risk industrial products. Wire event detectors to the highest-risk joints — BGA corner balls, large capacitors, connector tails — using daisy-chain test boards where available. Run functional tests at intervals (e.g., every 250 cycles) and at test completion. Pair thermal cycling with <a href="/blog/pcb-burn-in-ess-testing.html">burn-in and ESS</a> to separate early-life failures from wear-out.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">14</div>
+    <div class="checklist-content">
+      <h4>Step 3: Analyze, Document, and Feed Back to Design</h4>
+      <p>Fit a Weibull distribution to the failure times, report η and β with confidence bounds, and document the failure locations with X-Ray and cross-section. Every failure mode that appears in cycling should trigger a design review — if a specific capacitor position fails at 60% of target life, the fix is placement or package change, not accepting a lower target. Our <a href="/blog/pcb-failure-analysis-guide.html">failure analysis workflow</a> covers the cross-sectioning and micro-analysis used to confirm failure mechanisms after cycling.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When comparing quotes for thermal qualification, ask suppliers for their chamber fleet (air-to-air vs liquid-to-liquid), their standard dwell times, and whether they run IPC-9701-style continuous monitoring. The cheapest quote is often the one running short-dwell, no-monitoring tests that will overstate your product's life.</p>
+  </div>
+
+  <h2>What This Means for Your Next PCB Order</h2>
+
+  <p>Thermal cycling is the fastest reliable way to learn how long your assembly will survive its real temperature environment — provided the profile, monitoring, and statistics are done right. At Huaxing PCBA, our thermal chambers run IPC-9701 and JESD22-A104 profiles with continuous event monitoring and Weibull-based reporting, integrated into IATF 16949-compliant qualification flows. Our engineering team reviews your field temperature environment at the DFM stage and recommends a test profile matched to your product class — before tooling is committed. <a href="/blog/pcb-testing-methods.html">Read our testing methods overview</a> to see where thermal cycling fits in the full qualification sequence, or <a href="/contact/">contact our engineering team</a> to plan your thermal qualification program.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-thermal-cycling.webp)">
+      <h2>Plan Your Thermal Qualification With Real Data</h2>
+      <p>Send your Gerber files and field temperature data. Our reliability team will recommend the right thermal cycling profile — IPC-9701 or JESD22-A104 — and quote a qualification program with Weibull reporting. Free DFM review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Start Your Qualification <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  RELATED READING       -->
+<!-- ═══════════════════════ -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-burn-in-ess-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Burn-In &amp; Environmental Stress Screening</a></li>
+    <li><a href="/blog/lead-free-vs-leaded-solder.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Lead-Free vs Leaded Solder Reliability</a></li>
+    <li><a href="/blog/bga-assembly-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">BGA Assembly &amp; Reliability Guide</a></li>
+    <li><a href="/blog/pcb-failure-analysis-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Failure Analysis Methods</a></li>
+    <li><a href="/blog/pcb-vibration-shock-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Vibration &amp; Shock Testing</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

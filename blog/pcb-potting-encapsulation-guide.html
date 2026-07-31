@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Potting &amp; Encapsulation — Material Selection vs Conformal Coating for Harsh Environments | Huaxing PCBA</title>
+<meta name="description" content="PCB potting and encapsulation guide: polyurethane, silicone and epoxy potting compounds compared, when potting beats conformal coating, thermal and stress considerations, rework implications, and how to specify encapsulation for automotive, marine and industrial boards.">
+<meta property="og:title" content="PCB Potting &amp; Encapsulation — Material Selection vs Conformal Coating">
+<meta property="og:description" content="Polyurethane vs silicone vs epoxy potting for PCB protection: when encapsulation beats conformal coating, thermal and stress trade-offs, and rework implications.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-potting-encapsulation-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-potting.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-potting-encapsulation-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Potting & Encapsulation — Material Selection vs Conformal Coating for Harsh Environments",
+  "description": "PCB potting and encapsulation guide: polyurethane, silicone and epoxy potting compounds compared, when potting beats conformal coating, thermal and stress considerations, rework implications, and how to specify encapsulation for automotive, marine and industrial boards.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-potting.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-potting-encapsulation-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-potting-encapsulation-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-potting.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">PCB Potting &amp; Encapsulation:<br><em>Material Selection vs Conformal Coating for Harsh Environments</em></h1>
+      <p class="reveal">Full encapsulation is the most protective — and most permanent — decision you can make for a PCB. Here's how to choose between potting compounds and coating, and get it right the first time.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Potting &amp; Encapsulation</span></div>
+
+  <p>When a PCB must survive submersion, vibration, chemical exposure, or extreme temperature swings, conformal coating is often the default answer — but it is not always the right one. Potting and encapsulation completely surround the assembly in a solid compound, sealing every component, solder joint, and trace inside a protective block. For automotive sensors, marine electronics, LED drivers, and industrial controls, potting is frequently the only protection that survives the environment. The catch: it is permanent, it traps heat, and it is unforgiving of design mistakes.</p>
+
+  <p>At Huaxing PCBA, our encapsulation line dispenses polyurethane, silicone, and epoxy potting compounds with automated meter-mix systems and vacuum degassing, supporting automotive and industrial customers across <span class="data-point">60+</span> encapsulated product programs. This guide covers the material decision — urethane vs silicone vs epoxy — the thermal and mechanical trade-offs that determine long-term survival, and the rework reality you need to accept before you commit to potting.</p>
+
+  <img class="article-img" src="../generated/blog-potting-hero.webp" alt="Automated potting machine dispensing transparent protective compound over electronic circuit board assembly in manufacturing line" loading="lazy" style="max-width:80%">
+
+  <h2>Potting vs Conformal Coating: When Full Encapsulation Wins</h2>
+
+  <p>Conformal coating applies a thin film (25-200 μm) that follows the board contours, protecting surfaces but leaving component bodies, solder fillets, and underneath-package areas partially exposed. Potting floods the entire assembly in 1-10 mm of compound. The decision is not about quality — it is about the threat model.</p>
+
+  <table class="spec-table">
+    <tr><th>Protection Need</th><th>Conformal Coating</th><th>Potting / Encapsulation</th></tr>
+    <tr><td>Moisture &amp; condensation</td><td>Good</td><td>Excellent — full seal</td></tr>
+    <tr><td>Submersion / washdown</td><td>Marginal</td><td>Excellent</td></tr>
+    <tr><td>Vibration &amp; shock damping</td><td>None</td><td>Excellent</td></tr>
+    <tr><td>Chemical / solvent exposure</td><td>Moderate</td><td>Excellent</td></tr>
+    <tr><td>Heat dissipation</td><td>Neutral</td><td>Depends on compound (thermal potting available)</td></tr>
+    <tr><td>Rework / repair</td><td>Removable</td><td>Difficult to impossible</td></tr>
+    <tr><td>Weight added</td><td>Negligible</td><td>Significant (10-100 g typical)</td></tr>
+  </table>
+
+  <p>Our rule of thumb: if the product faces continuous submersion, aggressive washdown chemicals, or high-G vibration with heavy components, potting is usually the right call. If the requirement is condensation resistance and moderate humidity with a need for repair, <a href="/blog/pcb-conformal-coating-guide.html">conformal coating</a> remains the workhorse. Marine electronics are a classic potting case — our <a href="/blog/marine-grade-pcb-manufacturing.html">marine-grade PCB guide</a> covers the full protection stack used for offshore products.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> Conformal coating protects the <em>surface</em>; potting protects the <em>assembly</em>. If your failure analysis shows moisture ingress through component bodies, connector bases, or under-BGA areas, coating will not fix it — only encapsulation will.</p>
+  </div>
+
+  <h2>Polyurethane vs Silicone vs Epoxy: Choosing the Compound</h2>
+
+  <p>The potting compound is the decision that cannot be undone cheaply. Three families dominate, and each has a distinct performance profile. Matching the compound to the environment is the difference between a board that survives a decade and one that cracks internally in eighteen months.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Polyurethane — The All-Rounder</h4>
+      <p>Polyurethane (PU) potting compounds offer the best balance of moisture resistance, adhesion, mechanical toughness, and cost. They are the default for automotive sensors, cable assemblies, and industrial controls. Typical properties: hardness 50-90 Shore A, elongation 100-400%, service temperature −40 to +130°C (some grades to +150°C). PU bonds aggressively to most substrates, which is excellent for sealing — and a problem for rework. It is also the most common choice for <a href="/blog/pcb-ev-charging-infrastructure.html">EV charging infrastructure</a> electronics, where submersion resistance and thermal cycling coexist.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Silicone — The Temperature and Stress Champion</h4>
+      <p>Silicone compounds handle the widest temperature range (−55 to +200°C+), remain flexible at low temperature, and have the lowest modulus — meaning they transmit the least mechanical stress to components and solder joints during thermal cycling. Silicone is the choice for high-temperature automotive (underhood), LED drivers, and power electronics. The trade-offs: softer (20-60 Shore A), lower mechanical protection, higher cost, and adhesion that is good but less aggressive than PU — which is why silicone-potted boards are the most likely to allow moisture creep along leads in extreme immersion. Our <a href="/blog/pcb-smart-lighting-led-driver-systems.html">LED driver PCB guide</a> covers silicone potting for lighting applications in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Epoxy — Maximum Rigidity, Maximum Risk</h4>
+      <p>Epoxy potting compounds cure to a hard, rigid block (70-90 Shore D) with excellent chemical resistance and dielectric strength. They are chosen for transformers, high-voltage modules, and applications needing structural rigidity. The danger: rigid epoxy transmits thermal expansion stress directly to components and solder joints. Epoxy-potted boards have the highest rate of internal cracking under thermal cycling of the three families — especially with large components. If the product must survive wide temperature swings, choose a flexible PU or silicone instead. Epoxy is also essentially unreworkable.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Match compound hardness to thermal environment: wide ΔT + rigid epoxy = cracked joints. For every 10°C of additional temperature range in your environment, favor a softer, lower-modulus compound.</p>
+  </div>
+
+  <h2>Thermal Management: The Hidden Cost of Encapsulation</h2>
+
+  <p>Potting is an excellent electrical insulator and moisture barrier — and a thermal blanket. Most compounds conduct heat 5-20× worse than air (thermal conductivity 0.2-0.6 W/m·K for standard compounds vs ~0.026 W/m·K for still air — but the compound replaces air <em>convection</em>, which is what actually cools components). A power component that ran at 85°C junction in free air can exceed 120°C when encapsulated, unless the design accounts for it.</p>
+
+  <img class="article-img" src="../generated/blog-potting-material.webp" alt="Close-up of thermally conductive potting compound being applied over power electronics module with visible heat sink design" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Thermally Conductive Potting Compounds</h4>
+      <p>Filled compounds with alumina, boron nitride, or aluminum nitride particles achieve 1.0-3.0 W/m·K — enough to conduct heat to the housing instead of trapping it. Thermally conductive silicone or PU is mandatory for any encapsulated power stage above a few watts. When we pot power modules, we verify junction temperatures with thermal imaging on the first article and adjust compound or heatsink design before production — a step that is skipped far too often. See our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a> for the full heat-path design methodology.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Potting to the Housing vs Potting the Board Only</h4>
+      <p>Potting the board <em>inside</em> a housing with a thin gap between compound and case wall creates an insulating air gap that defeats the thermal path. Potting <em>to the housing</em> (fill-and-seal, where compound contacts the metal case) conducts heat directly to the enclosure, which then dissipates to ambient. This changes the housing design — venting, fill ports, and case material — so it must be decided before tooling. Automotive customers commonly specify fill-and-seal for motor controllers and sensors.</p>
+    </div>
+  </div>
+
+  <h2>Mechanical Stress, CTE, and Component Compatibility</h2>
+
+  <p>Potting compounds cure, shrink slightly, and then expand and contract with temperature — all while bonded to components of different stiffness. The resulting stress can crack ceramic capacitors, lift fine-pitch packages, or stress wire bonds. These failures are invisible from the outside and typically appear months into field use.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Low-Stress Formulations and Stress Absorbers</h4>
+      <p>Flexible compounds (low Shore A) and "soft potting" silicone formulations minimize stress transfer. Where a rigid compound is required, adding a foam or elastomer liner around sensitive components absorbs strain. For large ceramic capacitors, many programs switch to <a href="/blog/pcb-conformal-coating-guide.html">coating + mechanical restraint</a> instead of full potting precisely to avoid stress cracking. Always run a thermal cycling validation on encapsulated first articles — see our <a href="/blog/pcb-thermal-cycling-testing.html">thermal cycling testing guide</a> for the profile methodology.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Component Compatibility: What Not to Encapsulate</h4>
+      <p>Some components cannot survive encapsulation: components relying on air cooling (large heatsinks, fans), components needing adjustment or calibration access (trimmers, switches), connectors that must remain exposed (use dam-and-fill to keep them clear), and components that outgas or expand significantly at temperature (large electrolytic capacitors in rigid compounds). MEMS sensors and precision references can shift calibration under compound stress. Review the BOM against the compound datasheet before committing — this review has prevented multiple costly redesigns in our programs.</p>
+    </div>
+  </div>
+
+  <h2>The Potting Process: What Happens on the Production Line</h2>
+
+  <p>Potting quality depends as much on process as material. The same compound can produce a flawless seal or a void-filled, moisture-wicking failure depending on how it is dispensed and cured.</p>
+
+  <img class="article-img" src="../generated/blog-potting-process.webp" alt="Vacuum chamber degassing potting compound in electronics manufacturing, removing air bubbles before dispensing" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Meter-Mix Dispensing and Ratio Accuracy</h4>
+      <p>Two-component compounds are mixed at exact ratios (typically 1:1 to 10:1 by volume). Automated meter-mix systems hold ratio accuracy to ±1-2%, while hand mixing commonly drifts to ±5% or worse — and a 5% ratio error can change cure time by hours and final hardness by 10+ Shore points. For high-volume work, dispensing robots with heated, degassed material reservoirs are standard. For low-volume or prototype runs, pre-mixed frozen syringes eliminate ratio risk entirely.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Vacuum Degassing and Void Control</h4>
+      <p>Entrapped air bubbles become moisture paths and stress concentrators. Vacuum degassing the mixed compound before dispensing, combined with controlled pour height and slow fill, keeps void content below 1-2% by volume. For deep or dense assemblies, a vacuum potting process (dispensing inside a vacuum chamber) is the only way to achieve complete fill. We verify fill quality with X-Ray on first articles and periodic samples — a 1 mm void under a high-voltage pad is a latent failure. This pairs naturally with the <a href="/blog/pcb-inspection-aoi-xray-spi.html">X-Ray inspection capability</a> already used for BGA verification.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Cure Schedules and Handling</h4>
+      <p>Cure schedules range from 30 minutes at elevated temperature (epoxies) to 24+ hours at room temperature (some silicones). Accelerated cure must stay within the compound's specified temperature window — overheating a PU compound causes foaming or embrittlement. After cure, dimensional checks, hardness spot-checks, and electrical tests confirm the process is in control. For assemblies that will face <a href="/blog/pcb-vibration-shock-testing.html">vibration qualification</a>, potting often <em>replaces</em> the need for underfill and other mechanical reinforcement — one of its under-appreciated benefits.</p>
+    </div>
+  </div>
+
+  <h2>Rework Reality: Encapsulation Is a Commitment</h2>
+
+  <p>Before specifying potting, your team must accept the repair implications. Encapsulated boards are rarely reworkable in the conventional sense — the compound must be removed thermally, chemically, or mechanically, and the process often damages the board or components underneath.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Rework Options and Their Costs</h4>
+      <p>Soft silicones can sometimes be cut away with hot knives or chemical softeners; PU and epoxy require aggressive methods — heat guns (risking component damage), solvents (slow and hazardous), or milling (destructive). A reworkable silicone with a release coating is a deliberate design choice for products with known field-repair needs. For most potted products, the practical strategy is replace-at-unit level, with a documented <a href="/blog/pcb-rework-repair-guide.html">rework procedure</a> for the specific compound used. If your product requires component-level field repair, potting is probably the wrong protection strategy.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> Ask your assembly partner three questions before approving a potted design: (1) What is the compound's verified thermal conductivity and does it match your power budget? (2) What is the process void target and how is it verified? (3) What is the documented rework path if a field failure occurs? Suppliers who cannot answer all three are selling you a process they have not validated.</p>
+  </div>
+
+  <h2>What This Means for Your Next PCB Order</h2>
+
+  <p>Potting and encapsulation deliver protection no coating can match — full submersion resistance, vibration damping, and a permanent seal against the environment. The trade-offs are real: heat trapping, mechanical stress, weight, and the end of conventional repair. The right decision comes from matching compound family to thermal environment, validating with thermal imaging and thermal cycling on first articles, and controlling the process with ratio accuracy and void management. At Huaxing PCBA, our encapsulation line supports polyurethane, silicone, and epoxy systems with automated dispensing, vacuum degassing, and X-Ray void verification — and our engineering team reviews component compatibility and thermal paths before you commit to tooling. <a href="/blog/pcb-assembly-process.html">Read our assembly process overview</a> to see where encapsulation fits the production flow, or <a href="/contact/">contact our engineering team</a> to evaluate potting for your product.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-potting.webp)">
+      <h2>Evaluate Encapsulation for Your Next Design</h2>
+      <p>Send your Gerber files and environment requirements. Our engineering team will recommend the right protection strategy — potting compound selection, thermal validation, and process controls — matched to your product. Free DFM review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Start Your Project <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  RELATED READING       -->
+<!-- ═══════════════════════ -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+    <li><a href="/blog/marine-grade-pcb-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Marine-Grade PCB Manufacturing</a></li>
+    <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Design</a></li>
+    <li><a href="/blog/pcb-thermal-cycling-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Cycling Testing</a></li>
+    <li><a href="/blog/pcb-rework-repair-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Rework &amp; Repair Guide</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
