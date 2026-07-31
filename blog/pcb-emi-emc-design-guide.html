@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB EMI/EMC Design Guide — Emissions Control, Immunity & Compliance Testing for FCC/CE Mark | Huaxing PCBA</title>
+<meta name="description" content="Complete PCB EMI/EMC design guide: stackup strategies, ground plane design, shielding, filtering, and pre-compliance testing. Pass FCC Part 15 and CE EN 55032 on first submission.">
+<meta property="og:title" content="PCB EMI/EMC Design Guide — Emissions Control, Immunity & Compliance Testing">
+<meta property="og:description" content="Design your PCB for first-pass EMC compliance. Stackup, ground planes, shielding, filtering, and pre-compliance testing — everything you need for FCC/CE certification.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-emi-emc-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-emi-emc.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-emi-emc-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB EMI/EMC Design Guide — Emissions Control, Immunity & Compliance Testing for FCC/CE Mark",
+  "description": "Complete PCB EMI/EMC design guide: stackup strategies, ground plane design, shielding, filtering, and pre-compliance testing. Pass FCC Part 15 and CE EN 55032 on first submission.",
+  "datePublished": "2026-07-31",
+  "dateModified": "2026-07-31",
+  "image": "https://huaxingpcba.com/generated/blog-cover-emi-emc.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-emi-emc-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-emi-emc-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-emi-emc.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB EMI/EMC Design Guide:<br><em>Emissions Control, Stackup Strategy & First-Pass Compliance for FCC/CE Mark</em></h1>
+      <p class="reveal">A practical guide to designing PCBs that pass radiated and conducted emissions testing on the first submission — covering ground plane design, stackup optimization, shielding, filtering, and pre-compliance strategies.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB EMI/EMC Design Guide</span></div>
+
+  <p>EMC compliance testing is where PCB projects go to die — not because the design was wrong, but because EMC was treated as a testing problem instead of a design problem. A failed FCC Part 15 or CE EN 55032 radiated emissions scan at a certified lab costs <strong>$2,000–5,000 per attempt</strong>, adds 4–8 weeks to your schedule, and sends you back to the PCB layout tool to add ferrite beads, copper tape, and shield cans that should have been there from the start. This guide covers the PCB-level design decisions that determine whether you pass EMC on the first submission or fight emissions for months.</p>
+
+  <p>At Huaxing PCBA, we manufacture PCBs for applications where EMC compliance is non-negotiable — medical devices requiring IEC 60601-1-2, automotive ECUs tested to CISPR 25, industrial controllers under EN 61000-6-2/4, and IoT products that need both FCC and CE marks. Our controlled impedance manufacturing capability supports the precise trace geometries that high-speed and EMI-sensitive designs require, with <span class="data-point">±10%</span> impedance tolerance on differential pairs up to 12 layers.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-emi-emc-hero.webp" alt="Multi-layer PCB with shield cans, ferrite beads on power input, and dense ground stitching vias around board perimeter — professional EMC design" loading="lazy">
+
+  <h2>EMC 101: The Difference Between Emissions and Immunity — and Why Your PCB Affects Both</h2>
+
+  <p>EMC (electromagnetic compatibility) covers two directions: <strong>emissions</strong> (your PCB radiating noise that interferes with other devices) and <strong>immunity</strong> (external noise interfering with your PCB). Both are PCB-level problems. A switching power supply with a 10cm input loop creates a magnetic dipole antenna that radiates efficiently at harmonics of the switching frequency. A microcontroller with a 50MHz clock and no ground reference plane creates common-mode currents that turn every cable into an unintentional antenna. Here is what you are up against by frequency range:</p>
+
+  <table class="spec-table">
+    <tr><th>Frequency Range</th><th>Primary Concern</th><th>PCB Root Cause</th><th>Test Standard</th></tr>
+    <tr><td>150 kHz – 30 MHz</td><td>Conducted emissions (power lines)</td><td>Switching PSU noise coupling to input, inadequate CM filtering</td><td>FCC Part 15.107 / CISPR 11/32</td></tr>
+    <tr><td>30 MHz – 300 MHz</td><td>Radiated emissions (cable radiation)</td><td>Common-mode currents on I/O cables, poor ground referencing</td><td>FCC Part 15.109 / CISPR 11/32</td></tr>
+    <tr><td>300 MHz – 1 GHz</td><td>Radiated emissions (PCB direct)</td><td>Clock harmonics, gap in return path, slot antenna in reference plane</td><td>FCC Part 15.109 / CISPR 11/32</td></tr>
+    <tr><td>1 GHz – 6 GHz</td><td>Radiated emissions (IC-level)</td><td>Package-level radiation, inadequate decoupling, heatsink resonance</td><td>CISPR 32 (above 1 GHz)</td></tr>
+    <tr><td>ESD (transient)</td><td>Immunity — system crash/reset</td><td>No ESD protection, chassis ground not bonded to PCB ground</td><td>IEC 61000-4-2 (±8kV contact)</td></tr>
+    <tr><td>Burst/Surge (transient)</td><td>Immunity — data corruption</td><td>Inadequate I/O filtering, no TVS clamping on external connectors</td><td>IEC 61000-4-4/4-5</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The 10 dB rule in EMC: every 10 dB of margin you add during PCB design saves approximately $10,000 and 4 weeks of re-spin cost during compliance testing. A ground plane that is 100mm² larger, a decoupling capacitor placed 5mm closer to the IC power pin, a return via stitched 2mm from a high-speed signal via — these are essentially free changes during layout that become $500–2,000 shield-can-and-ferrite-band-aids after testing.</p>
+  </div>
+
+  <h2>Stackup Strategy: The Foundation of Every EMC-Compliant Board</h2>
+
+  <p>The PCB stackup is the single most important EMC decision you make — and it is made before a single trace is routed. A bad stackup cannot be fixed with more filtering or shielding; it creates electromagnetic problems at the physics level. Here are the stackup rules that EMC engineers live by:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Every Signal Layer Must Be Adjacent to a Continuous Reference Plane</h4>
+      <p>High-speed signals return current follows the path of least impedance — which, above a few kHz, is the path of least inductance. That means return current flows <strong>directly under the signal trace</strong> on the adjacent reference plane, in the opposite direction. If that plane has a gap (slot, split, or void), the return current must detour around it, creating a loop antenna that radiates. The rule: <strong>never route a high-speed signal (clock, data bus, SPI, USB) across a plane split.</strong> If a plane must be split (e.g., analog vs digital ground on the same layer), route signals only over their own continuous section of the plane. For 4-layer boards, use the standard stackup: Signal-GND-PWR-Signal — this gives every signal layer an adjacent reference plane. <a href="/blog/pcb-stackup-design.html">Our stackup design guide</a> covers the trade-offs between standard and advanced stackup configurations.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Decrease the Signal-to-Plane Spacing on High-Speed Layers</h4>
+      <p>The tighter the coupling between a signal trace and its reference plane, the more the return current is confined directly under the trace — and the less it spreads laterally (reducing crosstalk and emissions). For a 4-layer 1.6mm board, the standard prepreg between L1 (signal) and L2 (GND) is typically 0.2mm. Reducing this to <strong>0.1mm</strong> cuts the loop area in half and reduces radiated emissions by approximately <strong>6 dB</strong>. The trade-off: thinner dielectric lowers the trace impedance, requiring narrower traces to maintain 50Ω — check with your fabricator that they can etch the resulting trace width reliably.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>6-Layer Minimum for Mixed-Signal Designs</h4>
+      <p>A 4-layer board with analog and digital sections is an EMC compromise: you either split the ground plane (creating return path discontinuities) or share one plane (coupling digital noise into analog circuits). A 6-layer stackup — Signal-GND-Signal-PWR-GND-Signal — gives you two continuous ground planes that can be stitched together with vias, providing isolation through physical separation rather than plane splitting. The marginal cost of 6-layer over 4-layer is approximately <strong>20–30%</strong>; the cost of one failed EMC test cycle is far higher. <a href="/blog/impedance-control.html">Our impedance control guide</a> covers the fabrication precision needed for controlled-impedance stackups.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Power-Ground Plane Pair as a Distributed Decoupling Capacitor</h4>
+      <p>When the power and ground planes on adjacent layers are separated by a thin dielectric (0.1–0.2mm), they form a distributed capacitor with very low inductance — typically <strong>100–500 pF per cm²</strong> depending on dielectric constant and thickness. This plane capacitance provides decoupling at frequencies up to 200–300 MHz with zero inductance penalty (no via inductance, no mounting inductance). To maximize this effect: place power and ground planes on adjacent layers (L2–L3 or L4–L5, depending on stackup) with the thinnest prepreg your fabricator supports, and minimize the number of anti-pads (clearance holes) that reduce the effective plate area.</p>
+    </div>
+  </div>
+
+  <h2>Ground Plane Design: Stitching, Guard Traces, and Split Planes</h2>
+
+  <p>The ground plane is not passive — it actively shapes the electromagnetic fields around every signal. Getting it wrong creates antennas; getting it right contains fields. Here are the rules that eliminate the most common ground-plane-related EMC failures:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Stitch Ground Planes with Vias Every λ/20 Along the Board Edge</h4>
+      <p>A PCB edge is a natural radiating aperture — when a signal's return current reaches the board edge and has nowhere to go, the field fringes out into free space. Ground stitching vias (also called via fences or picket fences) placed <strong>every λ/20 at the highest frequency of concern</strong> along the board perimeter create a low-impedance path that suppresses edge radiation. For a design with harmonics up to 1 GHz, λ/20 = 15mm in FR-4 — place ground vias every 10–12mm along all board edges. Stitch all ground planes together at these vias, not just the top and bottom layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Via Stitching at Layer Transitions — Every Signal Via Needs a Return Via Within 2mm</h4>
+      <p>When a high-speed signal changes layers (e.g., L1 → L3), the return current must also change reference planes (L2 → L4 ground). Without a nearby ground-to-ground stitching via, the return current finds its own path — typically through the nearest decoupling capacitor, which might be 10–20mm away, creating a large loop. Place a <strong>ground stitching via within 2mm of every signal layer-transition via</strong>, connecting all ground planes. This is the single most effective design rule for reducing emissions from multi-layer boards. <a href="/blog/pcb-via-technology.html">Our via technology guide</a> covers via types and placement strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Avoid Floating Copper — Every Copper Feature Must Be Referenced</h4>
+      <p>Unconnected copper pours, thermal thieving patterns, and orphaned copper islands on signal layers act as parasitic antennas — they capacitively couple to nearby signals and re-radiate at their resonant frequency. During PCB layout, run a design rule check for <strong>unconnected copper</strong> and either remove these features or connect them to ground through vias. Thermal thieving patterns on inner layers should be electrically connected to the nearest reference plane through a grid of vias — an unconnected thieving pattern on an inner layer is a floating metal plane that will resonate.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-emi-emc-detail.webp" alt="Macro detail of PCB edge showing via fence stitching ground planes at board perimeter with dense via pattern and copper pour connecting all ground references" loading="lazy">
+
+  <h2>Decoupling and Filtering: Component Placement Matters More Than Component Values</h2>
+
+  <p>The standard advice — "place a 100nF capacitor near every IC power pin" — is correct in principle but misses the critical detail: the inductance of the connection between the capacitor and the IC power pin is what determines decoupling effectiveness, not the capacitance value. Above approximately 50 MHz, the impedance of a 100nF MLCC is dominated by its mounting inductance (approximately <strong>0.5–1 nH for a well-placed 0402 capacitor</strong>), making the capacitance value almost irrelevant:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Place Decoupling Capacitors on the Same Layer as the IC — No Vias to Power Pins</h4>
+      <p>The highest-frequency decoupling path is: IC power pin → capacitor pad → capacitor → capacitor ground pad → IC ground pin. Every via in this path adds approximately <strong>0.5–0.8 nH</strong> of inductance. A route with two vias (one to a power plane, one to a ground plane) adds 1.0–1.6 nH — raising the impedance at 100 MHz from ~0.8Ω to ~1.8Ω. The preferred layout: place the capacitor on the same layer as the IC, route the power trace directly from the IC pin to the capacitor pad (no vias), then connect the capacitor's ground pad directly to the IC's ground pad with a short trace, and drop a via to the ground plane at the capacitor's ground pad only.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use Multiple Capacitor Values in Parallel — But Only If They Are Physically Separated</h4>
+      <p>Placing a 10µF, 100nF, and 1nF capacitor in parallel on the same IC power pin creates an <strong>anti-resonance peak</strong> where the inductive region of the larger capacitor resonates with the capacitive region of the smaller one, creating a high-impedance spike at some mid-frequency (typically 10–50 MHz). The fix: separate the capacitor values physically — place the smallest capacitor (1nF, 0201 or 0402) closest to the IC pin for the highest-frequency decoupling, place a 100nF a few mm away for mid-frequency, and place the bulk 10µF capacitor further out where its higher ESL is not a problem. The physical separation prevents the anti-resonance interaction.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ferrite Beads on Power Inputs — Choose the Right Impedance at the Noise Frequency</h4>
+      <p>A ferrite bead is a frequency-dependent resistor: it looks like a short circuit at DC, an inductor at low frequencies, and a resistor (typically 100–1,000Ω) at its specified frequency. The mistake: choosing a bead based on its DC current rating alone. A bead rated for 3A at 100Ω at 100 MHz provides 100Ω of series impedance at 100 MHz — but only 20–30Ω at 50 MHz, where your switching converter's fundamental might be radiating. <strong>Match the bead's impedance curve to your noise frequency</strong>, not its current rating. And always place a capacitor after the bead (toward the load), not before — a capacitor before the bead creates an LC resonator that can amplify the noise. For high-current supply filtering, see <a href="/blog/power-electronics-pcb.html">our power electronics PCB guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Shielding: When to Use Shield Cans — and When You Shouldn't Need To</h2>
+
+  <p>A shield can is an admission that the PCB layout didn't control electromagnetic fields adequately at the board level. That said, for compact designs with multiple radios (WiFi + Bluetooth + cellular + GPS on one board), shielding becomes inevitable. The key is to make shielding effective rather than adding a metal box that resonates:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Shield Can Grounding — Continuous Perimeter Contact, Not Corner Tabs Only</h4>
+      <p>A shield can that contacts the PCB ground plane only at four corner tabs forms a cavity resonator — the gap between tabs acts as a slot antenna, and the can itself becomes a resonant structure at frequencies where the slot length approaches λ/2. The fix: specify a <strong>continuous ground contact along the entire perimeter</strong> of the shield can footprint, with a solderable surface (ENIG or HASL) and a ground via stitched every <strong>2–3mm</strong> along the shield perimeter to the inner ground plane. The via spacing is critical: at 6 GHz, λ/20 in FR-4 is approximately 2.5mm — vias spaced wider than this act as a slot array.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Internal Shields — Route Sensitive Signals on Inner Layers, Use Outer Layers as Shield</h4>
+      <p>Instead of adding a shield can, bury sensitive signals on inner layers with solid ground planes above and below. A stripline configuration (signal trace between two ground planes) provides approximately <strong>15–20 dB more isolation</strong> than a microstrip (signal on outer layer, one ground plane below). The trade-off: stripline requires a 6+ layer board and has higher dielectric loss, but the emissions reduction is free — no additional BOM cost, no assembly step. This is the preferred approach for clock distribution, high-speed serial links (PCIe, USB 3, SATA), and analog sensor front-ends. <a href="/blog/rf-pcb-design-manufacturing.html">Our RF PCB design guide</a> covers controlled-impedance routing for sensitive signals.</p>
+    </div>
+  </div>
+
+  <h2>Pre-Compliance Testing: Find Failures Before the Certified Lab Does</h2>
+
+  <p>Pre-compliance testing doesn't require a $100K anechoic chamber. A near-field probe set ($200–500) and a spectrum analyzer (or oscilloscope with FFT, or even an RTL-SDR dongle for $30) can identify the top 80% of emissions problems before you book lab time:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Near-Field Scanning: Find the Hot Spots in 30 Minutes</h4>
+      <p>With the board running normally, scan a near-field H-field (magnetic) probe 1–2mm above the board surface while watching the spectrum analyzer. The probe will show emission peaks at clock harmonics, switching converter frequencies, and data bus activity. Mark the physical locations of the highest peaks — these are where layout changes (better decoupling, ground stitching, or shielding) will have the most impact. The near-field scan doesn't give you absolute field strength numbers that correlate to FCC limits, but the <strong>relative comparison</strong> (before/after a layout change) is extremely reliable for identifying whether a fix worked.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Conducted Emissions: Use a LISN (Line Impedance Stabilization Network)</h4>
+      <p>A LISN ($200–800) provides a standardized impedance (50Ω) on the AC mains input and a measurement port for the spectrum analyzer. This replicates the conducted emissions test setup in CISPR 32/FCC Part 15. Connect the LISN between your product's AC input and the wall outlet, and measure the RF voltage at the LISN's measurement port from 150 kHz to 30 MHz. The common-mode choke and X-capacitor values on your input filter determine what you see here — adjust them until the envelope is below the limit line with at least 6 dB margin.</p>
+    </div>
+  </div>
+
+  <h2>EMC Design Checklist: Before You Send Gerber Files to Manufacturing</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>No High-Speed Signals Crossing Plane Splits — DRC Verify This</h4>
+      <p>Run a design rule that checks every high-speed net against all plane splits on adjacent reference layers. A single clock trace crossing a split in the ground plane can produce 10–15 dB higher emissions at its harmonics. Most PCB CAD tools can run this check automatically — if yours cannot, manually review every layer transition and every area where the reference plane changes. <a href="/blog/impedance-control.html">Controlled impedance routing</a> is the first line of defense.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Return Via Within 2mm of Every Signal Layer-Transition Via</h4>
+      <p>Count your layer-transition vias and your ground stitching vias near them. If the ratio is less than 1:1 (one ground via per signal transition via), you have unmanaged return current paths that will radiate. This is especially critical for high-speed differential pairs (USB, HDMI, PCIe) that transition layers — each pair's transition needs its own ground stitching via.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>I/O Connectors Have Filtering at the Connector, Not at the IC</h4>
+      <p>EMC filtering (TVS diodes, common-mode chokes, series ferrite beads) on I/O lines must be placed within <strong>5mm of the connector pin</strong>, not near the IC that drives the signal. Placing filter components near the IC leaves a 50–100mm trace between the filter and the connector — which becomes an antenna that radiates whatever noise the filter was supposed to suppress. This is one of the most common EMC layout mistakes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Chassis Ground and PCB Ground Bonded at One Point — Near the I/O Connectors</h4>
+      <p>The chassis ground (metal enclosure, connector shells, shield terminations) and PCB digital ground must be connected at a single low-impedance point, typically near the I/O connector area. This provides a controlled path for common-mode currents to return to their source without flowing through the PCB, reducing cable radiation by 10–20 dB. Use multiple parallel connections (screws, grounding springs, conductive gaskets) to minimize inductance — a single wire connection has too much inductance to be effective above 30 MHz.</p>
+    </div>
+  </div>
+
+  <h2>Summary: EMC Is a PCB Design Discipline, Not a Testing Hurdle</h2>
+
+  <p>The cost difference between designing for EMC compliance from the start and retrofitting after a failed test is measured in weeks of schedule delay and thousands of dollars in re-spin costs — per test cycle. A 6-layer stackup, ground via stitching, proper decoupling placement, and I/O filtering at the connector add perhaps 5–10% to the PCB fabrication cost. One failed EMC test cycle costs 10–20× that amount in lab fees, engineering time, and delayed product launch. The math is unambiguous.</p>
+
+  <p>At Huaxing PCBA, we support EMC-conscious PCB designs with controlled impedance manufacturing (±10% tolerance), 4–12 layer stackups with thin dielectrics down to 0.1mm, and full design-rule-check verification before fabrication. <a href="/blog/rf-pcb-design-manufacturing.html">Read our RF PCB design guide</a> for high-frequency layout considerations, or <a href="/contact/">send us your Gerber files</a> for a DFM review including impedance and manufacturability feedback within 24 hours.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design Guide — Layer Planning & Impedance</a></li>
+      <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design & Manufacturing — High-Frequency Layout</a></li>
+      <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Controlled Impedance PCB — Design & Fabrication</a></li>
+      <li><a href="/blog/power-electronics-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Power Electronics PCB — High-Current Design Guide</a></li>
+      <li><a href="/blog/pcb-via-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Via Technology — Types, Placement & Return Paths</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-emi-emc.webp)">
+      <h2>Designing for EMC Compliance? We Manufacture to Your Stackup Specs</h2>
+      <p>Send us your Gerber files with controlled impedance requirements. We'll return a DFM review that verifies stackup, trace geometry, and via placement against your EMC design rules — within 24 hours. 4–12 layers, ±10% impedance tolerance.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your EMC PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

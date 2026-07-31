@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV Battery Management System (BMS) PCB — High-Voltage Cell Monitoring & ISO 26262 Compliance | Huaxing PCBA</title>
+<meta name="description" content="EV BMS PCB manufacturing guide: high-voltage isolation design, cell monitoring accuracy, ISO 26262 functional safety, and thermal management for 400V/800V battery packs. IATF 16949 certified production.">
+<meta property="og:title" content="EV Battery Management System (BMS) PCB — High-Voltage Cell Monitoring & ISO 26262 Compliance">
+<meta property="og:description" content="Complete guide to BMS PCB manufacturing — from 800V isolation to ASIL-D functional safety. IATF 16949 certified production.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/ev-bms-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ev-bms.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/ev-bms-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "EV Battery Management System (BMS) PCB — High-Voltage Cell Monitoring & ISO 26262 Compliance",
+  "description": "EV BMS PCB manufacturing guide: high-voltage isolation design, cell monitoring accuracy, ISO 26262 functional safety, and thermal management for 400V/800V battery packs.",
+  "datePublished": "2026-07-31",
+  "dateModified": "2026-07-31",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ev-bms.webp",
+  "url": "https://huaxingpcba.com/blog/ev-bms-pcb.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/ev-bms-pcb.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ev-bms.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">EV Battery Management System PCB:<br><em>High-Voltage Isolation, Precision Sensing & ISO 26262 Compliance</em></h1>
+      <p class="reveal">A procurement-focused guide to BMS PCB manufacturing — covering 400V/800V architecture, cell monitoring accuracy, creepage requirements, and what to demand from your PCB supplier.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>EV BMS PCB Guide</span></div>
+
+  <p>The battery management system is the most safety-critical PCB inside any electric vehicle. A BMS board sits directly on top of high-voltage lithium-ion cells — monitoring individual cell voltages with millivolt precision, balancing charge across hundreds of cells, and executing emergency disconnect within microseconds of detecting a fault. For procurement managers and hardware engineers sourcing BMS PCBs, the manufacturing requirements are unlike any other automotive board: you need <strong>high-voltage isolation up to 5kV</strong>, <strong>functional safety compliance to ISO 26262 ASIL-C/D</strong>, and thermal management that keeps precision analog front-end ICs stable across a –40°C to +125°C operating range.</p>
+
+  <p>At Huaxing PCBA, we manufacture BMS controller and cell monitoring unit (CMU) PCBs for 400V and 800V EV platforms at our IATF 16949 certified facility. Our production line handles <span class="data-point">up to 12 layers</span> with controlled impedance, 3.2mm thick copper (4 oz) for high-current bus bars, and automated optical inspection (AOI) with 100% flying probe testing on every BMS PCB. Here is what you need to know before placing your next BMS PCB order.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-ev-bms-hero.webp" alt="High-voltage EV BMS printed circuit board with isolation barriers and cell monitoring connectors, automotive-grade manufacturing" loading="lazy">
+
+  <h2>BMS PCB Architecture: CMU, BMU, and the Isolation Challenge</h2>
+
+  <p>A modern EV battery pack uses a distributed BMS architecture — cell monitoring units (CMUs) sit directly on cell groups inside the pack, connected via isolated CAN or daisy-chain SPI to a central battery management unit (BMU). Each board tier has distinct PCB manufacturing requirements:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Cell Monitoring Unit (CMU) PCB — Precision Analog Front-End</h4>
+      <p>The CMU PCB mounts directly on battery modules, measuring 6–16 cell voltages with ±1.5 mV accuracy using dedicated AFE ICs (TI BQ series, ADI LTC68xx, NXP MC33771). These boards require <strong>4-layer minimum stackup</strong> with a solid ground plane beneath the AFE to isolate analog traces from digital noise. Creepage distance between cell inputs must exceed <strong>4.0mm for 400V systems</strong> and <strong>8.0mm for 800V systems</strong> per IEC 60664-1. Temperature sensing NTC thermistors require dedicated Kelvin-connected traces to avoid IR drop errors. <a href="/blog/impedance-control.html">Our impedance control guide</a> covers the trace geometry precision needed for these sensitive measurements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Battery Management Unit (BMU) — Central Processing & Safety Logic</h4>
+      <p>The BMU aggregates data from all CMUs, runs state-of-charge (SOC) and state-of-health (SOH) algorithms, and controls contactors. It typically uses a <strong>6–8 layer HDI PCB</strong> with a 32-bit automotive MCU, isolated CAN FD transceivers, and redundant power supplies. The PCB must maintain galvanic isolation between the high-voltage domain (connected to battery pack) and the low-voltage domain (12V vehicle bus) — typically 2.5–5 kV isolation through isolated DC-DC converters and digital isolators with <strong>8mm+ creepage slots milled into the PCB</strong>. See <a href="/blog/automotive-pcb-requirements.html">our automotive PCB requirements guide</a> for the full reliability framework.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Shunt-Based vs Hall-Effect Current Sensing</h4>
+      <p>BMS current measurement for SOC coulomb counting uses either a precision shunt resistor (100 µΩ to 500 µΩ) with a dedicated 16–24 bit ADC, or a Hall-effect sensor with integrated magnetic concentrator. <strong>Shunt-based sensing</strong> demands PCB trace resistance as low as 0.5 mΩ between the shunt and ADC — achieved with <strong>4 oz copper pours</strong> and Kelvin (4-wire) connection routing. <strong>Hall-effect sensing</strong> simplifies PCB layout but adds ±1% accuracy error over temperature. Most ASIL-C/D designs use redundant shunts with cross-checked measurements. For heavy-copper PCB requirements, refer to <a href="/blog/heavy-copper-pcb.html">our heavy copper PCB guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> BMS PCBs that combine CMU and BMU functions on a single board (integrated BMS) trade isolation simplicity for higher layer count and tighter creepage constraints. Expect 8–12 layers with multiple milled isolation slots. Unit cost is 40–60% higher than distributed architecture boards, but system-level integration and harness elimination often offset this in pack-level BOM cost.</p>
+  </div>
+
+  <h2>ISO 26262 Functional Safety: What It Means for Your BMS PCB</h2>
+
+  <p>ISO 26262 is not a PCB manufacturing standard — it is a functional safety lifecycle standard. But the PCB is where the safety architecture is physically implemented, and your PCB supplier's process capability directly determines whether the safety goals can be met. Here is what ASIL-C and ASIL-D BMS designs demand from PCB manufacturing:</p>
+
+  <table class="spec-table">
+    <tr><th>Requirement</th><th>ASIL-B (Mild Hybrid)</th><th>ASIL-C (PHEV/400V)</th><th>ASIL-D (BEV/800V)</th></tr>
+    <tr><td>PCB Layer Count</td><td>4–6 layers</td><td>6–8 layers</td><td>8–12 layers</td></tr>
+    <tr><td>Creepage (HV to LV)</td><td>3.2 mm</td><td>6.4 mm</td><td>8.0 mm</td></tr>
+    <tr><td>Copper Weight (power plane)</td><td>2 oz</td><td>3–4 oz</td><td>4–6 oz</td></tr>
+    <tr><td>Isolation Voltage</td><td>1.5 kV</td><td>2.5 kV</td><td>5.0 kV</td></tr>
+    <tr><td>CTI Rating (base material)</td><td>PLC 3 (≥175V)</td><td>PLC 2 (≥250V)</td><td>PLC 0 (≥600V)</td></tr>
+    <tr><td>IPC Class</td><td>Class 2</td><td>Class 3</td><td>Class 3 + AABUS</td></tr>
+    <tr><td>Conformal Coating</td><td>Optional</td><td>Required</td><td>Required + IP67</td></tr>
+    <tr><td>Testing</td><td>100% AOI + FP</td><td>+ 4-wire Kelvin</td><td>+ HiPot + Partial Discharge</td></tr>
+  </table>
+
+  <p>For ASIL-D specifically, the PCB supplier must provide <strong>PPAP Level 3 documentation</strong> including material certs, process capability data (Cpk ≥ 1.67 for critical dimensions), and first-article inspection reports. The PCB base material must have a Comparative Tracking Index (CTI) of PLC 0 (≥600V) — typically achieved with high-Tg FR-4 (Tg > 170°C) or polyimide laminates. <a href="/blog/pcb-certifications-compliance.html">Our certifications and compliance guide</a> details the full documentation package.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The difference between an ASIL-B and ASIL-D BMS PCB is not just spec margins — it is the <em>process evidence</em> behind every board. ASIL-D requires statistical process control data, 100% automated optical inspection with defect classification, and traceability to the panel and material lot for every shipped PCB. Factor this into supplier selection: a shop that does Class 2 consumer boards cannot simply "tighten tolerances" for ASIL-D without a completely different quality infrastructure.</p>
+  </div>
+
+  <h2>800V Architecture: Creepage, Clearance, and Partial Discharge Risks</h2>
+
+  <p>The shift from 400V to 800V battery architecture (driven by Porsche Taycan, Hyundai E-GMP, and Lucid Air platforms) doubles the electrical stress on BMS PCBs. It is not just about wider spacing — 800V introduces <strong>partial discharge (PD)</strong> as a new failure mechanism that 400V designs never had to consider:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Creepage Extensions Must Be Structural, Not Just Spacing</h4>
+      <p>Per IEC 60664-1, pollution degree 2 environments at 800V DC require <strong>8.0mm minimum creepage</strong> between high-voltage nets and grounded copper or low-voltage circuits. This cannot be achieved with spacing alone on a densely populated BMS board — it requires <strong>milled isolation slots</strong> (1.0–1.5mm wide, routed through all layers) that physically interrupt the creepage path. At Huaxing PCBA, we CNC-route isolation slots with ±0.1mm positional accuracy and verify slot continuity with automated optical inspection on every board.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Partial Discharge Testing Becomes Mandatory Above 500V</h4>
+      <p>Partial discharge is a localized dielectric breakdown in voids, delamination, or sharp copper edges within the PCB that does not immediately short the board but <strong>erodes insulation over months of operation</strong>. 800V BMS PCBs must pass partial discharge testing per IEC 60270 with <strong>≤10 pC apparent charge at 1.2× operating voltage</strong>. This requires void-free lamination, smooth copper etching (no jagged trace edges), and post-etch cleaning to remove ionic residues. Our manufacturing process includes automated PD testing on 100% of 800V BMS PCBs before shipment. For more on high-voltage PCB reliability, see <a href="/blog/pcb-ionic-contamination-cleanliness-testing.html">our ionic contamination testing guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Thicker Base Material — CTI and Thermal Performance Trade-offs</h4>
+      <p>800V designs typically push PCB thickness to <strong>2.0–3.2mm</strong> to accommodate copper weights up to 6 oz and maintain mechanical rigidity through thermal cycling. The challenge: thicker laminates have higher thermal resistance, trapping heat from shunt resistors and AFE ICs. This is solved with <strong>thermal via arrays</strong> (0.3mm diameter, 1.0mm pitch) under hot components, connecting to a dedicated thermal plane on an inner layer. <a href="/blog/metal-core-pcb.html">Our MCPCB and thermal substrate guide</a> covers alternative substrates when FR-4 thermal performance is insufficient.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-ev-bms-detail.webp" alt="Close-up macro view of an 800V BMS PCB showing milled isolation slots, high-voltage copper pours, and precision cell monitoring connector placement" loading="lazy">
+
+  <h2>Cell Balancing: Passive vs Active — PCB Design Impact</h2>
+
+  <p>Cell balancing equalizes voltage across series-connected cells to prevent overcharge and maximize usable capacity. The two approaches — passive (resistive bleed) and active (charge redistribution) — create very different PCB requirements:</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Passive Balancing</th><th>Active Balancing</th></tr>
+    <tr><td>PCB Thermal Load</td><td>High — 100–300 mA bleed per cell; 2–6W total heat per CMU</td><td>Low — 1–5A transfer current at >90% efficiency</td></tr>
+    <tr><td>Copper Requirements</td><td>2 oz minimum for bleed resistor thermal pads; thermal vias under resistors</td><td>3–4 oz for high-current transfer paths between cells</td></tr>
+    <tr><td>Component Count</td><td>1 bleed resistor + 1 MOSFET per cell</td><td>1 inductor/transformer + 2 MOSFETs per cell pair</td></tr>
+    <tr><td>PCB Area per Channel</td><td>~200 mm²</td><td>~600 mm²</td></tr>
+    <tr><td>BOM Cost Impact</td><td>+$0.15/channel</td><td>+$1.20/channel</td></tr>
+  </table>
+
+  <p>Passive balancing is simpler but turns the CMU PCB into a distributed heater — 96-cell packs dissipate up to 30W through bleed resistors during balancing. This demands <strong>thermal pad copper pours under every bleed resistor</strong> with thermal vias to an inner ground plane acting as a heat spreader. Active balancing avoids this thermal load but adds inductor/transformer magnetics that require <strong>keepout zones</strong> around switching nodes to prevent EMI coupling into the AFE's analog front-end. <a href="/blog/pcb-thermal-management-guide.html">Read our thermal management guide</a> for detailed design strategies.</p>
+
+  <h2>BMS Communication Buses: Isolated CAN vs Daisy-Chain SPI</h2>
+
+  <p>BMS boards communicate across a high-voltage isolation barrier using either isolated CAN FD or transformer-isolated daisy-chain SPI. Both approaches have PCB layout implications that directly impact signal integrity and safety compliance:</p>
+
+  <p><strong>Isolated CAN FD</strong> uses digital isolators (TI ISO1042, ADI ADM3055E) with integrated DC-DC converters to bridge the HV-LV boundary. The PCB must maintain the isolation barrier by placing the isolator component <strong>straddling a milled slot</strong>, with the HV-side copper on one side and LV-side on the other — no copper bridging the gap on any layer. CAN bus termination resistors (120Ω) must be placed within 10mm of the transceiver to avoid stub reflections.</p>
+
+  <p><strong>Daisy-chain SPI</strong> (ADI isoSPI, TI differential-SPI) uses transformer coupling through tiny pulse transformers (e.g., Würth 749014011) that provide inherent isolation. The advantage: a single twisted-pair carries both data and power, reducing harness weight. The PCB challenge: the transformer's center-tap requires careful ground referencing to prevent common-mode voltage drift across the daisy chain. For high-speed digital PCB design requirements including controlled impedance routing, <a href="/blog/impedance-control.html">our impedance control guide</a> covers the necessary trace geometry.</p>
+
+  <h2>Procurement Checklist for BMS PCB Buyers</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Verify ISO 26262 Process Capability — Not Just ISO 9001</h4>
+      <p>A PCB supplier holding ISO 9001 is not evidence of functional safety capability. Request <strong>IATF 16949 certification</strong> as the minimum automotive quality baseline. For ASIL-C/D BMS boards, request evidence of process capability studies (Cpk data) for controlled impedance traces, minimum annular ring, and isolation slot width — these are the dimensions that directly affect safety goal integrity. <a href="/blog/pcb-certifications-compliance.html">Our certifications guide</a> explains what each standard actually means for PCB manufacturing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Define CTI and HiPot Requirements in the Fabrication Drawing</h4>
+      <p>Specify the required Comparative Tracking Index (CTI) per IEC 60112 — PLC 0 (≥600V) for 800V systems — in the PCB fabrication notes, not just the electrical schematic. Request HiPot test reports showing <strong>leakage current < 1 mA at 1.5× rated isolation voltage</strong> for 60 seconds. For 800V ASIL-D designs, add partial discharge testing with acceptance criteria ≤10 pC. If your supplier cannot provide PD test data, they are not qualified for 800V BMS manufacturing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Demand 4-Wire Kelvin Testing on All Shunt Sense Traces</h4>
+      <p>Standard flying probe continuity testing cannot verify the milli-ohm level trace resistances that shunt-based current sensing depends on. Specify <strong>4-wire Kelvin resistance measurement</strong> on all shunt sense traces, with acceptance limits per the nominal trace resistance ±10%. A 0.5 mΩ trace that measures 0.75 mΩ due to poor plating will create a 50% SOC calculation error in coulomb counting. Our facility performs this on <span class="data-point">100%</span> of BMS PCBs as standard.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Specify Conformal Coating Type and Coverage</h4>
+      <p>BMS PCBs operate in condensing humidity environments inside the battery pack enclosure. Conformal coating is mandatory — specify <strong>acrylic (AR) or silicone (SR) coating</strong> at 50–75µm thickness per IPC-CC-830, with masked keepout zones on connectors, test points, and pressure-relief vents. Polyurethane (UR) offers better chemical resistance for packs that may see electrolyte leakage. <a href="/blog/pcb-conformal-coating-guide.html">Our conformal coating guide</a> compares the options in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Include Thermal Cycling Validation in PPAP</h4>
+      <p>BMS PCBs see extreme thermal gradients: the AFE ICs run at +85°C while adjacent cell terminals are at –20°C during cold-start charging. Request thermal cycling test data: <strong>1,000 cycles –40°C to +125°C</strong> per AEC-Q100 Grade 1, with 4-wire resistance measurement before and after cycling to detect plating fatigue and barrel cracking. Acceptable resistance change: ≤10%. See <a href="/blog/pcb-cross-section-report-guide.html">our microsection interpretation guide</a> for how to read cross-section reports that reveal these defects.</p>
+    </div>
+  </div>
+
+  <h2>Summary: BMS PCB Manufacturing Is a Safety-Critical Supply Chain Decision</h2>
+
+  <p>The BMS PCB is where the electrical and functional safety of the entire battery pack converges onto a single board. The manufacturing requirements — milled isolation slots, partial discharge testing, 4-wire Kelvin measurement, CTI-rated base materials, and PPAP documentation — are fundamentally different from general automotive PCBs. This is not a board where you can compromise on supplier capability to save 15–20% on unit cost.</p>
+
+  <p>At Huaxing PCBA, we manufacture BMS CMU and BMU PCBs for 400V and 800V platforms at our IATF 16949 certified Shenzhen facility. Our BMS production line includes <strong>100% HiPot testing to 6kV, partial discharge screening, 4-wire Kelvin resistance measurement, and full PPAP Level 3 documentation</strong>. We support 4–12 layer PCBs with up to 6 oz copper, milled isolation slots, and controlled impedance. <a href="/blog/automotive-pcb-requirements.html">Read our automotive PCB requirements guide</a> for the full quality framework, or <a href="/contact/">contact our engineering team</a> with your BMS PCB specifications for a DFM review within 24 hours.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/automotive-pcb-requirements.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Automotive PCB Requirements — IATF 16949 & Reliability</a></li>
+      <li><a href="/blog/ev-obc-dcdc-converter-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">EV On-Board Charger & DC-DC Converter PCB</a></li>
+      <li><a href="/blog/heavy-copper-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Heavy Copper PCB — 4–20oz Design Guide</a></li>
+      <li><a href="/blog/pcb-ionic-contamination-cleanliness-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Ionic Contamination & Cleanliness Testing</a></li>
+      <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide — Types & Selection</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ev-bms.webp)">
+      <h2>Manufacturing Your BMS PCBs — IATF 16949 Certified</h2>
+      <p>Send us your BMS PCB Gerber files and BOM. We'll return a DFM review with isolation verification, CTI material options, and PPAP documentation within 24 hours. 4–12 layers, up to 6 oz copper, 100% HiPot and 4-wire Kelvin testing included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your BMS PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB for Smart Lighting &amp; LED Driver Systems — DALI, DMX512 &amp; Bluetooth Mesh Control Electronics | Huaxing PCBA</title>
+<meta name="description" content="PCB design and manufacturing for smart lighting systems: DALI-2 and DMX512 protocol requirements, LED driver PCB thermal management, wireless control integration (Bluetooth Mesh, Zigbee), and the IEC 62386 compliance framework for commercial and architectural lighting.">
+<meta property="og:title" content="PCB for Smart Lighting &amp; LED Driver Systems — DALI, DMX512 &amp; Bluetooth Mesh Control">
+<meta property="og:description" content="Smart lighting PCBs combine power electronics, RF, and digital control on a single substrate — with thermal constraints that LED-only boards don't face. Design guide for DALI-2, DMX512, and IoT-connected drivers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-smart-lighting-led-driver-systems.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-smart-lighting.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-smart-lighting-led-driver-systems.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB for Smart Lighting & LED Driver Systems — DALI, DMX512 & Bluetooth Mesh Control Electronics",
+  "description": "Smart lighting PCBs combine power electronics, RF, and digital control on a single substrate. Design and manufacturing guide covering DALI-2, DMX512, wireless mesh protocols, LED driver thermal management, and the IEC 62386 compliance framework for commercial and architectural lighting.",
+  "datePublished": "2026-07-31",
+  "dateModified": "2026-07-31",
+  "image": "https://huaxingpcba.com/generated/blog-cover-smart-lighting.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-smart-lighting-led-driver-systems.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-smart-lighting-led-driver-systems.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-smart-lighting.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">Smart Lighting PCB Design:<br><em>DALI-2, DMX512 &amp; Wireless Mesh Control Electronics</em></h1>
+      <p class="reveal">When an LED driver board must also be a DALI-2 bus node, a Bluetooth Mesh endpoint, and a 50W constant-current regulator — all on one 60mm-diameter PCB. Manufacturing guide for the most demanding lighting control boards.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Smart Lighting PCB Systems</span></div>
+
+  <p>The lighting industry's transformation from fluorescent tubes with mechanical ballasts to IoT-connected LED luminaires with addressable control represents one of the largest electronic content expansions of any traditional industry. A 2026 commercial office luminaire contains more semiconductor content than a 2010 laptop motherboard — MCU, DC-DC converter, LED driver FETs, DALI-2 transceiver, Bluetooth Low Energy module, ambient light sensor, and PIR occupancy sensor — all on a single PCB constrained by the luminaire's mechanical form factor and thermal budget.</p>
+
+  <p>Our facility has manufactured lighting control PCBs for applications ranging from <span class="data-point">5W</span> Bluetooth Mesh downlights to <span class="data-point">400W</span> DALI-2 stadium floodlight drivers. The engineering challenge is consistent across all power levels: integrating power electronics, wireless RF, and digital control on a thermally constrained substrate without cross-interference between the high-current LED driver section and the noise-sensitive communication interfaces. This guide covers the three dominant smart lighting protocols, their PCB design implications, and the manufacturing processes that ensure first-pass compliance with IEC 62386 and FCC Part 15.</p>
+
+  <img class="article-img" src="../generated/blog-smart-lighting-pcb-assembly.webp" alt="Round LED driver PCB with surface-mount components, toroidal inductor, and aluminum heat sink plate on production line" loading="lazy">
+
+  <h2>DALI-2 — The Commercial Standard for Addressable Lighting</h2>
+
+  <p>DALI-2 (IEC 62386) is the dominant wired control protocol for commercial and architectural lighting, specified in over 80% of new office building tender documents in Europe. Unlike 0-10V analog dimming — which sends a unidirectional voltage level to a driver — DALI-2 is a bidirectional digital bus that supports individual luminaire addressing, group control, scene recall, and real-time fault reporting (lamp failure, driver temperature, emergency battery status). The bus operates at 16V with a 250mA current-limited supply, and data is Manchester-encoded at 1200 bps with a 22.5V logic high and 0V logic low — a scheme designed for noise immunity in electrically hostile ceiling plenum environments.</p>
+
+  <p>From a PCB design perspective, DALI-2 introduces three requirements that simple LED drivers don't face: a galvanically isolated DALI interface (typically using an optocoupler or digital isolator rated for 2.5kV), bus power extraction circuitry that draws ≤2mA in receive mode, and a microcontroller running the DALI stack with sufficient flash for the IEC 62386-102 mandatory command set. The isolation barrier between the DALI bus and the mains-powered LED driver section is the critical PCB layout constraint — the creepage distance across the isolation boundary must meet the end-product safety standard (typically 6mm for reinforced isolation at 230VAC). We use a physical PCB slot under the optocoupler to enforce the creepage path, a technique also used in <a href="/blog/high-voltage-pcb-design.html">high-voltage PCB design</a>.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>DALI Bus Power Supply — Extract Without Draining</h4>
+      <p>The DALI bus provides 16VDC at up to 250mA total for all devices on the bus segment. Each control gear (driver) is allowed to draw a maximum of 2mA from the bus in receive mode — enough to power an MCU and DALI transceiver, but not enough to run wireless radios or sensor circuits. Designs that need additional functionality (BLE, sensors) must either include an auxiliary power supply from the mains side or use a supercapacitor-based energy buffering scheme that trickle-charges from the bus during idle periods. Our reference DALI-2 driver design uses a 2.5V supercapacitor bank that charges from the bus over 30 seconds at power-up, then supplies burst current for BLE advertising at 1-2 minute intervals. This approach keeps bus current draw within the 2mA limit while supporting wireless commissioning — a requirement increasingly specified in DALI-2 + D4i luminaires.</p>
+    </div>
+  </div>
+
+  <h2>DMX512/RDM — The Entertainment and Architectural Workhorse</h2>
+
+  <p>DMX512 (ANSI E1.11) originated in theater lighting control and has expanded into architectural facade lighting, RGBW pixel mapping, and large-scale dynamic installations. Unlike DALI's bus topology, DMX512 uses a daisy-chain topology with RS-485 differential signaling at 250 kbps — fast enough to update 512 channels (170 RGB fixtures) at 44 Hz refresh rate. The RDM (Remote Device Management) extension, standardized as ANSI E1.20, adds bidirectional communication for device discovery, status monitoring, and remote configuration over the same RS-485 physical layer.</p>
+
+  <p>DMX512 PCB design is fundamentally an RS-485 transceiver design with one critical addition: the DMX512 standard requires 120Ω termination at the last device on the chain, but the termination must be switchable or automatic — not hard-wired. Designs that permanently terminate every device create bus loading issues when 20+ devices are daisy-chained. The standard approach is a DIP switch or jumper for manual termination, but modern designs increasingly use auto-termination circuits that sense whether a downstream device is connected and enable termination only when the device is at the end of the chain. The RS-485 transceiver itself must withstand the common-mode voltage shifts that occur in long cable runs through electrically noisy environments — look for transceivers rated for ±25V common-mode range with 15kV ESD protection on the bus pins.</p>
+
+  <img class="article-img" src="../generated/blog-smart-lighting-dmx-pcb.webp" alt="Architectural lighting control PCB with DMX512 connectors, LED driver MOSFETs, and aluminum substrate for thermal management" loading="lazy">
+
+  <h2>Wireless Mesh Protocols — Bluetooth Mesh, Zigbee, and Thread</h2>
+
+  <p>Wireless lighting control eliminates the control wiring cost — which can represent 30-40% of total installation cost in a commercial building. The three competing wireless mesh protocols each target different segments: Bluetooth Mesh dominates commercial office lighting (driven by smartphone commissioning and Silicon Labs EFR32 ecosystem), Zigbee dominates residential and hospitality (driven by Philips Hue and Amazon Echo integration), and Thread is emerging in building automation through the Matter standard. From a PCB perspective, all three require an RF section on the same board as a switch-mode LED driver — the EMI challenge that defines smart lighting PCB design.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>RF Isolation from Switching Noise — The Dominant Design Constraint</h4>
+      <p>An LED driver switching at 60-130 kHz with 200-400V drain voltage swing on the MOSFET generates broadband harmonic noise well into the 2.4 GHz ISM band where Bluetooth and Zigbee operate. This is not a theoretical concern — we've measured 15-20 dB degradation in BLE receiver sensitivity on prototype boards where the PCB antenna was placed within 15mm of the driver inductor. The mitigation strategy has four components: (a) physical separation — minimum 25mm between the switching inductor/ MOSFET and the antenna keep-out zone; (b) ground partitioning — a continuous ground plane under the RF section with a single-point bridge to the power ground; (c) shielding — a surface-mount shield can over the RF module if physical separation is constrained by form factor; (d) spread-spectrum switching — configuring the LED driver controller for frequency dithering spreads the switching noise across a wider bandwidth, reducing peak noise at any single frequency. For complete EMI design methodology, see our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Antenna Placement — Don't Let the Aluminum Housing Kill Your Signal</h4>
+      <p>LED luminaires are typically housed in aluminum extrusions or die-cast enclosures — which act as Faraday cages at 2.4 GHz. A PCB antenna placed inside a fully enclosed aluminum housing will see 20-30 dB of attenuation, reducing effective range from 30 meters to 3 meters. Solutions: (a) external antenna with U.FL connector and a coaxial pigtail to a plastic window in the housing; (b) PCB antenna positioned at the edge of the board with a ground cutout that aligns with a plastic end-cap; (c) for fully sealed outdoor luminaires, a ceramic patch antenna mounted on the driver PCB with a plastic radome window in the housing. The antenna solution must be specified during the PCB design phase — retrofitting an antenna to a board designed for internal placement is usually impossible without a full respin. For wireless power applications in lighting, see our <a href="/blog/wireless-power-transfer-pcb.html">wireless power transfer guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>LED Driver Topology — Constant Current, Power Factor, and Dimming</h2>
+
+  <p>The LED driver section of a smart lighting PCB does three things: converts AC mains to a regulated DC current, maintains power factor above 0.9 (mandatory for luminaires above 25W under IEC 61000-3-2), and responds to dimming commands from the control interface (DALI, DMX, or wireless) with smooth, flicker-free dimming down to 0.1% of full output. The topology choice — flyback, buck-boost, or LLC resonant — depends on power level, dimming depth requirement, and cost sensitivity.</p>
+
+  <table class="spec-table">
+    <tr><th>Topology</th><th>Power Range</th><th>Dimming Depth</th><th>Relative Cost</th><th>Best Application</th></tr>
+    <tr><td>Single-Stage Flyback + PFC</td><td>5-75W</td><td>5-100%</td><td>$</td><td>Downlights, track lights, small area luminaires</td></tr>
+    <tr><td>Two-Stage Boost PFC + Flyback</td><td>40-150W</td><td>1-100%</td><td>$$</td><td>Troffer, linear, and panel luminaires</td></tr>
+    <tr><td>LLC Resonant + Buck CC</td><td>75-400W</td><td>0.1-100%</td><td>$$$</td><td>High-bay, stadium, and area floodlights</td></tr>
+    <tr><td>Buck-Boost (DC Input)</td><td>10-100W</td><td>1-100%</td><td>$</td><td>Emergency lighting, PoE lighting (48VDC bus)</td></tr>
+  </table>
+
+  <p>The interaction between the LED driver and the smart control section creates the most common design fault we see: dimming-induced MCU reset. When the LED driver dims below 5%, the output current ripple increases — and if the MCU's 3.3V LDO is powered from the same rectified DC bus without adequate filtering, the ripple couples through the LDO and browns out the MCU. The fix is a dedicated LDO input filter (100µF electrolytic + 10µF ceramic + ferrite bead) and a supervisor IC with a 2.7V threshold that holds the MCU in reset during deep dimming transients. For thermal management of the LED driver section, including MCPCB substrate selection, see our <a href="/blog/led-pcb-manufacturing.html">LED PCB manufacturing guide</a> and <a href="/blog/metal-core-pcb.html">metal core PCB guide</a>.</p>
+
+  <img class="article-img" src="../generated/blog-smart-lighting-thermal-mgmt.webp" alt="Thermal camera image of LED driver PCB showing heat distribution across MOSFETs and inductor during full-load operation" loading="lazy">
+
+  <h2>PCB Material Selection for Lighting Applications</h2>
+
+  <p>Lighting PCBs operate in uniquely harsh thermal environments. The LED junction temperature can reach 85-105°C, and the aluminum housing that dissipates that heat also conducts it to the driver PCB. Standard FR-4 with a Tg of 130°C is adequate for driver sections below 40W, but designs above 60W or with densely packed components should specify high-Tg FR-4 (Tg ≥170°C) or metal-core PCB (MCPCB) for the LED mounting section. For dual-section designs — MCPCB for the LED array, FR-4 for the driver — the board-to-board interconnection must handle the differential thermal expansion: a 100°C temperature rise on an aluminum substrate produces approximately 0.25mm of linear expansion per 100mm of board length.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>MCPCB-to-FR4 Interconnection — Thermal Stress Relief</h4>
+      <p>The junction between the aluminum-core LED board and the FR-4 driver board is the highest-stress mechanical point in the assembly. Rigid soldered connections (pin headers) will fatigue and crack within 500-1000 thermal cycles as the aluminum expands and contracts relative to the FR-4. The correct interconnection methods are: flexible PCB jumper (0.2mm polyimide with 1oz copper, minimum 10mm length for strain relief), stranded wire with silicone insulation (rated 200°C), or spring-loaded pogo-pin connectors that accommodate thermal displacement. For flex PCB reliability, see our <a href="/blog/flex-pcb-design-manufacturing.html">flex PCB design guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>IEC 62386 Compliance — What Manufacturers Must Verify</h2>
+
+  <p>IEC 62386 is not a single standard but a family of 30+ parts covering different device types, control gear functions, and bus power supplies. For a DALI-2 LED driver (control gear type 6 per IEC 62386-207), the mandatory compliance tests include: bus power consumption ≤2mA, response to 24-bit forward frames within 22.5ms, correct handling of 15V-20.5V bus voltage range, arc power reporting accuracy ±5%, and failure status reporting (lamp failure, thermal shutdown, load change detection). Testing requires a DALI-2 certified test sequencer — a USB-to-DALI interface with protocol conformance test software (available from DiiA member test houses). PCB designs that pass functional testing but fail conformance testing almost always fail on timing: the MCU's interrupt latency for DALI frame decoding exceeds the 9.17ms half-bit period tolerance at 1200 bps.</p>
+
+  <div class="highlight-box">
+    <p><strong>Design Rule:</strong> The MCU pin receiving the DALI bus signal must be configured as an edge-triggered interrupt with interrupt priority set above all other peripherals except the safety watchdog. If the MCU is also running a BLE stack (which has its own real-time constraints in the 625µs connection interval), the DALI interrupt must preempt the BLE stack. This means the MCU's NVIC (nested vector interrupt controller) must support preemptive interrupts — a feature present on ARM Cortex-M3/M4 but not on lower-cost M0/M0+ cores.</p>
+  </div>
+
+  <h2>Smart Lighting PCB Manufacturing at Huaxing PCBA</h2>
+
+  <p>Smart lighting PCBs demand manufacturing capabilities that span three traditionally separate domains: power electronics assembly (heavy copper, large magnetics, thermal management), RF assembly (impedance-controlled traces, RF connector placement, shield can attachment), and mixed-signal assembly (fine-pitch MCUs, sensors, optocouplers). The manufacturing line must handle all three on a single board without compromising any domain's quality requirement.</p>
+
+  <p>Our SMT lines for lighting control boards run a specific process: dual-side assembly with selective soldering for through-hole magnetics and connectors, nitrogen reflow for improved wetting on heavy copper LED driver sections, 100% AOI on both sides with separate inspection programs for the power section (looking for insufficient solder on large thermal pads) and the digital section (looking for bridging on 0.5mm pitch QFN packages). Post-assembly, every board undergoes a <span class="data-point">4-hour</span> burn-in test at 85°C ambient while cycling the LED output from 100% to 1% dimming at 5-second intervals — this catches the infant mortality failures that would otherwise surface during customer commissioning. For the complete assembly process methodology, see our <a href="/blog/pcb-assembly-process.html">PCB assembly process guide</a> and our guide on <a href="/blog/pcb-burn-in-ess-testing.html">burn-in and ESS testing</a>.</p>
+
+  <p>Whether you're developing a DALI-2 downlight driver, a DMX512 architectural facade controller, or a Bluetooth Mesh luminaire with integrated sensors, our engineering team can support your PCB manufacturing from prototype through mass production. <a href="/contact/">Contact us with your design files</a> for a DFM review and production quote — typical turnaround is 24 hours with a free thermal simulation report for lighting applications above 75W.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/led-pcb-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">LED PCB Manufacturing — Thermal Design & LM-80 Compliance</a></li>
+      <li><a href="/blog/power-electronics-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Power Electronics PCB — Thermal & High-Current Design</a></li>
+      <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design — Connectivity & Miniaturization</a></li>
+      <li><a href="/blog/metal-core-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Metal Core PCB — Aluminum & Copper Thermal Management</a></li>
+      <li><a href="/blog/building-automation-hvac-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Building Automation PCB — Smart Building Controllers</a></li>
+    </ul>
+  </div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-smart-lighting.webp)">
+      <h2>Ready to Manufacture Your Smart Lighting PCB?</h2>
+      <p>Upload your design files for a free DFM review and production quote. Includes thermal simulation for lighting applications above 75W. Typical response: 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('modal-open');}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('modal-open');}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=f.querySelector('[name="email"]').value.trim();if(!d)return;const b=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev/',{method:'POST',body:b});if(r.ok){f.reset();closeModal();alert('Thank you! We will respond within 24 hours.');}}catch(err){alert('Could not send. Please email us directly.');}return false;}
+</script>
+
+</body>
+</html>

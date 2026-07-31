@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Reflow Soldering Profile Optimization — Eliminate Tombstoning, Voiding &amp; Cold Solder Joints | Huaxing PCBA</title>
+<meta name="description" content="Complete reflow soldering profile optimization guide: ramp-soak-spike zones, thermocouple placement, void reduction below IPC-7095 Class III limits, and the 6 profile parameters that control tombstoning, voiding, and cold joints — with real SMT line data.">
+<meta property="og:title" content="PCB Reflow Soldering Profile Optimization — Eliminate Tombstoning, Voiding &amp; Cold Joints">
+<meta property="og:description" content="A single degree per second in the wrong zone can turn a 99.5% yield into 92%. Here's how to build and validate reflow profiles that eliminate the three most expensive SMT defects.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-reflow-soldering-profile-optimization.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-reflow-profile.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/pcb-reflow-soldering-profile-optimization.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Reflow Soldering Profile Optimization — Eliminate Tombstoning, Voiding & Cold Solder Joints",
+  "description": "Complete reflow profile optimization guide: ramp-soak-spike zones, thermocouple placement methodology, void reduction below IPC-7095 Class III limits, and the six profile parameters that control tombstoning, voiding, and cold joints — with real data from 8 SMT lines.",
+  "datePublished": "2026-07-31",
+  "dateModified": "2026-07-31",
+  "image": "https://huaxingpcba.com/generated/blog-cover-reflow-profile.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-reflow-soldering-profile-optimization.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/pcb-reflow-soldering-profile-optimization.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-reflow-profile.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">Reflow Soldering Profile Optimization:<br><em>Eliminate Tombstoning, Voiding &amp; Cold Solder Joints</em></h1>
+      <p class="reveal">The six profile parameters that separate a 99.5% first-pass yield from a 92% disaster — with zone-by-zone data from 8 SMT lines running mixed-technology boards daily.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Reflow Profile Optimization</span></div>
+
+  <p>Reflow soldering is the thermal heartbeat of SMT assembly — and the most common source of defects that survive AOI undetected. A profile that's 3°C too cool in the peak zone produces cold joints that pass electrical test but fail after 200 thermal cycles. A ramp rate one degree per second too fast creates tombstoning on 0402 passives. And the ramp-soak-spike (RSS) profile that works perfectly for a 1.6mm FR-4 board with 200 components will under-reflow a 2.4mm board with a large BGA ground plane — even if the oven setting never changed.</p>
+
+  <p>Our eight SMT lines run approximately <span class="data-point">1,200</span> reflow profiles per month across board thicknesses from 0.4mm flex to 3.2mm heavy copper, with component mixes spanning 0201 passives to 45mm BGA packages. Every profile is validated with a minimum of six thermocouple attachment points and verified against IPC-7530 and J-STD-020 moisture sensitivity limits. The difference between a good profile and a great one is roughly 2% first-pass yield — which on a 10,000-unit run means 200 boards that don't need rework.</p>
+
+  <img class="article-img" src="../generated/blog-reflow-oven-zone.webp" alt="Reflow oven conveyor with PCB entering heated zone, visible thermal gradient on board surface" loading="lazy">
+
+  <h2>The Four Thermal Zones — and What Each One Controls</h2>
+
+  <p>A modern reflow oven has four distinct thermal zones. Each zone contributes to a specific metallurgical outcome, and each has failure modes that produce characteristic defects. Understanding the zone physics lets you isolate root cause in seconds instead of guessing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Preheat Zone (25°C → 150°C, ramp 1-3°C/s)</h4>
+      <p>The preheat zone drives off volatile solvents from the solder paste flux. Ramp too fast (>3°C/s) and the flux vehicle boils instead of evaporating — creating solder balls and splatter. Ramp too slow (<1°C/s) and the flux spends too long at intermediate temperatures, oxidizing and losing activation potential before the spike zone. For mixed-technology boards with large thermal mass differences, the preheat ramp rate is the single biggest lever for minimizing delta-T across the board. Our standard preheat for 1.6mm FR-4 with SAC305 paste is 1.8°C/s ±0.3°C, adjusted downward to 1.2°C/s for boards with BGA ground planes exceeding 25cm².</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Soak Zone (150°C → 183°C, 60-120 seconds)</h4>
+      <p>The soak zone equalizes temperature across the board and activates the flux chemistry. Insufficient soak time leaves cold spots on large components — the classic mechanism behind BGA head-in-pillow defects where the package ball reaches liquidus while the PCB pad is still 5°C behind. Excessive soak (>120s) consumes flux activators, reducing wetting force in the reflow zone. The soak zone is where component thermal mass differentials matter most: a 35×35mm BGA with internal copper planes can lag the PCB surface temperature by 12-18°C during soak. Our profile methodology targets a delta-T of ≤5°C at soak exit, verified by thermocouples on the largest BGA body and the thinnest PCB area. Related techniques for thermal management across the entire board are covered in our <a href="/blog/pcb-thermal-management.html">PCB thermal management guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Reflow Zone (183°C → Peak 235-250°C, 45-90s above liquidus)</h4>
+      <p>This is where the solder powder melts, wets the pads, and forms the intermetallic compound (IMC) layer. Time above liquidus (TAL) is the critical parameter: too short (<30s for SAC305) and IMC formation is incomplete, producing weak joints; too long (>90s) and IMC grows excessively brittle, reducing thermal fatigue life. Peak temperature is alloy-specific: SAC305 requires 235-245°C; SnPb eutectic peaks at 205-220°C. The reflow zone is also where tombstoning initiates — the surface tension imbalance that lifts one end of a chip component occurs in the first 3-5 seconds after both terminations reach liquidus. Maintaining ramp rate below 2.5°C/s in this zone minimizes the thermal shock that exacerbates warpage on large packages. See our <a href="/blog/pcb-warpage-reflow-prevention.html">warpage prevention guide</a> for the full interaction between reflow profile and board flatness.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Cooling Zone (Peak → 100°C, ramp 2-6°C/s)</h4>
+      <p>The cooling rate determines the solder joint grain structure. Cooling too fast (>6°C/s) produces a fine-grained but stressed microstructure that's prone to tin whisker formation on lead-free alloys. Cooling too slow (<2°C/s) allows large IMC grains to form, reducing shear strength. The cooling zone is also where board warpage locks in — differential cooling between thick copper layers and thin dielectric creates residual stress. Our standard cooling rate is 3.5-4°C/s to 100°C, then natural convection below that threshold. For boards with heavy copper layers (>3oz), we reduce cooling to 2.5°C/s maximum to avoid delamination at the resin-copper interface.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> The most common reflow defect we see from customer-transferred programs isn't tombstoning or voiding — it's insufficient soak time. Boards profiled on a 5-zone oven then transferred to our 10-zone line show a 3-8% yield improvement simply because the longer soak zone achieves better delta-T equalization. If you're qualifying a new supplier, ask for the thermocouple data from their profile validation run — not just the final profile graph.</p>
+  </div>
+
+  <h2>Six Profile Parameters That Control Defect Rates</h2>
+
+  <p>Beyond the basic zone temperatures and belt speed, six specific parameters correlate directly with reflow defect rates. Each is measurable, adjustable, and has a known failure threshold backed by IPC and our internal process data.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Target (SAC305)</th><th>Tombstoning Risk</th><th>Voiding Risk</th><th>Cold Joint Risk</th></tr>
+    <tr><td>Preheat Ramp Rate</td><td>1.5-2.5°C/s</td><td>High if >3°C/s</td><td>Medium if >3°C/s</td><td>Low</td></tr>
+    <tr><td>Soak Duration (150-183°C)</td><td>70-100s</td><td>Low</td><td>Low</td><td>High if <60s</td></tr>
+    <tr><td>Delta-T at Soak Exit</td><td>≤5°C</td><td>High if >8°C</td><td>Medium if >8°C</td><td>High if >10°C</td></tr>
+    <tr><td>Peak Temperature</td><td>238-245°C</td><td>Low</td><td>High if >248°C</td><td>High if <233°C</td></tr>
+    <tr><td>Time Above Liquidus</td><td>60-80s</td><td>Medium if >90s</td><td>High if >90s</td><td>High if <45s</td></tr>
+    <tr><td>Cooling Rate to 100°C</td><td>3.0-4.5°C/s</td><td>Low</td><td>Low</td><td>Medium if <2°C/s</td></tr>
+  </table>
+
+  <p>For SAC305 alloy specifically, the peak temperature window is narrower than many engineers expect. Component datasheets typically list 260°C as the maximum peak package temperature per J-STD-020 — but that's the <em>component</em> limit, not the optimal process window. Running at 255°C won't damage components rated MSL 3, but it will accelerate IMC growth and increase void formation as flux boils off prematurely. Our internal process window targets 240°C ±3°C for standard SAC305, confirmed by monthly cross-section analysis of IMC thickness. For BGA-specific reflow concerns including X-ray void criteria, see our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a>.</p>
+
+  <img class="article-img" src="../generated/blog-reflow-thermocouple.webp" alt="Close-up macro photo of thermocouple wire attached to BGA package corner with high-temperature Kapton tape on green PCB substrate" loading="lazy">
+
+  <h2>Thermocouple Placement — Why Position Matters More Than Profile Settings</h2>
+
+  <p>A reflow profile is only as good as the thermocouple data it's built on. Attach a TC to the thinnest, lightest component on the board, and your profile will under-reflow every large package. Attach only to the largest BGA, and you'll scorch every small passive. Proper thermocouple placement requires minimum four measurement points — and for complex boards, six or more.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Largest BGA/QFN Package Body Center</h4>
+      <p>Drill a small hole from the bottom of the board to reach the center pad, or use high-temperature epoxy to bond the TC bead to the package top surface. This is your canary for cold joints — if the largest thermal mass reaches peak temperature, everything smaller has already been above liquidus for longer.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Smallest Passive Component (0201 or 0402)</h4>
+      <p>The smallest mass heats fastest and risks exceeding the maximum allowable temperature. This TC protects against component damage and tombstoning — if the small component's ramp rate exceeds 3°C/s anywhere in the preheat or reflow zones, reduce the zone setpoints for those zones.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Board Edge — Thinnest Cross-Section</h4>
+      <p>Board edges heat and cool faster than the center due to convection exposure. A TC at the board edge captures the maximum ramp rate the board experiences, which is typically 0.5-1°C/s faster than the board center. This is your guardrail against delamination and warpage. Board edge warpage is covered in detail in our <a href="/blog/pcb-warpage-reflow-prevention.html">warpage prevention guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Board Center — Average Thermal Mass Area</h4>
+      <p>This represents the majority of components and provides the baseline profile that most joints will experience. Use this TC for the primary profile graph in production documentation. For mixed-technology boards with both power electronics and fine-pitch logic, add a second center TC on a different region.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> When evaluating an EMS provider's reflow capability, ask two questions: "How many thermocouples do you use for profile validation on a new product?" and "What's your maximum acceptable delta-T at soak exit?" Providers running 3 TCs with a 12°C delta-T tolerance are operating at commodity quality levels. Providers running 6+ TCs with a 5°C delta-T ceiling have invested in process engineering — and it shows in defect rates below 500 DPPM.</p>
+  </div>
+
+  <h2>Void Reduction — IPC-7095 Class III Targets and How to Hit Them</h2>
+
+  <p>Solder joint voids are gas pockets trapped during reflow, caused by flux outgassing that can't escape before the solder solidifies. IPC-7095 defines three void acceptance classes. Class III — required for automotive, medical, and aerospace — limits any single BGA void to 15% of joint area and total voiding to 20%. Hitting Class III consistently requires three profile strategies working together.</p>
+
+  <p>The soak zone is the primary lever for void reduction. Extending soak time from 60s to 90s gives flux volatiles more time to escape before the solder melts and seals the escape path. However, this also consumes more flux activator — so the soak extension must be paired with a paste formulation that has adequate activator longevity. Our standard void-reduction profile uses 85-95s soak and peak temperature at the lower end of the window (238°C instead of 245°C), which reduces the vapor pressure of trapped gases by roughly 15%. For boards that still exceed Class III limits after profile optimization, see our <a href="/blog/pcb-testing-methods.html">PCB testing methods comparison</a> for X-ray inspection protocols.</p>
+
+  <img class="article-img" src="../generated/blog-reflow-void-xray.webp" alt="Grayscale X-ray micrograph showing BGA solder ball cross-sections with small round voids visible inside solder joints" loading="lazy">
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Stencil Aperture Design for Void Escape</h4>
+      <p>Voids don't just form at the solder-pad interface — they also migrate upward through the molten solder. Aperture designs that leave a gas escape path — such as home-plate or grid-segmented apertures for large thermal pads — can reduce voiding by 40-60% compared to full-coverage apertures. This interacts with the reflow profile: slower ramp rates give more time for gas to travel the escape path. See our <a href="/blog/smt-stencil-design-guide.html">SMT stencil design guide</a> for aperture geometry best practices.</p>
+    </div>
+  </div>
+
+  <h2>Profile Validation — The Three-Pass Methodology</h2>
+
+  <p>A single profile run isn't sufficient for production qualification. The three-pass methodology — one cold pass, one nominal pass, one hot pass — validates that your profile has adequate process window margin. If any pass produces defects, the profile window needs tightening.</p>
+
+  <table class="spec-table">
+    <tr><th>Pass</th><th>Peak Temp Target</th><th>TAL Target</th><th>Purpose</th></tr>
+    <tr><td>Cold Pass</td><td>232-235°C</td><td>50-60s</td><td>Verify minimum acceptable reflow — checks for cold joints and incomplete wetting at lower boundary</td></tr>
+    <tr><td>Nominal Pass</td><td>238-242°C</td><td>65-75s</td><td>Production target — the profile that will run in daily production</td></tr>
+    <tr><td>Hot Pass</td><td>245-248°C</td><td>80-90s</td><td>Verify maximum acceptable reflow — checks for component damage, excessive IMC, and delamination at upper boundary</td></tr>
+  </table>
+
+  <p>All three passes should produce X-ray and cross-section results within IPC Class II or III limits (per product requirement). If the hot pass shows voiding above the Class limit, reduce peak temperature by 2-3°C and revalidate. If the cold pass shows incomplete wetting on any joint, extend TAL by 5-10s through belt speed reduction. A profile that passes all three has a process window of at least 10°C in peak temperature and 20s in TAL — adequate for production variation in oven loading and ambient conditions. For guidance on cross-section interpretation, see our <a href="/blog/pcb-cross-section-report-guide.html">cross-section report guide</a>.</p>
+
+  <h2>Putting It Together — A Production-Ready Profile</h2>
+
+  <p>The reflow profile is not a set-and-forget parameter. Ambient humidity affects flux activation. Board loading density affects convection efficiency. Even a seasonal shift of 10°C in factory ambient temperature shifts the preheat ramp rate by 0.2-0.3°C/s — enough to move from nominal to marginal on boards with large thermal mass differentials. Profile validation should be repeated quarterly at minimum, and immediately after any change in PCB laminate supplier, solder paste lot, or board thickness.</p>
+
+  <p>At Huaxing PCBA, every new product introduction includes a full three-pass profile validation with minimum six thermocouple attachment points, documented X-ray void analysis against IPC-7095 Class III targets, and a signed profile report that travels with the production batch record. Our process engineering team has profiled over <span class="data-point">8,000</span> unique board designs — from single-sided consumer IoT boards to 24-layer server backplanes with 3oz copper and 55mm BGA packages. <a href="/blog/pcb-assembly-process.html">Read our complete assembly process guide</a> or <a href="/contact/">contact our engineering team</a> to discuss your specific reflow requirements.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/bga-assembly-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">BGA Assembly Guide — X-Ray Inspection & Defect Prevention</a></li>
+      <li><a href="/blog/pcb-warpage-reflow-prevention.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Warpage During Reflow — Root Causes & Prevention</a></li>
+      <li><a href="/blog/smt-stencil-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMT Stencil Design Guide — Aperture Geometry & Nano-Coating</a></li>
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods — AOI, X-Ray, Flying Probe, ICT Comparison</a></li>
+      <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management — Design Strategies for Heat Dissipation</a></li>
+    </ul>
+  </div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-reflow.webp)">
+      <h2>Get a Reflow Profile Review With Your Next Order</h2>
+      <p>Upload your Gerber files and BOM — receive a full three-pass reflow profile validation report with X-ray void analysis within 24 hours. Free DFM review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Profile Validation <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('modal-open');}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('modal-open');}
+async function handleInquiry(e){e.preventDefault();const f=e.target,d=f.querySelector('[name="email"]').value.trim();if(!d)return;const b=new FormData(f);try{const r=await fetch('https://inquiry-proxy.workers.dev/',{method:'POST',body:b});if(r.ok){f.reset();closeModal();alert('Thank you! We will respond within 24 hours.');}}catch(err){alert('Could not send. Please email us directly.');}return false;}
+</script>
+
+</body>
+</html>
