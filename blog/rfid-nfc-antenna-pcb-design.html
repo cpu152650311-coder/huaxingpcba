@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFID &amp; NFC Antenna PCB Design — Coil Tuning, Impedance Matching &amp; Tag Manufacturing | Huaxing PCBA</title>
+<meta name="description" content="Engineering guide to RFID and NFC antenna PCB design: 13.56MHz coil antenna tuning, UHF 860-960MHz impedance matching, antenna-on-PCB manufacturing tolerances, and testing methods that predict read range.">
+<meta property="og:title" content="RFID &amp; NFC Antenna PCB Design — Coil Tuning, Impedance Matching &amp; Tag Manufacturing">
+<meta property="og:description" content="How to design and manufacture RFID/NFC antennas on PCB: HF coil turns and Q factor, UHF matching networks, material loss, and read-range testing — from a Shenzhen PCB manufacturer.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/rfid-nfc-antenna-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-rfid-nfc.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/rfid-nfc-antenna-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "RFID & NFC Antenna PCB Design — Coil Tuning, Impedance Matching & Tag Manufacturing",
+  "description": "Engineering guide to RFID and NFC antenna PCB design: 13.56MHz coil antenna tuning, UHF 860-960MHz impedance matching, antenna-on-PCB manufacturing tolerances, and testing methods that predict read range.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-rfid-nfc.webp",
+  "url": "https://huaxingpcba.com/blog/rfid-nfc-antenna-pcb-design.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/rfid-nfc-antenna-pcb-design.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-rfid-nfc.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">RFID &amp; NFC Antenna PCB Design:<br><em>Coil Tuning, Impedance Matching &amp; Tag Manufacturing That Actually Reads</em></h1>
+      <p class="reveal">A procurement-focused guide to RFID and NFC antenna PCB manufacturing — covering 13.56MHz coil antenna tuning, UHF 860-960MHz matching networks, material loss effects, and the test methods that predict real-world read range.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>RFID &amp; NFC Antenna PCB Guide</span></div>
+
+  <p>An NFC payment card, an RFID inventory tag, and a wireless charging pad all share the same physics: a coil or dipole antenna printed directly on the PCB, tuned to a specific frequency, and matched to a chip's impedance. The antenna is the part of the product users touch every day — and it is also the part most likely to fail silently: a tag that reads at 3cm instead of 10cm, a card that demagnetizes its own tuning, or a UHF label that works on one batch of boards and not the next. For hardware teams and procurement managers sourcing RFID and NFC antenna PCBs, the manufacturing tolerances matter more than the schematic: <strong>copper thickness, etch tolerance, solder mask, and material loss</strong> all shift the resonant frequency.</p>
+
+  <p>At Huaxing PCBA, we manufacture NFC antenna boards, RFID tag inlays on PCB, and combo antenna-plus-controller boards at our Shenzhen facility — with <span class="data-point">±5% copper etch tolerance</span>, controlled impedance, and RF testing on antennas. Here is what you need to specify for antenna PCBs that work on the first production run.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-rfid-nfc-coil.webp" alt="Macro photograph of a 13.56MHz NFC coil antenna etched on a PCB showing multiple turns and tuning pads" loading="lazy">
+
+  <h2>HF NFC Coil Antennas: Turns, Inductance, and the Tuning Equation</h2>
+
+  <p>HF RFID and NFC operate at 13.56 MHz using a resonant coil antenna. The tag chip presents a capacitive load, and the antenna coil is tuned to resonance with a parallel capacitor (either discrete or, in tuned designs, the chip's internal capacitance). The resonant frequency is set by the classic equation f = 1/(2π√(LC)), so the manufacturing variables are the ones that change L and C:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Coil Geometry: Turns, Trace Width, and Gap Set the Inductance</h4>
+      <p>A typical NFC antenna on a 25×40mm card uses <strong>4–6 turns</strong> of 0.2–0.5mm trace with 0.2–0.4mm spacing, producing 1.5–3.0 µH inductance. Inductance scales with the square of turns, so a ±10% etch error on trace width changes inductance by roughly ±5% — which shifts resonance by ±2.5%. Specify copper etch tolerance of <strong>±5% (better: ±10µm absolute)</strong> on antenna layers, and keep the coil on a single layer with a clean ground keepout beneath it. <a href="/blog/pcb-copper-weight-selection.html">Our copper weight guide</a> explains how 1/2oz vs 1oz copper affects etch precision.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Q Factor and Read Range: The Trade-Off Nobody Puts on the Drawing</h4>
+      <p>Read range is proportional to antenna Q (quality factor), but a Q that is too high makes the tag sensitive to detuning from nearby metal or the reader's field. Typical NFC tag Q is <strong>15–30</strong>. Q is set by copper losses (thin copper = lower Q), solder mask over the coil (lossy mask lowers Q), and the tuning capacitor's ESR. If your tag reads short, the first suspects are copper weight (use 1oz, not 0.5oz, for the coil) and solder mask covering the coil traces. <a href="/blog/rf-pcb-design-manufacturing.html">Our RF PCB guide</a> covers loss mechanisms in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Tuning Pads: Design for Post-Assembly Adjustment</h4>
+      <p>Board material, solder mask, and nearby components all shift resonance by 1–3% from simulation. Production NFC antenna PCBs should include <strong>tuning pads</strong> — small copper pads that can be trimmed or populated with a fixed capacitor to pull the resonant frequency back to 13.56 MHz ±1%. Specify a tuning procedure in the assembly instructions: measure resonant frequency, then adjust the pad capacitor. <a href="/blog/pcb-testing-methods.html">Our testing methods guide</a> covers the RF measurement workflow.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> When quoting NFC antenna PCBs, ask the supplier for their <em>etch tolerance on fine traces</em> and their <em>solder mask thickness control</em> — not their layer count. A supplier who holds ±10µm etch and 10µm mask thickness will produce antennas that all resonate within ±1%; a supplier who doesn't will ship boards where every tag reads differently. The difference shows up as read-range consistency across a production batch.</p>
+  </div>
+
+  <h2>UHF RFID Antennas: 860–960 MHz Dipoles and Matching Networks</h2>
+
+  <p>UHF RFID (RAIN RFID) operates at 860–960 MHz using dipole-based antennas with a complex conjugate match to the tag chip's impedance — typically 10–30Ω real, −100 to −200Ω imaginary. The antenna design is an impedance-matching problem, and the PCB manufacturing tolerances directly change the match:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Dipole Length and the Dielectric Constant Effect</h4>
+      <p>A half-wave UHF dipole on FR-4 is physically shorter than a free-space dipole because the substrate's dielectric constant (Er ≈ 4.2–4.5 for FR-4) slows the wave. The exact shortening factor depends on trace width, substrate thickness, and ground proximity — and it varies with material lot. Specify the <strong>laminate vendor and grade</strong> in the fabrication notes (e.g., Shengyi S1141 or equivalent) and verify resonance on first articles; a material substitution can shift the operating band by 10–20 MHz. <a href="/blog/pcb-materials-guide.html">Our materials guide</a> compares FR-4 grades and their dielectric stability.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>T-Match and Inductive Coupling: The Matching Network</h4>
+      <p>Most UHF tag chips are matched using a <strong>T-match structure</strong> (a shorted stub across the dipole feed) or an inductively coupled loop. These structures are sensitive to trace width and spacing to within ±50µm. The matching section should be drawn with wide traces (0.5–1.0mm) where possible to reduce etch sensitivity, and the design should include a simulation-based tolerance analysis showing the expected S11 across the etch tolerance range. <a href="/blog/impedance-control.html">Our impedance control guide</a> explains how to specify and verify the match.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ground Planes Kill UHF Antennas: Keep Them Away</h4>
+      <p>Unlike HF coils (which tolerate a nearby ground), UHF dipoles detune catastrophically when a ground plane is within 2–3mm. Specify a <strong>ground keepout of at least 5mm</strong> around the antenna area on all layers, and route all other signals on the opposite side of the board. If the antenna shares a board with a controller, put the antenna on a separate corner with a clear keepout — a common DFM failure is the fabricator adding ground copper fill under the antenna "to improve grounding," which destroys the read range. <a href="/blog/pcb-emc-emi-compliance.html">Our EMC compliance guide</a> covers antenna-to-ground interaction.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-rfid-nfc-uhf.webp" alt="UHF RFID dipole antenna printed on PCB with T-match structure and chip landing pads" loading="lazy">
+
+  <h2>Material and Finish Effects: What Actually Changes Resonance</h2>
+
+  <p>Three manufacturing variables dominate antenna performance variation, and all three are under the fabricator's control:</p>
+
+  <table class="spec-table">
+    <tr><th>Variable</th><th>Effect on Antenna</th><th>Typical Tolerance</th><th>Control</th></tr>
+    <tr><td>Copper etch tolerance</td><td>Changes trace width → shifts L and resonance</td><td>±10–20% (standard), ±5% (precision)</td><td>Specify ±5% on antenna layers; use 1oz+ copper</td></tr>
+    <tr><td>Solder mask thickness/loss</td><td>Adds dielectric loss → lowers Q and read range</td><td>10–25µm</td><td>Mask over coil only where needed; specify mask type</td></tr>
+    <tr><td>Laminate Er tolerance</td><td>Changes electrical length → shifts operating band</td><td>±0.2 (FR-4), ±0.05 (RF-grade)</td><td>Lock laminate vendor/grade; RF-grade for UHF</td></tr>
+    <tr><td>Surface finish</td><td>ENIG adds nickel loss; immersion silver lower loss</td><td>—</td><td>HASL/enig acceptable for HF; consider silver for UHF</td></tr>
+  </table>
+
+  <p>The practical rule: <strong>HF (13.56MHz) antennas are forgiving</strong> — a ±5% etch shift changes resonance by ~2%, usually within the tag's bandwidth. <strong>UHF antennas are not</strong> — the same etch tolerance can move the match point out of the band entirely. If your product is UHF, budget for RF-grade laminate (Rogers 4003, Megtron 6, or at minimum a tightly-spec'd FR-4) and a first-article RF test. <a href="/blog/pcb-laminate-selection-guide.html">Our laminate selection guide</a> details the material options for RF boards.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The cheapest way to make RFID/NFC antenna PCBs consistent is to control the three variables above in the fabrication drawing — etch tolerance, solder mask, and material grade. Doing this costs nothing on the PO, but it converts a "works sometimes" antenna into one that reads the same on every unit.</p>
+  </div>
+
+  <h2>Combo Boards: Antenna Plus Controller on One PCB</h2>
+
+  <p>Many IoT products integrate the NFC reader/writer controller and the antenna coil on a single board. The integration challenge is isolation: the controller's digital noise and power switching can detune or desensitize the antenna just millimeters away.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Physical Separation and Ground Isolation</h4>
+      <p>Keep the antenna coil at least <strong>10mm from the controller and switching regulators</strong>, with a ground guard trace around the coil and no copper fill inside the coil's inner area. The coil's return path must be a dedicated trace back to the controller's RF pin — never a shared ground pour. This is the most common layout mistake in combo NFC boards. <a href="/blog/mixed-signal-pcb-design.html">Our mixed-signal design guide</a> covers the partitioning rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>EMI from the Buck Converter: The Silent Detuner</h4>
+      <p>An NFC reader draws 100–300mA during card polling, and the switching regulator's ripple at 1–3 MHz can intermodulate with the 13.56MHz carrier, reducing read sensitivity. Specify a <strong>low-ripple regulator (or LC filter) on the RF supply</strong>, and keep the switching node away from the coil. Request EMI pre-scan data on first articles if the product must pass FCC/CE. <a href="/blog/pcb-emi-emc-design-guide.html">Our EMI/EMC design guide</a> covers filtering and layout for RF systems.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Edge Plating and Castellated Half-Holes for Module Antennas</h4>
+      <p>If the antenna board ships as a module (e.g., a Bluetooth/NFC module with antenna), castellated half-holes (castellations) on the edge are the standard interconnect. Specify <strong>0.5–0.8mm castellated holes with full plating coverage</strong> and verify plating thickness ≥ 25µm on the castellation walls. <a href="/blog/pcb-edge-plating-castellations.html">Our edge plating guide</a> covers the manufacturing requirements for module antennas.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-rfid-nfc-testing.webp" alt="RF engineer measuring an NFC antenna PCB with a network analyzer and tuning probe" loading="lazy">
+
+  <h2>Testing That Predicts Read Range: From VNA to Field Testing</h2>
+
+  <p>Antenna PCBs need RF-specific testing that standard PCB electrical tests (flying probe, AOI) do not cover. Specify the following on the PO:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>VNA S-Parameter Measurement on Every Panel (or Sample Per Lot)</h4>
+      <p>For HF coils, measure resonant frequency and Q with a vector network analyzer using a calibrated probe — acceptance criteria typically <strong>13.56 MHz ±1% and Q in the designed range</strong>. For UHF, measure S11 across 800–1000 MHz and verify the match point is within the design band. Sample rate: 5 boards per production lot minimum, or 100% for high-reliability applications. <a href="/blog/pcb-testing-methods.html">Our testing methods guide</a> compares RF test approaches.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Read Range Field Test: The Only Test That Matters</h4>
+      <p>For assembled tags, specify a <strong>read range test at a fixed reader power</strong> with a calibrated reader (e.g., minimum 4cm for NFC, 3m for UHF with a 1W reader), performed on a sample of finished assemblies. Read range is the customer-visible metric — a board that resonates perfectly in the lab can still read short because of chip placement or assembly variation. Ask the supplier to document the test setup and results in the inspection report.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Incoming Inspection: What You Can Verify Yourself</h4>
+      <p>On incoming QC, verify: coil trace width and spacing against the drawing (optical measurement), solder mask coverage over the coil (visual), and — for a quick functional check — an NFC phone read test on a sample of boards. A 10-second phone test on 5% of the batch catches most assembly-level antenna failures before they reach your customer. <a href="/blog/pcb-incoming-quality-inspection.html">Our incoming inspection guide</a> has the full checklist.</p>
+    </div>
+  </div>
+
+  <h2>Procurement Checklist for RFID/NFC Antenna PCBs</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Put Etch Tolerance and Material Grade in the Fabrication Drawing</h4>
+      <p>Specify copper etch tolerance ±5% (or ±10µm) on antenna layers, the exact laminate vendor/grade, and solder mask type. These three lines in the fab notes cost nothing but determine whether your antenna batch is consistent. Without them, the fabricator's standard tolerances (±20% etch on fine traces) will apply.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Require RF Test Data, Not Just Continuity</h4>
+      <p>Ask for VNA measurement reports (resonant frequency/Q for HF; S11 for UHF) on samples from every lot, and read-range field test results on finished assemblies. If the supplier cannot provide RF test data, they are not set up for antenna production — find one who is.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan for a Tuning Iteration in Your Schedule</h4>
+      <p>Antenna resonance shifts with every variable — material, mask, nearby components, even the enclosure. Budget for <strong>1–2 tuning iterations</strong> between first article and production: measure, adjust tuning pads, re-measure. A supplier who offers this as a standard service (rather than charging per iteration) is worth the premium. <a href="/blog/quick-turn-pcb-manufacturing.html">Our quick-turn guide</a> covers how to compress these iterations.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Verify Antenna Keepouts Survive the DFM Process</h4>
+      <p>Ask for a DFM review that explicitly confirms the antenna keepout areas are preserved — no ground fill under the coil/dipole, no copper pour inside the antenna zone, no via-in-keepout. This is a 2-minute check that prevents the most common "the antenna doesn't read" failures. <a href="/blog/dfm-tips.html">Our DFM guide</a> has the full pre-production checklist.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Antenna PCBs Reward Precision, Not Just Price</h2>
+
+  <p>RFID and NFC antenna PCBs are the rare case where a 5% difference in manufacturing tolerance shows up directly in the user experience — read range, card reliability, and tag consistency. The good news is that the controlling variables (etch tolerance, material grade, solder mask, test coverage) are all specifiable in the fabrication drawing, and all verifiable on incoming inspection.</p>
+
+  <p>At Huaxing PCBA, we manufacture HF coil antennas, UHF RFID tag PCBs, and NFC combo boards with <strong>±5% etch tolerance, controlled impedance, edge plating/castellations, and RF testing (VNA and read-range)</strong> as standard options. <a href="/blog/iot-pcb-design-manufacturing.html">Read our IoT PCB design guide</a> for the broader connected-device framework, or <a href="/contact/">send us your antenna PCB files</a> for a DFM review covering keepouts, etch tolerance, and tuning strategy within 24 hours.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing — Materials &amp; Signal Integrity</a></li>
+      <li><a href="/blog/pcb-edge-plating-castellations.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Edge Plating &amp; Castellations Guide</a></li>
+      <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design &amp; Manufacturing</a></li>
+      <li><a href="/blog/pcb-emc-emi-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Design for EMC/EMI Compliance</a></li>
+      <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods — AOI, X-Ray, Flying Probe &amp; More</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-rfid-nfc.webp)">
+      <h2>Manufacturing Your RFID &amp; NFC Antenna PCBs — Tuned &amp; Tested</h2>
+      <p>Send us your antenna PCB Gerbers and BOM. We'll return a DFM review covering keepouts, etch tolerance, material selection, and tuning strategy within 24 hours. HF coils, UHF dipoles, edge plating, and VNA testing available.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Antenna PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

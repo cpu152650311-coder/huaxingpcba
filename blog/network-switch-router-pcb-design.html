@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Switch &amp; Router PCB Design — 100G/400G Ethernet, High-Speed Backplane &amp; Thermal Management | Huaxing PCBA</title>
+<meta name="description" content="Engineering guide to network switch and router PCB manufacturing: 100G/400G Ethernet SerDes routing, 16-32 layer stackups, low-loss laminate selection, backdrilling, and thermal design for 300W+ switch ASICs.">
+<meta property="og:title" content="Network Switch &amp; Router PCB Design — 100G/400G Ethernet &amp; High-Speed Backplane">
+<meta property="og:description" content="What to specify when sourcing switch and router PCBs: SerDes routing rules, low-loss materials, backdrilling depth, and ASIC thermal design — from a Shenzhen PCB manufacturer.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/network-switch-router-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-network-switch.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/network-switch-router-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Network Switch & Router PCB Design — 100G/400G Ethernet, High-Speed Backplane & Thermal Management",
+  "description": "Engineering guide to network switch and router PCB manufacturing: 100G/400G Ethernet SerDes routing, 16-32 layer stackups, low-loss laminate selection, backdrilling, and thermal design for 300W+ switch ASICs.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-network-switch.webp",
+  "url": "https://huaxingpcba.com/blog/network-switch-router-pcb-design.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/network-switch-router-pcb-design.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-network-switch.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Network Switch &amp; Router PCB Design:<br><em>100G/400G SerDes, Low-Loss Materials &amp; 300W ASIC Thermal Management</em></h1>
+      <p class="reveal">A procurement-focused guide to switch and router PCB manufacturing — covering 16-32 layer stackups, backdrilling depth, laminate selection for 100G/400G Ethernet, and the thermal engineering that keeps switch ASICs alive.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Network Switch PCB Guide</span></div>
+
+  <p>A 32-port 400G data center switch routes 12.8 Tbps of traffic through a single switch ASIC that draws <strong>300–500W</strong>. Every one of those 32 ports — plus uplinks, management, and power — crosses the PCB as a 56G or 112G SerDes differential pair, and the board itself must be built to tolerances measured in microns. Network switch and router PCBs are among the most demanding products a PCB manufacturer can build: <strong>16–32 layers</strong>, <strong>low-loss laminates</strong>, <strong>backdrilling with ±50µm depth control</strong>, and <strong>thermal design that moves hundreds of watts</strong> without warping the board.</p>
+
+  <p>At Huaxing PCBA, we manufacture switch and router boards up to <span class="data-point">32 layers</span> with controlled impedance of ±5%, sequential lamination for complex stackups, and backdrilling on vias above 5 Gbps. Our factory runs a dedicated high-layer-count line with AOI, X-ray, and impedance TDR testing on 100% of panels. Here is what to specify on your next networking PCB order.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-network-switch-stackup.webp" alt="Cross-section of a 32-layer network switch PCB showing sequential lamination layers and low-loss laminate core" loading="lazy">
+
+  <h2>SerDes Routing at 112G: The Rules That Make or Break a Switch Board</h2>
+
+  <p>Modern switch ASICs drive 112G PAM4 SerDes on every port. At those data rates, the electrical length of a trace is measured in millimeters of wavelength — 112G PAM4 has a fundamental frequency of ~28 GHz, and the routing rules are fundamentally different from 10G-era designs:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Insertion Loss Budget: Every dB Costs You Ports</h4>
+      <p>A 112G SerDes link has a typical channel budget of <strong>20–24 dB at 28 GHz</strong> including connectors, vias, and trace. A standard FR-4 trace loses 0.5–1.0 dB/inch at 28 GHz; a low-loss laminate like Megtron 6 or Rogers drops that to 0.3–0.5 dB/inch. If your switch design routes 6 inches of trace to a port connector, the difference between FR-4 and low-loss material is 3+ dB — often the difference between a link that opens and one that doesn't. <a href="/blog/pcb-laminate-selection-guide.html">Our laminate selection guide</a> compares Isola, Panasonic, and Shengyi materials with loss data.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Via Stub Elimination: Backdrilling Is Not Optional Above 25G</h4>
+      <p>Every through-hole via on a high-speed trace leaves a stub — the unused portion of the barrel below the signal layer. At 28 GHz, a <strong>10 mil stub resonates</strong> and can cost 3–5 dB of insertion loss. Backdrilling removes the stub with a controlled-depth second drill, leaving typically <strong>4–6 mil of remaining barrel</strong>. Specify backdrill depth tolerance of ±50µm (some fabs hold ±75µm) and backdrill on ALL signal vias above 5 Gbps. <a href="/blog/pcb-backdrilling-guide.html">Our backdrilling guide</a> covers stub effects and depth control in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>PAM4 Signal Integrity: Crosstalk and Return Loss Dominate</h4>
+      <p>PAM4 uses four amplitude levels instead of two, so the signal-to-noise margin is roughly one-third of NRZ. That makes <strong>near-end crosstalk (NEXT) and return loss</strong> the binding constraints. Rules of thumb at 112G: keep 3W spacing between adjacent SerDes pairs, use ground via fencing on pair-to-pair boundaries, and avoid layer changes without a ground via within 0.5mm of the transition. <a href="/blog/pcb-crosstalk-analysis.html">Our crosstalk analysis guide</a> quantifies the coupling budgets.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> When requesting quotes for a 100G/400G switch board, ask each supplier for their <em>measured</em> insertion loss on the specific laminate you spec — not the datasheet number. Material loss varies by prepreg lot, and a supplier's actual process (etch factor, surface roughness) can add 0.1–0.2 dB/inch over the datasheet. A 12.8Tbps switch with marginal loss budget will fail link training at temperature even though the design simulates clean.</p>
+  </div>
+
+  <h2>Stackup Design: 16–32 Layers of Sequential Lamination</h2>
+
+  <p>Switch boards carry dozens of SerDes pairs, power planes for multiple voltage rails, and dense BGA fan-out — typically requiring <strong>20–32 layers</strong>. High layer counts force sequential lamination (build-up), which changes cost and yield dramatically:</p>
+
+  <table class="spec-table">
+    <tr><th>Switch Class</th><th>Layer Count</th><th>Lamination</th><th>Typical Material</th></tr>
+    <tr><td>Access switch (1/10G)</td><td>8–14 layers</td><td>Single lamination</td><td>FR-4 / Mid-loss</td></tr>
+    <tr><td>Distribution switch (25/100G)</td><td>14–20 layers</td><td>Single + backdrill</td><td>Mid-loss (Megtron 4 class)</td></tr>
+    <tr><td>Core switch (400G)</td><td>20–32 layers</td><td>Sequential lamination</td><td>Low-loss (Megtron 6 / Rogers)</td></tr>
+    <tr><td>Backplane / Fabric</td><td>24–40 layers</td><td>Sequential + backdrill</td><td>Low-loss, low-CTE</td></tr>
+  </table>
+
+  <p>Sequential lamination means the board is pressed, drilled, and plated in stages — layer pairs are built up one at a time. Each additional lamination cycle adds cost and warpage risk. For a 24-layer design with two build-up cycles, plan for <strong>15–25% higher unit cost</strong> than a single-lamination 24-layer board, and insist on warpage control: specify flatness ≤ 0.75% (IPC-6012 Class 3) and verify with thermal cycling on first articles. <a href="/blog/pcb-stackup-design.html">Our stackup design guide</a> walks through layer planning for high-speed systems.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Material System: Low-Loss Core + Standard Prepreg Can Save Money</h4>
+      <p>A full Megtron 6 stackup is expensive. A common cost optimization: use low-loss material only on the signal layers carrying 56G/112G traffic, and standard high-Tg FR-4 for the power/ground sandwich layers. This hybrid stackup cuts material cost 20–30% while keeping the critical channels within budget — provided the fabricator can manage CTE mismatch between material systems. <a href="/blog/pcb-materials-guide.html">Our materials guide</a> covers FR-4 vs high-Tg vs low-loss selection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Impedance Control on 100Ω Differential Pairs: ±5% or Nothing</h4>
+      <p>SerDes pairs are specified at 100Ω differential ±5% (some designs at ±7% for 56G with equalization headroom). On a 24-layer board, impedance is set by trace width, dielectric thickness, and copper weight — and it drifts with etch uniformity and prepreg flow during lamination. Require <strong>impedance coupons on every panel edge</strong> and TDR verification with a statistical report (Cpk ≥ 1.33) rather than single-point measurements. <a href="/blog/impedance-control.html">Our impedance control guide</a> explains the full verification workflow.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-network-switch-backdrill.webp" alt="Microscope view of backdrilled via stubs on a high-speed network switch PCB showing clean barrel removal" loading="lazy">
+
+  <h2>Thermal Design: Moving 300W+ Off a Switch ASIC</h2>
+
+  <p>A 400G switch ASIC dissipates more heat than a desktop CPU, inside a chassis that must fit in 1U. The PCB's thermal role is both conducting heat out and surviving the temperature gradient without warping:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Thermal Via Arrays: 0.3mm Vias, 1.0mm Pitch, Filled or Not</h4>
+      <p>Under the ASIC's exposed pad, use a dense array of <strong>0.3mm thermal vias at 1.0mm pitch</strong> (approximately 300–400 vias under a 45×45mm package) connecting to inner ground/thermal planes. Whether to fill with conductive epoxy (thermal via fill) depends on whether the ASIC uses a solder-attached heatsink — filled vias prevent solder wicking and voiding. Specify via fill for flip-chip BGA packages that are reflowed with a heat spreader. <a href="/blog/pcb-via-fill-types.html">Our via fill guide</a> compares conductive vs non-conductive options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Copper Weight and Plane Design for 48V and POL Power</h4>
+      <p>Switch boards run a 48V mid-bus with point-of-load (POL) converters stepping to 0.8–1.0V core rails drawing 200–400A. The core power plane must carry that current without excessive drop: use <strong>2oz copper on power planes</strong> (sometimes 3oz for the 48V distribution), with multiple parallel vias between planes and a power integrity analysis that models plane inductance. <a href="/blog/pcb-copper-weight-selection.html">Our copper weight guide</a> covers 1oz–6oz selection for high-current planes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Warpage Control: The Silent Yield Killer at 32 Layers</h4>
+      <p>Asymmetric layer stacking, mixed material systems, and heavy copper create internal stress that warps large switch boards during reflow. A warped 32-layer board fails SMT assembly (solder joints on the ASIC don't wet) and can crack the ASIC package. Specify <strong>board flatness ≤ 0.75%</strong>, symmetric stackup, and thermal cycling validation on first articles. <a href="/blog/pcb-warpage-reflow-prevention.html">Our warpage prevention guide</a> details root causes and countermeasures.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Switch PCB thermal design is a three-way trade: via fill type, copper weight, and warpage. Adding 2oz planes helps power integrity but increases warpage risk; dense via arrays help conduction but complicate routing on adjacent layers. A supplier with experience on high-layer-count boards will flag these interactions in DFM — a supplier that just says "yes, we can do 32 layers" is telling you they haven't built many.</p>
+  </div>
+
+  <h2>Backplane and Line Card: When the PCB Is the System Bus</h2>
+
+  <p>Modular chassis switches separate switching fabric from line cards, connected through a backplane that can be <strong>24–40 layers</strong> with hundreds of differential pairs running the length of the chassis. Backplane PCB requirements are the extreme end of the spectrum:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Long-Trace Loss Management: 20–30 Inches of FR-4 Is Not Possible</h4>
+      <p>A backplane trace can run 20–30 inches between connectors. At 56G, even low-loss material loses 6–9 dB over that length, so the design must budget for the full channel including the backplane connector's 2–3 dB. This is why backplanes use <strong>low-CTE, low-loss materials</strong> (Megtron 6, Rogers 3000/4000 series) and why the laminate selection is made at the architecture stage, not the fab stage. <a href="/blog/data-center-server-pcb.html">Our data center server PCB guide</a> covers the related high-layer-count design rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Connector Landing: Press-Fit and Plating Thickness</h4>
+      <p>Backplane connectors use press-fit (compliant pin) terminations, which require precise plated through-hole dimensions: finished hole size tolerance of <strong>±50µm</strong>, hole wall copper ≥ 25µm, and no wicking or voiding in the barrel. Specify hard gold or ENIG on connector areas and confirm the fabricator's drill accuracy on large-format panels. <a href="/blog/pcb-press-fit-technology-guide.html">Our press-fit guide</a> covers the mechanical requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Panel Size Limits: Backplanes Push the Maximum Board Size</h4>
+      <p>Backplanes routinely approach <strong>600×800mm</strong> — the practical maximum for standard PCB manufacturing. Panel utilization drops, lamination pressure uniformity becomes critical, and registration across a large panel is harder. Confirm the fabricator's maximum board size and their experience with large-format sequential lamination before committing. Our capability includes boards up to 600×800mm.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-network-switch-thermal.webp" alt="Network switch ASIC with thermal via array and heatsink mounting pattern on a high-layer-count PCB" loading="lazy">
+
+  <h2>Procurement Checklist for Switch and Router PCBs</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Demand a Material and Loss Budget Sign-Off</h4>
+      <p>Ask the supplier to confirm the exact laminate/PPG stackup (vendor, grade, DK/DF values) and a channel loss budget for your longest SerDes route, before production. Get this in writing — material substitution is the most common silent change in networking PCB quotes. If they substitute Megtron 6 with a "similar" material, the loss budget changes and links may fail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Verify Backdrill Capability With Cross-Sections</h4>
+      <p>Backdrill quality is invisible until you cut the board. Require <strong>microsection cross-sections of backdrilled vias</strong> on first articles showing remaining stub length within ±50µm of spec, and confirm the drill depth control on your specific board thickness. <a href="/blog/pcb-cross-section-report-guide.html">Our cross-section interpretation guide</a> shows how to read these reports.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Specify Thermal Cycling and Warpage Acceptance in the PO</h4>
+      <p>Put <strong>flatness ≤ 0.75%</strong> and thermal cycling (−40°C to +125°C, 500 cycles) acceptance criteria in the purchase order. Measure warpage after reflow simulation, not just on bare boards — that is when the failure appears. For 300W+ ASIC designs, require thermal impedance validation on first articles. <a href="/blog/pcb-thermal-management-guide.html">Our thermal management guide</a> covers the validation methods.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Test Strategy: Flying Probe + Impedance TDR + X-Ray</h4>
+      <p>High-layer-count boards need a layered test strategy: flying probe for continuity/isolation (100% of nets), TDR impedance verification on coupons (100% of panels), and X-ray for BGA and backdrill alignment. Confirm the supplier can do this in-house — sending 32-layer boards to a third-party test house adds a week of lead time. <a href="/blog/pcb-testing-methods.html">Our testing methods guide</a> compares the options.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Switch PCBs Are a Materials and Process Game</h2>
+
+  <p>Network switch and router PCBs are won or lost on three things: material selection (loss budget), process control (backdrill depth, impedance, registration), and thermal engineering (via arrays, copper weight, warpage). These are not design-only problems — they are manufacturing capability problems, and the difference between suppliers is measured in dB and microns, not in price per layer.</p>
+
+  <p>At Huaxing PCBA, we manufacture switch, router, and backplane PCBs up to <strong>32 layers with sequential lamination, backdrilling, low-loss material capability (Megtron 6, Rogers), and 2–3oz copper planes</strong>. Our high-layer-count line includes impedance TDR on 100% of panels, X-ray inspection, and thermal cycling validation. <a href="/blog/pcb-signal-integrity.html">Read our signal integrity guide</a> for the broader high-speed design framework, or <a href="/contact/">send us your switch PCB files</a> for a DFM review covering stackup, loss budget, and backdrill strategy within 24 hours.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-backdrilling-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Back Drilling Guide — Stub Removal &amp; Signal Integrity</a></li>
+      <li><a href="/blog/pcb-laminate-selection-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Laminate Selection — Isola vs Panasonic vs Shengyi</a></li>
+      <li><a href="/blog/data-center-server-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Data Center Server PCB Design &amp; Manufacturing</a></li>
+      <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Count &amp; Impedance Planning</a></li>
+      <li><a href="/blog/pcb-thermal-management-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Design Guide</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-network-switch.webp)">
+      <h2>Manufacturing Your Switch &amp; Router PCBs — Up to 32 Layers</h2>
+      <p>Send us your networking PCB Gerbers and BOM. We'll return a DFM review covering stackup, loss budget, backdrill depth, and thermal via strategy within 24 hours. 16–32 layers, low-loss materials, 2–3oz copper planes, 100% impedance TDR.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Switch PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

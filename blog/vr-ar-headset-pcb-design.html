@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VR &amp; AR Headset PCB Design — HDI, Rigid-Flex &amp; High-Bandwidth Requirements | Huaxing PCBA</title>
+<meta name="description" content="Complete guide to VR and AR headset PCB design: any-layer HDI for 4K micro-displays, rigid-flex boards for the temple area, thermal management for 5W+ modules, and the manufacturing tolerances that determine yield.">
+<meta property="og:title" content="VR &amp; AR Headset PCB Design — HDI, Rigid-Flex &amp; High-Bandwidth">
+<meta property="og:description" content="What to specify when sourcing VR/AR headset PCBs: micro-display bandwidth, any-layer HDI stackups, rigid-flex reliability, and thermal limits — from a Shenzhen PCBA manufacturer.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/vr-ar-headset-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-vr-ar-headset.webp">
+    <link rel="canonical" href="https://huaxingpcba.com/blog/vr-ar-headset-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "VR & AR Headset PCB Design — HDI, Rigid-Flex & High-Bandwidth Requirements",
+  "description": "Complete guide to VR and AR headset PCB design: any-layer HDI for 4K micro-displays, rigid-flex boards for the temple area, thermal management for 5W+ modules, and the manufacturing tolerances that determine yield.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-vr-ar-headset.webp",
+  "url": "https://huaxingpcba.com/blog/vr-ar-headset-pcb-design.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://huaxingpcba.com/images/logo.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://huaxingpcba.com/blog/vr-ar-headset-pcb-design.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-vr-ar-headset.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">VR &amp; AR Headset PCB:<br><em>HDI, Rigid-Flex &amp; the Bandwidth That Makes Presence Possible</em></h1>
+      <p class="reveal">A procurement-focused guide to VR and AR headset PCB manufacturing — covering 4K micro-display bandwidth, any-layer HDI stackups, rigid-flex temple boards, and the thermal budgets that decide comfort and yield.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>VR &amp; AR Headset PCB Guide</span></div>
+
+  <p>A modern VR headset drives two 4K micro-OLED panels at 90–120 Hz, tracks six degrees of freedom with four or more cameras, runs eye tracking at 200 Hz, and communicates over Wi-Fi 6E — all inside a package that must stay under 500 grams and below 45°C on the skin. Every one of those functions routes through a printed circuit board, and the board technology is the difference between a headset that feels like a product and one that feels like a prototype. For hardware teams and procurement managers sourcing VR and AR headset PCBs, the requirements are unusually demanding: <strong>any-layer HDI for display bandwidth</strong>, <strong>rigid-flex for the temple-to-front hinge</strong>, and <strong>thermal management that protects both the silicon and the wearer</strong>.</p>
+
+  <p>At Huaxing PCBA, we manufacture mainboards, display driver boards, and rigid-flex interconnects for AR/VR products at our Shenzhen facility — including <span class="data-point">any-layer HDI up to 16 layers</span>, laser microvias at 0.075mm, and 2-ounce inner-layer copper for high-current display drivers. Our 8 SMT lines place 0201 and 0.3mm-pitch BGA components, and every headset board passes AOI, X-ray, and flying probe testing before shipment. Here is what you need to specify on your next headset PCB order.</p>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-vr-ar-headset-hdi.webp" alt="Any-layer HDI PCB for a VR headset mainboard showing laser microvias and fine-pitch BGA pads" loading="lazy">
+
+  <h2>Display Bandwidth: Why 4K Per Eye Changes Your PCB Stackup</h2>
+
+  <p>A dual-4K headset at 90 Hz pushes roughly 30 Gbps of raw display data across the board. The display driver interface (typically MIPI DSI or eDP) runs differential pairs at 3–6 Gbps per lane, and the PCB stackup must preserve those signals across the entire route from SoC to panel connector. This is where generic 4-layer design fails and HDI earns its place:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Controlled Impedance at 85Ω and 100Ω on Every Display Lane</h4>
+      <p>MIPI DSI pairs are specified at 100Ω differential, while eDP runs at 85–100Ω depending on lane configuration. The stackup must provide continuous reference planes beneath every differential pair — no plane splits, no layer changes without a ground via adjacent to the transition. At Huaxing PCBA we hold impedance tolerance to <strong>±5%</strong> with TDR verification on every production panel. <a href="/blog/impedance-control.html">Our impedance control guide</a> explains the stackup math in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Any-Layer HDI — The Only Way to Escape the Fan-Out Bottleneck</h4>
+      <p>The display SoC on a headset mainboard is typically a 0.4mm-pitch BGA with 400–800 pins, while the micro-display connector sits 15–25mm away on the front of the board. Routing that many high-speed lanes out of a fine-pitch BGA requires microvias on every layer — that is the definition of any-layer HDI. A 1+N+1 stackup (two laser microvia layers) cannot fan out a 0.4mm BGA without excessive routing layers; an any-layer design with stacked and staggered microvias achieves it in 8–12 layers. <a href="/blog/hdi-technology.html">Our HDI technology guide</a> compares 1+N+1, 2+N+2, and any-layer approaches with cost data.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Skew Control: Length Matching Within 5 mil Across 40+ Lanes</h4>
+      <p>Display interfaces are byte-lane aligned; a 5-mil skew between lanes in a byte group causes timing violations that manifest as image corruption at random temperatures. High-volume headset boards specify <strong>intra-pair skew ≤ 2 mil and inter-pair skew ≤ 5 mil</strong> per byte group. This pushes real DFM limits: serpentine routing on inner layers, matched via counts per lane, and registration capability of ±50µm between layers. Not every fab holds ±50µm registration at 12+ layers — verify this specific number before committing volume. <a href="/blog/pcb-stackup-design.html">Our stackup design guide</a> covers the layer planning behind these tolerances.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Insight:</strong> When comparing quotes for a headset mainboard, do not compare layer count alone. A 10-layer any-layer design with 0.075mm laser vias can outperform a 14-layer through-hole design at lower cost, because the any-layer stackup shortens routing and reduces the number of signal layers needed. Ask each supplier for their minimum microvia aspect ratio and registration tolerance — those two numbers determine whether your 4K display design will actually fan out cleanly.</p>
+  </div>
+
+  <h2>Rigid-Flex for the Temple: The Hinge That Survives 50,000 Cycles</h2>
+
+  <p>AR headsets and foldable VR designs route display, power, and sensor signals from the front module to the temple-mounted battery and compute section through a hinge that flexes every time the device is folded or adjusted. The interconnect across that hinge is a rigid-flex PCB, and its reliability requirement — typically <strong>50,000 flex cycles</strong> — is the hardest mechanical spec in the product:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Flex Layer Count: 2 Layers Beats 4 for Dynamic Bending</h4>
+      <p>Dynamic flex sections should use <strong>2 copper layers maximum</strong> (some designs manage 1). Each additional copper layer stiffens the flex and shifts the neutral axis, dramatically reducing cycle life. The rigid sections can be 6–10 layers; the transition must be stepped and bonded with coverlay rather than soldermask. Specify polyimide base material (25–50µm) with rolled-annealed copper (1/2 oz) for dynamic sections — ED copper cracks under repeated bending. <a href="/blog/flex-pcb-design-manufacturing.html">Our flex PCB guide</a> details material selection for dynamic applications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Bend Radius and Stiffener Design Decide Cycle Life</h4>
+      <p>For 25µm polyimide with 1/2 oz copper, the minimum dynamic bend radius is <strong>1.5mm</strong> — below that, copper fatigue failures appear within 10,000 cycles. The flex route must be designed with a constant bend radius (no sharp corners), and the hinge area needs a thin FR-4 or polyimide stiffener behind connector landing zones to prevent strain transfer to solder joints. Request bend-cycle test data (IPC-6013 Class 3 dynamic flex) with your first articles — it is the fastest way to tell which suppliers actually understand flex reliability. <a href="/blog/rigid-flex-pcb.html">Our rigid-flex guide</a> covers the design rules and cost factors.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Coverlay vs Soldermask: Only Coverlay Survives Bending</h4>
+      <p>On the flex section, soldermask cracks at the bend line within a few thousand cycles because it has no elongation. The flex area must use <strong>polyimide coverlay</strong> (12.5–25µm) over the copper traces, with adhesive-laminated or adhesive-less construction. This is a common failure point in low-cost prototypes: the board looks identical to a production design but uses soldermask on the flex, and the hinge fails in the field. Put "coverlay on all dynamic flex areas, no soldermask" in the fabrication notes explicitly.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-vr-ar-headset-rigidflex.webp" alt="Rigid-flex PCB for an AR headset temple hinge showing polyimide coverlay and stepped rigid sections" loading="lazy">
+
+  <h2>Thermal Budget: 5W in a Space the Size of a Matchbox</h2>
+
+  <p>A VR headset mainboard dissipates 4–8W through an area of roughly 60×60mm, with no fan and strict skin-temperature limits (regulatory surface-temperature limits for wearable devices cap at ~48°C in contact areas, and comfort targets are lower). The PCB is both the heat source and the primary heat spreader:</p>
+
+  <table class="spec-table">
+    <tr><th>Heat Source</th><th>Typical Power</th><th>PCB Requirement</th></tr>
+    <tr><td>Display SoC / GPU</td><td>2–4W</td><td>Exposed thermal pad + via array to inner plane</td></tr>
+    <tr><td>Micro-display driver ICs</td><td>0.8–1.5W</td><td>Copper pour under each driver, 2oz inner layer</td></tr>
+    <tr><td>Wi-Fi 6E / BT module</td><td>0.8–1.2W</td><td>Isolated ground island, thermal vias</td></tr>
+    <tr><td>Eye-tracking camera ISP</td><td>0.3–0.6W</td><td>Thermal pad + keepout for sensor alignment</td></tr>
+    <tr><td>IMU + tracking sensors</td><td>0.1–0.2W</td><td>Mechanical isolation, minimal thermal coupling</td></tr>
+  </table>
+
+  <p>The critical PCB techniques are <strong>thermal via arrays</strong> (0.2–0.3mm vias, 0.6–1.0mm pitch) directly under the SoC's exposed pad, connected to a dedicated 2oz thermal plane on layer 2, and <strong>edge-routed heat paths</strong> that carry heat toward the lens mount where a metal mid-frame acts as a heatsink. A common spec error: specifying 1oz inner copper to save cost, which doubles the thermal resistance of the spreader plane. The 2oz upgrade costs pennies per board and drops junction temperature by 8–15°C in practice. <a href="/blog/pcb-thermal-management-guide.html">Our thermal management guide</a> has the full via-array design rules.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> In a headset, thermal design is not just reliability engineering — it is comfort engineering. Every watt that stays on the board raises skin-contact temperature and reduces how long users can wear the device. Specify the thermal plane and via strategy in the fabrication drawing, and validate with thermal camera imaging on first articles. A 10°C improvement here is a product-level feature, not a manufacturing detail.</p>
+  </div>
+
+  <h2>Sensor Fusion Boards: Eye Tracking, Cameras, and IMU Placement</h2>
+
+  <p>Inside a modern headset, four to six cameras (two passthrough, two eye-tracking, one or two depth/slam), an IMU, and often a proximity sensor must all coexist on small auxiliary boards with strict mechanical constraints. The PCB implications are subtle but decisive:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>MIPI CSI Routing at 2.5 Gbps Per Lane on 6-Layer HDI</h4>
+      <p>Camera modules connect over MIPI CSI-2 with 2–4 lanes at 1.5–2.5 Gbps. Each camera board needs its own controlled-impedance microstrip or stripline pair, with the sensor's MIPI clock pair isolated from the I2C control bus to prevent coupling. Camera PCBs are typically <strong>6-layer HDI with 0.1mm laser vias</strong>, sized to fit in 10×15mm keepouts. <a href="/blog/pcb-crosstalk-analysis.html">Our crosstalk analysis guide</a> covers pair isolation for these high-speed sensor busses.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>IMU Isolation: The Board Is Part of the Sensor</h4>
+      <p>The IMU measures accelerations of a few milli-g. PCB flexure, vibration from the display, and thermal warpage all corrupt its output. The IMU should sit on a <strong>stiffened, isolated island</strong> — either a dedicated rigid section with a stiffener, or on a small rigid-flex wing with mechanical decoupling from the mainboard. Keep high-current traces (display backlight, haptics) at least 5mm away from the IMU footprint. Sensor placement is a mechanical design decision that the PCB stackup must support with local stiffening. <a href="/blog/mixed-signal-pcb-design.html">Our mixed-signal design guide</a> details analog isolation techniques.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Wireless Coexistence: Wi-Fi 6E, Bluetooth, and UWB on One Board</h4>
+      <p>Headsets now carry Wi-Fi 6E (6GHz band), Bluetooth LE, and increasingly UWB for controller tracking — three radios with antennas within centimeters of each other. The board needs <strong>dedicated antenna keepouts with clearance to ground</strong>, ideally antenna-on-board (AoB) or chip antennas with matched 50Ω feed lines, and careful filtering on shared power rails. Antenna tuning on a production board is a manufacturing-process interaction: solder mask thickness and copper finish (ENIG vs ENEPIG) shift resonant frequency by 1–3%. <a href="/blog/rf-pcb-design-manufacturing.html">Our RF PCB guide</a> covers antenna feed design and the finish trade-offs.</p>
+    </div>
+  </div>
+
+  <img class="article-img" style="max-width:80%" src="../generated/blog-vr-ar-headset-thermal.webp" alt="Thermal camera view of a VR headset mainboard showing heat spreading through the PCB copper planes" loading="lazy">
+
+  <h2>Procurement Checklist for VR/AR Headset PCBs</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Verify Any-Layer HDI Capability With a Test Vehicle, Not a Brochure</h4>
+      <p>Any-layer HDI is the highest-yield-risk process in headset boards. Ask for a coupon or test vehicle demonstrating <strong>stacked microvias through 3+ layer pairs, 0.075mm laser vias, and ±50µm registration</strong> on a board with the same layer count and thickness as your design. Ask what their typical first-pass yield is on 10-layer any-layer boards — a supplier who has not manufactured this class of board will quote it at a price that either loses money or cuts corners.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Put Bend-Cycle and Thermal Validation in the Contract</h4>
+      <p>For rigid-flex temple boards, contractually require <strong>50,000-cycle dynamic bend testing per IPC-6013 Class 3</strong> on first articles, with resistance change ≤ 5% over the test. For the mainboard, require thermal cycling (−20°C to +85°C, 500 cycles) and a thermal camera validation report. These two tests catch 90% of headset PCB field failures before they happen. <a href="/blog/pcb-testing-methods.html">Our testing methods guide</a> compares the full validation toolbox.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Specify Microvia Reliability Data, Not Just Microvia Presence</h4>
+      <p>HDI microvias fail through barrel cracking under thermal cycling. Require IST (Interconnect Stress Test) data for your specific via configuration — stacked microvias need <strong>IST failure thresholds of 500+ cycles</strong> with resistance change under 10%. Ask whether the supplier fills vias with conductive or non-conductive epoxy, and how they handle via-in-pad for the 0.4mm BGA fan-out. <a href="/blog/pcb-via-fill-types.html">Our via fill guide</a> explains the reliability difference between fill types.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Plan for Panel Utilization — Headset Boards Are Awkwardly Shaped</h4>
+      <p>Rigid-flex and oddly shaped headset boards can drop panel utilization below 60%, which directly inflates unit cost. Ask your supplier for a panelization DFM review before quoting volume: V-score, tab routing, and flex-section nesting choices can lift utilization from 55% to 75% with no design change. <a href="/blog/pcb-panelization-cost-optimization.html">Our panelization guide</a> shows the layout levers.</p>
+    </div>
+  </div>
+
+  <h2>Summary: Headset PCBs Reward Suppliers Who Have Done It Before</h2>
+
+  <p>VR and AR headset PCBs combine the hardest parts of consumer electronics — fine-pitch HDI, dynamic rigid-flex, dense thermal management, and multi-radio RF — into a single small board. The difference between a 70% and a 95% first-pass yield on these designs is almost entirely supplier process capability: microvia registration, impedance control, flex-cycle discipline, and thermal validation. These are not things you can inspect at incoming quality control; they are baked in during manufacturing.</p>
+
+  <p>At Huaxing PCBA, we manufacture AR/VR mainboards, display driver boards, and rigid-flex interconnects at our Shenzhen facility, with <strong>any-layer HDI to 16 layers, 0.075mm laser microvias, 2oz inner-layer copper, and IPC-6013 Class 3 rigid-flex capability</strong>. Our quality system (IATF 16949 and ISO 9001 certified) applies automotive-grade process discipline to wearable electronics. <a href="/blog/consumer-electronics-pcb.html">Read our consumer electronics PCB guide</a> for the broader wearable design framework, or <a href="/contact/">send us your headset PCB files</a> for a DFM review with stackup, impedance, and panelization analysis within 24 hours.</p>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/hdi-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">HDI PCB Technology — When to Upgrade to Microvia Design</a></li>
+      <li><a href="/blog/flex-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Flex PCB Design &amp; Manufacturing Guide</a></li>
+      <li><a href="/blog/rigid-flex-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Rigid-Flex PCB — Design Rules &amp; Cost Factors</a></li>
+      <li><a href="/blog/pcb-thermal-management-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Design Guide</a></li>
+      <li><a href="/blog/consumer-electronics-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Consumer Electronics PCB — Wearables &amp; Smart Devices</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-vr-ar-headset.webp)">
+      <h2>Manufacturing Your AR/VR Headset PCBs — HDI &amp; Rigid-Flex Ready</h2>
+      <p>Send us your headset PCB Gerbers and BOM. We'll return a DFM review covering any-layer HDI feasibility, impedance stackup, rigid-flex bend validation, and panelization within 24 hours. Up to 16 layers, 0.075mm laser vias, IPC-6013 Class 3 flex.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Headset PCB Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
