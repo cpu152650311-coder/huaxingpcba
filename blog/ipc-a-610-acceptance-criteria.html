@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPC-A-610 Acceptance Criteria — Class 1/2/3 Visual Inspection Guide for PCBA Buyers | Huaxing PCBA</title>
+<meta name="description" content="IPC-A-610 acceptance criteria explained for PCBA buyers — Class 1/2/3 solder joint rules, component damage limits, cleanliness requirements, and a 15-point incoming inspection checklist.">
+<meta property="og:title" content="IPC-A-610 Acceptance Criteria — Class 1/2/3 Visual Inspection Guide for PCBA Buyers">
+<meta property="og:description" content="What every buyer should check before accepting an assembled board: solder joint fillets, wetting angles, chip damage limits, and cleanliness — straight from IPC-A-610.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/ipc-a-610-acceptance-criteria.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ipc-a-610.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/ipc-a-610-acceptance-criteria.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "IPC-A-610 Acceptance Criteria — Class 1/2/3 Visual Inspection Guide for PCBA Buyers",
+  "description": "IPC-A-610 acceptance criteria explained for PCBA buyers — Class 1/2/3 solder joint rules, component damage limits, cleanliness requirements, and a 15-point incoming inspection checklist.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ipc-a-610.webp",
+  "url": "https://huaxingpcba.com/blog/ipc-a-610-acceptance-criteria.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/ipc-a-610-acceptance-criteria.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-ipc-a-610.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">IPC-A-610 Acceptance Criteria:<br><em>Class 1/2/3 Visual Inspection Guide for PCBA Buyers</em></h1>
+      <p class="reveal">The acceptance rules your assembler inspects against — solder joint fillets, wetting angles, component damage limits, and cleanliness — and the 15-point checklist to use at incoming inspection.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>IPC-A-610 Acceptance Criteria</span></div>
+
+  <p>When a shipment of assembled boards arrives, the question that decides whether you accept or reject it is: <em>does this workmanship meet the acceptance criteria in the contract?</em> For the vast majority of electronics buyers, that criteria document is IPC-A-610 — the most widely used assembly acceptance standard in the world, referenced in <span class="data-point">3,000+</span> corporate and military procurement specifications. It defines, with photographs and measurement tolerances, what a good solder joint looks like, how much component damage is tolerable, and what level of cleanliness is acceptable. Without it, "defective" is an opinion; with it, "defective" is a measurement.</p>
+
+  <p>At Huaxing PCBA, we assemble boards to IPC-A-610 Class 2 and Class 3 on <span class="data-point">8 SMT lines</span>, with certified IPC-A-610 trainers performing final inspection on every lot. This guide walks you through the criteria that actually matter when you open the box — the solder joint rules, the damage limits, the contamination thresholds — plus the checklist we recommend you run at incoming inspection. If you are new to the standard family, our <a href="/blog/ipc-standards-comparison.html">IPC standards comparison guide</a> explains how A-610 fits with IPC-A-600, J-STD-001, and IPC-6012.</p>
+
+  <img class="article-img" src="/generated/blog-ipc-a-610-solder-joints.webp" alt="Macro view of through-hole solder joint fillets with glossy gold solder cones meeting IPC-A-610 wetting criteria" loading="lazy" style="max-width:80%">
+
+  <h2>What IPC-A-610 Actually Governs — and What It Doesn't</h2>
+
+  <p>IPC-A-610 is an <strong>acceptance criteria</strong> document for <strong>assembled</strong> electronic products. It answers one question: given a board that is already assembled, is the workmanship acceptable? It is deliberately visual — it uses photographs and illustrations of target, acceptable, and nonconforming conditions rather than process instructions. That is what makes it the default reference in purchase orders: a buyer and a supplier can both look at the same joint and agree on the verdict.</p>
+
+  <table class="spec-table">
+    <tr><th>Standard</th><th>Governs</th><th>Typical Use in a PO</th></tr>
+    <tr><td>IPC-A-610</td><td>Acceptance criteria for <strong>assembled</strong> boards — solder joints, component damage, cleanliness, marking</td><td>"Assemble to IPC-A-610 Rev H, Class 2"</td></tr>
+    <tr><td>IPC-A-600</td><td>Acceptance criteria for <strong>bare</strong> printed boards — laminate, plating, registration</td><td>"Fabricate to IPC-A-600 Class 3"</td></tr>
+    <tr><td>J-STD-001</td><td>Process requirements — materials, soldering methods, verification</td><td>"Process per J-STD-001, Class 3"</td></tr>
+    <tr><td>IPC-6012</td><td>Qualification/performance of bare boards — electrical, mechanical, environmental</td><td>"Qualify per IPC-6012 Class 3"</td></tr>
+  </table>
+
+  <p>Two practical consequences follow. First, A-610 is not a process standard — it does not tell the assembler <em>how</em> to solder, so it is normally paired with J-STD-001 in the same contract. Second, A-610 says nothing about the bare board itself; laminate defects, plating voids, and registration errors are judged against IPC-A-600 and IPC-6012, which we cover in our <a href="/blog/ipc-a-600-acceptance-criteria.html">IPC-A-600 acceptance guide</a>. When your incoming inspection flags a defect, the first step is always to identify <em>which standard</em> applies to that defect class.</p>
+
+  <h2>Class 1, 2, and 3: How Acceptance Stringency Scales</h2>
+
+  <p>IPC-A-610 defines three product classes, and the class in your contract determines the acceptance limits for every single criterion in the document:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Class 1 — General Electronic Products</h4>
+      <p>Consumer products where the primary requirement is function of the completed assembly. Acceptance limits are the most lenient: cosmetic imperfections that do not affect function are acceptable. Examples: disposable consumer electronics, toys, basic lighting.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Class 2 — Dedicated Service Electronic Products</h4>
+      <p>Products where <span class="data-point">extended life and uninterrupted service</span> are required, but failure is not life-critical. This is the default class for most industrial, telecom, and commercial equipment. Cosmetic imperfections are acceptable if they do not affect reliability. Most commercial EMS work ships Class 2.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Class 3 — High-Performance / Harsh Environment Electronic Products</h4>
+      <p>Products where continued performance is critical — failure cannot be tolerated (life support, avionics, military, automotive safety). The most stringent acceptance limits in the document: no cosmetic imperfections permitted that could affect reliability, tighter fillet and damage tolerances, and 100% inspection of many criteria. Expect Class 3 to add <span class="data-point">15-30%</span> to assembly and inspection cost versus Class 2, driven by stricter criteria and denser inspection coverage. Our <a href="/blog/ipc-class-2-vs-class-3.html">IPC Class 2 vs Class 3 guide</a> breaks down where that cost actually goes.</p>
+    </div>
+  </div>
+
+  <p>The class must be written into your contract <em>before</em> production — you cannot "upgrade" a shipment to Class 3 after it is built, because the inspection coverage was planned around the contracted class. And note that A-610's class definitions apply to the <em>end product</em>: a board that goes into a Class 3 medical pump must be inspected as Class 3 even if the bare board was fabricated to a lower class.</p>
+
+  <img class="article-img" src="/generated/blog-ipc-a-610-inspection-line.webp" alt="Automated optical inspection machine scanning assembled circuit boards in a dark factory with amber lighting" loading="lazy" style="max-width:85%">
+
+  <h2>The 5 Solder Joint Criteria That Decide Accept or Reject</h2>
+
+  <p>Most incoming-inspection disagreements are about solder joints. IPC-A-610 evaluates every joint — through-hole, chip component, gull wing, BGA — against a small set of measurable criteria. These are the five that generate the most disputes between buyers and assemblers:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Wetting Angle: The Joint Must "Wet" the Surfaces</h4>
+      <p>The solder must wet both the lead/termination and the pad, forming a contact angle of <span class="data-point">≤ 90°</span> between the solder and the surface. An angle greater than 90° indicates poor wetting (dewetting), which is a reject condition for all classes. This is the fastest single check a buyer can make under a microscope: glossy, concave fillets = good wetting; dull, convex, balled solder = dewetting.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Minimum Fillet Height: Solder Thickness + 25% of the Lead</h4>
+      <p>For through-hole joints, the solder fillet must extend up the lead to a minimum height of <span class="data-point">solder thickness + 25% of the lead diameter</span> (Class 2 and 3). For chip components, the minimum fillet height is solder thickness + 25% of the termination height. A fillet that stops below this line does not guarantee a reliable mechanical and electrical connection and is rejectable.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Side Fillet Length on Chip Components: 75% of the Termination</h4>
+      <p>On chip components (0402, 0201, 01005), the solder must wet along at least <span class="data-point">75% of the termination length</span> (Class 2), measured on the side fillet. Class 3 raises related requirements on fillet height and adds requirements for the solder to visibly wet the end cap. This is why tiny passives are the most common source of A-610 rejects — their small terminations leave little room for fillet variation. See our <a href="/blog/fine-pitch-smt-assembly-guide.html">fine-pitch SMT assembly guide</a> for how placement and stencil design keep these fillets in spec.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Voiding in BGA and QFN Joints: X-Ray Is the Only Way to See It</h4>
+      <p>For area-array components, A-610 defers void evaluation to X-ray. The widely applied guidance (IPC-7095) caps void area at <span class="data-point">25% of the ball cross-section</span> for Class 2 and 15% for Class 3, with tighter limits on voids clustered under thermal pads. This criterion cannot be checked visually — your incoming inspection must include X-ray sampling for BGA/QFN products, or you are accepting blind. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">AOI / X-Ray / SPI inspection guide</a> covers the equipment and sampling rates.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Component Damage: Cracks Never, Chipping Within Limits</h4>
+      <p>Cracks in the component body are a reject at any class. Chipping is allowed only within measured limits: for ceramic chip components, chipping must not expose the internal metallization, and total edge damage is limited to <span class="data-point">25% of the chip's width</span> (Class 2) with tighter limits for Class 3. Damaged components from handling, rework, or depaneling are the second most common reject category — which is why our <a href="/blog/pcb-depaneling-methods.html">depaneling guide</a> emphasizes method selection as a yield issue, not just a throughput one.</p>
+    </div>
+  </div>
+
+  <h2>Contamination and Cleanliness: The Criterion Most Buyers Forget</h2>
+
+  <p>Solder joints are visible; ionic contamination is not — but it causes corrosion, dendrite growth, and field failures months after acceptance. IPC-A-610 requires that assembled boards be free of flux residues, oils, and other contaminants that could affect reliability. The measurable enforcement is J-STD-001's ionic cleanliness limit of <span class="data-point">≤ 1.56 μg/cm²</span> NaCl equivalent (for rosin-based processes requiring cleaning), verified by ROSE or ion chromatography; for no-clean processes, acceptability is judged by the A-610 visual criteria combined with surface insulation resistance (SIR) testing per IPC-9202. If your product is high-humidity or high-voltage, specify the cleanliness test explicitly in the PO — do not assume the assembler runs ROSE by default. Our <a href="/blog/pcb-ionic-contamination-cleanliness-testing.html">ionic contamination testing guide</a> explains the methods and limits in detail.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The most expensive acceptance mistake is inspecting only solder joints. A board can pass every visual criterion and still fail in the field from contamination, hidden voids, or internal component damage. For Class 2/3 products, pair visual inspection with X-ray sampling and an ionic cleanliness test at first article — <span class="data-point">3 checks</span> that together cover what the eye alone cannot see.</p>
+  </div>
+
+  <h2>How to Write IPC-A-610 Into Your Purchase Order</h2>
+
+  <p>Acceptance criteria are only enforceable if they are in the contract. We recommend four clauses on every assembly PO:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Standard + Revision + Class, Explicitly</h4>
+      <p>Write "IPC-A-610 <strong>Rev H</strong>, Class 2" (or 3) — not "IPC-A-610" alone. Revisions change criteria; without a revision pin, a dispute can hinge on which edition applies. Also state the governing class of the end product, since A-610 classes describe the product, not the factory.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Deviations in Writing</h4>
+      <p>Any relaxation or tightening (e.g., "X-ray void limit 20% for the thermal pad") must be a written deviation attached to the PO. Verbal allowances are unenforceable and are the #1 source of post-shipment disputes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Inspection Data Deliverables</h4>
+      <p>Require the assembler to ship the inspection records: AOI/SPI logs, X-ray reports for area-array lots, first article inspection (FAI) results, and — if specified — ionic cleanliness reports. Our <a href="/blog/pcb-first-article-inspection-guide.html">FAI guide</a> lists the documents a complete first-article package contains.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Disposition Process for Nonconforming Lots</h4>
+      <p>Agree in advance on the path for rejects: 8D corrective action, sort/repair vs. scrap decision rights, return freight responsibility, and the deadline for replacement. A written disposition clause turns a quality dispute into an administrative step. Our <a href="/blog/pcb-quality-dispute-resolution.html">quality dispute resolution guide</a> covers the common clause structures.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-ipc-a-610-cross-section.webp" alt="Photorealistic 3D cross-section of a soldered through-hole joint showing copper barrel, solder fillet and lead merging" loading="lazy" style="max-width:80%">
+
+  <h2>A Buyer's 15-Point Incoming Inspection Checklist</h2>
+
+  <p>Use this checklist when you receive assemblies. It is written to be executable by a trained inspector with a microscope, X-ray access (for area-array products), and a copy of the contracted revision:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Documentation</h4>
+      <p>Certificate of conformance (CoC) states the standard, revision, class, and lot/date codes; packing list matches PO quantities.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Sampling Plan</h4>
+      <p>Sample size defined in advance (e.g., ANSI/ASQ Z1.4 General Level II, AQL 1.0 for visual, 0.65 for functional) — documented before inspection, not after.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Solder Joint Wetting</h4>
+      <p>Spot-check wetting angle ≤ 90° on a sample of through-hole and chip joints across board quadrants.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Fillet Height</h4>
+      <p>Verify minimum fillet height (solder thickness + 25% of lead/termination dimension) on through-hole and chip components.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Chip Side Fillet</h4>
+      <p>Side fillet covers ≥ 75% of termination length on chip passives (Class 2).</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>BGA/QFN Voids</h4>
+      <p>X-ray sample: void area within the contracted limit (25% Class 2 / 15% Class 3 per IPC-7095 guidance).</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Component Damage</h4>
+      <p>No cracks; chipping within width limits and not exposing metallization.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Misalignment</h4>
+      <p>Component offset within A-610 limits (chip offset ≤ 25% of pad width for Class 2/3; no tombstoning, no skew beyond fillet coverage).</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Polarity and Marking</h4>
+      <p>All polarized components (diodes, electrolytics, ICs) correctly oriented; reference designators legible.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Cleanliness</h4>
+      <p>No visible flux residue around joints (per A-610 visual limits for the flux type); ROSE report if contracted.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating</h4>
+      <p>If coated: coverage, no bubbles/delamination, no coating on test points/connectors — per the coating criteria in A-610. See our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a>.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">12</div>
+    <div class="checklist-content">
+      <h4>Mechanical Assembly</h4>
+      <p>Connectors seated, fasteners torqued, no foreign object debris (FOD) inside the enclosure.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">13</div>
+    <div class="checklist-content">
+      <h4>Electrical Test Evidence</h4>
+      <p>ICT/flying probe or functional test reports included, pass rates within contract. See our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> for what each report should contain.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">14</div>
+    <div class="checklist-content">
+      <h4>Traceability</h4>
+      <p>Lot/date codes marked and mapped to build records — required for any product with a recall or warranty path. Our <a href="/blog/pcb-lot-traceability-ipc1782.html">IPC-1782 traceability guide</a> covers the data standards.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">15</div>
+    <div class="checklist-content">
+      <h4>Packaging and Handling Evidence</h4>
+      <p>ESD-safe packaging per the agreed standard, moisture-barrier bags with intact humidity indicator cards for MSL components, and no physical damage in transit. Our <a href="/blog/pcb-esd-packaging-standards.html">ESD packaging standards guide</a> lists the box-level checks.</p>
+    </div>
+  </div>
+
+  <p>Run this checklist on first article before production, then on a contracted sampling basis per lot. For a deeper look at how to structure the incoming inspection agreement itself — sample sizes, AQLs, and hold/release authority — our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection guide</a> and <a href="/blog/pcb-quality-metrics-dppm-benchmarks.html">quality metrics guide</a> give the benchmarks your assembler should be reporting against.</p>
+
+  <h2>How Huaxing PCBA Implements IPC-A-610</h2>
+
+  <p>IPC-A-610 is not a poster on our wall — it is the operating system of our quality department. Every Huaxing assembly order ships with a CoC stating the contracted standard, revision, and class. Our SMT lines run 100% AOI with 3D SPI on every printed panel, X-ray sampling on all area-array lots, and final inspection performed by IPC-A-610 certified inspectors. First articles are documented against the contracted class, and customers receive the inspection records with the shipment. If you are specifying a new product, send us your Gerber, BOM, and your class requirement — our engineers will confirm the acceptance plan, the inspection coverage, and the criteria that apply to your specific component mix before production starts, and return a quote with the full acceptance criteria mapped to your contract.</p>
+
+  <p><a href="/contact/">Send your assembly files and class requirement to our quality team</a> for a 24-hour quote with the IPC-A-610 acceptance plan included.</p>
+
+</article>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/ipc-a-600-acceptance-criteria.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC-A-600 Acceptance Criteria — Bare Board Inspection</a></li>
+      <li><a href="/blog/ipc-standards-comparison.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Standards Comparison — Which Standard Goes Where</a></li>
+      <li><a href="/blog/ipc-class-2-vs-class-3.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Class 2 vs Class 3 — Which Do You Need?</a></li>
+      <li><a href="/blog/pcb-inspection-aoi-xray-spi.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">AOI vs X-Ray vs SPI Inspection Methods</a></li>
+      <li><a href="/blog/pcb-pre-shipment-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Pre-Shipment Inspection for Overseas Buyers</a></li>
+    </ul>
+  </div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-ipc-a-610.webp)">
+      <h2>Agreeing an Acceptance Plan for Your Assembly?</h2>
+      <p>Send your Gerber, BOM, and class requirement — we'll confirm the IPC-A-610 revision, inspection coverage, and acceptance criteria for your component mix, with a quote in 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request an IPC-A-610 Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script>
+</body>
+</html>

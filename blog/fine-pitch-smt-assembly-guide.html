@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fine-Pitch SMT Assembly — 01005 &amp; 0201 Component Handling, Stencil &amp; Reflow Guide | Huaxing PCBA</title>
+<meta name="description" content="Fine-pitch SMT assembly guide for 01005 and 0201 components — placement accuracy, laser-cut stencil design, Type 4/5 solder paste, reflow profiling, and AOI resolution for zero-yield-loss production.">
+<meta property="og:title" content="Fine-Pitch SMT Assembly — 01005 &amp; 0201 Component Handling, Stencil &amp; Reflow Guide">
+<meta property="og:description" content="How to assemble 01005 and 0201 components without yield loss: placement accuracy, stencil apertures, solder paste type, reflow profile, and inspection resolution.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/fine-pitch-smt-assembly-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-fine-pitch-smt.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/fine-pitch-smt-assembly-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Fine-Pitch SMT Assembly — 01005 & 0201 Component Handling, Stencil & Reflow Guide",
+  "description": "Fine-pitch SMT assembly guide for 01005 and 0201 components — placement accuracy, laser-cut stencil design, Type 4/5 solder paste, reflow profiling, and AOI resolution for zero-yield-loss production.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-fine-pitch-smt.webp",
+  "url": "https://huaxingpcba.com/blog/fine-pitch-smt-assembly-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/fine-pitch-smt-assembly-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-fine-pitch-smt.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">Fine-Pitch SMT Assembly:<br><em>Handling 01005 &amp; 0201 Components Without Yield Loss</em></h1>
+      <p class="reveal">The process stack that makes tiny passives and fine-pitch ICs assembleable — placement accuracy, stencil apertures, solder paste type, reflow control, and the inspection resolution to see what you built.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Fine-Pitch SMT Assembly Guide</span></div>
+
+  <p>A 01005 resistor is <span class="data-point">0.4 mm × 0.2 mm</span> — about the size of a grain of salt. A 0.4 mm-pitch QFP has leads just <span class="data-point">0.16 mm wide</span> with 0.24 mm gaps. Both are routine in wearables, hearing aids, modules, and any product where every square millimeter of PCB costs money. The difference between a factory that assembles these parts at 99.5% first-pass yield and one that scrapes by at 96% is not luck — it is a specific, measurable process stack: placement machine capability, stencil geometry, solder paste particle size, reflow profile control, and inspection resolution. This guide walks through each layer and what to demand from your assembler when your BOM contains fine-pitch parts.</p>
+
+  <p>Huaxing PCBA runs fine-pitch production on <span class="data-point">8 SMT lines</span> with 3D SPI and 3D AOI on every line, qualified for 01005 and 0.3 mm-pitch CSP assembly. The numbers below are the actual process parameters our engineers quote against — use them as the yardstick when you evaluate an assembly partner.</p>
+
+  <img class="article-img" src="/generated/blog-fine-pitch-placement.webp" alt="Pick-and-place vacuum nozzle holding a tiny 0201 chip component above a PCB pad in a dark factory" loading="lazy" style="max-width:80%">
+
+  <h2>What "Fine Pitch" Actually Means on an Assembly Line</h2>
+
+  <p>"Fine pitch" covers two distinct families of parts, and each stresses a different part of the process:</p>
+
+  <table class="spec-table">
+    <tr><th>Component</th><th>Size / Pitch</th><th>Critical Process Stress</th></tr>
+    <tr><td>0201 chip (0603 metric)</td><td>0.6 × 0.3 mm</td><td>Stencil printing, tombstoning</td></tr>
+    <tr><td>01005 chip (0402 metric)</td><td>0.4 × 0.2 mm</td><td>Placement accuracy, paste volume control</td></tr>
+    <tr><td>008004 chip (0201 metric)</td><td>0.25 × 0.125 mm</td><td>Placement accuracy, AOI resolution, handling</td></tr>
+    <tr><td>QFP / SOP</td><td>0.3 - 0.5 mm lead pitch</td><td>Print definition, bridging control</td></tr>
+    <tr><td>CSP / BGA</td><td>0.3 - 0.5 mm ball pitch</td><td>Aperture design, X-ray verification</td></tr>
+  </table>
+
+  <p>Once lead pitch drops to 0.5 mm or below — or passives drop to 0201 and smaller — the assembly process shifts from "standard" to "fine-pitch mode": thinner stencils, finer paste, tighter placement tolerances, and higher-resolution inspection. Each of the next five sections covers one layer of that stack.</p>
+
+  <h2>Placement: The ±40 μm Accuracy Reality</h2>
+
+  <p>The placement machine is the first gate. For 01005 components, industry-standard capability requires placement accuracy of <span class="data-point">±40 μm at 3σ</span> (Cpk ≥ 1.33, with most leading lines quoting Cpk ≥ 1.67). That is roughly one-tenth of the component's own width. A machine rated ±80 μm can assemble 0402 parts all day but will scatter 01005 parts across the pad — and the defect appears downstream as tombstoning, reflow misalignment, or opens that AOI catches only after reflow, when rework is expensive.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Verify the Machine Class, Not the Marketing Sheet</h4>
+      <p>Ask the assembler for the placement Cpk measured <em>on your board type</em> with glass slide or fiducial-based verification, not the machine vendor's datasheet number. A useful audit question: "What is your measured placement accuracy for 01005, and when was it last verified?" The honest answer includes a date and a procedure (typically IPC-9850 or the machine maker's calibration glass). Our <a href="/blog/pcb-supplier-audit.html">supplier audit guide</a> includes this as a line item in the process-capability section.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Fiducials and Panel Stiffness Are Part of Accuracy</h4>
+      <p>The machine's accuracy is only as good as the board's positional reference. Every panel needs global fiducials plus local fiducials within <span class="data-point">10 mm</span> of fine-pitch sites. Panel stiffness matters equally: a 0.8 mm board that bows more than 0.5% during placement pushes parts off their pads before reflow even starts. See our <a href="/blog/pcb-panelization-cost-optimization.html">panelization guide</a> for the rail/fiducial geometry rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Nozzle and Force Control for Tiny Bodies</h4>
+      <p>01005 parts need dedicated mini-nozzles (typically 0.3-0.5 mm ID) and placement force of <span class="data-point">0.5 - 2.0 N</span> with closed-loop force control. Too little force — the part sticks to the nozzle; too much — paste squeeze-out and pad damage. Air-pressure and vision centering must be replaced with laser or 3D centering for these sizes.</p>
+    </div>
+  </div>
+
+  <h2>Stencil: The 0.08 mm Laser-Cut Reality</h2>
+
+  <p>The stencil is where fine-pitch yield is won or lost, because print defects are the single largest cause of reflow defects. For 01005 and 0.3 mm-pitch work, the baseline is a <span class="data-point">0.08 mm (3 mil)</span> laser-cut stainless stencil — versus 0.12-0.15 mm for standard 0402+ assemblies — with aperture walls cleaned by electropolishing or nano-coating to maximize paste release.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Aperture Area Ratio: Keep It Above 0.66</h4>
+      <p>Per IPC-7525, the aperture area ratio (opening area ÷ wall area) must stay above <span class="data-point">0.66</span> for reliable paste release. For a 01005 pad of roughly 0.22 × 0.22 mm on a 0.08 mm stencil, that works out to an aperture around 0.17-0.19 mm — near the practical limit for laser cutting. Below 0.66, paste stays in the aperture and you get skipped deposits, which reflow into opens. Our <a href="/blog/smt-stencil-design-guide.html">stencil design guide</a> includes the full calculation table.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Electroformed Stencils for Sub-0.3 mm Apertures</h4>
+      <p>When apertures drop below 0.2 mm, laser-cut walls develop taper and roughness that hurt release. Electroformed (EF) stencils deliver near-vertical, mirror-smooth walls and are the standard choice for 0.3 mm-pitch CSP and 008004 work. They cost more and wear differently — acceptable when your BOM is genuinely fine-pitch.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Print Process: Underside Wiping and Vision Alignment</h4>
+      <p>Fine-pitch printing requires automatic underside wiping every <span class="data-point">5-10 prints</span> (versus 20-30 for standard work), a print speed of 20-50 mm/s, and a snap-off of 0-0.5 mm. Board-to-stencil alignment must use vision with the fine-pitch fiducials — pin alignment alone will not hold ±25 μm print registration.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-fine-pitch-stencil.webp" alt="Macro view of a laser-cut stainless steel SMT stencil with ultra-fine rectangular apertures" loading="lazy" style="max-width:85%">
+
+  <h2>Solder Paste: Type 4/5 Powder and a Controlled Environment</h2>
+
+  <p>Paste particle size must fit through the aperture. IPC J-STD-005 powder types: Type 4 = <span class="data-point">20-38 μm</span>, Type 5 = 15-25 μm, Type 6 = 5-15 μm. Rule of thumb: aperture width should be at least <span class="data-point">5× the largest particle</span>. A 0.18 mm aperture needs Type 4 at minimum and Type 5 for reliable release. Type 5's trade-off is faster oxidation (more surface area) — which is why fine-pitch paste is used within an 8-hour stencil life and refrigerated at 2-10°C with a 72-hour opened-shelf limit.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Fine-pitch printing is a humidity-controlled operation. The paste responds to ambient conditions — target <span class="data-point">20-26°C and 40-60% RH</span> in the print room. Below 40% RH, static and paste drying; above 60%, paste absorbs moisture and spatters in reflow, causing solder balls around 01005 joints — the defect class most often blamed on the paste but actually caused by the environment. Our <a href="/blog/solder-paste-selection-guide.html">solder paste selection guide</a> covers alloy and flux choices for each powder type.</p>
+  </div>
+
+  <h2>Reflow: Winning the Tombstone and Solder-Balling Battle</h2>
+
+  <p>Two defect modes dominate fine-pitch reflow, and both are controlled by the profile and the layout:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Tombstoning: The Wetting-Balance Problem</h4>
+      <p>Tombstoning happens when one end of a chip component wets and pulls before the other. For 0201/01005 parts, the trigger is usually asymmetric pad sizes, a thermal gradient across the component, or paste volume mismatch between the two pads. The profile countermeasure is a controlled ramp: <span class="data-point">≤ 2°C/s</span> preheat ramp and a soak at 150-200°C for 60-120 s to equalize component temperature before liquidus. Paste-volume asymmetry on fine-pitch pads is detected at SPI, not after reflow — which is why 3D SPI on every print is non-negotiable for fine-pitch boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Solder Balls: Environment + Profile</h4>
+      <p>Solder balls around fine-pitch joints come from paste spatter (moisture pickup or too-fast ramp into liquidus) or from paste printed outside the pad. For SAC305, keep time above liquidus at <span class="data-point">60-90 s</span>, peak at 235-245°C, and consider nitrogen reflow for sub-0.4 mm pitch — nitrogen (O₂ &lt; 1000 ppm) reduces oxidation-driven solder balling and improves wetting on tight geometries. Our <a href="/blog/pcb-reflow-soldering-profile-optimization.html">reflow profile optimization guide</a> gives the full parameter table for SAC305 and lead-free alloys.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Pad Design Is a Process Input, Not Just a Layout Choice</h4>
+      <p>Many fine-pitch yield problems are designed in: asymmetric thermal relief, vias-in-pad without fill that steal paste, and solder-mask-defined pads that shrink the effective paste area. The fix belongs in DFM review before the stencil is cut — our <a href="/blog/dfm-tips.html">DFM tips guide</a> and <a href="/blog/pcb-design-for-testability.html">design-for-test guide</a> list the fine-pitch pad rules (NSMD pads, filled vias, balanced thermal relief) that prevent the tombstone and void defect families at the source.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-fine-pitch-reflow.webp" alt="Circuit board emerging from a reflow oven tunnel with molten gold solder joints gleaming" loading="lazy" style="max-width:80%">
+
+  <h2>Inspection: Seeing What You Built</h2>
+
+  <p>If you cannot inspect a defect class, that defect class is shipping. Fine-pitch demands a three-layer inspection stack:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>3D SPI After Every Print</h4>
+      <p>SPI measures paste height, area, and volume on every pad — catching the skipped deposits and volume asymmetry that become opens and tombstoning after reflow. For 01005 pads, SPI must resolve <span class="data-point">±10 μm</span> height differences; a 2D SPI cannot see the volume defect on a 0.22 mm pad.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>3D AOI at ≥ 10 μm Resolution</h4>
+      <p>Post-reflow AOI needs a camera resolution of <span class="data-point">10 μm/pixel or better</span> for 01005 and 0.3 mm-pitch parts (5 μm for 008004), with 3D height measurement for solder fillet volume and lead-lift detection on QFPs. 2D AOI at 15-20 μm will miss the lifted lead and the marginal fillet that fails in vibration testing. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">AOI/X-Ray/SPI comparison</a> covers the resolution and coverage trade-offs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>X-Ray for CSP/BGA and QFN Hidden Joints</h4>
+      <p>For area-array parts on the same board — even if the fine-pitch content is mostly QFPs — X-ray sampling verifies the hidden joints, including void limits per IPC-7095 (≤ 25% ball area Class 2, ≤ 15% Class 3). Our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> covers the X-ray acceptance workflow, and the <a href="/blog/flip-chip-ic-packaging-pcb-substrates.html">flip-chip substrate guide</a> explains the fine-pitch side of advanced packaging.</p>
+    </div>
+  </div>
+
+  <h2>The Fine-Pitch Qualification Checklist</h2>
+
+  <p>When you move a design with 01005/0201 or sub-0.5 mm-pitch ICs to a new assembler, run this before committing production volume:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Machine Capability Evidence</h4>
+      <p>Placement Cpk ≥ 1.33 (prefer 1.67) verified for your smallest component size, with a dated procedure.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Stencil Design Review</h4>
+      <p>Aperture area ratio ≥ 0.66 on every fine-pitch pad; stencil thickness and finish (laser + nano-coat vs electroformed) matched to your smallest aperture.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Paste Qualification</h4>
+      <p>Powder type (Type 4 minimum, Type 5 for &lt; 0.3 mm apertures), storage and stencil-life controls documented.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Environment Logging</h4>
+      <p>Print room temperature/humidity monitored and logged — ask to see the last 30 days of data.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Inspection Coverage</h4>
+      <p>3D SPI + 3D AOI at the resolutions above, X-ray available for area-array parts, and first-article inspection against your acceptance criteria. Our <a href="/blog/pcb-first-article-inspection-guide.html">FAI guide</a> lists the complete first-article package.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>First-Article Build and Report</h4>
+      <p>Run a pilot panel through the full line, then review SPI volume data, AOI images, X-ray results, and electrical test before production sign-off. See our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> for the electrical test options at fine pitch (flying probe versus fixture-based ICT).</p>
+    </div>
+  </div>
+
+  <h2>How Huaxing PCBA Runs Fine-Pitch Production</h2>
+
+  <p>Fine-pitch is our default, not our specialty line: all <span class="data-point">8 SMT lines</span> are equipped for 01005 and 0.3 mm-pitch work, with 3D SPI and 3D AOI on every line, X-ray for area-array parts, and print-room climate control at 20-26°C / 40-60% RH. We maintain measured placement Cpk records per line, cut stencils in-house with nano-coating, and qualify paste per BOM. Send us your design files — we will run the fine-pitch DFM review (pad geometry, aperture ratio, panel stiffness) and return a quote with the process parameters for your smallest part, before you commit a single panel.</p>
+
+  <p><a href="/contact/">Upload your fine-pitch design for DFM review and a 24-hour quote</a>, or <a href="/blog/pcb-quote-comparison-guide.html">read our quote comparison guide</a> to see how to evaluate assembly proposals for fine-pitch work.</p>
+
+</article>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/smt-stencil-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMT Stencil Design Guide</a></li>
+      <li><a href="/blog/solder-paste-selection-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Solder Paste Selection Guide</a></li>
+      <li><a href="/blog/bga-assembly-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">BGA Assembly — X-Ray Inspection &amp; Defect Prevention</a></li>
+      <li><a href="/blog/pcb-inspection-aoi-xray-spi.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">AOI vs X-Ray vs SPI Inspection Methods</a></li>
+      <li><a href="/blog/flip-chip-ic-packaging-pcb-substrates.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Flip-Chip &amp; Advanced IC Packaging Substrates</a></li>
+    </ul>
+  </div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-fine-pitch-smt.webp)">
+      <h2>Building a Board With 01005 or Fine-Pitch ICs?</h2>
+      <p>Send your design files — we'll run the fine-pitch DFM review, confirm the stencil/paste/placement parameters for your smallest part, and return a quote in 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get a Fine-Pitch Assembly Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script>
+</body>
+</html>

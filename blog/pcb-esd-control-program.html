@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESD Control in PCB Assembly — ANSI/ESD S20.20 Program Requirements &amp; Supplier Audit Checklist | Huaxing PCBA</title>
+<meta name="description" content="ESD control program requirements for PCB assembly per ANSI/ESD S20.20 — HBM/CDM damage models, EPA grounding, ionizers, packaging per ESD S541, and a 10-point supplier audit checklist.">
+<meta property="og:title" content="ESD Control in PCB Assembly — ANSI/ESD S20.20 Program Requirements &amp; Supplier Audit Checklist">
+<meta property="og:description" content="What a real ESD control program looks like: HBM and CDM damage models, EPA grounding rules, ionizer verification, ESD S541 packaging, and the audit questions to ask your assembler.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-esd-control-program.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-esd-control.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-esd-control-program.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ESD Control in PCB Assembly — ANSI/ESD S20.20 Program Requirements & Supplier Audit Checklist",
+  "description": "ESD control program requirements for PCB assembly per ANSI/ESD S20.20 — HBM/CDM damage models, EPA grounding, ionizers, packaging per ESD S541, and a 10-point supplier audit checklist.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-esd-control.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-esd-control-program.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-esd-control-program.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-esd-control.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Quality Assurance</p>
+      <h1 class="reveal">ESD Control in PCB Assembly:<br><em>ANSI/ESD S20.20 Program Requirements &amp; Supplier Audit Checklist</em></h1>
+      <p class="reveal">The difference between a real ESD control program and a box of wrist straps — HBM and CDM damage models, EPA grounding rules, ionizer verification, and the audit questions that separate certified assemblers from the rest.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>ESD Control in PCB Assembly</span></div>
+
+  <p>Industry studies attribute <span class="data-point">8-33%</span> of electronic product failures to electrostatic discharge, with annual losses to electronics manufacturers estimated in the <span class="data-point">billions of dollars</span>. The painful part: most ESD damage is latent. A chip weakened by a 200V discharge at an unprotected workstation can pass final test, ship, and fail in the customer's hands a year later. That is why an ESD control program is not a quality nicety — it is a reliability requirement, and for most regulated industries it is a contractual one. ANSI/ESD S20.20 is the standard that defines what a compliant program looks like, and it is the benchmark your assembler should be able to demonstrate, certificate in hand.</p>
+
+  <p>Huaxing PCBA operates <span class="data-point">8 SMT lines</span> inside ESD-protected areas (EPAs) built to ANSI/ESD S20.20, with ionizers on every placement and rework station, daily wrist-strap testing, and compliance verification on a documented schedule. This guide explains the three damage models, what S20.20 actually requires, where assemblies get damaged in a real factory, and the audit checklist we recommend you run on any assembly partner.</p>
+
+  <img class="article-img" src="/generated/blog-esd-wrist-strap.webp" alt="Macro view of an ESD wrist strap coil cord plugged into a grounding point on a dark workbench" loading="lazy" style="max-width:80%">
+
+  <h2>The Three Damage Models Every Buyer Should Know</h2>
+
+  <p>ESD damage is characterized by three discharge models, and each one is addressed by different controls inside a program:</p>
+
+  <table class="spec-table">
+    <tr><th>Model</th><th>Source</th><th>Typical Voltage</th><th>Damage Mechanism</th><th>Primary Control</th></tr>
+    <tr><td>HBM (Human Body Model)</td><td>Charged person touches a device</td><td>500 V - 15 kV</td><td>Junction damage in I/O structures, metal melt</td><td>Wrist straps, grounded workstations, ESD footwear/flooring</td></tr>
+    <tr><td>CDM (Charged Device Model)</td><td>Device itself charges, then discharges to ground</td><td>50 - 1,000 V (modern chips fail at 100-250 V)</td><td>Gate oxide punch-through in the chip core</td><td>Ionizers, conductive handling, low-charging materials</td></tr>
+    <tr><td>MM (Machine Model)</td><td>Charged machine/tool contacts a device</td><td>50 - 500 V</td><td>Similar to HBM, lower energy</td><td>Grounded equipment, bonding</td></tr>
+  </table>
+
+  <p>The critical insight for buyers: <strong>CDM is the model that modern, small-geometry chips are most vulnerable to</strong>, and it is the hardest to control because it does not involve a person at all. A chip can charge triboelectrically as it slides in its tape-and-reel pocket, then discharge through a grounded placement nozzle — no human ever touches it. That is why a program built only around wrist straps (HBM control) is incomplete; the S20.20 program explicitly requires charge-generation control (ionization) for processes where CDM risk exists.</p>
+
+  <h2>What ANSI/ESD S20.20 Actually Requires</h2>
+
+  <p>ANSI/ESD S20.20 is a program standard: it defines the elements a compliant ESD control program must contain and the verification schedule to prove it is working. The required elements:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>An ESD Control Plan and Designated ESD Coordinator</h4>
+      <p>The program must be a written, documented plan with a named owner. It covers training, product protection requirements, and the compliance verification plan. If a factory cannot produce its ESD control plan document on request, it does not have a program — it has procedures.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Grounding and Bonding: The Backbone</h4>
+      <p>All conductors in the EPA (workstations, equipment, shelving, carts) must be grounded or bonded, with resistance to ground below <span class="data-point">1 Ω</span> for equipment and tooling per ESD TR53 verification methods. This is the element most often "assumed" rather than measured — verification records are the proof.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Personnel Grounding</h4>
+      <p>Standing workers use wrist straps with a <span class="data-point">1 MΩ ± 10%</span> series resistor, tested daily (continuous monitors preferred); seated or mobile workers use ESD footwear with conductive flooring in the 1×10⁶ to 1×10⁹ Ω range. The wrist-strap tester logs are one of the fastest audit signals: empty log = no program.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Protected Areas (EPAs) With Marked Boundaries</h4>
+      <p>Every area where ESD-susceptible items are handled is a marked EPA: ESD-protective flooring, worksurfaces (1×10⁶ to 1×10⁹ Ω), seating, and clearly posted boundary signs. The requirement is that no unprotected item — including a bare assembled board — crosses an EPA boundary outside ESD-protective packaging.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Charge Generation Control (Ionization)</h4>
+      <p>Wherever static-generating processes exist — pick-and-place heads, rework, handling of insulative component carriers — ionizers are required, with offset voltage (balance) within <span class="data-point">±35 V</span> and discharge time verified on a schedule (typically quarterly or per the manufacturer's recommendation). This is the CDM control layer.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>ESD-Safe Packaging per ESD S541</h4>
+      <p>Packaging for storage and transport must meet ESD S541: shielding bags with surface resistance below <span class="data-point">1×10¹¹ Ω</span>, dissipative trays, and proper labeling. This is the same packaging family we cover in detail in our <a href="/blog/pcb-esd-packaging-standards.html">ESD packaging standards guide</a> — the program requirement and the packaging requirement are two halves of the same system.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Training and Compliance Verification</h4>
+      <p>All personnel handling ESD-sensitive items are trained (typically on hire and annually), and the program is audited on a fixed schedule — S20.20 certification bodies audit annually, and internal compliance checks run more frequently. The compliance verification plan is itself a required document.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> An S20.20 <em>certificate</em> (issued by an accredited body, valid 3 years with annual surveillance audits) is the strongest single signal that a program is real. But certificates expire and audits are snapshots — the <strong>verification records</strong> (wrist-strap logs, ionizer test sheets, resistance measurements) are the live evidence. Ask for both.</p>
+  </div>
+
+  <img class="article-img" src="/generated/blog-esd-ionizer.webp" alt="Industrial ionizing blower mounted above an electronics assembly line with airflow over dark circuit boards" loading="lazy" style="max-width:85%">
+
+  <h2>Where Assemblies Actually Get Damaged in a Factory</h2>
+
+  <p>Even inside a certified EPA, specific operations concentrate ESD risk. These are the five hotspots we see in audits and our own line design:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Incoming Kitting and Component Decanting</h4>
+      <p>Components removed from tape-and-reel or trays for kitting are handled outside their ESD-protective carriers. Triboelectric charging during tape unwinding is a documented CDM source — kitting stations need dissipative worksurfaces and ionizers, not just mats.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Pick-and-Place Heads (The CDM Zone)</h4>
+      <p>The component charges in its pocket, the vacuum nozzle is grounded — the discharge path goes straight through the chip. Ionizers over placement heads, conductive tape and cover, and humidity control at <span class="data-point">40-60% RH</span> are the controls. This is why our placement lines run ionizers as standard equipment, not an option.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Rework and Manual Soldering</h4>
+      <p>Hand soldering, hot-air rework, and component replacement are the highest-touch operations in assembly. The station must be a complete EPA: grounded soldering iron (3-wire, tip grounded to <span class="data-point">&lt; 2 Ω</span>), grounded wrist strap, dissipative mat, and — for hot-air tools that generate ionizing airflow — ionizer verification. Our <a href="/blog/pcb-rework-repair-guide.html">rework and repair guide</a> covers the process side.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Test and Programming Fixtures</h4>
+      <p>Boards are plugged into fixtures, probed, and programmed — each contact is a discharge opportunity. Fixtures need grounded beds, ESD-safe handles, and ionizers where boards are loaded by hand. Electrical test areas are also where latent damage first surfaces as marginal failures; see our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> for the test coverage discussion.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Packing, Labeling, and Storage</h4>
+      <p>Boards packed into non-dissipative foam, bubble wrap, or unlabeled bags lose their protection at the exact moment they leave the EPA. Packaging must follow ESD S541 (shielding bags, dissipative trays), and storage racks and carts must be grounded or made of dissipative material. Our <a href="/blog/pcb-box-build-assembly.html">box-build guide</a> covers the full integration and packing flow for turnkey products.</p>
+    </div>
+  </div>
+
+  <h2>The 10-Point ESD Audit Checklist for Buyers</h2>
+
+  <p>Use this when you audit an assembly partner — on-site or remote video audit:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Certificate and Scope</h4>
+      <p>Valid ANSI/ESD S20.20 certificate (not expired), scope covers the assembly operations you are buying, issued by an accredited body.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>ESD Control Plan Document</h4>
+      <p>Written plan exists, current revision, names the ESD coordinator, and includes the compliance verification plan.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>EPA Boundaries</h4>
+      <p>Marked EPAs around all handling areas; no unprotected boards crossing boundaries outside ESD packaging.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Wrist-Strap Testing Logs</h4>
+      <p>Daily tester logs for the last 90 days, with continuous monitors where operators are seated.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Ionizer Verification Records</h4>
+      <p>Offset voltage within ±35 V and discharge-time test sheets within the required interval for all ionizers.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Resistance Verification (ESD TR53)</h4>
+      <p>Worksurface, flooring, and grounding-point resistance measurements on the required schedule (typically 12 months).</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Grounding Point Integrity</h4>
+      <p>Equipment grounding verified to &lt; 1 Ω; visible grounding points on benches, racks, and carts.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Packaging Materials</h4>
+      <p>ESD bags and trays meet ESD S541 (surface resistance &lt; 1×10¹¹ Ω), correct bags used for the sensitivity level, proper labeling.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Training Records</h4>
+      <p>Training matrix covers all ESD-sensitive-handling personnel, initial and annual refresher, signed records.</p>
+    </div>
+  </div>
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Humidity Monitoring</h4>
+      <p>EPA humidity maintained and logged at 40-60% RH; low-humidity periods (winter/dry climate) covered by increased ionization.</p>
+    </div>
+  </div>
+
+  <p>Fold this checklist into your broader <a href="/blog/pcb-supplier-audit.html">supplier audit program</a> and pair it with the documentation checks in our <a href="/blog/pcb-incoming-quality-inspection.html">incoming inspection guide</a> — ESD compliance is verified at the factory, but its failures show up at your incoming inspection and in the field.</p>
+
+  <img class="article-img" src="/generated/blog-esd-packing.webp" alt="Assembled circuit board being placed into a dark anti-static shielding bag on a workbench" loading="lazy" style="max-width:80%">
+
+  <h2>ESD in the Contract: What to Write</h2>
+
+  <p>ESD protection should be contractual, not assumed. Three clauses to include in your assembly agreement:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Program Requirement</h4>
+      <p>"Assembler shall maintain an ESD control program compliant with ANSI/ESD S20.20, covering all handling, assembly, test, and packing operations for the products under this agreement, and shall provide its current S20.20 certificate upon request."</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Documentation Deliverables</h4>
+      <p>Require the verification records to travel with each shipment or be available on request: wrist-strap test logs, ionizer verification sheets, and — for high-reliability products — the ESD audit report from the last internal or third-party audit.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Packaging Specification</h4>
+      <p>Reference ESD S541 for all storage and transport packaging, with explicit labeling requirements. Cross-reference our <a href="/blog/pcb-esd-packaging-standards.html">packaging standards guide</a> when you draft the clause.</p>
+    </div>
+  </div>
+
+  <h2>How Huaxing PCBA Runs Its ESD Program</h2>
+
+  <p>Every Huaxing assembly line operates inside an S20.20-conformant EPA: grounded worksurfaces and flooring, <span class="data-point">1 MΩ</span> wrist straps with daily tested logs, ionizers on every placement, kitting, rework, and test station, humidity held at 40-60% RH, and packaging per ESD S541. We maintain an internal compliance verification schedule beyond the certificate cycle, and the records are available to customers on request. If your product is sensitive — and most modern ICs are — ask us for the current S20.20 certificate and a sample of the verification logs; we will send them with your first quote.</p>
+
+  <p><a href="/contact/">Request our ESD program documentation and a quote for your assembly project</a> — or read our <a href="/blog/pcb-factory-esg-social-compliance-audit.html">factory compliance audit guide</a> to see the full set of audits a serious buyer runs before awarding volume.</p>
+
+</article>
+
+  <!-- ── Related Reading ── -->
+  <div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+    <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+    <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+      <li><a href="/blog/pcb-esd-packaging-standards.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB ESD Packaging &amp; IPC-1601 Storage Standards</a></li>
+      <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit — 10-Point Checklist</a></li>
+      <li><a href="/blog/pcb-incoming-quality-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Incoming Quality Inspection Guide</a></li>
+      <li><a href="/blog/pcb-rework-repair-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Rework &amp; Repair Guide</a></li>
+      <li><a href="/blog/pcb-factory-esg-social-compliance-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Factory ESG &amp; Social Compliance Audit</a></li>
+    </ul>
+  </div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-esd-control.webp)">
+      <h2>Auditing an Assembly Partner's ESD Program?</h2>
+      <p>Send us your project details — we'll share our current ANSI/ESD S20.20 certificate, verification logs, and a quote for your assembly volume, with ESD documentation included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request ESD Documentation &amp; Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script>
+</body>
+</html>
