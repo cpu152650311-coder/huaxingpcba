@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCBA IC Programming Service — In-Circuit vs Offline Firmware Flashing for MCU, Flash &amp; EEPROM | Huaxing PCBA</title>
+<meta name="description" content="IC programming in PCB assembly explained: in-circuit vs offline programming, supported device families, data security, test coverage, and how to specify programming services on your PCBA order.">
+<meta property="og:title" content="PCBA IC Programming Service — In-Circuit vs Offline Firmware Flashing">
+<meta property="og:description" content="How contract manufacturers program MCUs, flash and EEPROM during assembly — methods, device support, security controls and what to specify on your purchase order.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-ic-programming-assembly-service.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ic-programming.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-ic-programming-assembly-service.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCBA IC Programming Service — In-Circuit vs Offline Firmware Flashing for MCU, Flash & EEPROM",
+  "description": "IC programming in PCB assembly explained: in-circuit vs offline programming, supported device families, data security, test coverage, and how to specify programming services on your PCBA order.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ic-programming.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-ic-programming-assembly-service.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-ic-programming-assembly-service.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ic-programming.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">PCBA IC Programming &amp; Firmware Flashing:<br><em>In-Circuit vs Offline — How to Specify Programming on Your Assembly Order</em></h1>
+      <p class="reveal">Programmed ICs can add weeks to your schedule if you leave the method unspecified — here is how in-circuit and offline programming differ, and what to write into your PCBA order.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCBA IC Programming Service</span></div>
+
+  <p>Every product that contains a microcontroller, flash memory, EEPROM, or one-time-programmable (OTP) device eventually needs its firmware written — and where that happens in the supply chain determines your cost, your schedule, and your security exposure. Programming at the bare-board stage, at the assembled-board stage, or at the box-build stage are three different operations with different yields, different test coverage, and different failure modes. For a procurement manager, the question is not "can the factory program ICs" — almost every PCBA assembler can — but "how, when, and with what controls."</p>
+
+  <p>At Huaxing PCBA, firmware flashing is a standard production service across our <span class="data-point">8 SMT lines</span>, with dedicated programming stations, controlled firmware handling, and program-verify coverage on every assembled unit. This guide explains the two main methods, the device families we program daily, the security and traceability controls that protect your firmware, and the five specifications that belong on every order that includes programming.</p>
+
+  <img class="article-img" src="../generated/blog-ic-programming-hero.webp" alt="Photorealistic macro photo of a PCBA programming station with a probe fixture touching a microcontroller on an assembled board" loading="lazy" style="max-width:80%">
+
+  <h2>In-Circuit vs Offline Programming — The Core Decision</h2>
+
+  <p>There are two fundamentally different ways to get firmware into a device, and each fits a different production scenario. The choice affects yield, cycle time, and how many boards you can recover when a program fails.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>In-Circuit Programming (ICP) — After Assembly, Through Test Points</h4>
+      <p>ICP writes firmware through the board's own test points or a boundary-scan chain (JTAG/SWD) after reflow, using a flying-probe or bed-of-nails style fixture. Its big advantage: the device is programmed in its final circuit, so the programmer can also power the rail and verify the surrounding power and clock circuitry at the same time. Yield issues are recoverable — a failed program is simply retried before the board moves on. ICP integrates naturally into our <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">flying probe and functional test</a> flow, so programming and test share one fixture pass.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Offline / Gang Programming — Before Assembly, on the Component</h4>
+      <p>Offline programming writes the firmware to bare components — usually QFN, BGA, or tray-loaded flash parts — before they are placed on the board, using a socketed gang programmer. This is the right choice when the MCU or memory has no accessible programming pins after assembly, when you want every device verified before it commits to a board, or when you are programming hundreds of identical parts and want maximum throughput. The trade-off: the programmed state is set before solder, so any later corruption requires a rework cycle rather than a simple retry — see our <a href="/blog/pcb-rework-repair-guide.html">rework and repair guide</a> for how that is handled.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Criteria</th><th>In-Circuit (ICP)</th><th>Offline / Gang</th></tr>
+    <tr><td>When programming happens</td><td>After reflow, on assembled board</td><td>Before placement, on bare component</td></tr>
+    <tr><td>Typical devices</td><td>MCU, SoC, CPLD, SPI flash with test points</td><td>QFN/BGA MCU, tray flash, EEPROM, OTP</td></tr>
+    <tr><td>Failed-program recovery</td><td>Retry in fixture (fast)</td><td>Rework or discard component</td></tr>
+    <tr><td>Throughput for high volume</td><td>Moderate — one board at a time</td><td>High — 8-32 sockets per gang unit</td></tr>
+    <tr><td>Circuits verified during program</td><td>Power, clock, reset, IO pins</td><td>Component only</td></tr>
+    <tr><td>Best fit</td><td>Prototype, low-medium volume, test-rich boards</td><td>High volume, no-pin-access devices</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Many orders combine both — gang-program the high-pin-count BGA flash offline for throughput, then use ICP for the on-board MCU during functional test. Specifying "program during test" without naming the method often produces the slower, more expensive of the two flows.</p>
+  </div>
+
+  <h2>Device Families We Program — and the Formats That Keep Them Straight</h2>
+
+  <p>Programming support is not uniform across assemblers. Before you qualify a factory for a firmware-bearing product, confirm the device families and file formats they handle natively. At Huaxing PCBA the daily workload covers the following categories, and our engineering team validates each new device against the programmer's device library before production.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Microcontrollers — Arm Cortex, RISC-V, 8051, PIC and AVR Families</h4>
+      <p>MCU programming is the most common request. We support SWD and JTAG debug interfaces for Arm Cortex-M and Cortex-A parts, plus vendor-specific protocols for STM32, NXP, Microchip, Renesas, ESP32 and domestic Chinese MCU vendors. Firmware is delivered as hex, binary, or ELF; we verify the checksum after programming and log the result per serial number.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Serial Flash, EEPROM, and OTP Devices</h4>
+      <p>NOR flash (SPI/QSPI), serial EEPROM (I2C/SPI), and OTP parts are programmed offline in gang sockets for high volume or in-circuit where the design exposes the bus. For data files — calibration tables, MAC addresses, serial numbers — we support auto-incrementing serialization, so each unit gets a unique value without a separate file per unit.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>CPLD / FPGA Configuration Devices</h4>
+      <p>Configuration PROMs and CPLDs follow the same gang-program flow as flash. For FPGA designs, the configuration bitstream is usually loaded from an external flash at power-up, so the practical work is programming that flash — which falls under the serial flash category above.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-ic-programming-gang.webp" alt="Macro photograph of a gang programmer with multiple QFN packages seated in sockets" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="../generated/blog-ic-programming-verify.webp" alt="Photorealistic photo of an automated test fixture verifying programmed microcontroller firmware on an assembled board" loading="lazy" style="max-width:80%">
+
+  <h2>Firmware Security — What Happens to Your Hex File at the Factory</h2>
+
+  <p>Firmware is intellectual property, and the moment it leaves your server it becomes a supply-chain security question. A serious assembler treats your hex file the way it treats a customer's proprietary BOM: access-controlled, logged, and destroyed on request. These are the controls we operate, and the ones you should ask any candidate factory about.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Controlled Firmware Reception and Storage</h4>
+      <p>Firmware is received through a controlled channel (encrypted transfer or the project portal), stored on access-controlled drives, and never placed in shared production folders. Access is limited to the programming engineering team, and every copy event is logged. This complements the broader <a href="/blog/pcb-contract-manufacturing-ip-protection.html">IP protection measures</a> you should have in your contract manufacturing agreement.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Read-Back Protection and Post-Program Locks</h4>
+      <p>For MCUs that support it, we enable the vendor's read-out protection (RDP) level after programming as specified in your order — this prevents firmware extraction from a production unit. Note that locking is irreversible for some families, so we confirm the requirement in writing before applying it, and we keep a small unlocked sample batch if your team needs post-lock debugging.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Firmware Disposal at Project End</h4>
+      <p>When the order completes, we delete project firmware from programming stations and return or destroy delivered media per your instruction. A data-destruction certificate is available for regulated industries — the same discipline documented in our <a href="/blog/pcb-lot-traceability-ipc1782.html">lot traceability and IPC-1782 guide</a> for serialized records.</p>
+    </div>
+  </div>
+
+  <h2>Program-Verify Coverage — the Quality Metric That Matters</h2>
+
+  <p>Programming is not a "fire and forget" operation: every programmed device should be verified by reading it back and comparing against the source image. The verification policy is where quality differences between assemblers show up. Ask for the program-verify rate on the quality report — some factories verify only a sample; we verify 100% of programmed units, then confirm the checksum again at functional test where the design allows.</p>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> On a typical 5,000-unit run with 100% program-verify, we see 0.1-0.4% first-pass program failures — most caused by marginal sockets or contact issues, virtually all recovered on retry. If a supplier reports zero program failures ever, the more likely explanation is that they are not verifying everything.</p>
+  </div>
+
+  <h2>The Five Specifications That Belong on Every Programming Order</h2>
+
+  <p>Programming failures are almost always specification failures — the firmware version, the method, or the verify requirement was never written down. Add these five items to your purchase order or assembly notes, and the programming step becomes predictable.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Exact Firmware File, Version, and Checksum</h4>
+      <p>Name the file, the build version, and the SHA-256 checksum. A checksum mismatch at receipt is the cheapest failure to catch — it happens before a single device is programmed. Also state who approves a version change and how it is communicated (change order, not email).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Programming Method — ICP, Offline, or Both</h4>
+      <p>Specify in-circuit, offline/gang, or a combination (e.g., "gang-program U3 flash offline; ICP program MCU during functional test"). If you don't care, say "assembler's choice" — but know that you are delegating a cost and yield decision.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Serialization Rules</h4>
+      <p>If units need unique serial numbers, MAC addresses, or calibration values: state the format, the start value, the increment, and where the value is also written (label, barcode, or both). We support auto-increment serialization with a per-lot report.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Verify and Test Requirements</h4>
+      <p>Require 100% program-verify with read-back comparison, and state whether programming is followed by functional test. Tie the programming step into your <a href="/blog/pcb-testing-methods.html">test strategy</a> so a program failure is caught at the earliest stage — ideally before the board is conformal-coated or potted.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Security and Disposal Terms</h4>
+      <p>Reference your NDA, require read-out protection where supported, and specify firmware deletion at project end. Make the security controls part of the order — not a verbal assumption — so both sides are auditable.</p>
+    </div>
+  </div>
+
+  <h2>Programming and the Rest of the Assembly Flow</h2>
+
+  <p>Programming interacts with other production steps in ways that are easy to miss. Boards that will be <a href="/blog/pcb-conformal-coating-guide.html">conformal coated</a> or <a href="/blog/pcb-potting-encapsulation-guide.html">potted</a> must be programmed before the coating step — a coated programming pad is a rework. Boards with <a href="/blog/pcb-burn-in-ess-testing.html">burn-in or ESS</a> requirements should be programmed before burn-in so the stress test exercises real firmware. And for <a href="/blog/pcb-box-build-assembly.html">box-build</a> programs, the final system-level configuration often happens after integration — make sure the order distinguishes board-level programming from system-level flashing so the work is not done twice.</p>
+
+  <p>At Huaxing PCBA, IC programming is offered as a standard option on turnkey and consignment programs alike — see our <a href="/blog/turnkey-pcb-assembly.html">turnkey assembly overview</a> for how programming, test, and box-build combine into one responsible supplier. <a href="/contact/">Send us your BOM and firmware plan</a> and our engineering team will confirm device support, programming method, and program-verify coverage before you commit to a schedule.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ic-programming.webp)">
+      <h2>Add Programming to Your Assembly Order</h2>
+      <p>Send your firmware files and BOM — our team will confirm device support, recommend the programming method, and quote program-verify coverage with your assembly. Free DFM and programming review within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Programming Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  RELATED READING       -->
+<!-- ═══════════════════════ -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Flying Probe vs ICT vs Functional Test</a></li>
+    <li><a href="/blog/pcb-testing-methods.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Testing Methods Explained</a></li>
+    <li><a href="/blog/turnkey-pcb-assembly.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Turnkey PCBA Services</a></li>
+    <li><a href="/blog/pcb-contract-manufacturing-ip-protection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IP Protection in Contract Manufacturing</a></li>
+    <li><a href="/blog/pcb-lot-traceability-ipc1782.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Lot Traceability &amp; IPC-1782</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
