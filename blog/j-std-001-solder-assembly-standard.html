@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J-STD-001 Solder Assembly Standard — Process Requirements &amp; Verification Levels for PCBA Buyers | Huaxing PCBA</title>
+<meta name="description" content="J-STD-001 requirements for PCB assembly explained for buyers — what the 3 verification levels and 3 product classes actually change on your purchase order, plus an audit checklist for your assembler.">
+<meta property="og:title" content="J-STD-001 Solder Assembly Standard — Process Requirements &amp; Verification Levels for PCBA Buyers">
+<meta property="og:description" content="The soldering process standard buyers actually specify: verification levels A/B/C, product classes 1/2/3, cleanliness limits, and the audit questions that separate compliant assemblers from paper tigers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/j-std-001-solder-assembly-standard.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-jstd001.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/j-std-001-solder-assembly-standard.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "J-STD-001 Solder Assembly Standard — Process Requirements & Verification Levels for PCBA Buyers",
+  "description": "J-STD-001 requirements for PCB assembly explained for buyers — what the 3 verification levels and 3 product classes actually change on your purchase order, plus an audit checklist for your assembler.",
+  "datePublished": "2026-08-02",
+  "dateModified": "2026-08-02",
+  "image": "https://huaxingpcba.com/generated/blog-cover-jstd001.webp",
+  "url": "https://huaxingpcba.com/blog/j-std-001-solder-assembly-standard.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/j-std-001-solder-assembly-standard.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-jstd001.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">J-STD-001 Soldering:<br><em>What the Verification Levels &amp; Classes Actually Change on Your PO</em></h1>
+      <p class="reveal">The IPC soldering process standard is quoted on nearly every PCBA purchase order — but most buyers cannot explain the difference between verification level A and C, or what class 3 inspection really requires.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>J-STD-001 Soldering Standard</span></div>
+
+  <p>If you have ever issued a PCBA purchase order, J-STD-001 is probably already on it — often as a single line: "Assembly per J-STD-001." That line hides a lot of decisions. The standard defines <em>how</em> solder joints must be made and <em>what</em> an acceptable joint looks like, but its three verification levels and three product classes give the assembler a wide range of interpretation. Specify it without detail and you are paying for ambiguity.</p>
+
+  <p>Huaxing PCBA has assembled over <span class="data-point">8 million</span> solder joints per day across 8 SMT lines since 2010, running J-STD-001 class 2 and class 3 programs for automotive, medical, and industrial customers. This guide translates the standard into what a procurement engineer actually needs to write into a contract — and what to check on the factory floor. For the visual acceptance side, see our companion guide to <a href="/blog/ipc-a-610-acceptance-criteria.html">IPC-A-610 acceptance criteria</a>.</p>
+
+  <img class="article-img" src="/generated/blog-jstd001-solder-joint.webp" alt="Macro photograph of a wave-soldered through-hole joint with a bright fillet on a PCB assembly line" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>What J-STD-001 Governs That IPC-A-610 Does Not</h2>
+
+  <p>IPC-A-610 answers "does this joint pass visual inspection?" J-STD-001 answers the harder question: "was the process capable of making this joint in the first place?" It is a <em>process</em> standard — the requirements cover soldering materials, tooling, operator training, cleanliness, and the conditions under which assembly may occur. It also sets explicit requirements for solder alloy selection, flux management, and handling of components sensitive to moisture or static.</p>
+
+  <p>The two standards are designed to be used together: J-STD-001 defines the process and the acceptance requirements for soldered electrical and electronic assemblies, while IPC-A-610 provides the pictorial acceptance criteria used at inspection. A factory that claims J-STD-001 compliance but has no IPC-A-610 workmanship reference on the line is running an incomplete program. Our <a href="/blog/ipc-standards-comparison.html">IPC standards comparison</a> walks through how the whole family fits together on a purchase order.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> J-STD-001 is the process standard; IPC-A-610 is the inspection standard. A compliant assembler runs both, plus the cleanliness requirements of J-STD-001 section 7.2 — which IPC-A-610 does not cover at all.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>The Three Verification Levels: A, B, and C</h2>
+
+  <p>Verification levels determine how deeply the assembler must prove compliance. This is the most commercially important clause in the standard, and the one most often left unspecified.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Level A — Self-Verification</h4>
+      <p>The assembler verifies its own work against the standard. No independent oversight. Suitable for low-criticality consumer products where the buyer's risk tolerance is high and the cost of a latent defect is low. This is the default level for most quick-turn and prototype work.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Level B — Buyer-Verified</h4>
+      <p>The buyer or an authorized representative performs verification of the assembler's process. This typically means the buyer's quality engineer reviews process documentation, witnesses testing, or audits the line. Level B is common for medical, industrial, and aerospace work where the OEM keeps process ownership.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Level C — Third-Party Verified</h4>
+      <p>An accredited independent body verifies compliance. This is the strongest assurance and the one required by many defense and safety-critical programs. Level C adds cost and lead time, so it should be specified only where the application genuinely demands independent verification. For regulated industries, pair it with the <a href="/blog/pcb-certifications-compliance.html">certification and compliance framework</a> your end customer requires.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Verification Level</th><th>Who Verifies</th><th>Typical Use</th><th>Relative Cost</th></tr>
+    <tr><td>A</td><td>Assembler self-verification</td><td>Consumer, prototyping</td><td>Baseline</td></tr>
+    <tr><td>B</td><td>Buyer or representative</td><td>Medical, industrial</td><td>+10–20%</td></tr>
+    <tr><td>C</td><td>Accredited third party</td><td>Defense, safety-critical</td><td>+20–40%</td></tr>
+  </table>
+
+  <!-- ── Section ── -->
+  <h2>Product Classes: What Class 3 Actually Demands</h2>
+
+  <p>J-STD-001 adopts the same three product classes as the rest of the IPC standards. Class 1 is general consumer electronics; class 2 is dedicated service electronics where extended life and uninterrupted service are expected; class 3 is high-performance and harsh-environment electronics where continuous performance is critical and downtime cannot be tolerated.</p>
+
+  <p>The practical difference shows up in solder joint geometry tolerances, allowable voiding, and defect criteria. A class 3 BGA voiding limit, for example, is tighter than class 2 — which changes the reflow profile, the solder paste selection, and the X-ray sampling rate the assembler must apply. If you are deciding between class 2 and class 3 for the first time, our <a href="/blog/ipc-class-2-vs-class-3.html">class 2 vs class 3 decision guide</a> covers the cost and reliability trade-offs with real yield data.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Class 1 — General Electronic Products</h4>
+      <p>Consumer devices where the primary requirement is function of the completed assembly. Cosmetic imperfections are acceptable within reason. Typical end products: toys, consumer appliances, basic LED lighting.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Class 2 — Dedicated Service Electronics</h4>
+      <p>Equipment where extended life and uninterrupted service are desired but not critical. This is the default for most industrial, telecom, and commercial products. Communications equipment, industrial controls, and most IoT infrastructure fall here.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Class 3 — High-Performance / Harsh Environment</h4>
+      <p>Continuous performance in demanding conditions; downtime is unacceptable. Aerospace, automotive safety systems, medical life-support, and military electronics. Requires tighter process controls, more stringent inspection, and typically 100% X-ray for BGAs.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-jstd001-reflow.webp" alt="PCB assemblies moving through a reflow soldering oven with visible temperature zones on the machine display" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="/generated/blog-jstd001-inspection.webp" alt="Quality inspector with magnifying lamp and tweezers examining solder joints on an assembled circuit board" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Cleanliness Requirements: The Clause Most Assemblers Prefer to Skip</h2>
+
+  <p>Section 7.2 of J-STD-001 requires assemblies to be free of ionic contamination that could impair reliability. The standard's quantitative limit — typically measured by ROSE testing — is an equivalency of <span class="data-point">1.56 μg/cm²</span> NaCl equivalent for no-clean processes (and lower for medical-grade requirements). Many buyers never ask for the test report, and many assemblers never run it.</p>
+
+  <p>If your product is exposed to humidity, conformal coating, or high-voltage gradients, specify the cleanliness test explicitly in the PO — ROSE for production screening, ion chromatography for root-cause analysis. Our guide to <a href="/blog/pcb-ionic-contamination-cleanliness-testing.html">ionic contamination and cleanliness testing</a> explains which method fits which situation and how to read the report.</p>
+
+  <!-- ── Section ── -->
+  <h2>What J-STD-001 Training and Certification Mean — and Do Not Mean</h2>
+
+  <p>An assembler displaying a "J-STD-001 Certified" plaque usually means its operators and inspectors hold individual IPC certification, and the company has passed an IPC-audited program. What it does <em>not</em> mean is that every joint on every board is made to class 3 — the class and verification level are chosen per contract.</p>
+
+  <p>During a factory audit, ask for three documents: the operator training matrix with certification expiry dates, the current revision of the soldering process specification, and the last internal audit report against J-STD-001. A supplier that cannot produce all three within an hour is likely running the plaque as marketing. Our <a href="/blog/pcb-supplier-audit.html">supplier audit checklist</a> includes the full J-STD-001 verification sequence.</p>
+
+  <!-- ── Section ── -->
+  <h2>How to Write J-STD-001 into Your Purchase Order</h2>
+
+  <p>One line is not enough. A well-specified contract clause covers five points: the standard revision (current is J-STD-001H), the product class, the verification level, the cleanliness test requirement, and the documentation deliverables (certificates, X-ray reports, cleanliness reports).</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Pin the Revision</h4>
+      <p>Write "J-STD-001H" rather than "J-STD-001." Revisions change acceptance criteria; a floating reference lets the assembler pick the version most convenient for its current process. If your engineering team has not reviewed the latest revision, ask your supplier for a revision change summary before quoting.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>State the Class and Verification Level Separately</h4>
+      <p>Example: "Assembly per J-STD-001H, class 2, verification level B." Class and verification level are independent axes — class 2 with level C is a valid (and defensible) specification for a medical device that does not need full class 3 process controls.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Add the Solder Alloy and Profile Constraints</h4>
+      <p>For lead-free work, reference the alloy family (SAC305 is the default) and require the reflow profile be matched to the actual components. Our <a href="/blog/pcb-reflow-soldering-profile-optimization.html">reflow profile optimization guide</a> shows why a single generic profile fails on mixed-technology boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Require Cleanliness Documentation</h4>
+      <p>Add "ROSE test report per J-STD-001 section 7.2 included with shipment" — one sentence that forces the assembler to actually run the test. If the product uses conformal coating, cleanliness is a precondition for coating adhesion; skipping the test risks coating delamination in the field.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Define Non-Conformance Handling</h4>
+      <p>State what happens when inspection finds a joint outside acceptance criteria: rework per IPC-7711/7721, re-inspection, and a corrective action report. Without this clause, marginal joints get silently released "by disposition" — and you never hear about it.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Write "J-STD-001H, class X, verification level Y, ROSE cleanliness report required" into every PCBA contract. The five-clause pattern takes ten seconds to type and eliminates the most common compliance disputes at incoming inspection.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>The Buyer's Floor Audit: 5 Checks That Separate Real Programs from Paper</h2>
+
+  <p>Verification level B gives you the right to inspect — use it. A 45-minute floor audit during a factory visit covers the essentials:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Check the Solder Paste Storage Log</h4>
+      <p>Paste must be refrigerated, tracked by lot, and logged out with expiry dates. Out-of-spec paste is the single most common hidden cause of intermittent solder defects that pass AOI.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Watch a Reflow Profile Verification</h4>
+      <p>Ask to see the last thermal profile run for the board family you are buying, including the thermocouple placement photo. A real program shows you the actual curve; a paper program shows you a standard template.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Verify MSL Handling</h4>
+      <p>Moisture-sensitive components must be stored per their moisture sensitivity level with dry-bake records for opened reels. Our <a href="/blog/pcb-msl-moisture-sensitivity-guide.html">MSL handling guide</a> covers what the dry-bake records should look like.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Ask Who Dispositions Defects</h4>
+      <p>The answer should be a quality engineer, not the line operator. Independent dispositioning is the difference between a controlled process and one that self-approves.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Demand the Cleanliness Report</h4>
+      <p>If your PO specified ROSE testing, the report should exist for the same lot you are inspecting. If it does not, the assembler is shipping against a clause it never executed — a red flag that other clauses may be unexecuted too.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: Turning a Standard into a Contract</h2>
+
+  <p>J-STD-001 is the backbone of solder assembly quality, but its value depends entirely on how precisely you specify it. Pin the revision, separate class from verification level, demand cleanliness documentation, and verify with a floor audit. For the visual side of acceptance, pair it with <a href="/blog/ipc-a-610-acceptance-criteria.html">IPC-A-610</a>; for the material side, check our <a href="/blog/lead-free-vs-leaded-solder.html">lead-free vs leaded solder reliability analysis</a>.</p>
+
+  <p>At Huaxing PCBA, we run J-STD-001H class 2 and class 3 programs with verification level B and C options, ROSE cleanliness testing in-house, and full documentation packages on every shipment. <a href="/blog/ipc-standards-comparison.html">Read our standards comparison</a> or <a href="/contact/">contact our engineering team</a> to have a compliance engineer review your specification before you send it out for quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/ipc-a-610-acceptance-criteria.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC-A-610 Acceptance Criteria — Class 1/2/3 Visual Inspection</a></li>
+    <li><a href="/blog/ipc-standards-comparison.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Standards Comparison — Which Standard Goes Where</a></li>
+    <li><a href="/blog/ipc-class-2-vs-class-3.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC Class 2 vs Class 3 — Reliability Trade-offs</a></li>
+    <li><a href="/blog/pcb-ionic-contamination-cleanliness-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Ionic Contamination &amp; Cleanliness Testing — ROSE, SIR</a></li>
+    <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit — 10-Point Checklist</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-jstd001.webp)">
+      <h2>Need a J-STD-001 Compliance Review of Your Spec?</h2>
+      <p>Send your current purchase order terms and Bill of Materials — our compliance engineers will confirm your class and verification level are correctly specified, and return a quote with documentation deliverables included. Response within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Compliance Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
