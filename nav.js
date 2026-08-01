@@ -164,6 +164,7 @@
         'padding:16px 24px;gap:0;z-index:99' +
       '}' +
       '.nav-links.mobile-open{display:flex}' +
+      '.mobile-menu-btn{display:flex}' +
       '.nav-links a,.nav-dropdown-trigger{' +
         'padding:12px 0;border-bottom:1px solid #1a1a25;font-size:16px' +
       '}' +
