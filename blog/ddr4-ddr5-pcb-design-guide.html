@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DDR4 &amp; DDR5 PCB Design Guidelines — Routing Rules, Impedance Targets &amp; Manufacturing Constraints | Huaxing PCBA</title>
+<meta name="description" content="DDR4 and DDR5 PCB design guidelines: fly-by vs T-topology, impedance targets, trace spacing, layer stackup, via stubs and the manufacturing constraints that decide whether your memory interface works at 6400 MT/s.">
+<meta property="og:title" content="DDR4 &amp; DDR5 PCB Design Guidelines — Routing, Impedance &amp; Manufacturing Reality">
+<meta property="og:description" content="Complete DDR4/DDR5 PCB layout guide: topology, impedance, stackup, length matching, via stubs, and the DFM constraints that break memory interfaces in production.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/ddr4-ddr5-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ddr-memory.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/ddr4-ddr5-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "DDR4 & DDR5 PCB Design Guidelines — Routing Rules, Impedance Targets & Manufacturing Constraints",
+  "description": "DDR4 and DDR5 PCB design guidelines: fly-by vs T-topology, impedance targets, trace spacing, layer stackup, via stubs and the manufacturing constraints that decide whether your memory interface works at 6400 MT/s.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ddr-memory.webp",
+  "url": "https://huaxingpcba.com/blog/ddr4-ddr5-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/ddr4-ddr5-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ddr-memory.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">DDR4 &amp; DDR5 PCB Design:<br><em>Routing Rules, Impedance Targets &amp; Manufacturing Reality</em></h1>
+      <p class="reveal">Memory interfaces are the hardest part of most boards to get right — here are the layout rules that survive contact with a real fab.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>DDR4 &amp; DDR5 PCB Design</span></div>
+
+  <p>Every year we see otherwise well-designed products fail their memory bring-up — not because of bad silicon, but because the PCB layout violated one of the interface's non-negotiable constraints. DDR4 at 3200 MT/s already pushes a 1.6 GHz clock across a dozen traces; DDR5 at 6400 MT/s doubles the data rate while tightening timing margins to the point where <span class="data-point">±10 ps</span> of skew matters. As a fabrication and assembly partner, Huaxing PCBA manufactures memory boards daily — from 4-layer consumer modules to 16-layer server mainboards with 24 DIMM slots — and this guide reflects the design rules we actually verify in DFM review, not the idealized versions from reference design notes.</p>
+
+  <p>The good news: DDR routing is a solved problem if you follow a consistent discipline. Topology, impedance, reference planes, length matching, and via treatment are all decisions you make before the first trace is drawn. This guide covers each one with the numbers that matter, then closes with the manufacturing constraints that quietly invalidate otherwise-correct layouts — because a design that cannot be fabricated to tolerance is not a design at all.</p>
+
+  <img class="article-img" src="../generated/blog-ddr-memory-hero.webp" alt="DDR5 memory module inserted into a motherboard DIMM slot with gold contacts in macro detail" loading="lazy" style="max-width:80%">
+
+  <h2>DDR4 vs DDR5 — What Actually Changed for the PCB Designer</h2>
+
+  <p>Moving from DDR4 to DDR5 is not just a faster version of the same interface. Several architectural changes have direct PCB consequences, and designs that simply re-use DDR4 layout rules will leave performance on the table — or fail qualification outright.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>DDR4 (typical)</th><th>DDR5 (typical)</th><th>PCB Impact</th></tr>
+    <tr><td>Data rate</td><td>2133-3200 MT/s</td><td>4800-6400 MT/s</td><td>Stricter skew &amp; via stub control</td></tr>
+    <tr><td>VDD / VDDQ</td><td>1.2 V</td><td>1.1 V</td><td>~30% tighter noise budget</td></tr>
+    <tr><td>Burst length</td><td>8 (BL8)</td><td>16 (BL16)</td><td>Fewer, longer bursts — same power</td></tr>
+    <tr><td>Command/address topology</td><td>Fly-by (3DS optional)</td><td>Fly-by, 2-rank same-rank refresh</td><td>Topology unchanged, timing tighter</td></tr>
+    <tr><td>On-die ECC</td><td>No</td><td>Yes (DRAM core)</td><td>Soft-error resilience, not layout relief</td></tr>
+    <tr><td>PMIC on module</td><td>No (VDD on board)</td><td>Yes (5V input, PMIC on DIMM)</td><td>DIMM power filtering moves off-board</td></tr>
+    <tr><td>Decision feedback equalization</td><td>Optional</td><td>Standard (DFE)</td><td>Receiver can recover some ISI — not a layout crutch</td></tr>
+  </table>
+
+  <p>Two of these rows deserve emphasis. First, the 1.1 V rail means the PDN noise budget shrinks by roughly 30% compared to DDR4 — the power delivery design has to be better, not the same (<a href="/blog/pcb-power-integrity-design.html">power integrity for high-speed boards</a> is a topic we cover separately). Second, DFE on the receiver helps recover signal that the channel degrades, but it cannot fix gross topology mistakes; the industry rule of thumb is that a marginal DDR4 layout becomes a failing DDR5 layout at the same cost.</p>
+
+  <h2>Command/Address Routing — Fly-By Topology and Why T-Branch Is Obsolete</h2>
+
+  <p>DDR4 and DDR5 both mandate fly-by topology for command/address (CA) and control signals. In fly-by routing, the CA bus daisy-chains from DIMM slot to DIMM slot, terminating at the far end with a termination resistor network (VTT). This minimizes stub length at each device — the single most important factor for signal quality at multi-Gbps rates.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route CA and Control as a Single Chain, Not a Star</h4>
+      <p>Every branch off the CA bus acts as a stub that reflects energy back into the line. Fly-by keeps each device's connection as short as possible (ideally &lt; 300 mils from the bus to the package ball). T-branch topologies that worked for DDR2/DDR3 double the stub count and are not supported for DDR4/DDR5 beyond two DIMMs. For a 2-DIMM-per-channel design, the chain order is: controller → DIMM A → DIMM B → VTT terminator. VTT termination should sit at the physical end of the chain, not at the controller.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Match CA Lengths Within the Group — Not Across the Whole Bus</h4>
+      <p>The CA bus is matched within ±20-50 mils between signals of the same group (address, bank, command, control) rather than as one monolithic bundle, because the controller drives them against a common clock. Group-by-group matching is what your fab's DFM check will look for; unmatched control signals (CS#, CKE, ODT) are a common source of hard-to-debug rank failures. See our <a href="/blog/pcb-signal-integrity.html">signal integrity design rules</a> for the general matching discipline.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-ddr-memory-layout.webp" alt="Photorealistic 3D cross-section of multilayer PCB showing routing planes and microvia layers" loading="lazy" style="max-width:80%">
+
+  <h2>Impedance Targets &amp; Tolerances That Actually Ship</h2>
+
+  <p>DDR impedance targets are standardized, but the tolerance you can hold depends on your material, stackup, and the fab's process control. These are the values we manufacture to and verify with TDR on every memory board program:</p>
+
+  <table class="spec-table">
+    <tr><th>Signal Group</th><th>Target Impedance</th><th>Manufacturing Tolerance</th></tr>
+    <tr><td>Single-ended data (DQ), DMI, DQS (single)</td><td>40 Ω ± 10%</td><td>±10% (tight stackup control)</td></tr>
+    <tr><td>Differential DQS / DQ differential pairs</td><td>80 Ω ± 10% (diff)</td><td>±10%</td></tr>
+    <tr><td>Command/address, control, clock</td><td>40 Ω single-ended</td><td>±10%</td></tr>
+    <tr><td>Differential clock (CK_t/CK_c)</td><td>100 Ω ± 10% (diff)</td><td>±10%</td></tr>
+  </table>
+
+  <p>The 40 Ω single-ended target for DQ traces is lower than typical 50 Ω logic routing because the controller and DRAM include on-die termination that expects the lower impedance. A common mistake is routing the byte lanes at 50 Ω "because it's the default" — this mismatch degrades the signal-integrity margin that DDR5's tight timing budget simply does not have. If your design tool defaults to 50 Ω, override it for the memory groups. For how the stackup achieves these values, our <a href="/blog/impedance-control.html">impedance control guide</a> walks through the math of trace width, spacing, and dielectric height.</p>
+
+  <h2>Layer Stackup &amp; Reference Plane Rules for Memory Boards</h2>
+
+  <p>DDR4 works reliably on a well-designed 6-layer stackup; DDR5 at 6400 MT/s pushes most production designs to 8-12 layers. What matters is not the count but the adjacency of planes to every routing layer.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Every Routing Layer Needs an Unbroken Reference Plane</h4>
+      <p>Impedance is defined against a reference plane. When a DQ trace crosses a plane split (e.g., a moat under a connector area), its impedance jumps and the return current detours — exactly the recipe for crosstalk and radiated EMI. Rule: no signal trace crosses a split; if a split is unavoidable, bridge it with stitching capacitors at 100-200 mil spacing. Memory buses should be routed over solid ground on one side and a power plane (VDD/VDDQ) on the other, which also gives the PDN its plane capacitance.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Keep DQ Byte Lanes on Adjacent Layers With Consistent Dielectric</h4>
+      <p>Each DQ byte lane (8 DQ + DQS + DM = 10-11 signals) should share the same routing layer and the same dielectric stack so that propagation delay is consistent across the group. Mixing layers with different dielectric heights adds skew you cannot fully compensate with serpentine length matching. At 6400 MT/s, propagation delay per inch of FR-4 is roughly 160-170 ps; a 10 mil difference in trace length is ~1.4 ps — small, but length matching rules below are written to keep total group skew under control.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Thinner Dielectrics for DDR5 — and What That Costs</h4>
+      <p>DDR5 designs commonly use 3-4 mil (0.075-0.1 mm) prepreg between signal and plane layers to hit 40 Ω with reasonable trace widths. Thinner dielectric improves impedance control and reduces plane spacing for lower inductance, but it increases the risk of resin starvation, impedance variation across panel, and higher Dk sensitivity to resin content. This is where material selection matters: a high-performance laminate with tight Dk tolerance (e.g., Megtron or a mid-loss FR-4 like TU-872) is worth the upcharge on DDR5 boards. Our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a> compares the options by Dk tolerance and loss.</p>
+    </div>
+  </div>
+
+  <h2>Length Matching &amp; Timing Budgets — The Numbers</h2>
+
+  <p>Length matching is the discipline that turns a good stackup into a working interface. JEDEC publishes timing budgets; the layout translation is a set of matching rules that have been stable across generations:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>DQ-to-DQS Matching: ±10-25 mils Within a Byte Lane</h4>
+      <p>Each byte lane's DQ signals must be matched to its strobe (DQS) within ±10-25 mils depending on data rate — at DDR5-6400, the tight end (≤ ±10-15 mils) is recommended because the controller's write leveling can compensate only partially. DQS-to-CK matching across the lane is typically ±50-100 mils. The same-lane matching is far stricter than lane-to-lane, so group your matching effort there first.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>CA-to-CK Matching: ±50-100 mils; CK to CK_n Differential: ±5 mils</h4>
+      <p>The command/address bus is matched to the clock within ±50-100 mils (tighter at 6400). The differential clock pair itself must be matched to within ±5 mils of each other and routed with constant spacing — a 5 mil skew in a differential clock at 1.6 GHz is over 2.6 ps of phase error, most of which the controller cannot recover. Keep differential pairs coupled: edge-to-edge spacing at 2× the trace width, and avoid separating the pair even for via transitions.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-ddr-memory-impedance.webp" alt="Extreme macro photograph of fine-pitch BGA solder balls and dense high-speed PCB traces" loading="lazy" style="max-width:80%">
+
+  <h2>Via Stubs &amp; Back-Drilling Above 3200 MT/s</h2>
+
+  <p>A via that connects a signal from layer 3 to layer 12 leaves a stub of unused barrel below the connection. That stub is an open-circuit transmission line stub that resonates — and at DDR5 frequencies, even a 30 mil stub measurably degrades the channel's eye diagram.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Insight:</strong> The resonance frequency of a via stub depends on its length: a 40 mil stub in FR-4 resonates around 8-10 GHz, but the harmonic content of a 3.2 GHz clock already interacts with it. Rule of thumb for DDR5: keep signal via stubs below ~15-20 mils. If your design routes on inner layers, specify <a href="/blog/pcb-backdrilling-guide.html">back-drilling</a> of the stubs, or move the routing layer so the via transition is short. Back-drilling adds a process step and cost — this is a DFM discussion to have with your fab before tooling, not after.</p>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Via-in-Pad and Via Fill for Dense Memory Fan-Out</h4>
+      <p>Routing 64-bit wide data buses out of a BGA controller typically requires via-in-pad on the BGA escape area. These vias must be filled (conductive or non-conductive epoxy) and capped, otherwise solder wicks into the barrel and voids the BGA joint. Our <a href="/blog/pcb-via-fill-types.html">via fill types guide</a> covers copper-filled vs epoxy-filled choices — for DDR escape routing, epoxy-filled with cap plating is the standard balance of cost and reliability. Expect the fab to add a microsection verification step on via fill quality for memory boards.</p>
+    </div>
+  </div>
+
+  <h2>Manufacturing Constraints That Break Otherwise-Correct Designs</h2>
+
+  <p>Every month our DFM team sees a memory board design that is electrically correct on paper but has a fabrication issue that will quietly kill yield or reliability. These are the top five, in order of frequency:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Aspect Ratio Limits on Plated Vias</h4>
+      <p>A 0.2 mm finished via in a 3.2 mm board is a 16:1 aspect ratio — at the edge of standard plating capability. High-aspect-ratio vias thin the copper at the center of the barrel, raising resistance and risking open vias under thermal stress. If your stackup forces thin vias through thick boards, either enlarge the via, reduce board thickness, or move to sequential lamination (HDI). Our <a href="/blog/hdi-technology.html">HDI technology guide</a> explains when microvia buildup is the right answer for dense memory designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Trace Width vs Copper Weight at 40 Ω</h4>
+      <p>At 40 Ω on a 4 mil dielectric, the required trace width is roughly 4-5 mils with 1 oz copper. If you also need 2 oz copper for power paths (common on server boards), the etch factor changes the effective width and impedance — impedance tolerance can drift by 2-3 Ω unless the fab compensates. Specify the target impedance with the final copper weight in mind, and ask your fab for the etch compensation they apply. See our <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a> for how power and signal requirements interact.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Serpentine Length Matching Near Other Traces</h4>
+      <p>Accordion serpentines used for length matching reintroduce crosstalk if the parallel segments are too close. Keep serpentine segments spaced at ≥ 3× the trace width, limit serpentine depth, and never route a serpentine under a component or over a plane split. A common DFM correction we issue is expanding serpentine spacing on DDR buses — it costs nothing electrically and prevents coupling between matched pairs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">12</div>
+    <div class="checklist-content">
+      <h4>Controlled Impedance Coupons and TDR Verification</h4>
+      <p>Every memory board panel must carry impedance coupons per the stackup, and the fab should report TDR-measured impedance per panel. Insist on this in your fab notes: "Impedance per IPC-2141, coupons per panel, report required." A supplier that does not verify impedance on memory boards is shipping a lottery ticket. Our <a href="/blog/gerber-files-guide.html">Gerber preparation guide</a> covers how to communicate these requirements in your fabrication notes so nothing is left to interpretation.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> For DDR5 programs, Huaxing PCBA runs impedance TDR verification on every panel, back-drills stubs beyond 15 mils as standard on request, and microsections via fill quality on the first article. Memory interfaces are where the difference between a "PCB supplier" and a "high-speed manufacturing partner" shows up — the DFM feedback at the design stage is where most memory bring-up problems get prevented.</p>
+  </div>
+
+  <h2>What This Means for Your Next Memory Board Order</h2>
+
+  <p>DDR4 and DDR5 design is a stack of small, non-negotiable disciplines: fly-by topology, 40 Ω targets, unbroken reference planes, group-wise length matching, and via stub control. Get the stackup and topology right at the start, and the rest is verification rather than heroics. At Huaxing PCBA, our engineering team reviews your memory interface at the DFM stage — impedance targets, via strategy, back-drill requirements, and stackup tolerance — and returns a manufacturability report before tooling is cut. <a href="/blog/pcb-stackup-design.html">Read our stackup design guide</a> to prepare a stackup that survives DFM, or <a href="/contact/">send us your design files</a> for a free high-speed manufacturability review.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ddr-memory.webp)">
+      <h2>Build Your Memory Board With a High-Speed Partner</h2>
+      <p>Send your DDR4/DDR5 design files. Our DFM team will verify impedance targets, via strategy and stackup tolerance — and quote fabrication with TDR verification and back-drilling. Free high-speed design review included.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  RELATED READING       -->
+<!-- ═══════════════════════ -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity Design Rules</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control Explained</a></li>
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design Guide</a></li>
+    <li><a href="/blog/pcb-backdrilling-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Back-Drilling Guide</a></li>
+    <li><a href="/blog/pcb-via-fill-types.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Via Fill Types Explained</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>

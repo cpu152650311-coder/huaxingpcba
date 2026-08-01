@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPAP for PCB Assembly — The 18 Elements &amp; How to Qualify a PCBA Supplier | Huaxing PCBA</title>
+<meta name="description" content="PPAP for PCB assembly explained: the AIAG 18 elements, PSW, process capability for solder joints, PPAP vs FAI vs ISIR, and the supplier red flags procurement engineers must catch.">
+<meta property="og:title" content="PPAP for PCB Assembly — 18 Elements &amp; Supplier Qualification">
+<meta property="og:description" content="What PPAP really requires from a PCBA supplier: the 18 AIAG elements that matter, reading a PSW, capability studies for solder processes, and red flags in submissions.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-supplier-ppap-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ppap.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-supplier-ppap-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="../design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="../blog.css?v=3">
+
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PPAP for PCB Assembly — The 18 Elements & How to Qualify a PCBA Supplier",
+  "description": "PPAP for PCB assembly explained: the AIAG 18 elements, PSW, process capability for solder joints, PPAP vs FAI vs ISIR, and the supplier red flags procurement engineers must catch.",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-01",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ppap.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-supplier-ppap-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-supplier-ppap-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=22" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="../generated/blog-cover-ppap.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">PPAP for PCB Assembly:<br><em>18 Elements &amp; How to Qualify a PCBA Supplier</em></h1>
+      <p class="reveal">PPAP is the strongest quality lever an electronics buyer has — here's how to require it, read it, and catch the submissions that are theater.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PPAP for PCB Assembly</span></div>
+
+  <p>Most electronics buyers sourcing from China have heard of PPAP — Production Part Approval Process — but fewer than one in ten has actually required it from a PCBA supplier. That is a missed lever: PPAP is the only widely standardized process that forces a contract manufacturer to prove, with documents and data, that their production process can repeatedly make your board to specification. It was built for the automotive industry (AIAG PPAP 4th edition) but the framework transfers directly to any high-reliability PCBA — medical, industrial, aerospace, and energy products all benefit.</p>
+
+  <p>At Huaxing PCBA, we submit PPAP packages for automotive (IATF 16949), medical, and industrial customers on a regular basis. This guide explains what the 18 elements actually mean for a PCB assembly, which ones deserve your attention as a buyer, how to read a Part Submission Warrant, and the warning signs that a submission is paperwork rather than proof. If you are running a <a href="/blog/pcb-supplier-rfp-guide.html">supplier RFP</a> or qualifying a new assembly partner, this is the checklist to add to your evaluation.</p>
+
+  <img class="article-img" src="../generated/blog-ppap-hero.webp" alt="PCB assembly under an optical inspection microscope with golden solder joints in sharp focus" loading="lazy" style="max-width:80%">
+
+  <h2>What PPAP Is — and When to Require It</h2>
+
+  <p>PPAP is the documented evidence that a supplier's production process, at volume, produces parts meeting all customer requirements. The AIAG PPAP manual defines 18 elements of submission; the customer (you) decides the submission level (1-5) and therefore how much evidence you want. PPAP is triggered by: a new product, a new supplier, a change in process, a change in tooling, a change in material, or a relocation of production.</p>
+
+  <table class="spec-table">
+    <tr><th>Submission Level</th><th>What the Supplier Provides</th><th>Typical Use</th></tr>
+    <tr><td>Level 1</td><td>PSW only (signed warrant)</td><td>Low-risk commodity boards</td></tr>
+    <tr><td>Level 2</td><td>PSW + product samples + limited support data</td><td>Standard commercial products</td></tr>
+    <tr><td>Level 3</td><td>PSW + samples + complete supporting data (all 18 elements)</td><td><strong>Default for automotive/medical/high-reliability</strong></td></tr>
+    <tr><td>Level 4</td><td>PSW + customer-specified additional requirements</td><td>Customer-specific programs</td></tr>
+    <tr><td>Level 5</td><td>Full PPAP reviewed at the supplier's site</td><td>New high-risk suppliers</td></tr>
+  </table>
+
+  <p>For most PCBA programs, <strong>Level 3 is the right default</strong>: it requires the full evidence trail without demanding on-site review. If you are qualifying a brand-new supplier for a safety-critical board, Level 5 (on-site review, which can be done remotely — see our <a href="/blog/pcb-remote-factory-audit.html">remote factory audit guide</a>) adds real assurance.</p>
+
+  <h2>The 18 Elements — Which Ones Matter for PCB Assembly</h2>
+
+  <p>Not all 18 elements carry equal weight for an electronics assembly. Here is the practical breakdown, grouped by how much scrutiny each deserves.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design Records, DFMEA, and the Design Change Review</h4>
+      <p>For a PCBA, the "design record" is your Gerber + BOM + assembly drawing. Verify the supplier's DFM report matches your design revision, and that any deviations (documented in their <a href="/blog/dfm-tips.html">DFM review</a>) were approved by you. DFMEA for assembly-level failure modes (solder defects, component damage) should reference the actual board layout — a generic DFMEA template is a red flag.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Process Flow Diagram and PFMEA</h4>
+      <p>The process flow must cover the real line: solder paste printing → SPI → placement → reflow → AOI → X-ray → ICT/functional test → conformal coating (if any) → final inspection → packaging. The PFMEA assigns risk priority numbers (RPNs) to failure modes at each step. Check that the PFMEA's top risks match your board's real risks — e.g., fine-pitch BGA voiding for a BGA-heavy board, or tombstoning for mixed-size passives. Generic PFMEAs that ignore your board's specifics are worthless.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Control Plan — the Document to Actually Read</h4>
+      <p>The control plan is the operational heart of PPAP: for each process step, what is controlled, how it is measured, how often, and what happens on failure. For PCBA, the control plan should name real inspection gates (SPI, AOI, X-ray, ICT) with real frequencies and sample sizes. A control plan that lists "visual inspection 100%" without specifying criteria (IPC-A-610 class) is a plan that cannot be audited. Our <a href="/blog/ipc-a-600-acceptance-criteria.html">acceptance criteria guides</a> cover the standards the plan should reference.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Measurement System Analysis (MSA)</h4>
+      <p>MSA (GR&R studies) proves the measurement equipment can actually detect variation. For PCBA, the measurements that matter: solder paste volume (SPI), AOI defect detection repeatability, impedance testing, and functional test coverage. A supplier who cannot show GR&R results for their SPI and AOI systems cannot claim to control the process with them.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Process Capability Studies — What Cpk Means for Solder</h4>
+      <p>Process capability (Cpk) is the element most often faked, because solder joints do not have a simple measurable dimension like a machined shaft. Realistic PCBA capability studies cover what is measurable: solder paste volume (SPI, target Cpk ≥ 1.33), stencil aperture deposits, pad position, component placement offset, and through-hole fill. When a supplier quotes "Cpk 1.67" without stating which characteristic was studied, ask the question. A capability study on one characteristic does not certify the whole process — see our <a href="/blog/pcb-quality-metrics-dppm-benchmarks.html">DPPM benchmarks guide</a> for how process quality actually shows up in yield data.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>First Article Inspection (FAI), Dimensional Results, and Material Certifications</h4>
+      <p>The FAI verifies the first production units against the drawing — our <a href="/blog/pcb-first-article-inspection-guide.html">FAI guide</a> covers exactly what to check. Material certifications (copper clad laminate CCL, solder paste alloy, solder mask, flux) with lot numbers and expiry dates must be attached. For medical and automotive, also expect the IMDS/declaration of materials and conflict minerals reporting (<a href="/blog/conflict-minerals-compliance-pcb.html">CMRT guide</a>).</p>
+    </div>
+  </div>
+
+  <h2>Reading the PSW — Part Submission Warrant</h2>
+
+  <p>The PSW is the single-page signed declaration that summarizes the whole submission. Every buyer should know the five fields that decide whether to accept it:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">7</div>
+    <div class="checklist-content">
+      <h4>Reason for Submission</h4>
+      <p>Must match your trigger (initial submission, engineering change, process change, tooling change). If the stated reason does not match the actual trigger, the PSW is inaccurate — and a PSW that is inaccurate on its face cannot be trusted on anything else.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">8</div>
+    <div class="checklist-content">
+      <h4>Result — Approved / Interim / Rejected</h4>
+      <p>An "Interim" approval means the supplier acknowledges gaps and is shipping under a time-limited concession with a corrective action plan. That is acceptable if you agreed to it in writing — but the interim period must have a deadline. Rejected submissions require a corrective action plan (8D) before any further shipments. Our <a href="/blog/pcb-quality-dispute-resolution.html">quality dispute resolution guide</a> covers the 8D process and how to enforce it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">9</div>
+    <div class="checklist-content">
+      <h4>Weight, Dimensions, and Drawing Deviation Fields</h4>
+      <p>The recorded weight and dimensions let you verify incoming goods match the approved state. The deviation field is where undocumented changes hide — any deviation listed requires your written approval. Never sign off a PSW with open deviations you have not reviewed.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="../generated/blog-ppap-capability.webp" alt="Extreme macro of consistent golden solder joints on a PCB surface with amber accent lighting" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="../generated/blog-ppap-gauge.webp" alt="Digital caliper measuring PCB thickness on an inspection bench" loading="lazy" style="max-width:80%">
+
+  <h2>PPAP vs FAI vs ISIR — Clearing Up the Confusion</h2>
+
+  <p>These three terms are constantly mixed up, and using them interchangeably in an RFQ produces exactly the wrong evidence from suppliers.</p>
+
+  <table class="spec-table">
+    <tr><th>Document</th><th>Scope</th><th>When It Happens</th><th>What It Proves</th></tr>
+    <tr><td>FAI (First Article Inspection)</td><td>One unit vs drawing</td><td>First article of any new build</td><td>The part matches the drawing</td></tr>
+    <tr><td>ISIR (Initial Sample Inspection Report)</td><td>Sample lot vs spec (VDA style)</td><td>Initial samples, common in EU/German customers</td><td>Sample lot conforms; lighter process evidence</td></tr>
+    <tr><td>PPAP</td><td>Production process + parts</td><td>Before mass production starts</td><td>The <em>process</em> can repeatably make conforming parts</td></tr>
+  </table>
+
+  <p>If your supplier offers you an FAI when you asked for PPAP, that is not a substitution — it is a partial answer. FAI answers "is this one unit right?" while PPAP answers "can your line do this 10,000 times?" For high-volume or high-reliability products you need the process answer. Many buyers start with FAI for prototypes and escalate to Level 3 PPAP when moving to production — a sensible progression, as long as both are specified explicitly in the <a href="/blog/pcb-supplier-rfp-guide.html">RFP</a>.</p>
+
+  <h2>Red Flags in Supplier PPAP Submissions</h2>
+
+  <p>After reviewing hundreds of PPAP packages (ours and competitors'), these are the patterns that predict trouble downstream:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">10</div>
+    <div class="checklist-content">
+      <h4>Identical Documents Across Different Projects</h4>
+      <p>If the PFMEA, control plan, or capability study has no project-specific content — same RPNs, same risks, same measurements for a dense BGA board and a simple 2-layer power board — the package was generated from a template. Require project-specific details: your board's fine-pitch components, your assembly's specific inspection gates, your materials.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">11</div>
+    <div class="checklist-content">
+      <h4>Capability Claims Without Data</h4>
+      <p>"All characteristics Cpk ≥ 1.33" with no raw data, no sample size, no measurement method. Real capability studies include the data, the number of units, the measurement system used, and the date. Demand the raw study. If the supplier cannot produce it, the claim is marketing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">12</div>
+    <div class="checklist-content">
+      <h4>Missing Traceability and Certifications</h4>
+      <p>No lot-level traceability plan, no material certificates, no reflow profile data, no MSL handling records. These are the operational documents that connect the PPAP to the real production run. Our <a href="/blog/pcb-lot-traceability-ipc1782.html">IPC-1782 traceability guide</a> explains the standard that makes lot-level data possible, and our <a href="/blog/pcb-msl-moisture-sensitivity-guide.html">MSL handling guide</a> covers the moisture-control records that belong in any submission.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> The fastest way to test a PPAP's authenticity: ask for the reflow oven profile chart with actual thermocouple data from the PPAP run, and the SPI data from that same run. Both are machine-generated, date-stamped, and nearly impossible to fake convincingly. If either is missing, the submission is paperwork.</p>
+  </div>
+
+  <h2>How Huaxing Runs PPAP for Global Customers</h2>
+
+  <p>For IATF 16949 automotive programs and high-reliability medical/industrial projects, Huaxing PCBA submits Level 3 PPAP packages including: DFM report with your revision control, PFMEA with project-specific risks, control plan mapped to our real production line, SPI/AOI GR&R studies, solder paste volume capability data (Cpk ≥ 1.33), FAI per your drawing, material certificates with lot traceability, and a PSW with accurate deviation disclosure. Our quality system is audited under IATF 16949 and ISO 9001, so the PPAP evidence comes from processes that are themselves audited. <a href="/blog/pcb-certifications-compliance.html">Review our certifications guide</a> to see what each quality system actually certifies.</p>
+
+  <h2>What to Ask for in Your Next RFQ</h2>
+
+  <p>PPAP turns quality from a promise into a deliverable. In your next <a href="/blog/pcb-supplier-rfp-guide.html">RFQ</a>, specify: submission level (Level 3 default), the 18 elements required, the FAI requirement per drawing revision, capability targets (e.g., solder paste volume Cpk ≥ 1.33), and the PSW sign-off gate before mass production. Suppliers who have run PPAP before will quote it without hesitation; suppliers who have not will suddenly discover they are "still preparing documentation." That signal alone is worth the price of asking. <a href="/contact/">Contact our quality team</a> to see a sample PPAP package structure, or send your RFQ and we will respond with our PPAP scope and timeline included.</p>
+
+</article>
+
+<!-- ═══════════════════════ -->
+<!--  CTA SECTION           -->
+<!-- ═══════════════════════ -->
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="background-image:url(../generated/blog-cta-ppap.webp)">
+      <h2>Qualify a Supplier Who Can Prove It</h2>
+      <p>Send your RFQ or drawing package. Huaxing PCBA will respond with a PPAP scope — submission level, element list, and timeline — alongside your quote. IATF 16949 certified quality system, Level 3 PPAP as standard.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ -->
+<!--  RELATED READING       -->
+<!-- ═══════════════════════ -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-first-article-inspection-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">First Article Inspection Guide</a></li>
+    <li><a href="/blog/pcb-supplier-rfp-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier RFP Framework</a></li>
+    <li><a href="/blog/pcb-supplier-audit.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Supplier Audit Checklist</a></li>
+    <li><a href="/blog/pcb-quality-metrics-dppm-benchmarks.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Quality Metrics &amp; DPPM</a></li>
+    <li><a href="/blog/pcb-lot-traceability-ipc1782.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Lot Traceability IPC-1782</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════ -->
+<!--  FOOTER                -->
+<!-- ═══════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="../inquiry-handler.js"></script></body>
+</html>
