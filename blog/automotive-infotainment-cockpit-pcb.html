@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automotive Infotainment &amp; Cockpit PCB Design — High-Speed Display, EMC &amp; Reliability Rules | Huaxing PCBA</title>
+<meta name="description" content="Automotive cockpit and infotainment PCB design rules — AEC-Q100 component selection, LVDS/MIPI/eDP/SerDes routing, CISPR 25 EMC, thermal and HDI manufacturing choices for 15-year automotive life.">
+<meta property="og:title" content="Automotive Infotainment &amp; Cockpit PCB Design — Display, EMC &amp; Reliability Rules">
+<meta property="og:description" content="Designing an automotive head unit or cluster? Display interface routing, AEC-Q100 parts, CISPR 25 emissions, thermal management, and the HDI stackup decisions that survive 15 years in a car.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/automotive-infotainment-cockpit-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-automotive-infotainment.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/automotive-infotainment-cockpit-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Automotive Infotainment & Cockpit PCB Design — High-Speed Display, EMC & Reliability Rules",
+  "description": "Automotive cockpit and infotainment PCB design rules — AEC-Q100 component selection, LVDS/MIPI/eDP/SerDes routing, CISPR 25 EMC, thermal and HDI manufacturing choices for 15-year automotive life.",
+  "datePublished": "2026-08-02",
+  "dateModified": "2026-08-02",
+  "image": "https://huaxingpcba.com/generated/blog-cover-automotive-infotainment.webp",
+  "url": "https://huaxingpcba.com/blog/automotive-infotainment-cockpit-pcb.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/automotive-infotainment-cockpit-pcb.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-automotive-infotainment.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">Automotive Infotainment &amp; Cockpit PCB:<br><em>Display Routing, EMC, and Reliability Rules for 15-Year Automotive Life</em></h1>
+      <p class="reveal">The cockpit is now the most complex electronics module in a car — multiple high-speed display links, a dozen microcontrollers, and a temperature and vibration envelope that consumer boards never see. These are the design rules that survive it.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Automotive Infotainment &amp; Cockpit PCB</span></div>
+
+  <p>Modern vehicles ship with a digital cockpit: a cluster, a center information display, sometimes a passenger display and head-up display, all driven by a system-on-chip that rivals a laptop in complexity. The PCBs behind these screens combine high-speed digital interfaces, power electronics, audio, and wireless modules on boards that must survive −40°C cold starts, 85°C dashboards, vibration, and a 15-year design life under AEC component rules.</p>
+
+  <p>Huaxing PCBA builds cockpit and infotainment boards for Tier-1 and Tier-2 automotive suppliers — up to <span class="data-point">32</span> layers, with HDI microvia stacks, controlled impedance, and IATF 16949 process controls. This guide covers the interfaces you will route, the EMC budget you must hold, and the manufacturing choices that separate an automotive board from a consumer board. For the general requirements of automotive electronics, start with our <a href="/blog/automotive-pcb-requirements.html">automotive PCB requirements guide</a>.</p>
+
+  <img class="article-img" src="/generated/blog-auto-infotainment-display.webp" alt="Photorealistic render of a car dashboard display board with high-speed connector and display driver section" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Why Cockpit Boards Are Not Consumer Boards</h2>
+
+  <p>The most common procurement mistake is treating a head unit like a tablet PCB. The differences are structural, not cosmetic. Every component must be an automotive-grade part (AEC-Q100 for ICs, AEC-Q200 for passives), the board must survive thermal cycling from −40°C to +85°C for thousands of cycles, and every electronic function must be traceable under IATF 16949. The consequences of a field failure — a recall — cost orders of magnitude more than the board itself.</p>
+
+  <table class="spec-table">
+    <tr><th>Attribute</th><th>Consumer Board</th><th>Automotive Cockpit Board</th></tr>
+    <tr><td>Component grade</td><td>Commercial</td><td>AEC-Q100 / Q200, PPAP</td></tr>
+    <tr><td>Temperature range</td><td>0–60°C</td><td>−40–85°C (grade 2), up to 105°C (grade 0)</td></tr>
+    <tr><td>Design life</td><td>2–3 years</td><td>10–15 years</td></tr>
+    <tr><td>EMC requirement</td><td>FCC Class B</td><td>CISPR 25 Class 3–5, ISO 7637 transients</td></tr>
+    <tr><td>Traceability</td><td>Lot level</td><td>Single-board level (UID marking)</td></tr>
+    <tr><td>Vibration</td><td>None specified</td><td>ISO 16750-3, 10–1000 Hz</td></tr>
+  </table>
+
+  <p>The stackup decision follows directly from the reliability requirement. Automotive boards favor thicker copper and controlled dielectric systems over exotic ultra-thin laminates. Our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> and <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a> cover the material trade-offs in detail.</p>
+
+  <!-- ── Section ── -->
+  <h2>The Display Interface Zoo: LVDS, MIPI DSI, eDP, and SerDes</h2>
+
+  <p>A single cockpit aggregates every display interface in the industry. The cluster typically uses LVDS or MIPI DSI; the center display uses eDP or GMSL; the head-up display and cameras use automotive SerDes (GMSL, FPD-Link). Each interface has its own impedance, voltage, and routing discipline — and many boards carry all of them at once.</p>
+
+  <table class="spec-table">
+    <tr><th>Interface</th><th>Differential Impedance</th><th>Typical Speed</th><th>Typical Use</th></tr>
+    <tr><td>LVDS</td><td>100 Ω</td><td>0.5–3 Gbps</td><td>Cluster, legacy displays</td></tr>
+    <tr><td>MIPI DSI</td><td>100 Ω (pairs)</td><td>1.5–4.5 Gbps/lane</td><td>Touch displays, small panels</td></tr>
+    <tr><td>eDP</td><td>100 Ω</td><td>Up to 8.1 Gbps/lane</td><td>High-res center displays</td></tr>
+    <tr><td>GMSL / FPD-Link</td><td>100 Ω</td><td>Up to 6 Gbps</td><td>Camera, long-reach links</td></tr>
+  </table>
+
+  <p>Routing discipline for all of these is the same at the board level: controlled 100 Ω differential pairs, length matching within the lane group, solid reference plane, and no vias in the pair unless both signals transition together. For the detailed rules, our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> and <a href="/blog/impedance-control.html">impedance control guide</a> cover pair routing, via transitions, and coupon requirements.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Length-Match Within the Lane, Not Just the Pair</h4>
+      <p>MIPI and LVDS specify skew between lanes. Match lengths within a few mils across the whole lane group, not just within one pair. Most layout tools do this automatically once the constraint is set — but the constraint is often forgotten on mixed-interface boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep Display Links Off the Power Plane Edges</h4>
+      <p>The switching noise from the DC-DC converters in the cockpit couples into long display routes that run near plane edges. Route the high-speed lanes over solid reference, away from the power stage. Our <a href="/blog/pcb-crosstalk-analysis.html">crosstalk analysis guide</a> quantifies the coupling.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan SerDes for a Single Connector Transition</h4>
+      <p>Automotive SerDes links run meters of cable, so the PCB side must be clean. Keep the serializer close to the connector, use a ground stitch around the connector footprint, and never route the pair through a split plane. Our <a href="/blog/network-switch-router-pcb-design.html">high-speed board guide</a> shows the connector-zone layout pattern.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-auto-infotainment-serdes.webp" alt="Macro photograph of a high-speed board connector zone with differential pair routing on a dark PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>EMC: Holding CISPR 25 Class 3–5 in a Metal Box</h2>
+
+  <p>Infotainment is the noisiest subsystem in the vehicle: switching regulators, high-speed display clocks, and wireless radios all share one board. The OEM EMC requirement is typically CISPR 25 radiated emissions Class 3 to Class 5 depending on the frequency band, plus ISO 7637 transient immunity on the power input.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Budget the Switching Regulators Early</h4>
+      <p>Each buck converter is an intentional noise source. Spread them across the board rather than clustering them, keep their switching loops tight, and route their outputs away from display lanes. The <a href="/blog/pcb-emc-emi-compliance.html">EMC and EMI compliance guide</a> covers loop-area control and filtering.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Shield the Display Clock Sources</h4>
+      <p>Display clocks and their harmonics sit in FM and DAB radio bands. A grounded shield over the clock area, or a ground pour with stitching vias around it, usually recovers 5–10 dB of margin. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC design rules</a> include the shield-placement checklist.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Filter the Power Input for ISO 7637</h4>
+      <p>The 12 V rail carries load-dump and transient spikes. A TVS array plus an input LC filter at the connector is the minimum; verify the filter's resonance is damped so it does not ring at the OEM test pulse. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers input filtering design.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Thermal and Mechanical: The Cockpit Is a Heater</h2>
+
+  <p>A center display SoC can dissipate 5–10 W, inside a dashboard that already exceeds 60°C on a sunny day. The board itself must conduct that heat to the enclosure, which means thermal vias under the SoC, copper planes that carry heat laterally, and careful placement of the regulators that add their own dissipation. Warpage control matters equally: a cockpit board with a large SoC and mixed thicknesses can bow during reflow and fail connector coplanarity.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design the Thermal Path to the Enclosure</h4>
+      <p>Thermal vias under the SoC and regulators, tied to planes that reach a board-edge pad contacting the metal housing, turn the dashboard into a heatsink. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> has the via-array sizing formulas.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Balance Copper for Warpage</h4>
+      <p>Symmetric stackups and balanced copper pours across layers prevent bow and twist after reflow. For large cockpit boards, keep the copper density within 10% between mirrored layers. Our <a href="/blog/pcb-warpage-reflow-prevention.html">warpage prevention guide</a> covers the stackup and panelization rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan for Vibration at the Connector</h4>
+      <p>The board-to-board and board-to-cable connectors take the worst vibration load. Add mounting holes near heavy connectors and use stiffeners on long flex tails. The <a href="/blog/pcb-vibration-shock-testing.html">vibration testing guide</a> explains the qualification tests.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-auto-infotainment-thermal.webp" alt="Macro photograph of a system-on-chip with thermal via array and copper pours on a dark automotive PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Manufacturing: HDI, Microvias, and Process Control</h2>
+
+  <p>The cockpit board's density demands HDI construction: microvias, buried vias, and often 4–6 sequential laminations. That is where manufacturing capability separates automotive-capable suppliers from board houses that only do standard through-hole stacks. The <a href="/blog/hdi-technology.html">HDI technology guide</a> covers the stackup options; here are the procurement-level checks.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Verify Microvia Reliability Data</h4>
+      <p>Automotive thermal cycling stresses microvias hard. Ask for IPC-6012 qualification data and IST results, not just a capability statement. Our <a href="/blog/pcb-microvia-reliability-ist.html">microvia reliability guide</a> lists the exact questions to ask.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Confirm 100 Ω Coupon Coverage</h4>
+      <p>Every impedance net group needs coupons measured against your target. Do not accept "designed to 100 Ω" — accept measured values from the production panel. The <a href="/blog/impedance-control.html">impedance control guide</a> has the coupon template.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Check the Surface Finish for Mixed Needs</h4>
+      <p>ENIG for the fine-pitch SoC and connector pads, plus selective OSP or ENEPIG where wire bonding appears. A single finish across the board usually forces a compromise. Our <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a> walks through the options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Require PPAP for the Module</h4>
+      <p>For production cockpit modules, the supplier should submit PPAP with control plans, FMEA, and capability data. The <a href="/blog/pcb-supplier-ppap-guide.html">PPAP guide for PCB assembly</a> lists the 18 elements and what each should contain.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: Design for the Recall, Not the Demo</h2>
+
+  <p>A cockpit board that looks great in the demo vehicle fails in the field when the display clock radiates into the FM band, the SoC overheats on a summer day, or a microvia cracks after two years of thermal cycling. The design rules are known: AEC-grade parts, disciplined high-speed routing, an early EMC budget, a real thermal path, and HDI construction from a supplier with automotive process controls.</p>
+
+  <p>At Huaxing PCBA, we manufacture automotive infotainment and cockpit boards under IATF 16949, with HDI up to 32 layers, controlled impedance, single-board traceability, and PPAP support. <a href="/blog/automotive-pcb-requirements.html">Read our automotive requirements guide</a> for the complete qualification checklist, or <a href="/contact/">send your stackup and layout</a> for a DFM review focused on cockpit-specific risks before tooling.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/automotive-pcb-requirements.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Automotive PCB Requirements — AEC-Q100, Thermal &amp; Reliability</a></li>
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Planning for High-Speed Boards</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — High-Speed Design Rules</a></li>
+    <li><a href="/blog/pcb-emc-emi-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB EMC &amp; EMI Compliance — Design for Certification</a></li>
+    <li><a href="/blog/hdi-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">HDI PCB Technology — Microvias, Build-Up &amp; Cost</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-automotive-infotainment.webp)">
+      <h2>Designing a Cockpit Module? Let's Review Your Stackup</h2>
+      <p>Send your schematic and layout — our engineers will check display routing, impedance coupons, EMC risk areas, thermal via coverage, and HDI stackup, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Automotive DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

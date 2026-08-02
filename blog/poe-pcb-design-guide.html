@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PoE PCB Design Guide — Power over Ethernet PD/PSE Layout, Isolation &amp; 802.3bt Rules | Huaxing PCBA</title>
+<meta name="description" content="PoE PCB design rules for powered devices and power sourcing equipment — 802.3af/at/bt power classes, isolation and creepage, magnetics placement, thermal design, and layout rules that pass compliance.">
+<meta property="og:title" content="PoE PCB Design Guide — Power over Ethernet PD/PSE Layout, Isolation &amp; 802.3bt Rules">
+<meta property="og:description" content="Designing a PoE powered device? Class 1-8 power budgets, transformer and diode bridge placement, 1500V isolation spacing, thermal vias for the DC-DC stage, and the compliance tests that matter.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/poe-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-poe.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/poe-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PoE PCB Design Guide — Power over Ethernet PD/PSE Layout, Isolation & 802.3bt Rules",
+  "description": "PoE PCB design rules for powered devices and power sourcing equipment — 802.3af/at/bt power classes, isolation and creepage, magnetics placement, thermal design, and layout rules that pass compliance.",
+  "datePublished": "2026-08-02",
+  "dateModified": "2026-08-02",
+  "image": "https://huaxingpcba.com/generated/blog-cover-poe.webp",
+  "url": "https://huaxingpcba.com/blog/poe-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/poe-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-poe.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PoE PCB Design:<br><em>Power, Isolation, and Layout Rules That Pass 802.3bt Compliance</em></h1>
+      <p class="reveal">Power over Ethernet turns one cable into both data and power — and turns your PCB into a mixed-signal, high-voltage, thermal problem. These are the layout rules that make it work.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PoE PCB Design Guide</span></div>
+
+  <p>Power over Ethernet (PoE) has moved from a convenience to a default: IP cameras, access points, LED controllers, building automation nodes, and industrial sensors increasingly ship with a single RJ45 expecting both link and power. That single port hides a demanding design problem — a PoE powered device (PD) board carries 48–57 V DC alongside gigabit differential pairs, switching power electronics, and isolation boundaries, all in a compact footprint.</p>
+
+  <p>Huaxing PCBA manufactures PoE PD and PSE boards for <span class="data-point">network</span> and <span class="data-point">building automation</span> customers, up to 32 layers, with the isolation and thermal controls that 802.3bt class 8 designs require. This guide covers the power classes, the front-end layout, the isolation rules, and the manufacturing checks that separate a passing design from a field failure. If you are new to the power side, our <a href="/blog/pcb-power-integrity-design.html">power integrity and PDN design guide</a> covers the fundamentals first.</p>
+
+  <img class="article-img" src="/generated/blog-poe-magnetics.webp" alt="Macro photograph of an Ethernet magnetics module and RJ45 connector on a network PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>802.3af, at, and bt: The Power Classes You Are Designing For</h2>
+
+  <p>The PoE standard has grown three times. Each revision raised the power budget and tightened the front-end requirements. Designing a PD that only needs 13 W against the wrong class wastes cost; designing a 90 W PD without planning the thermal path fails in the field.</p>
+
+  <table class="spec-table">
+    <tr><th>Standard</th><th>PSE Output</th><th>PD Budget</th><th>Class Range</th><th>Typical Use</th></tr>
+    <tr><td>802.3af (PoE)</td><td>15.4 W</td><td>12.95 W</td><td>0–3</td><td>Legacy IP cameras, VoIP</td></tr>
+    <tr><td>802.3at (PoE+)</td><td>30 W</td><td>25.5 W</td><td>4</td><td>PTZ cameras, thin clients</td></tr>
+    <tr><td>802.3bt (PoE++)</td><td>60 W</td><td>51 W</td><td>5–6</td><td>LED signage, access points</td></tr>
+    <tr><td>802.3bt (PoE++)</td><td>90 W</td><td>71.3 W</td><td>7–8</td><td>PTZ+heaters, industrial PCs</td></tr>
+  </table>
+
+  <p>Class 5–8 designs use all four twisted pairs (4-pair power) instead of two, which changes both the diode bridge configuration and the DC-DC input stage. For network infrastructure boards, our <a href="/blog/network-switch-router-pcb-design.html">switch and router PCB guide</a> covers the PSE side — where the port count drives the power budget and the thermal design.</p>
+
+  <!-- ── Section ── -->
+  <h2>The PD Front End: Detection, Classification, and the Diode Bridge</h2>
+
+  <p>Every PoE PD starts with the same front end: a signature resistor (24.9 kΩ) for detection, a classification circuit, and a diode bridge that rectifies the DC regardless of cable polarity. The bridge is where cost and loss decisions happen — for 802.3bt class 8, the bridge must carry up to 1.5 A per pair continuously, and standard small-signal diodes are not enough.</p>
+
+  <p>Layout rules for the front end are strict: the signature and classification circuitry must sit close to the connector with short traces, and the bridge diodes need enough copper and thermal relief to shed heat. A common field failure is the detection signature drifting out of the 23.75–26.25 kΩ window because the resistor was placed next to a heat source or its traces added parasitic resistance. Keep the front-end components in a cool, quiet zone of the board.</p>
+
+  <!-- ── Section ── -->
+  <h2>Isolation and Creepage: The 1500V Barrier Nobody Draws</h2>
+
+  <p>PoE front ends are galvanically isolated from the downstream electronics — typically 1500 Vrms isolation between the PoE side and the DC-DC output. That isolation is not just a transformer choice; it is a physical layout requirement. Creepage (distance along the board surface) and clearance (through air) must be designed, not assumed.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Plan the Isolation Slot</h4>
+      <p>A routed slot (moat) under the isolation transformer physically separates the primary and secondary grounds. Without it, a solder bridge or whisker across the boundary turns a compliance-passing design into a safety failure. Slot width should match the creepage requirement plus margin.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Size the Creepage for Your Pollution Degree</h4>
+      <p>For 1500 Vrms working voltage with pollution degree 2, IPC-2221 creepage lands around 1.5–2 mm minimum — but add margin for coated boards, and never route other signals across the boundary. The transformer's own clearance spec is a floor, not the target.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep the DC-DC Switching Node Away from the Data Pair</h4>
+      <p>The flyback or buck switching node carries high dv/dt. Keep it on the opposite side of the board from the magnetics, or shield it with a ground pour. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC and EMI compliance guide</a> covers the coupling paths that cause radiated failures.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-poe-isolation.webp" alt="Photorealistic render of a PCB with an isolation transformer and routed slot separating primary and secondary sections" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="/generated/blog-poe-thermal.webp" alt="Macro photograph of a DC-DC converter section on a network PCB with MOSFETs, thermal vias and copper pours" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Thermal Design: 90W Through a Small Board</h2>
+
+  <p>At 71.3 W delivered, a class 8 PD dissipates several watts in the front-end bridge, the DC-DC converter, and the magnetics. A typical 90% efficient 71 W converter still sheds 7 W of heat — enough to raise board temperature dramatically in a sealed enclosure. Thermal design is not optional at this power level.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use Thermal Vias Under Power Components</h4>
+      <p>The MOSFETs and bridge diodes need thermal via arrays tied to internal copper planes. For a 1.6 mm board, a 3×3 array of 0.3 mm vias under each power device can drop junction temperature 15–20°C versus no vias. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> covers via sizing and plane design in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Plan the Copper Pour Budget Early</h4>
+      <p>At 1.5 A per pair, trace and plane width matter. A 2 oz copper pour carrying 1.5 A with a 10°C rise needs roughly 0.5 mm width minimum — but for the 4-pair 802.3bt path, plan dedicated pours, not traces, and keep them on adjacent layers connected with stitching vias.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Position the Converter Where Air or Enclosure Metal Can Help</h4>
+      <p>Thermal vias to a board edge or to a pad that contacts the enclosure metal turn the case into a heatsink. If the design cannot do that, at minimum keep the DC-DC section away from the processor and the detection circuitry.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> For class 5–8 designs, layout the thermal path before you layout the signals. Thermal vias, dedicated pours, and component placement decisions made at schematic time cost nothing; retrofitted at layout review they cost a board revision.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>The Data Side: Magnetics and Differential Pairs</h2>
+
+  <p>PoE adds power to an Ethernet link, and the Ethernet side still has to work at gigabit speed. The magnetics module (or discrete transformer + common-mode choke) provides both isolation and common-mode termination, and its placement directly affects link quality.</p>
+
+  <p>Place the magnetics as close to the RJ45 as physically possible, keep the differential pairs length-matched and impedance-controlled to 100 Ω, and route them over a solid reference plane with no splits — especially no split under the magnetics. For the high-speed layout rules, our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> and <a href="/blog/pcb-crosstalk-analysis.html">crosstalk analysis guide</a> cover pair routing, via transitions, and return-path discipline in detail.</p>
+
+  <!-- ── Section ── -->
+  <h2>Manufacturing Checks for PoE Boards</h2>
+
+  <p>PoE boards concentrate the manufacturing risks of both power and high-speed boards: high-voltage spacing, thermal relief, and impedance control all in one product. Before production, verify four things:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copper Weight and Plating for Current</h4>
+      <p>Confirm the copper weight matches the current plan — 2 oz or heavier for the 4-pair power path. Our <a href="/blog/pcb-copper-weight-selection.html">copper weight selection guide</a> explains the trade-offs of thick copper on fine-pitch signal layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Impedance Coupons for the Data Pairs</h4>
+      <p>Require impedance test coupons for the 100 Ω differential pairs, measured per your stackup. Do not accept "designed to 100 Ω" — accept measured values. Our <a href="/blog/impedance-control.html">impedance control guide</a> has the coupon specification template.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Isolation Testing at Incoming Inspection</h4>
+      <p>Run a hipot or insulation resistance check across the isolation boundary on a sample. A 1500 Vrms-rated barrier that tests at 200 V before shipment is a defect, not a surprise for later.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Confirm the Isolation Slot Is Real</h4>
+      <p>Verify the routed slot exists in the fabricated board — we have seen DFM tools silently bridge a slot with copper pour. X-ray or cross-section a first article if the board is small enough that the slot is hard to see. Our <a href="/blog/pcb-first-article-inspection-guide.html">first article inspection guide</a> lists the checks.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The PoE Board Is a System, Not a Schematic</h2>
+
+  <p>A reliable PoE design coordinates four disciplines: the power budget (which class you target), the front-end (detection, bridge, classification), the isolation boundary (creepage, slots, transformer placement), and the thermal path (vias, pours, component position). Get all four right and the board passes compliance the first time; miss one and the field failure is expensive.</p>
+
+  <p>At Huaxing PCBA, we manufacture PoE PD and PSE boards with controlled impedance, isolation-slot verification, and 2 oz+ copper capability. <a href="/blog/pcb-emc-emi-compliance.html">Read our EMC compliance guide</a> for the test-side companion, or <a href="/contact/">send your design</a> for a DFM review focused on the PoE-specific risks before you commit to tooling.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/network-switch-router-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Network Switch &amp; Router PCB Design</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — High-Speed Design Rules</a></li>
+    <li><a href="/blog/pcb-power-integrity-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Power Integrity &amp; PDN Design — Decoupling &amp; Target Impedance</a></li>
+    <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management — Vias, Pours &amp; Component Placement</a></li>
+    <li><a href="/blog/pcb-emc-emi-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB EMC &amp; EMI Compliance — Design for Certification</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-poe.webp)">
+      <h2>Building a PoE Device? Let's Review the Layout Together</h2>
+      <p>Send your schematic and layout files — our engineers will check isolation spacing, thermal via coverage, impedance control, and the 802.3bt front end, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your PoE DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
