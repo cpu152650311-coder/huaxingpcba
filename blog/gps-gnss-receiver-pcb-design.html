@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GNSS &amp; GPS Receiver PCB Design — Antenna Feed, LNA Placement &amp; Grounding for Accurate Positioning | Huaxing PCBA</title>
+<meta name="description" content="GNSS receiver PCB design rules for GPS, GLONASS, Galileo and BeiDou modules — antenna feed line, LNA placement, ground plane, impedance control, shielding and assembly checks that determine real positioning accuracy.">
+<meta property="og:title" content="GNSS &amp; GPS Receiver PCB Design — Antenna Feed, LNA Placement &amp; Grounding">
+<meta property="og:description" content="A GNSS receiver is won or lost in the first 20 mm of RF layout. Antenna feed, LNA placement, ground plane discipline and the manufacturing checks that turn a design into centimeter-level positioning.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/gps-gnss-receiver-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-gps-gnss.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/gps-gnss-receiver-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "GNSS & GPS Receiver PCB Design Guide — Antenna Feed, LNA Placement & Grounding for Accurate Positioning",
+  "description": "GNSS receiver PCB design rules for GPS, GLONASS, Galileo and BeiDou modules — antenna feed line, LNA placement, ground plane, impedance control, shielding and assembly checks that determine real positioning accuracy.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-gps-gnss.webp",
+  "url": "https://huaxingpcba.com/blog/gps-gnss-receiver-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/gps-gnss-receiver-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-gps-gnss.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">GNSS &amp; GPS Receiver PCB Design:<br><em>Antenna Feed, LNA Placement, and the Grounding Rules That Decide Positioning Accuracy</em></h1>
+      <p class="reveal">A GNSS signal arrives at −130 dBm — weaker than thermal noise. These layout rules decide whether your receiver locks in seconds or never locks at all.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>GNSS Receiver PCB Design</span></div>
+
+  <p>A GNSS receiver does not fail gradually — it either acquires a fix or it does not. The difference is rarely in the module datasheet; it is in the PCB that surrounds the module. The antenna feed line, the low-noise amplifier (LNA) placement, the ground plane beneath the antenna, and the shielding between the RF front end and digital noise all sit on your board, and every one of them is a decision the module vendor cannot make for you.</p>
+
+  <p>Huaxing PCBA builds GNSS boards for tracking devices, drone navigation, automotive telematics, and precision agriculture — up to <span class="data-point">32 layers</span> with ±5% impedance control, laser-drilled microvias, and 0.3&nbsp;mm BGA assembly across 8 SMT lines. This guide covers the RF layout rules that determine real-world positioning performance, the manufacturing tolerances you should specify, and the assembly checks that catch problems before your product ships.</p>
+
+  <img class="article-img" src="/generated/blog-gps-gnss-hero.webp" alt="Macro photograph of a GNSS receiver PCB section with a ceramic patch antenna, RF shield can and LNA circuit on dark board surface" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Why the Antenna Ground Plane Decides Everything</h2>
+
+  <p>A GNSS signal at the antenna is roughly −130&nbsp;dBm — a hundred million times weaker than the noise floor of a typical receiver input. The ceramic patch antenna is a half-wavelength radiator, and its ground plane is the other half of the antenna. If the ground plane is too small, has copper removed beneath the patch, or is coupled to noisy digital returns, the antenna detunes, gain drops, and the receiver needs more satellite signal to lock.</p>
+
+  <p>Three ground-plane rules matter more than anything else on a GNSS board:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Size the Ground Plane for the Antenna, Not the Module</h4>
+      <p>Most ceramic patch antennas specify a minimum ground plane of 30–40&nbsp;mm square. A tracker PCB that is only 25&nbsp;mm wide cannot host a full-size patch antenna properly — the antenna's center frequency shifts and the radiation pattern tilts. Either enlarge the board, choose a smaller antenna with a documented smaller ground requirement, or move to a chip antenna with a manufacturer-defined counterpoise. Do not crop the ground plane to fit the antenna; that reverses cause and effect.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Never Remove Copper Under the Patch</h4>
+      <p>The ground plane directly beneath a ceramic patch antenna is part of the radiating structure. Route no traces, place no vias, and pour no secondary fills in the region directly under the patch footprint. If the antenna sits over a split in the ground plane — for example, over a power-plane split on layer 2 — the effective antenna aperture shrinks and the resonant frequency shifts by tens of MHz, which is enough to lose the L1 band edge.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep Digital Noise Off the Antenna Reference</h4>
+      <p>The antenna ground is also the receiver's RF reference. High-speed digital switching currents that flow through this plane couple directly into the antenna port. Stitch the antenna ground to the main ground plane at the antenna's edge with a ring of vias, and keep the digital section's return currents off this zone. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI compliance guide</a> covers plane partitioning in more depth.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The ground plane under a GNSS patch antenna is half the antenna. Size it to the antenna spec, keep copper intact beneath the patch, and isolate it from digital return currents — or no receiver design will compensate.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Antenna Feed Line: 50 Ω with the Right Launch</h2>
+
+  <p>Between the antenna and the receiver's LNA, the feed line carries the weakest signal on the board. Every mismatch reflects energy back to the antenna; every millimeter of loss subtracts directly from link margin. A 50&nbsp;Ω controlled-impedance trace is the baseline — but the details of the launch and the stackup determine whether it is actually 50&nbsp;Ω across the band.</p>
+
+  <table class="spec-table">
+    <tr><th>Feed Line Element</th><th>Typical Spec</th><th>What It Protects</th></tr>
+    <tr><td>Characteristic impedance</td><td>50 Ω ± 5%</td><td>Reflection loss at L1 (1575.42 MHz)</td></tr>
+    <tr><td>Trace width (4-layer, J=0.1 mm)</td><td>0.35–0.45 mm</td><td>Controlled by stackup Dk and spacing</td></tr>
+    <tr><td>Feed length</td><td>&lt; 30 mm ideal</td><td>Insertion loss — each mm adds ~0.02 dB</td></tr>
+    <tr><td>Via count on the feed</td><td>0–1</td><td>Each via adds ~0.1–0.3 dB and a resonance risk</td></tr>
+    <tr><td>Ground return</td><td>Coplanar GND on same layer</td><td>Confines field, blocks coupling</td></tr>
+  </table>
+
+  <p>If the feed must change layers, place the transition via next to a ground via so the return current has a continuous path — a missing return via turns the via into a series inductor that resonates in the L1 band. Keep the feed on the outer layer if possible; inner-layer feeds add via transitions and make impedance verification harder. When a U.FL/IPEX connector is used instead of a direct antenna, the connector's pad capacitance also needs tuning — the standard fix is a small series pad or a shortened stub in the matching network, verified with a network analyzer on the first article.</p>
+
+  <img class="article-img" src="/generated/blog-gps-gnss-antenna.webp" alt="Macro photograph of a ceramic patch GPS antenna mounted at the edge of a PCB with a 50 ohm feed line trace leading to the receiver section" loading="lazy" style="max-width:80%">
+
+  <p>Specify impedance coupons on the panel so the fab can TDR-verify the actual feed impedance before assembly. Our <a href="/blog/impedance-control.html">impedance control guide</a> explains the coupon design and acceptance limits, and <a href="/blog/rf-pcb-design-manufacturing.html">the RF PCB manufacturing guide</a> covers material and tolerance strategy for RF front ends.</p>
+
+  <!-- ── Section ── -->
+  <h2>LNA Placement: Short Feed, Clean Supply, Quiet Ground</h2>
+
+  <p>Many GNSS modules integrate the LNA; external LNAs appear when the antenna is far from the module (active antenna) or when the module's internal noise figure is too high for the application's sensitivity budget. Wherever the LNA sits, it is the most sensitive component on the board — its placement rules are non-negotiable.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Place the LNA as Close to the Antenna Port as Possible</h4>
+      <p>The trace between antenna and LNA input is where the system's noise figure is set — loss before the LNA adds directly to the noise figure. Keep this trace under 10&nbsp;mm; every 0.1&nbsp;dB of pre-LNA loss costs about 0.1&nbsp;dB of sensitivity. If the antenna is remote (active antenna), the LNA belongs in the antenna itself and the module runs off the DC bias fed up the coax.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Give the LNA a Dedicated, Filtered Supply</h4>
+      <p>LNA gain is typically 15–25&nbsp;dB, so any noise on its supply is amplified straight into the receiver. Feed the LNA from a dedicated LDO or a filtered branch — a ferrite bead plus 100&nbsp;nF and 1&nbsp;µF decoupling, with the decoupling caps as close to the LNA pins as the footprint allows. Never share the LNA supply directly with a switching regulator output without filtering.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Guard the LNA Output and Input From Each Other</h4>
+      <p>A 20&nbsp;dB-gain LNA's output is a strong signal relative to its input. If output and input traces run parallel for more than a few millimeters, feedback oscillation is possible. Keep input and output traces separated by at least 3× the trace width, ideally on different routing layers, and never route them on adjacent layers without a ground plane between them.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-gps-gnss-lna.webp" alt="Close-up photograph of a low-noise amplifier section on a GNSS board with ferrite bead and decoupling capacitors around the RF input trace" loading="lazy" style="max-width:80%">
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When you send a GNSS board to fabrication, state the LNA feed-line impedance target (±5%), request impedance coupons, and ask for the measured TDR report. A fab that returns measured data instead of "designed to spec" is a fab that controls its process.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Shielding: Where the Shield Can Goes, and How It Grounds</h2>
+
+  <p>The receiver front end needs protection from two noise sources: the board's own digital circuits (MCU, memory, switching regulators) and external interferers (cellular transmitters, Bluetooth, Wi-Fi). A shield can over the RF section is the standard solution, but only if it is designed and assembled correctly.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Define the Shield Zone in the Layout, Not After</h4>
+      <p>The shield fence footprint needs a continuous ground ring on the top layer, at least 1&nbsp;mm wide, with vias to the internal ground plane every 2&nbsp;mm or closer. A fence with sparse vias is a slot antenna at cellular frequencies — it can make interference worse. Include the fence pads in the original layout; retrofitting a shield to a finished board rarely works.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep the Antenna Outside the Shield</h4>
+      <p>An antenna inside a shield can is detuned and desensitized — the can is a resonant cavity at L-band. The classic architecture is antenna at the board edge, RF feed entering the shielded zone through a small aperture, and everything after the matching network inside the can. If the module has an integrated antenna, the antenna must stay outside the can by definition.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Verify Shield Solder Coverage in Assembly</h4>
+      <p>A shield can with a few dry joints is electrically a loose lid — it reduces shielding by tens of dB at some frequencies. Specify X-ray or AOI inspection of shield fence solder joints, and require the fence pads to have adequate solder paste volume in the stencil design. Our <a href="/blog/bga-assembly-guide.html">BGA and fine-pitch assembly guide</a> covers X-ray verification practice that applies to shield cans too.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-gps-gnss-shield.webp" alt="Photorealistic render of an RF shield can being placed over a GNSS receiver front end, showing the fence ground ring and via stitching on the PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Stackup and Materials: FR-4 Works, With Discipline</h2>
+
+  <p>Unlike 5G mmWave boards, GNSS at 1.5&nbsp;GHz does not demand exotic laminates. Standard FR-4 has acceptable loss at L1 — the challenge is controlling the dielectric constant variation that shifts impedance. A 4-layer stackup with a solid ground plane under the RF layer is the workhorse configuration for GNSS designs.</p>
+
+  <table class="spec-table">
+    <tr><th>Stackup Choice</th><th>Best For</th><th>Trade-off</th></tr>
+    <tr><td>2-layer, antenna on top edge</td><td>Simple trackers, lowest cost</td><td>Thin ground, feed impedance harder to hold</td></tr>
+    <tr><td>4-layer (Sig-GND-PWR-Sig)</td><td>Most GNSS products</td><td>Good balance; keep RF on outer layer</td></tr>
+    <tr><td>6+ layer with RF on outer</td><td>GNSS + cellular + Wi-Fi combo boards</td><td>More cost; needs isolation strategy between radios</td></tr>
+    <tr><td>Hybrid with Rogers/PTFE RF layer</td><td>Multi-band or high-precision receivers</td><td>Higher cost and lead time; needed only for extreme sensitivity</td></tr>
+  </table>
+
+  <p>For most products, specify FR-4 with a controlled Dk tolerance from the laminate supplier (typical ±5% on Dk) and let the fab compute trace widths for 50&nbsp;Ω from the actual stackup. If you need every last decibel of sensitivity — for example, a rover-grade receiver — a hybrid stackup with a Rogers RO4003C or PTFE RF layer is justified; our <a href="/blog/ptfe-high-frequency-pcb-manufacturing.html">PTFE high-frequency manufacturing guide</a> covers the processing constraints (plasma treatment, drilling, plating) that hybrid boards require.</p>
+
+  <!-- ── Section ── -->
+  <h2>Production Testing: The Checks That Catch Bad Boards</h2>
+
+  <p>Electrical test and AOI verify the board is assembled correctly, but neither proves the RF section works. GNSS performance depends on impedance, antenna tuning, and shielding integrity — all invisible to a flying probe. Production GNSS testing has three tiers:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Tier 1: Impedance Coupon Verification (Every Panel)</h4>
+      <p>TDR-measured impedance on the panel coupons must fall inside the ±5% window before assembly. This is the cheapest RF insurance you can buy — a panel-wide impedance drift is caught here, not after 1,000 boards are in the field. Require the TDR report with your first article.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Tier 2: RF Functional Test With a GNSS Simulator</h4>
+      <p>A GNSS constellation simulator injects a known signal at the antenna port and verifies acquisition time, C/N0, and position accuracy against a pass/fail mask. This catches LNA gain issues, filter problems, and feed-line faults that electrical test cannot see. For products where a missed fix is a safety issue — automotive, agricultural autosteer — simulator testing every board is the standard.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Tier 3: Live-Sky Spot Check (Sample)</h4>
+      <p>A live-sky test with a real antenna confirms the complete system — antenna, feed, receiver — acquires and tracks satellites with expected C/N0 values. Sample-level live-sky testing (e.g., 5% of production) catches antenna supplier drift and assembly variations that a simulator on the bench cannot. Our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> compares RF functional test against other electrical test approaches.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The GNSS Layout Checklist</h2>
+
+  <p>A GNSS receiver works when the RF chain is treated as one continuous structure: antenna plus ground plane, feed line with verified impedance, LNA with clean supply and short input trace, and a shield zone that is designed in from the start. Every one of these decisions is made in the layout, and every one can be verified at the factory before mass production.</p>
+
+  <p>At Huaxing PCBA, we manufacture GNSS boards up to 32 layers with ±5% impedance control, laser microvias, and 0.3 mm BGA assembly. Our DFM review checks antenna ground plane integrity, feed-line impedance targets, and shield fence via density before tooling. <a href="/blog/rf-pcb-design-manufacturing.html">Read our RF board manufacturing guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing — Materials &amp; Impedance Control</a></li>
+    <li><a href="/blog/rfid-nfc-antenna-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RFID &amp; NFC Antenna PCB Design — Coil &amp; Matching</a></li>
+    <li><a href="/blog/pcb-emc-emi-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Design for EMC/EMI Compliance</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control — Why ±5% Matters</a></li>
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Planning Guide</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-gps-gnss.webp)">
+      <h2>Building a GNSS Product? Let's Review the RF Layout</h2>
+      <p>Send your layout files — our engineers will check antenna ground plane, feed-line impedance, LNA placement, and shield fence design, then return a DFM report with measured impedance capability and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your GNSS DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

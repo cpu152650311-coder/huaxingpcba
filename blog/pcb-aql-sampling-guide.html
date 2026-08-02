@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQL Sampling Plans for PCB &amp; PCBA Inspection — ISO 2859-1 Tables, Defect Classes &amp; Buyer's Checklist | Huaxing PCBA</title>
+<meta name="description" content="AQL sampling for PCB and PCBA inspection — how to read ISO 2859-1 / ANSI Z1.4 tables, choose inspection level and defect classes, and set AQL limits that match IPC-A-610 and IPC-6012 acceptance criteria.">
+<meta property="og:title" content="AQL Sampling Plans for PCB &amp; PCBA Inspection — ISO 2859-1 &amp; Defect Classes">
+<meta property="og:description" content="Most PCB quality disputes trace back to an AQL written wrong. Sample size code letters, inspection levels, defect classes, and the IPC mapping that makes your AQL enforceable with a Chinese supplier.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-aql-sampling-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-aql.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-aql-sampling-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AQL Sampling Plans for PCB & PCBA Inspection — ISO 2859-1 Tables, Defect Classes & Buyer's Checklist",
+  "description": "AQL sampling for PCB and PCBA inspection — how to read ISO 2859-1 / ANSI Z1.4 tables, choose inspection level and defect classes, and set AQL limits that match IPC-A-610 and IPC-6012 acceptance criteria.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-aql.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-aql-sampling-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-aql-sampling-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-aql.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">AQL Sampling Plans for PCB &amp; PCBA Inspection:<br><em>ISO 2859-1 Tables, Defect Classes, and the Buyer's Checklist That Makes Rejections Enforceable</em></h1>
+      <p class="reveal">An AQL written wrong is a quality dispute written in advance. Here is how to read the tables, set the levels, and map defects to IPC classes so your inspection criteria hold up with any supplier.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>AQL for PCB &amp; PCBA Inspection</span></div>
+
+  <p>Almost every PCB or PCBA purchase order that includes quality terms references an AQL — Acceptable Quality Limit — but a surprising number of buyers cannot tell you what their AQL actually allows. The phrase "AQL 1.0" without an inspection level, a defect class, and a reference to the acceptance standard is a sentence with no verb: no supplier can enforce it, and no third-party inspector can apply it consistently.</p>
+
+  <p>Huaxing PCBA ships assembled boards to buyers in <span class="data-point">30+ countries</span> under ISO 9001 and IATF 16949, with IPC-A-610 Class 2/3 acceptance criteria and documented AQL plans in our control plans. This guide explains how AQL sampling actually works for bare boards and assemblies — the tables, the levels, the defect classes, and the IPC mapping that turns an AQL line item into an enforceable contract term.</p>
+
+  <img class="article-img" src="/generated/blog-aql-hero.webp" alt="Quality inspector using a magnifying lamp and ruler to inspect a populated PCB assembly on an inspection bench" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>What Is a Typical AQL for PCB and PCBA Inspection?</h2>
+
+  <p>For PCB/PCBA inspection, buyers typically set AQL 0% for critical defects, 0.65–1.0% for major defects, and 1.5–2.5% for minor defects under ISO 2859-1, General Inspection Level II. Bare boards (IPC-6012) often use tighter major AQLs than assemblies, where IPC-A-610 Class 2/3 criteria define what counts as a defect. AQL 1.0 does not mean "1% of boards may be bad" — it means the sampling plan accepts a lot whose actual defect rate is at or below 1.0% with 95% confidence, and rejects lots above it with defined risk.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> AQL 0 / 0.65 / 1.5 (critical / major / minor) at General Inspection Level II is the most common starting point for PCBA. It is strict enough to protect function, practical enough to keep production moving — and it is what most quality agreements between electronics buyers and Chinese EMS factories reference.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>How AQL Sampling Works: The Three Parameters</h2>
+
+  <p>An AQL plan has exactly three parameters: the lot size, the inspection level, and the AQL value per defect class. Together they determine the sample size and the accept/reject numbers — nothing else. If any of the three is missing from your PO, the plan is not defined.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Lot Size — and Getting It Wrong Is the Most Common Error</h4>
+      <p>The lot is the batch offered for inspection at one time, from one production run, under one set of conditions. For PCBA, a common error is treating the whole order as one lot when it ships in weekly batches — or treating each carton as a separate lot, which inflates the sample size and can reject statistically fine production. Define the lot in the quality agreement: e.g., "each production batch of the same part number produced in one day, not exceeding 5,000 units."</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Inspection Level — General II Is the Default for Good Reason</h4>
+      <p>ISO 2859-1 defines General Inspection Levels I, II, and III, plus Special Levels S-1 through S-4. Level II is the default for most electronics because it balances sample size and protection. Level I halves the sample for low-risk incoming inspection; Level III doubles it for high-value or high-risk product. The special levels are for destructive or costly tests (S-1 is the smallest) — used for solder joint cross-sectioning, not for visual inspection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Defect Classes — Critical, Major, Minor</h4>
+      <p>Defects are classified by severity. Critical defects (AQL 0 — always reject) are safety or regulatory failures: wrong part, reversed polarity, counterfeit component, a solder bridge on a mains-voltage board. Major defects (AQL 0.65–1.0) affect function or durability: missing component, tombstone, insufficient wetting on a critical joint, delamination beyond class limits. Minor defects (AQL 1.5–2.5) are cosmetic or non-functional: minor misalignment, slight solder mask scratch, silkscreen blemish.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Reading the Tables: A Worked Example</h2>
+
+  <p>Here is the exact procedure a third-party inspector follows, using the ISO 2859-1 single sampling tables.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Step 1 — Find the Sample Size Code Letter (Table A)</h4>
+      <p>For a lot of 3,200 PCBA boards at General Inspection Level II, the code letter is K. The code letter is the only bridge between lot size and sample size — it is looked up in Table A (sample size code letters), not guessed.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Step 2 — Find the Sample Size and Accept/Reject Numbers (Table B)</h4>
+      <p>Code letter K gives a sample size of 125 boards. With AQL 1.0 for majors, Table B shows Ac = 3, Re = 4: inspect 125 boards, accept if 3 or fewer major defects are found, reject if 4 or more. With AQL 1.5 for minors, the same sample size shows Ac = 5, Re = 6. Critical defects are always Ac = 0, Re = 1 regardless of sample size.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Step 3 — Apply the Rule per Defect Class, Not Combined</h4>
+      <p>Each defect class has its own accept/reject number. You do not sum majors and minors. A lot with 3 major defects and 5 minor defects is accepted on majors (Ac = 3) and rejected on minors (Ac = 5, Re = 6 → 5 is still within Ac). If it had 6 minors, the lot is rejected even though majors passed.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Lot Size</th><th>Level II Code</th><th>Sample Size</th><th>AQL 0.65 (Majors)</th><th>AQL 1.0 (Majors)</th><th>AQL 1.5 (Minors)</th><th>AQL 2.5 (Minors)</th></tr>
+    <tr><td>501–1,200</td><td>J</td><td>80</td><td>Ac 1 / Re 2</td><td>Ac 2 / Re 3</td><td>Ac 3 / Re 4</td><td>Ac 5 / Re 6</td></tr>
+    <tr><td>1,201–3,200</td><td>K</td><td>125</td><td>Ac 2 / Re 3</td><td>Ac 3 / Re 4</td><td>Ac 5 / Re 6</td><td>Ac 7 / Re 8</td></tr>
+    <tr><td>3,201–10,000</td><td>L</td><td>200</td><td>Ac 3 / Re 4</td><td>Ac 5 / Re 6</td><td>Ac 7 / Re 8</td><td>Ac 10 / Re 11</td></tr>
+    <tr><td>10,001–35,000</td><td>M</td><td>315</td><td>Ac 5 / Re 6</td><td>Ac 7 / Re 8</td><td>Ac 10 / Re 11</td><td>Ac 14 / Re 15</td></tr>
+  </table>
+
+  <p>These numbers come straight from the ISO 2859-1 tables. If your supplier quotes an accept/reject pair that does not match the table for your lot size and level, that is a red flag worth questioning — our <a href="/blog/pcb-supplier-audit.html">supplier audit guide</a> covers how to verify quality terms during factory qualification.</p>
+
+  <img class="article-img" src="/generated/blog-aql-aoi.webp" alt="Automated optical inspection machine scanning a populated PCB assembly in a clean SMT production line" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Mapping Defects to IPC Classes: What Actually Counts</h2>
+
+  <p>An AQL plan without an acceptance standard is unfalsifiable — the inspector needs a definition of "defect." For PCB/PCBA, that definition comes from the IPC documents, and the AQL must reference them explicitly.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Bare Boards: IPC-6012 + IPC-A-600</h4>
+      <p>IPC-6012 sets the performance requirements for rigid PCBs (with IPC-6013 for flex), and IPC-A-600 is the visual acceptance reference. Bare-board AQL plans typically use IPC-A-600 Class 2 or 3 criteria — for example, a Class 2 board with a major AQL of 0.65 might reject on annular ring violations, delamination, or plating voids beyond the table limits. Our <a href="/blog/ipc-a-600-acceptance-criteria.html">IPC-A-600 guide</a> explains the visual criteria.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Assemblies: IPC-A-610 + J-STD-001</h4>
+      <p>For PCBA, IPC-A-610 defines the visual acceptance criteria for solder joints (Class 1/2/3), and J-STD-001 the process requirements. A "major defect" in your AQL should map to specific IPC-A-610 conditions — insufficient wetting, tombstoning, solder bridging, lifted pads — so the inspector checks against defined images, not opinion. Our <a href="/blog/ipc-a-610-acceptance-criteria.html">IPC-A-610 guide</a> and <a href="/blog/j-std-001-solder-assembly-standard.html">J-STD-001 guide</a> cover the criteria per class.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Write the Reference Into the PO</h4>
+      <p>A workable quality clause reads: "Inspection per ISO 2859-1, General Inspection Level II. Critical defects AQL 0, major defects AQL 1.0 per IPC-A-610 Class 3, minor defects AQL 2.5 per IPC-A-610 Class 3." One sentence, fully specified. Compare that to "AQL 1.0" — the difference is the difference between an enforceable contract and a dispute.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-aql-defect.webp" alt="Macro photograph of a PCB assembly solder joint under magnification showing a tombstoned chip component beside a correctly soldered component" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>AQL vs 100% Inspection: When Sampling Is the Wrong Tool</h2>
+
+  <p>AQL sampling is an economic tool, not a quality system. It assumes a process that is mostly good and protects the buyer against accepting a bad lot. It does not catch every defect, and for certain parameters it is the wrong approach entirely.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Never AQL-Sample Safety-Critical or Regulatory Parameters</h4>
+      <p>Critical defects are AQL 0 — but "AQL 0" with sampling still means the sample is inspected, not the whole lot. For genuine safety parameters (isolation, creepage, high-voltage withstand, flammability), require 100% inspection or 100% automated screening in the supplier's process, and verify it in the audit. Our <a href="/blog/pcb-incoming-quality-inspection.html">incoming quality inspection guide</a> has the checkpoint list.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>In Modern SMT, AOI and SPI Run 100% — AQL Is the Final Audit</h4>
+      <p>A common buyer misconception is that the factory "samples" solder joints. In fact, modern SMT lines run 100% SPI after printing and 100% AOI after placement and reflow; AQL sampling applies to the final outgoing audit, not to the soldering itself. Ask your supplier which inspection steps are 100% automated — a factory that relies on manual AQL for solder joint quality is a factory with a weak process. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">AOI/X-ray/SPI guide</a> explains the automated layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Use Tightened Inspection After a Rejection</h4>
+      <p>ISO 2859-1 includes switching rules: after a lot is rejected, the plan switches to tightened inspection (smaller AQL, larger samples) until the process recovers. Specify in the quality agreement that two consecutive rejections trigger tightened inspection — and that three trigger a supplier corrective action request. Our <a href="/blog/pcb-quality-metrics-dppm-benchmarks.html">quality metrics guide</a> covers DPPM tracking to measure whether the process actually improved.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Buyer's Checklist: The AQL Clause That Holds Up</h2>
+
+  <p>Before you issue the next PO with a quality clause, verify every line:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Nine Terms Every Quality Clause Must Contain</h4>
+      <p>① Reference standard (ISO 2859-1 / ANSI Z1.4) ② Lot definition ③ Inspection level (General I/II/III or Special S-1–S-4) ④ AQL per defect class (critical / major / minor) ⑤ Acceptance standard per class (IPC-A-610, IPC-6012, J-STD-001 + class) ⑥ Sample size basis (single sampling, normal) ⑦ Switching rules (normal → tightened → reduced) ⑧ Disposition of rejected lots (100% screening by supplier at their cost, re-inspection) ⑨ Inspection timing (pre-shipment, with advance notice and inspector access).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Common Pitfalls to Avoid</h4>
+      <p>Do not use Level II on a low-volume prototype lot where Level S-2 or a 100% check is more sensible. Do not apply one AQL across mixed defect classes without defining which is which. Do not treat AQL as a guaranteed defect percentage — a 1.0 AQL lot can still contain defects; it is a risk statement, not a promise. And do not let the inspector "make up" sample sizes — the tables decide.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Verify the Factory Documents AQL in Its Control Plan</h4>
+      <p>An ISO 9001 or IATF 16949 factory should be able to show you its control plan with the inspection steps and AQL levels documented per process. If the factory cannot produce a control plan, your PO's AQL clause is the only quality system in the relationship — and that is a fragile position. Our <a href="/blog/pcb-supplier-ppap-guide.html">PPAP guide</a> covers how control plans fit into supplier qualification.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: Write the AQL You Can Enforce</h2>
+
+  <p>AQL sampling is a simple tool that gets complicated only when it is specified sloppily. Define the lot, pick the inspection level, set AQL per defect class, reference the IPC acceptance standard, and agree the switching and disposition rules. Then the pre-shipment inspection has an objective basis — and both sides know exactly what a rejection means. Our <a href="/blog/pcb-pre-shipment-inspection.html">pre-shipment inspection guide</a> covers the full OQC checklist to run alongside your AQL plan.</p>
+
+  <p>At Huaxing PCBA, our outgoing quality inspection follows documented AQL plans under ISO 9001 and IATF 16949, with IPC-A-610 Class 2/3 acceptance criteria and 100% AOI/SPI screening in the SMT process. <a href="/blog/pcb-quality-metrics-dppm-benchmarks.html">Read our quality metrics guide</a> to see what DPPM levels to expect, or <a href="/contact/">contact our quality team</a> for a copy of our standard quality agreement.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-pre-shipment-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Pre-Shipment Inspection — OQC Checklist for Buyers</a></li>
+    <li><a href="/blog/ipc-a-610-acceptance-criteria.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IPC-A-610 Acceptance Criteria — Class 1/2/3 Visual Guide</a></li>
+    <li><a href="/blog/pcb-inspection-aoi-xray-spi.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Inspection Methods — AOI vs X-Ray vs SPI</a></li>
+    <li><a href="/blog/pcb-quality-metrics-dppm-benchmarks.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Quality Metrics &amp; DPPM Benchmarks</a></li>
+    <li><a href="/blog/pcb-incoming-quality-inspection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Incoming Quality Inspection Guide</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-aql.webp)">
+      <h2>Need a Quality Agreement That Holds Up?</h2>
+      <p>Request our standard quality agreement — ISO 2859-1 AQL plans, IPC-A-610 Class 2/3 criteria, and documented control plans. Every quote includes a DFM review and our outgoing quality commitment. Get your quote within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Request Quality Terms <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

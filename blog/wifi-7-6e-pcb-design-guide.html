@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wi-Fi 7 &amp; Wi-Fi 6E PCB Design — 6 GHz Routing, Antenna Keep-Out &amp; Material Selection | Huaxing PCBA</title>
+<meta name="description" content="Wi-Fi 7 and Wi-Fi 6E PCB design rules — 6 GHz stackup and material selection, 50 Ω routing with real tolerance, antenna keep-out zones, via stubs, and the SRRC/FCC certification checks for router, IoT and gateway boards.">
+<meta property="og:title" content="Wi-Fi 7 &amp; Wi-Fi 6E PCB Design — 6 GHz Routing, Antenna Keep-Out &amp; Materials">
+<meta property="og:description" content="Wi-Fi 7 pushes RF design to 6 GHz on ordinary-looking PCBs. Stackup materials, real impedance tolerance, antenna keep-out and the certification constraints that separate a working router from a failing one.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/wifi-7-6e-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-wifi-7.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/wifi-7-6e-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Wi-Fi 7 & Wi-Fi 6E PCB Design Guide — 6 GHz Routing, Antenna Keep-Out & Material Selection",
+  "description": "Wi-Fi 7 and Wi-Fi 6E PCB design rules — 6 GHz stackup and material selection, 50 Ω routing with real tolerance, antenna keep-out zones, via stubs, and the SRRC/FCC certification checks for router, IoT and gateway boards.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-wifi-7.webp",
+  "url": "https://huaxingpcba.com/blog/wifi-7-6e-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/wifi-7-6e-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-wifi-7.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Wi-Fi 7 &amp; Wi-Fi 6E PCB Design:<br><em>6 GHz Routing, Antenna Keep-Out, and the Material Choices That Keep Multi-Gigabit Links Alive</em></h1>
+      <p class="reveal">At 6 GHz the PCB is no longer a passive carrier — it is part of the radio. These layout and material rules determine whether your Wi-Fi 7 product ships with real throughput or a range problem.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Wi-Fi 7 &amp; Wi-Fi 6E PCB Design</span></div>
+
+  <p>Wi-Fi 7 (802.11be) and Wi-Fi 6E are the first Wi-Fi generations to use the 6 GHz band — 5925–7125 MHz depending on region — and that single change moves the RF design problem from "route it reasonably" to "the board is part of the antenna and the filter." At 6 GHz, a 10&nbsp;mm trace carries meaningful loss, a via stub is a resonant structure, and the tolerance on your laminate's dielectric constant directly sets how far from 50&nbsp;Ω your real traces land.</p>
+
+  <p>Huaxing PCBA builds Wi-Fi 6E/7 boards for routers, gateways, and IoT access points — up to <span class="data-point">32 layers</span> with ±5% impedance control, back-drilling for high-layer-count designs, and low-loss laminate processing (Rogers, Megtron, PTFE) alongside standard FR-4. This guide covers the layout rules that determine real throughput, the material decisions that control cost, and the certification checks — including SRRC for China-bound products — that every Wi-Fi 7 design eventually faces.</p>
+
+  <img class="article-img" src="/generated/blog-wifi-7-hero.webp" alt="Photorealistic render of a Wi-Fi 7 router PCB with four antenna zones, RF shield cans and a large SoC in the center" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Does Wi-Fi 6E/7 PCB Design Require Rogers or Other Low-Loss Materials?</h2>
+
+  <p>Not always — and knowing when it does is where most of the cost gets saved. At 6 GHz, standard FR-4's dissipation factor (Df ≈ 0.018–0.022) causes insertion loss roughly three times higher than at 2.4 GHz. For a short antenna feed under one inch, FR-4 with strict impedance control is usually acceptable. But for longer RF traces — the front-end path from SoC to the antenna switch, or the transmit path of a high-power AP — the loss budget forces a low-loss laminate.</p>
+
+  <table class="spec-table">
+    <tr><th>Material</th><th>Dk (typ.)</th><th>Df (typ. @ 10 GHz)</th><th>Relative Cost</th><th>Typical Role</th></tr>
+    <tr><td>Standard FR-4</td><td>4.2–4.5</td><td>0.018–0.022</td><td>1×</td><td>Digital layers, short feeds</td></tr>
+    <tr><td>Low-loss FR-4 (e.g., Shengyi S1000-2M)</td><td>4.2–4.4</td><td>0.008–0.010</td><td>1.2–1.5×</td><td>Affordable RF compromise</td></tr>
+    <tr><td>Megtron 6 / 7</td><td>3.6–3.7</td><td>0.002–0.003</td><td>3–4×</td><td>High-layer-count, high-data-rate boards</td></tr>
+    <tr><td>Rogers RO4003C</td><td>3.38</td><td>0.0027</td><td>5–8×</td><td>Antenna feeds, RF front ends</td></tr>
+    <tr><td>PTFE (Rogers RT/duroid, Taconic)</td><td>2.2–3.0</td><td>0.0009–0.002</td><td>8–15×</td><td>Highest performance, antenna substrates</td></tr>
+  </table>
+
+  <p>The engineering answer is almost always a hybrid stackup: FR-4 or low-loss FR-4 for the bulk of the board, with a Rogers or Megtron layer pair only where the RF traces run. Hybrid laminates cost more per panel and add processing steps (plasma treatment, different drill parameters), so the goal is to confine the expensive material to the traces that need it. Our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a> walks through the trade-offs per application, and <a href="/blog/ptfe-high-frequency-pcb-manufacturing.html">the PTFE manufacturing guide</a> covers the processing constraints of the top-tier materials.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> "Wi-Fi 7 needs Rogers" is wrong as a blanket statement. Short feeds on FR-4 with tight impedance control pass easily; long RF paths and high-power transmitters need low-loss laminates. Design the hybrid stackup around the actual trace lengths and power levels.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Impedance at 6 GHz: What ±5% Actually Means at the Fab</h2>
+
+  <p>Every Wi-Fi RF trace is designed to 50 Ω (and differential pairs to 100 Ω), but the fabricated value is a distribution, not a point. The practical question is how wide that distribution is — and it is set by three variables the layout engineer controls only indirectly: the laminate's Dk tolerance, the etch process, and the dielectric thickness tolerance.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Understand the Dk Tolerance Chain</h4>
+      <p>A laminate with Dk specified at 4.3 ± 0.2 shifts trace impedance by roughly ±2–3% on its own. Stack that on top of etch and thickness variation, and the honest fabrication capability for controlled impedance is ±10% on standard FR-4 — the ±5% you see in datasheets refers to a controlled process with selected materials and impedance coupons on every panel. If your design truly needs ±5%, say so explicitly and expect the fab to run tighter process controls.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Account for Etch Compensation and Copper Roughness</h4>
+      <p>At 6 GHz, copper surface roughness contributes measurable loss — a standard electrodeposited (ED) foil can add 20–30% more loss than low-profile (LP) foil at these frequencies. Specify LP foil for the RF layers, and let the fab apply etch compensation so the final trace width lands at the target, not the drawn width. Our <a href="/blog/pcb-manufacturing-tolerances.html">manufacturing tolerances guide</a> covers etch, drill, and registration limits in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Require TDR Coupon Verification — Measured, Not Designed</h4>
+      <p>Never accept "designed to 50 Ω." The impedance coupon on each panel must be TDR-measured, and the report should show the measured value per coupon. A fab that returns measured data is controlling its process; a fab that returns the design value is copying it from the order form. Our <a href="/blog/impedance-control.html">impedance control guide</a> has the coupon specification template.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>6 GHz Routing: Return Paths, Via Stubs, and Back-Drilling</h2>
+
+  <p>Above 5 GHz, the return current hugs the trace — it does not spread out the way it does at low frequency. That makes the reference plane immediately beneath every RF trace the most important routing constraint on the board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Never Route an RF Trace Over a Plane Split</h4>
+      <p>A split in the ground or power plane under an RF trace forces the return current to detour, which adds inductance, creates radiation, and distorts the impedance. Keep RF traces over a continuous ground reference for their entire length. If a plane split is unavoidable, stitch the two sides with capacitors sized for the band (e.g., 100 pF at 6 GHz) at the crossing point.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Via Stubs Are Resonators at 6 GHz — Back-Drill or Skip</h4>
+      <p>A through via that continues past the routing layer leaves a stub of plated barrel. At 6 GHz, a 1 mm stub has a noticeable reactance and can resonate inside the band; a 2 mm stub can swallow several dB at specific frequencies. Options: route RF on the outer layers to avoid vias entirely, use blind/buried vias in an HDI stackup, or back-drill the stubs. Back-drilling adds a process step and cost, so it belongs only on the critical RF nets — our <a href="/blog/pcb-backdrilling-guide.html">back-drilling guide</a> explains when it pays for itself.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Stitch Ground Along the RF Path</h4>
+      <p>Ground vias flanking an RF trace confine the fields, reduce coupling, and give return current a low-impedance path at layer transitions. A rule of thumb for 6 GHz: ground vias every 1–2 mm along coplanar-waveguide RF traces, and a via right beside every RF via that changes layers. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> covers via stitching and return-path discipline in depth.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-wifi-7-stackup.webp" alt="Photorealistic 3D cross-section render of a hybrid PCB stackup showing copper layers, dielectric cores and a back-drilled via" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Antenna Keep-Out and Multi-Radio Coexistence</h2>
+
+  <p>Wi-Fi 7 access points are multi-radio systems: 2.4 GHz, 5 GHz, and 6 GHz radios, often alongside Bluetooth and sometimes Zigbee. Each antenna needs its zone, and the zones need isolation from each other and from the board's digital noise.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Respect the Antenna Keep-Out Zone</h4>
+      <p>Antenna vendors specify a keep-out area — typically 3–5 mm around the antenna element with no copper, no components, and no traces. Violating it detunes the antenna and shifts the resonant frequency. Print the keep-out on the silkscreen and review it in DFM; it is the most common Wi-Fi layout defect we see in first-article reviews.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Separate Antennas by More Than the Minimum Distance</h4>
+      <p>For spatial isolation, place antennas at opposite board edges where possible — aim for ≥ 20 mm separation between 2.4/5 GHz antennas and the 6 GHz antenna, and ≥ 15 mm between any antenna and the SoC. Isolation between the 5 GHz and 6 GHz radios matters most, because their bands are adjacent and the filters are not infinitely sharp.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Shield the Front End, Not Just the SoC</h4>
+      <p>The RF front end (power amplifier, LNA, antenna switch) should sit under a shield can with a continuous fence and dense ground vias — same discipline as the GNSS case, but with more radios to isolate. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI compliance guide</a> covers shield design and emission control for multi-radio boards.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-wifi-7-antenna.webp" alt="Photorealistic render of a Wi-Fi router PCB corner showing four PCB trace antennas with clear keep-out zones marked around each antenna element" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Assembly-Level RF: Solder Voids and Stencil Design</h2>
+
+  <p>The RF performance designed into the layout can be destroyed at assembly. Three assembly details matter specifically at 6 GHz:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Control Solder Voids Under the PA and LNA</h4>
+      <p>Power amplifiers rely on the ground pad and thermal vias for both heat and RF ground. Large solder voids under the exposed pad raise thermal resistance and add inductance — degraded output power and spurious emission risk. Specify X-ray inspection of the PA/LNA ground pads and keep voiding under 25% per IPC-A-610 class criteria. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">AOI/X-ray/SPI guide</a> covers void acceptance practice.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep Solder Mask and Silkscreen Off RF Traces</h4>
+      <p>Solder mask has its own Dk (3.2–4.0) and sitting directly on an RF trace changes its effective impedance — sometimes by several percent at 6 GHz. For critical RF traces, specify mask-defined openings (soldermask over bare copper with the trace exposed) or account for mask Dk in the impedance calculation. Never place silkscreen on an RF trace; its ink is lossy and its thickness is uncontrolled.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Design the Stencil for the Shield Cans and Fine-Pitch Parts</h4>
+      <p>Wi-Fi boards mix large shield cans, fine-pitch RFICs, and small passives. The stencil must step up thickness for the cans without starving the 0201 pads — a stepped stencil or a second paste pass for cans is the standard solution. Review the stencil design with the fab; our <a href="/blog/smt-stencil-design-guide.html">stencil design guide</a> has the aperture rules.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Certification: FCC, and SRRC for China-Bound Products</h2>
+
+  <p>Most English-language guidance stops at FCC, but if your product ships to China — or is manufactured there — SRRC (State Radio Regulation Committee) approval is mandatory for devices with Wi-Fi transmitters. A few realities that affect the PCB design:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>SRRC Covers the 6 GHz Band With Its Own Rules</h4>
+      <p>China's SRRC regulates the 6 GHz band (5925–7125 MHz) with specific power limits and may require additional testing for Wi-Fi 7 devices. If you plan to sell in China, verify the current SRRC requirements early — a design that passes FCC may still need hardware changes (e.g., lower EIRP, different antenna gain) for SRRC.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Design for Certification Margin, Not the Limit</h4>
+      <p>Every Wi-Fi device needs margin to its EIRP limit to survive unit-to-unit variation. A design that sits exactly at the limit in the lab will fail in production. Keep 2–3 dB of headroom, which usually means slightly lower PA output or a slightly less efficient antenna — decisions made in the RF budget, not discovered at the compliance lab.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Freeze the Layout Before Certification Testing</h4>
+      <p>Certification results apply to the exact layout tested. Any change to antenna placement, stackup, or front-end routing after certification means retesting. Do the DFM review, first-article verification, and any impedance fixes before the compliance submission — our <a href="/blog/pcb-first-article-inspection-guide.html">first-article inspection guide</a> is the checklist to run first.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Wi-Fi 7 Board Checklist</h2>
+
+  <p>A Wi-Fi 7 board works when the RF chain is treated as a transmission-line problem from SoC to antenna: hybrid materials where the loss budget demands them, real measured impedance with documented tolerance, continuous return paths with no plane splits, back-drilled or avoided via stubs, respected antenna keep-outs, and assembly controls on voids and mask. None of this is exotic — it is disciplined RF layout plus a manufacturer that measures what it builds.</p>
+
+  <p>At Huaxing PCBA, we manufacture Wi-Fi 6E/7 boards up to 32 layers with low-loss hybrid laminates, ±5% impedance control, and back-drilling capability. Our DFM review checks antenna keep-out, plane continuity, via stub risk, and stencil design before tooling. <a href="/blog/rf-pcb-design-manufacturing.html">Read our RF manufacturing guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing — Materials &amp; Impedance</a></li>
+    <li><a href="/blog/mmwave-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">mmWave PCB Design — 28/39 GHz Material &amp; Launch Rules</a></li>
+    <li><a href="/blog/pcb-laminate-selection-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Laminate Selection — Isola vs Panasonic vs Shengyi</a></li>
+    <li><a href="/blog/pcb-backdrilling-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Back-Drilling — Via Stub Removal Above 5 Gbps</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — High-Speed Design Rules</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-wifi-7.webp)">
+      <h2>Designing a Wi-Fi 6E/7 Product? Let's Check the RF Stackup</h2>
+      <p>Send your layout files — our engineers will review material selection, impedance targets, antenna keep-out, via stub risk, and stencil design, then return a DFM report with measured impedance capability and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Wi-Fi DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
