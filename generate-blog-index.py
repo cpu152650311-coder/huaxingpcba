@@ -44,7 +44,8 @@ def extract_meta(html_path):
     # Procurement keywords
     if any(kw in fname for kw in ['procurement','quote','supplier','buy','cost','price',
             'blanket','spot','consignment','turnkey','counterfeit','import','nre','incoterms',
-            'duty','esd','compliance','inspection','scorecard','negotiation','sourcing']):
+            'duty','esd','compliance','inspection','scorecard','negotiation','sourcing',
+            'payment','warranty']):
         cat = "Procurement Guide"
         cat_slug = "procurement"
     # Manufacturing keywords  

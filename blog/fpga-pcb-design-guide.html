@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPGA PCB Design Guide — Power Sequencing, Decoupling &amp; High-Speed Layout Rules | Huaxing PCBA</title>
+<meta name="description" content="FPGA PCB design rules for Xilinx and Intel FPGAs — power sequencing, decoupling capacitor networks, layer stackup, high-speed I/O routing, BGA assembly and first-article testing.">
+<meta property="og:title" content="FPGA PCB Design Guide — Power Sequencing, Decoupling &amp; High-Speed Layout Rules">
+<meta property="og:description" content="Designing an FPGA board? Core rail sequencing, the decoupling network, stackup depth, transceiver routing and the BGA assembly checks that turn a layout into a working board.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/fpga-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-fpga.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/fpga-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FPGA PCB Design Guide — Power Sequencing, Decoupling & High-Speed Layout Rules",
+  "description": "FPGA PCB design rules for Xilinx and Intel FPGAs — power sequencing, decoupling capacitor networks, layer stackup, high-speed I/O routing, BGA assembly and first-article testing.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-fpga.webp",
+  "url": "https://huaxingpcba.com/blog/fpga-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/fpga-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-fpga.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">FPGA PCB Design:<br><em>Power Sequencing, Decoupling, and the Layout Rules That Make a 20-Layer Board Boot</em></h1>
+      <p class="reveal">An FPGA concentrates a switching power supply, a high-speed router, and a fine-pitch BGA on one board. These are the design rules that keep all three working.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>FPGA PCB Design Guide</span></div>
+
+  <p>FPGAs are the workhorses of industrial control, defense electronics, AI edge inference, and test instrumentation — and they are among the most demanding devices to put on a PCB. A mid-range FPGA draws current from four or more power rails, routes hundreds of high-speed I/O pins, and comes in a BGA package whose assembly tolerances are measured in micrometers. Most FPGA layout failures are not logic errors; they are power delivery, stackup, or assembly problems that show up weeks after the first boards arrive.</p>
+
+  <p>Huaxing PCBA manufactures FPGA boards up to <span class="data-point">32 layers</span> with laser-drilled microvias, ±5% impedance control, and BGA placement down to 0.3&nbsp;mm pitch across 8 SMT lines. This guide walks through the design decisions that determine whether your board works the first time — power sequencing, the decoupling network, layer count, high-speed routing, and the manufacturing checks that catch problems before production. If you are new to board stackups, our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> covers the fundamentals first.</p>
+
+  <img class="article-img" src="/generated/blog-fpga-power.webp" alt="Macro photograph of the power delivery section of an FPGA board with inductors and dense decoupling capacitors around a large BGA" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Why FPGA Boards Fail Differently</h2>
+
+  <p>An FPGA is not a microprocessor with a few power pins. A Xilinx or Intel device exposes separate rails for the core logic, block RAM, auxiliary circuits, I/O banks, and high-speed transceivers — each with its own voltage, current draw, and sequencing requirement. On top of that, the package is a large BGA with hundreds of power balls in the center, which means power must be delivered vertically through the board, not along its surface.</p>
+
+  <p>The practical consequences: the power system is designed before routing, the stackup must provide clean reference planes for both signals and current return, and the board house must hold tight tolerances on impedance, via drills, and BGA pad geometry. Skipping any of these turns a working schematic into a non-booting board.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> FPGA layout is power-first. Decide the rail architecture, sequencing, and decoupling budget before placing a single route — the signal layers are the easy part compared to delivering 20 A at 0.85 V with less than 30 mV of droop.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>FPGA Power Rails and Sequencing: The Order Matters</h2>
+
+  <p>Every major FPGA family defines a power-on sequence. For AMD/Xilinx devices, the core rail (VCCINT) must ramp first, followed by VCCBRAM, then VCCAUX, and finally the I/O banks (VCCO). Intel/Altera specifies a similar hierarchy: core before I/O, with the transceiver rails (VCCH, VCCL) sequenced relative to the core. The reason is internal ESD structures — if an I/O rail powers up while the core is still off, current can leak through protection diodes and latch the device.</p>
+
+  <p>A typical FPGA rail plan looks like this:</p>
+
+  <table class="spec-table">
+    <tr><th>Rail</th><th>Typical Voltage</th><th>Typical Current</th><th>Sequence Position</th><th>Notes</th></tr>
+    <tr><td>VCCINT (core)</td><td>0.72–0.95 V</td><td>5–30 A</td><td>1st</td><td>Lowest voltage, highest current — tightest tolerance</td></tr>
+    <tr><td>VCCBRAM</td><td>0.72–0.95 V</td><td>1–4 A</td><td>1st–2nd</td><td>Often tied to VCCINT with a filter</td></tr>
+    <tr><td>VCCAUX</td><td>1.8 V</td><td>0.5–2 A</td><td>2nd–3rd</td><td>Feeds configuration and analog circuits</td></tr>
+    <tr><td>VCCO (I/O banks)</td><td>1.2 / 1.5 / 1.8 / 2.5 / 3.3 V</td><td>0.5–4 A per bank</td><td>Last</td><td>Bank voltage depends on interface standard</td></tr>
+    <tr><td>MGTAVCC / MGTAVTT</td><td>1.0 / 1.2 V</td><td>1–3 A</td><td>After core</td><td>Transceiver analog rails — cleanest supply on the board</td></tr>
+  </table>
+
+  <p>Design the sequencing with dedicated supervisor ICs or a PMIC with programmable sequencing rather than relying on RC delays — RC timing drifts with temperature and tolerances. A power monitor with a reset output that holds the FPGA in configuration until all rails are valid is the cheapest insurance against intermittent boot failures. Our <a href="/blog/pcb-power-integrity-design.html">power integrity and PDN design guide</a> covers target impedance and plane design in detail.</p>
+
+  <!-- ── Section ── -->
+  <h2>The Decoupling Network: 100 nF Is a Starting Point, Not a Plan</h2>
+
+  <p>FPGA data sheets specify a minimum decoupling capacitance — typically 0.1 µF per power pin pair — but that number assumes ideal placement. What actually matters is the impedance of the whole power delivery network (PDN) from the regulator through the planes to the die. For a core rail at 0.85 V with a 20 A transient, a 5% droop budget leaves only 42 mV, and the PDN impedance must stay below roughly 2 mΩ across the switching frequency range.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use a Mix of Capacitor Values, Not a Wall of Identical Caps</h4>
+      <p>Parallel resonance between identical capacitors creates impedance peaks. A proven recipe is one 0.1 µF cap per power pin pair plus a distribution of 0.01 µF, 1 µF, and 4.7–22 µF bulk caps near the package. Use X7R or better dielectrics — X5R loses over half its capacitance at DC bias on a 0.85 V rail is marginal, and on 3.3 V rails X5R can drop 60%.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Place High-Frequency Caps on the Bottom Side Directly Under the BGA</h4>
+      <p>For 0.8 mm pitch BGAs, the 0.1 µF caps go on the opposite side of the board, each connected to its power ball via a microvia. The via inductance between ball and cap dominates at high frequency, so keep the loop short — a 0.3 mm via pair has roughly 0.5 nH, which matters at 100 MHz and above. Our <a href="/blog/pcb-via-technology.html">via technology guide</a> covers via-in-pad and microvia options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Budget Bulk Capacitance for the Regulator Loop</h4>
+      <p>The regulator's output capacitors (47–470 µF across the board) handle the low-frequency transient. Spread them around the board edge near the power entry point, not only at the regulator — the plane itself is part of the loop. Confirm the total with a PDN simulation; most EDA tools now include it.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-fpga-routing.webp" alt="Macro photograph of dense high-speed differential pair routing on a multilayer FPGA board surface" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Layer Count and Stackup: How Many Layers Does Your FPGA Board Need?</h2>
+
+  <p>There is no universal answer, but a practical rule: the number of routing layers equals the number of distinct signal groups plus two reference planes, rounded up. A small FPGA with 100 I/O pins and no transceivers fits on 4–6 layers. A mid-density device with DDR4 and a few gigabit links needs 8–10. A high-end FPGA with dozens of 10–28 Gbps transceivers, multiple DDR banks, and wide parallel buses routinely needs 14–20+ layers.</p>
+
+  <table class="spec-table">
+    <tr><th>Design Class</th><th>Typical Layers</th><th>Key Stackup Elements</th><th>Example Device</th></tr>
+    <tr><td>Low-density, no transceivers</td><td>4–6</td><td>2 signal + 2 plane</td><td>Cyclone 10, Artix-7 small</td></tr>
+    <tr><td>Mid-density with DDR3/DDR4</td><td>8–10</td><td>4–6 signal + 4 plane</td><td>Artix-7, Kintex-7 small</td></tr>
+    <tr><td>High-end with 10G+ transceivers</td><td>14–20</td><td>Dedicated transceiver layers, multiple ground planes</td><td>Kintex UltraScale, Agilex</td></tr>
+    <tr><td>Large array + many high-speed buses</td><td>20–32</td><td>Blind/buried vias, HDI microvia build-ups</td><td>Virtex UltraScale+, Stratix 10</td></tr>
+  </table>
+
+  <p>Whatever the layer count, three rules hold. First, every signal layer must sit next to a continuous reference plane — never two signal layers back-to-back. Second, the transceiver pairs need their own clean layer or a dedicated zone with no crossing vias. Third, specify impedance control at 50 Ω single-ended and 100 Ω differential with a ±5% tolerance, and require test coupons. Our <a href="/blog/impedance-control.html">impedance control guide</a> explains how coupons are measured and what the report should show.</p>
+
+  <img class="article-img" src="/generated/blog-fpga-stackup.webp" alt="Photorealistic cross-section of a multilayer PCB showing stacked copper layers and microvias" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Routing High-Speed I/O: Transceivers, DDR, and LVDS</h2>
+
+  <p>The routing rules for FPGA I/O depend on the interface. Differential transceiver pairs (10–28 Gbps) need length-matched, impedance-controlled traces with minimal via transitions — each via adds ~0.5 dB of loss and a reflection point. DDR buses need matched lengths within the byte group and a solid reference plane under the whole bus. LVDS and other parallel interfaces need matched skew and controlled spacing to prevent crosstalk.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route Transceiver Pairs on the Top Layer, Keep Vias Out of the Pair</h4>
+      <p>When a via transition is unavoidable, add a ground stitching via beside each signal via to provide a return path, and keep the pair together through the transition. Avoid routing transceivers over split planes — the return current has nowhere to go and the pair radiates. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> covers pair routing and via discipline in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Match DDR Lengths Within the Group, Not Just the Bus</h4>
+      <p>DDR4 at 2400 MT/s tolerates roughly ±10 ps of skew within a byte lane. At typical FR-4 propagation (~150 ps/inch), that is about ±1.5 mm of length matching — doable, but only if the reference plane is continuous under the entire bus. Our <a href="/blog/ddr4-ddr5-pcb-design-guide.html">DDR4/DDR5 design guide</a> has the full routing recipe.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Guard Sensitive Analog Pins from Switching Noise</h4>
+      <p>Transceiver analog rails (MGTAVCC) and any ADC/DAC sections want their own quiet zones with separate filtering. Route digital switching traces at least 3× the trace width away from analog traces, and avoid crossing splits in the analog reference plane.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-fpga-bga.webp" alt="Macro photograph of a large fine-pitch BGA package soldered onto a dark PCB with gold pad edges" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Configuration, JTAG, and Debug: Design the Test Access In</h2>
+
+  <p>An FPGA board without a debug strategy is a board that gets reworked. Every design should expose a JTAG header (or pads) for boundary-scan testing and configuration programming, plus a selection of test points on the critical rails.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route JTAG Pins to a Dedicated Header or Pads</h4>
+      <p>TDI, TDO, TCK, TMS plus target power and ground — the header must be reachable during assembly, so place it on the board edge. If space is tight, a 5-pin pad array works for production programming before final assembly. Boundary scan through JTAG also lets a test engineer verify BGA solder joints without physical probing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Add Test Points on Every Power Rail</h4>
+      <p>Bring VCCINT, VCCAUX, VCCO, and the transceiver rails out to 0.9 mm test points. During first-article bring-up, these are the fastest way to verify sequencing and droop with an oscilloscope. Our <a href="/blog/pcb-design-for-testability.html">design-for-testability guide</a> lists the test point rules your assembly partner expects.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Choose the Configuration Mode Early</h4>
+      <p>Master SPI (boot from flash), slave selectMAP, or JTAG — the mode pins and the flash device footprint must be on the board from the first layout pass. Adding a boot flash late forces a board revision.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>BGA Assembly and DFM: What the Factory Needs From You</h2>
+
+  <p>Large FPGA packages concentrate every assembly risk: fine pitch, high ball count, and significant warpage when the die and substrate heat up. The design decisions that keep assembly yields high:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use Via-in-Pad for 0.8 mm Pitch and Below</h4>
+      <p>At 0.8 mm pitch there is no room for dog-bone fanout — the via must go directly in the pad, filled and plated. Specify VIPPO (via-in-pad plated over) so solder paste does not wick into the via. Our <a href="/blog/bga-assembly-guide.html">BGA assembly guide</a> covers fanout and paste stencil rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Plan the Stencil and Reflow Profile for the Biggest Package</h4>
+      <p>The stencil aperture for 0.8 mm pitch BGA is typically 0.35–0.40 mm with a 1:1 area ratio. The reflow profile must satisfy the FPGA's peak temperature limit (usually 245 °C max at the package surface for lead-free) while still reaching full wetting on large ground planes. Our <a href="/blog/pcb-reflow-soldering-profile-optimization.html">reflow profile guide</a> covers the trade-offs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Require X-Ray Inspection of Every FPGA BGA</h4>
+      <p>Visual inspection cannot see solder balls under the package. X-ray must check for shorts, opens, and voids in the critical power balls — voids above 25% of ball area on a core power ball can cause hot spots. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">AOI/X-ray/SPI inspection guide</a> explains what the X-ray report should contain.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Watch Warpage on Large Packages</h4>
+      <p>A 35×35 mm BGA with a large die can warp during reflow, lifting corner balls. Mitigations: keep the board copper balanced, use a profile with adequate soak, and confirm the board meets the flatness spec (typically ≤0.75% bow per IPC-6012). If the package is known to be warpage-sensitive, consider a dedicated reflow fixture.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The DFM conversation should start at schematic time. Layer count, via-in-pad, stencil apertures, and X-ray requirements are all decided by the stackup and BGA fanout you choose — changing them after layout costs a board revision.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>First Article: Verifying the FPGA Board Before Production</h2>
+
+  <p>When the first boards come back, the bring-up sequence should follow the same order as the power sequence: verify each rail's voltage and ramp, check the configuration interface, then exercise the high-speed interfaces. The manufacturing side of first-article validation matters just as much:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Run Impedance Coupon Verification on Every Panel</h4>
+      <p>The TDR measurement on the coupons must fall inside the ±5% window before the panel is released for assembly. Do not accept "designed to 50 Ω" — accept measured values. Our <a href="/blog/impedance-control.html">impedance control guide</a> has the coupon spec template.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Cross-Section One Board for Via and Plating Verification</h4>
+      <p>For HDI stackups, a microsection check confirms blind/buried via registration and copper plating thickness in the barrel. This is the one test that proves the inner-layer connections exist. Our <a href="/blog/pcb-microsection-analysis-guide.html">microsection analysis guide</a> explains the acceptance criteria.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Boundary-Scan Test the Assembled Board</h4>
+      <p>With JTAG on the board, a boundary-scan test can verify every net on the FPGA's pins — catching assembly faults that functional test would chase for hours. Combine it with the X-ray results for a complete BGA picture. Our <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">test method comparison</a> helps you choose the right mix for your volume.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-fpga-test.webp" alt="Photorealistic render of a flying probe test machine probing a large BGA circuit board in a clean test lab" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Summary: Power First, Signals Second, Assembly Third</h2>
+
+  <p>An FPGA board works when three systems are designed in order: the power delivery network (rails, sequencing, decoupling, planes), the signal network (stackup, impedance, routing discipline), and the assembly network (fanout, stencil, X-ray, test access). Every one of these is decided before the first route is placed — which is exactly why talking to your manufacturer at schematic stage pays for itself.</p>
+
+  <p>At Huaxing PCBA, we manufacture FPGA boards up to 32 layers with HDI microvias, ±5% impedance control, and BGA placement down to 0.3 mm pitch. Our DFM review flags stackup, fanout, and testability issues before tooling. <a href="/blog/pcb-stackup-design.html">Read our stackup guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-power-integrity-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Power Integrity &amp; PDN Design — Decoupling &amp; Target Impedance</a></li>
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Planning for Signal Integrity</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — High-Speed Design Rules</a></li>
+    <li><a href="/blog/bga-assembly-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">BGA Assembly Guide — X-Ray Inspection &amp; Defect Prevention</a></li>
+    <li><a href="/blog/pcb-first-article-inspection-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB First Article Inspection — The Complete Checklist</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-fpga.webp)">
+      <h2>Designing an FPGA Board? Let's Review the Stackup Together</h2>
+      <p>Send your schematic and layout files — our engineers will check layer count, via-in-pad fanout, decoupling coverage, and the assembly requirements for your BGA, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your FPGA DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
