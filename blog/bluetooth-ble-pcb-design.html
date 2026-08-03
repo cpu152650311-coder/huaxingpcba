@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bluetooth Low Energy PCB Design — 2.4 GHz Antenna, RF Matching &amp; Coexistence Rules | Huaxing PCBA</title>
+<meta name="description" content="BLE PCB design and manufacturing guide — 2.4 GHz trace antenna and chip antenna layout, 50 Ω matching networks, crystal and decoupling rules, Wi-Fi coexistence, and RF testing requirements for reliable wireless modules.">
+<meta property="og:title" content="Bluetooth Low Energy PCB Design — Antenna, RF &amp; Coexistence">
+<meta property="og:description" content="A BLE radio is only as good as the board around it. Here is what changes on the layout, the matching network, the power rails and the assembly line when you mass-produce a 2.4 GHz wireless module.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/bluetooth-ble-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ble-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/bluetooth-ble-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Bluetooth Low Energy PCB Design — 2.4 GHz Antenna, RF Matching &amp; Coexistence Rules",
+  "description": "BLE PCB design and manufacturing guide — 2.4 GHz trace antenna and chip antenna layout, 50 Ω matching networks, crystal and decoupling rules, Wi-Fi coexistence, and RF testing requirements for reliable wireless modules.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ble-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/bluetooth-ble-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/bluetooth-ble-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-ble-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Bluetooth Low Energy PCB Design:<br><em>Antenna Layout, RF Matching, and the Coexistence Rules That Decide Whether Your Module Actually Connects</em></h1>
+      <p class="reveal">A BLE radio is only as good as the board around it — the antenna, the matching network, the crystal and the power rails all sit inside your PCB, and each one can quietly destroy link budget in ways that only show up in the field.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>BLE PCB Design</span></div>
+
+  <p>Bluetooth Low Energy is the default wireless link for billions of battery-powered devices — wearables, beacons, medical sensors, smart locks, and industrial IoT nodes ship in the tens of millions per quarter. But BLE is also unforgiving: the entire radio operates in the 2.4 GHz ISM band with a sensitivity budget of roughly <span class="data-point">-96 dBm</span>, which means a poorly laid-out antenna or a noisy power rail can cost you 10-20 dB of link margin before the firmware ever runs.</p>
+
+  <p>Huaxing PCBA manufactures BLE modules and host boards for IoT brands worldwide — controlled-impedance stackups to 50 Ω on the RF path, chip and PCB trace antenna designs with matching networks, and 100% RF-tested boards with conducted and radiated measurements on every lot. This guide covers the layout decisions that determine real-world range, the matching and crystal rules that keep production yields high, and the testing you should demand from your manufacturer.</p>
+
+  <img class="article-img" src="/generated/blog-ble-pcb-antenna.webp" alt="Macro photo of a 2.4 GHz PCB trace antenna with matching network on a BLE module" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Why BLE Layout Is Different From a Digital Board</h2>
+
+  <p>BLE operates in the 2.4-2.4835 GHz ISM band with 40 channels of 2 MHz spacing — 37 data channels and 3 advertising channels. At 2.4 GHz the wavelength is 125 mm, so a quarter-wave antenna is only 31 mm, and every millimeter of trace, every via, and every ground gap on the RF path becomes electrically significant. The same rules that would be harmless on a 100 MHz digital bus can detune a BLE antenna by tens of MHz.</p>
+
+  <table class="spec-table">
+    <tr><th>BLE Feature</th><th>Value</th><th>PCB Design Impact</th></tr>
+    <tr><td>Frequency band</td><td>2.400-2.4835 GHz</td><td>Quarter-wave antenna ≈ 31 mm; trace length matters</td></tr>
+    <tr><td>Channel spacing</td><td>2 MHz (40 channels)</td><td>Sharp tuning; ±2-3 MHz detune hurts adjacent channels</td></tr>
+    <tr><td>Data rates (BLE 5.x)</td><td>125 kbps - 2 Mbps</td><td>Coded PHY gives range; 2 Mbps needs clean RF path</td></tr>
+    <tr><td>TX power</td><td>0 dBm typical (up to +8 dBm)</td><td>Regulatory limit 10 dBm EIRP; antenna gain must be checked</td></tr>
+    <tr><td>RX sensitivity</td><td>-96 dBm typical</td><td>Noise on power rails directly steals sensitivity</td></tr>
+    <tr><td>Crystal tolerance</td><td>±20 ppm typical (BLE spec ±50 ppm total)</td><td>Load capacitance tuning on the crystal pins</td></tr>
+  </table>
+
+  <p>The practical consequence: a BLE board needs a controlled-impedance RF section, a clean ground reference under the antenna feed, and decoupling discipline that a purely digital board never demands. Our <a href="/blog/impedance-control.html">impedance control guide</a> explains how to specify the 50 Ω targets on your fabrication drawing, and <a href="/blog/rf-pcb-design-manufacturing.html">the RF PCB guide</a> covers the material and stackup choices for 2.4 GHz work.</p>
+
+  <!-- ── Section ── -->
+  <h2>Antenna Design: Trace, Chip, or Module-Mounted?</h2>
+
+  <p>Every BLE product must pick an antenna strategy, and the choice drives the entire RF layout. There are three common options, each with different PCB real estate, cost, and tuning requirements.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>PCB Trace Antenna (Inverted-F / Meander)</h4>
+      <p>A printed inverted-F antenna (IFA) on the board edge costs nothing in BOM and is the most common choice for high-volume BLE products. The classic IFA occupies roughly 25 × 8 mm on a 1.6 mm FR-4 board, with a ground clearance of 2-3 mm around it and a feed point that connects through a π matching network to the radio. Performance depends on the ground plane underneath being continuous — cut it for battery or antenna keep-out and the resonant frequency shifts. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> shows how to allocate the RF layer in a multilayer board.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Chip Antenna (Ceramic)</h4>
+      <p>A ceramic chip antenna (for example, 3.2 × 1.6 mm or 1.6 × 0.8 mm) takes far less board area than a trace antenna and is less sensitive to enclosure effects, which makes it the default for wearables and small IoT nodes. The trade-off is a narrower bandwidth and stricter layout rules — the datasheet's ground clearance, keep-out, and matching values must be followed almost exactly, and the antenna needs its own clear ground zone with no traces underneath. Our <a href="/blog/rfid-nfc-antenna-pcb-design.html">antenna PCB guide</a> covers the grounding discipline for small antennas.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Pre-Certified Module (Chip + Antenna On Board)</h4>
+      <p>Using a pre-certified BLE module (FCC/CE module grants) moves the antenna design burden to the module vendor. Your PCB then only needs to follow the module's recommended footprint — usually a ground keep-out under the antenna and a clean area around it. This is the fastest path to market and the safest for low-volume products, at a per-unit cost premium of roughly $1-3. For volume above 50-100k units/year, most brands move to a custom trace or chip antenna design to save BOM cost.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Whatever antenna you choose, the ground plane directly beneath it is part of the antenna. A keep-out that is too small, a split ground, or a battery that sits under the antenna zone will detune the design regardless of how well the matching network is tuned. Decide the antenna zone first, then route everything else around it.</p>
+  </div>
+
+  <img class="article-img" src="/generated/blog-ble-pcb-matching.webp" alt="Photorealistic macro of a BLE π matching network with three tiny 0402 components near the antenna feed" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>The 50 Ω Feed and the π Matching Network</h2>
+
+  <p>Between the BLE SoC's RF pin and the antenna sits a controlled-impedance trace and a matching network, typically a π or L configuration of two to three components. This network tunes out the impedance mismatch between the radio output and the antenna, and it is the most common source of RF yield loss in production.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep the RF Trace Short, Straight, and 50 Ω</h4>
+      <p>The trace from the SoC RF pin to the matching network, and from the network to the antenna feed, should be a coplanar waveguide or microstrip with a controlled 50 Ω impedance. Keep the total length under 15-20 mm, avoid vias on the RF path (each via adds inductance and loss), and never route the RF trace over a split ground. Specify the impedance target on the fabrication drawing — a 10% impedance error changes return loss by about 1 dB and detunes the matching.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use 0402 or 0201 Components With Known Parasitics</h4>
+      <p>Matching components must be the size the layout was simulated with — swapping a 0402 inductor for a 0603 of the same nominal value changes the parasitic capacitance enough to shift the resonant frequency by several MHz. Specify the component sizes on the BOM and lock them with the manufacturer. The network values themselves (typically 0.5-3 nH inductors and 0.5-2 pF capacitors) are tuned during the initial board bring-up using a VNA, then fixed for production.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Ground the Shield Can Properly</h4>
+      <p>If the BLE section uses an RF shield can, the can's perimeter must stitch to the ground plane with vias every 2-3 mm, and the can must not touch any component pads or traces. A poorly grounded shield can becomes a parasitic antenna element that couples noise into the RX path — a classic cause of sensitivity that looks fine in the lab but fails in the field. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC compliance guide</a> covers shield can design in the emissions context.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Crystal, Power, and Decoupling: The Quiet Support System</h2>
+
+  <p>A BLE radio's frequency accuracy depends on a 32 MHz (or 26 MHz) crystal, and its sensitivity depends on clean supply rails. These two support systems cause more field failures than the antenna itself.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Crystal Load Capacitance: The ±20 ppm Budget</h4>
+      <p>The BLE specification requires the radio to stay within ±50 ppm total frequency error, and most designs budget ±20 ppm for the crystal itself, leaving the rest for temperature drift and production tolerance. The two load capacitors on the crystal (typically 8-12 pF each, matching the crystal's specified load capacitance) must be placed close to the crystal with short traces, and the crystal must sit away from switching regulators and high-current traces. A crystal that is 30 ppm off shifts the RF channels enough to reduce sensitivity by 3-6 dB at the band edges.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Power Rail Noise Directly Steals Sensitivity</h4>
+      <p>The BLE SoC's supply rails — usually a 3.3 V or 1.8 V rail from a DC-DC converter plus an internal LDO — must be decoupled with the exact capacitor values and placement from the SoC datasheet. Switching regulator ripple above roughly 20 mVpp couples into the RF front end and raises the noise floor. Place the DC-DC converter on the opposite side of the board from the RF section, or at minimum behind a ground stitch and a ferrite bead on the supply trace. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> has the decoupling and plane design rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Coexistence With Wi-Fi: Plan the PTA Lines</h4>
+      <p>Most IoT products pair BLE with Wi-Fi on the same device (a smart lock, a speaker, a hub). Both radios share the 2.4 GHz band, and without coexistence management they desensitize each other. Modern designs use the 3-wire PTA (Packet Traffic Arbitration) interface between the Wi-Fi and BLE radios, plus a shared antenna or a diplexer. The PTA lines are slow control signals, but they must be routed cleanly and the antenna sharing network must be specified — this is a layout decision, not a firmware one. Our <a href="/blog/wifi-7-6e-pcb-design-guide.html">Wi-Fi PCB design guide</a> covers the 2.4 GHz coexistence layout in detail.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-ble-pcb-module.webp" alt="Macro photo of a BLE module board with crystal, decoupling capacitors and RF section" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Range, Link Budget, and Real-World Expectations</h2>
+
+  <p>Buyers often ask "how far does BLE reach?" — the honest answer is that range is a link budget calculation, and the PCB determines several terms of that budget. A typical BLE link at 0 dBm TX power and -96 dBm sensitivity has a free-space path loss budget of about 96 dB, which maps to roughly 60-100 meters outdoors at 2.4 GHz. Indoors, walls and reflections consume 10-30 dB, dropping reliable range to 10-30 meters. Every dB lost in the PCB — antenna detuning, impedance mismatch, power rail noise — comes directly out of that budget.</p>
+
+  <table class="spec-table">
+    <tr><th>Link Budget Term</th><th>Typical Value</th><th>What Can Go Wrong on the PCB</th></tr>
+    <tr><td>TX power</td><td>0 dBm (1 mW)</td><td>Mismatch loss at antenna feed (up to 2-3 dB)</td></tr>
+    <tr><td>Antenna gain</td><td>0-2 dBi (trace/chip)</td><td>Detuned antenna → negative gain at band edges</td></tr>
+    <tr><td>RX sensitivity</td><td>-96 dBm</td><td>Supply noise, shield can coupling, crystal offset</td></tr>
+    <tr><td>Path loss (outdoor)</td><td>~96 dB at 100 m</td><td>—</td></tr>
+    <tr><td>Path loss (indoor)</td><td>70-86 dB at 10-30 m</td><td>Enclosure, battery, metal objects near antenna</td></tr>
+  </table>
+
+  <p>If your product must hit a specific range target — a smart lock that must reach the phone from the hallway, a beacon that must cover a warehouse aisle — state it as a link budget requirement to your manufacturer, not as "good range". The DFM review should verify the antenna zone, the impedance targets, and the matching component sizes before tooling. Our <a href="/blog/iot-pcb-design-manufacturing.html">IoT PCB design guide</a> walks through the full system-level checklist for connected products.</p>
+
+  <!-- ── Section ── -->
+  <h2>RF Testing You Should Demand From Your Manufacturer</h2>
+
+  <p>BLE modules fail in production for reasons that a continuity test can never catch: a slightly detuned matching network, a ground gap under the antenna, a crystal that drifted in reflow. The only way to catch these is RF testing, and the level of testing your manufacturer offers is a direct indicator of whether they understand wireless hardware at all.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Conducted Testing: TX Power, Frequency Error, and RX Sensitivity</h4>
+      <p>Every production board should be tested conducted — the radio's RF pin connected through a test port to a spectrum analyzer or a BLE tester. Measure TX power (should be within ±1 dB of target), carrier frequency error (within ±50 ppm, ideally ±20 ppm), and ideally RX sensitivity. A test port with a known insertion loss must be designed into the board from day one; adding it later means a board re-spin. Frequency error measurement is the cheapest way to catch crystal and reflow issues on 100% of boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Radiated Testing: TRP and TIS on a Sample Basis</h4>
+      <p>Conducted testing verifies the radio; radiated testing verifies the antenna. Measure Total Radiated Power (TRP) and Total Isotropic Sensitivity (TIS) on a sample from each lot — typically 5-10 boards per lot in a shielded chamber. TRP should be within 1-2 dB of the design target; a 3 dB drop from one lot to the next means something changed in the PCB fab, the antenna, or the assembly. This is the test that catches silent antenna detuning. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">inspection methods guide</a> covers how RF testing fits into the broader test strategy.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Antenna Tuning During Bring-Up: Use a VNA, Not Trial and Error</h4>
+      <p>During prototype bring-up, the matching network should be tuned with a Vector Network Analyzer measuring return loss (S11) at the antenna feed. Target return loss better than -10 dB across the full 2.400-2.4835 GHz band, ideally -12 dB or better. Trial-and-error tuning without measurement routinely produces boards that work in the lab and fail certification. If your manufacturer offers VNA-based tuning and re-verification as a service, that is the single strongest signal that they ship RF hardware regularly.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-ble-pcb-testing.webp" alt="Photorealistic shot of a BLE module under RF test with a spectrum analyzer and shielded chamber" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Manufacturing Controls for RF Boards</h2>
+
+  <p>RF boards fail the DFM review more often than digital boards because the layout constraints are tighter. When you send a BLE design to manufacturing, the review should specifically verify the items below — most contract manufacturers will catch gross errors, but the RF-specific ones are frequently missed.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Coupons and Verification Per Panel</h4>
+      <p>Controlled-impedance boards need impedance test coupons on every panel, with the measured values reported against the ±10% (or tighter) target. Verify the target impedance is actually specified on the fab drawing — the single most common RF DFM error is a drawing that says nothing about impedance while the layout assumed 50 Ω. Our <a href="/blog/pcb-manufacturing-tolerances.html">manufacturing tolerances guide</a> covers what impedance control really costs and how to verify it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Soldermask Over the Antenna Zone</h4>
+      <p>Soldermask has a dielectric constant around 3.5-4 and adds loss and detuning when it covers the antenna and the RF trace. Specify the antenna zone and RF traces as copper-exposed (soldermask removed) or with the mask defined in the fab drawing. This is a small detail that consistently improves radiated performance by 0.5-1.5 dB. Our <a href="/blog/pcb-solder-mask-types.html">solder mask guide</a> explains the material options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Component Placement and Solder Paste for 0201 Matching Parts</h4>
+      <p>0201 matching components need precise stencil apertures and placement accuracy (typically ±0.05 mm placement). Specify an SMT process qualified for 0201 — most high-volume lines handle it, but a line set up for 0402-and-larger will struggle with tombstoning and paste voids on 0201s. Our <a href="/blog/smt-stencil-design-guide.html">stencil design guide</a> covers aperture design for fine-pitch and small passives.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The BLE Board Checklist</h2>
+
+  <p>A BLE board that connects reliably treats the antenna zone as sacred space, keeps the RF feed short and at 50 Ω, tunes the matching network with a VNA during bring-up, gives the crystal and the power rails the quiet they need, plans coexistence with Wi-Fi in the layout, and verifies every board with conducted RF testing plus lot-sample radiated testing. None of it is exotic — it is disciplined RF layout backed by manufacturing controls that match the technology.</p>
+
+  <p>At Huaxing PCBA we manufacture BLE modules and host boards with controlled-impedance stackups, 0201-capable SMT lines, VNA-based antenna tuning support, and conducted RF test on 100% of boards with TRP/TIS radiated verification per lot. Our DFM review checks the antenna zone, impedance targets, matching component sizes, crystal placement, and RF test port design before tooling. <a href="/blog/iot-pcb-design-manufacturing.html">Read our IoT PCB guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing — Materials &amp; Impedance</a></li>
+    <li><a href="/blog/wifi-7-6e-pcb-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Wi-Fi 7 &amp; 6E PCB Design — 6 GHz Routing</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Impedance Control — Why ±5% Matters</a></li>
+    <li><a href="/blog/rfid-nfc-antenna-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RFID &amp; NFC Antenna PCB Design</a></li>
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design — Connectivity &amp; Miniaturization</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-ble-pcb.webp)">
+      <h2>Developing a BLE or IoT Wireless Product?</h2>
+      <p>Send your layout files — our engineers will review the antenna zone, impedance targets, matching network, crystal placement and RF test port design, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your BLE Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

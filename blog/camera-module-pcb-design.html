@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camera Module PCB Design — MIPI CSI-2 Routing, Sensor Power &amp; EMI Control | Huaxing PCBA</title>
+<meta name="description" content="Camera module and image sensor PCB design guide — MIPI CSI-2 differential pair routing, sensor power supply noise control, clock and EMI management, FPC connections, and assembly requirements for security, automotive and medical cameras.">
+<meta property="og:title" content="Camera Module PCB Design — MIPI CSI-2 &amp; Sensor Power">
+<meta property="og:description" content="An image sensor board is an analog front end wearing a digital costume. Here is what changes on the layout, the power path, the MIPI lanes and the assembly line when you mass-produce a camera module.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/camera-module-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-camera-module.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/camera-module-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Camera Module PCB Design — MIPI CSI-2 Routing, Sensor Power &amp; EMI Control",
+  "description": "Camera module and image sensor PCB design guide — MIPI CSI-2 differential pair routing, sensor power supply noise control, clock and EMI management, FPC connections, and assembly requirements for security, automotive and medical cameras.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-camera-module.webp",
+  "url": "https://huaxingpcba.com/blog/camera-module-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/camera-module-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-camera-module.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Camera Module PCB Design:<br><em>MIPI CSI-2 Lane Routing, Sensor Power Integrity, and the EMI Rules That Keep Image Quality Clean</em></h1>
+      <p class="reveal">An image sensor board is an analog front end wearing a digital costume — a few millivolts of power noise or one poorly routed MIPI lane shows up in every frame as banding, sparkle, or dropped lines.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Camera Module PCB</span></div>
+
+  <p>Camera modules are everywhere in 2026 hardware: security cameras, automotive surround-view and cabin cameras, medical endoscopes, machine-vision systems, and AR headsets. A modern image sensor is a precision analog device — a 1/2.3-inch CMOS sensor with <span class="data-point">2 µm</span> pixel pitch converts charge to voltage with sub-millivolt accuracy, then pushes that data over MIPI CSI-2 lanes running at 1-2.5 Gbps per lane. The board that carries it must treat the sensor's power and clock with analog discipline while routing high-speed digital lanes that are equally unforgiving.</p>
+
+  <p>Huaxing PCBA manufactures camera module boards and host interfaces for security, automotive, and medical customers — 4- to 10-layer controlled-impedance stackups, 100 Ω differential pairs for MIPI lanes, low-noise sensor power regulators, and cleanroom-class assembly for optical components. This guide covers the layout rules that determine image quality, the power and EMI decisions that prevent the classic noise artifacts, and the manufacturing checks to put in your purchase order.</p>
+
+  <img class="article-img" src="/generated/blog-camera-module-mipi.webp" alt="Macro photo of a camera module PCB showing MIPI CSI-2 differential pairs and image sensor footprint" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>What Lives on a Camera Module Board?</h2>
+
+  <p>A camera module board is three subsystems on one PCB: the image sensor and its optics, the sensor power and clock tree, and the MIPI CSI-2 output interface. Understanding how these interact is the foundation of every layout decision that follows.</p>
+
+  <table class="spec-table">
+    <tr><th>Subsystem</th><th>Typical Components</th><th>Key Layout Constraint</th></tr>
+    <tr><td>Image sensor</td><td>CMOS sensor die, crystal/clock, lens holder, IR filter</td><td>Optical alignment, thermal isolation, clean analog supply</td></tr>
+    <tr><td>Power &amp; clock</td><td>AVDD/DOVDD/DVDD regulators, MCLK oscillator, decoupling</td><td>Noise-free rails — ripple couples straight into pixel data</td></tr>
+    <tr><td>MIPI interface</td><td>CSI-2 TX lanes, I2C control, GPIO strobes</td><td>100 Ω differential pairs, length matching, solid reference</td></tr>
+    <tr><td>Interconnect</td><td>FPC connector, board-to-board, or flex tail</td><td>Impedance through the connector, shielding</td></tr>
+  </table>
+
+  <p>The most common mistake is treating the sensor like a digital chip. It is not — the analog pixel output path sits on the same die as the digital interface, and noise injected into the supply or the substrate shows up as horizontal banding or column noise in the image. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> covers how to allocate layers when a board carries precision analog and high-speed digital together.</p>
+
+  <!-- ── Section ── -->
+  <h2>MIPI CSI-2 Routing: The Rules That Prevent Dropped Frames</h2>
+
+  <p>MIPI CSI-2 carries the image data from sensor to processor as differential pairs — one clock lane and one to four data lanes, each pair running at 1-2.5 Gbps depending on resolution and frame rate. A 4K@60 sensor with 4 lanes pushes roughly 2.5 Gbps per lane, which puts the layout squarely in high-speed signal-integrity territory.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route MIPI Lanes as 100 Ω Differential Pairs With Controlled Impedance</h4>
+      <p>Each MIPI pair must be routed as a differential pair with 100 Ω differential impedance (85 Ω on some automotive applications), with a continuous ground reference directly beneath. Specify the impedance target on the fabrication drawing — it is not negotiable at these data rates. Keep the pairs away from the sensor's analog supply traces and from the MCLK clock line. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> has the pair-routing rules, and <a href="/blog/impedance-control.html">the impedance control guide</a> covers how to specify targets.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Match Lane Lengths Within 5-10 mil</h4>
+      <p>All data lanes and the clock lane must be length-matched so the pixel data arrives at the processor in the same cycle. Typical tolerance is 5-10 mil (0.13-0.25 mm) between lanes and slightly looser between data and clock. Length matching is done with serpentine routing in the pair itself — never route one lane of a pair on a different layer, because the via delay alone can exceed the tolerance. Our <a href="/blog/pcb-backdrilling-guide.html">backdrilling guide</a> covers via effects on high-speed lanes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Minimize Vias on MIPI Lanes — and Ground Them When You Can't</h4>
+      <p>Each via on a MIPI lane adds 5-10 ps of delay and an impedance discontinuity. Keep the lane count low (2-4 vias per pair maximum) and place ground vias beside signal vias to preserve the return path. If the sensor and processor are on different boards connected by an FPC, the FPC's impedance and the connector's transition become part of the link — specify the FPC impedance and keep the tail short. Our <a href="/blog/flex-pcb-design-manufacturing.html">flex PCB guide</a> covers FPC impedance and bend requirements.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> MIPI failures rarely show up as "no image" — they show up as intermittent frame drops, sparkle on the display, or heat-related glitches that pass QC in the lab and fail in the field. The layout rules above exist precisely because these intermittent faults are nearly impossible to catch in production testing. Get the routing right before tooling.</p>
+  </div>
+
+  <img class="article-img" src="/generated/blog-camera-module-sensor.webp" alt="Photorealistic macro of a CMOS image sensor package on a camera module board with lens holder" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Sensor Power: The Analog Discipline That Kills Banding</h2>
+
+  <p>An image sensor needs three or more supply rails — AVDD (analog, typically 2.8 V), DOVDD (digital I/O, 1.8 V), and DVDD (digital core, 1.1-1.2 V) — and the separation between them is a layout decision, not a schematic one. Noise on AVDD appears in the image as horizontal banding or fixed-pattern noise, and it is the #1 image-quality defect we see in camera boards.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep the Analog Supply Separate From the Digital Supply</h4>
+      <p>AVDD must be generated by its own LDO (or a dedicated regulator output) with the ferrite bead and decoupling network from the sensor datasheet — never shared directly with the digital rail. Route the AVDD trace as a short, wide trace or a local plane segment that does not cross digital switching traces. A 10-20 mV ripple on AVDD is enough to create visible banding on a 12-bit sensor. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers rail isolation and decoupling in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Follow the Power-Up Sequencing Requirements</h4>
+      <p>Most sensors require AVDD before DOVDD before DVDD (or a specific sequence from the datasheet), with the reset pin held until all rails are stable. This is normally handled by a PMIC or supervisor IC, but the layout must keep the enable/reset traces short and free of noise so the sequence is reliable. A sequencing violation can latch the sensor into a low-quality mode that passes basic image tests and fails at low light.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Place Decoupling Within 2-3 mm of Every Sensor Power Pin</h4>
+      <p>The sensor's decoupling capacitors — typically 0.1 µF and 1 µF or 4.7 µF per rail — must sit within 2-3 mm of the corresponding pin, on the same layer or through a single via pair. Long decoupling traces add inductance that defeats the capacitor's purpose at the frequencies the sensor switches. Our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal design guide</a> explains the ground and decoupling strategy for analog-digital coexistence.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Clock, EMI, and the MCLK Discipline</h2>
+
+  <p>The sensor master clock (MCLK, typically 24-27 MHz) drives the entire pixel pipeline, and its harmonics are a classic radiated-emissions problem. A 27 MHz fundamental with sharp edges generates harmonics that land directly in FM radio and other bands, and the clock line couples into the MIPI lanes if routed carelessly.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route MCLK as a Guarded Trace, Not a Bus Signal</h4>
+      <p>The MCLK trace should be short, routed over a solid ground, with ground guard traces or ground vias alongside if it runs more than 10-15 mm. Do not route it parallel to MIPI lanes or to the I2C control lines. Series termination (typically 22-33 Ω) at the driver matches the impedance and rounds the edges, cutting harmonic energy. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC compliance guide</a> covers clock-line emission control in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Plan the EMI Budget at Kickoff, Not at the Lab</h4>
+      <p>Camera boards fail FCC/CE radiated testing more often than most products because the sensor clock, the MIPI lanes, and the FPC connector radiate as a system. Decide the target (FCC Part 15B, CE, or automotive CISPR 25) at project start, and carry the margin into the layout: shield cans over the sensor and the clock source, a grounded FPC connector shell, and a continuous ground plane under the whole camera area. Our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a> has the full emissions-control checklist.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-camera-module-emc.webp" alt="Macro photo of a camera module with RF shield can over the sensor clock area" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Consider Spread-Spectrum Clocking for Consumer Products</h4>
+      <p>Many sensor platforms support spread-spectrum clocking (SSC) on MCLK, which spreads the clock energy across a small frequency range and reduces peak emissions by 3-6 dB. SSC is a firmware/configuration choice, but the layout must accommodate it — the decoupling and termination rules are the same. For security and automotive cameras where certification is strict, the combination of SSC and a shield can is the standard recipe. Our <a href="/blog/surveillance-security-pcb.html">security camera PCB guide</a> covers the system-level EMC approach.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-camera-module-power.webp" alt="Macro photo of sensor power regulation stage with LDO and decoupling capacitors near an image sensor" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Optical and Thermal: The Mechanical Side of Image Quality</h2>
+
+  <p>Image quality is not only electrical. The sensor's performance degrades with temperature — dark current doubles roughly every 6-7 °C — and the optical path (lens, IR filter, focus) is a mechanical assembly that the PCB must support precisely.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep the Sensor Thermally Connected to a Heat Path</h4>
+      <p>The sensor package should have a thermal pad connected through thermal vias to a ground or dedicated thermal plane. At 60 °C junction, a typical sensor's dark current and hot-pixel count rise noticeably; at 80 °C, image quality in low light degrades visibly. For outdoor security cameras, specify the thermal budget (ambient + self-heating) and verify with a thermal simulation or prototype measurement. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> covers via arrays and heat spreading.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Design the Footprint for Optical Alignment</h4>
+      <p>The sensor's optical center must align with the lens holder and the enclosure aperture. Use fiducials on the board and specify the sensor placement tolerance (±0.05 mm or better) in the assembly drawing. For automotive and medical cameras, active alignment (adjusting the lens while the sensor is live) is common — the PCB must allow access for the alignment fixture and the adhesive cure. Our <a href="/blog/pcb-design-for-testability.html">DFT guide</a> covers fiducial and test-point design.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Cleanroom-Level Assembly for the Optical Path</h4>
+      <p>Dust on the sensor window or the IR filter is a permanent image defect. Camera module assembly should happen in a cleanroom or at minimum a controlled environment with ESD protection, with the sensor kept in its sealed packaging until the last step. If your manufacturer does not offer clean assembly for optical components, image defects will appear in the field and be blamed on the sensor. Our <a href="/blog/pcb-esd-control-program.html">ESD control guide</a> covers the handling requirements.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Manufacturing Checks for Camera Boards</h2>
+
+  <p>Camera module boards combine the tightest tolerances of any consumer PCB: controlled impedance, fine-pitch sensor packages (often 0.4-0.5 mm pitch BGA or LGA), optical alignment, and cleanliness. The manufacturing partner you choose must be qualified for all of it.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Control With Coupons on Every Panel</h4>
+      <p>The 100 Ω differential pairs on MIPI lanes need impedance coupons on every panel with measured values reported. Verify the target is on the fab drawing — a drawing that omits impedance targets while the layout assumed 100 Ω pairs is the most common camera-board DFM failure. Our <a href="/blog/pcb-manufacturing-tolerances.html">tolerances guide</a> covers impedance verification in production.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>X-Ray Inspection for Fine-Pitch Sensor Attach</h4>
+      <p>Image sensors in LGA or BGA packages need X-ray inspection of the solder joints — hidden voids under the die can cause intermittent failures that appear as image glitches months later. Require 100% X-ray for the sensor attach, or at minimum on the first article and lot samples. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">AOI vs X-ray guide</a> explains when each method is mandatory.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Functional Image Testing Before Shipment</h4>
+      <p>Every camera module should be powered up and capture a test image before shipment — a flat-field check catches dead pixels, banding, and focus defects that electrical test cannot. For security cameras, a test chart shot verifies the whole optical path. Specify "100% functional image test with flat-field and test-chart capture" in your purchase order; manufacturers who cannot do this are not equipped for camera work.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Camera Board Checklist</h2>
+
+  <p>A camera module board that delivers clean images routes MIPI lanes as controlled 100 Ω differential pairs with matched lengths and minimal vias, isolates the analog sensor supply from digital noise, disciplines the MCLK with termination and guards, plans the EMI budget before the first prototype, keeps the sensor cool and clean, and verifies every board with X-ray and functional image testing.</p>
+
+  <p>At Huaxing PCBA we manufacture camera module boards with controlled-impedance stackups to 10 layers, 100 Ω MIPI differential pairs, low-noise sensor power stages, cleanroom-class assembly for optical components, X-ray inspection of sensor attach, and 100% functional image testing before shipment. Our DFM review checks the MIPI lane routing, length matching, sensor decoupling, thermal via array, and test access before tooling. <a href="/blog/surveillance-security-pcb.html">Read our security camera PCB guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/surveillance-security-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Security &amp; Surveillance PCB Manufacturing</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — High-Speed Rules</a></li>
+    <li><a href="/blog/pcb-power-integrity-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Power Integrity &amp; PDN Design</a></li>
+    <li><a href="/blog/flex-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Flex PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/automotive-infotainment-cockpit-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Automotive Infotainment &amp; Cockpit PCB</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-camera-module.webp)">
+      <h2>Developing a Camera Module or Vision Product?</h2>
+      <p>Send your layout files — our engineers will review the MIPI lane routing, impedance targets, sensor power separation, thermal path and test access, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Camera Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

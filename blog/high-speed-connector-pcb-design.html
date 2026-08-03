@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High-Speed Connector PCB Design — Board-to-Board, Mezzanine &amp; Backplane Routing | Huaxing PCBA</title>
+<meta name="description" content="High-speed connector PCB design guide — board-to-board, mezzanine and backplane connector selection, differential pair routing through connector pin fields, breakout and via management, and manufacturing requirements for 10-112 Gbps links.">
+<meta property="og:title" content="High-Speed Connector PCB Design — B2B &amp; Backplane">
+<meta property="og:description" content="A connector is the weakest link in a high-speed channel. Here is how to select board-to-board, mezzanine and backplane connectors, route the breakout, manage vias, and specify manufacturing so a 25-112 Gbps link survives production.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/high-speed-connector-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-hs-connector.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/high-speed-connector-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "High-Speed Connector PCB Design — Board-to-Board, Mezzanine &amp; Backplane Routing",
+  "description": "High-speed connector PCB design guide — board-to-board, mezzanine and backplane connector selection, differential pair routing through connector pin fields, breakout and via management, and manufacturing requirements for 10-112 Gbps links.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-hs-connector.webp",
+  "url": "https://huaxingpcba.com/blog/high-speed-connector-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/high-speed-connector-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-hs-connector.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">High-Speed Connector PCB Design:<br><em>Board-to-Board, Mezzanine and Backplane Selection — and the Breakout Routing That Makes or Breaks a 25-112 Gbps Link</em></h1>
+      <p class="reveal">A connector is the weakest link in any high-speed channel: it adds insertion loss, crosstalk, and a routing bottleneck — and the way you break out of its pin field decides whether the link actually closes.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>High-Speed Connectors</span></div>
+
+  <p>Every high-speed system eventually crosses a connector: a mezzanine board stacked over a motherboard, a line card plugged into a backplane, a module seated on a carrier. At 10 Gbps the connector and its breakout are a manageable problem; at 25, 56, and now 112 Gbps (PAM4), the connector pin field is often <span class="data-point">the</span> limiting element of the whole channel. The PCB work around a connector — the breakout pattern, the via transitions, the return-path vias — determines whether the link closes with margin or fails intermittently in the field.</p>
+
+  <p>Huaxing PCBA manufactures high-layer-count boards for networking, server, and industrial customers — stackups up to 32 layers, backdrilling for via-stub control, tight-impedance differential pairs, and press-fit connector assembly. This guide covers how to choose board-to-board, mezzanine, and backplane connectors, how to route the breakout and manage vias, and what to specify on the fabrication drawing so the channel performs as designed.</p>
+
+  <img class="article-img" src="/generated/blog-hs-connector-mezzanine.webp" alt="Macro photo of a mezzanine connector pair between two stacked PCBs" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Connector Families and When to Use Each</h2>
+
+  <p>High-speed connectors come in three broad families, and the choice between them is driven by the system architecture — how the boards stack, how often they are serviced, and what data rate the channel must carry.</p>
+
+  <table class="spec-table">
+    <tr><th>Connector Family</th><th>Typical Pitch</th><th>Data Rate</th><th>Best For</th></tr>
+    <tr><td>Board-to-board (stacking)</td><td>0.4-0.8 mm</td><td>up to 10-25 Gbps</td><td>Module-on-carrier, sensor boards, compute modules</td></tr>
+    <tr><td>Mezzanine (high-density)</td><td>0.5-1.27 mm</td><td>10-56 Gbps</td><td>Processor/FPGA mezzanines, stacked compute</td></tr>
+    <tr><td>Backplane (card edge / orthogonal)</td><td>1.9-2.5 mm column pitch</td><td>25-112 Gbps PAM4</td><td>Line cards, switches, routers, servers</td></tr>
+  </table>
+
+  <p>The data rate is the first constraint: a connector rated for 56 Gbps PAM4 has a fundamentally different internal geometry (twin-ax style contacts, ground shielding between pairs) than a 10 Gbps part. Choosing a connector rated well above your actual link rate is the cheapest insurance — the connector cost difference is small compared with a channel redesign. Our <a href="/blog/network-switch-router-pcb-design.html">network switch PCB guide</a> covers the system-level architecture these connectors support.</p>
+
+  <!-- ── Section ── -->
+  <h2>Selecting the Right Connector for Your Link</h2>
+
+  <p>Connector selection is where most high-speed projects make their first mistake: picking a part for mechanical fit and discovering too late that its electrical rating does not match the link budget. Work through the checklist below before committing to a part number.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Match the Rating to the Worst-Case Link, Not the Nominal One</h4>
+      <p>A connector rated at "25 Gbps" may be specified for NRZ at a specific loss budget and trace length. If your channel runs the connector at the far end of a long backplane trace with multiple vias, the effective margin is much smaller. Compare the connector's insertion loss and return loss specs against your total channel budget — not just the bit rate. The vendor's differential insertion loss at the operating frequency (e.g., 14 GHz for 56 Gbps PAM4) is the number that matters. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> explains the channel budget method.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Check the Pin-Field Breakout Before the Footprint</h4>
+      <p>Every high-speed connector has a recommended breakout pattern — the exact routing of the differential pairs out of the pin field, published in the datasheet. The breakout pitch (how many rows deep you can route before needing vias) determines how many layers the board needs. A 0.5 mm pitch mezzanine connector with 4 rows of signals typically requires 8-12 layers for a clean breakout; a backplane connector with shielded columns needs a specific via pattern. Verify the breakout fits your stackup before layout starts — this is the single most common cause of late-layer-count increases. Our <a href="/blog/pcb-layer-count-selection-guide.html">layer count guide</a> covers the trade-offs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan for Press-Fit or Solder Attachment</h4>
+      <p>High-speed connectors attach by press-fit compliant pins (preferred for backplane and high-pin-count parts — no solder, field-replaceable) or by surface-mount solder. Press-fit needs plated through-holes with a specific finished hole size and a board thickness within the connector's range, plus a press fixture on the assembly line. SMT high-speed connectors need precise solder paste volume and often a vacuum or low-void profile for the larger ground pins. Our <a href="/blog/pcb-press-fit-technology-guide.html">press-fit guide</a> covers the hole and plating requirements in detail.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Select the connector against your channel budget, verify the breakout fits your planned layer count, and confirm the attachment method matches your assembly line. Connector selection done this way removes 80% of the late-stage signal-integrity surprises on high-speed boards.</p>
+  </div>
+
+  <img class="article-img" src="/generated/blog-hs-connector-backplane.webp" alt="Photorealistic shot of a backplane connector pin field with differential pairs fanning out" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Breakout Routing: Getting Out of the Pin Field Alive</h2>
+
+  <p>The breakout — routing from the connector pins to the first free routing channel — is where high-speed designs are won or lost. In the pin field, trace widths shrink, spacing tightens, and impedance control becomes difficult. The breakout strategy determines how many layers you need and how much crosstalk the channel starts with.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Follow the Vendor Breakout Pattern Exactly</h4>
+      <p>Connector vendors publish recommended breakout layouts with specific trace widths, spacing, and via placement for each data rate. These patterns are simulation-verified — deviating from them (thinner traces to fit more channels, tighter spacing to save layers) shifts the impedance and adds crosstalk. The breakout is not a place for improvisation. If the vendor pattern does not fit your stackup, change the stackup or the connector, not the pattern. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> explains how to size planes and dielectrics for breakout impedance.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Manage the Via Transition: Backdrill, Ground Vias, and Stub Control</h4>
+      <p>Every signal via in a high-speed channel has a stub — the unused portion of the plated barrel — that resonates and notches the channel at specific frequencies. Above 10 Gbps, backdrilling (drilling out the unused stub) is standard; above 25 Gbps it is mandatory. Place ground vias around signal vias to control the return path, and keep the signal-via antipads sized per the vendor recommendation. Our <a href="/blog/pcb-backdrilling-guide.html">backdrilling guide</a> covers stub effects and drill depth control in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep Pair Spacing and Ground Shielding Consistent</h4>
+      <p>In the breakout, differential pairs must keep their nominal spacing (the gap between the + and - traces) and pair-to-pair separation per the impedance target. When pairs run parallel for more than a few millimeters, add ground stitching between them to control crosstalk. The impedance in the breakout zone should match the rest of the trace — a 100 Ω target everywhere, including under the connector footprint. Our <a href="/blog/pcb-crosstalk-analysis.html">crosstalk guide</a> covers spacing and shielding rules.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Stackup and Material Choices for Connector Channels</h2>
+
+  <p>The board material and stackup determine whether the connector's rated performance is actually achievable. A 56 Gbps connector on a lossy FR-4 board with poor plane spacing will not deliver 56 Gbps — the board becomes the bottleneck.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Match the Laminate to the Data Rate</h4>
+      <p>Standard FR-4 (Dk ~4.2, Df ~0.020) is fine up to about 10 Gbps with short traces. Above 25 Gbps, low-loss laminates (Df below 0.010, such as Megtron 6/7 or Isola equivalents) are required, and at 112 Gbps the material choice dominates the channel loss budget. The connector vendor's performance curves assume a specific material class — using a cheaper laminate voids the connector's rated performance. Our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a> compares the material families.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Control Plane Spacing for Impedance and Crosstalk</h4>
+      <p>The dielectric thickness between signal layers and their reference planes sets both the trace impedance and the crosstalk coupling. Tight plane spacing (thin dielectric) reduces crosstalk but forces thinner traces for the same impedance; the stackup must balance trace width, spacing, and plane distance. Specify the impedance targets and the stackup on the fabrication drawing, and verify with coupons. Our <a href="/blog/pcb-manufacturing-tolerances.html">tolerances guide</a> covers what the fab actually holds.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-hs-connector-breakout.webp" alt="Photorealistic macro of a connector breakout zone with differential pairs and backdrilled vias" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan the Reference-Plane Transitions</h4>
+      <p>When a differential pair changes reference planes (from one ground layer to another) near a connector, the return current must have a path — place ground vias at the transition. Floating copper or a split plane under a connector pin field creates a return-path discontinuity that shows up as a resonance notch. Every reference-plane change in the breakout zone needs its own ground-via stitch. Our <a href="/blog/pcb-via-technology.html">via technology guide</a> covers the via patterns for clean transitions.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-hs-connector-routing.webp" alt="Macro photo of differential pair routing fanning out from a high-speed connector with ground vias" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Verification: Simulation, TDR, and Eye Diagrams</h2>
+
+  <p>A high-speed connector channel cannot be verified with a multimeter. The design must be checked with simulation before tooling and with measurements on the first articles. This is not optional above 10 Gbps — it is the difference between a board that works and a board that "mostly works".</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Simulate the Full Channel Before Tooling</h4>
+      <p>Model the complete channel — driver, trace, vias, connector, trace, receiver — using the connector vendor's S-parameter models and your stackup. Check insertion loss, return loss, and crosstalk against the link budget with margin (typically 3 dB or more). If the channel closes in simulation with less than 2-3 dB margin, the physical board will fail in production. This simulation is standard practice for networking and server boards; your manufacturer should support reviewing the results. Our <a href="/blog/data-center-server-pcb.html">server PCB guide</a> covers the verification flow for high-layer-count boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Measure TDR and Eye Diagrams on First Articles</h4>
+      <p>On the first articles, measure the channel with a Time Domain Reflectometer (TDR) to verify impedance through the connector and breakout, and capture eye diagrams at the operating rate. A TDR sweep of the connector zone shows exactly where the impedance deviates — typically at the via and the connector pin. Eye diagrams show the real margin at the receiver. Compare the measurement against simulation; a >5% deviation means something in the stackup or breakout differs from the model. Our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> places these measurements in the full test strategy.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Verify Backdrill Depth and Via Quality in Production</h4>
+      <p>Backdrill depth is a production-controlled parameter: too shallow leaves a stub, too deep breaks the connection to the plane. Specify the backdrill depth tolerance on the drawing and verify with cross-sections on first articles and lot samples. Similarly, via wall quality (no voids, complete plating) is verified by microsection. Our <a href="/blog/pcb-microsection-analysis-guide.html">microsection guide</a> covers how to read these verification reports.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Manufacturing Requirements for Connector-Heavy Boards</h2>
+
+  <p>High-speed connector boards stress the manufacturing process in specific ways: the impedance control must hold across the panel, the press-fit holes must be drilled and plated to tight tolerance, and the assembly must handle heavy connectors without skewing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Coupons on Every Panel, Reported Per Panel</h4>
+      <p>For every panel of a high-speed board, the fab should produce impedance coupons measured and reported against the ±10% (or tighter) target. Do not accept "verified" without the data. The coupon must represent the actual stackup — same dielectric thickness, same trace geometry — not a simplified test structure. Our <a href="/blog/pcb-quality-metrics-dppm-benchmarks.html">quality metrics guide</a> covers what to track across lots.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Hole Quality for Press-Fit Pins</h4>
+      <p>Press-fit connectors demand finished hole diameters within ±0.05 mm of spec, smooth plating, and no burrs — a burr or undersized hole scrapes the compliant pin and breaks the connection. Specify the hole tolerance, and verify with a press-fit insertion test on first articles. Copper thickness in the hole must meet the current requirement for power pins (often 25-50 µm). Our <a href="/blog/pcb-trace-width-current-capacity.html">current capacity guide</a> covers plating thickness for power paths.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Assembly: Support, Alignment, and Inspection</h4>
+      <p>Heavy backplane connectors need board support during assembly to prevent warpage, and the placement must hold tight coplanarity for SMT parts. After assembly, X-ray inspection verifies solder joints on SMT high-speed connectors, and a seating-height check verifies press-fit insertion. Specify "100% visual + X-ray on first article, lot-sample X-ray" for the connector joints. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">inspection guide</a> covers the method mix.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The High-Speed Connector Checklist</h2>
+
+  <p>A high-speed connector channel that closes with margin is selected against the channel budget, laid out with the vendor breakout pattern, disciplined through the via transitions with backdrilling and ground stitching, built on a laminate that matches the data rate, verified by simulation and TDR/eye measurements, and manufactured with per-panel impedance reporting and tight press-fit hole control.</p>
+
+  <p>At Huaxing PCBA we manufacture high-speed connector boards up to 32 layers with low-loss laminates, backdrilling to ±0.05 mm depth control, per-panel impedance coupons, press-fit assembly with insertion testing, and X-ray inspection of connector joints. Our DFM review checks the breakout pattern, via and backdrill plan, stackup impedance targets, and hole tolerances before tooling. <a href="/blog/network-switch-router-pcb-design.html">Read our network switch PCB guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-backdrilling-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Back Drilling — Via Stub Control</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — High-Speed Rules</a></li>
+    <li><a href="/blog/pcb-press-fit-technology-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Press-Fit Technology Guide</a></li>
+    <li><a href="/blog/network-switch-router-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Network Switch &amp; Router PCB Design</a></li>
+    <li><a href="/blog/data-center-server-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Data Center Server PCB Design</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-hs-connector.webp)">
+      <h2>Designing a High-Speed or Networking Board?</h2>
+      <p>Send your layout files — our engineers will review the breakout pattern, via and backdrill plan, stackup impedance targets, and connector attachment requirements, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your High-Speed Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
