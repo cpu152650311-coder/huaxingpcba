@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Antenna Design Guide — Trace Antenna, Chip Antenna &amp; Matching Network Tuning | Huaxing PCBA</title>
+<meta name="description" content="PCB antenna design guide — IFA and MIFA trace antennas, chip antennas, 50 ohm matching networks and tuning with a VNA, layout rules that preserve range, testing methods, and the DFM requirements for wireless boards.">
+<meta property="og:title" content="PCB Antenna Design Guide — Range Is Designed, Not Luck">
+<meta property="og:description" content="The antenna is the difference between 10 meters and 100 meters of wireless range — and on most products it is just a trace on the PCB. Here is how to design, tune, and manufacture it properly.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-antenna-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-antenna.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-antenna-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Antenna Design Guide — Trace Antenna, Chip Antenna &amp; Matching Network Tuning",
+  "description": "PCB antenna design guide — IFA and MIFA trace antennas, chip antennas, 50 ohm matching networks and tuning with a VNA, layout rules that preserve range, testing methods, and the DFM requirements for wireless boards.",
+  "datePublished": "2026-08-04",
+  "dateModified": "2026-08-04",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-antenna.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-antenna-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-antenna-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-pcb-antenna.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCB Antenna Design Guide:<br><em>Trace Antennas, Chip Antennas, and Matching Networks — the Layout Rules That Decide Real-World Wireless Range</em></h1>
+      <p class="reveal">On most wireless products the antenna is not a component you buy — it is a trace on your PCB, and its design determines whether your device reaches 10 meters or 100.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB Antenna Design</span></div>
+
+  <p>Every wireless product has an antenna problem, and on most of them the antenna is part of the PCB itself: a printed trace antenna, a chip antenna, or the feed to an external element. The antenna is the component with the widest performance spread relative to its cost — the same radio chip can deliver <span class="data-point">20 dB</span> of additional link budget with a well-designed antenna versus a badly placed one, which is the difference between a product that works across a warehouse and one that drops connection across a room. And unlike every other component, its performance depends on things you cannot buy: the ground plane, the clearance, the enclosure, and the tuning.</p>
+
+  <p>Huaxing PCBA manufactures wireless boards for BLE, Wi-Fi, sub-GHz, and cellular products — controlled-impedance RF stackups, mixed laminates, antenna keep-out verification in DFM, and RF functional testing on the assembly line. This guide covers the antenna types, the design method for a 2.4 GHz trace antenna, matching network tuning, the layout rules that preserve range, and how to test the result.</p>
+
+  <img class="article-img" src="/generated/blog-pcb-antenna-trace.webp" alt="Macro photo of an inverted-F trace antenna at the edge of a wireless PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Antenna Types Compared</h2>
+
+  <p>The choice between a trace antenna, a chip antenna, and an external antenna is a size/cost/performance trade. Most products land on a trace or chip antenna; external antennas appear when range is a hard requirement.</p>
+
+  <table class="spec-table">
+    <tr><th>Antenna Type</th><th>Typical Size (2.4 GHz)</th><th>Efficiency</th><th>Tuning Effort</th><th>Best For</th></tr>
+    <tr><td>Inverted-F (IFA) trace</td><td>~15.5 × 6 mm</td><td>60-80%</td><td>Medium — trim + match</td><td>BLE, Wi-Fi, Zigbee products</td></tr>
+    <tr><td>Meandered (MIFA) trace</td><td>~10 × 5 mm</td><td>50-70%</td><td>Medium-high</td><td>Compact wearables, sensors</td></tr>
+    <tr><td>Chip antenna</td><td>1.6 × 0.8 to 7 × 2 mm</td><td>50-75%</td><td>Low-medium — datasheet layout</td><td>Very small boards, modules</td></tr>
+    <tr><td>External (whip, dipole, PCB panel)</td><td>25-100 mm</td><td>70-90%+</td><td>Low — plug and play</td><td>Gateways, routers, industrial links</td></tr>
+  </table>
+
+  <p>A trace antenna costs nothing but board area and needs the most engineering attention. A chip antenna costs $0.10-0.50 and shrinks the footprint but imposes strict datasheet layout rules. An external antenna costs the most and takes space but delivers the best, most predictable performance. Our <a href="/blog/bluetooth-ble-pcb-design.html">BLE PCB design guide</a> and <a href="/blog/wifi-7-6e-pcb-design-guide.html">Wi-Fi design guide</a> show how each choice plays out in a specific radio context.</p>
+
+  <!-- ── Section ── -->
+  <h2>How a PCB Antenna Works: Resonance, Ground Plane, and Bandwidth</h2>
+
+  <p>Understanding the physics behind the antenna saves you from the two classic mistakes: copying a reference layout into the wrong board shape, and "tuning" without understanding what you are tuning.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>The Antenna Is Half the Circuit — the Ground Plane Is the Other Half</h4>
+      <p>An inverted-F antenna is a quarter-wave structure: the radiating element plus the board's ground plane together form the antenna. The ground plane is not a passive backdrop — its size, shape, and the copper beneath the antenna directly set the resonant frequency and efficiency. This is why the same antenna design behaves differently on a 20 × 30 mm sensor board and a 50 × 80 mm product board, and why antenna layout must be locked before the board outline is final.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Resonance Is Set by Electrical Length, Not Physical Size Alone</h4>
+      <p>At 2.4 GHz a quarter wavelength in free space is about 31 mm. A trace antenna achieves resonance in a smaller footprint using the dielectric of the board (which shortens the wavelength) and the meandering of the trace. The exact resonant frequency depends on trace geometry, dielectric constant, ground plane, and even the solder mask. That is why the final frequency is trimmed on the bench, not computed once.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Bandwidth Is the Price You Pay for Small Size</h4>
+      <p>Small antennas are narrowband. A compact trace antenna may cover only 100-200 MHz of bandwidth — enough for one band (BLE's 2.4-2.483 GHz, or Wi-Fi's lower channels) but not the full 2.4 GHz ISM range with margin in a plastic-enclosure shift. If your product must work across the whole 2.4 GHz band plus handle enclosure detuning, budget for a wider antenna design or accept a tuned compromise.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The ground plane is half the antenna, resonance is set by electrical length, and small antennas are narrowband. Design the board outline and antenna together — never drop a reference antenna into a board shape it was not designed for.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Designing a 2.4 GHz Trace Antenna (IFA)</h2>
+
+  <p>The inverted-F antenna is the workhorse of 2.4 GHz product design. It is compact, cheap, and well documented — TI's AN043 reference and Nordic's antenna notes are the starting points most engineers use. The dimensions below are the classic starting values; your tuning will adjust them.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Start From a Proven Reference Geometry</h4>
+      <p>A 2.4 GHz IFA typically occupies about 15.5 × 6 mm: a radiating arm of roughly 12-15 mm, a shorting stub of 1-2 mm connecting the antenna to ground at the feed end, and a feed point placed along the arm. The antenna sits at the board edge or corner with nothing beneath it but the board's ground pour — the clearance zone extends below the antenna on all layers. Use the reference design's dimensions verbatim as your starting point.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Size the Ground Plane Correctly</h4>
+      <p>Reference designs assume a ground plane of at least 20 × 40 mm under and beside the antenna. Smaller ground planes shift the resonance up and hurt efficiency; larger ones are fine. If your board is smaller than the reference assumption, expect to tune more aggressively — or move to a chip antenna with a layout specified for small grounds.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Feed It With a 50 Ω Line and a Tuning Stub</h4>
+      <p>The feed from the radio's matching network to the antenna is a 50 Ω trace (typically 0.4-0.6 mm wide on a 0.8-1.6 mm FR-4 stackup, depending on the layer). Add a small tuning stub or a provision for a series inductor at the feed so the bench can adjust impedance without cutting copper. Our <a href="/blog/impedance-control.html">impedance control guide</a> covers how to specify the feed's impedance on the fab drawing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Meander Only When You Must</h4>
+      <p>Meandering the trace (MIFA) shrinks the antenna but narrows the bandwidth and makes tuning touchier. For a product with a fixed, known frequency band it is a fair trade; for a multi-channel radio it is not. If the board has room for a straight IFA, use it.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Chip Antennas: When to Use Them and the Datasheet's Hidden Rules</h2>
+
+  <p>Chip antennas solve the "no room for a trace" problem and are heavily used in wearables, hearables, and compact modules. They are not simpler — they just move the complexity into a very strict layout recipe.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>The Datasheet Layout Is the Antenna</h4>
+      <p>Chip antenna datasheets specify a ground clearance area (often a notch or a region with no ground pour on the layer below), a recommended placement (usually a board corner or edge), and a matching network. Copy the recommended layout exactly — including the clearance geometry. Vendors provide antenna evaluation boards and layout guides for a reason: the antenna only works as specified with that exact surrounding copper.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep the Matching Network Close and Symmetric</h4>
+      <p>The chip antenna's matching components (typically a π network of two shunt caps and a series inductor) sit within a few millimeters of the antenna feed. Keep the traces between them short and symmetric, ground the component pads directly to the antenna's ground area, and do not route other signals through the clearance zone on any layer.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Watch Out for Battery and Enclosure Proximity</h4>
+      <p>A lithium battery under the antenna clearance absorbs radiation and detunes the antenna — a classic cause of "works on the bench, fails in the product." Keep the battery, metal brackets, and large ground pours out of the antenna's near field (a few millimeters for 2.4 GHz, more for sub-GHz). Test the final assembled product, not the bare board. Our <a href="/blog/rfid-nfc-antenna-pcb-design.html">RFID/NFC antenna guide</a> shows the same proximity logic applied to NFC coils.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcb-antenna-chip.webp" alt="Macro photo of a chip antenna at the corner of a compact wireless module with its matching components" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>The Matching Network: 50 Ω, the π Network, and Tuning on the Bench</h2>
+
+  <p>The antenna's impedance at its feed point is rarely exactly 50 Ω — the matching network transforms it so the radio sees a clean 50 Ω load, maximizing power transfer and minimizing reflections.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design for a π Network With Tuning Positions</h4>
+      <p>Reserve a π network at the antenna feed: one series element and two shunt positions (typically a 1-10 nH inductor in series with 0.5-2 pF capacitors to ground, values depending on the antenna and band). On the first prototype, populate the network with placeholder values from the reference design, measure, then adjust. Populate the pads with 0402 or 0603 parts so values can be swapped during tuning.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Tune With a Vector Network Analyzer, Not by Range Testing</h4>
+      <p>The correct tuning instrument is a VNA measuring return loss (S11) at the antenna feed. The target is return loss better than -10 dB (VSWR under 2:1) across your operating band, with -15 dB or better at the center frequency. Range testing alone cannot separate antenna problems from radio, firmware, or environment problems — it only tells you the total is bad. A 30-minute VNA session at the start of a project saves weeks of field debugging later.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Retune in the Final Enclosure</h4>
+      <p>The enclosure shifts the antenna — plastic with high dielectric constant lowers the resonant frequency; metal shields and batteries absorb energy. Tune the antenna with the product assembled in its final enclosure, with the battery installed, and with the same orientation the product will be used in. A design tuned on the open bench and then placed in an enclosure is a design tuned to the wrong environment.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcb-antenna-matching.webp" alt="Macro photo of a pi matching network with small inductors and capacitors at an antenna feed point" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Layout Rules That Kill Range</h2>
+
+  <p>These are the mistakes seen most often in DFM reviews of wireless boards — each one costs measurable dB of real-world performance.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copper in the Keep-Out Zone</h4>
+      <p>Ground pour, traces, or component pads in the antenna clearance — on any layer — detune the antenna and short the radiation. The clearance must be enforced on all layers, including inner planes. This is checked in DFM; boards arrive with antennas that cannot work because an inner-layer ground plane extends under the antenna.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Traces Running Under or Beside the Antenna</h4>
+      <p>Digital lines, power traces, or the crystal's routing under the antenna couple noise into the radiator and shift its resonance. Keep all routing out of the antenna zone, and route the radio's crystal and supply lines away from the antenna side of the board.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Solder Mask and Silkscreen Over the Antenna</h4>
+      <p>Covering the trace antenna with solder mask changes its resonant frequency by a measurable amount. Specify mask removal over the antenna element, and keep silkscreen and reference designators out of the zone. Our <a href="/blog/pcb-solder-mask-types.html">solder mask guide</a> covers how to specify mask openings.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Uncontrolled Feed Impedance</h4>
+      <p>The 50 Ω feed between the radio and the antenna must actually be 50 Ω. On a stackup where the fab did not control impedance, the feed's mismatch adds directly to the system's return loss. Specify impedance control on the RF feed and verify with coupons. See our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB manufacturing guide</a> for the fabrication requirements.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Antenna Testing: Return Loss, VSWR, and Radiated Performance</h2>
+
+  <p>Testing has two levels: conducted (at the feed point, with a VNA) and radiated (over the air, in a chamber or anechoic environment). Both belong in the product's test plan.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Conducted: Return Loss and VSWR on Every Design Iteration</h4>
+      <p>Measure S11 at the antenna feed over the operating band on each prototype iteration. Record the return loss curve and the resonant frequency; both should be stable across a few boards (part tolerance and laminate variation cause small shifts). If the resonance jumps between boards of the same design, check the fabrication for stackup or material drift.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Radiated: TRP and TIS for the Full Picture</h4>
+      <p>Total Radiated Power (TRP) and Total Isotropic Sensitivity (TIS) measure what the antenna actually radiates and receives over the air — the numbers that matter for range. A chamber or anechoic measurement gives you these, and it is the only reliable way to compare antenna designs or enclosures. For certification, radiated testing is mandatory anyway.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Production: RF Functional Test on the Line</h4>
+      <p>On the assembly line, a simple RF functional test — transmit power and frequency at the antenna connector, or a radiated sniff test in a shielded fixture — catches assembly defects (missing components, solder bridges in the matching network, damaged antennas) before units ship. For high-volume wireless products this test is standard. Our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> places RF tests in the full test strategy.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcb-antenna-test.webp" alt="Macro photo of an RF test setup measuring a wireless board with a vector network analyzer" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>DFM Checklist: What to Send the Fab</h2>
+
+  <p>The fabrication drawing for a board with an on-PCB antenna needs a few specific notes beyond the standard set:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Control on the RF Feed</h4>
+      <p>Specify the 50 Ω feed's impedance target and tolerance (±10% typical, tighter if your design requires it), with coupons on every panel and reported data. The coupon stackup must match the real board — same dielectric thickness and trace geometry. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> shows how to define the RF stackup.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Mask Removal Over the Antenna</h4>
+      <p>Note the mask opening over the trace antenna element so the fab does not cover it. If the design uses a specific laminate or copper weight for the RF layer, state it — mixed-stackup wireless boards are routine, but only when the drawing says so.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>DFM Review of the Keep-Out</h4>
+      <p>Ask the manufacturer to verify the antenna keep-out on all layers as part of DFM. A good fab will flag copper in the antenna zone before tooling, saving you a respin. This review is included free with every Huaxing quote — it has caught real antenna problems on wireless projects of every size.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Antenna Design Checklist</h2>
+
+  <p>A wireless product with real range has an antenna that was designed, not assumed: the right antenna type for the board size and band, a ground plane sized to the reference design, a clean keep-out on every layer, a 50 Ω feed with controlled impedance, a π network tuned with a VNA in the final enclosure, and a production test that catches assembly defects. Every step is cheap compared with the cost of a product that drops connection in the field.</p>
+
+  <p>At Huaxing PCBA we manufacture wireless boards with controlled-impedance RF stackups to ±5%, mixed FR-4 and high-frequency laminates, mask openings and keep-out verification in DFM, and RF functional testing on 8 SMT lines. Our DFM review checks the antenna clearance on all layers, the feed impedance stackup, and the assembly requirements before tooling. <a href="/blog/gps-gnss-receiver-pcb-design.html">Read our GNSS antenna guide</a> for the positioning side of antenna design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/bluetooth-ble-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Bluetooth Low Energy PCB Design</a></li>
+    <li><a href="/blog/wifi-7-6e-pcb-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Wi-Fi 7 &amp; Wi-Fi 6E PCB Design</a></li>
+    <li><a href="/blog/lorawan-sub-ghz-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">LoRaWAN &amp; Sub-GHz PCB Design</a></li>
+    <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control — RF &amp; High-Speed</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-pcb-antenna.webp)">
+      <h2>Designing a Wireless Board With an On-PCB Antenna?</h2>
+      <p>Send your layout files — our engineers will verify the antenna keep-out on all layers, the 50 Ω feed stackup, and the assembly requirements, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your RF Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

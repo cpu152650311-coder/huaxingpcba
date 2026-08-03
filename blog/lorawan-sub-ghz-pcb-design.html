@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoRaWAN &amp; Sub-GHz PCB Design — 868/915 MHz RF Layout, Antenna Matching &amp; Battery Life | Huaxing PCBA</title>
+<meta name="description" content="LoRaWAN and sub-GHz PCB design guide — 868/915 MHz RF front-end layout, antenna options and matching network, battery-life engineering for LPWAN sensors, certification, and the DFM requirements your fab must meet.">
+<meta property="og:title" content="LoRaWAN &amp; Sub-GHz PCB Design — RF Layout That Reaches Kilometers">
+<meta property="og:description" content="A LoRaWAN node is a radio first and a sensor second: the 868/915 MHz RF section, the antenna, and the sleep current decide whether your product covers a factory floor or a city district. Here is the layout and manufacturing guide.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/lorawan-sub-ghz-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-lorawan-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/lorawan-sub-ghz-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "LoRaWAN &amp; Sub-GHz PCB Design — 868/915 MHz RF Layout, Antenna Matching &amp; Battery Life",
+  "description": "LoRaWAN and sub-GHz PCB design guide — 868/915 MHz RF front-end layout, antenna options and matching network, battery-life engineering for LPWAN sensors, certification, and the DFM requirements your fab must meet.",
+  "datePublished": "2026-08-04",
+  "dateModified": "2026-08-04",
+  "image": "https://huaxingpcba.com/generated/blog-cover-lorawan-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/lorawan-sub-ghz-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/lorawan-sub-ghz-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-lorawan-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">LoRaWAN &amp; Sub-GHz PCB Design:<br><em>868/915 MHz RF Layout, Antenna Matching, and Battery-Life Engineering for LPWAN Sensors</em></h1>
+      <p class="reveal">A LoRaWAN node is a radio first and a sensor second — the RF section, the antenna, and the sleep current decide whether your device covers a factory floor or a whole city district.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>LoRaWAN PCB Design</span></div>
+
+  <p>LoRaWAN has become the default wireless standard for long-range, low-power IoT: utility meters, agricultural soil sensors, warehouse trackers, and smart-city infrastructure all run on 868 MHz (Europe) or 915 MHz (North America) sub-GHz links. The radio can reach <span class="data-point">-137 dBm</span> sensitivity at the lowest spreading factor — which means a well-laid-out node talks to a gateway kilometers away on milliwatts of power. But that range is only achievable if the PCB around the transceiver is designed correctly: a poor RF layout can cost 10-20 dB of link budget, which is the difference between 5 km and 500 m.</p>
+
+  <p>Huaxing PCBA manufactures sub-GHz IoT boards for metering, agricultural, and industrial customers — controlled-impedance FR-4 and high-frequency laminates, 2-32 layer stackups with 3/3 mil capability, impedance tolerance to ±5%, and 8 SMT lines with AOI, X-ray, and RF test support. This guide walks through the RF front-end, antenna selection, matching, battery-life design, and the DFM requirements you should put on the fabrication drawing.</p>
+
+  <img class="article-img" src="/generated/blog-lorawan-pcb-rf.webp" alt="Macro photo of the RF front-end section of a LoRaWAN sensor PCB showing the transceiver, SAW filter and matching components" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Why Sub-GHz Layout Differs From 2.4 GHz Design</h2>
+
+  <p>Most hardware engineers have designed a 2.4 GHz BLE or Wi-Fi board at some point. Sub-GHz design feels deceptively easier because the frequency is lower — but the physics changes the rules in ways that surprise people.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>The Wavelength Is 10 Times Longer</h4>
+      <p>At 868 MHz the free-space wavelength is about 345 mm — a quarter-wave antenna is roughly 86 mm long. That is far too long to fit as a straight trace on a small sensor board, which is why sub-GHz boards use meandered trace antennas, chip antennas, or external spring/whip elements. The long wavelength also means the antenna interacts with the whole board and its enclosure, not just a small keep-out zone.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Component Parasitics Scale With Frequency</h4>
+      <p>At 868 MHz, a 0402 capacitor's parasitic inductance is still significant, and a badly placed ground via can add several nH that detunes the matching network. The RF section needs the same discipline as a 2.4 GHz design: short traces, solid ground reference directly under the RF path, and vias placed right at the pad of every ground pin.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>The Receiver Is Extremely Sensitive — and Extremely Vulnerable</h4>
+      <p>A LoRa receiver at -137 dBm is working with signals a million times weaker than a typical BLE receive level. Noise coupling from the digital section, switching regulators, or the MCU clock that would be invisible on a BLE board can desensitize a sub-GHz receiver. Power supply filtering and layout separation are not optional.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Lower frequency does not mean easier layout. The RF section of a sub-GHz board needs the same care as a 2.4 GHz design, plus attention to antenna size, ground-plane interaction, and receiver sensitivity that the higher-frequency world rarely worries about.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>The RF Front End: Transceiver, SAW Filter, and Matching</h2>
+
+  <p>Most sub-GHz designs are built around a Semtech SX1261/SX1262-class transceiver or a module integrating one. The transceiver's reference design gives you the schematic; the layout is where range is won or lost. Our <a href="/blog/iot-pcb-design-manufacturing.html">IoT PCB design guide</a> covers the system-level architecture these radios sit inside.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Follow the Reference Design for the RF Matching Network</h4>
+      <p>The SX1262 datasheet specifies a balun and LC matching network between the differential RF pins and the 50 Ω antenna path, tuned for the operating band. Use the exact component values for your band (868 or 915 MHz differ), place them in a tight cluster, and do not "optimize" the values by guesswork — tuning comes later with a network analyzer. The matching components must sit close to the transceiver with their ground pins tied to the same continuous ground pour.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Add a SAW Filter if Your Product Must Pass EMC Testing</h4>
+      <p>A SAW filter after the radio cleans up out-of-band emissions and improves rejection of strong nearby transmitters (for example, cellular bands near 868 MHz). It costs about 20-30 cents and a little insertion loss (~2 dB), but it is the difference between passing ETSI EN 300 220 harmonic limits on the first try and redesigning the output stage. For cost-sensitive high-volume designs, evaluate whether the transceiver's own harmonic performance is sufficient before adding it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Route the 50 Ω Feed as a Coplanar Waveguide</h4>
+      <p>The antenna feed from the matching network to the antenna or connector should be a controlled 50 Ω trace. On 1.6 mm FR-4, a grounded coplanar waveguide (CPWG) with a ~1.2-1.5 mm trace and 0.25-0.4 mm gaps to ground pours on both sides is a practical geometry, with ground stitching vias along the trace every 3-5 mm. Specify ±10% impedance control (Huaxing holds ±5%) and verify with TDR on first articles. Our <a href="/blog/impedance-control.html">impedance control guide</a> explains the stackup and coupon requirements.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The RF chain is: transceiver → balun/matching → optional SAW filter → 50 Ω CPWG feed → antenna. Each transition must be tight, grounded, and impedance-controlled, or the sensitivity number on the datasheet will never appear in the field.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Antenna Options for Sub-GHz Boards</h2>
+
+  <p>Antenna choice is the highest-leverage decision on a LoRaWAN node. It determines size, cost, range, and how much engineering effort the tuning phase takes. See our <a href="/blog/pcb-antenna-design-guide.html">PCB antenna design guide</a> for the full design methods; the table below summarizes the options for sub-GHz.</p>
+
+  <table class="spec-table">
+    <tr><th>Antenna Type</th><th>Typical Size</th><th>Gain / Efficiency</th><th>Best For</th></tr>
+    <tr><td>Meandered PCB trace (quarter-wave)</td><td>~86 mm path, folded</td><td>-3 to -1 dBi, narrow band</td><td>High-volume, low-cost sensors</td></tr>
+    <tr><td>Chip antenna</td><td>9-25 mm × 3-8 mm</td><td>-4 to -1 dBi, needs clearance</td><td>Compact boards, moderate range</td></tr>
+    <tr><td>Spring / whip (helical)</td><td>20-50 mm tall</td><td>-2 to +1 dBi</td><td>Trackers, handhelds, plastic enclosures</td></tr>
+    <tr><td>SMA + external antenna</td><td>Connector + external</td><td>0 to +3 dBi</td><td>Gateways, fixed installations, maximum range</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Trace Antennas Need a Clean Ground Plane Below</h4>
+      <p>A meandered quarter-wave trace antenna radiates against the board's ground plane — the ground plane is literally half the antenna. The antenna must sit on a board edge or corner with the ground pour beneath it intact, and a clearance of 3-5 mm around the trace with no copper, traces, or components. The feed point connects to the 50 Ω line; the far end is open. Tuning is done by trimming the last segment or adjusting the matching network.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Chip Antennas Are Easy to Place, Hard to Get Right</h4>
+      <p>Chip antennas shrink the board but impose strict datasheet rules: a specific ground clearance area, a specific location (usually a board corner), and a required matching network. Ignoring the clearance rule can cost 5-8 dB. Always copy the datasheet's recommended PCB layout verbatim — including the ground cutout, if one is specified.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Gateways Should Never Rely on a PCB Antenna</h4>
+      <p>A gateway's range covers the whole network, so its antenna is the worst place to save money. Use an SMA connector and a proper external antenna (collinear or panel with 2-6 dBi gain), mounted away from the enclosure metal. The connector needs a solid RF launch: keep the 50 Ω trace from the connector to the concentrator short, and ground the connector body with multiple vias.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-lorawan-pcb-antenna.webp" alt="Macro photo of a meandered PCB trace antenna and a spring antenna on a sub-GHz sensor board" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="/generated/blog-lorawan-pcb-gateway.webp" alt="Industrial LoRaWAN gateway with external antenna mounted on a rooftop" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Layout Rules: Placement, Keep-Outs, and Grounding</h2>
+
+  <p>The mechanical layout of the RF section follows a small set of non-negotiable rules. Our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB manufacturing guide</a> covers the fabrication side of the same discipline.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep the RF Section in Its Own Corner, Away From Noise Sources</h4>
+      <p>Place the transceiver and its antenna at one edge of the board, far from the MCU, switching regulator, and any high-current traces. If the board has a metal shield can, it should surround only the RF section. Digital signals must not cross under the antenna area or the 50 Ω feed on any layer.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Ground Stitch Everything Around the RF Path</h4>
+      <p>Every ground pad of the transceiver, SAW filter, and matching components gets its own via to the main ground plane, placed directly at the pad. Along the CPWG feed, add stitching vias on both sides every 3-5 mm. This keeps the return current on a tight path under the signal trace and prevents the ground plane from becoming a radiating structure itself.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Isolate the Switching Regulator From the Radio</h4>
+      <p>The DCDC converter that powers the node is the biggest noise source on the board. Keep its switching node (the inductor connection) short and far from the RF section, use a dedicated ground pour for the converter that connects to the main plane at one point, and place the RF supply filter (ferrite bead plus bulk and RF capacitors) right at the transceiver's supply pin. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers supply filtering in detail.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Battery Life: Designing for 5-10 Years on One Cell</h2>
+
+  <p>The second half of a LoRaWAN product is power: most nodes are battery-powered and must run for years. The radio only transmits for milliseconds at a time — the average current is set by sleep current and duty cycle, not by the transmit burst.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Work From a Real Duty-Cycle Budget</h4>
+      <p>A typical metering node transmits a 46 ms packet at +14 dBm (~40-100 mA depending on the radio and supply) every 10 minutes. At a 2 µA sleep current, the average current is roughly 10 µA — dominated by sleep, not transmit. A 3.6 V Li-SOCl2 cell (ER18505, ~3800 mAh) then delivers 5-10+ years. Change the interval to 1 minute and the transmit term starts to dominate: the same cell drops to roughly 1-2 years. Model your own numbers before choosing the cell.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Minimize Sleep Current at the Schematic Level</h4>
+      <p>Sleep current is a sum of many small leaks: regulator quiescent current, pull-up resistors left energized, leakage into unpowered ICs, and the MCU's own deep-sleep draw. Use a low-quiescent LDO or a DCDC with <2 µA quiescent current, switch power domains with MOSFETs or load switches, and check every pull-up resistor — a single 100 kΩ pull-up to 3.3 V wastes 33 µA permanently, which alone can cut battery life in half.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Watch the Transmit Current Path</h4>
+      <p>At +22 dBm (the SX1262's high-power setting), the transmit current can exceed 100 mA. The supply trace and battery contacts must carry this without voltage sag — a 0.5 Ω contact resistance costs 50 mV under load, and brownouts at the end of battery life are a classic field failure. Keep the battery-to-regulator path short and wide, and use gold-plated contacts rated for the peak current.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Battery life is decided by microamps, not milliamps: sleep current and duty cycle dominate. Choose the cell from a real duty-cycle budget, and hunt down every microamp of leakage at the schematic review stage.</p>
+  </div>
+
+  <img class="article-img" src="/generated/blog-lorawan-pcb-battery.webp" alt="Macro photo of a battery-powered LoRaWAN sensor node with its lithium cell and antenna in a rugged enclosure" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Certification: ETSI EN 300 220 and FCC Part 15.247</h2>
+
+  <p>Before a LoRaWAN product can be sold, it must pass regional radio certification. The PCB design directly affects how painful that process is.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Know Which Rule Applies to Your Band</h4>
+      <p>Europe's 868 MHz band falls under ETSI EN 300 220 (with a 1% duty-cycle limit for many channels), while the US 915 MHz band operates under FCC Part 15.247. Both limit radiated emissions, harmonics, and spurious output. The layout decisions that matter: a clean output stage (SAW filter, good grounding), a matching network that presents the right load to the PA, and an antenna feed that does not radiate harmonics.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use a Certified Module to Shorten the Path</h4>
+      <p>If time-to-market dominates, use a pre-certified LoRaWAN module (SX1262-based modules with FCC/CE approval are widely available). The end product still needs some testing — enclosure effects, power supply — but the radio portion is largely covered. If you integrate the bare transceiver, budget for conducted and radiated testing with a pre-compliance lab before the full certification run.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Design for Testability From the Start</h4>
+      <p>Add RF test points (a 50 Ω pad in the feed line, or a small probe pad after the matching network) so the lab can measure conducted output power and harmonics without modifying the board. On the production side, an RF functional test — transmit power and frequency check on every unit — catches assembly defects before they reach the field. Our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> places RF tests in the full production test strategy.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>DFM for Sub-GHz Boards: What to Put on the Drawing</h2>
+
+  <p>A sub-GHz board is usually a modest 2-6 layer design, but the RF section imposes requirements that a standard digital fab drawing may not cover. Specify these explicitly:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Control on the 50 Ω Feed and Coupons Per Panel</h4>
+      <p>Request ±10% impedance control on the antenna feed (tighter if you designed for it), with coupons on every panel and reported measurement data. The coupon must mirror the actual stackup — same dielectric, same trace geometry. Do not accept "impedance verified" without numbers. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> covers how to define this correctly.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Controlled Dielectric and Copper Weight</h4>
+      <p>The antenna feed's impedance depends on the dielectric constant of the laminate. Specify FR-4 with a known Er (4.2-4.5) or a controlled-Dk material for the RF layer, and fix the copper weight (typically 1 oz for the signal layer). If the design uses a high-frequency laminate for the antenna area, the fab must know which layers use which material — mixed-stackup RF boards are routine for us.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep the Antenna Area Free of Solder Mask and Silkscreen</h4>
+      <p>Solder mask over the trace antenna shifts its resonant frequency — specify mask removal (or a mask opening) over the antenna element, and keep silkscreen and component identifiers out of the keep-out zone. If the board uses a castellation or edge connector for a whip antenna, note the plating and edge requirements. Our <a href="/blog/pcb-solder-mask-types.html">solder mask guide</a> explains the options.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The LoRaWAN Node Checklist</h2>
+
+  <p>A LoRaWAN node that delivers its datasheet range is designed with the RF section isolated at a board edge, a SAW-filtered and matched front end, a controlled-impedance 50 Ω feed, an antenna with a clean ground plane and clearance, a power budget dominated by a few microamps of sleep current, and a fabrication drawing that specifies impedance coupons, controlled dielectric, and mask-free antenna areas. On the assembly side, RF functional test on every unit catches the defects that range testing in the field would otherwise find months later.</p>
+
+  <p>At Huaxing PCBA we manufacture sub-GHz IoT boards up to 32 layers with controlled-impedance capability to ±5%, mixed FR-4 and high-frequency laminates, 3/3 mil fine-line routing, and full RF assembly support — 8 SMT lines, X-ray for shield cans and connectors, and flying-probe plus functional testing. Our DFM review checks the RF stackup, impedance coupons, antenna keep-outs, and assembly requirements before tooling. <a href="/blog/cellular-iot-module-pcb-design.html">Read our cellular IoT module guide</a> to compare LPWAN options, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/cellular-iot-module-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Cellular IoT Module PCB Design</a></li>
+    <li><a href="/blog/bluetooth-ble-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Bluetooth Low Energy PCB Design</a></li>
+    <li><a href="/blog/pcb-antenna-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Antenna Design Guide</a></li>
+    <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-lorawan-pcb.webp)">
+      <h2>Building a LoRaWAN Sensor or Gateway?</h2>
+      <p>Send your layout files — our engineers will review the RF stackup, impedance coupons, antenna keep-out, and assembly requirements, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your RF Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

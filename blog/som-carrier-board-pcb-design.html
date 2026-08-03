@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SoM Carrier Board PCB Design — System-on-Module Connectors, Power Tree &amp; High-Speed Routing | Huaxing PCBA</title>
+<meta name="description" content="System-on-Module carrier board PCB design guide — SoM connector selection, multi-rail power tree design, high-speed routing for PCIe/USB/MIPI, thermal and mechanical integration, and DFM requirements for manufacturing.">
+<meta property="og:title" content="SoM Carrier Board PCB Design — From Module to Product">
+<meta property="og:description" content="A System-on-Module moves the hard computing problem off your board — but the carrier board still has to feed it power, route its high-speed interfaces, and survive manufacturing. Here is the engineering and DFM guide.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/som-carrier-board-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-som-carrier.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/som-carrier-board-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SoM Carrier Board PCB Design — System-on-Module Connectors, Power Tree &amp; High-Speed Routing",
+  "description": "System-on-Module carrier board PCB design guide — SoM connector selection, multi-rail power tree design, high-speed routing for PCIe/USB/MIPI, thermal and mechanical integration, and DFM requirements for manufacturing.",
+  "datePublished": "2026-08-04",
+  "dateModified": "2026-08-04",
+  "image": "https://huaxingpcba.com/generated/blog-cover-som-carrier.webp",
+  "url": "https://huaxingpcba.com/blog/som-carrier-board-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/som-carrier-board-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-som-carrier.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">SoM Carrier Board PCB Design:<br><em>System-on-Module Connectors, Power Tree Architecture, and High-Speed Routing That Get Your Product to Market Fast</em></h1>
+      <p class="reveal">A System-on-Module moves the hardest computing problem off your board — but the carrier board still has to feed it clean power, route its high-speed interfaces, and survive manufacturing at volume.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>SoM Carrier Board Design</span></div>
+
+  <p>System-on-Module (SoM) development has become the dominant strategy for industrial, medical, and IoT products that need serious computing without a multi-million-dollar processor design program. You buy a module that packages the CPU, memory, and power management, then design a carrier board that provides the power input, connectors, and I/O your product actually needs. The trade-off is that the carrier board is no longer a simple board — it carries <span class="data-point">PCIe</span>, USB 3.x, MIPI, and Gigabit Ethernet through a dense connector, feeds a half-dozen power rails, and has to stay manufacturable at volume. That is exactly the middle ground where a good manufacturing partner saves a project.</p>
+
+  <p>Huaxing PCBA builds carrier boards for compute modules across industrial automation, medical, and edge-AI applications — high-layer-count stackups, controlled impedance to ±5%, press-fit and SMT connector assembly, X-ray inspection of fine-pitch connectors, and full box-build integration. This guide covers the connector choice, the power tree, high-speed routing, thermal/mechanical integration, and the DFM requirements to put on the drawing.</p>
+
+  <img class="article-img" src="/generated/blog-som-carrier-connector.webp" alt="Macro photo of a system-on-module seated on its carrier board connector" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>SoM vs Custom Processor Board: When a Carrier Makes Sense</h2>
+
+  <p>The first decision is architectural: integrate the processor yourself, or mount a module on a carrier. The answer shapes the whole program, from NRE to supply chain.</p>
+
+  <table class="spec-table">
+    <tr><th>Factor</th><th>Custom Processor Board</th><th>SoM + Carrier Board</th></tr>
+    <tr><td>Hardware NRE</td><td>High — CPU, memory, PMIC design</td><td>Low — module vendor did the hard part</td></tr>
+    <tr><td>Time to first prototype</td><td>6-12 months</td><td>4-8 weeks for the carrier</td></tr>
+    <tr><td>Processor upgrade path</td><td>Full redesign</td><td>Swap the module, keep the carrier</td></tr>
+    <tr><td>Unit BOM cost</td><td>Lower at very high volume</td><td>Module premium ($20-150)</td></tr>
+    <tr><td>Design risk</td><td>DDR routing, PMIC, boot bring-up</td><td>Module vendor already validated it</td></tr>
+    <tr><td>Best volume range</td><td>100k+/year, long lifecycle</td><td>1k-100k/year, fast-changing features</td></tr>
+  </table>
+
+  <p>The crossover point is usually around <span class="data-point">50k-100k</span> units per year: below it, the module premium is cheaper than the engineering and risk of a custom processor design; above it, the BOM savings of integration start to win. For most industrial and medical products — which ship in the thousands, not millions — the SoM approach is the rational choice, and the carrier board becomes the product.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> A carrier board moves your product's risk from "will the DDR boot?" to "does the board feed power and route I/O correctly?" — a much smaller, more manageable engineering problem, and one where DFM experience pays off immediately.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Choosing the Module Form Factor and Connector</h2>
+
+  <p>The module ecosystem spans hobbyist-friendly boards to industrial standards, and the connector is the physical and electrical heart of the interface.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Match the Form Factor to Your Product's Lifecycle and Volume</h4>
+      <p>Raspberry Pi Compute Module 4/5 use a 260-pin DDR4 SODIMM edge connector and dominate cost-sensitive products. SMARC and Qseven are standardized industrial form factors (defined by SGET) with long-lifecycle guarantees and wide temperature options — better for medical, transportation, and industrial control where a 10-year supply commitment matters. For very compact designs, board-to-board modules (0.4-0.5 mm pitch mezzanine connectors) save height. The form factor choice sets your connector, mechanical envelope, and available I/O.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Read the Connector's Current and Signal Ratings Before Layout</h4>
+      <p>An SoM connector carries both power and high-speed signals. Check the per-pin current rating for the power pins — a CM4-style connector has specific pins rated for the 5 V input, and exceeding them melts connectors. Check the high-speed pin assignments: which pins are the PCIe lanes, USB pairs, and display lanes, and whether they have dedicated ground pins between them. The datasheet's recommended footprint and breakout pattern are the starting point for your layer count. Our <a href="/blog/high-speed-connector-pcb-design.html">high-speed connector guide</a> covers breakout routing in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan the Mechanical Stack From Day One</h4>
+      <p>The module sits on top of the carrier, so the stack height (module + connector + carrier) must fit your enclosure. A SODIMM connector adds ~6-8 mm; mezzanine connectors 2-5 mm. Plan standoffs, heat-sink clearance above the module, and access to the module's antenna connectors or microSD. Late mechanical changes are the most expensive kind — lock the stack height before layout starts.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Power Tree Design: From Input to 0.8 V Core</h2>
+
+  <p>The carrier board's first job is feeding the module clean, sequenced power. Most modules take a single main input (5 V or 12 V) and regulate internally, but the carrier still needs its own rails for peripherals, and the input path must handle the module's peak current.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Size the Input Path for Peak, Not Average, Current</h4>
+      <p>A quad-core module can draw 1.5-3 A at 5 V under load, with transients during boot and Wi-Fi transmission. Size the input connector, fuse, and trace copper for the peak with margin — a 2 oz copper pour for the main input is common, and the input bulk capacitance (220-470 µF) goes right at the connector. Voltage drop in a thin input trace at 3 A causes brownouts that are infuriating to debug. Our <a href="/blog/pcb-trace-width-current-capacity.html">current capacity guide</a> gives the copper math.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Design the Peripheral Rails as a Clean Tree</h4>
+      <p>Peripheral rails (5 V for displays, 3.3 V for sensors, 1.8 V for level shifters) come from small buck converters or LDOs on the carrier. Give each rail its own local decoupling at the load, keep the switchers' switching nodes short, and sequence the rails if any peripheral requires power-on order. A power tree diagram in the schematic — input, converters, loads, with current estimates per branch — is the document your DFM reviewer will thank you for. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers decoupling and plane design.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Watch the PDN Impedance at the Module Connector</h4>
+      <p>The module's internal regulators need a low-impedance input supply. That means solid power planes under the connector, decoupling right at the power pins (both bulk and 100 nF RF-class caps), and no routing of high-current paths through vias sized for signals. A 0.5 A rail through a single 0.3 mm via is a 30-50 mV drop you did not plan for — parallel vias for every power connection.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-som-carrier-power.webp" alt="Macro photo of the power tree section of a carrier board with buck converters and decoupling capacitors" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>High-Speed Routing on the Carrier</h2>
+
+  <p>The carrier's signal-integrity work concentrates on the interfaces between the module connector and your product's I/O: PCIe, USB 3.x, MIPI CSI/DSI, HDMI, and Ethernet. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> covers the general method; here are the carrier-specific rules.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Respect the Module Vendor's Routing Guidance</h4>
+      <p>Module vendors publish routing recommendations for each interface — recommended impedance (85 Ω for PCIe and MIPI, 90 Ω for USB 3.x, 100 Ω for Ethernet), trace length limits, and reference-plane rules. Follow them exactly. The module was validated with those constraints; deviating from them moves the risk onto your board. If the module vendor provides a reference carrier design, start from its stackup and routing strategy.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Control the Breakout From the Connector</h4>
+      <p>The pins of an SoM connector are dense, and the first 5-10 mm of routing out of the connector is where impedance control is hardest. Use the connector's recommended breakout, keep pairs adjacent and length-matched from the pin out, and avoid vias in the immediate breakout zone if the layer count allows. If vias are unavoidable (they often are), pair them with ground vias. Our <a href="/blog/pcb-backdrilling-guide.html">backdrilling guide</a> covers via stub control when the stackup is thick.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep Diff Pairs on One Layer and One Reference Plane</h4>
+      <p>Route each differential pair entirely on one signal layer with a continuous reference plane underneath — no crossing plane splits, no reference-plane changes without stitching vias. Length-match within the pair (usually ±0.1-0.5 mm depending on the interface) and between lanes of a bus where the spec requires it. On a 4-6 layer carrier, put the high-speed pairs on the outer layers or on a dedicated signal layer adjacent to ground; our <a href="/blog/pcb-layer-count-selection-guide.html">layer count guide</a> helps you pick the stackup.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Add ESD Protection at the External Connectors</h4>
+      <p>USB, HDMI, and Ethernet ports are the entry points for electrostatic discharge. Put ESD protection (TVS diodes) directly at each external connector, before any series elements, with short, low-inductance paths to chassis or signal ground. This is a carrier board afterthought that causes endless field failures if skipped — and it is invisible to functional testing until units die in the field. Our <a href="/blog/pcb-esd-control-program.html">ESD control guide</a> covers the program-level requirements.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-som-carrier-stackup.webp" alt="Photorealistic cross-section of a multi-layer carrier board showing copper and dielectric layers" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Antenna and RF for Wireless SoMs</h2>
+
+  <p>Modules with Wi-Fi, BLE, or cellular bring their own RF section, but the antenna is usually on the carrier — which means the antenna design problem is still yours.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use U.FL/IPEX Connectors and External Antennas for Industrial Products</h4>
+      <p>For products where range matters, route from the module's RF pin to a U.FL connector on the carrier edge and use an external antenna. The RF trace between the module and the connector must be a controlled 50 Ω line with the module's recommended clearance — a short, well-grounded run. For cost-sensitive consumer designs, a PCB trace antenna on the carrier can work, but the antenna then competes with the module's own radiation and the enclosure. See our <a href="/blog/pcb-antenna-design-guide.html">PCB antenna design guide</a> for the design rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep Antenna Keep-Outs Clear on Every Layer</h4>
+      <p>If the carrier hosts a trace or chip antenna, enforce the keep-out on all layers — no copper pour, traces, or components in the antenna zone, including on inner layers. A ground pour under a chip antenna's clearance area detunes it completely. Add this to the DFM review checklist; it is a top cause of wireless products with half their designed range.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Thermal and Mechanical: Heatsinks, Enclosures, and Warpage</h2>
+
+  <p>Modules run hot — a quad-core SoC can dissipate 5-15 W — and the carrier board is the thermal path to the enclosure.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design the Thermal Path, Not Just the PCB</h4>
+      <p>Most modules have a top heat-spreader or expose the processor for a heatsink. The carrier board contributes via thermal vias under the module's power section and, for high-power modules, a metal core or heavy copper layer in that zone. Specify thermal vias (filled or tented, 0.3-0.5 mm, arrayed under the hot area) in the fabrication drawing. Our <a href="/blog/pcb-thermal-management-guide.html">thermal management guide</a> covers the via and copper strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Control Warpage for Connector Reliability</h4>
+      <p>A carrier board that bows under the module connector causes intermittent contact failures that are nearly impossible to diagnose in the field. Keep copper balance reasonably even across the board, avoid large solid pours on one side only, and consider a 1.6-2.0 mm board thickness for modules with tall connectors. Warpage control matters more on carrier boards than on most designs because of the long connector line. Our <a href="/blog/pcb-warpage-reflow-prevention.html">warpage guide</a> covers the specifics.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan the Assembly Sequence With Your CM</h4>
+      <p>Carrier boards are often double-sided with the SoM connector on one side and peripherals on the other. Confirm the assembly sequence with your manufacturer: which side is populated first, whether the connector is press-fit or SMT, and whether the module is assembled at your site or the factory's. Box-build — carrier, module, enclosure, and final test — is where turnkey manufacturing saves real time. Our <a href="/blog/turnkey-pcb-assembly.html">turnkey assembly guide</a> explains the scope.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-som-carrier-assembly.webp" alt="Macro photo of an SMT line placing a fine-pitch connector on a carrier board" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>DFM for Carrier Boards: What the Fab Needs From You</h2>
+
+  <p>Carrier boards concentrate the DFM risk in a few places: the connector footprint, the impedance-controlled pairs, and the mixed assembly. Specify these on the drawing:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Coupons With Per-Panel Reporting</h4>
+      <p>Request coupons for every impedance class on the board (85/90/100 Ω), measured per panel and reported. The coupon stackup must match the real board. This is the single most common gap between a design that simulates well and a board that measures well. Our <a href="/blog/impedance-control.html">impedance control guide</a> covers the coupon requirements in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Connector Assembly and Inspection Requirements</h4>
+      <p>Specify the connector attach method (press-fit vs SMT), the solder paste and stencil requirements for fine-pitch connectors, and the inspection level — X-ray for hidden solder joints under shields and high-pin-count connectors, AOI for the rest. A press-fit SoM connector needs accurate hole size and plating, verified on first articles. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">inspection guide</a> covers the method mix.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Panelization and Test Points</h4>
+      <p>Panelization must keep the connector area flat and clear of V-score stress. Add ICT or flying-probe test points for the critical rails and interfaces on the carrier, and a test strategy that includes a module-bring-up test at the factory if you are using turnkey assembly. Our <a href="/blog/pcb-design-for-testability.html">design for testability guide</a> covers test point placement.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Carrier Board Checklist</h2>
+
+  <p>A carrier board that ships reliably is built on a module form factor matched to the product's lifecycle, a connector treated with respect for its current and signal ratings, a power tree sized for peak currents with clean sequencing, high-speed pairs routed to the module vendor's exact guidance, antennas given their keep-outs, a thermal path designed in from the start, and a fabrication drawing that specifies impedance coupons, connector inspection, and warpage control. Done this way, the SoM approach delivers exactly what it promises: fast time-to-market with low hardware risk.</p>
+
+  <p>At Huaxing PCBA we manufacture carrier boards up to 32 layers with impedance control to ±5%, mixed laminates, press-fit and fine-pitch SMT connector assembly, X-ray inspection, and full turnkey box-build with bring-up testing. Our DFM review checks the connector breakout, impedance stackup, power input path, thermal via arrays, and assembly sequence before tooling. <a href="/blog/data-center-server-pcb.html">Read our server PCB guide</a> for the high-layer-count side of the same discipline, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/high-speed-connector-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">High-Speed Connector PCB Design</a></li>
+    <li><a href="/blog/pcb-power-integrity-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Power Integrity &amp; PDN Design</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity — High-Speed Rules</a></li>
+    <li><a href="/blog/fpga-pcb-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">FPGA PCB Design Guide</a></li>
+    <li><a href="/blog/turnkey-pcb-assembly.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Turnkey PCBA — One-Stop Assembly</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-som-carrier.webp)">
+      <h2>Designing a Carrier Board for Your Compute Module?</h2>
+      <p>Send your layout files — our engineers will review the connector breakout, impedance stackup, power tree, thermal vias, and assembly sequence, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Carrier Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
