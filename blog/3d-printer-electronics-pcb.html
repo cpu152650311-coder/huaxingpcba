@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Printer Electronics PCB Design — Motion Control, Heater Drive &amp; Quiet Operation | Huaxing PCBA</title>
+<meta name="description" content="3D printer mainboard PCB design and manufacturing — stepper driver selection, heated-bed MOSFET sizing, thermistor accuracy, 12V vs 24V power architecture, and EMI control for quiet, reliable printing.">
+<meta property="og:title" content="3D Printer Electronics PCB Design — Motion, Heat &amp; Power">
+<meta property="og:description" content="The mainboard decides print quality before the nozzle does. Stepper driver choices, heated-bed MOSFET sizing, thermistor accuracy and EMI control — the PCB rules behind quiet, reliable 3D printers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/3d-printer-electronics-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-3d-printer.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/3d-printer-electronics-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "3D Printer Electronics PCB Design — Motion Control, Heater Drive & Quiet Operation",
+  "description": "3D printer mainboard PCB design and manufacturing — stepper driver selection, heated-bed MOSFET sizing, thermistor accuracy, 12V vs 24V power architecture, and EMI control for quiet, reliable printing.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-3d-printer.webp",
+  "url": "https://huaxingpcba.com/blog/3d-printer-electronics-pcb.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/3d-printer-electronics-pcb.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-3d-printer.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">3D Printer Electronics PCB Design:<br><em>Motion Control, Heater Drive, and the Power Architecture Behind Quiet, Reliable Printing</em></h1>
+      <p class="reveal">Before the nozzle moves a millimeter, the mainboard has already decided print quality — stepper driver current, bed-heater regulation, thermistor accuracy, and the EMI that turns a silent printer into a radio nuisance.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>3D Printer Electronics PCB</span></div>
+
+  <p>A modern FDM 3D printer mainboard is a power electronics board wearing a motion-control hat: four to six stepper drivers switching 1–2 A per phase, a heated bed pulling 200–350 W, a hotend heater, a part-cooling fan, and a 32-bit MCU coordinating all of it — usually on a single 4-layer PCB. Get the power stage right and the printer prints quietly for years; get it wrong and you get thermal runaway shutdowns, ghosting in the prints, and EMC failures at certification.</p>
+
+  <p>Huaxing PCBA manufactures 3D printer mainboards and heated-bed PCBs for printer OEMs and aftermarket brands — up to <span class="data-point">6 layers</span>, 2 oz and 3 oz copper for heater and motor paths, 24 V architectures to 350 W, and 100% functional test with heater and stepper loads connected. This guide covers the component and layout decisions that separate a 2026-quality mainboard from a hobby-grade one.</p>
+
+  <img class="article-img" src="/generated/blog-3d-printer-mainboard.webp" alt="Photorealistic render of a 3D printer mainboard with stepper driver modules, MOSFET heat sink and connector headers" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Anatomy of a 3D Printer Mainboard: What Actually Lives on the Board</h2>
+
+  <p>The board is a small power plant with a motion controller attached. Every subsystem has a PCB consequence:</p>
+
+  <table class="spec-table">
+    <tr><th>Subsystem</th><th>Typical Spec (2026)</th><th>PCB Consequence</th></tr>
+    <tr><td>MCU</td><td>32-bit (STM32, RP2040, ESP32 class)</td><td>3.3 V logic, quiet digital ground</td></tr>
+    <tr><td>Stepper drivers</td><td>4–6× TMC2209/TMC5160 class, 1–2 A RMS</td><td>Solid thermal pad, sense resistors, quiet SPI/UART lines</td></tr>
+    <tr><td>Heated bed</td><td>24 V, 200–350 W (9–15 A)</td><td>2–3 oz copper, MOSFET with heatsink, thick traces</td></tr>
+    <tr><td>Hotend heater</td><td>24 V, 40–70 W</td><td>MOSFET switching, thermistor input accuracy</td></tr>
+    <tr><td>Power input</td><td>24 V DC, 300–500 W PSU</td><td>Reverse-polarity protection, bulk capacitance, inrush control</td></tr>
+    <tr><td>Connectivity</td><td>USB, Wi-Fi, SD card, display port</td><td>ESD protection on every external connector</td></tr>
+  </table>
+
+  <p>The layer count is almost always 4: two signal layers plus a solid ground plane and a power plane. The ground plane is what makes the difference between a board that prints cleanly and one with layer-shift artifacts from motor noise coupling into the endstop and encoder inputs. Our <a href="/blog/pcb-layer-count-selection-guide.html">layer count selection guide</a> explains the 2 vs 4 layer decision for mixed power/digital boards.</p>
+
+  <!-- ── Section ── -->
+  <h2>Stepper Motor Drive: Current, Microstepping, and Quiet Operation</h2>
+
+  <p>The stepper drivers are the heart of print quality. Their selection and layout determine the two things buyers actually notice: print accuracy and noise.</p>
+
+  <table class="spec-table">
+    <tr><th>Driver Class</th><th>Typical Current</th><th>Microstepping</th><th>Noise Behavior</th><th>Typical Use</th></tr>
+    <tr><td>A4988 class (legacy)</td><td>1–2 A</td><td>Up to 1/16</td><td>Audible whine at low speeds</td><td>Budget printers, retired</td></tr>
+    <tr><td>TMC2209 class</td><td>1.4–2 A RMS</td><td>Up to 1/256</td><td>StealthChop — near-silent</td><td>Mainstream 2026 printers</td></tr>
+    <tr><td>TMC5160 class</td><td>2–3 A RMS</td><td>Up to 1/256</td><td>Silent with spreadCycle control</td><td>CoreXY, large-format, high-speed</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design the Driver Thermal Path for Continuous Current</h4>
+      <p>Stepper drivers run at 1–2 A RMS continuously, hour after hour. The exposed pad must be soldered to a copper island with thermal vias to the ground plane — a driver without a thermal path derates itself and can hit thermal shutdown mid-print. Require X-ray or AOI verification of the driver pad solder coverage in assembly. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> covers pad and via design for power components.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep the Current-Sense Path Short and Clean</h4>
+      <p>The driver's current regulation measures voltage across a sense resistor on the motor return path. Any parasitic inductance or resistance in that path shifts the actual motor current. Put the sense resistors within a few millimeters of the driver, use 1% low-inductance parts, and route the sense traces as a tight differential pair to the driver pins. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> has the sense-resistor layout rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Run the Driver Interface as a Quiet Bus</h4>
+      <p>Modern drivers communicate over UART or SPI for current and microstepping configuration. These lines run next to switching motor phases on the same board — route them on the inner signal layer between ground planes, and add series resistors (22–33 Ω) at the driver pins to damp ringing. A corrupted UART configuration mid-print is the kind of intermittent failure that takes weeks to find.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-3d-printer-drivers.webp" alt="Macro photo of stepper motor driver modules with heat sinks on a 3D printer controller board" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Heater Control: Sizing the Heated-Bed MOSFET for 350 W</h2>
+
+  <p>The heated bed is the highest-current subsystem on the board, and the most common source of field failures — usually because the MOSFET was sized for the bed's steady-state power instead of its switching reality.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Do the 24 V Math Before Picking the MOSFET</h4>
+      <p>A 300 W bed at 24 V draws 12.5 A. A logic-level MOSFET with 5 mΩ RDS(on) dissipates about 0.8 W of conduction loss at that current — fine thermally with a pad. But the switching loss at 1–10 kHz PWM, plus the cold-bed inrush (a cold bed's resistance is roughly 30% lower, so it draws more current at power-on than at operating temperature), means the part must be rated for the peak, not the average. Select a MOSFET with at least 2× the calculated current headroom and verify the thermal pad area in the layout. Our <a href="/blog/pcb-trace-width-current-capacity.html">trace width and current capacity guide</a> has the copper sizing tables for the 12.5 A path.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Route the Bed Power Path as a Low-Inductance Loop</h4>
+      <p>The loop from the input connector through the MOSFET and back to the bed connector should be short and wide — the switching node is where the EMI radiates from. Keep the MOSFET gate drive close to the MOSFET, add a gate resistor (10–22 Ω) to control slew rate, and put a snubber across the switching node if the layout forces a long run to the bed connector. Our <a href="/blog/smps-pcb-layout-design.html">SMPS layout guide</a> covers switching-node discipline in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Independent Thermal Fuse Path — Never Rely on Firmware Alone</h4>
+      <p>A runaway heated bed is a fire hazard, and firmware thermal runaway detection has failure modes (frozen MCU, corrupted sensor reading). The board should include a hardware thermal cutoff — a thermal fuse or a dedicated hardware comparator on the bed thermistor that latches the MOSFET off — independent of the MCU. Print this requirement in the spec; it is a liability line, not a feature. Our <a href="/blog/pcb-functional-safety-iso26262.html">functional safety guide</a> covers the independent-fail-safe principle in the automotive context that applies here too.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Thermal Sensing: Thermistor Accuracy That Doesn't Drift</h2>
+
+  <p>Print temperature accuracy is set by the thermistor circuit, and most temperature complaints trace back to the PCB, not the sensor.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use 100 kΩ NTC (B = 3950) With a Precision Reference</h4>
+      <p>The de-facto standard is a 100 kΩ NTC thermistor with B = 3950, read through a voltage divider with a 4.7 kΩ pullup to a stable reference. At 200–300 °C the divider output sits in the middle of the ADC range where accuracy is best. Use a 0.1% pullup resistor and a dedicated reference if the MCU's VDD tolerance is loose — a 3% reference shift reads as 5–10 °C of error at hotend temperatures.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep the Thermistor Traces Away From the Heater Lines</h4>
+      <p>The thermistor signal is a high-impedance divider output — a few hundred mV of coupled noise from the adjacent heater MOSFET switching changes the temperature reading and can trigger false thermal-runaway shutdowns. Route thermistor traces on the inner layers between ground planes, or shield them with a ground trace on both sides. Our <a href="/blog/mcu-pcb-design-guide.html">MCU PCB design guide</a> covers ADC input conditioning and grounding.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Calibrate the Beta Curve in Production, Not in the Field</h4>
+      <p>Thermistor B-value tolerance (±1% on good parts) plus ADC error adds up to a per-unit temperature offset. For brands that advertise ±1 °C hotend accuracy, the manufacturing line should calibrate each board's temperature mapping during functional test — a 30-second step that eliminates most "temperature too high/low" support tickets. Our <a href="/blog/pcb-first-article-inspection-guide.html">first-article inspection guide</a> shows how to build calibration into the test fixture.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-3d-printer-bed.webp" alt="Photorealistic macro shot of a 3D printer heated bed PCB with copper traces and thermistor pad" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="/generated/blog-3d-printer-hotend.webp" alt="Professional macro photo of a 3D printer hotend heater block with thermistor and heater cartridge" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Power Input: 12 V vs 24 V Architectures and Inrush</h2>
+
+  <p>The 2026 mainstream is 24 V, and the migration changed the PCB rules substantially.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>24 V Halves the Current, But Doubles the Layout Discipline</h4>
+      <p>Moving from 12 V to 24 V cut the bed current from 25 A to 12.5 A for the same wattage — smaller traces, smaller MOSFETs, less heat. The trade-off: higher voltage stresses on the switching nodes and connectors, and a bigger safety gap requirement between high-voltage traces. Specify creepage/clearance per the working voltage (IPC-2221B) and review the connector ratings — a cheap 24 V connector is a field-failure generator. Our <a href="/blog/high-voltage-pcb-design.html">high-voltage design guide</a> covers the spacing rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Handle the Cold-Bed Inrush at Power-On</h4>
+      <p>A cold bed's resistance is roughly 30% lower than at operating temperature, so at power-on the bed draws ~1.3× its steady-state current — plus the PSU's own inrush and the bulk capacitors charging. Without soft-start, the connector and PSU see a current spike that degrades contacts over time. An NTC inrush limiter on the input or firmware-controlled PWM ramp (500 ms) solves it cheaply. Our <a href="/blog/smps-pcb-layout-design.html">SMPS layout guide</a> covers bulk capacitance and inrush handling in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Reverse-Polarity and ESD Protection on Every Input</h4>
+      <p>The barrel jack or XT60 input is user-pluggable — a reversed connector is a common user error that should cost a fuse, not a mainboard. Include reverse-polarity protection (P-channel MOSFET ideal-diode circuit or a beefy Schottky), a slow-blow input fuse sized at 1.5× max current, and TVS clamping on the input. Our <a href="/blog/pcb-esd-control-program.html">ESD control guide</a> covers connector protection practice.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>EMI From Steppers: Why Print Quality Degrades and How to Fix It</h2>
+
+  <p>A printer with five switching motor phases, a PWM bed heater, and a fan controller is an EMI source by construction. The failures show up two ways: radiated emissions failing FCC/CE at the lab, and internal coupling that corrupts the MCU, the endstops, or the Wi-Fi module during prints.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design for the Motor Cable, Because the Cable Radiates</h4>
+      <p>Motor cables are the antennas. Plan for ferrite beads on each motor cable near the connector, twisted-pair wiring in the harness spec, and keep the connectors grouped at one board edge so cables don't crisscross the enclosure. The board layout can't fix a bad cable harness — but it can make the cable the only radiating element, which is manageable. Our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a> has the full emissions checklist.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep Switching Nodes Off the Outer Layers</h4>
+      <p>The bed-heater and stepper switching nodes should live on inner layers or be shielded by ground pour on both sides. A switching node on the outer layer next to the board edge radiates directly. If the layout forces an outer-layer switching trace, run a ground trace beside it and keep it short. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> covers return-path and shielding discipline.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Test With All Motors Moving and the Bed PWMing</h4>
+      <p>An EMC pre-scan with the printer idle passes; with all five steppers stepping and the bed at full PWM, it can fail by double digits. Put "EMC pre-compliance with full motion profile" in the development plan and run it before the certification submission. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC compliance guide</a> explains how to specify pre-scan testing to your manufacturer.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Assembly and Testing for Mainboard Reliability</h2>
+
+  <p>3D printer mainboards run hot, vibrate, and get handled by enthusiasts who probe around with multimeters. The manufacturing checks should match that life.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Functional Test With Real Loads, Not Just Connectivity</h4>
+      <p>Require a functional test that connects actual steppers and heaters: verify each driver steps, each heater reaches target temperature, the thermistor reads within calibration, and the fans spin. A connectivity-only ICT misses a weak driver thermal joint that only fails under load. Our <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">test method guide</a> explains the three test tiers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>AOI Plus X-Ray on the Driver and MOSFET Pads</h4>
+      <p>Stepper drivers and power MOSFETs fail silently when their thermal pads have voids. AOI catches the visible defects; X-ray catches the voids under the exposed pads. Specify X-ray sampling (e.g., 5 boards per lot) on the power components, with void acceptance per IPC-A-610. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">AOI/X-ray/SPI guide</a> has the acceptance criteria.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Burn-In the Power Stage Before Shipping</h4>
+      <p>A 30–60 minute powered burn-in with the bed at temperature catches the early-life failures — marginal MOSFETs, cold solder joints under thermal stress, weak connectors — before they reach customers. For higher-volume SKUs, sample-based thermal cycling adds another layer of confidence. Our <a href="/blog/pcb-burn-in-ess-testing.html">burn-in and ESS guide</a> has the profiles.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The 3D Printer Mainboard Checklist</h2>
+
+  <p>A 2026-quality 3D printer mainboard is a 24 V power board with disciplined motion control: drivers with real thermal paths and quiet interfaces, MOSFETs sized for cold-bed inrush, thermistor circuits that don't drift, a hardware thermal fail-safe, and EMI managed at the layout stage with the motor cables in mind. The manufacturers who ship quiet, reliable printers treat these as PCB rules — not firmware features.</p>
+
+  <p>At Huaxing PCBA we manufacture 3D printer mainboards and heated-bed PCBs up to 6 layers with 2–3 oz copper, 24 V architectures to 350 W, and functional test with real stepper and heater loads. Our DFM review checks driver thermal pads, heater-loop inductance, thermistor trace isolation, and connector ratings before tooling. <a href="/blog/mcu-pcb-design-guide.html">Read our MCU board design guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/mcu-pcb-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">MCU PCB Design — Decoupling &amp; ADC Grounding</a></li>
+    <li><a href="/blog/smps-pcb-layout-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMPS PCB Layout — Switching Power Rules</a></li>
+    <li><a href="/blog/pcb-trace-width-current-capacity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Trace Width &amp; Current Capacity — IPC-2152</a></li>
+    <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management — Heat Dissipation</a></li>
+    <li><a href="/blog/pcb-emi-emc-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB EMI/EMC Design — Emissions Control</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-3d-printer.webp)">
+      <h2>Designing a 3D Printer Mainboard? Let's Check the Power Stage</h2>
+      <p>Send your layout files — our engineers will review driver thermal pads, heater MOSFET sizing, thermistor accuracy, inrush handling and connector ratings, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Mainboard DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

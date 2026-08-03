@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Vacuum PCB Design &amp; Manufacturing — Sensor Fusion, Motor Drive &amp; Battery Management | Huaxing PCBA</title>
+<meta name="description" content="Robot vacuum PCB design and manufacturing guide — LiDAR/ToF navigation, BLDC motor drive, BMS and charging contacts, mopping-model waterproofing, and the assembly controls that cut field failures.">
+<meta property="og:title" content="Robot Vacuum PCB Design &amp; Manufacturing — Sensors, Motors &amp; BMS">
+<meta property="og:description" content="A robot vacuum mainboard is one of the most sensor-dense consumer boards built today. Here is what changes on the layout, the motor drive, the battery path and the assembly line when you mass-produce one.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/robot-vacuum-pcb-design-manufacturing.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-robot-vacuum.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/robot-vacuum-pcb-design-manufacturing.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Robot Vacuum PCB Design & Manufacturing — Sensor Fusion, Motor Drive & Battery Management",
+  "description": "Robot vacuum PCB design and manufacturing guide — LiDAR/ToF navigation, BLDC motor drive, BMS and charging contacts, mopping-model waterproofing, and the assembly controls that cut field failures.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-robot-vacuum.webp",
+  "url": "https://huaxingpcba.com/blog/robot-vacuum-pcb-design-manufacturing.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/robot-vacuum-pcb-design-manufacturing.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-robot-vacuum.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">Robot Vacuum PCB Design &amp; Manufacturing:<br><em>Sensor Fusion, Motor Drive, and the Battery Path That Survives 10,000 Cleaning Cycles</em></h1>
+      <p class="reveal">A robot vacuum mainboard packs navigation, drive, power and connectivity into a circular board the size of a coaster — and every one of those subsystems has a failure mode that shows up in field returns, not in the lab.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Robot Vacuum PCB</span></div>
+
+  <p>Robot vacuums are among the most sensor-dense consumer products manufactured today. A typical 2026 model carries a rotating LiDAR module, four to six cliff sensors, an IMU, two wheel-motor drivers, a suction fan controller, a battery management circuit, Wi-Fi and Bluetooth radios, and on mopping models, a water pump and mop motor — all on a 4- to 8-layer board between 0.8 and 1.6&nbsp;mm thick. The layout that makes all of these coexist quietly is where the engineering is actually won.</p>
+
+  <p>Huaxing PCBA builds robot vacuum mainboards for consumer robotics brands — up to <span class="data-point">8 layers</span> with controlled impedance for the radio section, gold-plated charging contacts, selective conformal coating for mopping models, and 100% flying-probe testing before every shipment. This guide covers the design decisions that determine field reliability, the motor-drive and battery rules that prevent the classic early failures, and the manufacturing checks to put in your purchase order.</p>
+
+  <img class="article-img" src="/generated/blog-robot-vacuum-navigation.webp" alt="Macro photo of a robot vacuum mainboard with LiDAR connector, IR cliff sensor array and motor drivers" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>What Exactly Lives on a Robot Vacuum Mainboard?</h2>
+
+  <p>The board is really five subsystems on one PCB: the navigation cluster, the motion cluster, the power cluster, the radio cluster, and the safety cluster. Each has different layout needs, and the conflicts between them are what make robot vacuum boards harder than they look.</p>
+
+  <table class="spec-table">
+    <tr><th>Subsystem</th><th>Typical Components</th><th>Key Layout Constraint</th></tr>
+    <tr><td>Navigation</td><td>LiDAR module, ToF/drop sensors, IMU, encoder inputs</td><td>Sensor data integrity — keep away from motor switching noise</td></tr>
+    <tr><td>Motion</td><td>2× wheel-motor drivers, suction BLDC driver, mop motor</td><td>High-current paths with short, low-inductance loops</td></tr>
+    <tr><td>Power</td><td>BMS, charge path, DC-DC rails (3.3/5/12 V), protection</td><td>Thermal management of charge and motor surges</td></tr>
+    <tr><td>Radio</td><td>Wi-Fi/BLE SoC, antenna, RF matching</td><td>50 Ω controlled impedance, antenna keep-out</td></tr>
+    <tr><td>Safety</td><td>Bumper sensors, drop sensors, thermal cutoffs, ESD</td><td>Fail-safe wiring — sensors must read correctly under fault</td></tr>
+  </table>
+
+  <p>The board shape is also unusual: circular, with the LiDAR turret occupying the center, the battery pack wrapped around the outside, and the wheel motors on opposite sides. That geometry forces routing around a center keep-out and puts the highest-current traces on the outer ring — both worth planning in the stackup before layout starts. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> covers how to allocate layers when a single board carries analog sensors, switching power and a radio.</p>
+
+  <!-- ── Section ── -->
+  <h2>Navigation Sensing: LiDAR, ToF, and Cliff Sensors</h2>
+
+  <p>A robot vacuum navigates with three complementary sensor families, and each one has a PCB-side requirement that is easy to miss.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep LiDAR Data Lines Away From Motor Switching</h4>
+      <p>The rotating LiDAR module spins at 2,000–3,000 RPM and streams point-cloud data over a serial link to the main SoC. The wheel motors and suction fan switch tens of amps within centimeters of that link. Route LiDAR data lines as differential pairs with a solid reference plane, and keep them off the layers directly above motor-driver outputs. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> has the pair-routing rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Cliff Sensors Work by IR Reflection — the Board Must Not Blind Them</h4>
+      <p>Cliff (drop) sensors are infrared emitter-receiver pairs aimed at the floor, typically four to six around the chassis. They detect a stair edge when the reflected signal drops below a threshold. Solder mask color, silkscreen ink, and even a component shadow in the sensor field of view can shift the calibration. Keep the sensor zone clean of copper and ink, and specify matte mask on the sensor side to avoid specular reflections. Our <a href="/blog/pcb-solder-mask-types.html">solder mask guide</a> explains the reflectivity differences between gloss and matte finishes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Give the IMU a Quiet Mechanical and Electrical Home</h4>
+      <p>The IMU provides odometry dead-reckoning between LiDAR scans. Place it near the board center — the same spot where the LiDAR turret sits, so in practice it lands beside the turret — with solid ground pour underneath and no switching regulators within a few millimeters. A gyro that picks up 20 kHz motor noise produces drift that looks like a navigation bug. Our <a href="/blog/mems-sensor-pcb-design.html">MEMS sensor design guide</a> covers the grounding and isolation rules in detail.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Navigation failures are the #1 reason robot vacuums are returned. Most are not software bugs — they are EMI coupling into LiDAR data, IMU drift from regulator noise, or cliff sensors blinded by the board's own mask and ink. Treat the sensor cluster like an analog front end, not a digital peripheral.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Motor Drive: Stall Currents, PWM Frequency, and Audible Noise</h2>
+
+  <p>A robot vacuum has three motor stages with very different electrical personalities. Sizing the drive correctly for each one is the difference between a board that lasts and one that comes back with a blown MOSFET.</p>
+
+  <table class="spec-table">
+    <tr><th>Motor Stage</th><th>Typical Power</th><th>Drive Voltage</th><th>Failure Mode to Design For</th></tr>
+    <tr><td>Wheel motors (2×)</td><td>5–15 W each</td><td>12–21.6 V</td><td>Stall against furniture — 2–3× rated current</td></tr>
+    <tr><td>Suction fan (BLDC)</td><td>10–30 W</td><td>12–21.6 V</td><td>Blocked airflow, carpet drag, inrush</td></tr>
+    <tr><td>Mop motor / pump</td><td>2–8 W</td><td>5–12 V</td><td>Dry-run, water ingress on the driver</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Size MOSFETs for Stall Current, Not Running Current</h4>
+      <p>A wheel motor that draws 1.5 A free-running can pull 3–4.5 A when the robot pushes into a chair leg. Select the low-side MOSFETs and sense resistors for the stalled condition with margin, and let the firmware current-limit below the hardware limit. Verify the PCB copper can carry the stall current: at 4.5 A continuous, a 1 oz trace needs roughly 3.5 mm width before derating — plan the motor loop in the stackup, not as an afterthought. Our <a href="/blog/pcb-trace-width-current-capacity.html">trace width and current capacity guide</a> has the IPC-2152 tables.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Run PWM Above 20 kHz — Audible Noise Is a Return Reason</h4>
+      <p>Motor PWM below 20 kHz produces an audible whine that customers hear across the room and return the unit over. Standard practice in 2026 robot vacuums is PWM at 20–40 kHz for wheel and suction motors, which pushes the fundamental above human hearing. The trade-off is higher switching losses in the MOSFETs — acceptable at these power levels, but it means the driver layout needs a tight gate-drive loop and adequate copper. Our <a href="/blog/power-electronics-pcb.html">power electronics PCB guide</a> covers gate-drive layout and snubber design.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Add Flyback and Bulk Decoupling at Every Motor Connector</h4>
+      <p>Each brushed motor connector needs a flyback diode (or TVS for faster decay) and a bulk capacitor local to the connector, not shared across the board. The wheel motors on a robot vacuum start and stop hundreds of times per cleaning cycle; without local decoupling, the current spikes modulate the 12 V rail and corrupt the IMU and radio. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> explains rail-modulation control in depth.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-robot-vacuum-drive.webp" alt="Photorealistic macro shot of a BLDC motor driver stage with MOSFETs and heat sink on a robot vacuum mainboard" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Battery, BMS, and the Charging Dock</h2>
+
+  <p>The battery subsystem is where robot vacuum economics bite: the pack is a large fraction of the BOM, and the charging path sees daily mechanical wear that ordinary consumer electronics never experiences.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Typical Packs: 4S at 14.4 V, Up to 6S at 21.6 V</h4>
+      <p>Most robot vacuums run a 4S Li-ion pack at 14.4 V nominal with 2,500–5,200 mAh cells, or a 6S pack at 21.6 V on higher-suction flagships. The BMS must cover over-voltage, under-voltage, over-current, and over-temperature per cell, plus cell balancing. Specify a BMS with cell-balance current of at least 50 mA so the pack stays balanced through hundreds of partial charge cycles — imbalance is a leading cause of early pack failure in robots that dock for a top-up after every run. Our <a href="/blog/ev-bms-pcb.html">BMS PCB guide</a> covers protection and balancing design in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Charging Contacts Wear Mechanically — Plan the Metallurgy</h4>
+      <p>The robot docks daily, making and breaking the charging contact hundreds of times per year. Specify gold-plated contacts (hard gold over nickel, 0.1–0.3 µm gold minimum) on both the robot and the dock, and design the contact pads large enough to tolerate misalignment. On the PCB side, that means a robust pad geometry with the plating called out on the fabrication drawing. Our <a href="/blog/pcb-gold-plating-hard-vs-soft.html">gold plating guide</a> explains hard-gold vs ENIG trade-offs for contact applications.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Wireless Charging Variants Change the Layout Entirely</h4>
+      <p>Flagship models are moving to wireless charging docks, which replaces the contact pads with a receiver coil and its rectifier stage. The coil needs a large clean area, the rectifier needs thermal relief, and the whole power path needs to handle 15–30 W inductively. If your roadmap includes a wireless-charging SKU, reserve the coil zone in the stackup from day one. Our <a href="/blog/wireless-power-transfer-pcb.html">wireless power transfer guide</a> covers coil layout and rectifier design.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-robot-vacuum-battery.webp" alt="Macro photo of a robot vacuum battery connector with gold-plated charging contacts on the mainboard" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Mopping Models: Water, Conformal Coating, and IP Ratings</h2>
+
+  <p>Once a robot carries a water tank, the board is no longer a dry electronics product. The classic failure is not a flood — it is years of micro-condensation inside a warm chassis slowly corroding exposed traces and connector pins.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Specify Selective Conformal Coating, Not Full Coverage</h4>
+      <p>Mopping models should have acrylic conformal coating applied selectively — covering the analog sensor area, the BMS, and the motor drivers, while leaving connectors, charging contacts, and test points uncoated. Full coverage coats the test points and makes rework nearly impossible. Our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> covers acrylic vs silicone vs Parylene selection for moisture environments.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Design the Water Path: Pump Below the Board, Drips Away From Vents</h4>
+      <p>The pump and water lines should sit below the mainboard plane so any leak drips away from electronics, and the board's mounting bosses should be on standoffs rather than sitting flush. Even with coating, a board that lives in the drip path will fail eventually — the mechanical layout is the primary defense, the coating is the secondary one.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Target IPX4 at the System Level, But Don't Stop There</h4>
+      <p>Most mopping robots target IPX4 (splash-proof) at system level, which the sealed chassis provides. The board itself should be rated to tolerate condensation: coated, with conformal-coated connector solder joints on the water-side connectors, and connector pins specified with gold or tin-lead finishes that resist fretting corrosion. Our <a href="/blog/pcb-ionic-contamination-cleanliness.html">ionic contamination guide</a> covers why cleanliness levels matter before coating.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-robot-vacuum-mopping.webp" alt="Macro photo of a robot vacuum water pump connector with selective conformal coating on surrounding components" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>EMI and Noise: Why Quiet Boards Ship More Units</h2>
+
+  <p>Robot vacuums fail EMC testing surprisingly often, for a consistent reason: a 20–40 kHz switching motor system sharing a board with a 2.4 GHz radio and a sub-millimeter-precision IMU. The emissions budget has to be managed in the layout, not at the compliance lab.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Give the Radio Its Own Clean Corner</h4>
+      <p>Place the Wi-Fi/BLE SoC and its antenna at the board edge farthest from the motor connectors, with a keep-out around the antenna per the module vendor's drawing. The 2.4 GHz band is exactly where motor-switching harmonics land, so the antenna feed needs controlled impedance and the radio ground needs a continuous reference. Our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB guide</a> covers antenna feed and grounding practice.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Plan the Emissions Budget Like a Product Spec</h4>
+      <p>Decide at kickoff whether the product targets FCC Part 15B, CE (EN 55014 for household appliances), or both, and carry the margin into the layout: keep 6 dB of headroom on radiated emissions, which usually means ferrite beads on motor cables, a continuous chassis ground, and shield cans over the noisiest drivers. Our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a> has the full emissions-control checklist.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Test Emissions With Motors Running, Not Just Idle</h4>
+      <p>The classic lab surprise: the board passes with the motors unplugged and fails by 8 dB with the suction fan at full speed. Your manufacturing partner should support pre-compliance testing with the actual motor load connected. Put "EMC pre-scan with motor load" in the project plan, not in the re-spin budget. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC compliance guide</a> walks through specifying this to your manufacturer.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Assembly and Reliability for a 2-Year Consumer Warranty</h2>
+
+  <p>The design rules above prevent field failures; the assembly rules below make sure the failures that do happen are caught before shipment. Robot vacuums are consumer products with a brutal duty cycle — daily operation, vibration, and temperature cycling — so the manufacturing checks are stricter than a typical consumer board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>100% Flying Probe or ICT on Every Board</h4>
+      <p>With the BMS, motor drivers, and charging path all safety-relevant, a sample-test strategy is not acceptable. Require 100% electrical test — flying probe for prototype and low volume, ICT with a bed-of-nails fixture once volumes justify the tooling. The test program must verify the BMS protection thresholds, not just connectivity. Our <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">flying probe vs ICT guide</a> covers when to switch.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Burn-In and Thermal Cycling Catch the Early Failures</h4>
+      <p>Consumer robots fail in the first month when marginal solder joints and weak components surface under thermal cycling. Specify a 2–4 hour burn-in with power cycling for production boards, and a thermal-cycling sample per lot (e.g., 100 cycles from 0 to 60 °C). Our <a href="/blog/pcb-burn-in-ess-testing.html">burn-in and ESS guide</a> has the test profiles, and <a href="/blog/pcb-thermal-cycling-testing.html">the thermal cycling guide</a> covers IPC-9701 requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>ESD Control Through the Whole Assembly Chain</h4>
+      <p>Robot vacuum boards carry sensitive IMUs, LiDAR interfaces, and RF front ends. Require an ANSI/ESD S20.20-compliant assembly line — grounded workstations, ionizers, and ESD-safe packaging for shipment. A board zapped during handling can ship with a degraded IMU that reads fine at ICT but drifts in the field. Our <a href="/blog/pcb-esd-control-program.html">ESD control program guide</a> is the audit checklist.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Robot Vacuum Board Checklist</h2>
+
+  <p>A robot vacuum mainboard that survives the field treats the navigation cluster as a precision analog front end, sizes the motor drive for stall currents, protects the battery path with a real BMS and gold-plated contacts, waterproofs the mopping variants selectively, and manages EMI as a product spec from day one. None of it is exotic — it is disciplined mixed-signal layout backed by manufacturing checks that match the duty cycle.</p>
+
+  <p>At Huaxing PCBA we manufacture robot vacuum mainboards up to 8 layers with controlled impedance, hard-gold charging contacts, selective conformal coating, and 100% flying-probe test on every board. Our DFM review checks the sensor-zone clearance, motor-loop layout, BMS test coverage, and coating mask before tooling. <a href="/blog/robotics-automation-pcb.html">Read our robotics PCB guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/robotics-automation-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Robotics PCB Manufacturing — Motor Control &amp; Reliability</a></li>
+    <li><a href="/blog/mems-sensor-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">MEMS Sensor PCB Design — Accelerometers &amp; Gyros</a></li>
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design — Connectivity &amp; Miniaturization</a></li>
+    <li><a href="/blog/wireless-power-transfer-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Wireless Power Transfer — Qi &amp; Inductive Charging</a></li>
+    <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management — Heat Dissipation Design</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-robot-vacuum.webp)">
+      <h2>Developing a Robot Vacuum or Consumer Robot?</h2>
+      <p>Send your layout files — our engineers will review the sensor cluster, motor-drive loops, BMS test coverage, charging-contact plating and coating mask, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Robot Vacuum DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portable Power Station PCB Design — BMS, Inverter &amp; Fast-Charge Architecture | Huaxing PCBA</title>
+<meta name="description" content="Portable power station PCB design and manufacturing — BMS cell balancing, high-current heavy-copper bus design, sine-wave inverter, MPPT input, GaN fast charging, and UL 2743 certification requirements.">
+<meta property="og:title" content="Portable Power Station PCB Design — BMS &amp; Inverter">
+<meta property="og:description" content="From 100 Wh pocket units to 2000 Wh outdoor stations, the PCB is where power density is won or lost. BMS design, heavy-copper bus bars, inverter stages and the certification path for the 2026 market.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/portable-power-station-pcb.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-power-station.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/portable-power-station-pcb.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Portable Power Station PCB Design — BMS, Inverter & Fast-Charge Architecture",
+  "description": "Portable power station PCB design and manufacturing — BMS cell balancing, high-current heavy-copper bus design, sine-wave inverter, MPPT input, GaN fast charging, and UL 2743 certification requirements.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-power-station.webp",
+  "url": "https://huaxingpcba.com/blog/portable-power-station-pcb.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/portable-power-station-pcb.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-power-station.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Portable Power Station PCB Design:<br><em>BMS, Inverter, and the Heavy-Copper Architecture Behind 2000 Wh in a Carry Handle</em></h1>
+      <p class="reveal">A portable power station is a grid-scale BMS, an inverter, and a fast charger compressed into a consumer product — and the PCB copper is where the power density is actually won.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Portable Power Station PCB</span></div>
+
+  <p>Portable power stations grew from niche camping gear into a mainstream 2026 consumer category: units from 100 Wh pocket bricks to 2,000+ Wh outdoor generators, all built around the same three power stages — a battery management system, an inverter, and a charging front end with solar input. At 1,500 W output, the battery-side current reaches 30–60 A at 24–48 V, which means the PCB design rules are closer to industrial power electronics than consumer electronics.</p>
+
+  <p>Huaxing PCBA manufactures power station boards for energy brands — heavy-copper BMS and inverter boards up to <span class="data-point">6 oz</span> copper, 16-layer stackups for the digital control sections, selective solder for through-hole power components, and UL-recognized processes for the 2026 certification cycle. This guide covers the architecture choices, the copper and thermal rules, and the certification path that determines whether your power station reaches US shelves.</p>
+
+  <img class="article-img" src="/generated/blog-power-station-bms.webp" alt="Macro photo of a portable power station BMS PCB with cell-balancing circuits and current sense shunts" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Power Station Architecture: From Cell to AC Outlet</h2>
+
+  <p>Every portable power station is the same electrical story with different numbers: a battery pack, a protection and balancing layer (BMS), a DC bus, an inverter for AC output, and a charging front end that accepts AC, solar, and increasingly USB-C PD input. The PCB design decisions hinge on three numbers: pack voltage, inverter power, and charge power.</p>
+
+  <table class="spec-table">
+    <tr><th>Class</th><th>Capacity</th><th>Pack Config (LiFePO4)</th><th>Bus Voltage</th><th>Inverter</th></tr>
+    <tr><td>Pocket</td><td>100–300 Wh</td><td>3S (9.6 V) – 4S (12.8 V)</td><td>12 V</td><td>100–300 W</td></tr>
+    <tr><td>Mid</td><td>500–1000 Wh</td><td>8S (25.6 V)</td><td>24 V</td><td>600–1000 W</td></tr>
+    <tr><td>Large</td><td>1500–2000+ Wh</td><td>16S (51.2 V)</td><td>48 V</td><td>1500–2400 W</td></tr>
+  </table>
+
+  <p>The 2026 market has consolidated on LiFePO4 — roughly 3,500 cycles vs 500–800 for NMC, which is the headline spec buyers compare. The higher-voltage 48 V packs cut battery-side current dramatically (a 2,000 W inverter at 48 V draws ~45 A vs ~165 A at 12 V), which is why the large class moved to 16S. Our <a href="/blog/energy-storage-pcb.html">energy storage PCB guide</a> covers the grid-scale version of the same architecture.</p>
+
+  <!-- ── Section ── -->
+  <h2>BMS Design: Balancing, Protection, and the Cell Counts</h2>
+
+  <p>The BMS is the safety layer of the product — it is also where most certification findings land, because UL and UN38.3 look at protection behavior, not just cell quality.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Balance Current and Topology Scale With Cell Count</h4>
+      <p>A 16S pack needs a 16-channel AFE with passive balancing; balance current of 100 mA is the practical minimum for a pack that sits fully charged for weeks between trips. Larger 2,000 Wh units increasingly use active balancing (inductive cell-to-cell transfer) to recover capacity from weak cells. Specify the balancing strategy in the BMS spec, and verify the AFE's measurement accuracy — a 5 mV cell-voltage error translates directly into lost usable capacity. Our <a href="/blog/ev-bms-pcb.html">EV BMS PCB guide</a> covers AFE selection and layout.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Protection Must Be Redundant and Latching</h4>
+      <p>Over-voltage, under-voltage, over-current, over-temperature, and short-circuit protection are mandatory per cell group. The critical design rule: protection must be hardware-latched, not firmware-reset — a BMS that re-enables output after a fault can turn a cell failure into a thermal event. Use a dedicated protection IC plus a secondary hardware comparator chain, and require the BMS vendor to provide fault-latch verification data. Our <a href="/blog/pcb-functional-safety-iso26262.html">functional safety guide</a> covers the independent fail-safe principle.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Current Sensing: Shunt Location and Kelvin Layout</h4>
+      <p>The BMS measures pack current through a shunt resistor — typically 0.5–1 mΩ for the 50–100 A class. The shunt's sense traces must be Kelvin-connected (four-wire) directly at the shunt pads, routed as a differential pair, and kept away from the power traces. A 5 mm sense-trace detour through the power path adds an error that reads as wrong state-of-charge. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers precision sensing layout.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>High-Current PCB Design: Heavy Copper, Bus Bars, and Thermal Paths</h2>
+
+  <p>This is where portable power station boards differ from everything else in consumer electronics: the power paths carry tens of amps continuously, and the copper has to be sized like a wire, not a trace.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Size the Copper for 4× the Continuous Current</h4>
+      <p>At 45 A continuous on a 48 V pack, a 2 oz trace would need to be absurdly wide; the standard solution is 3–6 oz copper on the power layers plus bus bars for the highest-current links. A 6 oz, 10 mm trace carries roughly 60 A with acceptable rise; beyond that, use a tin-plated copper bus bar bolted to the board. Our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB guide</a> covers the plating, etching, and design rules for 3–6 oz layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Every High-Current Joint Needs a Thermal Path</h4>
+      <p>MOSFETs, the shunt, and the bus-bar lands dissipate tens of watts. Each power component needs a copper island with thermal vias to an internal plane or a dedicated heatsink zone — and the enclosure needs a thermal interface to that zone. A power station that thermal-throttles on a 35 °C campsite day is a product failure. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> has the via-array and plane design rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan the Inverter Loop Before Layout Starts</h4>
+      <p>The inverter's high-frequency switching loop (DC bus capacitors to MOSFETs to transformer/inductor) must be physically small and tight — loop inductance here shows up as voltage spikes that kill MOSFETs and as radiated EMI. Put the DC-link capacitors within millimeters of the inverter MOSFETs, and keep the AC output path separate from the DC sense paths. Our <a href="/blog/power-electronics-pcb.html">power electronics guide</a> covers inverter-stage layout in depth.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-power-station-busbar.webp" alt="Photorealistic macro shot of a heavy-copper PCB with tin-plated bus bar and thick copper traces" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Inverter and Charging: Sine Wave, MPPT, and GaN Fast Charge</h2>
+
+  <p>The output stage and the input stage are two different power electronics problems sharing one board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Pure Sine Wave Is Table Stakes — THD Below 3%</h4>
+      <p>Every 2026 power station advertises pure sine wave output; buyers running CPAP machines, induction cooktops, and power tools check the spec. Target total harmonic distortion below 3% at rated load and verify output waveform on the functional test line with a resistive and a motor load. The inverter control loop and the output filter (LC) dominate THD — specify the filter design in the DFM review. Our <a href="/blog/solar-inverter-pcb-manufacturing.html">solar inverter guide</a> covers the grid-tie variant of the same stage.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>MPPT Input: Design for the Panel Voltage Range, Not the Label</h4>
+      <p>Solar input is nominally 12–48 V, but open-circuit voltage runs ~20% higher than the label. The MPPT front end must survive the full Voc range plus cold-temperature spikes, and the input connector needs reverse-polarity protection (solar cables get swapped). Specify MPPT efficiency ≥ 98% at the design review and verify it on the production test with a solar simulator. Our <a href="/blog/new-energy-pcb.html">new energy PCB guide</a> covers the input-stage protection requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>GaN Fast Charge: 100 W USB-C PD Is Now Standard</h4>
+      <p>Flagship units charge at 100 W over USB-C PD and 500–1000 W from AC. GaN (gallium nitride) FETs in the AC charger stage run at 100–300 kHz switching frequencies, which shrinks magnetics but demands careful layout — tight gate loops, low-inductance source connections, and thermal management for the GaN parts. If your design uses GaN, the layout rules are stricter than silicon; budget for a layout review pass. Our <a href="/blog/pcb-thermal-management-guide.html">thermal management design guide</a> covers the power-component layout rules.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Thermal Management and Enclosure Integration</h2>
+
+  <p>A power station is a sealed box with a battery and an inverter inside — the thermal budget has to be designed as a system, with the PCB as the primary heat spreader.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Model the Worst-Case Corner: Full Inverter + Full Charge in 40 °C</h4>
+      <p>The design thermal case is not "nominal use" — it is a customer charging at full AC rate while running the inverter at rated load in a hot vehicle. Model that corner in the design review: total dissipation of 30–60 W is typical for a 1,500 W unit, and the PCB thermal vias and enclosure fins have to move it out. Our <a href="/blog/pcb-thermal-management.html">thermal management guide</a> has the via-array sizing methodology.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Put Thermal Sensors on the Copper, Not Just the Air</h4>
+      <p>BMS over-temperature protection should read the cell and board temperature, not the ambient. Place NTC sensors on the BMS board near the MOSFETs and shunt, with thermal vias under the sensor pads so they track the copper temperature quickly. A slow thermal sensor turns a momentary overload into a battery event. Our <a href="/blog/pcb-thermal-cycling-testing.html">thermal cycling guide</a> covers sensor placement practice.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-power-station-thermal.webp" alt="Macro photo of power MOSFETs with thermal via arrays on a high-current PCB copper island" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Safety and Certification: UL 2743, UN38.3, and the 2026 Market</h2>
+
+  <p>Portable power stations are among the most certification-heavy consumer products in electronics. The certification strategy should shape the PCB design from the first layout pass.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>UL 2743 Is the North American Gate</h4>
+      <p>UL 2743 (Portable Power Packs) covers the whole unit — battery, inverter, charger, enclosure. The standard's requirements include fault tests that the PCB must survive: component-level failures must not lead to fire or electric shock. Design for UL from the start: trace spacing per working voltage, fuse protection on every output, and documented component ratings. Our <a href="/blog/pcb-ul-certification-guide.html">UL certification guide</a> covers UL 796 and the board-level requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>UN38.3 Is About the Battery, But the Board Signs It</h4>
+      <p>UN38.3 (transport of lithium batteries) requires the pack — including its BMS — to pass mechanical and electrical abuse tests. The BMS board must survive vibration, shock, and temperature cycling without the protection circuits degrading. The PCB qualification test matrix should mirror the UN38.3 profiles. Our <a href="/blog/pcb-vibration-shock-testing.html">vibration and shock testing guide</a> has the JESD22 and MIL-STD profiles.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>FCC Part 15B and the Inverter's Emissions Budget</h4>
+      <p>The inverter's 20–50 kHz switching and the GaN charger's 100–300 kHz switching both radiate. Plan the emissions budget with 6 dB of margin, keep the switching loops tight, and budget for a pre-compliance scan with the inverter under load before the formal test. Our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC guide</a> covers switching-power emissions control.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-power-station-inverter.webp" alt="Professional photo of a portable power station inverter stage PCB with toroidal inductor and heat sink" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Assembly Considerations for High-Power Boards</h2>
+
+  <p>Heavy-copper boards and mixed through-hole/SMT assemblies need a manufacturing line that handles both — and the test strategy has to verify power behavior, not just connectivity.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Heavy Copper Changes the Fabrication and Assembly Rules</h4>
+      <p>6 oz copper doesn't etch or solder like 1 oz: minimum trace/space relaxes, drill registration tolerances widen, and the reflow profile needs adjustment for the thermal mass. Confirm your fabricator's heavy-copper capability matrix before design freeze — a 3 oz minimum-space spec that the fab can't hold is a re-spin. Our <a href="/blog/pcb-manufacturing-tolerances.html">manufacturing tolerances guide</a> covers the heavy-copper deltas.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Selective Solder for the Power Components</h4>
+      <p>Through-hole MOSFETs, bus-bar lands, and connector pins on heavy-copper boards should be selective-soldered rather than hand-soldered — consistent joints, repeatable fillets, no cold joints on a 45 A path. Specify selective solder with X-ray sampling on the power joints. Our <a href="/blog/wave-vs-selective-soldering.html">wave vs selective soldering guide</a> covers the process choice.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Functional Test With Real Power, Not Just Signal</h4>
+      <p>The production test must verify the BMS protection thresholds (OVP/UVP/OCP trip points), inverter output voltage and frequency, MPPT tracking, and charge current — under load. A functional test with an electronic load and a battery simulator catches what flying probe cannot: a protection chain that trips 200 mV late. Our <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">test method guide</a> explains the three-tier strategy.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Portable Power Station PCB Checklist</h2>
+
+  <p>A power station that ships to US shelves in 2026 is a heavy-copper power board with a redundant, latched BMS; bus-bar-class current paths sized at 4× continuous; a sine-wave inverter with THD under 3%; an MPPT front end built for real panel voltages; GaN charging laid out with silicon-grade discipline; and a UL 2743 / UN38.3 certification plan that shaped the layout from day one. The PCB copper is where the power density lives — everything else is packaging around it.</p>
+
+  <p>At Huaxing PCBA we manufacture portable power station BMS and inverter boards up to 6 oz copper with selective solder, 100% flying probe, and functional test with electronic loads and battery simulators. Our DFM review checks copper sizing, inverter loop inductance, BMS fault-latch design, and certification spacing before tooling. <a href="/blog/energy-storage-pcb.html">Read our energy storage guide</a> to prepare your design, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/energy-storage-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Energy Storage PCB — BMS &amp; High-Voltage Isolation</a></li>
+    <li><a href="/blog/ev-bms-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">EV BMS PCB — Cell Monitoring &amp; Safety</a></li>
+    <li><a href="/blog/heavy-copper-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Heavy Copper PCB — 3–6 oz Design Rules</a></li>
+    <li><a href="/blog/power-electronics-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Power Electronics PCB — Thermal &amp; High-Current</a></li>
+    <li><a href="/blog/pcb-thermal-management.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management — Heat Dissipation</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-power-station.webp)">
+      <h2>Developing a Portable Power Station? Let's Review the Power Stage</h2>
+      <p>Send your layout files — our engineers will review copper sizing, inverter loop inductance, BMS fault-latch design, thermal paths and certification spacing, then return a DFM report and a quote. Free DFM review with every quote.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Power Station DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
