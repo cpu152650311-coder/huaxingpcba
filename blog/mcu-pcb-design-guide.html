@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCU PCB Design Guide — Decoupling, Crystal Layout, ADC Grounding &amp; Debug Ports | Huaxing PCBA</title>
+<meta name="description" content="MCU PCB design guide — power decoupling placement, crystal oscillator layout and load capacitors, analog grounding for ADC accuracy, SWD debug port design, and DFM rules for QFN/QFP microcontroller packages.">
+<meta property="og:title" content="MCU PCB Design Guide — Decoupling, Crystal Layout, ADC Grounding &amp; Debug Ports">
+<meta property="og:description" content="Most MCU board problems are layout problems: decoupling too far from the pin, a crystal with vias under it, or a noisy analog reference. The layout and DFM rules that make firmware actually reliable.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/mcu-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-mcu.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/mcu-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MCU PCB Design Guide — Decoupling, Crystal Layout, ADC Grounding & Debug Ports",
+  "description": "MCU PCB design guide — power decoupling placement, crystal oscillator layout and load capacitors, analog grounding for ADC accuracy, SWD debug port design, and DFM rules for QFN/QFP microcontroller packages.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-mcu.webp",
+  "url": "https://huaxingpcba.com/blog/mcu-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/mcu-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-mcu.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">MCU PCB Design Guide:<br><em>Decoupling, Crystal Layout, ADC Grounding &amp; Debug Ports for Boards That Ship Without Surprises</em></h1>
+      <p class="reveal">Most MCU board failures are not firmware bugs — they are layout decisions made in an afternoon. Decoupling capacitors a centimeter from the pin, a crystal with vias routed underneath, an ADC reference shared with a switching regulator. Here is the layout discipline that makes the silicon work as specified.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>MCU PCB Design Guide</span></div>
+
+  <p>Microcontrollers are forgiving — until they are not. The same MCU that runs happily on a poorly laid-out prototype board will glitch in production: brown-out resets on motor start, ADC readings that wander with the display update, a crystal that fails to start at cold temperature, or SWD programming that only works with a specific cable length. These are the classic symptoms of layout problems, and they are entirely preventable with a few disciplined rules applied at the schematic and layout stage.</p>
+
+  <p>Huaxing PCBA manufactures and assembles embedded control boards — from 2-layer sensor nodes to <span class="data-point">32-layer</span> industrial controllers — across 8 SMT lines with 0201 placement and 0.3 mm-pitch QFN/BGA capability, under ISO 9001 and IATF 16949. This guide covers the MCU-specific layout rules that matter most, plus the DFM details that determine whether your QFN or QFP board assembles cleanly the first time.</p>
+
+  <img class="article-img" src="/generated/blog-mcu-hero.webp" alt="Populated MCU board with a QFP microcontroller, decoupling capacitors, and a crystal oscillator in a clean assembly photo" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Layer Stackup — When Is 2 Layers Enough, When Do You Need 4</h2>
+
+  <p>The stackup decision sets the ceiling for everything else. For a simple MCU board with a few GPIOs, one UART, and no analog precision requirement, a 2-layer board is fine. For anything with an ADC you care about, a switching regulator, or high-speed communication, a 4-layer board is cheaper than the field failures it prevents.</p>
+
+  <table class="spec-table">
+    <tr><th>Board type</th><th>2-layer</th><th>4-layer</th></tr>
+    <tr><td>Stackup</td><td>Signal / Signal</td><td>Signal – GND – PWR – Signal</td></tr>
+    <tr><td>Ground reference</td><td>Partial pours, weak</td><td>Solid plane, continuous</td></tr>
+    <tr><td>ADC accuracy</td><td>±10–20 LSB noise floor typical</td><td>±1–3 LSB achievable with care</td></tr>
+    <tr><td>Decoupling effectiveness</td><td>Loop inductance limited</td><td>Cap-to-plane inductance minimal</td></tr>
+    <tr><td>EMI behavior</td><td>Higher emissions</td><td>Controlled return paths</td></tr>
+    <tr><td>Typical cost delta</td><td>—</td><td>+30–60% board cost</td></tr>
+  </table>
+
+  <p>The rule of thumb: if the product has a precision ADC, a radio, or a motor/relay switching on the same board, go 4-layer. The ground plane directly under the MCU gives every decoupling capacitor a low-inductance return path, which is the single biggest lever on MCU stability. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> walks through the layer-count decision in detail.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Four layers for anything with analog precision or noise sources; two layers only for simple digital-only boards. The ground plane is the foundation of every other rule in this guide.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Power Delivery and Decoupling — Placement Is Everything</h2>
+
+  <p>MCU datasheets specify decoupling values — typically 100 nF per power pin plus one 1–10 µF bulk cap per supply domain. The values matter less than the placement. A 100 nF cap 10 mm from the pin has so much loop inductance that it is nearly useless at the frequencies the MCU switches at (tens to hundreds of MHz).</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Place the 100 nF Caps Within 2 mm of Their Power Pin</h4>
+      <p>Each VDD/VCC pin gets its own 100 nF cap, placed on the same side of the board as the MCU, as close to the pin as the footprint allows — the via-to-pad distance plus the cap body should fit within roughly 2 mm. Route power from the pin to the cap first, then to the via; keep the ground side short to the via. This creates the smallest possible charge loop. If the MCU has a central power pad (QFN), the vias go under the body — see the DFM section below.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>One Bulk Cap Per Supply Domain, Close to the Source</h4>
+      <p>Place a 4.7–22 µF bulk capacitor near where the supply enters the MCU area — at the output of the regulator or where the connector power comes in. It handles the low-frequency transients (motor starts, radio bursts, display refresh) that the 100 nF caps cannot. For mixed analog/digital supplies, isolate the analog rail with a ferrite bead or a small series inductor and its own bulk cap — see our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> for the full PDN design process.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-mcu-stackup.webp" alt="Photorealistic cross-section render of a four-layer PCB showing signal, ground and power planes" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep the Regulator Loop Tight and Away From Analog</h4>
+      <p>If the board has a buck converter, keep its switching loop (input cap, inductor, output cap) compact, and route the switch node (LX) as a short wide trace on one layer with the ground return directly beneath. Do not route the switch node under the MCU, the crystal, or the ADC section. A ferrite bead between the digital 3.3 V and the analog supply (AVDD) is the standard isolation method for MCU ADC accuracy.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-mcu-decoupling.webp" alt="Macro photo of decoupling capacitors placed directly beside a microcontroller package pins on a PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Crystal and Oscillator Layout</h2>
+
+  <p>Crystal circuits are sensitive by nature: a few picofarads of stray capacitance, a noisy trace underneath, or a ground cut under the crystal can prevent startup or cause frequency drift. The MCU's internal oscillator amplifier is also a broadband noise source that can couple into adjacent analog circuits.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep the Crystal Close to the MCU Pins — No Vias in the Loop</h4>
+      <p>Place the crystal within 5–10 mm of the MCU's OSC pins. Route the two crystal traces short, symmetric, and on the same layer, with no vias in the loop. Do not route any other signal underneath the crystal area on adjacent layers — add a ground pour (or a guard ring) around and under the crystal footprint and stitch it with vias. A via under a crystal pad is a classic intermittent-startup source.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Size the Load Capacitors Correctly — and Check the MCU's Internal Capacitance</h4>
+      <p>For a parallel-resonant crystal, the load capacitance CL is specified on the crystal datasheet. The two external load caps are typically 2 × CL (minus the MCU pin and PCB stray capacitance, roughly 3–5 pF). For an 8–16 MHz crystal with CL = 18 pF, two 22 pF caps are the common starting point; for CL = 12 pF, two 15 pF caps. Many modern MCUs have internally adjustable load capacitance — check the reference manual and disable internal caps if you are using external ones. A series resistor of 0–33Ω in the OSC_OUT path limits drive level and prevents crystal overdrive.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>32.768 kHz RTC Crystals Get the Same Discipline</h4>
+      <p>The low-frequency RTC crystal is even more sensitive — it runs at microwatt drive levels. Keep its traces short, guard them with ground, and keep the RTC crystal and its caps away from any switching node or the MCU's main crystal. If the RTC must stay accurate, the load capacitance (typically 6–12.5 pF for watch crystals) must match the crystal spec exactly; mismatch shifts the frequency by tens of ppm.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-mcu-crystal.webp" alt="Macro photograph of a quartz crystal oscillator and its two load capacitors placed close to a microcontroller" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Analog Grounding for ADC Accuracy</h2>
+
+  <p>The classic MCU ADC symptom: readings jump when the display updates or when a relay switches. The cause is usually a shared ground return or a noisy reference. The fix is partitioning — not splitting planes arbitrarily.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Partition the Board Into Digital and Analog Zones</h4>
+      <p>Group all analog circuitry (ADC inputs, reference, sensor front-end, op-amps) into one zone, and keep digital switching (MCU, communication interfaces, regulators) out of it. On a 4-layer board with a solid ground plane, the standard approach is a single ground plane with a moat or slot under the analog zone, connected to the digital ground at one point — ideally under the MCU, where the ADC reference and ground pins are. Our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal design guide</a> covers star grounding and partitioning in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Give the ADC a Clean Reference</h4>
+      <p>If the MCU has a separate VREF pin, route it as a quiet trace directly from the reference source (a dedicated reference IC, or the analog supply through an RC filter) — never from the digital 3.3 V rail without filtering. Keep the reference trace away from the crystal and the switch node. For 12-bit and higher ADCs, use a 0.1 µF + 1 µF cap directly at the VREF pin with a tight ground return.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Filter and Guard Analog Input Traces</h4>
+      <p>Route ADC input traces away from digital lines, add a small RC filter (e.g., 1 kΩ + 1 nF) at each analog input if the source impedance and sample rate allow, and keep the analog source ground return close to its signal trace. Avoid routing analog inputs across a plane split — the return current path breaks and the reading picks up the delta.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Debug, Programming and Testability</h2>
+
+  <p>SWD (Serial Wire Debug) is the standard programming/debug interface for ARM Cortex-M MCUs; JTAG remains common for other families. A debug port designed properly is invisible; designed poorly it costs hours on every prototype iteration.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route SWD as Short, Grounded Traces With Optional Series Resistors</h4>
+      <p>Keep the SWDIO and SWCLK traces short and parallel with a ground trace between or beside them. Optional 0–33Ω series resistors near the MCU allow tuning and protect the pins; a 100 kΩ pull-up on SWDIO and pull-down on SWCLK are common per MCU family requirements. Add a 100 nF cap on the debug connector's target power pin, and an ESD diode array at the connector — debug headers are frequently touched. If the debug port is inaccessible after assembly, see our <a href="/blog/pcb-design-for-testability.html">DFT guide</a> for test-point and boundary-scan strategies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Add Test Points for Power, Ground and Critical Signals</h4>
+      <p>A 0.1" test pad on each supply rail, ground, and the MCU's reset line turns a "why won't it boot" debugging session into a five-minute measurement. Test points on the SWD lines let you probe programming issues without holding the probe on a QFP pin. Specify test points in the schematic from the start — retrofitting them later is a respin.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Reset and Boot Configuration Pins — Don't Leave Them Floating</h4>
+      <p>The reset pin should have a 10 kΩ pull-up to VDD and a 100 nF cap to ground (with ESD protection if the reset is user-accessible). Boot-select pins must be tied to their required levels with resistors — a floating boot pin is a classic "works on the bench, fails in the field" failure, because the pin state changes with handling and temperature. Verify the MCU family's required strap values against your schematic.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>DFM for MCU Packages — QFN, QFP and the Thermal Pad</h2>
+
+  <p>MCU packaging choices affect assembly yield directly. The QFN's exposed thermal pad is both a heat path and a solder-joint reliability risk; the QFP's fine pitch tests stencil and placement capability.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>QFN Thermal Pad — Vias, Paste Coverage and Tenting</h4>
+      <p>The QFN's central pad needs thermal vias (typically 5–9 vias of 0.3 mm, in a grid under the pad) for both heat and mechanical anchoring. Solder paste coverage on the thermal pad should be 50–70% per IPC-7525 — too little paste and the joint is weak, too much and the part floats or the paste squeegees out under the package. Fill and cap (or tent) the vias on the bottom side so paste does not wick away. Our <a href="/blog/pcb-via-fill-types.html">via fill guide</a> covers the options, and <a href="/blog/dfm-tips.html">our DFM guide</a> covers paste and footprint rules broadly.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Fine-Pitch QFP and QFN — Stencil and Placement Capability</h4>
+      <p>0.5 mm-pitch QFNs and 0.65 mm QFPs are routine; 0.4 mm pitch is achievable with good stencil design and a capable assembler. Confirm the footprint's pad width and the stencil aperture match the IPC-7525 recommendations for your pitch, and that the assembly house's placement accuracy (±50 µm typical for high-speed machines) covers the package. X-ray inspection is recommended for QFN parts — the inner-row and pad joints are not visually inspectable. Our <a href="/blog/fine-pitch-smt-assembly-guide.html">fine-pitch assembly guide</a> covers 0.4 mm and below.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Silkscreen, Reference Designators and Assembly Documentation</h4>
+      <p>Put a polarity mark and pin-1 indicator on the MCU footprint, and keep the silkscreen clear of the pads. Provide the assembly drawing with the MCU orientation called out — an inverted QFN is the most expensive single-board error in prototyping. If the board goes through an automated optical inspection, ensure the fiducials (1 mm solid circles, clear of solder mask) are present for the panel — AOI and placement both need them.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Layout Is the Firmware You Didn't Write</h2>
+
+  <p>MCU reliability on the bench is mostly luck; in the field it is layout discipline. Decoupling within 2 mm of every power pin, a crystal with a clean guarded loop, partitioned analog grounds with a quiet reference, a proper debug port, and DFM-correct QFN/QFP footprints — these are not advanced techniques, they are the baseline. Boards that follow them boot first time, program reliably, and read accurate ADC values.</p>
+
+  <p>At Huaxing PCBA, we fabricate and assemble MCU boards from 2-layer prototypes to 32-layer industrial controllers, with 0201 placement, QFN/BGA X-ray verification, and a free DFM review on every quote. <a href="/blog/pcb-thermal-management-guide.html">Read our thermal management guide</a> if your MCU board dissipates real power, or <a href="/contact/">send your design files</a> to our engineering team for a layout and manufacturability review within 24 hours.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Count &amp; Material Planning</a></li>
+    <li><a href="/blog/mixed-signal-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Mixed-Signal PCB Design — Grounding &amp; Partitioning</a></li>
+    <li><a href="/blog/pcb-power-integrity-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Power Integrity &amp; PDN Design</a></li>
+    <li><a href="/blog/pcb-design-for-testability.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Design for Testability — Test Points &amp; ICT</a></li>
+    <li><a href="/blog/dfm-tips.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">DFM Tips — 8 Rules That Cut Costs by 30%</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-mcu.webp)">
+      <h2>Turning an MCU Design Into a Product?</h2>
+      <p>Send us your Gerbers and BOM — our DFM team checks decoupling placement, QFN thermal pad design, and stencil requirements for free, and you get a quote within 24 hours. Prototype in 5 days, production in 7–10.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

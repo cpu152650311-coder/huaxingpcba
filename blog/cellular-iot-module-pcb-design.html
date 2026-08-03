@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cellular IoT Module PCB Design — LTE-M, NB-IoT &amp; Cat-1 Antenna Integration for Global Connectivity | Huaxing PCBA</title>
+<meta name="description" content="Cellular IoT module PCB design guide — LTE-M vs NB-IoT vs Cat-1 selection, antenna keep-out and 50Ω RF trace routing, transmit-burst power supply design, SIM interface, and manufacturing requirements for module boards.">
+<meta property="og:title" content="Cellular IoT Module PCB Design — LTE-M, NB-IoT &amp; Cat-1 Antenna Integration">
+<meta property="og:description" content="A cellular module is only as reliable as the board around it. Antenna keep-out, 50Ω RF traces, burst-current power, SIM routing — the design rules that keep your IoT product connected in the field.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/cellular-iot-module-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-cellular-iot.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/cellular-iot-module-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cellular IoT Module PCB Design — LTE-M, NB-IoT & Cat-1 Antenna Integration for Global Connectivity",
+  "description": "Cellular IoT module PCB design guide — LTE-M vs NB-IoT vs Cat-1 selection, antenna keep-out and 50Ω RF trace routing, transmit-burst power supply design, SIM interface, and manufacturing requirements for module boards.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-cellular-iot.webp",
+  "url": "https://huaxingpcba.com/blog/cellular-iot-module-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/cellular-iot-module-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-cellular-iot.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Industry Application</p>
+      <h1 class="reveal">Cellular IoT Module PCB Design:<br><em>LTE-M, NB-IoT &amp; Cat-1 Antenna Integration Rules for Products That Stay Connected in the Field</em></h1>
+      <p class="reveal">The module datasheet tells you the radio works — the board around it decides whether it keeps working in the field. Antenna keep-out, 50Ω RF traces, transmit-burst power delivery, and the manufacturing details that separate connected products from return-rate statistics.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Cellular IoT Module PCB Design</span></div>
+
+  <p>Every year, IoT hardware teams ship products that pass lab testing and then fail in the field with the same symptom: the device loses connectivity, drops registration, or transmits at reduced power. The root cause is rarely the module — Quectel, SIMCom, u-blox and other cellular modules are well-characterized. It is almost always the surrounding board: an antenna area with no keep-out, an RF trace routed over a split ground plane, a power supply that sags during the 2 A transmit burst, or a SIM interface with noise coupled onto the clock line. These are design decisions, and they are all fixable before the board goes to fabrication.</p>
+
+  <p>Huaxing PCBA builds and assembles connected product boards — including RF designs with controlled 50Ω impedance, hybrid FR-4/Rogers stackups, and <span class="data-point">8 SMT lines</span> that place 0201 components and LGA modules at 0.5 mm pitch — for customers shipping IoT products to 30+ countries under ISO 9001 and IATF 16949. This guide covers the design rules that determine whether your cellular IoT product actually works in the field.</p>
+
+  <img class="article-img" src="/generated/blog-cellular-iot-hero.webp" alt="Compact IoT device PCB with a cellular module, trace antenna area, and battery connector on a dark workbench" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>LTE-M vs NB-IoT vs Cat-1 — Which Radio Goes on Your Board</h2>
+
+  <p>The radio choice drives everything downstream: module footprint, antenna size, power budget, and certification path. LTE-M, NB-IoT, and Cat-1 are all 4G-based low-power technologies, but they differ sharply in throughput, mobility, and coverage behavior.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>LTE-M (Cat-M1)</th><th>NB-IoT (Cat-NB1/NB2)</th><th>Cat-1 / Cat-1 bis</th></tr>
+    <tr><td>Downlink peak</td><td>~1 Mbps</td><td>~30–60 kbps</td><td>10 Mbps</td></tr>
+    <tr><td>Uplink peak</td><td>~1 Mbps</td><td>~20–60 kbps</td><td>5 Mbps</td></tr>
+    <tr><td>Bandwidth</td><td>1.4 MHz</td><td>200 kHz</td><td>20 MHz (Cat-1bis: 1.4 MHz)</td></tr>
+    <tr><td>Mobility / handover</td><td>Yes</td><td>No (static)</td><td>Yes</td></tr>
+    <tr><td>Voice (VoLTE)</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Typical use</td><td>Trackers, wearables, alarms</td><td>Meters, sensors, agriculture</td><td>Voice devices, video, gateways</td></tr>
+    <tr><td>Module cost</td><td>$$</td><td>$</td><td>$$$</td></tr>
+  </table>
+
+  <p>For a battery-powered tracker that moves, LTE-M is the default. For a fixed water meter reporting a few times a day, NB-IoT wins on cost and coverage depth. For a device that needs voice or low-latency two-way communication, Cat-1 — or the single-antenna Cat-1 bis variant — is the practical floor. The board-level consequence is modest: all three operate in the 700 MHz–2.7 GHz band plan, so the antenna, RF routing, and power rules below apply across the board. If your product also carries a GNSS receiver for tracking, our <a href="/blog/gps-gnss-receiver-pcb-design.html">GNSS receiver design guide</a> covers the co-location rules for cellular plus GPS antennas.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> LTE-M for moving assets, NB-IoT for fixed low-rate sensors, Cat-1/Cat-1 bis for voice or higher data. All share the same board-level RF and power design discipline — the radio choice does not change the layout rules.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Module Placement and Antenna Keep-Out Rules</h2>
+
+  <p>Module vendors publish keep-out requirements in their hardware design guides, and they are not suggestions — the antenna efficiency loss from a violated keep-out is typically 2–6 dB, which translates directly into shorter range and worse indoor penetration. The antenna area is the single most important real estate on a cellular IoT board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Respect the Antenna Keep-Out Zone — 10–15 mm Is Typical</h4>
+      <p>Most LTE module vendors require a clear zone of 10–15 mm around the antenna pad or connector, with no copper on any layer, no components, and no traces crossing underneath. The exact value is in the module's hardware design guide — check it for your specific module. Ground pour directly under the antenna pad detunes the radiator and shifts the resonant frequency; if the vendor allows a ground plane below the antenna, follow their stated distance precisely.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Place the Module Close to the Antenna — Short RF Trace Wins</h4>
+      <p>Route the RF path from module to antenna as short as possible — under 20 mm is a good target for a 50Ω trace, and many designs put the antenna on the same board edge as the module. Every millimeter of RF trace adds loss, and every via adds a discontinuity. If the antenna is external (via a U.FL/IPEX connector), place the connector within 15–20 mm of the module's antenna pad.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep Digital, Power, and High-Current Nets Out of the RF Zone</h4>
+      <p>Do not route the DC-DC switch node, the battery charge path, or high-speed digital lines (USB, SDIO) near the antenna area. The transmit burst of the cellular radio (up to 23 dBm, or 200 mW, plus harmonics) couples into unshielded digital lines, and digital switching noise couples back into the receiver — reducing sensitivity exactly when the device is far from a tower.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-cellular-iot-antenna.webp" alt="Macro photo of a PCB antenna area with clear keep-out zone and a ceramic chip antenna at the board edge" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Routing the RF Signal — 50Ω Controlled Impedance</h2>
+
+  <p>The trace between the module's antenna pad and the antenna is a transmission line and must be controlled to 50Ω single-ended. The impedance is set by the trace width, the dielectric height to the reference plane, and the ground structure around it.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use Coplanar Waveguide With Ground (CPWG) on an Outer Layer</h4>
+      <p>The standard structure for a cellular RF trace is a 50Ω coplanar waveguide with ground: a trace on an outer layer, solid ground plane directly below, and ground pours on both sides of the trace with a defined gap. Keep the trace on the top layer next to the module, avoid vias, and avoid routing on an inner layer (buried stripline is harder to control and adds vias). Specify this net class in the fabrication notes with a ±10% tolerance, or tighter if the module vendor asks. Our <a href="/blog/impedance-control.html">impedance control guide</a> covers how impedance is calculated and verified at the fab.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Add Stitching Vias Along the RF Trace</h4>
+      <p>Ground the coplanar pours with stitching vias every 50–100 mils along both sides of the trace. This keeps the coplanar ground at the same potential across the trace length and prevents the pour from resonating. On a 2-layer board, this is especially important because the ground reference is weaker.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Reserve a Pi-Matching Network — Even If You Think You Don't Need It</h4>
+      <p>Module vendors recommend a pi-network (series inductor/cap plus two shunt components) between the module and the antenna to tune out board parasitics and antenna impedance mismatch. Reserve the pads even if you plan to populate zero-ohm or leave them empty — adding a matching network after the fact on a production board requires a respin. Measure with a VNA at the antenna connector and tune the values during bring-up.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Material Choice — FR-4 Is Usually Fine, With One Caveat</h4>
+      <p>Cellular bands span 700 MHz to 2.7 GHz. On short RF traces (under 20 mm), standard FR-4 with controlled impedance is perfectly adequate — the loss at these frequencies is manageable. The caveat is consistency: specify impedance-controlled fabrication so the width is tuned to your actual stackup, and for higher bands (B42/B43 TDD at 3.4–3.8 GHz, CBRS) consider low-loss materials. For boards mixing RF and very high-speed digital, hybrid stackups with Rogers or PTFE on the RF layers are an option — see our <a href="/blog/ptfe-high-frequency-pcb-manufacturing.html">PTFE high-frequency manufacturing guide</a> for the material handling realities.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-cellular-iot-rf.webp" alt="Photorealistic macro of a 50 ohm RF trace with coplanar ground pours and stitching vias on a green PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Power Supply Design for Transmit Bursts</h2>
+
+  <p>A cellular module is not a steady-state load. During a transmit burst, the module draws current in a sharp pulse — up to 2 A for GSM-class bursts, and typically 0.5–1.5 A for LTE-M/NB-IoT/Cat-1 depending on power class and band. If the supply voltage sags below the module's minimum (often 3.3 V or 3.4 V), the module de-rates its transmit power, and range drops silently.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Size the Input Capacitance for the Burst, Not the Average</h4>
+      <p>Place a low-ESR bulk capacitor (33 µF or 47 µF, X5R/X7R) plus 10 µF and 100 nF ceramics directly at the module's VBAT pins, within 5–10 mm. The bulk cap supplies the burst current between DC-DC converter response cycles; without it, the module sees voltage droop on every transmit. Check the module datasheet's recommended capacitance — most vendors specify a minimum total capacitance at the power pin.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Verify the DC-DC Converter's Transient Response</h4>
+      <p>A converter sized for the average current (e.g., 300 mA for an NB-IoT module) will droop during the 1 A burst. Size the converter for the peak burst current plus 30–50% margin, and check its load-transient spec — a converter with 100 mV droop on a 100 mV step might be fine for a sensor but marginal for a radio. During bring-up, measure the VBAT waveform with a scope at max TX power and confirm droop stays under the module's spec.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-cellular-iot-power.webp" alt="Bulk and ceramic decoupling capacitors and a DC-DC converter on an IoT module board power section" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Route the Power Path Wide and Direct</h4>
+      <p>Use wide traces or a dedicated power pour for VBAT — 30–50 mils minimum per amp — and avoid daisy-chaining the module's power through other circuits. Keep the DC-DC converter's switching loop (input cap, inductor, output cap) tight and away from the RF trace and antenna area. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers decoupling and plane design in depth.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>SIM/USIM Interface, Grounding and EMI Shielding</h2>
+
+  <p>SIM interface problems are a top field-failure category for cellular IoT devices: a device that intermittently loses registration or fails to attach is often a SIM clock line picking up noise, or a SIM socket with marginal ESD protection.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route SIM Lines With Ground Guarding and ESD Protection</h4>
+      <p>Route the SIM clock, data, and reset lines with a ground trace or pour between them, keep the traces short (under 20 mm), and avoid routing them near the RF trace or DC-DC switch node. Add a low-capacitance TVS array (1–2 pF) at the SIM socket, and series resistors of 22Ω on the clock and data lines if the module reference design calls for them. Follow the module vendor's pull-up and pull-down requirements on the reset and presence lines.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Solid Ground Under the Module — No Splits, No Excuses</h4>
+      <p>The area under the module must have a continuous ground plane on the adjacent layer, with ground vias around the module's ground pads. Module vendors specify a ground via pattern in their reference designs — copy it. Splits in the ground plane under the module turn it into a slot antenna and wreck both emissions and receiver sensitivity. For designs with analog or sensor sections, see our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal grounding guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>EMI Shielding — Can, Gasket, or Careful Layout</h4>
+      <p>If the product must pass radiated emissions or immunity testing (FCC/CE/PTCRB), a shield can over the module is the most reliable option, with a perimeter of ground pads and vias under the can footprint. If a can is not possible, keep the module away from board edges and user-facing connectors, and keep the antenna feed line as short as possible. Our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a> covers emissions control strategies for certified products.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Manufacturing Considerations for Module Boards</h2>
+
+  <p>Module boards are dense, mixed-technology assemblies — LGA modules, chip antennas, and fine-pitch passives on the same board as a battery connector and a USB port. A few manufacturing choices have outsized impact on yield and field reliability.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>LGA Module Pads — Via Placement and Solderability</h4>
+      <p>LGA modules (the most common form factor for LTE-M/NB-IoT) have pads on the bottom face with no balls. Put the escape vias outside the pad or use via-in-pad with filled and capped vias — a plain via inside the pad wicks solder away from the joint during reflow. The module's thermal/power pads should have a small array of thermal vias with proper tenting on the bottom side. Our <a href="/blog/pcb-via-fill-types.html">via fill types guide</a> explains filled vs plugged vs tented options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Stencil Design for Mixed-Pitch Boards</h4>
+      <p>Module boards mix 0.5 mm-pitch LGA pads with 0201/0402 passives and a chip antenna. The stencil thickness is a compromise: step-stencils (two thicknesses on one stencil) are common for these boards so the fine-pitch module pads get less paste than the power components. Ask your assembler for a step-stencil review during DFM — it is a standard part of our quoting process. See our <a href="/blog/smt-stencil-design-guide.html">stencil design guide</a> for aperture rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>X-Ray Inspection for LGA and Shielded Modules</h4>
+      <p>LGA solder joints are not visually inspectable, and shield cans hide the module entirely. Specify X-ray inspection of the module pads — ideally 100% on the first article and a sample per batch afterward. If your assembler cannot X-ray LGA modules, that is a red flag for this board type. Our <a href="/blog/pcb-inspection-aoi-xray-spi.html">inspection methods guide</a> compares X-ray with AOI and SPI coverage.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Board Around the Module Is the Product</h2>
+
+  <p>Cellular IoT failures in the field are overwhelmingly board-level: antenna keep-out violations, uncontrolled RF traces, power droop during transmit bursts, and noisy SIM interfaces. Each has a design rule and a fabrication requirement — respect the antenna zone, control the 50Ω path, size the burst capacitance, guard the SIM lines, and verify the assembly with X-ray. Get those right and the module does what it is specified to do.</p>
+
+  <p>At Huaxing PCBA, we fabricate impedance-controlled boards with ±5% targets, assemble LGA and castellated modules across 8 SMT lines with X-ray verification, and support hybrid RF stackups for connected products. <a href="/blog/iot-pcb-design-manufacturing.html">Read our IoT PCB design guide</a> for the broader connectivity picture, or <a href="/contact/">send your module reference design and layout</a> to our engineering team for a free DFM and impedance review with your 24-hour quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design &amp; Manufacturing — Connectivity at Scale</a></li>
+    <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design — Materials, Impedance &amp; Signal Integrity</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control — Why ±5% Matters at GHz Speeds</a></li>
+    <li><a href="/blog/pcb-emi-emc-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB EMI/EMC Design — Emissions &amp; Immunity Control</a></li>
+    <li><a href="/blog/gps-gnss-receiver-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">GNSS &amp; GPS Receiver PCB Design — Antenna &amp; LNA Rules</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-cellular-iot.webp)">
+      <h2>Building a Cellular IoT Product?</h2>
+      <p>Send us your layout, stackup, and impedance requirements — our team reviews antenna keep-out, RF routing, and module assembly details for free, and you get a quote within 24 hours. X-ray verification and step-stencil assembly available on every module board order.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

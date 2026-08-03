@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HDMI &amp; DisplayPort PCB Design — Differential Pair Routing, ESD &amp; Fabrication Rules for 4K/8K Video | Huaxing PCBA</title>
+<meta name="description" content="HDMI and DisplayPort PCB design guide — 100Ω differential pair routing, TMDS vs FRL vs UHBR requirements, ESD protection, and the stackup and fabrication notes that keep 4K/8K video signals clean.">
+<meta property="og:title" content="HDMI &amp; DisplayPort PCB Design — Routing, ESD &amp; Fabrication for 4K/8K Video">
+<meta property="og:description" content="HDMI 2.1 FRL runs at 12 Gbps per lane — board-level mistakes show up immediately. Impedance targets, pair routing, ESD, and what to write in your fabrication notes.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/hdmi-displayport-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-hdmi-dp.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/hdmi-displayport-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HDMI & DisplayPort PCB Design — Differential Pair Routing, ESD & Fabrication Rules for 4K/8K Video",
+  "description": "HDMI and DisplayPort PCB design guide — 100Ω differential pair routing, TMDS vs FRL vs UHBR requirements, ESD protection, and the stackup and fabrication notes that keep 4K/8K video signals clean.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "image": "https://huaxingpcba.com/generated/blog-cover-hdmi-dp.webp",
+  "url": "https://huaxingpcba.com/blog/hdmi-displayport-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/hdmi-displayport-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-hdmi-dp.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">HDMI &amp; DisplayPort PCB Design:<br><em>Differential Pair Routing, ESD Protection, and the Fabrication Rules That Keep 4K/8K Video Clean</em></h1>
+      <p class="reveal">HDMI 2.1 FRL pushes 12 Gbps per lane and DisplayPort 2.0 pushes 20 Gbps per lane — at those speeds the board, not the cable, is usually the weakest link. Here is what to route, what to specify, and what to write in your fabrication notes.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>HDMI &amp; DisplayPort PCB Design</span></div>
+
+  <p>Video interfaces fail on real products for reasons that never show up in the connector datasheet: wrong impedance tolerance in the stackup, vias left un-backdrilled on a 12 Gbps lane, AC coupling caps placed at the wrong end of the pair, or ESD protection with too much capacitance loading the signal. If you are building a monitor, a set-top box, a KVM switch, a medical display, or an automotive infotainment module, the difference between a board that passes HDMI 2.1 compliance and one that flickers at certain resolutions is almost always decided in the PCB layout and the fabrication notes — not in the silicon.</p>
+
+  <p>Huaxing PCBA fabricates and assembles high-speed video boards up to <span class="data-point">32 layers</span> with controlled impedance at ±5% and TDR verification on every impedance-critical net, under ISO 9001 and IATF 16949. This guide covers the HDMI and DisplayPort routing rules that matter, the stackup decisions behind them, and the exact fabrication requirements to put on your drawing.</p>
+
+  <img class="article-img" src="/generated/blog-hdmi-dp-hero.webp" alt="HDMI and DisplayPort connectors soldered on a dark high-speed video PCB with dense differential pair routing" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>HDMI vs DisplayPort — What the Interface Choice Changes on Your Board</h2>
+
+  <p>The two interfaces share the same electrical foundation — 100Ω differential pairs with AC coupling — but their data rates and signaling schemes set very different board requirements. Choosing the interface is a product decision; living with its routing rules is a board decision.</p>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>HDMI 2.0</th><th>HDMI 2.1</th><th>DisplayPort 1.4</th><th>DisplayPort 2.0</th></tr>
+    <tr><td>Max bandwidth</td><td>18 Gbps (TMDS)</td><td>48 Gbps (FRL)</td><td>32.4 Gbps (HBR3)</td><td>80 Gbps (UHBR20)</td></tr>
+    <tr><td>Lanes × rate</td><td>4 × 3 Gbps</td><td>4 × 12 Gbps</td><td>4 × 8.1 Gbps</td><td>4 × 20 Gbps</td></tr>
+    <tr><td>Signaling</td><td>TMDS</td><td>FRL (fixed-rate link)</td><td>Main link (8b/10b)</td><td>Main link (128b/132b)</td></tr>
+    <tr><td>Differential impedance</td><td>100Ω ±10%</td><td>100Ω ±10%</td><td>100Ω ±10%</td><td>100Ω ±10%</td></tr>
+    <tr><td>AC coupling caps</td><td>Optional (source side)</td><td>Required on all FRL lanes</td><td>Required, 0.1 µF</td><td>Required, 0.1 µF</td></tr>
+  </table>
+
+  <p>The practical consequence: a layout that handled HDMI 2.0 at 3 Gbps per lane with moderate care will usually fail HDMI 2.1 FRL at 12 Gbps per lane. At 12–20 Gbps the signal period is under 100 ps, so a via stub of 30 mils, an impedance discontinuity of ±15%, or 200 mils of intra-pair skew is enough to close the eye diagram. If you are designing for HDMI 2.1 or DP 2.0, treat every lane as a high-speed SerDes link, not as a "video trace."</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> HDMI and DisplayPort are both 100Ω differential interfaces, but HDMI 2.1 FRL and DisplayPort 2.0 UHBR require genuine high-speed design discipline — controlled impedance within ±10% (tighter is better), minimal vias, backdrilling or thin dielectrics, and AC coupling caps with controlled placement.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Impedance Targets and Stackup Requirements</h2>
+
+  <p>Both standards specify 100Ω differential impedance ±10%, measured at the connector reference plane. In practice, compliance testers measure with 25 ps rise-time TDR, so the impedance profile along the entire trace — including the connector launch, the AC coupling cap pads, and the vias — must stay inside the window. A stackup designed for 50Ω single-ended traces does not automatically produce 100Ω differential pairs; the pair geometry (trace width, spacing, and the dielectric height to the reference plane) is a separate calculation.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Choose the Right Layer Count for the Data Rate</h4>
+      <p>For HDMI 2.0 and DP 1.4, a well-designed 4-layer stackup (signal–ground–power–signal) with the pairs referenced to solid ground planes is workable for short runs under 6 inches. For HDMI 2.1 FRL at 12 Gbps and DP 2.0 UHBR at 20 Gbps, plan 6–8 layers so that every high-speed pair references a solid ground plane on the adjacent layer, power planes are split off, and the connector side can use a low-loss dielectric. Our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a> walks through layer-count trade-offs in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Select a Laminate That Keeps Loss Under Control</h4>
+      <p>Standard FR-4 with a dissipation factor around 0.020 works for HDMI 2.0 at 3 Gbps on short traces. At 12–20 Gbps, dielectric loss and copper roughness dominate: a 10-inch trace on standard FR-4 can lose more than 4–6 dB at 6 GHz, which is roughly the fundamental of a 12 Gbps signal. For FRL and UHBR runs longer than 4–6 inches, specify a mid-loss laminate such as Megtron 6, Isola FR408HR, or Nelco N4000-13 SI family (Df ≈ 0.003–0.005), with smooth or ultra-low-profile copper on the signal layers. Our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a> compares the material families by loss and cost.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Control Etch Tolerance — It Sets Your Impedance Window</h4>
+      <p>Differential impedance is directly sensitive to trace width and spacing. A standard etch tolerance of ±20% on width can shift a 100Ω pair by 10Ω or more. Specify impedance-controlled pairs with ±10% final tolerance (measured), and let the fab adjust the artwork width to hit the target on your specific stackup — this is standard practice at any capable fab. Ask for <span class="data-point">±5%</span> on the pairs that run to compliance-tested connectors. Our <a href="/blog/impedance-control.html">impedance control guide</a> explains the measurement and reporting process, including TDR coupons.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-hdmi-dp-stackup.webp" alt="Photorealistic cross-section render of a multilayer PCB showing copper planes and tight differential pair geometry" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Differential Pair Routing Rules for HDMI and DisplayPort</h2>
+
+  <p>Once the stackup is fixed, the layout rules are mechanical — and measurable. The standards do not specify routing rules directly, but the eye-diagram budgets do, which is why the industry has converged on the following practice.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Match Length Inside the Pair — 5 mils Is the Working Budget</h4>
+      <p>Intra-pair skew of 5 mils (0.127 mm) is the commonly used budget for HDMI 2.0 TMDS and DP HBR3; at FRL 12 Gbps and UHBR 20 Gbps, tighten it to 2–3 mils where the layout allows. Each mil of skew between the P and N lines is roughly 0.17 ps of timing offset at the receiver — small alone, but it adds to jitter from every other source. Use accordion or trombone tuning near the connector end, never in the middle of a tightly coupled run.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Pair-to-Pair Spacing — Give the Lanes Room</h4>
+      <p>Keep at least 3× the dielectric height (usually 20–30 mils) between adjacent differential pairs, and 30+ mils from any aggressor (clock nets, switching regulators). If pairs must run parallel for more than 1 inch, increase spacing to 4×. Crosstalk between adjacent 100Ω pairs at 12 Gbps shows up as deterministic jitter that no equalizer can fully remove. See our <a href="/blog/pcb-crosstalk-analysis.html">crosstalk analysis guide</a> for the math behind the spacing rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Vias — Eliminate, Then Minimize, Then Backdrill</h4>
+      <p>Every via on a high-speed pair is a discontinuity: the stub below the signal layer acts as a resonant open stub. At 12 Gbps, a 30-mil stub resonates inside the signal band. Rules of thumb: limit each lane to 2–3 vias; keep via antipad diameter at 2× the drill; and for FRL/UHBR layers below the top surface, specify backdrilling to remove the unused stub. If the design is via-heavy, a thin-dielectric stackup (e.g., 1.6 mm total) can keep stubs short without backdrilling. Our <a href="/blog/pcb-backdrilling-guide.html">backdrilling guide</a> covers depth control and tolerances.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>AC Coupling Caps — Placement and Pad Discipline</h4>
+      <p>DisplayPort requires 0.1 µF AC coupling caps on every main-link lane; HDMI 2.1 FRL requires AC coupling on all four lanes (100 nF–220 nF typical). Place the caps close to the source or connector per the reference design, keep the traces to and from the cap pads symmetric, and use 0402 (or 0201 for UHBR) packages to minimize pad capacitance. The cap pad discontinuity should be tuned with the adjacent trace width — most high-speed reference designs specify a neck-down width for the cap footprint.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Connector Launch — The Most Common Place Eye Diagrams Die</h4>
+      <p>The connector footprint creates the biggest impedance discontinuity on the whole net. Follow the connector vendor's recommended landing pattern exactly, place stitching vias around the connector shield and ground pins (one via per 50–100 mils of shield edge), and avoid routing pairs under the connector body. Route the first 200 mils of each pair away from the connector with constant width and no tuning until the trace is clear of the footprint.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-hdmi-dp-routing.webp" alt="Macro photograph of matched-length differential pair routing with tuning sections on a dark PCB" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>ESD Protection Without Killing the Signal</h2>
+
+  <p>HDMI and DisplayPort connectors are user-accessible, which means they face ESD events of up to ±8 kV contact per IEC 61000-4-2. The tension: a TVS diode with more than 0.5 pF of loading capacitance will round off the edges of a 12–20 Gbps signal even when it is not conducting.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Pick Low-Capacitance TVS Diodes — 0.3 pF or Less</h4>
+      <p>Use TVS devices rated at 0.2–0.5 pF line capacitance per line for HDMI/DP data pairs. Rail-to-rail clamp architectures with integrated diodes are the standard choice; a single 4-channel TVS array covers one differential pair plus its shield. Place the TVS as close to the connector as physically possible — within 100 mils — so the clamp path is short. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC/EMI compliance guide</a> covers the rest of the protection strategy, including filtering and layout for emissions.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-hdmi-dp-esd.webp" alt="Low-capacitance ESD protection TVS diode array placed close to an HDMI connector on a PCB" loading="lazy" style="max-width:80%">
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Guard the 5V, HPD and DDC/SCL-SDA Lines Too</h4>
+      <p>The +5V and Hot-Plug Detect pins carry no high-speed data and can use standard TVS plus a series resistor. The DDC (I²C) lines for HDMI and the AUX channel for DisplayPort run at 100 kHz–1 MHz — a 1–2 pF TVS is fine there, and series resistors of 22–100Ω help. Skipping protection on these pins is a common field-failure source: an ESD strike on the connector's control pins can corrupt EDID reads or latch the port.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>EMI, Shielding and Grounding Around the Connector</h2>
+
+  <p>Video connectors are also antennas. The TMDS/FRL clocks radiate from the connector body and the exposed pair run, and compliance with FCC Part 15 / CE EN 55032 emissions limits often depends on connector-area design more than on the main board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Stitch the Shield, Don't Leave It Floating</h4>
+      <p>HDMI connectors ship with a metal shell that must be tied to chassis ground through low-impedance vias. Add stitching vias every 50–100 mils around the connector footprint and connect the shell to the ground plane at both ends. A floating shell turns the connector into a slot antenna. For metal-enclosure products, connect the shell to chassis ground through a 1 nF/2 kV capacitor if the enclosure is separate from the PCB ground.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep Switching Power Away From the Video Section</h4>
+      <p>Buck converters and their inductor fields are the most common video noise sources. Place the video interface, connector, and PHY/retimer on one side of the board; keep the switching regulator and its loop at least 300 mils away, on the opposite side of a ground plane. If a regulator must sit near the connector, use a shielded inductor and route the switch node away from the pairs. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers plane design for clean power delivery.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>What to Write in Your Fabrication Notes</h2>
+
+  <p>High-speed video boards fail in fabrication review when the requirements are implied rather than stated. Put these five items on the fabrication drawing and the stackup sheet:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Table With Tolerances</h4>
+      <p>List every impedance net class: 100Ω differential ±10% for HDMI/DP pairs, plus any 90Ω USB or 85Ω PCIe pairs on the same board. Ask for TDR coupons per impedance class on every panel and a TDR report with the shipment. Tolerances tighter than ±10% (e.g., ±5%) are achievable with impedance tuning — state them explicitly if the design needs them.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Backdrilling Requirements</h4>
+      <p>If the design relies on backdrilling, specify the nets (or "all vias on layers X–Y"), the residual stub allowance (typically ≤ 10 mils), and that the backdrill diameter is 8 mils larger than the drill. Confirm the fab's backdrill depth tolerance (±3 mils typical) against your stub budget.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Laminate and Copper Type</h4>
+      <p>Name the laminate family (e.g., Megtron 6, FR408HR) and the copper roughness grade for signal layers. If standard FR-4 is acceptable, say so — but for FRL/UHBR boards, leaving the laminate unspecified invites a cost-driven substitution that loses 3–5 dB at 6 GHz.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Solder Mask on High-Speed Traces</h4>
+      <p>Solder mask over a 100Ω pair changes the effective dielectric and can shift impedance by 2–4Ω. Either design the pair widths for mask-over (the fab's impedance calculator accounts for it) or specify mask removal (NSMD-defined) on the impedance nets. Do not leave it ambiguous.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Connector Assembly Details</h4>
+      <p>Specify whether the connector is hand-soldered or reflowed, the paste stencil thickness for the connector ground pins, and whether a selective solder or press-fit option applies. Connector pins with insufficient solder fillet fail intermittently in the field and are invisible to AOI on the inner rows. Our <a href="/blog/fine-pitch-smt-assembly-guide.html">fine-pitch SMT guide</a> covers stencil and reflow control for dense connector footprints.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: Route for the Standard You Are Shipping, Not the One You Started With</h2>
+
+  <p>HDMI 2.1 and DisplayPort 2.0 moved video interfaces firmly into the high-speed domain. The board rules are not exotic — 100Ω pairs on solid ground references, controlled etch and impedance, minimal vias with backdrilling, low-capacitance ESD, and disciplined connector launches — but they must be designed in and specified on the drawing, because they cannot be fixed after fabrication. If you are also routing USB-C for DisplayPort Alt Mode, our <a href="/blog/usb-c-pcb-design-guide.html">USB-C design guide</a> covers the shared 100Ω/90Ω routing considerations.</p>
+
+  <p>At Huaxing PCBA, we fabricate impedance-controlled boards with ±5% differential targets, TDR-verified coupons, and backdrilling up to 32 layers, and our SMT lines place 0201 components and 0.3 mm-pitch BGA connectors for dense video designs. <a href="/blog/pcb-signal-integrity.html">Read our signal integrity guide</a> for the broader high-speed picture, or <a href="/contact/">send your stackup and impedance requirements</a> to our engineering team for a DFM review with your quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design — Layer Count &amp; Material Planning</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control — Why ±5% Matters at GHz Speeds</a></li>
+    <li><a href="/blog/pcb-emi-emc-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB EMI/EMC Design — Emissions &amp; Immunity Control</a></li>
+    <li><a href="/blog/usb-c-pcb-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">USB-C PCB Design — Impedance, ESD &amp; PD Routing</a></li>
+    <li><a href="/blog/pcb-backdrilling-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Backdrilling — Stub Removal Above 5 Gbps</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-hdmi-dp.webp)">
+      <h2>Need a High-Speed Stackup That Actually Hits 100Ω?</h2>
+      <p>Send us your stackup, impedance table, and Gerbers — our engineering team runs a free DFM and impedance review, and you get a quote within 24 hours. Backdrilling, mid-loss laminates, and TDR reports available on every order.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
