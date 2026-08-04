@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class-D Audio Amplifier PCB Design — Power Stage Layout, Output Filter &amp; EMC for 100W+ Amplifiers | Huaxing PCBA</title>
+<meta name="description" content="Class-D audio amplifier PCB design guide — half-bridge power stage and gate drive layout, LC output filter selection, switching-noise control for audio quality, thermal design for 100W+ channels, EMC, and DFM specs.">
+<meta property="og:title" content="Class-D Amplifier PCB Design — 90% Efficiency Without the Noise">
+<meta property="og:description" content="A class-D amp is a switching power stage that must also sound clean: loop inductance, output filter, and ground discipline decide whether you get 90% efficiency with -100 dB noise, or a hissing, buzzing mess. Here is the guide.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/class-d-amplifier-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-class-d-amp.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/class-d-amplifier-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Class-D Audio Amplifier PCB Design — Power Stage Layout, Output Filter &amp; EMC for 100W+ Amplifiers",
+  "description": "Class-D audio amplifier PCB design guide — half-bridge power stage and gate drive layout, LC output filter selection, switching-noise control for audio quality, thermal design for 100W+ channels, EMC, and DFM specs.",
+  "datePublished": "2026-08-04",
+  "dateModified": "2026-08-04",
+  "image": "https://huaxingpcba.com/generated/blog-cover-class-d-amp.webp",
+  "url": "https://huaxingpcba.com/blog/class-d-amplifier-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/class-d-amplifier-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-class-d-amp.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Class-D Audio Amplifier PCB Design:<br><em>Power Stage Layout, Output Filter &amp; EMC for 100W+ Amplifiers</em></h1>
+      <p class="reveal">A class-D amp is a switching power stage that also has to sound clean — loop inductance, output filter, and ground discipline decide whether you get 90% efficiency with studio-clean noise or a hissing mess.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Class-D Amplifier PCB Design</span></div>
+
+  <p>Class-D amplifiers now dominate everything from 3W smart-speaker drivers to <span class="data-point">2000W</span> subwoofer modules, for one reason: efficiency. A class-AB amp wastes 40-50% of the supply power as heat, while a well-designed class-D stage converts 85-92% of the input power into speaker output. That difference is why battery-powered Bluetooth speakers can run for a day, why automotive amplifiers fit behind a dashboard, and why a 100W-per-channel home theater receiver no longer needs a giant heatsink. The cost is complexity: a class-D amp is a switching power stage switching at 300 kHz to 1.2 MHz right next to a high-gain analog audio path, and the PCB is where those two worlds collide.</p>
+
+  <p>Huaxing PCBA manufactures amplifier boards for consumer audio, automotive infotainment, and professional PA equipment — 2-8 layer stackups with 2-6 oz copper on power layers, ENIG finishes for the amplifier ICs, X-ray inspection for high-density power stages, and full functional and audio test support. This guide covers the power stage layout, output filter design, ground and noise discipline, thermal management, EMC, and the DFM specifications to put on the drawing.</p>
+
+  <img class="article-img" src="/generated/blog-class-d-amp-pcb.webp" alt="Macro photo of a class-D audio amplifier PCB showing the amplifier IC, ferrite inductors and electrolytic capacitors" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>How Class-D Works — and What the PCB Must Do</h2>
+
+  <p>A class-D amplifier converts the audio signal into a high-frequency pulse-width-modulated square wave, amplifies that square wave in a half-bridge switching stage, then reconstructs the audio with a low-pass LC filter at the output. The switching frequency is typically 384 kHz to 768 kHz (with spread-spectrum modulation on modern controllers to spread the EMI), well above the 20 kHz audio band.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>The Board Carries Two Conflicting Worlds</h4>
+      <p>The power stage is a fast switcher: 20-40V rails (or ±35V for higher-power designs), switching currents in the amps, and edges in the low-nanosecond range. The input stage is a high-gain analog circuit that amplifies millivolt audio signals by 20-30 dB. The layout's job is to keep the switcher's noise out of the analog path while giving the power stage the tight loops it needs. This is the same discipline our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal PCB design guide</a> describes, applied to power audio.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Every dB of Noise Has a Physical Source</h4>
+      <p>Output noise in a class-D amp comes from specific places: switching ripple leaking past the output filter, ground bounce from the power stage's return currents, coupling from the switch node into the input stage, and the controller's own PWM jitter. Each of these is a layout problem with a layout fix. A design that measures -100 dB noise and one that measures -70 dB differ mostly in how the power and analog sections are placed, grounded, and separated.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Efficiency Claims Only Hold With Good Layout</h4>
+      <p>The datasheet efficiency curve assumes a minimum loop inductance and gate-drive path. A sloppy layout adds switching loss at every edge, raises the FET temperature, and can trigger the over-current or over-temperature protection earlier than the design intends. The thermal and the electrical design are the same layout.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Class-D is a power converter and a precision audio circuit on one board. Every layout decision — loop size, ground scheme, filter placement — serves both masters, and the compromises are where noise comes from.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>The Power Stage: Half-Bridge, Gate Drive, and Switching Loop</h2>
+
+  <p>Most designs use an integrated class-D controller with built-in gate drivers (TI TAS/TPA series, Infineon MERUS, ST, or NXP parts), driving external MOSFETs for high power or integrated FETs for low power. The layout rules below apply to both.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Minimize the Half-Bridge Switching Loop</h4>
+      <p>The loop formed by the high-side FET, low-side FET, and the local bulk capacitor across the supply rails carries the full switching current. Keep it small — a tight cluster on one side of the board with the capacitor physically adjacent to the FETs, connected by short wide traces or a dedicated copper pour. Loop inductance here causes voltage overshoot at the switch node, increases EMI, and wastes efficiency. A loop area under 1 cm² is a practical target for a 100W channel. Our <a href="/blog/smps-pcb-layout-design.html">SMPS layout guide</a> covers the same loop-minimization physics in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Route the Gate Drive as a Tight, Separate Pair</h4>
+      <p>The gate drive trace from the controller to each FET's gate must be short (under 10 mm where possible) and run as a tight pair with its return path, away from the switch node and the output traces. Add the gate resistor right at the FET gate. A long or noisy gate trace makes the FET switch slower or oscillate — slow switching burns efficiency, oscillation burns the FET. If the controller and FETs are in one package, this is handled internally and the layout effort moves to the output filter and supplies.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Size the Supply and Output Copper for Peak Current</h4>
+      <p>A 100W channel into 4Ω draws about 5A RMS from the supply, with peaks near 10A. The supply traces, the output traces to the filter, and the speaker output must be sized for that current with margin — 2 oz copper minimum on the power path, wider where the traces are long. Voltage drop in the supply path sags the rails under bass transients, which is audible as compression. Use the copper math in our <a href="/blog/pcb-trace-width-current-capacity.html">current capacity guide</a> rather than guessing.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The switching loop and the gate drive are the two sacred geometries of a class-D power stage: one as small as possible, the other as clean as possible. Everything else follows.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>The Output Filter: Inductors, Capacitors, and Placement</h2>
+
+  <p>The LC filter between the switch node and the speaker reconstructs the audio and — critically — shapes the EMI. Its layout is as important as its values.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Choose Inductors Rated for the Real Current</h4>
+      <p>Output filter inductors carry the full speaker current plus the switching ripple. A 10-22 µH ferrite inductor with a saturation rating well above the peak current is typical; running the inductor into saturation collapses the filter and dumps switching spikes into the speaker. Check the saturation curve at the operating temperature, not just the datasheet headline number. Metal-alloy or high-saturation ferrite cores are standard for 100W+ channels. The inductor's DC resistance also matters: 100 mΩ costs about 0.5W of heat at 5A.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Place the Filter Close to the Switch Node, Keep the Path Short</h4>
+      <p>The trace from the switch node to the inductor, and from the inductor to the filter capacitor and speaker terminal, should be short and wide. The filter capacitor (typically 0.47-1 µF film or C0G ceramic, plus a snubber) sits between the inductor output and ground, with its ground returned directly to the power ground plane. Long, thin filter traces add inductance that turns the filter into a resonant antenna. Keep the speaker output pair (plus and minus) as a twisted or tightly-coupled pair to the connector.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Add a Zobel Network and Snubber Per Datasheet</h4>
+      <p>Most class-D reference designs specify a Zobel network (typically 10Ω + 100 nF) at the speaker output to keep the filter stable with reactive loads, and an RC snubber across the switch node to damp ringing. Place these physically at the points they protect — the snubber right at the switch node, the Zobel right at the speaker connector. Component placement here is part of the circuit, not decoration.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-class-d-amp-inductor.webp" alt="Macro photo of two ferrite core inductors side by side on a dark PCB with visible copper windings" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Grounding and Noise Discipline: Keeping the Audio Clean</h2>
+
+  <p>The difference between a good amplifier and a noisy one is almost always the ground scheme. Class-D controllers use separate power ground and analog ground (AGND) pins precisely so the layout can keep the two apart.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use a Star or Single-Point Ground Between Power and Analog</h4>
+      <p>Connect the power ground (return path for the switching current) and the analog ground (input stage, feedback, controller's analog section) at exactly one point — usually a star point near the controller or at the input connector ground. The switching return current must never flow through the analog ground plane. Split the ground pour if needed to enforce this, and bridge the split only at the star point. Our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal grounding guide</a> explains the theory in depth.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep the Input Stage Physically Opposite the Power Stage</h4>
+      <p>Place the audio input connector, input filter, and the controller's analog input pins at the board edge farthest from the switching stage and the output filter. Do not route the input traces across or under the power section on any layer. If the board is long, treat the middle as a buffer zone with the ground plane intact but no signal routing. Shielding the input stage with a grounded guard trace around the input traces is cheap insurance on high-gain designs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Filter the Supply Rails at Every Stage</h4>
+      <p>The amplifier's supply pins need local decoupling: bulk electrolytic (470-2200 µF per channel, placed near the power stage) plus ceramic caps (100 nF and 10 µF) right at the controller and FET supply pins. The analog supply for the input stage gets its own LC or RC filter, fed from the main rail with a ferrite bead. This keeps the PWM current ripple from modulating the analog supply — a classic cause of audible buzz. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers the decoupling methodology.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Noise in class-D is a ground problem before it is anything else. One star point, separate power and analog grounds, physical separation of input and output stages, and filtered supply rails eliminate most audible artifacts without changing a single schematic value.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Thermal Design for 100W+ Channels</h2>
+
+  <p>Even at 90% efficiency, a 100W channel dissipates <span class="data-point">10W</span>, and a 4-channel amp dissipates 40W. The PCB must move that heat out.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Give the FETs and Controller a Real Thermal Path</h4>
+      <p>The output FETs (or the integrated amp package) expose a thermal pad that must connect through a via array to a copper pour that covers as much board area as the layer budget allows. Use 10-25 thermal vias (0.3 mm, tented or filled) under the pad, tie them to a continuous pour on layers 2 and 3, and connect that pour to the enclosure heatsink with a thermal pad or to the board edge for airflow. Do not route signal traces through the thermal pour — keep it a clean heat spreader. Our <a href="/blog/pcb-thermal-management-guide.html">thermal management guide</a> details the via and pour design.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Spread the Channels and the Heat</h4>
+      <p>On multi-channel boards, distribute the channels across the board rather than clustering them, so each channel's copper area contributes to cooling the others' heat. Keep the electrolytic capacitors away from the FETs and the output inductors — their lifetime halves for every 10°C rise. The output inductors and the rectifier/freewheeling diodes are secondary heat sources that still need airflow or copper.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Verify With a Full-Power Load Test</h4>
+      <p>Run the prototype at full rated power into a resistive load (4Ω and 8Ω) with continuous sine or pink noise for 30+ minutes, and measure case and component temperatures. The thermal test is also the stability test — a marginal loop that oscillates at high temperature shows up here first. Document the thermal images; they are the evidence your enclosure designer needs. Our <a href="/blog/pcb-thermal-cycling-testing.html">thermal cycling testing guide</a> covers the long-term reliability angle.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-class-d-amp-thermal.webp" alt="Macro photo of an audio amplifier PCB with a black finned aluminum heatsink and thermal interface pad" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>EMC: Switching Noise vs. FCC Part 15B / CISPR 32</h2>
+
+  <p>A 768 kHz switcher driving 5A into a speaker cable is a textbook radiator. Class-D amps must pass FCC Part 15B (US) or CISPR 32 / EN 55032 (EU) for consumer equipment — and the speaker cable is usually the biggest antenna in the system.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use Spread-Spectrum Modulation and a Clean Switch Node</h4>
+      <p>Modern class-D controllers offer spread-spectrum PWM that dithers the switching frequency, spreading the emission energy so it falls under the quasi-peak limits. Enable it by default. Pair it with a physically small switch node (minimal copper area, tight loop) and a well-placed snubber, and most radiated problems disappear before the filter stage. Our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a> covers the general methodology.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Add a Common-Mode Choke on the Speaker Output</h4>
+      <p>The speaker cable is a long antenna driven by the amplifier output. A small common-mode choke (or ferrite beads) on the output pair suppresses the common-mode current without affecting the differential audio — this is the single most effective EMC fix on class-D boards. Place it right at the speaker connector, with the filter ground returned to the power ground star point. Also route the input cable's ground carefully: a ground loop through the input cable is a classic cause of both hum and failed radiated tests.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan the Compliance Test Early</h4>
+      <p>Run a pre-compliance radiated scan at the prototype stage — a desktop spectrum analyzer with a near-field probe finds the hot spots (switch node, inductor, speaker connector) in minutes. Fixing EMI at the prototype costs a trace reroute; fixing it at the certification stage costs a board respin and weeks of delay. Budget for the scan in every class-D project.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>DFM for Amplifier Boards: What to Put on the Drawing</h2>
+
+  <p>Amplifier boards combine high-current copper, mixed SMT/through-hole parts, and often thick copper pours that need special fab attention.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Specify Copper Weight, Finish, and Thermal Vias</h4>
+      <p>State the copper weight per layer (2 oz minimum on power layers, up to 6 oz for very high-current designs), the surface finish (ENIG for the amplifier IC pads and connector areas), and the thermal via arrays under the FETs and amp ICs — diameter, fill, and whether the vias are capped for soldering. Unspecified thermal vias get made however the fab defaults, which is how thermal pads end up with voids.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Mixed Assembly: SMT + Through-Hole Power Parts</h4>
+      <p>Speaker terminals, supply connectors, and large electrolytics are through-hole, while the controller and FETs are SMT. Plan the assembly order: SMT first, then through-hole, with wave or selective soldering for the THT side. Note any press-fit or screw-terminal requirements on the assembly drawing. Our <a href="/blog/smt-vs-through-hole-assembly.html">SMT vs through-hole comparison</a> and <a href="/blog/wave-vs-selective-soldering.html">wave vs selective soldering guide</a> cover the process trade-offs.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Test Strategy: Audio and Power on Every Unit</h4>
+      <p>Production testing for amplifiers needs more than a power-on check: a functional audio test (output at 1 kHz, THD+N measurement, and DC offset check on every unit) plus a soak test at partial power catches assembly defects — wrong filter parts, reversed FETs, cold joints on the power path — that a visual inspection misses. Specify the test points and the test jig requirements on the drawing. Our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> places audio functional test in the full production strategy.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The Class-D Amplifier Checklist</h2>
+
+  <p>A class-D amplifier that delivers rated power, runs cool, sounds clean, and passes EMC is designed with a minimized switching loop, a clean gate drive, filter inductors rated for real current and placed tight to the switch node, a single-point ground scheme that keeps switching current out of the analog path, physical separation of input and power sections, a real thermal path from every hot device into the board, and a production test that measures audio quality on every unit. The schematic gives you the circuit; the layout gives you the amplifier.</p>
+
+  <p>At Huaxing PCBA we manufacture class-D amplifier boards from 3W portable drivers to 1000W+ pro-audio modules — 2-8 layers with 2-6 oz copper, ENIG finishes, thermal via arrays, mixed SMT/through-hole assembly on 8 SMT lines plus 4 DIP lines, and functional audio test support in production. Our DFM review checks the power loops, thermal vias, ground scheme, and assembly order before tooling. <a href="/blog/audio-hifi-pcb-manufacturing.html">Read our audio &amp; HiFi PCB manufacturing guide</a> for the material and cleanliness side of audio boards, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/audio-hifi-pcb-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Manufacturing for Audio &amp; HiFi</a></li>
+    <li><a href="/blog/smps-pcb-layout-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMPS PCB Layout Guide</a></li>
+    <li><a href="/blog/mixed-signal-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Mixed-Signal PCB Design</a></li>
+    <li><a href="/blog/pcb-thermal-management-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Design Guide</a></li>
+    <li><a href="/blog/pcb-emi-emc-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB EMI/EMC Design Guide</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-class-d-amp.webp)">
+      <h2>Developing a Class-D Amplifier or Audio Module?</h2>
+      <p>Send your schematic and layout — our engineers will review the power loops, thermal vias, ground scheme, and assembly order, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Audio Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

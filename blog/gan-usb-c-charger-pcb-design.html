@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GaN USB-C Fast Charger PCB Design — 65W-240W Power Stage Layout, Thermal &amp; EMI Control | Huaxing PCBA</title>
+<meta name="description" content="GaN USB-C fast charger PCB design guide — 65W to 240W power stage layout, loop inductance and gate drive rules, thermal management, EMI control, USB PD 3.1 routing, and the isolation/DFM specs your fab must hold.">
+<meta property="og:title" content="GaN Charger PCB Design — Packing 240W Into a Pocket-Size Enclosure">
+<meta property="og:description" content="A 140W GaN charger switches at 400 kHz+ inside a case the size of a matchbox — loop inductance, thermal vias, and primary-secondary isolation decide whether it runs cool, passes EMC, and survives. Here is the design guide.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/gan-usb-c-charger-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-gan-charger.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/gan-usb-c-charger-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "GaN USB-C Fast Charger PCB Design — 65W-240W Power Stage Layout, Thermal &amp; EMI Control",
+  "description": "GaN USB-C fast charger PCB design guide — 65W to 240W power stage layout, loop inductance and gate drive rules, thermal management, EMI control, USB PD 3.1 routing, and the isolation/DFM specs your fab must hold.",
+  "datePublished": "2026-08-04",
+  "dateModified": "2026-08-04",
+  "image": "https://huaxingpcba.com/generated/blog-cover-gan-charger.webp",
+  "url": "https://huaxingpcba.com/blog/gan-usb-c-charger-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/gan-usb-c-charger-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-gan-charger.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">GaN USB-C Fast Charger PCB Design:<br><em>65W-240W Power Stage Layout, Thermal &amp; EMI Control</em></h1>
+      <p class="reveal">A 140W GaN charger switches at 400 kHz inside a case the size of a matchbox — loop inductance, thermal vias, and primary-secondary isolation decide whether it runs cool, passes EMC, and survives.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>GaN Charger PCB Design</span></div>
+
+  <p>Gallium-nitride power devices have rewritten the USB charger market: a 65W GaN charger is smaller than the silicon charger that shipped with the same laptop five years ago, and USB PD 3.1 now pushes single-port supplies to <span class="data-point">240W</span> at 48V. GaN's low gate charge and near-zero reverse recovery let the converter switch at 300 kHz to 1 MHz instead of the 65-100 kHz of silicon flybacks, which shrinks the magnetic components dramatically — but it moves the engineering difficulty from the transformer into the PCB. At 1 MHz with <10 ns switching edges, layout parasitics that were invisible at 100 kHz become efficiency killers, EMI sources, and even reliability risks.</p>
+
+  <p>Huaxing PCBA manufactures GaN chargers and adapters for consumer, industrial, and automotive customers — 2-8 layer high-Tg stackups, 2 oz and heavier copper for the power path, controlled impedance on the USB signal pairs, and 8 SMT lines with X-ray inspection for the high-density primary side. This guide walks through topology selection, power-stage layout, thermal management, EMI control, USB PD routing, isolation rules, and the DFM specifications to put on the fabrication drawing.</p>
+
+  <img class="article-img" src="/generated/blog-gan-charger-pcb.webp" alt="Macro photo of a GaN power supply PCB showing the half-bridge GaN IC, gate driver, transformer and golden copper traces" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Topology Choice: Flyback, Active Clamp, or PFC + LLC</h2>
+
+  <p>The power architecture sets every downstream layout decision. The table below summarizes where each topology fits in 2026 GaN charger designs.</p>
+
+  <table class="spec-table">
+    <tr><th>Topology</th><th>Power Range</th><th>Switching Frequency</th><th>Typical Efficiency</th><th>Used In</th></tr>
+    <tr><td>Quasi-resonant flyback</td><td>20-90W</td><td>150-300 kHz</td><td>90-93%</td><td>65W phone/laptop chargers</td></tr>
+    <tr><td>Active-clamp flyback (ACF)</td><td>65-140W</td><td>300-700 kHz</td><td>93-95%</td><td>Compact 100W+ single-port</td></tr>
+    <tr><td>Bridgeless PFC + LLC</td><td>140-240W</td><td>PFC 100-300 kHz, LLC 300 kHz-1 MHz</td><td>94-96%</td><td>140-240W multi-port GaN</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>QR Flyback for Cost-Driven 65W Designs</h4>
+      <p>The quasi-resonant flyback with a GaN primary (typically 650V GaN in a 4×6 mm DFN) is the workhorse of the 65W segment. It uses valley switching to cut turn-on losses and needs no auxiliary switch, keeping BOM and layout simple. Design effort goes into the snubber and the transformer leakage inductance — a planar or well-coupled bobbin transformer with <1% leakage keeps the ringing under control. Our <a href="/blog/smps-pcb-layout-design.html">SMPS layout guide</a> covers the general flyback layout rules this design builds on.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Active-Clamp Flyback for the 100W Class</h4>
+      <p>Above 90W, the flyback's turn-off loss and leakage energy penalty grows, and the active-clamp flyback adds an auxiliary GaN or MOSFET to recycle the leakage energy. It recovers 1-2% efficiency and lets the converter run at 500-700 kHz with a smaller transformer — at the cost of a second switch, a clamp capacitor, and tighter layout discipline. The clamp loop (auxiliary switch + capacitor) must be a small, tight loop next to the transformer primary; inductance here directly increases voltage stress on the clamp switch.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>PFC + LLC for 140W and Above</h4>
+      <p>Above 140W, chargers need power-factor correction to meet EN 61000-3-2 harmonic limits, and the standard architecture is a boost PFC stage (often totem-pole bridgeless with GaN for 96%+ efficiency) followed by an LLC resonant converter. This is a two-board-class layout: the PFC section handles 240-400V DC with high dV/dt, and the LLC section runs at 300 kHz-1 MHz. Isolation, creepage, and thermal management become the dominant layout constraints. Our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> covers the PDN design these stages depend on.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Choose the topology by power level and enclosure size: QR flyback to 90W, active-clamp flyback to 140W, PFC + LLC above that. Each step up in frequency moves more design risk from the magnetics into the PCB layout.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Power Stage Layout: Loops, Gate Drive, and Copper</h2>
+
+  <p>The power stage is where GaN boards live or die. The switching loop — high-side device, low-side device, and the decoupling capacitor across them — must be physically as small as possible.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Minimize the Power Loop Inductance</h4>
+      <p>Every nanohenry in the half-bridge loop adds voltage overshoot at turn-off: V = L × dI/dt, and GaN switches dI/dt in the A/ns range. A loop inductance above 5 nH can push the switch-node voltage past the 650V rating on a 400V rail. Place the high-side and low-side devices and the bus capacitor so the loop is a single small square on one layer, with the return path directly underneath on the adjacent layer. Use multiple vias in parallel for every connection in the loop, and never route the loop through a long trace. Our <a href="/blog/pcb-trace-width-current-capacity.html">trace width and current capacity guide</a> gives the copper sizing math for the power path.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep the Gate Drive Path Short and Clean</h4>
+      <p>GaN gate drivers are usually integrated in the same package as the power stage (half-bridge GaN ICs with driver, like the parts used in most modern chargers), which removes the external gate-loop problem. If you use discrete GaN devices, the driver must sit within 3-5 mm of the gate pad, the gate resistor directly at the device, and the drive return must not share the power-loop path. A separate Kelvin-source connection for the low-side device keeps the drive from being corrupted by the switching current. See our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> for decoupling placement rules.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Size the Copper for DC and Thermal, Not Just Resistance</h4>
+      <p>A 140W charger at 28V/5A carries 5A on the secondary; at 48V/5A the primary average current is still 2-3A plus a large AC ripple component. Use 2 oz copper on the power layers as a baseline (Huaxing supports up to 6 oz), widen the traces for the ripple current, and duplicate critical paths across layers with via arrays. The switch node, in particular, needs enough copper to spread heat from the device into the board — a 12 mm² exposed-pad GaN IC wants a thermal pad pattern with a 3×3 or 4×4 via array directly under the pad, connected to an internal copper pour. Our <a href="/blog/pcb-thermal-management-guide.html">thermal management guide</a> details the via and pour design.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The power stage layout is a loop-minimization problem: tight switching loop, short gate drive, and copper sized for both current and heat. Measure the loop by its area — a small loop on one layer beats a spread-out loop on two.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Thermal Management: Dissipating 5-8W From a Matchbox</h2>
+
+  <p>A 95% efficient 140W charger still dissipates <span class="data-point">7W</span> inside a case with almost no airflow. The PCB is the heatsink — thermal design is a board-level problem, not a mechanical one.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design the Thermal Path From the Device Down</h4>
+      <p>Heat flows from the GaN device's exposed pad through thermal vias into internal copper pours, then to the board edges or a heat spreader. Use an array of 0.3 mm vias (10-20 of them) filled or tented with thermal paste on the pad, tie them to a continuous pour that covers a large fraction of the board area on layers 2 and 3, and connect that pour to the enclosure heat spreader with a thermal pad. Every layer of copper participates; a 4-layer board with solid internal planes dissipates roughly twice what a 2-layer board can.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Separate the Hot Components Across the Board</h4>
+      <p>The transformer, the GaN stage, and the rectifier diodes are the three dominant heat sources. Spreading them across the board instead of clustering them lowers the peak temperature of each by 5-15°C, because each gets its own copper area and the board conducts heat from all three simultaneously. The transformer is often the hottest component — keep it off the center of the board and away from the electrolytic capacitors, whose lifetime halves for every 10°C of ambient rise.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Model and Prototype the Thermal Performance</h4>
+      <p>Run a steady-state thermal simulation (or a practical load test) at full rated power and at the worst-case input (low line, e.g., 90VAC) where efficiency drops and losses peak. Measure case temperature with a thermocouple on the transformer and the GaN device; EN 62368-1 limits enclosure touch temperatures to 70°C (85°C for some surfaces), which often becomes the constraint that drives the design. Prototype early — thermal issues found in production are the most expensive to fix. Our <a href="/blog/pcb-thermal-cycling-testing.html">thermal cycling testing guide</a> covers the reliability side of repeated heating.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-gan-charger-thermal.webp" alt="Macro photo of a power supply PCB with a black aluminum heatsink and thermal vias visible under the heat pad" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>EMI Control: Passing FCC/CE From a 1 MHz Switcher</h2>
+
+  <p>Switching at 400 kHz-1 MHz moves the fundamental switching noise into the AM and VHF bands where it is hardest to filter — conducted EMI limits apply from 150 kHz to 30 MHz (CISPR 32 / EN 55032) and radiated limits to 6 GHz. The layout does most of the work before the filter ever sees the noise.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Control the Switch-Node Capacitance and Snubber It</h4>
+      <p>The switch node (the connection between the high-side source, low-side drain, and transformer primary) is the main radiating antenna. Keep its copper area exactly as large as needed for current — no more — because every extra square millimeter of switch-node copper adds capacitance and radiates. A small RC snubber across the switch node (or across the transformer primary) is standard on GaN flybacks to damp the ringing that the leakage inductance excites at turn-off. Tune it on the bench with a spectrum analyzer, not by guesswork.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Build the Input Filter With the Layout, Not Just the Schematic</h4>
+      <p>The conducted EMI filter — common-mode choke, X-capacitors, Y-capacitors, and a differential-mode inductor — only works if its component placements and return paths are disciplined: the choke's input and output loops must not couple, the Y-capacitors connect the primary and secondary grounds at a single defined point, and the ground planes on both sides of the isolation barrier must not overlap capacitively. A filter drawn correctly but laid out carelessly fails the test by 10-20 dB. Our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a> covers the full playbook.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Shield Strategically, Ground Deliberately</h4>
+      <p>A metal shield over the primary section (or the whole converter) is common in 100W+ designs; its seams and solder joints must be grounded with vias every few millimeters to work as a Faraday cage. The output cable is the other radiating structure — common-mode chokes on the output pair and a ferrite bead on the output ground stop the cable from becoming an antenna. Plan the pre-compliance test early: conducted and radiated scans at the prototype stage cost far less than a redesign after certification starts.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-gan-charger-emc.webp" alt="Macro photo of a power electronics PCB showing a shielded inductor with an EMI shield can partially open" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>USB PD 3.1 Routing: The Secondary Side</h2>
+
+  <p>The secondary side carries the USB-C connector, the PD controller, and the 5-48V output path. It looks simple compared to the primary — until you route it.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route the CC and D+/D- Pairs With Impedance Control</h4>
+      <p>The CC (configuration channel) lines carry the PD protocol signaling and, on 240W designs, the 5A current-advertising; they should be routed as a tightly coupled pair with controlled impedance where the controller datasheet requires it, and kept away from the switching noise of the primary. The D+/D- USB 2.0 pair also benefits from impedance control (90 Ω differential) if the charger supports data. Our <a href="/blog/usb-c-pcb-design-guide.html">USB-C PCB design guide</a> covers the connector and PD routing rules in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Protect the CC/SBU Pins Against ESD and Overvoltage</h4>
+      <p>USB-C connectors see constant plugging and unplugging — the CC pins need ESD protection (a small TVS array) placed within 3-5 mm of the connector, and the VBUS path needs bulk and ceramic capacitance sized for the output ripple spec. For 240W/48V outputs, the VBUS trace must handle 5A continuously: widen it to the copper math in our <a href="/blog/pcb-trace-width-current-capacity.html">current capacity guide</a>, and keep the sense lines (if the PD controller does remote sensing) as a clean, separate pair.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep the Feedback Path Quiet</h4>
+      <p>The output voltage feedback from the secondary to the primary controller crosses the isolation barrier through an optocoupler or a digital isolator. Route the feedback traces away from the transformer and the switch node, keep the loop area small, and place the compensation components tight to the controller. A noisy feedback path shows up as output ripple and audible noise — two of the most common charger complaints.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-gan-charger-usbc.webp" alt="Extreme macro photo of a USB-C receptacle connector soldered onto a dark PCB with gold-plated pins" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Isolation and Safety: Creepage, Clearance, and UL 62368-1</h2>
+
+  <p>An offline charger has mains voltage (up to 375V peak for 264VAC) on one side of the barrier and user-touchable output on the other. The PCB geometry is a safety device.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Observe the Creepage and Clearance Tables</h4>
+      <p>For reinforced insulation on a 240VAC input with pollution degree 2, IEC 62368-1 requires clearance around 6.0 mm and creepage typically 6.0-8.0 mm between primary and secondary, measured on the actual PCB surface — slots in the board count toward creepage distance, which is why charger boards often have routed slots under the optocoupler. These numbers are the minimums for production; verify against the latest standard and your certifier's interpretation, because they vary with working voltage, altitude, and coating. IPC-2221B gives the analogous board-level guidance. Our <a href="/blog/pcb-ul-certification-guide.html">UL certification guide</a> explains the process and the UL 94 flammability requirements for the base material.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use High-Tg, High-CTI Laminate on the Primary</h4>
+      <p>The base material's CTI (comparative tracking index) class determines the creepage distance required: a CTI Class I material (≥600V, e.g., high-Tg FR-4 with ceramic filler) allows shorter creepage than a Class III material. Specify high-Tg FR-4 (Tg 150-170°C) for the whole board — the transformer area gets hot, and low-Tg material degrades and tracks over time. Our <a href="/blog/pcb-materials-guide.html">PCB materials guide</a> compares the laminate options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Document the Isolation Design for the Certifier</h4>
+      <p>UL 62368-1 certification requires the certifier to see the isolation distances on the layout, the transformer's isolation construction (margins, triple-insulated wire), and the Y-capacitor ratings. Keep a clean, annotated copy of the layout showing the primary-secondary distances, and make sure the production board matches the certified sample — a last-minute trace reroute across the barrier voids the certificate. The certificate covers the specific board revision; any change to the barrier area needs re-review.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>DFM for GaN Chargers: What to Put on the Drawing</h2>
+
+  <p>A GaN charger board is dense, two-sided, and often assembled with mixed lead-free profiles. Specify these on the fabrication and assembly drawings:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copper Weight, Via Arrays, and Pad Finishes</h4>
+      <p>State the copper weight per layer (typically 2 oz on power layers), the thermal via arrays under the GaN pad and transformer (diameter, fill/tenting, and whether they are capped), and the surface finish — ENIG for the GaN pads and USB connector, with OSP acceptable on internal power areas. Mismatched via tenting is a common cause of solder voids in the thermal pad.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Panel Design for High-Density Two-Sided Assembly</h4>
+      <p>Charger boards assemble both sides (primary on top, secondary on bottom), so the panelization must survive two passes through reflow. Specify V-score or tab-route panelization with the second-side components inside the panel area, and note the fiducial placement for each side. Our <a href="/blog/pcb-panelization-cost-optimization.html">panelization guide</a> covers the layout math.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Test Strategy: Hi-Pot, Load, and EMC Sampling</h4>
+      <p>Production testing for offline chargers is not just functional: every unit gets a hi-pot (dielectric withstand) test between primary and secondary to catch assembly damage to the isolation barrier, plus a load test at rated power. A sample of each batch goes to conducted and radiated EMC verification. Specify the test points and the hi-pot voltage (typically 3000-4000VAC for reinforced insulation at production level) on the drawing. Our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> places these in the full production strategy.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Summary: The GaN Charger Checklist</h2>
+
+  <p>A GaN charger that runs cool, passes EMC, and certifies cleanly is designed with a topology matched to the power level, a minimized power loop with tight gate drive, copper sized for current and heat, thermal vias moving heat from every hot component into internal planes, an EMI strategy that starts at the switch node, USB PD pairs routed with impedance control and ESD protection, and primary-secondary isolation that follows the creepage tables exactly. On the production side, hi-pot and load testing on every unit, with EMC sampling per batch, catches the defects that field failures would otherwise find in customers' homes.</p>
+
+  <p>At Huaxing PCBA we manufacture GaN chargers and adapters from 20W to 240W+ — 2-8 layers with high-Tg FR-4, 2-6 oz copper, ENIG finishes, laser microvias for the high-density primary side, and full power-supply assembly support: 8 SMT lines, X-ray for the transformer and GaN pads, and hi-pot plus load testing in production. Our DFM review checks the power loop, thermal via arrays, isolation distances, and panelization before tooling. <a href="/blog/smps-pcb-layout-design.html">Read our SMPS layout guide</a> for the deeper power-electronics rules, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/smps-pcb-layout-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMPS PCB Layout Guide</a></li>
+    <li><a href="/blog/usb-c-pcb-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">USB-C PCB Design &amp; Layout</a></li>
+    <li><a href="/blog/pcb-thermal-management-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Design Guide</a></li>
+    <li><a href="/blog/pcb-emi-emc-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB EMI/EMC Design Guide</a></li>
+    <li><a href="/blog/pcb-ul-certification-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB UL Certification Guide</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-gan-charger.webp)">
+      <h2>Developing a GaN Charger or Power Adapter?</h2>
+      <p>Send your schematic and layout — our engineers will review the power loop, thermal via arrays, isolation distances, and panelization, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Power Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

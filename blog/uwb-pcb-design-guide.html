@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UWB PCB Design Guide — 6.5/8 GHz Impulse Radio Layout, Antenna Rules &amp; FCC Certification | Huaxing PCBA</title>
+<meta name="description" content="Ultra-wideband PCB design guide — 6.5/8 GHz impulse radio layout, antenna and phase-center rules, BLE coexistence, automotive digital-key requirements, FCC Part 15 certification, and the DFM specs your fab must hold.">
+<meta property="og:title" content="UWB PCB Design — Impulse Radio Layout That Ranges to the Centimeter">
+<meta property="og:description" content="UWB measures distance with sub-nanosecond pulses, not signal strength — which is why antenna phase center, group delay, and grounding matter more than on any other radio board. Here is the layout and manufacturing guide.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/uwb-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-uwb-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/uwb-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "UWB PCB Design Guide — 6.5/8 GHz Impulse Radio Layout, Antenna Rules &amp; FCC Certification",
+  "description": "Ultra-wideband PCB design guide — 6.5/8 GHz impulse radio layout, antenna and phase-center rules, BLE coexistence, automotive digital-key requirements, FCC Part 15 certification, and the DFM specs your fab must hold.",
+  "datePublished": "2026-08-04",
+  "dateModified": "2026-08-04",
+  "image": "https://huaxingpcba.com/generated/blog-cover-uwb-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/uwb-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/uwb-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-uwb-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">UWB PCB Design:<br><em>Impulse Radio Layout, Antenna Rules &amp; Certification for Digital Keys and Asset Tracking</em></h1>
+      <p class="reveal">UWB measures distance with sub-nanosecond pulses instead of signal strength — so antenna phase center, group delay, and grounding decide whether your product ranges to the centimeter or drifts by a meter.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>UWB PCB Design</span></div>
+
+  <p>Ultra-wideband has become the precision ranging standard of the IoT world: phone-as-car-key systems, industrial asset trackers, smart-home presence detection, and hands-free access control all use UWB because it measures distance with <span class="data-point">±10 cm</span> accuracy — roughly 20-50 times better than Bluetooth RSSI ranging. Instead of measuring received signal strength, a UWB radio transmits sub-2 ns impulse pulses across a 499.2 MHz channel and measures time-of-flight directly. The market moved fast: UWB shipments passed 500 million units in 2024 and automotive digital keys are now fitted to most new EV and premium ICE platforms.</p>
+
+  <p>Huaxing PCBA manufactures UWB modules and digital-key ECUs for automotive, IoT, and industrial customers — 2-32 layer stackups with 3/3 mil capability, laser microvias for compact RF modules, impedance control to ±5%, and 8 SMT lines with X-ray and RF functional test support. This guide covers the RF front-end layout, antenna and phase-center rules, BLE coexistence, automotive requirements, certification, and the DFM specifications you should put on the fabrication drawing.</p>
+
+  <img class="article-img" src="/generated/blog-uwb-pcb-module.webp" alt="Macro photo of an ultra-wideband transceiver module PCB showing the radio IC, ceramic antenna and gold-plated pads" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Why UWB Layout Is Different From Any Other Radio</h2>
+
+  <p>Most RF boards are designed for a single carrier frequency. UWB is a time-domain technology: the receiver digitizes a wideband pulse and measures when it arrives. That changes what matters on the PCB in three specific ways.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>The Bandwidth Spans 3.1-10.6 GHz, Not a Single Carrier</h4>
+      <p>FiRa Consortium devices operate on Channel 5 (6.4896 GHz) or Channel 9 (7.9872 GHz), each with a 499.2 MHz channel bandwidth. A matching network tuned for one frequency is useless here — every reactive element must stay flat across the whole 500 MHz channel, or the pulse shape distorts and the leading-edge timing that ranging depends on shifts. Keep the RF path short, use components rated well above 8 GHz, and avoid high-Q resonances near the passband.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Group Delay Variation Becomes a Ranging Error</h4>
+      <p>A 1 ns timing error is a 30 cm distance error, because the radio pulse travels at roughly 0.3 m/ns. Group delay variation across the channel — from a poorly grounded via fence, a mismatched trace, or an out-of-band filter resonance — directly corrupts the time-of-arrival measurement. UWB receivers calibrate out fixed delays, but frequency-dependent delay variation cannot be calibrated. The practical rule: one clean, short, controlled-impedance path from the transceiver to the antenna, with no stubs, no layer changes, and no unnecessary filtering in the RF line.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Antenna Phase Center Is Part of the Measurement</h4>
+      <p>Ranging accuracy depends on where the antenna appears to radiate from — its phase center — not where the component is physically placed. A chip antenna with a datasheet-specified ground clearance, mounted exactly as recommended, has a stable phase center; a trace antenna bent to fit a crowded board corner does not. For automotive digital keys the antenna position on the vehicle must also be reproducible across production, so the design rules for antenna placement are stricter than for a BLE tag.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> UWB is a time-domain radio. Anything that varies with frequency — group delay, matching ripple, antenna detuning — becomes a ranging error. The RF path must be short, flat, and predictable, not just low-loss.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>The RF Front End: Transceiver, Matching, and Grounding</h2>
+
+  <p>UWB designs are built around a single-chip transceiver — Qorvo DW3110/DW3120, NXP SR150/SR040, or NXP NCJ29D5 for automotive — usually paired with a companion MCU. Our <a href="/blog/iot-pcb-design-manufacturing.html">IoT PCB design guide</a> covers the system architecture these radios sit inside; here are the RF-specific rules.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Copy the Reference Design's RF Section Verbatim</h4>
+      <p>The transceiver datasheet specifies the balun, matching components, and antenna-port layout for each channel. Use the exact component values and footprint placements from the reference design — do not relocate the matching network "for convenience." The differential RF pins need their ground pins connected to a continuous ground pour directly beneath the IC, with vias at every ground pad. A stray 1-2 nH of via inductance here detunes the match across the wide channel.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Route the 50 Ω Feed as a Tight, Continuous Line</h4>
+      <p>From the matching network to the antenna or connector, keep a controlled 50 Ω line — microstrip or grounded coplanar waveguide — on one layer, with no vias in the RF path. On a typical 1.6 mm FR-4 stackup, a CPWG trace around 1.0-1.2 mm wide with 0.3 mm gaps to ground pours on both sides works for the UWB band; verify the exact geometry against your stackup with the fab's impedance calculator. Add ground stitching vias beside the line every 2-3 mm. Specify ±10% impedance control and verify with TDR — our <a href="/blog/impedance-control.html">impedance control guide</a> explains the coupon requirements.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Isolate the RF Section With a Grounded Via Fence</h4>
+      <p>UWB receivers digitize pulses at GHz sample rates, and the digital switching noise from the companion MCU can couple straight into the antenna port. Surround the RF section with a via fence (vias on ~0.5 mm pitch) connecting all ground pours, keep the antenna and RF trace away from the MCU's clock and SPI lines, and never route digital signals on the layer directly beneath the antenna. If the board uses a shield can, ground its mounting pads with multiple vias to the main plane.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The RF chain is: transceiver → balun/matching → 50 Ω feed → antenna. Every transition must be tight, grounded, and impedance-controlled — and the wide channel bandwidth leaves no room for resonances that a narrowband design would tolerate.</p>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Antenna Selection and Phase-Center Rules</h2>
+
+  <p>UWB antenna choice trades size, cost, and angular coverage against ranging reliability. Our <a href="/blog/pcb-antenna-design-guide.html">PCB antenna design guide</a> covers antenna fundamentals; the UWB-specific considerations are below.</p>
+
+  <table class="spec-table">
+    <tr><th>Antenna Type</th><th>Typical Size</th><th>Pattern</th><th>Best For</th></tr>
+    <tr><td>Ceramic chip antenna</td><td>3-8 mm × 1-2 mm</td><td>Omnidirectional, needs ground clearance</td><td>Tags, trackers, compact modules</td></tr>
+    <tr><td>PCB monopole / dipole</td><td>12-25 mm element</td><td>Omnidirectional in one plane</td><td>High-volume, low BOM cost</td></tr>
+    <tr><td>Printed monopole + ground plane</td><td>20-40 mm total</td><td>Quasi-omnidirectional</td><td>Industrial tags, anchors</td></tr>
+    <tr><td>External/UWB-rated antenna</td><td>Connector + antenna</td><td>Wideband, stable phase center</td><td>Anchors, automotive ECUs, fixed infrastructure</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Follow the Chip Antenna's Clearance Drawing Exactly</h4>
+      <p>Chip antenna datasheets specify a ground clearance zone, a recommended board-edge location, and often a matching network. Ignoring the clearance — placing the antenna over a ground pour, or a trace crossing the keep-out area on an inner layer — can cost 5-8 dB and shift the phase center. Copy the manufacturer's recommended layout including any ground cutout, and keep the antenna area clear of solder mask per the datasheet.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>For Automotive Digital Keys, Plan Antenna Placement Per Vehicle Zone</h4>
+      <p>Car makers place 4-8 UWB anchors around the vehicle (door handles, trunk, center console) so the phone's position can be triangulated. Each anchor PCB needs its antenna oriented for the coverage zone, with a stable phase center and a mounting position that is repeatable in production. This is a mechanical and layout planning task as much as an RF one — specify the antenna location and orientation on the assembly drawing, and use fixtures in production to hold it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Test the Antenna in the Final Enclosure</h4>
+      <p>UWB performance changes with nearby metal, battery packs, and enclosures — a tag inside a metal-backed asset tracker can lose most of its range. Always characterize return loss and pattern with the final housing and battery present. If the enclosure is plastic with conductive coatings, verify the antenna still radiates before committing to tooling. Our <a href="/blog/rf-pcb-design-manufacturing.html">RF PCB manufacturing guide</a> covers the fabrication side of antenna- and impedance-critical boards.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-uwb-pcb-antenna.webp" alt="Macro photo of a printed antenna element at the edge of a UWB module PCB with gold flash plating" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>BLE Coexistence: The Dual-Radio Design Problem</h2>
+
+  <p>Most UWB products also carry BLE — the phone digital-key ecosystem uses BLE for wake-up and handshake, then UWB for precise ranging. Putting two radios on one board creates a classic coexistence problem.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep the Two Antennas at Opposite Edges</h4>
+      <p>The BLE antenna (2.4 GHz) and the UWB antenna (6.5-8 GHz) should sit at opposite corners or edges of the board, with their keep-out zones non-overlapping. This is not just about detuning — it minimizes coupling of the BLE transmitter's harmonics and the UWB pulses into each other's receivers. A minimum separation of 20-30 mm is a practical target for compact modules. Our <a href="/blog/bluetooth-ble-pcb-design.html">BLE PCB design guide</a> covers the 2.4 GHz side of the layout.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Coordinate Power and Clock Domains</h4>
+      <p>Both radios share the same supply rails and often the same crystal or reference clock. Use separate LDO/DC-DC outputs for the RF sections with individual ferrite-bead filters, and keep the UWB crystal and its load capacitors close to the transceiver. If a single crystal drives both radios, follow the reference design's buffer arrangement exactly — a shared-clock layout error is a classic source of intermittent ranging failures. See our <a href="/blog/pcb-power-integrity-design.html">power integrity guide</a> for supply filtering detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Design the Antenna Switch and T/R Path for Both Bands</h4>
+      <p>Time-division products switch between TX and RX on the UWB path (or between BLE and UWB on a shared antenna). The switch's isolation, insertion loss, and return loss must hold across both bands. Use parts rated for the full 3.1-10.6 GHz range even if you only use Channel 5/9 today — it keeps the design reusable and avoids a respin when a customer asks for the other channel.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-uwb-pcb-automotive.webp" alt="Concept photo of a smartphone approaching a car door handle with a golden light pulse suggesting digital key ranging" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Automotive Digital Key: Requirements Beyond the Radio</h2>
+
+  <p>Phone-as-car-key is the highest-volume UWB application, and it pulls in requirements that a consumer tag never sees. Our <a href="/blog/automotive-pcb-requirements.html">automotive PCB requirements guide</a> covers the platform-level rules; the UWB-specific ones follow.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Automotive-Grade Parts and Process From Day One</h4>
+      <p>UWB anchor ECUs live in door handles and bumpers: operating temperature from -40°C to +105°C, vibration per ISO 16750, and AEC-Q100-qualified components. The fabrication must be IATF 16949-certified with PPAP documentation, IPC-A-610 Class 3 assembly, and full lot traceability. Huaxing holds IATF 16949 and runs automotive production with X-ray inspection and 100% functional test on UWB anchors.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Security and Ranging Integrity Are Board-Level Concerns</h4>
+      <p>UWB digital keys rely on time-of-flight to stop relay attacks — a relay amplifier that tricks a BLE-only car key is defeated because the UWB time-of-flight measurement reveals the extra distance. The PCB supports this by keeping the antenna phase center stable and the RF path clean so measured delays are deterministic. Physical tamper protection on the anchor (secure MCU, tamper mesh options) is specified at the system level, but the board layout must keep security-critical traces away from board edges where they can be probed.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan the RF Test Coverage Per Anchor</h4>
+      <p>Every anchor needs a production RF test — transmit power, pulse shape, and frequency — plus an antenna check in the final housing. Add test points on the RF feed and a test mode in firmware. Our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a> shows where RF functional test fits in the overall test strategy, alongside AOI, X-ray, and flying-probe.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>Certification: FCC Part 15.517/15.519 and Beyond</h2>
+
+  <p>UWB is regulated differently from narrowband radios because it operates under a power spectral density limit rather than a total power limit.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Know the Emission Limit That Drives the Design</h4>
+      <p>In the US, indoor UWB systems fall under FCC Part 15.517 and handheld devices under 15.519, both capped at -41.3 dBm/MHz EIRP. Europe uses ETSI EN 302 065 (with the same -41.3 dBm/MHz low-duty-cycle limit for many use cases). The wide 500 MHz channel spreads the energy so thin that meeting the limit is usually about controlling out-of-channel emissions — harmonics of the 499.2 MHz channel spacing, clock spurs, and switching noise from the digital section — rather than the main pulse. A clean layout and a shielded RF section are the cheapest insurance. See our <a href="/blog/pcb-emi-emc-design-guide.html">EMI/EMC design guide</a> for the general emissions-control playbook.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use a Certified Module to Shorten Time-to-Market</h4>
+      <p>Pre-certified UWB modules (FCC/CE approved) dramatically cut the certification path for tags and anchors — the radio portion is largely covered, and the end product mainly needs enclosure and system-level testing. If you integrate the bare transceiver, budget for conducted and radiated pre-compliance testing before the full run. Either way, keep an RF test point in the feed so the lab can measure without modifying the board.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Document the Antenna Configuration for the Filing</h4>
+      <p>UWB certifications are filed for a specific antenna configuration. If you swap the antenna type after certification, the filing may not cover the new configuration. Lock the antenna BOM and the board revision that passed testing, and keep the test report with the production documentation. FiRa certification (for interoperability) is a separate program that buyers increasingly request for tags and anchors — plan for it if your product targets the phone ecosystem.</p>
+    </div>
+  </div>
+
+  <!-- ── Section ── -->
+  <h2>DFM for UWB Boards: What to Put on the Drawing</h2>
+
+  <p>A UWB board is usually a compact 4-8 layer HDI design, and the RF section imposes requirements a standard digital fab drawing may not cover. Specify these explicitly:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Control With Per-Panel Coupons</h4>
+      <p>Request ±10% impedance control on the 50 Ω RF feed (tighter if your simulation says so), with coupons on every panel and reported measurement data. The coupon must mirror the real stackup — same dielectric, same trace geometry. Do not accept "impedance verified" without numbers. Our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> covers defining this correctly.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Controlled Dielectric and Microvia Tolerances</h4>
+      <p>The RF feed impedance depends on the laminate's dielectric constant. Specify FR-4 with a known Dk (4.2-4.5) or a controlled-Dk laminate for the RF layer, and fix the copper weight. Compact UWB modules use laser microvias (0.075 mm, which Huaxing supports) for fan-out under the transceiver — note the via-in-pad and filling requirements for any pad under the IC. Our <a href="/blog/hdi-technology.html">HDI technology guide</a> explains the microvia stackup options.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep the Antenna Area Free of Mask, Silkscreen, and Copper</h4>
+      <p>Specify solder mask removal over the antenna element, keep silkscreen and component identifiers out of the keep-out zone, and confirm no copper pour or trace crosses the clearance area on any layer. If the antenna connects via a castellation or edge plating, note the plating requirements — edge-plated castellations are routine for module-style UWB boards. Our <a href="/blog/pcb-solder-mask-types.html">solder mask guide</a> explains mask options.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-uwb-pcb-factory.webp" alt="Macro photo of a laser drilling machine processing a board in a modern PCB factory" loading="lazy" style="max-width:80%">
+
+  <!-- ── Section ── -->
+  <h2>Summary: The UWB Board Checklist</h2>
+
+  <p>A UWB product that delivers centimeter-level ranging is designed with a short, flat RF path from transceiver to antenna, a grounded via-fenced RF section, an antenna with a stable phase center and datasheet-exact clearance, BLE and UWB antennas isolated at opposite edges, a power tree that keeps switching noise off the RF rails, and a fabrication drawing that specifies impedance coupons, controlled dielectric, microvia tolerances, and mask-free antenna areas. On the production side, RF functional test on every unit — transmit power, pulse shape, and frequency — catches the defects that field ranging failures would otherwise reveal months later.</p>
+
+  <p>At Huaxing PCBA we manufacture UWB modules and automotive anchors up to 32 layers with laser microvias, controlled-impedance capability to ±5%, mixed FR-4 and high-frequency laminates, and full RF assembly support — 8 SMT lines, X-ray for shield cans and BGA, and flying-probe plus RF functional testing. Our DFM review checks the RF stackup, impedance coupons, antenna keep-outs, and assembly requirements before tooling. <a href="/blog/gps-gnss-receiver-pcb-design.html">Read our GNSS receiver design guide</a> for the other precision-positioning radio, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-antenna-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Antenna Design Guide</a></li>
+    <li><a href="/blog/bluetooth-ble-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Bluetooth Low Energy PCB Design</a></li>
+    <li><a href="/blog/rf-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">RF PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Impedance Control Guide</a></li>
+    <li><a href="/blog/hdi-technology.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">HDI PCB Technology</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-uwb-pcb.webp)">
+      <h2>Building a UWB Tag, Anchor, or Digital-Key ECU?</h2>
+      <p>Send your layout files — our engineers will review the RF stackup, impedance coupons, antenna keep-out, and assembly requirements, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your UWB Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
