@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethernet PHY PCB Design — Magnetics Placement, 100 Ohm Routing &amp; RJ45 Layout | Huaxing PCBA</title>
+<meta name="description" content="Ethernet PHY PCB design guide — magnetics placement rules, Bob Smith termination, 100 ohm MDI differential pair routing, crystal layout and ESD protection for 10/100/1000BASE-T industrial IoT boards.">
+<meta property="og:title" content="Ethernet PHY PCB Design — Layout Rules for Links That Never Drop a Packet">
+<meta property="og:description" content="The magnetics and the MDI pairs decide whether your Ethernet link passes EMC and holds link at temperature. Here is the board-level design and manufacturing guide for 10/100/1000BASE-T.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/ethernet-phy-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-ethernet-phy-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/ethernet-phy-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ethernet PHY PCB Design — Magnetics Placement, 100 Ohm Routing &amp; RJ45 Layout",
+  "description": "Ethernet PHY PCB design guide — magnetics placement rules, Bob Smith termination, 100 ohm MDI differential pair routing, crystal layout and ESD protection for 10/100/1000BASE-T industrial IoT boards.",
+  "datePublished": "2026-08-05",
+  "dateModified": "2026-08-05",
+  "image": "https://huaxingpcba.com/generated/blog-cover-ethernet-phy-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/ethernet-phy-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/ethernet-phy-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-ethernet-phy-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Ethernet PHY PCB Design:<br><em>Magnetics Placement, 100 Ω Routing &amp; RJ45 Layout for Industrial IoT Boards</em></h1>
+      <p class="reveal">Ethernet looks forgiving until a machine on the factory floor loses link at 85 °C. The difference between a link that holds and one that flaps is decided by the magnetics placement and the MDI pairs — before the firmware ever runs.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Ethernet PHY PCB Design</span></div>
+
+  <p>Ethernet is the default connectivity backbone of industrial IoT: gateways, PLCs, drives, and edge computers all speak 10/100/1000BASE-T over a cheap, unshielded twisted-pair cable that can run <span class="data-point">100 meters</span> and survive decades of industrial noise. The protocol's autonegotiation and error correction absorb a lot of sloppy layout — which is exactly why marginal designs pass the bench test and then fail in the field: link drops at temperature, intermittent CRC errors, or a radiated-emissions failure at the EMC lab.</p>
+
+  <p>Huaxing PCBA manufactures Ethernet-enabled boards for industrial automation, building automation, and IoT customers — up to 32 layers, controlled impedance to ±5% with coupon testing, 3/3 mil routing, and 8 SMT lines with full functional test support including live Ethernet link testing. This guide covers PHY placement, the magnetics rules that most layout engineers get wrong, 100 Ω MDI routing, the crystal and power sections, ESD protection, and the fabrication notes that make a Gigabit link reproducible across production.</p>
+
+  <img class="article-img" src="/generated/blog-ethernet-phy-pcb-magnetics.webp" alt="Macro photo of an Ethernet magnetics module and PHY chip on an industrial gateway PCB with gold-plated pads" loading="lazy" style="max-width:80%">
+
+  <h2>Why the Magnetics Decide Link Quality</h2>
+
+  <p>The Ethernet magnetics — the transformer module between the RJ45 jack and the PHY — do three jobs: they provide galvanic isolation (1.5 kVrms per IEEE 802.3), they reject common-mode noise from the cable, and they shape the signal through center-tap terminations. The magnetics are the most layout-sensitive component on the board, and most Ethernet field failures trace back to how they are placed and grounded. Our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> covers the general high-speed rules; here are the Ethernet-specific ones.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Place the Magnetics Within 10-15 mm of the RJ45 Jack</h4>
+      <p>The MDI traces between the connector and the magnetics are exposed to the outside world and act as antennas if they run too far. Keep this section as short as possible — under 15 mm is the common reference-design rule. If the board uses a jack with integrated magnetics, the rule moves inside the connector and your job is to route the PHY-side traces cleanly and provide the correct center-tap supply.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>No Traces, No Copper, No Vias Under the Magnetics</h4>
+      <p>The area directly under the magnetics module must be cleared of copper on all layers — no ground pour, no signal traces, no vias. The transformer couples energy between its windings and to the board; copper underneath creates an unintentional antenna and couples noise into the PHY. Reference designs typically specify a keep-out of 2-3 mm beyond the module footprint on every layer, with the ground pour resumed outside that zone and stitched with vias.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Use Bob Smith Termination and the Correct Center-Tap Supply</h4>
+      <p>The classic Bob Smith termination — 75 Ω resistors from each MDI line to a common point, with a 1 nF/2 kV capacitor to chassis ground — provides a return path for common-mode energy and is required for passing radiated-emissions tests on unshielded twisted-pair designs. The transformer center taps go to the PHY's VDD (typically 3.3 V) through a decoupling capacitor for 100BASE-TX, or to a resistor network that biases the transmit pairs for 1000BASE-T. Follow the PHY datasheet's center-tap schematic exactly — getting this wrong produces a board that links but fails emissions testing.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The magnetics are a noise-isolation component, not just a connector accessory. Short MDI traces, a clean keep-out under the module, and the exact center-tap termination from the datasheet are the three rules that separate passing and failing EMC results.</p>
+  </div>
+
+  <h2>MDI Differential Pairs: 100 Ohm Routing That Stays Tight</h2>
+
+  <p>Each 1000BASE-T link uses four differential pairs (BI_DA through BI_DD), each running at 125 MBaud with PAM-5 modulation — a demanding signal by any standard. 100BASE-TX uses two pairs at 125 MBaud MLT-3. Both need controlled 100 Ω differential impedance and disciplined routing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route All MDI Pairs as 100 Ω Differential With Tight Coupling</h4>
+      <p>Specify 100 Ω differential impedance ±10% (or tighter, ±5% for Gigabit) and route the pairs edge-coupled over a continuous ground plane. On a standard 1.6 mm FR-4 stackup, this works out to roughly 0.2 mm traces with 0.15-0.2 mm spacing on an outer layer. Keep intra-pair spacing constant for the entire route — every variation changes the impedance and creates a reflection point. Huaxing's impedance control to ±5% with TDR coupon testing makes Gigabit links reproducible across panels.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Match Pair Lengths Within 50 mil (1.27 mm) and Keep Inter-Pair Skew Under 0.5 ns</h4>
+      <p>Gigabit Ethernet is extremely sensitive to skew: the four pairs must arrive at the receiver within tight timing windows. Length-match the two traces within each pair to within 50 mil, and match the overall lengths of the four pairs to within about 200 mil. Routing all four pairs on the same layer with the same number of vias keeps the delay uniform — avoid routing one pair on layer 2 and another on layer 4 with a different via count.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Minimize Vias; When Used, Keep Them Symmetric</h4>
+      <p>Each via adds inductance and a small impedance discontinuity. Prefer routing the MDI section on a single layer; if a via pair is unavoidable, place the vias for both legs side by side and keep their stubs short by routing on adjacent layers. Vias in the MDI path are one of the first things an EMC consultant will question.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Keep Other Signals 5x the Pair Spacing Away</h4>
+      <p>Aggressive signals — clocks, switching regulators, and the PHY's own MII/RMII/RGMII bus — must stay well clear of the MDI pairs. A spacing of at least 5 times the intra-pair spacing (roughly 1 mm) between an MDI pair and any other trace prevents crosstalk that degrades the eye diagram. Crossing other signals at 90 degrees is acceptable; running parallel is not.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>100BASE-TX</th><th>1000BASE-T</th></tr>
+    <tr><td>Pairs used</td><td>2 (TX, RX)</td><td>4 (BI_DA - BI_DD)</td></tr>
+    <tr><td>Line rate</td><td>125 MBaud MLT-3</td><td>125 MBaud PAM-5</td></tr>
+    <tr><td>Differential impedance</td><td>100 Ω ±10%</td><td>100 Ω ±10%</td></tr>
+    <tr><td>Intra-pair length match</td><td>&le; 50 mil recommended</td><td>&le; 50 mil recommended</td></tr>
+    <tr><td>Isolation requirement</td><td>1.5 kVrms</td><td>1.5 kVrms</td></tr>
+    <tr><td>Max cable length</td><td>100 m</td><td>100 m</td></tr>
+  </table>
+
+  <h2>PHY Placement, Crystal and Power Integrity</h2>
+
+  <p>The PHY itself (parts like the TI DP83822, Microchip LAN8720A, Realtek RTL8211F, or Broadcom BCM54210) has modest layout demands compared with the magnetics — but three details consistently bite.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Place the PHY Close to the Magnetics, Not to the MAC</h4>
+      <p>The MDI side of the PHY faces the magnetics and must stay short; the MAC side (MII/RMII/RGMII) is a parallel digital bus that tolerates longer traces. Position the PHY so the MDI pairs to the magnetics are the shortest routes on the board, even if that pushes the RGMII bus a little further. The RGMII bus at 125 MHz still needs length matching, but it is far more forgiving than the analog MDI side.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Crystal First, Then Decoupling, Then the Rest</h4>
+      <p>The PHY reference clock (typically 25 MHz for Gigabit, or a 50 MHz oscillator) drives the transmit clock recovery, so its layout is part of signal integrity: place the crystal within 5 mm of the PHY's XI/XO pins, keep the traces short and equal, and never route the crystal traces under other components. Add 0.1 µF decoupling on every PHY supply pin with vias directly to the ground plane, plus a 10 µF bulk capacitor per supply rail. A noisy PHY supply shows up as jitter — and jitter shows up as intermittent link flaps.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Give the PHY Its Own Supply Section, Isolated From Switching Regulators</h4>
+      <p>If the board has a DC-DC converter (and most industrial boards do — see our <a href="/blog/smps-pcb-layout-design.html">SMPS layout guide</a>), keep the PHY's analog supply away from the switch node. A ferrite bead plus 10 µF/0.1 µF filtering on the PHY rail, and a ground pour that connects the PHY's ground pin to the plane with at least two vias, keeps switching noise out of the link. For PoE designs, the PHY supply section also interacts with the PSE/PD negotiation — our <a href="/blog/poe-pcb-design-guide.html">PoE design guide</a> covers that in detail.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-ethernet-phy-pcb-routing.webp" alt="Close-up of tightly coupled differential pair traces on an Ethernet PHY board showing 100 ohm routing" loading="lazy" style="max-width:80%">
+
+  <h2>ESD, Surge and Industrial Transient Protection</h2>
+
+  <p>An RJ45 connector is an open door for electrostatic discharge and, in industrial environments, surge events from long cable runs. IEEE 802.3 defines the isolation, but protecting the PHY beyond the magnetics is a board design decision.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Add a TVS Array at the Connector, Before the Magnetics</h4>
+      <p>A low-capacitance Ethernet TVS array (parts like the SLVU2.8-4 or ESD7484, with under 1 pF per line to preserve signal quality) clamps ESD at the jack. Place it within 5 mm of the RJ45, with its ground connection straight to the chassis-ground zone. The TVS protects the magnetics and PHY from the 8 kV contact discharges that IEC 61000-4-2 testing applies directly to the connector shell and pins.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Connect the Connector Shell to Chassis Ground Through a Resistor-Capacitor Network</h4>
+      <p>The RJ45 shield should not connect directly to the signal ground plane — that turns the cable shield into a noise antenna and can create ground loops between devices. The standard industrial approach is a 1 MΩ resistor in parallel with a 1-10 nF/2 kV capacitor from the shell to chassis ground, keeping the shield at a defined potential while blocking DC ground loops. If the design uses a metal panel, bond the chassis ground zone to the panel at a single point.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>For Outdoor or Long-Run Links, Add Surge Protection</h4>
+      <p>Industrial Ethernet ports that leave the enclosure (or run between buildings) need surge protection beyond ESD diodes — a GDT or TVS with higher energy rating on the magnetics' cable side, coordinated with the isolation rating of the transformer. This is a different protection tier from indoor ESD and should be specified with the project's immunity standard (IEC 61000-4-5 surge, level 2-4).</p>
+    </div>
+  </div>
+
+  <h2>Putting It Together: A Gateway Board Layout Order</h2>
+
+  <p>Industrial IoT gateways combine Ethernet with a host processor, memory, and fieldbus interfaces — our <a href="/blog/iot-pcb-design-manufacturing.html">IoT PCB design guide</a> and <a href="/blog/building-automation-hvac-pcb.html">building automation guide</a> cover the system-level picture. The Ethernet portion of the layout, in order:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Position the RJ45 Jack First, at the Board Edge</h4>
+      <p>The jack defines the mechanical envelope (panel cutout, height, shielding). Place it at the edge with the chassis-ground zone around it, isolated from the signal ground by the RC network.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Then the Magnetics, Then the PHY, Then the MAC Interface</h4>
+      <p>Work outward from the jack: TVS, magnetics with a clear keep-out underneath, PHY within a few millimeters of the magnetics, then the RGMII/MII bus to the processor. Lock these positions before routing anything else — the Ethernet section is the least flexible part of the board.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Route the MDI Pairs, Then the MAC Bus, Then the Power</h4>
+      <p>MDI pairs first (short, 100 Ω, length-matched), then the parallel MAC interface with its own length matching, then the PHY power with ferrite filtering. Leave the magnetics keep-out untouched until the board is fully routed.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-ethernet-phy-pcb-industrial.webp" alt="Concept photo of an industrial gateway with Ethernet ports in a factory automation cabinet with blue LED indicators" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="/generated/blog-ethernet-phy-pcb-factory.webp" alt="Reflow soldering oven line processing Ethernet gateway boards in a modern PCB factory" loading="lazy" style="max-width:80%">
+
+  <h2>Manufacturing Notes for a Reproducible Ethernet Board</h2>
+
+  <p>Ethernet performance depends on manufacturing consistency more than most board types — a 5% impedance drift changes the eye diagram, and inconsistent stackup ruins Gigabit links. Specify these on the fabrication drawing:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Coupons and TDR Report on Every Panel</h4>
+      <p>Require 100 Ω differential coupons per layer and a TDR report with the shipment. Huaxing tests impedance to ±5% and provides the report automatically.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Controlled Dielectric and Stackup</h4>
+      <p>Specify the dielectric material (e.g., FR-4 with controlled DK of 4.2-4.5 at 1 GHz) and the exact stackup — the impedance of the MDI pairs is set by the layer structure, so any substitution changes the link margin. If the board also carries high-speed signals elsewhere, our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> is the reference.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Functional Test: Live Link Test on Every Unit</h4>
+      <p>Beyond AOI and ICT, Ethernet boards deserve a functional test that establishes a live link — at 1000BASE-T where applicable — and checks link status plus a packet loopback. A link test catches magnetics soldering defects, missing center-tap parts, and assembly issues that AOI cannot see.</p>
+    </div>
+  </div>
+
+  <h2>Summary: The Ethernet Board Checklist</h2>
+
+  <p>A production-ready Ethernet board has the magnetics within 15 mm of the jack with a clean keep-out underneath, Bob Smith termination and the datasheet center-tap network, four tightly coupled 100 Ω differential pairs length-matched within 50 mil, a PHY placed for short MDI routes with its crystal and decoupling in order, TVS at the connector, the shell grounded through an RC network, and a fabrication drawing that pins down impedance, dielectric, and stackup. When all of that is right, the link holds at temperature, passes emissions, and runs for a decade — which is exactly what industrial equipment buyers expect.</p>
+
+  <p>At Huaxing PCBA we manufacture Ethernet gateway, switch, and IoT boards up to 32 layers with impedance control to ±5%, 3/3 mil routing, and full assembly support across 8 SMT lines — including X-ray, conformal coating, and live Gigabit link functional testing. Our DFM review checks your magnetics placement, keep-outs, impedance requirements, and assembly notes before tooling. <a href="/blog/network-switch-router-pcb-design.html">Read our switch and router PCB guide</a> for the 100G/400G high-speed side of networking, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/network-switch-router-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Network Switch &amp; Router PCB Design</a></li>
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/poe-pcb-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PoE PCB Design Guide</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity Guide</a></li>
+    <li><a href="/blog/pcb-emc-emi-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Design for EMC/EMI Compliance</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-ethernet-phy-pcb.webp)">
+      <h2>Designing an Ethernet-Connected Board?</h2>
+      <p>Send your layout files — our engineers will review the magnetics placement, impedance requirements, keep-outs, and assembly notes, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service, live Gigabit link testing in production.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Ethernet Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

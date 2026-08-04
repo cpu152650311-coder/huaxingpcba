@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IoT Hardware Security PCB Design — Secure Elements, Tamper Mesh &amp; Secure Boot | Huaxing PCBA</title>
+<meta name="description" content="IoT hardware security PCB design guide — secure element integration, tamper detection mesh layout, secure boot chain, JTAG protection and key provisioning for connected devices that cannot be compromised.">
+<meta property="og:title" content="IoT Hardware Security PCB Design — Making the Board Itself the Barrier">
+<meta property="og:description" content="Software encryption is useless if the key can be read off the board. Here is how to design secure elements, tamper mesh and a secure boot chain into the PCB itself.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/iot-hardware-security-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-iot-security-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/iot-hardware-security-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "IoT Hardware Security PCB Design — Secure Elements, Tamper Mesh &amp; Secure Boot",
+  "description": "IoT hardware security PCB design guide — secure element integration, tamper detection mesh layout, secure boot chain, JTAG protection and key provisioning for connected devices that cannot be compromised.",
+  "datePublished": "2026-08-05",
+  "dateModified": "2026-08-05",
+  "image": "https://huaxingpcba.com/generated/blog-cover-iot-security-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/iot-hardware-security-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/iot-hardware-security-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-iot-security-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">IoT Hardware Security PCB Design:<br><em>Secure Elements, Tamper Mesh &amp; Boot-Chain Protection at the Board Level</em></h1>
+      <p class="reveal">Software encryption is only as strong as the hardware that holds the keys. For connected devices handling money, credentials, or critical infrastructure, the PCB itself must be part of the security architecture.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>IoT Hardware Security PCB Design</span></div>
+
+  <p>Every connected product eventually holds something worth stealing: payment credentials, device identities, encryption keys, firmware IP, or customer data. Attackers know that software defenses — encryption, secure channels, code obfuscation — are only as strong as the weakest place the key material can be extracted from the hardware. A skilled attacker with a hot-air station, a logic analyzer, and a few hundred dollars of equipment can read flash, tap I2C buses, and probe JTAG ports on a board that was designed without hardware security in mind. The <span class="data-point">4.5 billion</span> connected IoT devices shipped in 2025 make this a volume problem, not a niche one.</p>
+
+  <p>Huaxing PCBA manufactures security-sensitive boards for payment, smart-meter, access-control, medical, and industrial IoT customers — up to 32 layers with 3/3 mil routing, X-ray inspection, and controlled production processes that support key provisioning and anti-tamper assembly. This guide covers the threat model, secure element integration, secure boot, tamper detection layout, anti-probing design, and the manufacturing-side security practices that turn a PCB into a physical barrier.</p>
+
+  <img class="article-img" src="/generated/blog-iot-security-pcb-secure-element.webp" alt="Macro photo of a secure element IC with surrounding tamper detection traces on a security-focused IoT module PCB" loading="lazy" style="max-width:80%">
+
+  <h2>Start With a Threat Model, Not a Shopping List</h2>
+
+  <p>Hardware security is a cost/risk tradeoff, and the right level depends on what the device protects and who might attack it. A $4 smart plug and a $400 payment terminal have completely different security requirements — and should have completely different boards. Our <a href="/blog/pcb-pos-payment-terminals.html">payment terminal PCB guide</a> covers the PCI PTS tier; here is the general framework.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Define the Asset and the Attackers</h4>
+      <p>What is the crown jewel: the device's private key, customer data in flash, the firmware itself, or the ability to impersonate the device on a network? Who attacks: opportunistic thieves, competitors reverse-engineering your design, or sophisticated adversaries with lab equipment? The answers set the security tier — a casual attacker is stopped by a locked debug port; a professional one requires a tamper mesh and a secure element.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Enumerate the Physical Attack Vectors on the PCB</h4>
+      <p>Every board has a fixed set of physical surfaces: the debug interface (JTAG/SWD), the firmware storage (external flash, MCU internal flash), the communication buses between the MCU and peripherals (I2C, SPI), the power and ground rails, and the bare board surface itself. A threat model maps each asset to the attack paths that reach it — then the design work is closing those paths one by one.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Match the Security Tier to the Product's Value</h4>
+      <p>A useful four-tier scale: (1) consumer devices — read-protected MCU flash and a locked debug port; (2) commercial IoT — add a secure element for device identity and encrypted firmware updates; (3) high-value infrastructure — add tamper detection, encrypted storage, and secure boot with attestation; (4) regulated payment — full PCI PTS with tamper-responsive mesh and certified secure elements. Most B2B IoT products live in tiers 2-3.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Security is a tiered design decision, not a component. Decide what the device protects and who attacks it first — then choose the hardware measures that close the actual attack paths.</p>
+  </div>
+
+  <h2>Secure Elements: Where the Keys Actually Live</h2>
+
+  <p>A secure element (SE) is a tamper-resistant chip that stores keys and performs cryptographic operations without ever exposing the key material — the MCU asks the SE to sign or decrypt, and the key never leaves the SE's internal storage. Common parts include the Microchip ATECC608/ATECC608B, NXP SE050/SE051, and Infineon OPTIGA Trust series. Our <a href="/blog/iot-pcb-design-manufacturing.html">IoT PCB design guide</a> covers the general architecture; here are the security-relevant layout rules.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route the SE Bus Directly to the MCU, Short and Un-Tapped</h4>
+      <p>The SE communicates over I2C (ATECC608, SE050) or SPI, and that bus is the attacker's primary interception point — a logic analyzer clipped onto the I2C lines can observe key-handling traffic. Keep the SE-to-MCU trace short (under 30 mm), on an inner layer if possible, and route it with no test points, no vias to exposed layers, and no stubs. A series resistor near the SE acts as a current-limiting barrier for probing attempts.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep SE Supply and Reset Pins Clean</h4>
+      <p>The SE's VCC needs solid decoupling (0.1 µF plus 1 µF) right at the pin, and the reset pin should be pulled up through a resistor so a glitch attack cannot force the SE into a reset loop during a transaction. Many SEs also expose a tamper input (e.g., the ATECC608's internal tamper detection, or external tamper pins on the NXP parts) — wire these to the tamper detection circuit described below.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Provision Keys at Manufacturing Time, Never in the Field</h4>
+      <p>A secure element is only as good as the provisioning process. Keys should be generated or injected in the factory — ideally inside the SE itself (the SE generates its own key pair and exports only the public part), or loaded through a secure provisioning service from the vendor. This is a manufacturing-process decision as much as a layout one; see the provisioning section below for what to require from your CM.</p>
+    </div>
+  </div>
+
+  <h2>Secure Boot: The Chain That Refuses Compromised Firmware</h2>
+
+  <p>Secure boot verifies that the firmware running on the MCU is authentic and unmodified, using a root of trust anchored in hardware. Without it, an attacker who can replace the flash contents owns the device.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use an MCU With a Hardware Root of Trust and Lockable Debug</h4>
+      <p>Modern MCUs (STM32H7, i.MX RT, nRF5340, and the security-focused Cortex-M33/M55 parts) implement secure boot in ROM, with eFuses or OTP memory that permanently locks the debug port and disables boot from external memory once the production image is committed. The layout side of this is trivial — the security lives in the device configuration — but the board must bring out the right configuration pins (BOOT strapping) with pull resistors that the production process can set and then isolate.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Design the Boot Straps for One-Way Locking</h4>
+      <p>Route BOOT0/BOOT1 straps to a test pad or 0 Ω option rather than a user-accessible jumper, so the production line can configure them and the final unit has no boot-mode switch left open. The debug interface (SWD/JTAG) pads should be present for production testing but buried under components or on an inner layer after finalization — a locked debug port is only locked if there is no exposed port to attack.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Verify, Sign, and Version Every Firmware Update</h4>
+      <p>Secure boot alone does not protect the update path: the bootloader must verify the signature of each new image against the public key stored in the secure element or OTP, and reject downgrades. Board design supports this by giving the MCU a dedicated secure channel to the SE (covered above) and by keeping the update firmware small enough to verify in RAM before committing to flash.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Security Measure</th><th>Stops</th><th>Board Design Requirement</th></tr>
+    <tr><td>Secure element (ATECC608/SE050)</td><td>Key extraction, cloning</td><td>Short un-tapped bus, clean supply</td></tr>
+    <tr><td>Secure boot + locked debug</td><td>Firmware substitution</td><td>One-way boot straps, buried SWD pads</td></tr>
+    <tr><td>Read-protected flash</td><td>Dumping via debug</td><td>OTP configuration, no exposed test pads</td></tr>
+    <tr><td>Tamper mesh / sensors</td><td>Physical intrusion</td><td>Fine-pitch mesh, tamper domain battery</td></tr>
+    <tr><td>Encrypted external storage</td><td>Chip-off flash reads</td><td>Keys in SE, never in external flash</td></tr>
+  </table>
+
+  <h2>Tamper Detection: Making Physical Intrusion Visible</h2>
+
+  <p>For high-value devices — payment terminals, smart meters, access controllers — the board must detect physical intrusion and respond (wipe keys, log the event, alarm). This is where PCB layout becomes a security component in its own right.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route a Tamper Mesh Over the Sensitive Components</h4>
+      <p>A tamper mesh is a fine serpentine trace (0.1-0.2 mm wide, 0.15-0.3 mm pitch) routed over the top of the board — or on an internal layer pair — covering the MCU, secure element, and flash. The trace carries a continuously monitored signal; drilling, scraping, or probing that breaks or shorts the trace triggers the tamper response. The mesh typically sits on the outer layer with the components on the other side, or as a buried pattern over the IC area. Our <span class="data-point">3/3 mil</span> fine-line capability is what makes a genuinely fine mesh practical.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Combine the Mesh With Switch and Sensor Inputs</h4>
+      <p>A complete tamper domain adds: (a) a tamper switch that opens when the enclosure is opened (a PCB edge switch or a conductive pad pair under the cover), (b) optional light or motion sensors inside the enclosure, and (c) the SE's tamper input pin. Wire all of these into a single monitored domain so any single event — cover removal, drilling, light entering the enclosure — triggers the same response.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Power the Tamper Domain From a Battery-Backed Rail</h4>
+      <p>Tamper detection must keep working when the device is unplugged, so the tamper domain (SE + tamper logic + a real-time clock) runs from a coin cell or supercapacitor. The battery sits in its own always-on power rail with a diode to prevent back-feeding, and the tamper response path — SE key zeroization or a tamper latch — must be testable at production. A battery-backed tamper domain is standard on smart meters; our <a href="/blog/smart-grid-smart-meter-pcb.html">smart meter PCB guide</a> shows it in context.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-iot-security-pcb-tamper-mesh.webp" alt="Close-up of fine serpentine tamper detection traces on a PCB surface covering a secure microcontroller area" loading="lazy" style="max-width:80%">
+
+  <h2>Anti-Probing Layout: Making the Board Hostile to Analysis</h2>
+
+  <p>Beyond tamper response, the layout itself can raise the cost of every common attack: bus tapping, chip-off analysis, and fault injection.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route Sensitive Buses on Inner Layers, Never on the Surface</h4>
+      <p>Signals that carry key material or firmware — the SE bus, the flash bus, and the MCU's debug lines — should be routed on internal layers between two solid ground planes, so they are invisible from the surface and mechanically protected by the board material. Avoid vias that break to outer layers; if a via must rise, keep it under a component footprint.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Hide Test Points and Label Nothing Revealing</h4>
+      <p>Do not put silkscreen labels like "JTAG", "KEY", or "FLASH" on a security board — labeling is an invitation. Test points for production should be covered by solder mask and populated components after test, or use edge-connector test pads that are cut off at depanelization. The silkscreen should describe the board to a technician, not to an attacker.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Encrypt External Storage and Keep the Key Out of Flash</h4>
+      <p>If the design needs external flash (for firmware images or logs), the data should be encrypted with a key that lives only in the secure element — never a key stored in the same flash, and never a hardcoded key in firmware. A chip-off attacker who reads the flash directly should get ciphertext only. This is the single most important rule for devices that hold customer data.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Anti-probing design is about cost and friction: every sensitive signal hidden on an inner layer, every test pad buried, every label removed, and every stored byte encrypted raises the attacker's cost above the value of the target.</p>
+  </div>
+
+  <img class="article-img" src="/generated/blog-iot-security-pcb-factory.webp" alt="Automated firmware programming station with a secure circuit board seated in a production fixture" loading="lazy" style="max-width:80%">
+
+  <h2>Manufacturing and Provisioning Security</h2>
+
+  <p>Hardware security fails at the factory more often than at the attacker's bench. Key material must be provisioned, tracked, and protected through the manufacturing process — which is a contract requirement as much as a technical one. Our <a href="/blog/pcb-contract-manufacturing-ip-protection.html">IP protection guide</a> and <a href="/blog/pcb-lot-traceability-ipc1782.html">traceability guide</a> cover the commercial side; here is the technical checklist.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Require In-Factory Key Provisioning With a Clean Room Process</h4>
+      <p>Key injection should happen on a dedicated provisioning station with controlled access, logged operators, and no network exposure of the master keys. Prefer SEs that generate keys internally (the private key never exists outside the chip); if keys must be imported, use the vendor's secure provisioning service (Microchip, NXP, and Infineon all offer them) so the CM never handles raw key material.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Program, Lock, and Verify in One Pass</h4>
+      <p>The production firmware flash step should include: program the image, write the OTP/eFuse configuration that locks the debug port and enables secure boot, then verify the boot chain — power cycle the unit and confirm it boots from the locked configuration. A unit that leaves the line without its OTP fuses blown is a unit with an open back door. Huaxing's IC programming service supports this one-pass flow — see our <a href="/blog/pcb-ic-programming-assembly-service.html">IC programming guide</a> for the details.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Serialization and Chain-of-Custody for Security Boards</h4>
+      <p>Every security board should carry a unique serial number (laser-marked or in the SE certificate), with records linking the serial to the provisioning logs and the final product. This makes a compromised unit traceable to its production batch and supports certificate management. Combined with counterfeit-resistant marking, it also protects your brand — our <a href="/blog/pcb-counterfeit-detection-guide.html">counterfeit detection guide</a> explains the supply-chain side.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-iot-security-pcb-application.webp" alt="Concept photo of a smart lock and access control panel in a modern building with a subtle glowing security indicator" loading="lazy" style="max-width:80%">
+
+  <h2>Summary: The Secure IoT Board Checklist</h2>
+
+  <p>A security-hardened IoT board starts from a threat model, stores keys in a secure element on a short un-tapped bus, boots through a hardware-rooted secure chain with one-way locked debug, protects sensitive signals on inner layers with no revealing labels, adds a battery-backed tamper domain with a fine mesh for high-value designs, encrypts anything stored outside the SE, and is provisioned, locked, and serialized in a controlled factory process. Every one of those measures is a board-level decision — which is why hardware security belongs in the PCB design review, not just the software architecture.</p>
+
+  <p>At Huaxing PCBA we manufacture security-sensitive boards up to 32 layers with 3/3 mil fine-line routing for tamper meshes, controlled processes for key provisioning and OTP locking, X-ray inspection, and full functional test including secure-boot verification. Our DFM review checks your tamper mesh geometry, inner-layer routing, and provisioning requirements before tooling. <a href="/blog/pcb-pos-payment-terminals.html">Read our payment terminal security guide</a> for the PCI PTS tier, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/pcb-pos-payment-terminals.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB for POS Terminals &amp; Payment Systems</a></li>
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/pcb-contract-manufacturing-ip-protection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCBA IP Protection Guide</a></li>
+    <li><a href="/blog/smart-grid-smart-meter-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Smart Grid &amp; Smart Meter PCB</a></li>
+    <li><a href="/blog/pcb-lot-traceability-ipc1782.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Lot Traceability &amp; Serialization</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-iot-security-pcb.webp)">
+      <h2>Building a Security-Sensitive Connected Device?</h2>
+      <p>Send your layout files — our engineers will review the secure element routing, tamper mesh geometry, inner-layer placement, and provisioning requirements, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service, controlled production for key provisioning.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Secure Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

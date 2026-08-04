@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAN Bus PCB Design — Transceiver Layout, Termination &amp; EMC for Reliable Automotive Networks | Huaxing PCBA</title>
+<meta name="description" content="CAN bus PCB design guide — transceiver placement, 120-ohm termination, common-mode choke selection, differential pair routing and EMC rules that keep automotive and industrial networks error-free.">
+<meta property="og:title" content="CAN Bus PCB Design — Layout Rules That Keep Networks Error-Free">
+<meta property="og:description" content="Most CAN network failures are physical-layer problems: bad termination, misplaced transceivers, or missing common-mode filtering. Here is the board-level layout and manufacturing guide.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/can-bus-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-can-bus-pcb.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/can-bus-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CAN Bus PCB Design — Transceiver Layout, Termination &amp; EMC for Reliable Automotive Networks",
+  "description": "CAN bus PCB design guide — transceiver placement, 120-ohm termination, common-mode choke selection, differential pair routing and EMC rules that keep automotive and industrial networks error-free.",
+  "datePublished": "2026-08-05",
+  "dateModified": "2026-08-05",
+  "image": "https://huaxingpcba.com/generated/blog-cover-can-bus-pcb.webp",
+  "url": "https://huaxingpcba.com/blog/can-bus-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/can-bus-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-can-bus-pcb.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">CAN Bus PCB Design:<br><em>Transceiver Layout, Termination &amp; EMC Rules for Networks That Never Drop a Frame</em></h1>
+      <p class="reveal">Most CAN network failures are physical-layer problems — wrong termination, a misplaced transceiver, or a missing common-mode choke. Here is how to design the board so the protocol never has to fight the hardware.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>CAN Bus PCB Design</span></div>
+
+  <p>Controller Area Network is the wiring backbone of virtually every vehicle and most industrial machinery: a single modern car carries <span class="data-point">30-70</span> CAN or CAN FD nodes, and a production line may daisy-chain dozens of control boards over a 40-meter bus. The protocol itself is famously robust — differential signaling, CRC checking, and error confinement recover from most bit errors automatically. When a network does fail in the field, the root cause is usually not the software stack but the physical layer: marginal termination, excessive stub length, or an EMI problem that corrupts recessive bits.</p>
+
+  <p>Huaxing PCBA builds CAN and CAN FD node boards for automotive, industrial, and e-mobility customers — IATF 16949 certified, 2-32 layers, 3/3 mil fine-line capability, and 8 SMT lines with X-ray and full functional test support. Our DFM engineers review every automotive layout for the bus-specific rules in this guide before tooling. This article covers transceiver placement, differential routing, termination strategies, common-mode filtering, isolation, and the manufacturing specifications that determine whether your bus passes EMC testing on the first attempt.</p>
+
+  <img class="article-img" src="/generated/blog-can-bus-pcb-transceiver.webp" alt="Macro photo of a CAN transceiver IC and its decoupling capacitors on an automotive ECU board with gold-plated pads" loading="lazy" style="max-width:80%">
+
+  <h2>Why the Physical Layer Decides Network Reliability</h2>
+
+  <p>CAN is a multi-master, broadcast bus where every node listens while it transmits and detects collisions through bit monitoring. That arbitration mechanism only works if every node sees the same dominant/recessive levels at the same time — which makes signal quality on the wire a protocol-level concern, not just an analog nicety. Two timing parameters put hard constraints on the layout.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Bit Time Budget: Propagation Delay Must Fit the Sample Point</h4>
+      <p>At 500 kbit/s a CAN bit lasts 2 µs; the transceiver sampling point sits near 75-87.5% of the bit time. The round-trip propagation delay of the bus — cable, transceivers, and PCB traces — plus the oscillator tolerance must fit inside that window. A rule of thumb for 500 kbit/s is a maximum bus length around 40 m with 5 ns/m cable delay; at 1 Mbit/s that shrinks to roughly 25 m. CAN FD pushes data rates to <span class="data-point">5-8 Mbit/s</span> in the data phase, where propagation delay budgets become so tight that every centimeter of extra trace or every extra connector in the path is measurable.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Stub Length: The Un-Terminated Branch Is a Reflection Point</h4>
+      <p>Every node connects to the bus through a stub — a short pair of traces from the transceiver to the main trunk. Classic CAN tolerates stubs up to about 0.3 m at 500 kbit/s (per ISO 11898-2), but at CAN FD data rates the recommended stub drops to 10 cm or less. The layout equivalent: keep the transceiver as close to the connector as physically possible, and treat long node traces as a transmission-line problem, not a wiring convenience.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Recessive Bits Are Easy to Corrupt — EMI Turns a 1 into a 0</h4>
+      <p>CAN bus levels are 2 V or less between CANH and CANL in the dominant state, and the recessive state is a weakly driven, high-impedance state that any noise source can pull toward the threshold. Automotive transients (ISO 7637-2 pulses, load dumps up to 40 V) and radiated noise from adjacent high-current switching (motor drivers, DC-DC converters) are the classic corruptors. This is why transceiver choice, common-mode chokes, and TVS protection are not optional extras — they are part of the signal-integrity design.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> CAN works because every node agrees on bit timing and sees clean differential levels. Your PCB layout — stub length, termination, and filtering — directly sets how much timing and noise margin the network has left.</p>
+  </div>
+
+  <h2>Transceiver Placement and Power Decoupling</h2>
+
+  <p>The transceiver is the interface between the protocol controller (often an MCU with an integrated CAN controller) and the physical bus. Common parts include the NXP TJA1044/TJA1051, TI TCAN1042, and Infineon TLE9250 families; CAN FD-capable transceivers add faster slew-rate control and often a standby mode with a dedicated wake-up pin. Our <a href="/blog/automotive-pcb-requirements.html">automotive PCB requirements guide</a> covers the overall board context; here are the CAN-specific placement rules.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Place the Transceiver at the Board Edge, Next to the Connector</h4>
+      <p>The trace from the connector to the transceiver is part of the bus stub, so it must be as short as possible — target under 25 mm for CAN FD. Put the transceiver on the same side of the board as the connector, with the CANH/CANL pins facing it. Avoid routing the differential pair through vias on the way in; if a via pair is unavoidable, place them symmetrically and close together to keep the pair balanced.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Decouple VCC at the Transceiver, Not Just at the MCU</h4>
+      <p>A 100 nF ceramic capacitor within 3 mm of the transceiver VCC pin, plus a 10 µF bulk capacitor nearby, handles the current spikes during dominant-bit transitions. Place the capacitor on the same layer as the IC if possible, with a direct via to the ground plane. Weak decoupling shows up as bit errors exactly at high temperature or high data rates — the two conditions that are hardest to debug in the field.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Route TXD/RXD Away From the Bus Pins</h4>
+      <p>The microcontroller-side signals (TXD, RXD, and the CAN controller clock) are single-ended and noisy; the bus-side signals (CANH, CANL) are differential and sensitive. Keep a ground trace or plane gap between the two domains, and never run TXD parallel to CANH/CANL for more than a few millimeters. Digital noise coupled into the bus pins raises the error rate at exactly the wrong time — during arbitration.</p>
+    </div>
+  </div>
+
+  <h2>Differential Pair Routing: 120 Ohm, Tightly Coupled, Over a Solid Plane</h2>
+
+  <p>The CAN physical layer is specified for a characteristic impedance of <span class="data-point">120 Ω</span> on the cable, and the PCB portion of the network should match that as closely as practical. Unlike USB or Ethernet, CAN does not require an impedance-controlled PCB for short stubs — but modern high-speed CAN FD designs and long board-to-board links benefit from controlled differential impedance.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use 120 Ω Differential Impedance With Tight Intra-Pair Spacing</h4>
+      <p>On a typical 1.6 mm FR-4 stackup, a 120 Ω differential pair can be built with 0.2 mm (8 mil) traces and 0.2 mm spacing on an outer layer, or wider traces on inner layers. Keep the pair edge-coupled (side-by-side) rather than broadside, and maintain the same spacing for the entire route — the impedance of a CAN pair is set by geometry, and any abrupt width or spacing change creates a reflection. Huaxing supports impedance control to ±5% with coupon testing on every panel.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Length-Match CANH and CANL Within a Few Millimeters</h4>
+      <p>Skew between the two legs of the differential signal eats into the receiver's common-mode rejection. Keep CANH and CANL length-matched within 5 mm for classic CAN, tighter for CAN FD. Because both traces are short and parallel, this is usually automatic — the risk appears when one leg is routed around an obstacle while the other goes straight.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Solid Ground Reference, No Splits Under the Pair</h4>
+      <p>Route the pair over a continuous ground plane on the adjacent layer. A split in the plane under the traces — for example, a moat used to isolate an analog section — forces return current to detour and converts a clean differential signal into a loop antenna. If the board has multiple ground domains, keep the entire CAN physical layer in one domain or bridge the split with the common-mode choke (see below).</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Parameter</th><th>Classic CAN (ISO 11898-2)</th><th>CAN FD Data Phase</th></tr>
+    <tr><td>Max data rate</td><td>1 Mbit/s</td><td>5-8 Mbit/s</td></tr>
+    <tr><td>Bus impedance</td><td>120 Ω</td><td>120 Ω</td></tr>
+    <tr><td>Max stub length</td><td>0.3 m (typ.)</td><td>0.1 m (typ.)</td></tr>
+    <tr><td>Differential output</td><td>2 V (dominant)</td><td>1.5-2 V (dominant)</td></tr>
+    <tr><td>Node count</td><td>Up to 32 (typ.)</td><td>Up to 32 (typ.)</td></tr>
+    <tr><td>Termination</td><td>120 Ω at both ends</td><td>120 Ω at both ends</td></tr>
+  </table>
+
+  <h2>Termination: The Most Common Field Failure</h2>
+
+  <p>A CAN bus must be terminated with <span class="data-point">120 Ω</span> at each physical end of the trunk — exactly two terminations, no more, no less. Missing termination causes reflections that show up as intermittent errors at high speeds; extra termination loads the transceivers and can prevent the recessive level from being reached at all. This is the single most common cause of "works on the bench, fails in the field" CAN complaints.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Two 120 Ω Resistors, One at Each End of the Trunk</h4>
+      <p>Identify which two nodes are physically at the ends of the bus and place the termination there — typically the gateway and the last sensor node. Resistor tolerance matters: use ±1% resistors so the two terminations stay balanced. On boards that can be either a middle node or an end node (common in modular designs), fit the resistor through a solder jumper or 0 Ω link so the same board works in both positions.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Split Termination (60 Ω + 4.7 nF) When You Need Cleaner Emissions</h4>
+      <p>A split termination replaces each 120 Ω resistor with two 60 Ω resistors and a 4.7 nF capacitor between the midpoints, creating a low-pass filter at the end of the bus that shaves high-frequency common-mode energy. This is a common EMC fix in automotive ECUs. The capacitor value trades emissions against signal quality — stay in the 4.7 nF range for classic CAN and check the transceiver datasheet for CAN FD, where the extra capacitance can slow edges.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Biasing: Weak Pull-Ups Keep the Recessive State Well-Defined</h4>
+      <p>When all transceivers are in the recessive (high-impedance) state, the bus floats. A bias network — typically 10 kΩ pull-up on CANH and 10 kΩ pull-down on CANL at one designated node — pins the idle level near 2.5 V. Many transceivers include internal biasing (TJA1044 does; TJA1051 does not), so check the datasheet before adding external parts. Consistent idle level is what prevents spurious dominant bits when the network powers up.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-can-bus-pcb-termination.webp" alt="Close-up of 120 ohm termination resistors and a split termination capacitor network on a CAN bus node PCB" loading="lazy" style="max-width:80%">
+
+  <h2>Common-Mode Chokes, TVS and Transient Protection</h2>
+
+  <p>Automotive and industrial buses are exposed to transients that no signal-integrity textbook assumes: load-dump pulses, inductive kickback from solenoids and motors, and ESD from connectors and harnesses. Three components handle most of it.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Common-Mode Choke: 51 µH or 100 µH, Placed Between Connector and Transceiver</h4>
+      <p>A common-mode choke (CMC) passes the differential CAN signal while blocking common-mode noise that radiates from the harness — the main source of radiated-emission failures in CISPR 25 automotive tests. Typical values are 51 µH (TJA1044 reference designs) or 100 µH for harsher environments. Place the CMC between the connector and the transceiver, with its ground pin connected to the chassis/ground plane. The CMC is also the natural bridge point if the connector side of the board is a separate ground domain.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>TVS Diodes: Bidirectional, Rated for the Bus Voltage</h4>
+      <p>Place a bidirectional TVS diode (e.g., PESD1CAN family, or a 24 V bidirectional part for 24 V vehicle systems) directly at the connector pins, before the CMC. The diode clamps ESD and surge energy before it reaches the transceiver. For ISO 7637-2 pulse immunity, some designs add a series resistor or use transceivers with integrated protection (the TJA1044T/3 and TCAN1042V variants include built-in ±58 V bus fault protection).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Series Resistors on CANH/CANL for Extra Margin</h4>
+      <p>A 10-30 Ω series resistor on each bus line, between the CMC and the transceiver, damps ringing and adds fault current limiting. Some automotive reference designs use these in combination with the CMC to tune edge rates. Do not confuse these with termination — they are in series, not across the pair, and both lines must carry the same value to keep the pair balanced.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Factory Reality:</strong> At Huaxing, every automotive CAN board is assembled with solder-paste inspection (SPI), AOI, and X-ray for BGA and shield components — then functionally tested on a live CAN bus with a configurable termination network, so a missing 120 Ω resistor is caught before shipment, not by your field team.</p>
+  </div>
+
+  <h2>Isolation and Multi-Node Network Design</h2>
+
+  <p>Industrial CAN networks frequently need galvanic isolation between nodes — a motor drive and a PLC on the same bus can sit at very different ground potentials, and a ground loop through the CAN cable is both an EMC disaster and a safety hazard. Our <a href="/blog/industrial-control-pcb.html">industrial control PCB guide</a> covers the broader design context.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use a Galvanically Isolated Transceiver for Industrial Nodes</h4>
+      <p>Parts like the ISO1042 or ADM3053 integrate isolation (up to 5 kVrms) inside the transceiver package, eliminating a separate isolation barrier design. The isolated side needs its own DC-DC supply — often a small isolated module or a transformer-based design — and a dedicated isolated ground plane under the bus-side circuitry. Keep the isolation barrier (the gap under the IC) clear of traces on all layers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Topology: One Linear Trunk, Short Stubs — Not a Star</h4>
+      <p>CAN is specified for a linear bus with short stubs. Star topologies create multiple reflection points and require special care (termination at each spoke end, or a hub node with repeaters). If the mechanical layout forces a star, budget for a CAN repeater or a hub board rather than hoping the transceivers absorb the reflections.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan Node Count and Cable Length Against the Bit Rate</h4>
+      <p>Classic CAN supports 32 nodes at 1 Mbit/s over a short bus; at 125 kbit/s the bus can stretch to 500 m. More nodes mean more stub capacitance and more loading, which slows edge rates. If your system needs more nodes than the transceiver family supports, use a second bus segment with a gateway instead of overloading one segment.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-can-bus-pcb-automotive.webp" alt="Concept photo of a modern vehicle chassis with a glowing network line connecting ECU modules, suggesting CAN bus communication" loading="lazy" style="max-width:80%">
+
+  <img class="article-img" src="/generated/blog-can-bus-pcb-factory.webp" alt="Automated pick-and-place machine assembling components onto CAN node boards in a modern PCB factory" loading="lazy" style="max-width:80%">
+
+  <h2>Manufacturing Specifications to Put on the Fabrication Drawing</h2>
+
+  <p>The layout rules above only deliver their value if the board is manufactured to the right tolerances. When you send your CAN node board to a fabricator, specify the following explicitly — our <a href="/blog/pcb-manufacturing-tolerances.html">manufacturing tolerances guide</a> explains the standard values in detail.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Impedance Control on the CAN Pair (If Specified)</h4>
+      <p>If you design for 120 Ω differential impedance, require impedance coupons on the panel and a TDR report. Huaxing tests impedance to ±5% and includes the report with the shipment.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Copper Weight and Trace Width for the Bus Pins</h4>
+      <p>Bus pins carry only signaling current, but the connector pads and the power pins of the transceiver can carry real current in fault conditions. Standard 1 oz copper with 0.2 mm traces is adequate for the signal pair; widen the VCC and ground traces to the transceiver to 0.5 mm or more.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Conformal Coating for the Bus Side (Optional but Common)</h4>
+      <p>Automotive and industrial boards often specify conformal coating on the connector-side circuitry to resist vibration, moisture, and salt. If you plan to coat, mask the test points and any calibration area — and note that coating over the termination resistors is fine as long as the values are final.</p>
+    </div>
+  </div>
+
+  <h2>Summary: The CAN Node Board Checklist</h2>
+
+  <p>A reliable CAN node board has the transceiver within 25 mm of the connector, a tightly coupled 120 Ω differential pair over a solid ground plane, exactly two 120 Ω terminations at the physical ends of the trunk (split or biased as the EMC plan requires), a common-mode choke and TVS between connector and transceiver, clean decoupling on the transceiver supply, and a layout that keeps single-ended digital signals away from the bus pins. On the production side, specify impedance coupons, AOI plus functional bus testing, and — for automotive — IATF 16949 process control from an audited supplier.</p>
+
+  <p>At Huaxing PCBA we manufacture CAN, CAN FD, and isolated industrial node boards up to 32 layers with controlled impedance to ±5%, 3/3 mil fine-line routing, and full assembly support across 8 SMT lines and 4 DIP lines — including X-ray, conformal coating, and live-bus functional testing. Our DFM review checks your termination plan, stub lengths, and bus protection before tooling. <a href="/blog/pcb-emc-emi-compliance.html">Read our EMC/EMI compliance guide</a> to specify the emissions requirements correctly, or <a href="/contact/">send your files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/automotive-pcb-requirements.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Automotive PCB Design Requirements</a></li>
+    <li><a href="/blog/adas-autonomous-driving-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">ADAS &amp; Autonomous Driving PCB</a></li>
+    <li><a href="/blog/ev-bms-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">EV Battery Management System PCB</a></li>
+    <li><a href="/blog/industrial-control-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Industrial Control PCB Manufacturing</a></li>
+    <li><a href="/blog/pcb-emc-emi-compliance.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Design for EMC/EMI Compliance</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-can-bus-pcb.webp)">
+      <h2>Building a CAN or CAN FD Node Board?</h2>
+      <p>Send your layout files — our engineers will review the termination plan, stub lengths, bus protection, and impedance requirements, then return a DFM report and a quote. Free DFM review with every quote, 24h prototype service, IATF 16949 certified production.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your CAN Board DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
