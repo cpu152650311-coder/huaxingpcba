@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLDC Motor Controller PCB Design — 3-Phase Inverter Layout, Gate Driver & Current Sensing Rules | Huaxing PCBA</title>
+<meta name="description" content="BLDC motor controller PCB design guide — 3-phase inverter bridge layout, low-inductance power loops, gate driver placement, shunt current sensing, thermal design and EMC rules for e-bike, drone, power tool and robot controllers.">
+<meta property="og:title" content="BLDC Motor Controller PCB Design — Power-Stage Layout That Survives 30 A Continuous">
+<meta property="og:description" content="A BLDC controller is the hardest PCB in most products: 30 A+ switching at 20 kHz with microvolt-level sensing on the same board. Here is how the layout is actually done.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/bldc-motor-controller-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-bldc-motor-controller.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/bldc-motor-controller-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "BLDC Motor Controller PCB Design — 3-Phase Inverter Layout, Gate Driver & Current Sensing Rules",
+  "description": "BLDC motor controller PCB design guide — 3-phase inverter bridge layout, low-inductance power loops, gate driver placement, shunt current sensing, thermal design and EMC rules for e-bike, drone, power tool and robot controllers.",
+  "datePublished": "2026-08-06",
+  "dateModified": "2026-08-06",
+  "image": "https://huaxingpcba.com/generated/blog-cover-bldc-motor-controller.webp",
+  "url": "https://huaxingpcba.com/blog/bldc-motor-controller-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/bldc-motor-controller-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-bldc-motor-controller.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">BLDC Motor Controller PCB Design:<br><em>Inverter Bridge Layout, Gate Drive &amp; Current Sensing That Survive 30 A Continuous</em></h1>
+      <p class="reveal">A brushless DC controller is usually the most demanding PCB in the product: tens of amps switching at 20 kHz while a microcontroller reads microvolt-level current signals on the same board. The layout decides whether it survives.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>BLDC Motor Controller PCB Design</span></div>
+
+  <p>Every e-bike, drone, power tool, robot and appliance that moves is driven by a brushless DC (BLDC) motor — and every one of those motors is driven by a controller board that combines a high-current 3-phase inverter, gate drivers, current sensing, and a microcontroller on one PCB. It is a hostile electrical environment: phase currents of <span class="data-point">20–60 A</span> are chopped at 15–30 kHz while the same board tries to measure signals in the microvolt range and keep a 3.3 V MCU alive.</p>
+
+  <p>Huaxing PCBA builds motor controller boards for e-bike, micromobility, power tool, robotics and appliance customers — up to 32 layers with 3/3 mil routing, 2–6 oz copper options, and functional test rigs that spin real motors before shipment. This guide covers the six layout disciplines that separate a controller that lasts years from one that fails in the field: the inverter power stage, gate drive, current sensing, commutation feedback, thermal management, and EMC.</p>
+
+  <img class="article-img" src="/generated/blog-bldc-motor-controller-inverter.webp" alt="Macro photo of a BLDC motor controller PCB power stage with MOSFETs and thick copper traces" loading="lazy" style="max-width:80%">
+
+  <h2>Why BLDC Controllers Are a Different PCB Category</h2>
+
+  <p>A BLDC controller is a switching power converter and a precision analog instrument in the same enclosure. The commutation circuit turns each motor phase on and off six times per electrical revolution, pushing current through the motor winding inductance and back. That switching creates three things every other PCB only deals with one at a time: high di/dt ground noise, high temperature rise, and radiated EMI that couples straight into the control electronics.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Commutation Means the Ground Plane Is Never Quiet</h4>
+      <p>Every PWM edge dumps current into the ground and power planes. If the MCU and the gate drivers share a noisy return path, the controller will misfire — the classic symptom is random commutation glitches at high throttle that disappear when you probe the board. The layout answer is a clean partition between the power half and the logic half, connected at exactly one star point.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>The Board Is Also the Heatsink Interface</h4>
+      <p>A 48 V / 25 A controller dissipates 5–15 W in the MOSFETs alone. The PCB copper is part of the thermal path — which is why motor controller boards so often use 2–4 oz copper and arrays of thermal vias under the power devices. Our <a href="/blog/pcb-copper-weight-selection.html">copper weight guide</a> covers the specification side; the layout side is covered below.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>It Must Survive the Motor, Not Just the Lab</h4>
+      <p>Motors are inductive loads with brushes of electromagnetic energy: back-EMF spikes, cable inductance, and stall conditions. The board has to absorb regenerative energy, clamp voltage transients, and keep running through vibration. That is why controller reliability is mostly a layout and manufacturing-quality problem, not a component-selection problem.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Think of the controller as three circuits — power, analog, and digital — that share one board. The layout's job is to keep their ground returns, noise, and thermal paths from destroying each other.</p>
+  </div>
+
+  <h2>Power Stage Layout: The 3-Phase Inverter Bridge</h2>
+
+  <p>The heart of the controller is the inverter: six MOSFETs arranged as three half-bridges, one per motor phase. The single most important layout rule is to minimize the commutation loop — the path the current takes from the bulk capacitor, through the high-side FET, the phase output, the low-side FET, and back to the capacitor. This loop is the antenna that radiates EMI and the source of the voltage spikes that kill FETs.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Shrink the High-Side/Low-Side Commutation Loop to a Few Square Millimeters</h4>
+      <p>Place each high-side FET directly above its low-side FET (or use a half-bridge module) so the phase node is a short copper island between them, and put the bulk + ceramic capacitor bank within 10–15 mm of the FETs. The parasitic inductance of the loop should be under 10 nH; every extra nanohenry adds di/dt voltage spikes on top of the bus. For 30 A controllers, use 2 oz copper on the power layer and keep the high-current traces at least 3–4 mm wide per 10 A.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Split the Bus Capacitance: Bulk for Energy, Ceramic for Switching</h4>
+      <p>Electrolytic or film capacitors store the energy (typically 470–2200 µF for e-bike controllers); ceramic capacitors (0.1–1 µF, multiple in parallel) handle the high-frequency switching current right at the FETs. The ceramics must sit closer to the drain-source path than the bulk caps — their job is to supply current during the tens of nanoseconds of each switching edge.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Match the FET Voltage Class to the Application, Then Add Margin</h4>
+      <p>Typical selections: 36–48 V e-bike systems use 75–100 V FETs; 4S–6S drones use 40–60 V; 20 V power tools use 60 V. The margin absorbs switching spikes and regenerative braking overshoot. Our <a href="/blog/ev-traction-inverter-pcb.html">EV traction inverter guide</a> shows the same discipline scaled up to 800 V silicon carbide.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Application</th><th>Bus Voltage</th><th>Phase Current</th><th>FET Voltage Class</th><th>Copper Weight</th></tr>
+    <tr><td>Drone ESC (4S-6S)</td><td>14.8–22.2 V</td><td>20–40 A peak</td><td>40–60 V</td><td>2 oz</td></tr>
+    <tr><td>E-bike / scooter</td><td>36–48 V</td><td>15–30 A</td><td>75–100 V</td><td>2–3 oz</td></tr>
+    <tr><td>Power tool</td><td>18–20 V</td><td>30–60 A peak</td><td>60 V</td><td>3–4 oz</td></tr>
+    <tr><td>Robot / industrial</td><td>24–48 V</td><td>10–40 A</td><td>75–100 V</td><td>2–4 oz</td></tr>
+  </table>
+
+  <h2>Gate Driver Placement: Distance Is the Enemy</h2>
+
+  <p>The gate driver converts the MCU's 3.3 V logic into the 10–15 V, high-current pulses that actually switch the MOSFET gates. The layout relationship between driver and FET is as important as the components themselves.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Keep the Driver Within 10 mm of Its MOSFETs</h4>
+      <p>Gate drive traces carry fast edges into a capacitive load (the FET's gate, typically 5–30 nC). Long traces add inductance that causes ringing on the gate waveform, which translates directly into switching loss and EMI. Route the gate signal as a short, wide trace (0.5 mm+) with the gate resistor placed right at the FET gate pin — the resistor damps the ringing and controls the slew rate.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use the Kelvin Source Connection for High-Current FETs</h4>
+      <p>In a TO-220 or DFN power FET, the source pin carries both the main current and the gate return. The voltage drop across that shared inductance appears on the gate drive and can cause parasitic turn-on. A Kelvin source connection gives the driver its own dedicated return path to the source pad, decoupling the drive loop from the power loop. If the FET package has a separate source sense pin, use it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Plan the Bootstrap Supply on the Layout</h4>
+      <p>High-side drivers need a bootstrap capacitor that floats with the phase node. Place the bootstrap cap and its diode within 5 mm of the driver's high-side pins, with the cap's ground return going straight to the phase node — not through the logic ground. A poorly placed bootstrap cap is one of the most common causes of high-side drive failure at high duty cycles.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-bldc-motor-controller-gate-driver.webp" alt="Close-up of a gate driver IC with gate resistors placed adjacent to power MOSFETs on a motor controller PCB" loading="lazy" style="max-width:80%">
+
+  <h2>Current Sensing: Shunt, Kelvin Routing &amp; the Amplifier</h2>
+
+  <p>The controller must know the phase current for torque control, overcurrent protection, and commutation timing. The most common method is a low-side shunt resistor measured differentially by an amplifier. The measurement is microvolt-level — a <span class="data-point">2 mΩ</span> shunt at 30 A drops only 60 mV — sitting inches away from 30 A of switching current. Layout is everything.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use 4-Wire Kelvin Routing to the Shunt</h4>
+      <p>Route the sense traces directly from the shunt's own pads — one pair for the current path, one pair for the sense path — never tap the sense lines off the power trace. The sense traces should be thin, short, equal-length, and run close together (a twisted pair in PCB form) to reject common-mode noise. Route them on an inner layer if possible, away from the phase nodes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Put the Amplifier Next to the Shunt, Filter Right at the Amplifier</h4>
+      <p>The differential amplifier (or the MCU's internal PGA) should sit within 5–10 mm of the shunt. Add a small RC filter (e.g. 100 Ω / 1 nF) directly at the amplifier inputs to knock down the switching spikes before they reach the converter. The filter corner should be well above the PWM frequency but below the noise spectrum — typically 100 kHz–1 MHz.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Choose Shunt Value and Power Rating Together</h4>
+      <p>A 1–5 mΩ alloy shunt is typical. The tradeoff: lower value = less power loss but smaller signal; higher value = better resolution but more heat and voltage drop. At 30 A continuous through 2 mΩ, the shunt dissipates 1.8 W — it needs its own copper area and a 2–3 W rating, not a 0.25 W resistor. For three-phase sensing, use three shunts (one per low-side FET) or a single DC-link shunt depending on the control algorithm.</p>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr><th>Sensing Method</th><th>Signal Level</th><th>Pros</th><th>Layout Cost</th></tr>
+    <tr><td>Low-side shunt (per phase)</td><td>30–75 mV at rated current</td><td>Cheap, accurate, standard</td><td>Kelvin routing required</td></tr>
+    <tr><td>DC-link / bus shunt</td><td>Same, one shunt</td><td>One sense point</td><td>Cannot see phase current directly</td></tr>
+    <tr><td>Hall / current sensor IC</td><td>Analog out, isolated</td><td>No power loss, isolated</td><td>Costlier, still needs layout care</td></tr>
+    <tr><td>Motor phase resistance (sensorless)</td><td>Computed</td><td>No hardware</td><td>Needs clean ADC reference</td></tr>
+  </table>
+
+  <img class="article-img" src="/generated/blog-bldc-motor-controller-current-sense.webp" alt="Macro photo of precision shunt resistors with Kelvin sense traces on a motor controller current sensing circuit" loading="lazy" style="max-width:80%">
+
+  <h2>Commutation Feedback: Hall Sensors, Encoders &amp; Back-EMF</h2>
+
+  <p>The controller needs rotor position. Hall sensors mounted on the PCB (or in the motor) give absolute position for commutation; encoders add precision; sensorless designs measure back-EMF through the phase nodes. Each approach has layout implications.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Route Hall Signals as Short, Filtered Triplets</h4>
+      <p>Hall sensor outputs are low-level signals riding on a noisy motor environment. Keep the three hall traces short and parallel, add 0.1 µF bypass caps at each sensor, and terminate them with pull-ups near the MCU. If the sensors are in the motor rather than on the controller, the connector carries them — use twisted pairs or a shielded cable and add RC filtering at the MCU pins.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Give the ADC a Clean Reference for Back-EMF Sensing</h4>
+      <p>Sensorless controllers measure the motor's back-EMF through resistor dividers connected to the phase nodes — which are also the noisiest points on the board. The divider network must be close to the MCU, well-filtered, and referenced to the analog ground, not the power ground. This is where a mixed-signal layout discipline pays off; our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal design guide</a> covers the partitioning rules in detail.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Separate the MCU Power Domain From the Gate Drive Supply</h4>
+      <p>The MCU should run from its own LDO with a dedicated ground return to the star point. The 12–15 V gate drive rail and the 3.3 V logic rail should never share a regulator or a long common trace — switching current from the driver supply will modulate the logic rail and cause brownouts exactly when the motor is drawing maximum current.</p>
+    </div>
+  </div>
+
+  <h2>Thermal Design for Continuous Motor Current</h2>
+
+  <p>Heat is the number one field-failure driver in motor controllers. The MOSFETs dissipate most of it, and the PCB is part of the cooling path between the die and the heatsink or enclosure.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use 2–4 oz Copper and Flood the FET Footprints</h4>
+      <p>Copper weight directly increases the thermal spreading area of the board. Under each power FET, flood the pad with as much copper as the design allows and connect it to a large pour on the bottom layer with thermal vias. Our <a href="/blog/pcb-thermal-management-guide.html">thermal management guide</a> explains the via-array math; a typical rule of thumb is a 3×3 to 5×5 array of 0.3 mm vias under each FET tab.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Design the Thermal Path From the Start, Not as a Fix</h4>
+      <p>Decide early whether the FETs cool through a heatsink on the bottom of the board (via a thermal pad), through a metal-core substrate, or through the enclosure. Each changes the stackup, the solder mask openings (vias filled or tented), and the assembly process. A controller redesigned for heat late in the project costs more than one planned for it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Protect Against Thermal Runaway With Layout-Level Sensing</h4>
+      <p>Place an NTC thermistor near the FET bank (not near a capacitor or the MCU) and route its traces to the ADC with the same care as the current sense. Firmware can then derate current as temperature climbs instead of letting the board cook. A well-placed NTC on a 2 oz board reads the FET temperature within 5–10 °C — close enough to protect the hardware.</p>
+    </div>
+  </div>
+
+  <h2>EMC: The Motor Cable Is an Antenna</h2>
+
+  <p>The phase wires between controller and motor are the best antennas on the product — they carry 20 kHz PWM edges into an inductive load. Every controller design fights conducted and radiated emissions, and most of the fight is won on the PCB.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Add RC Snubbers Across Each Half-Bridge</h4>
+      <p>A snubber (e.g. 10 Ω / 1–10 nF) across each FET pair damps the voltage ringing at the phase node, cutting both the spike stress on the FETs and the radiated emissions. The snubber components belong physically between the FETs, not on the other side of the board. Our <a href="/blog/pcb-emc-emi-compliance.html">EMC compliance guide</a> covers the full emissions-control toolkit.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Filter the Motor Outputs and the Power Input</h4>
+      <p>Add a common-mode choke and Y-capacitors at the battery input, and ferrite beads or a small LC filter on the phase outputs where the cable connects. The board's connector footprint should make room for these — a controller with no input filter almost always fails CE/FCC conducted emissions testing on the first attempt.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep the MCU and Its Crystal Far From the Phase Nodes</h4>
+      <p>The switching node voltage swings the full bus voltage at every PWM edge; a crystal or a sensitive analog trace passing near it will pick up that energy. Route the phase output traces on the opposite side of the board from the MCU, and keep a ground pour between the power section and the logic section. For high-power controllers, consider a slot or moat in the ground plane to force the return currents onto the intended path.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-bldc-motor-controller-application.webp" alt="Concept photo of an e-bike motor controller module with heat sink fins and a brushless hub motor" loading="lazy" style="max-width:80%">
+
+  <h2>Manufacturing Requirements for Motor Controllers</h2>
+
+  <p>Motor controller boards push manufacturing capability harder than most PCBs: thick copper, high layer counts, fine-pitch BGA MCUs, and the requirement that every unit actually drive a motor before it ships.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Heavy Copper Changes the Fabrication Rules</h4>
+      <p>At 3–4 oz copper, minimum trace/space rules loosen (typically 5/5 mil or wider), and the etching process needs to be validated for the thicker foil. Impedance control on mixed 1 oz signal layers and 3 oz power layers requires careful stackup planning. Specify the copper weight per layer in your fabrication notes, not just "2 oz board."</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Plan for X-Ray and ICT/Flying Probe Coverage</h4>
+      <p>Controllers with BGA MCUs need X-ray inspection of the BGA joints; high-current solder joints benefit from AOI plus X-ray spot checks. For production volume, the board should include test points for ICT or flying probe coverage — see our <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">test method comparison</a> — plus a connector footprint for the motor test rig.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Require a Real-Motor Functional Test, Not Just Power-On</h4>
+      <p>A controller can pass every electrical test and still fail in the field because of a marginal gate drive or a noise-sensitive sense path. The most valuable test is a motor spin test: load the firmware, spin a real (or dynamometer) motor through the full speed range, and verify commutation, current limiting, and thermal behavior. Huaxing's functional test service supports exactly this — boards are tested with the actual load profile before packing.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> The manufacturing file set matters as much as the schematic: layer-by-layer copper weight, thermal via specifications, test point placement for ICT, and a motor-load functional test procedure all belong in the purchase order, not improvised at first production.</p>
+  </div>
+
+  <h2>Summary: The Six Disciplines of a Controller That Survives</h2>
+
+  <p>A reliable BLDC controller comes from six layout disciplines applied together: (1) a tightly looped inverter power stage with split bulk/ceramic capacitance; (2) gate drivers within 10 mm of their FETs with Kelvin sensing and correct bootstrap placement; (3) 4-wire Kelvin current sensing into a nearby amplifier; (4) clean commutation feedback with an isolated MCU power domain; (5) 2–4 oz copper and via-array thermal paths designed from the start; and (6) snubbers, input filtering, and physical separation that keep the motor's switching energy out of the logic. Skip any one of them and the board will work in the lab — until it is installed in the product that pays for it.</p>
+
+  <p>At Huaxing PCBA we manufacture BLDC controller boards up to 32 layers with 3/3 mil routing, 2–6 oz copper for power stages, X-ray and AOI inspection, and motor-load functional testing across 8 SMT lines. Our DFM review checks your commutation loop inductance, gate drive routing, Kelvin sense paths, and thermal via arrays before tooling. <a href="/blog/ebike-micromobility-pcb.html">Read our e-bike electronics guide</a> for the system-level view, or <a href="/contact/">send your controller files</a> for a free DFM review and quote.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/ebike-micromobility-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB for E-Bike &amp; Micromobility Electronics</a></li>
+    <li><a href="/blog/power-tool-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Power Tools &amp; Cordless Equipment PCB</a></li>
+    <li><a href="/blog/robotics-automation-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Robotics &amp; Industrial Automation PCB</a></li>
+    <li><a href="/blog/smps-pcb-layout-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">SMPS PCB Layout Design Guide</a></li>
+    <li><a href="/blog/pcb-copper-weight-selection.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Copper Weight Selection</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-bldc-motor-controller.webp)">
+      <h2>Building a Motor Controller That Has to Last?</h2>
+      <p>Send your schematic and layout files — our engineers will review your commutation loop, gate drive placement, Kelvin current sensing, and thermal via design, then return a DFM report and a production quote. Free DFM review with every quote, 24h prototype service, motor-load functional testing.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Controller DFM Review <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top"><h2 class="mi-heading">Start Your Project</h2><p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p></div>
+      <div class="modal-image-text"><div class="mi-label">HUAXING PCBA</div><div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div></div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
