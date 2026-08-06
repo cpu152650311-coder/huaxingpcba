@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Harvesting PCB Design — Solar, Piezoelectric &amp; RF Power Circuits for Battery-Free IoT | Huaxing PCBA</title>
+<meta name="description" content="Energy harvesting PCB design guide — indoor solar, thermoelectric, piezoelectric and RF power sources, cold-start PMIC selection, supercapacitor storage, leakage control and assembly rules for battery-free IoT devices.">
+<meta property="og:title" content="Energy Harvesting PCB Design — Solar, Piezoelectric &amp; RF Power Circuits">
+<meta property="og:description" content="From µW/cm² power densities to 380 mV cold-start PMICs — how to design a PCB that runs forever without a battery.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/energy-harvesting-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-energy-harvesting.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/energy-harvesting-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Energy Harvesting PCB Design — Solar, Piezoelectric & RF Power Circuits for Battery-Free IoT",
+  "description": "Energy harvesting PCB design guide — indoor solar, thermoelectric, piezoelectric and RF power sources, cold-start PMIC selection, supercapacitor storage, leakage control and assembly rules for battery-free IoT devices.",
+  "datePublished": "2026-08-07",
+  "dateModified": "2026-08-07",
+  "image": "https://huaxingpcba.com/generated/blog-cover-energy-harvesting.webp",
+  "url": "https://huaxingpcba.com/blog/energy-harvesting-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/energy-harvesting-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-energy-harvesting.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Energy Harvesting PCB Design:<br><em>Solar, Piezoelectric &amp; RF Power Circuits for Battery-Free IoT</em></h1>
+      <p class="reveal">Designing a board that runs for a decade on microwatts — no battery changes, no power budget anxiety, no maintenance truck rolls.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Energy Harvesting PCB Design</span></div>
+
+  <p>Battery-powered IoT nodes carry a hidden tax: every device with a battery needs a service visit eventually, and at <span class="data-point">1 million</span> deployed sensors, that tax becomes a full-time logistics operation. Energy harvesting removes the battery from the equation — the device draws its operating power from ambient light, vibration, heat, or radio waves. The engineering challenge moves from "how much battery do we need" to "how do we make every microwatt count."</p>
+
+  <p>This guide covers the PCB-level decisions that separate harvesting designs that work in the field from lab demos that die in a drawer: realistic power budgets per energy source, cold-start power management IC selection, storage architectures, leakage control, and the assembly quality rules that matter at nanoamp currents. We fabricate and assemble these low-power boards at Huaxing PCBA — including the clean-assembly processes leakage control demands. For the connectivity side of a battery-free node, pair this with our <a href="/blog/iot-pcb-design-manufacturing.html">IoT PCB design guide</a>.</p>
+
+  <img class="article-img" src="/generated/blog-energy-harvesting-pv.webp" alt="Small indoor solar panel on a wireless sensor node PCB harvesting energy from ambient office light" loading="lazy" style="max-width:80%">
+
+  <h2>Power Budget Reality: What Each Energy Source Actually Delivers</h2>
+
+  <p>The first rule of harvesting design: never size a system from datasheet maximums. Use the realistic range for the deployment environment, and design the power budget around the worst month, not the best day.</p>
+
+  <table class="spec-table">
+    <tr><th>Energy Source</th><th>Realistic Power Density</th><th>Typical Duty Cycle Supported</th><th>Best Deployment</th></tr>
+    <tr><td>Indoor photovoltaic (office light)</td><td>10-100 µW/cm²</td><td>Sensor read every 1-15 min</td><td>Smart buildings, retail tags</td></tr>
+    <tr><td>Outdoor photovoltaic</td><td>10-15 mW/cm²</td><td>Continuous + wireless uplink</td><td>Agriculture, infrastructure</td></tr>
+    <tr><td>Thermoelectric (ΔT 5-10°C)</td><td>10-100 µW/cm²</td><td>Sensor read every 5-30 min</td><td>Industrial pipes, HVAC, wearables</td></tr>
+    <tr><td>Piezoelectric vibration</td><td>1-100 µW/cm³</td><td>Burst mode, event-driven</td><td>Machinery, bridges, vehicles</td></tr>
+    <tr><td>Ambient RF (Wi-Fi/cellular)</td><td>0.1-10 µW/cm²</td><td>Sensor read every 30-120 min</td><td>Urban sensing, warehouses</td></tr>
+    <tr><td>Dedicated RF (reader-powered)</td><td>10-100 µW/cm²</td><td>On-demand activation</td><td>RFID, industrial tracking</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Know your sensor's real energy per reading</h4>
+      <p>A typical low-power MCU sleep current is 1-3 µA; waking, reading a sensor, and transmitting one LoRaWAN packet costs roughly 50-150 mJ of energy over 100-300 ms. At 50 µW average harvested power, that is one reading every 15-60 minutes. Design the duty cycle around this arithmetic, not around the datasheet's "ultra-low-power" marketing language. LoRaWAN uplink budgets are detailed in our <a href="/blog/lorawan-sub-ghz-pcb-design.html">LoRaWAN and Sub-GHz design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Indoor solar is the workhorse of battery-free IoT</h4>
+      <p>Amorphous or dye-sensitized cells deliver 10-100 µW/cm² under typical 200-500 lux office lighting. A 5 cm² panel in a well-lit office provides 0.5-2 mW — enough for frequent sensing. The design implication: the PCB must reserve a large, flat, uncluttered panel area, because panel size is the single biggest lever on your power budget.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Vibration and RF are event harvesters, not continuous supplies</h4>
+      <p>Piezoelectric harvesters excel where vibration is constant (pumps, compressors) but deliver bursts, not steady power. RF harvesting is viable only where a strong source exists (dedicated readers, dense cellular). Design these as "top-up" sources paired with storage, not as the primary energy budget. For RF-coupled power specifically, our <a href="/blog/wireless-power-transfer-pcb.html">wireless power transfer guide</a> covers the coil and matching network design.</p>
+    </div>
+  </div>
+
+  <h2>Cold-Start Power Management: The IC That Makes It Possible</h2>
+
+  <p>Harvesting PMICs do three jobs: boost the low source voltage, manage energy storage, and cold-start from a completely dead state. The cold-start spec is the one most designs get wrong.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Cold-start voltage decides your minimum light level</h4>
+      <p>Modern harvesting PMICs cold-start from 330-600 mV input — some below 100 mV with an external charge pump — and then run with quiescent currents of 300 nA to 1 µA. If your panel delivers 0.5 V under dim light and the PMIC needs 600 mV to start, the device never wakes. Match the PMIC's cold-start threshold to the source voltage at your worst-case lighting, not typical lighting.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>MPPT is not optional for solar harvesting</h4>
+      <p>Maximum power point tracking squeezes 20-40% more energy from a solar cell under varying light. Harvesting PMICs with built-in MPPT (typical tracking efficiency 80-90%) pay for themselves in panel area reduction. For thermoelectric sources, the PMIC must handle both polarities — the temperature gradient reverses when a pipe cools below ambient.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Quiescent current is a spec you hold the PMIC to</h4>
+      <p>Every nanoamp of PMIC quiescent current competes with your sensor budget. At 300 nA and 3.3 V, a PMIC consumes 1 µW — acceptable against a 50 µW harvest. At 5 µA quiescent, the PMIC alone eats 16 µW, and your duty cycle collapses. Read the quiescent figure at the actual operating voltage, not the minimum in the datasheet. Power integrity design for these rails is covered in our <a href="/blog/pcb-power-integrity-design.html">PDN design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Size the harvester for the worst month, pick the PMIC by cold-start voltage and quiescent current at your operating point, and let MPPT do the panel optimization — this combination is what separates field-deployable nodes from demo boards.</p>
+  </div>
+
+  <h2>Storage Architecture: Supercapacitors vs Thin-Film Batteries</h2>
+
+  <p>Harvested energy is bursty; the load needs steady power. The storage element bridges the gap, and its chemistry drives board layout and lifetime.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Supercapacitors: the default for battery-free design</h4>
+      <p>Supercapacitors (1-100 F) survive 500,000+ charge cycles, operate from -40°C to +70°C, and contain no lithium — simplifying shipping and disposal. A 10 F cell at 3.3 V holds roughly 54 J, enough for dozens of sensor reads. The layout cost: supercaps are physically large, and their ESR affects inrush current when the radio transmits.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Thin-film solid-state batteries for higher energy density</h4>
+      <p>Solid-state thin-film cells (e.g., 40-100 µAh/mm²-class products) offer 10-20× the energy density of supercaps in a flat, reflow-tolerant package — at higher cost and with a finite cycle life (typically 10,000 cycles or 5-10 years). Use them when the node must survive multi-day dark periods. Their low internal resistance also handles radio burst currents cleanly.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Hybrid: small supercap for bursts, harvester for everything else</h4>
+      <p>Most field nodes end up with a small supercap (1-5 F) as the energy buffer and no battery at all. The design rule: size storage for the worst-case duty period (e.g., 3 days of darkness indoors), then verify the harvester can refill it within the best-case period. Storage sizing methodology is covered in our <a href="/blog/portable-power-station-pcb.html">portable power station architecture guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-energy-harvesting-pmic.webp" alt="Macro shot of an ultra-low-power energy harvesting PMIC circuit on a compact IoT sensor PCB" loading="lazy" style="max-width:80%">
+
+  <h2>Leakage Control: Why Nanoamps Slip Away on the PCB Itself</h2>
+
+  <p>At microamp system currents, the PCB is no longer an ideal insulator. Surface leakage across the board can exceed the entire sensor budget if the design and assembly are not controlled.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Ionic contamination is the #1 leakage source</h4>
+      <p>Flux residue and other ionic contamination on the board surface creates leakage paths that grow with humidity — 100 MΩ between traces at 30% RH can drop below 10 MΩ at 80% RH. For harvesting circuits operating at nanoamp levels, specify aqueous cleaning after soldering and verify with ionic cleanliness testing. Our <a href="/blog/pcb-ionic-contamination-cleanliness-testing.html">ionic contamination testing guide</a> explains ROSE and SIR methods, and <a href="/blog/pcb-cleaning-processes-aqueous-vs-solvent.html">aqueous vs solvent cleaning</a> covers process selection.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Guard rings and high-impedance node protection</h4>
+      <p>Surround high-impedance sense nodes (photodiode amplifiers, voltage references) with guard rings driven at the same potential, and route them on dedicated clean layers. A 1 cm trace pair with 0.3 mm spacing in clean, dry conditions leaks ~1 pA; the same pair with contamination leaks 1000× more. The analog layout discipline is detailed in our <a href="/blog/mixed-signal-pcb-design.html">mixed-signal design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Conformal coating for humid deployments</h4>
+      <p>A thin acrylic or Parylene coating eliminates surface leakage in high-humidity environments (agriculture, marine, cold chain) — often the difference between a node that sleeps at 1 µA and one that drains at 20 µA in a humid season. Material selection guidance is in our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a>. For sealed outdoor nodes, moisture sensitivity handling during assembly matters too — see our <a href="/blog/pcb-msl-moisture-sensitivity-guide.html">MSL handling guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Antenna and RF Harvesting Front-End Design</h2>
+
+  <p>If your node harvests RF or uses a low-power radio, the antenna front-end deserves the same attention as the power path — a 1 dB mismatch costs 20% of your already-tiny energy budget.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Matching network efficiency beats antenna gain at close range</h4>
+      <p>For RF harvesting at 868/915 MHz or 2.4 GHz, a well-matched PCB antenna with a tuned matching network captures more energy than a slightly larger antenna with poor match. Measure return loss at the actual deployment frequency and environment — nearby metal shifts resonance by tens of MHz. Antenna layout and tuning fundamentals are in our <a href="/blog/pcb-antenna-design-guide.html">PCB antenna design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Keep the harvesting rectifier close to the antenna</h4>
+      <p>The RF-to-DC rectifier (often a voltage multiplier using Schottky diodes or a dedicated rectifier IC) must sit within 5-10 mm of the antenna feed with a solid ground reference. Longer traces at RF frequencies lose energy to parasitic capacitance before conversion. This placement rule applies to both harvesting front-ends and conventional radio front-ends.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Coexistence: harvesting antenna vs communication antenna</h4>
+      <p>Nodes that harvest from one band and communicate on another need deliberate antenna separation and filtering — typically 20-30 dB isolation between antennas. A harvesting antenna detuned by a nearby LoRa antenna costs you 30-50% of harvested power. Multi-antenna isolation rules are covered in our <a href="/blog/cellular-iot-module-pcb-design.html">cellular IoT module design guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-energy-harvesting-antenna.webp" alt="Close-up of a PCB trace antenna and matching network on a battery-free wireless sensor node" loading="lazy" style="max-width:80%">
+
+  <h2>Assembly Quality Rules That Matter at Nanoamp Currents</h2>
+
+  <p>Standard SMT assembly practices are mostly fine for harvesting boards — but three things change when the budget is microwatts.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Cleaning is a requirement, not an option</h4>
+      <p>Specify aqueous or semi-aqueous cleaning after reflow and verify with ionic cleanliness testing (ROSE per IPC-TM-650 2.3.25). A no-clean flux that is perfectly acceptable for a 100 mA device can sink your 1 µA sleep current. If your CM questions the cleaning spec, that is a signal to verify their process capability.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Component placement discipline for leakage-critical nets</h4>
+      <p>Keep the high-impedance nodes on the same side of the board as their components — no via-hopping through contaminated layers. Vias through a flux-contaminated barrel create leakage paths that are nearly impossible to clean fully. This rule applies to sensor front-ends of every kind; our <a href="/blog/mems-sensor-pcb-design.html">MEMS sensor design guide</a> shows the same discipline for accelerometers and pressure sensors.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Verify sleep current on every production unit</h4>
+      <p>Add a test step that measures sleep current on each assembled board — a board that sleeps at 1.5 µA instead of 1.0 µA loses 50% of its harvestable margin. Functional test strategies for low-power products are covered in our <a href="/blog/pcb-testing-methods.html">PCB testing methods guide</a>, and design-for-test additions in our <a href="/blog/pcb-design-for-testability.html">DFT guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When quoting a harvesting board, state the cleanliness spec (ROSE target, e.g., &lt;1.56 µg NaCl eq./in²) and the sleep-current test requirement explicitly on the purchase order. These two lines separate a 10-year node from a 10-month node.</p>
+  </div>
+
+  <h2>Case Study: A Battery-Free Soil Sensor for Smart Agriculture</h2>
+
+  <p>A smart agriculture customer needed a soil moisture and temperature node for greenhouse rows — where replacing batteries across thousands of nodes every season was the single largest operating cost.</p>
+
+  <p>The final design harvested from a <span class="data-point">4.5 cm²</span> amorphous solar panel under greenhouse light, used a harvesting PMIC with 380 mV cold-start and built-in MPPT, stored energy in a 5 F supercapacitor, and transmitted via LoRaWAN once per hour. Sleep current measured 1.2 µA after aqueous cleaning; total average power consumption landed at 45 µW against a 120 µW average harvest in the worst lighting month — a 2.6× margin. The boards, fabricated at 4 layers with ENIG finish and a thin acrylic coating, have run for 14 months with zero field failures. Greenhouse sensing architectures are covered further in our <a href="/blog/smart-agriculture-pcb-design.html">smart agriculture PCB guide</a>.</p>
+
+  <h2>Summary: The Battery-Free Design Checklist</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Budget from worst-case source, not datasheet best</h4>
+      <p>Build the energy budget table before layout: harvest vs consumption vs duty cycle, with 2× margin.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>PMIC chosen on cold-start voltage and quiescent current</h4>
+      <p>At the operating voltage and worst-case light, not the marketing numbers.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Storage sized for the worst dark period</h4>
+      <p>Supercap for cycle life, thin-film battery for multi-day holdover, hybrid for most nodes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Leakage engineered out</h4>
+      <p>Guard rings, clean layers, aqueous cleaning with ROSE verification, coating for humidity.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Sleep current tested on every unit</h4>
+      <p>Put it in the test plan and on the PO.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, we build battery-free IoT boards with the process controls leakage demands — aqueous cleaning lines, ionic cleanliness verification, and sleep-current functional test on every unit. Our engineering team will review your energy budget assumptions in the free DFM review that comes with every quote. <a href="/blog/immersion-cooling-pcb-design.html">Powering edge AI infrastructure instead?</a> Read our immersion cooling PCB guide, or <a href="/blog/pcba-npi-process-guide.html">learn how the NPI process takes your design from freeze to ramp</a>. For a project consultation, <a href="/contact/">contact our engineering team</a>.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/iot-pcb-design-manufacturing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">IoT PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/lorawan-sub-ghz-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">LoRaWAN &amp; Sub-GHz PCB Design</a></li>
+    <li><a href="/blog/pcb-antenna-design-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Antenna Design Guide</a></li>
+    <li><a href="/blog/wireless-power-transfer-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Wireless Power Transfer PCB</a></li>
+    <li><a href="/blog/pcb-ionic-contamination-cleanliness-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Ionic Contamination &amp; Cleanliness Testing</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-energy-harvesting.webp)">
+      <h2>Building a Battery-Free IoT Node?</h2>
+      <p>Send your schematic and power budget — our engineers will flag leakage risks and cleanliness requirements in your free DFM review, with a quote in 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

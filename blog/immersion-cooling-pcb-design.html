@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immersion Cooling PCB Design — Materials, Coating &amp; Layout Rules for Single-Phase and Two-Phase Systems | Huaxing PCBA</title>
+<meta name="description" content="Immersion cooling PCB design guide — dielectric fluid compatibility, laminate selection, conformal coating (Parylene vs silicone), surface finish, layout rules and qualification testing for single-phase and two-phase data center servers.">
+<meta property="og:title" content="Immersion Cooling PCB Design — Materials, Coating &amp; Layout Rules">
+<meta property="og:description" content="Fluid selection, Parylene vs silicone coating, laminate and finish choices — what actually changes when your server board goes into a tank of dielectric fluid.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/immersion-cooling-pcb-design.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-immersion-cooling.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/immersion-cooling-pcb-design.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Immersion Cooling PCB Design — Materials, Coating & Layout Rules for Single-Phase and Two-Phase Systems",
+  "description": "Immersion cooling PCB design guide — dielectric fluid compatibility, laminate selection, conformal coating (Parylene vs silicone), surface finish, layout rules and qualification testing for single-phase and two-phase data center servers.",
+  "datePublished": "2026-08-07",
+  "dateModified": "2026-08-07",
+  "image": "https://huaxingpcba.com/generated/blog-cover-immersion-cooling.webp",
+  "url": "https://huaxingpcba.com/blog/immersion-cooling-pcb-design.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/immersion-cooling-pcb-design.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-immersion-cooling.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">Immersion Cooling PCB Design:<br><em>Materials, Coating &amp; Layout Rules for Single-Phase and Two-Phase Systems</em></h1>
+      <p class="reveal">What actually changes when your server board goes into a tank of dielectric fluid — and how to specify it so the board survives 10 years submerged.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>Immersion Cooling PCB Design</span></div>
+
+  <p>Immersion cooling moves from pilot projects to mainstream deployment faster than any cooling technology in data center history. A single rack in a two-phase system now dissipates 100 kW or more, where the same footprint in air handles roughly <span class="data-point">30 kW</span>. But the boards inside that tank face an environment no standard server PCB was designed for: permanent contact with engineered dielectric fluids, thermal cycling through boiling points, and chemical exposure measured in years, not months.</p>
+
+  <p>At Huaxing PCBA, we manufacture boards for AI accelerator servers, 800G optical modules, and high-layer-count switch fabrics — the exact products now being qualified for immersion cooling. This guide covers the five decisions that determine whether an immersion-cooled board survives its service life: fluid compatibility, laminate selection, conformal coating, surface finish, and the layout rules that keep fluid flowing where it should. For the broader thermal picture, start with our <a href="/blog/pcb-thermal-management-guide.html">PCB thermal management guide</a>.</p>
+
+  <img class="article-img" src="/generated/blog-immersion-cooling-server-rack.webp" alt="Server boards submerged in a clear dielectric fluid tank inside a data center immersion cooling system" loading="lazy" style="max-width:80%">
+
+  <h2>Single-Phase vs Two-Phase: Why the Fluid Choice Changes Your PCB Specs</h2>
+
+  <p>Before touching the PCB, you must know which fluid family your system uses. The two architectures impose completely different chemical and thermal stresses on the board.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Single-phase systems — synthetic esters and polyalphaolefins</h4>
+      <p>Fluid stays liquid; heat transfers by convection. Fluids such as synthetic ester-based coolants and PAO blends have excellent material compatibility with most electronics plastics, but they are aggressive solvents toward some adhesives, tapes, and low-grade elastomers. Boards run at 60-70°C fluid temperature, which is gentle thermally but means the board is soaked in liquid for its entire life.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Two-phase systems — fluorinated fluids with a boiling point around 49-61°C</h4>
+      <p>The fluid boils on hot components and condenses on a cold plate, giving 10-100× better heat transfer per unit area. The board sees repeated immersion in boiling fluid — a vapor-liquid cycling environment that stresses coatings and seals far harder than single-phase. With major fluorinated fluid producers exiting the market by end-2025, many 2026 designs are re-qualifying alternative fluids or migrating to single-phase, which means the PCB qualification matrix must be re-run.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Dielectric strength is the safety spec nobody skips</h4>
+      <p>Engineered immersion fluids are specified at 35-45 kV dielectric strength per 2.5 mm gap — far above air. That is what makes bare high-voltage traces safe in a tank. But dielectric strength drops as the fluid absorbs moisture or degrades, so the PCB's own creepage and clearance design still matters. Our <a href="/blog/high-voltage-pcb-design.html">high-voltage PCB design guide</a> covers the spacing rules that apply here.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Two-phase is harsher on the board than single-phase. If your system may switch fluid families during qualification, design the PCB for the harsher case — two-phase compatible coatings and finishes work in single-phase, but not always the reverse.</p>
+  </div>
+
+  <h2>Laminate Selection: Moisture Absorption Is the Hidden Killer</h2>
+
+  <p>In air, a standard FR-4 board's moisture absorption of 0.1-0.25% rarely matters. Submerged in fluid, the laminate becomes the primary barrier between copper traces and the environment. Fluid wicks into board edges and along glass weave, and if the resin system absorbs moisture, the board's electrical properties drift over time.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Specify high-Tg, low-moisture-absorption laminates</h4>
+      <p>Standard FR-4 (Tg 130-140°C) absorbs 0.20-0.25% moisture. High-Tg FR-4 (Tg 170°C) and modified epoxy systems drop that to 0.10-0.15%. For two-phase systems, where boards cycle near the fluid boiling point for years, low-loss/high-Tg materials used in <a href="/blog/data-center-server-pcb.html">data center server PCBs</a> — such as mid-loss and low-loss grades — are the sensible baseline rather than the premium option.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Watch CTE and Z-axis expansion in cycling environments</h4>
+      <p>Two-phase immersion means the board repeatedly heats and cools through a 40-60°C swing. Laminates with matched CTE reduce stress on plated through-holes and microvias. If your design uses HDI with stacked vias, review the material's Td (decomposition temperature) — you want 340°C or higher for long-term stability. Stackup planning guidance is in our <a href="/blog/pcb-stackup-design.html">PCB stackup design guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Edge sealing: the cheapest reliability upgrade available</h4>
+      <p>Fluid ingress almost always starts at the board edge, where the glass weave is exposed after routing. Specify edge sealing (edge plating or a sealed edge coating) on immersion boards — it blocks the wicking path that drives 80% of field failures in early immersion deployments. Combined with the right coating, edge sealing turns a 3-year board into a 10-year board.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-immersion-cooling-material.webp" alt="Macro photo of a multilayer PCB laminate cross-section showing dense copper layers and glass weave structure" loading="lazy" style="max-width:80%">
+
+  <h2>Conformal Coating: Parylene vs Acrylic vs Silicone for Fluid Environments</h2>
+
+  <p>Conformal coating is the single most specified element of an immersion-cooled PCB. The right coating protects components and traces from fluid contact; the wrong one delaminates, softens, or traps fluid. Material selection fundamentals are covered in our <a href="/blog/pcb-conformal-coating-guide.html">conformal coating guide</a> — here is how the choice changes for immersion.</p>
+
+  <table class="spec-table">
+    <tr><th>Coating</th><th>Thickness</th><th>Fluid Resistance</th><th>Coverage Quality</th><th>Best For</th></tr>
+    <tr><td>Parylene C</td><td>1-25 µm</td><td>Excellent</td><td>Conformal, pinhole-free</td><td>Two-phase, long service life</td></tr>
+    <tr><td>Silicone (SR)</td><td>25-250 µm</td><td>Excellent</td><td>Thick, absorbs stress</td><td>Single-phase, high-thermal-cycling boards</td></tr>
+    <tr><td>Acrylic (AR)</td><td>25-75 µm</td><td>Good</td><td>Easy rework</td><td>Prototypes, quick qualification</td></tr>
+    <tr><td>Polyurethane (UR)</td><td>25-75 µm</td><td>Good-Fair</td><td>Hard, abrasion resistant</td><td>Single-phase, mechanical protection</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Parylene C is the two-phase default — with a thickness caveat</h4>
+      <p>Vapor-deposited Parylene C conforms to every surface including under BGAs, with no liquid pooling or meniscus effects. At 10-25 µm it is effectively pinhole-free and resists fluorinated fluids well. The trade-off: it is expensive (roughly 3-5× acrylic), requires masking of connectors, and is nearly impossible to rework. For production boards destined for two-phase tanks, that cost is justified.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Silicone for single-phase and high-cycling boards</h4>
+      <p>Silicone coatings remain flexible through wide temperature swings — ideal for single-phase systems where boards sit at 60-70°C indefinitely. They resist synthetic ester fluids well. The weakness is thickness (50-250 µm typical), which can interfere with connectors and press-fit zones, and softer surfaces that collect dust before sealing.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Masking strategy decides your rework cost</h4>
+      <p>Every connector, test pad, and mating surface must be masked before coating. Plan the keep-out zones in the layout phase — a board designed for coating has test points clustered and connectors grouped on one edge, which cuts masking cost by 30-40% versus a board that treats coating as an afterthought. If full coating is overkill for part of the board, our <a href="/blog/pcb-potting-encapsulation-guide.html">potting vs coating guide</a> explains selective encapsulation alternatives.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-immersion-cooling-coating.webp" alt="Close-up of a PCB being coated with a thin transparent protective layer in a cleanroom coating process" loading="lazy" style="max-width:80%">
+
+  <h2>Surface Finish and Component Selection Under Fluid</h2>
+
+  <p>Not every PCB surface finish tolerates years of fluid contact, and some components — especially electrolytic capacitors and low-grade plastics — react poorly to immersion.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>ENIG and ENEPIG beat immersion finishes for corrosion resistance</h4>
+      <p>Immersion silver (IAg) can tarnish in sulfur-bearing environments and dissolves slowly in some ester fluids; immersion tin is thin and reactive. ENIG (2-5 µm Ni / 0.05-0.1 µm Au) and ENEPIG give the corrosion margin immersion boards need, especially for long service life. The full comparison is in our <a href="/blog/pcb-surface-finish-selection.html">surface finish selection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Component-level compatibility is a bill-of-materials issue</h4>
+      <p>Aluminum electrolytic capacitors are the most fluid-sensitive components on a server board — their rubber seals and aluminum cases degrade in esters. Specify polymer or film capacitors in fluid-contacted areas, or require the CM to verify each capacitor's fluid compatibility data sheet. Plastic housings, O-rings, and adhesives should be checked against the fluid vendor's compatibility chart before design freeze.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Soldermask: standard LPI works, but verify adhesion</h4>
+      <p>Standard liquid photoimageable soldermask performs well in immersion fluids when properly cured. The failure mode is under-cured mask lifting in two-phase boiling zones. Specify the mask cure schedule per the supplier's recommendation and add a tape-pull adhesion check after fluid soak testing. Solder mask options and their limits are detailed in our <a href="/blog/pcb-solder-mask-types.html">solder mask types guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Layout Rules That Keep Fluid Flowing and Signal Integrity Intact</h2>
+
+  <p>Immersion changes the mechanical environment of the board: fluid must flow around and through it, and the board must not trap gas bubbles in two-phase systems. The electrical environment changes too — the dielectric constant of the surrounding medium rises from 1.0 (air) to 2.0-2.4 (fluid), which alters impedance of exposed traces.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Leave flow channels, not dead zones</h4>
+      <p>Orient tall components (heatsinks, connectors, capacitors) so fluid flows across their long axis. Avoid dense component walls that create stagnant pockets — in single-phase systems, stagnant zones run 10-15°C hotter than the fluid; in two-phase systems they trap vapor and stall boiling. Keep 5-10 mm of open channel on at least two opposite board edges.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Account for the fluid's dielectric constant in impedance calcs</h4>
+      <p>A microstrip trace that is 50 Ω in air drops to roughly 40-42 Ω immersed in a 2.2-Dk fluid because the effective dielectric constant rises. Controlled-impedance nets that cross exposed board areas need re-simulation with the fluid as the top dielectric. This matters most for PCIe Gen5/Gen6 and 800G optical lanes. Signal integrity rules for these speeds are in our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Thermal vias and copper weight still do the heavy lifting</h4>
+      <p>Immersion cooling removes the need for huge finned heatsinks, but the board-to-fluid interface still relies on thermal vias under hot components and adequate copper weight in power planes. A 2 oz inner-layer plane with a dense via array under the CPU socket conducts heat into the fluid far more efficiently than a thin 1 oz plane. High-current and thermal design rules are covered in our <a href="/blog/heavy-copper-pcb.html">heavy copper PCB guide</a> and <a href="/blog/pcb-trace-width-current-capacity.html">trace width guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Procurement Tip:</strong> When requesting quotes for immersion boards, attach a fluid compatibility requirement sheet. A CM that asks for the fluid datasheet, coating thickness target, and soak-test duration is one that has done immersion work before — that experience shows up in your field failure rate.</p>
+  </div>
+
+  <h2>Qualification Testing: Proving the Board Survives a Decade Submerged</h2>
+
+  <p>An immersion-cooled board cannot be qualified with the standard air-cooled test matrix alone. Add these tests before production ramp:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Fluid soak at elevated temperature — 1000 hours minimum</h4>
+      <p>Soak populated boards in the actual system fluid at the maximum operating fluid temperature for at least 1000 hours, then verify coating adhesion, soldermask adhesion, impedance drift, and insulation resistance. Boards that pass 1000 h at temperature typically pass 5+ year field exposure.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Immersion thermal cycling for two-phase designs</h4>
+      <p>Cycle boards through the fluid's boiling-condensing range (e.g., 30°C to 70°C) for 500-1000 cycles, monitoring for coating delamination and via barrel cracks. This complements standard <a href="/blog/pcb-thermal-cycling-testing.html">thermal cycling per IPC-9701</a> and catches failures that air-cycling misses because the fluid changes the thermal transfer profile.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Dielectric and leakage checks while submerged</h4>
+      <p>Measure insulation resistance and hi-pot performance with the board immersed and powered. A properly coated board holds >100 MΩ between adjacent high-voltage nets; any reading below 10 MΩ indicates a coating defect or fluid incompatibility that must be resolved before production.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-immersion-cooling-testing.webp" alt="Engineer inspecting an immersion-cooled server board during fluid soak qualification testing in a lab" loading="lazy" style="max-width:80%">
+
+  <h2>Cost Reality: What Immersion Adds to the Board</h2>
+
+  <p>Immersion does not multiply PCB cost — it adds specific, predictable line items. Plan for a board-level premium of roughly 15-35% over an equivalent air-cooled board:</p>
+
+  <table class="spec-table">
+    <tr><th>Cost Driver</th><th>Typical Add-On</th><th>Notes</th></tr>
+    <tr><td>High-Tg / low-loss laminate</td><td>+5-15%</td><td>Depends on layer count and material grade</td></tr>
+    <tr><td>Parylene C coating</td><td>+5-12%</td><td>Thickness and masking complexity drive price</td></tr>
+    <tr><td>ENIG / ENEPIG finish</td><td>+2-5%</td><td>vs HASL baseline</td></tr>
+    <tr><td>Edge sealing</td><td>+1-3%</td><td>Routed-edge seal or edge plating</td></tr>
+    <tr><td>Fluid qualification testing</td><td>One-time NRE</td><td>Soak, cycling, dielectric — budget 2-4 weeks</td></tr>
+  </table>
+
+  <p>Against that premium, the system-level savings are dramatic: immersion cuts cooling energy by 40-50%, raises rack density 3-5×, and eliminates most fans. For AI training clusters running 24/7, the payback window is typically 12-18 months — which is why the boards are worth designing right the first time.</p>
+
+  <h2>Summary: The Immersion-Ready Specification Checklist</h2>
+
+  <p>Hand this checklist to your CM with the Gerber files:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Fluid family stated on the drawing</h4>
+      <p>Single-phase ester or two-phase fluorinated — with the fluid vendor and grade named. The CM's coating and material choices depend on it.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Laminate: high-Tg, low moisture absorption, Td ≥ 340°C</h4>
+      <p>For two-phase, use the same mid/low-loss grades as <a href="/blog/data-center-server-pcb.html">AI data center server boards</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Coating: Parylene C (two-phase) or silicone (single-phase), thickness stated</h4>
+      <p>Masking zones defined in the layout, connectors grouped for efficient masking.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Finish: ENIG or ENEPIG</h4>
+      <p>With soldermask cure schedule verified against fluid soak.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Test plan: 1000 h fluid soak + immersion cycling + submerged dielectric check</h4>
+      <p>Signed off before prototype order, not after field failures appear.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, we fabricate and assemble immersion-ready boards up to 32 layers with ENIG/ENEPIG finishes, Parylene C coating capability, and controlled-impedance production verified on every panel. Our engineering team reviews fluid compatibility requirements as part of the free DFM review on every quote. <a href="/blog/energy-harvesting-pcb-design.html">Designing battery-free sensors for the same edge facilities?</a> See our energy harvesting PCB guide, or <a href="/blog/pcba-npi-process-guide.html">read how the NPI process gets a new board qualified</a>. For a project-specific consultation, <a href="/contact/">contact our engineering team</a>.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/data-center-server-pcb.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Data Center Server PCB Design &amp; Manufacturing</a></li>
+    <li><a href="/blog/pcb-thermal-management-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Management Design Guide</a></li>
+    <li><a href="/blog/pcb-conformal-coating-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Conformal Coating Guide</a></li>
+    <li><a href="/blog/pcb-laminate-selection-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Laminate Selection Guide</a></li>
+    <li><a href="/blog/pcb-thermal-cycling-testing.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Thermal Cycling Testing</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-immersion-cooling.webp)">
+      <h2>Designing an Immersion-Cooled Board?</h2>
+      <p>Send your Gerbers and fluid datasheet — our engineers will include coating, laminate, and finish recommendations in your free DFM review, with a quote in 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCBA NPI Process — From Design Freeze to Production Ramp: A Hardware Manager's Guide | Huaxing PCBA</title>
+<meta name="description" content="PCBA NPI process guide — EVT, DVT, PVT and pilot run stages, milestone gates, CM responsibilities, DFM and test strategy, BOM risk control, and how to run new product introduction with a Chinese PCBA manufacturer.">
+<meta property="og:title" content="PCBA NPI Process — From Design Freeze to Production Ramp">
+<meta property="og:description" content="EVT → DVT → PVT → ramp: the milestone gates, CM responsibilities, and the 5 failure points that kill hardware launches.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcba-npi-process-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcba-npi.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcba-npi-process-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCBA NPI Process — From Design Freeze to Production Ramp: A Hardware Manager's Guide",
+  "description": "PCBA NPI process guide — EVT, DVT, PVT and pilot run stages, milestone gates, CM responsibilities, DFM and test strategy, BOM risk control, and how to run new product introduction with a Chinese PCBA manufacturer.",
+  "datePublished": "2026-08-07",
+  "dateModified": "2026-08-07",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcba-npi.webp",
+  "url": "https://huaxingpcba.com/blog/pcba-npi-process-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcba-npi-process-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-pcba-npi.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Manufacturing Guide</p>
+      <h1 class="reveal">PCBA NPI Process:<br><em>From Design Freeze to Production Ramp — A Hardware Manager's Guide</em></h1>
+      <p class="reveal">The milestone-by-milestone playbook for taking a board from design freeze to volume production without the classic 6-month slip.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCBA NPI Process</span></div>
+
+  <p>New Product Introduction (NPI) is where hardware products go to succeed or slip. The engineering is done — the schematic is final, the layout is routed — and yet a typical NPI run still takes <span class="data-point">8-16 weeks</span> from design freeze to production ramp, and a large share of that time is spent fixing problems that were visible on day one: unmanufacturable footprints, obsolete parts in the BOM, test coverage gaps, and documentation mismatches between customer and factory.</p>
+
+  <p>This guide walks through the NPI stages — EVT, DVT, PVT, pilot run, ramp — with the milestone gates that define each one, what your contract manufacturer should deliver at every stage, and the five failure points that cause most schedule slips. We run NPI programs for customers across automotive, medical, industrial, and IoT at Huaxing PCBA, so the timelines and checklists here are the ones we use internally. For the cost side of the same journey, pair this with our <a href="/blog/prototype-vs-production.html">prototype vs production cost breakdown</a>.</p>
+
+  <img class="article-img" src="/generated/blog-pcba-npi-dfm.webp" alt="Engineering team reviewing a PCB design file on a monitor during the DFM review stage of an NPI program" loading="lazy" style="max-width:80%">
+
+  <h2>The NPI Timeline: What Realistic Schedules Look Like</h2>
+
+  <p>Before the stage details, set expectations. The schedule below assumes a mature design (no board respins) and a CM with existing process qualification for your board type. Add 2-4 weeks per board respin.</p>
+
+  <table class="spec-table">
+    <tr><th>Stage</th><th>Typical Duration</th><th>Gate to Pass</th><th>Boards Produced</th></tr>
+    <tr><td>DFM review + quote</td><td>3-5 days</td><td>All DFM issues closed or accepted</td><td>—</td></tr>
+    <tr><td>Prototype / EVT</td><td>1-2 weeks</td><td>Design validated, BOM locked</td><td>10-50</td></tr>
+    <tr><td>DVT</td><td>2-4 weeks</td><td>All test coverage verified, reliability started</td><td>50-200</td></tr>
+    <tr><td>PVT</td><td>2-3 weeks</td><td>Process qualified, yield target met</td><td>200-500</td></tr>
+    <tr><td>Pilot run</td><td>1-2 weeks</td><td>Production line signed off</td><td>500-2000</td></tr>
+    <tr><td>Production ramp</td><td>Ongoing</td><td>Stable yield ≥ target</td><td>Volume</td></tr>
+  </table>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design freeze is the real start line</h4>
+      <p>Nothing below happens efficiently until the schematic, layout, BOM, and fabrication files are frozen under version control. Every change after freeze cascades: DFM re-review, BOM re-risk, test fixture rework. Companies that treat NPI as "we'll fix it during proto" are the ones with 6-month slips. The DFM rules that prevent most freeze-time surprises are in our <a href="/blog/dfm-tips.html">DFM tips guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Week-by-week communication cadence</h4>
+      <p>For offshore manufacturing, schedule a fixed weekly NPI call (same day, same time) with a written agenda and action items. The timezone gap is manageable when the cadence is ritual — it is deadly when communication is ad hoc. A 30-minute weekly call costs 2 hours of calendar per week and saves weeks of rework over an NPI cycle.</p>
+    </div>
+  </div>
+
+  <h2>Stage 1 — DFM Review: The 5-Day Window That Decides Your Yield</h2>
+
+  <p>The DFM review is the highest-leverage stage in NPI. It costs nothing (most CMs include it with the quote), takes days, and catches issues that would otherwise surface as scrap in PVT.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>What a real DFM report contains</h4>
+      <p>Panel layout and utilization, minimum trace/space vs your CM's capability, annular ring and drill tolerance checks, solder mask slivers, impedance coupon placement, footprint-to-land-pattern verification for fine-pitch parts, and test point coverage. If the DFM report is a one-page "no issues found," ask for the detail — a thorough report is 5-15 pages.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Verify against the actual factory, not industry averages</h4>
+      <p>Industry-standard minimums (4/4 mil trace/space, 0.2 mm drills) are not your CM's minimums. A factory running 8 SMT lines with 0201 and 01005 experience may have different fine-pitch rules than a smaller shop. The DFM review is the moment to align the design to the specific factory's capability matrix. Assembly process steps are covered in our <a href="/blog/pcb-assembly-process.html">assembly process guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Lock the panelization before prototype</h4>
+      <p>Panel layout affects cost, depaneling stress, and test access. Agree on panel size, array count, fiducials, and tooling holes during DFM — changing panelization after PVT invalidates the process qualification. Depaneling method selection is covered in our <a href="/blog/pcb-depaneling-methods.html">depaneling methods guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Treat the DFM review as a gate, not a formality. Close every finding with an action owner and a date. This single discipline eliminates the majority of NPI schedule slips.</p>
+  </div>
+
+  <h2>Stage 2 — EVT: Proving the Design Works</h2>
+
+  <p>Engineering Validation Testing answers one question: does the design function as intended? At this stage the CM's job is fast, accurate prototype assembly with full documentation of what was done.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Prototype quantity: enough for test, not for faith</h4>
+      <p>Order 10-50 boards covering: functional bring-up, thermal testing, reliability samples (if any), and spare. More boards than needed burn budget; fewer stall the team when a test fails and needs rework. Prototype cost structure is detailed in our <a href="/blog/prototype-vs-production.html">prototype cost guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Demand build documentation at EVT</h4>
+      <p>The CM should return: assembly photos, reflow profile used, any deviations from the BOM (alternates substituted), and test results. This documentation becomes the baseline for DVT — without it, you cannot tell whether a DVT failure is a design issue or a process deviation.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Lock the BOM at the EVT gate</h4>
+      <p>EVT is when the BOM must be finalized: alternate sources qualified, long-lead parts ordered for DVT/PVT, and every part verified as active and available. Parts that slip in after EVT restart the risk assessment. Component lifecycle management is covered in our <a href="/blog/component-obsolescence-management.html">obsolescence management guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcba-npi-prototype.webp" alt="Hands placing a prototype PCB onto an SMT assembly line for the first engineering validation build" loading="lazy" style="max-width:80%">
+
+  <h2>Stage 3 — DVT: Test Coverage and Reliability in Parallel</h2>
+
+  <p>Design Validation Testing proves the product meets requirements. Two workstreams run in parallel: electrical test coverage verification and reliability testing.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Verify the test strategy on real boards</h4>
+      <p>AOI and X-ray catch assembly defects; flying probe or ICT verify connectivity; functional test proves the board works as a system. At DVT, confirm each test catches the defects it is supposed to — inject known defects (missing part, wrong orientation) into sample boards and confirm the test chain flags them. Test method selection is covered in our <a href="/blog/pcb-testing-methods.html">testing methods guide</a> and <a href="/blog/pcb-flying-probe-vs-ict-vs-functional-test.html">flying probe vs ICT vs functional test comparison</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Reliability testing starts at DVT, not after launch</h4>
+      <p>Thermal cycling, vibration, and burn-in should begin on DVT boards so failures surface while the design can still change. Starting reliability at PVT means every finding costs a respin. Our <a href="/blog/pcb-thermal-cycling-testing.html">thermal cycling guide</a> and <a href="/blog/pcb-vibration-shock-testing.html">vibration testing guide</a> cover the standards and sample sizes.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Design for testability pays at DVT</h4>
+      <p>Test points that were "nice to have" in layout become critical when the test fixtures are built. If the DFT review was skipped, DVT is where the cost shows up: extra fixture iterations, uncovered nets, manual probing. The DFT checklist is in our <a href="/blog/pcb-design-for-testability.html">DFT guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Stage 4 — PVT: Qualifying the Process, Not the Design</h2>
+
+  <p>Production Validation Testing is where the design meets the factory's real process. The goal: prove the manufacturing process can hit yield targets repeatably.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Run PVT on the production line with production tools</h4>
+      <p>PVT must use the actual SMT line, stencils, fixtures, and operators that will run volume — not the prototype area. If the PVT build is assembled on a different line, the process qualification is meaningless. Typical PVT yield targets: 95-99% first-pass yield for mature assembly processes, depending on board complexity.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Define yield and DPPM targets before PVT starts</h4>
+      <p>Agree on the numbers in advance: first-pass yield, defect rate in DPPM, and rework ceiling. Without agreed targets, every PVT discussion becomes a debate. Industry benchmarks for context are in our <a href="/blog/pcb-quality-metrics-dppm-benchmarks.html">DPPM benchmarks guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>PPAP documentation at the PVT gate</h4>
+      <p>For automotive and medical programs, the PVT gate is when PPAP documentation is compiled: process flow, FMEA, control plan, capability studies, and measurement system analysis. Even outside regulated industries, a light PPAP discipline (process flow + control plan + inspection criteria) prevents quality drift after ramp. The full 18-element breakdown is in our <a href="/blog/pcb-supplier-ppap-guide.html">PPAP guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcba-npi-test.webp" alt="Quality engineer running automated optical inspection on a PCB during production validation testing" loading="lazy" style="max-width:80%">
+
+  <h2>Stage 5 — Pilot Run and Ramp: The First Real Volume</h2>
+
+  <p>The pilot run is the final dress rehearsal — the first build that resembles volume production in every way.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Pilot run checks the supply chain, not just the line</h4>
+      <p>The pilot exposes supply chain issues: parts arriving on time, alternate sources performing, packaging surviving transit. This is also the moment to validate the first article inspection process — see our <a href="/blog/pcb-first-article-inspection-guide.html">FAI guide</a> for what to verify on the first production boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Ramp in stages, not all at once</h4>
+      <p>Ramp from pilot volume to 25% → 50% → 100% of target, holding each step until yield and quality metrics stabilize. A staged ramp converts a potential quality crisis into a manageable adjustment. Rushing to full volume on week one is the most common cause of ramp-phase scrap.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Establish the ongoing quality scorecard</h4>
+      <p>Move from NPI metrics to production metrics: weekly DPPM, first-pass yield trend, on-time delivery, and corrective action closure rate. A supplier scorecard started at ramp gives you the data to manage the relationship for years. KPI design is covered in our <a href="/blog/pcb-supplier-quality-scorecard.html">supplier scorecard guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>The Five Failure Points That Slip Every NPI Schedule</h2>
+
+  <p>Across the NPI programs we run, the same five issues cause the majority of schedule slips. Each has a cheap prevention.</p>
+
+  <table class="spec-table">
+    <tr><th>Failure Point</th><th>Symptom</th><th>Prevention</th></tr>
+    <tr><td>BOM changes after freeze</td><td>Restarts risk assessment, delays parts</td><td>Freeze gate with change-control board</td></tr>
+    <tr><td>Obsolete or long-lead parts</td><td>Parts unavailable at PVT</td><td>Lifecycle check at EVT gate</td></tr>
+    <tr><td>Test coverage gaps</td><td>Defects escape to field</td><td>Defect-injection verification at DVT</td></tr>
+    <tr><td>Unclear documentation</td><td>Factory and customer disagree on specs</td><td>Written specs + drawing review at DFM</td></tr>
+    <tr><td>Communication gaps</td><td>Week-long email loops</td><td>Fixed weekly call + action-item log</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> NPI schedules slip in predictable places. A change-control gate, a BOM lifecycle check, test coverage verification, written specs, and a fixed call cadence close all five failure points for a few hours of process discipline.</p>
+  </div>
+
+  <h2>Running NPI with a Chinese CM: The Practical Playbook</h2>
+
+  <p>Offshore NPI adds distance but removes nothing from the stage discipline. Four practices keep it smooth:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Put every requirement in writing with a drawing number</h4>
+      <p>Verbal agreements do not survive timezone gaps or staff changes. Every spec — coating, cleanliness, test requirements, packaging — goes into the drawing or a written specification referenced by the PO. Contract terms that protect you during NPI are covered in our <a href="/blog/pcb-contract-manufacturing-ip-protection.html">IP protection guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Use sample approval to close every decision</h4>
+      <p>First articles, color samples, coating thickness samples — approve them physically, in writing, with photos. "Approved" in an email is weaker than "approved" with a signed sample record. The first-article process is detailed in our <a href="/blog/pcb-first-article-inspection-guide.html">FAI guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Consider turnkey for NPI, consignment for ramp</h4>
+      <p>Many customers run turnkey (CM sources all components) during NPI — the CM's supply chain absorbs obsolescence and lead-time risk while volumes are uncertain — then shift toward consignment or hybrid as volumes stabilize. The trade-offs are compared in our <a href="/blog/pcb-consignment-vs-turnkey-assembly.html">consignment vs turnkey guide</a>, and full-service options in our <a href="/blog/turnkey-pcb-assembly.html">turnkey assembly guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Plan the first production order's quotes early</h4>
+      <p>Get volume quotes before PVT ends, so the ramp decision is not delayed by a pricing round. Quote comparison traps are covered in our <a href="/blog/pcb-quote-comparison-guide.html">quote comparison guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcba-npi-pilot.webp" alt="Automated SMT production line running a pilot batch of assembled PCBs with pick-and-place machines" loading="lazy" style="max-width:80%">
+
+  <h2>Summary: Your NPI Gate Checklist</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Before DFM: files frozen, specs written, drawing numbers assigned</h4>
+      <p>No exceptions — the freeze is the contract.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>At EVT gate: BOM locked, alternates qualified, long-lead parts ordered</h4>
+      <p>Build documentation received and filed.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>At DVT gate: test coverage verified with defect injection, reliability started</h4>
+      <p>Test fixtures qualified on real boards.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>At PVT gate: yield targets met on the production line, PPAP/control plan compiled</h4>
+      <p>Process qualified with production tools.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>At ramp: staged volume, scorecard live, weekly call cadence continues</h4>
+      <p>NPI ends when production metrics take over.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, NPI is a defined program, not an ad hoc service: dedicated NPI engineer, DFM report with every quote, EVT-to-ramp documentation, and PPAP support for automotive and medical programs. Our 8 SMT lines and in-house test engineering cover prototype through volume without a supplier switch — the leading cause of NPI re-qualification. <a href="/blog/immersion-cooling-pcb-design.html">Designing boards for immersion-cooled infrastructure?</a> Read our immersion cooling guide, or <a href="/blog/energy-harvesting-pcb-design.html">explore battery-free IoT design</a>. To start your NPI program, <a href="/contact/">contact our engineering team</a>.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/prototype-vs-production.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Prototype vs Mass Production</a></li>
+    <li><a href="/blog/pcb-first-article-inspection-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB First Article Inspection Guide</a></li>
+    <li><a href="/blog/pcb-supplier-ppap-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PPAP for PCB Assembly</a></li>
+    <li><a href="/blog/dfm-tips.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB DFM Tips — 8 Rules That Cut Costs</a></li>
+    <li><a href="/blog/low-volume-pcb-assembly.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Low-Volume PCB Assembly Guide</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-pcba-npi.webp)">
+      <h2>Starting an NPI Program?</h2>
+      <p>Send your Gerbers and BOM — get a full DFM report, NPI timeline, and quote in 24 hours, with a dedicated engineer from prototype through ramp.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
