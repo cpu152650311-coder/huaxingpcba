@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCIe PCB Design — Gen4/Gen5 Routing Rules, Loss Budget &amp; Signal Integrity | Huaxing PCBA</title>
+<meta name="description" content="PCIe PCB design guide — 85 ohm differential routing, channel loss budgets from Gen1 to Gen6, laminate selection, backdrilling, retimers, and the DFM checklist your PCB factory needs for reliable high-speed links.">
+<meta property="og:title" content="PCIe PCB Design — Gen4/Gen5 Routing Rules, Loss Budget &amp; Signal Integrity">
+<meta property="og:description" content="85-ohm pairs, loss budgets, laminates, backdrills and the DFM checklist — everything a hardware team must get right for PCIe Gen4/Gen5 boards.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcie-pcb-design-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcie.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcie-pcb-design-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCIe PCB Design — Gen4/Gen5 Routing Rules, Loss Budget & Signal Integrity",
+  "description": "PCIe PCB design guide — 85 ohm differential routing, channel loss budgets from Gen1 to Gen6, laminate selection, backdrilling, retimers, and the DFM checklist your PCB factory needs for reliable high-speed links.",
+  "datePublished": "2026-08-08",
+  "dateModified": "2026-08-08",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcie.webp",
+  "url": "https://huaxingpcba.com/blog/pcie-pcb-design-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcie-pcb-design-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-pcie.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Technical Guide</p>
+      <h1 class="reveal">PCIe PCB Design:<br><em>Gen4/Gen5 Routing Rules, Loss Budget &amp; Signal Integrity</em></h1>
+      <p class="reveal">The routing, material, and fabrication decisions that decide whether a 16-32 GT/s PCIe link trains at full speed — or falls back to a slower generation.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCIe PCB Design Guide</span></div>
+
+  <p>PCIe is the backbone of every compute platform — servers, AI accelerators, SSDs, network cards, and industrial PCs. But unlike older parallel buses, PCIe Gen4 and Gen5 links are <em>analog</em> problems: at 16 and 32 GT/s, the copper trace itself becomes the bottleneck. A link that passes on paper can train down a generation, fail to train at all, or burn weeks of debug time because of a routing decision made in layout.</p>
+
+  <p>This guide covers the full PCIe PCB design chain — channel loss budgets per generation, the 85&nbsp;Ω differential rules, laminate selection, length matching, via and backdrill strategy, retimer placement, and the DFM checklist your fabrication partner needs to hit your impedance and loss targets. Huaxing PCBA builds high-layer-count boards up to 32 layers with impedance control at ±5%, so the numbers below are the ones we actually verify on the coupon. If you are new to high-speed stackup design, start with our <a href="/blog/pcb-stackup-design.html">stackup design guide</a> before specifying the layer structure.</p>
+
+  <img class="article-img" src="/generated/blog-pcie-routing.webp" alt="Close-up of differential pair traces routed on a dark high-speed PCB surface" loading="lazy" style="max-width:80%">
+
+  <h2>The PCIe Generations: Data Rates, Modulation, and Loss Budgets</h2>
+
+  <p>Every PCIe generation doubles the data rate, which doubles the signal frequency and shrinks the time budget for reflections and loss. The channel loss budget — the total insertion loss the link can tolerate from connector to receiver — is the single most useful number for PCB design, because it tells you how much of the budget your routing can consume.</p>
+
+  <table class="spec-table">
+    <tr><th>Generation</th><th>Data Rate</th><th>Signaling</th><th>Channel Loss Budget</th><th>Nyquist Frequency</th></tr>
+    <tr><td>PCIe 1.0</td><td>2.5 GT/s</td><td>NRZ</td><td>~16 dB</td><td>1.25 GHz</td></tr>
+    <tr><td>PCIe 2.0</td><td>5 GT/s</td><td>NRZ</td><td>~16 dB</td><td>2.5 GHz</td></tr>
+    <tr><td>PCIe 3.0</td><td>8 GT/s</td><td>NRZ</td><td>~16 dB</td><td>4 GHz</td></tr>
+    <tr><td>PCIe 4.0</td><td>16 GT/s</td><td>NRZ</td><td>~23 dB</td><td>8 GHz</td></tr>
+    <tr><td>PCIe 5.0</td><td>32 GT/s</td><td>NRZ</td><td>~34-35 dB</td><td>16 GHz</td></tr>
+    <tr><td>PCIe 6.0</td><td>64 GT/s</td><td>PAM4</td><td>~42 dB</td><td>32 GHz</td></tr>
+  </table>
+
+  <p>Two things matter here. First, the budget is measured at the Nyquist frequency — the fundamental of the signal — so Gen5 at 16 GHz is four octaves harder than Gen3 at 4 GHz. Second, the budget includes the connector, the package, and the receiver — typically 60-70% of the budget is gone before your board trace even starts. A practical rule used by most design teams: keep the total board trace loss under roughly <span class="data-point">10 dB</span> for Gen4 and under 8 dB for Gen5, then verify with simulation. The physics behind this — dielectric loss, skin effect, and impedance discontinuities — is covered in our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a>.</p>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> Design against the loss budget, not against a trace length. Two identical-looking 8-inch routes can differ by 3-4 dB depending on laminate, copper roughness, and via count — which is the difference between a Gen5 link and a Gen4 fallback.</p>
+  </div>
+
+  <h2>The 85&nbsp;Ω Differential Pair: Rules That Apply to Every Lane</h2>
+
+  <p>PCIe specifies <strong>85&nbsp;Ω ±10% differential impedance</strong> — not the 100&nbsp;Ω used by Ethernet and USB. This is a common mistake when designers reuse library rules from other protocols.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Design the geometry, then let the fab tune it</h4>
+      <p>Differential impedance is set by trace width, spacing, dielectric thickness, and copper weight. Start with your stackup's reference values (typically 4-5 mil width, 6-8 mil spacing on a 100&nbsp;µm prepreg layer), then let the factory's impedance calculator converge the final width. What matters at the end is the measured coupon value, not the drawn width. Our <a href="/blog/impedance-control.html">impedance control guide</a> explains how tolerance is achieved and verified.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>One continuous reference plane, no splits</h4>
+      <p>Every PCIe lane needs an uninterrupted ground reference directly beneath it. A plane split under a differential pair causes an impedance discontinuity and common-mode noise that no termination can fix. If a split is unavoidable, route the pair across it perpendicular to the split with stitching vias on both sides — but treat this as a design failure, not a solution.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Keep the pair coupled</h4>
+      <p>Once a differential pair is routed together with consistent spacing, keep it that way. Fanning the pair apart for component escape changes the odd-mode impedance and creates skew. The exception is intentionally decoupling near connectors for AC coupling caps, where the geometry change is short and symmetric on both signals.</p>
+    </div>
+  </div>
+
+  <h2>Stackup and Laminate Selection: Matching Material Cost to Generation</h2>
+
+  <p>Laminate choice is the highest-leverage decision for high-speed PCIe. The loss tangent (Df) of the dielectric, plus the roughness of the copper foil, dominate trace loss above 4 GHz. The table below maps material classes to PCIe generations — and to cost, because upgrading every layer of a 16-20 layer board is expensive.</p>
+
+  <table class="spec-table">
+    <tr><th>Material Class</th><th>Typical Df (at 10 GHz)</th><th>Reliable Through</th><th>Relative Cost</th></tr>
+    <tr><td>Standard FR-4</td><td>0.018-0.022</td><td>PCIe Gen1-Gen3</td><td>1.0x</td></tr>
+    <tr><td>Mid-loss (e.g. FR-4 variants)</td><td>0.008-0.012</td><td>PCIe Gen4</td><td>1.2-1.5x</td></tr>
+    <tr><td>Low-loss (e.g. Megtron-6 class)</td><td>0.002-0.004</td><td>PCIe Gen5 / Gen6</td><td>2-3x</td></tr>
+    <tr><td>Ultra-low-loss (PTFE/ceramic)</td><td>&lt;0.002</td><td>56+ Gbps SerDes</td><td>3-5x</td></tr>
+  </table>
+
+  <p>A hybrid stackup — low-loss material on the outer routing layers where the PCIe lanes run, standard FR-4 for power and inner layers — captures most of the signal benefit at a fraction of the cost. Specify this explicitly in your stackup drawing; a factory quote will otherwise default to all-FR-4 or all-high-end material. The full selection criteria, including glass weave and Dk stability, are in our <a href="/blog/pcb-laminate-selection-guide.html">laminate selection guide</a>.</p>
+
+  <img class="article-img" src="/generated/blog-pcie-stackup.webp" alt="Photorealistic cross-section of a multilayer PCB showing alternating copper and laminate layers" loading="lazy" style="max-width:80%">
+
+  <p>Copper roughness is the second lever. Standard electrodeposited (ED) foil has a rough matte side that adds conductor loss at high frequency. Smooth foil (low-profile or RTF foil) reduces loss by 10-20% on long routes and is worth specifying for Gen5 layers. Ask your fab for the foil profile (Rz value) — a 2&nbsp;µm drop in Rz can save 1-2 dB on a 10-inch trace.</p>
+
+  <h2>Routing Rules: Length Matching, Skew, and Reference Planes</h2>
+
+  <p>PCIe is more forgiving than some protocols on absolute length — what matters is skew between the two signals of a pair, and between lanes of a link.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Intra-pair skew: 5 mil (Gen3), 2-3 mil (Gen4/5)</h4>
+      <p>Skew between P and N converts differential signal into common mode, directly eating the receiver's timing budget. Match the two traces of every pair to within 5 mil for Gen3 and tighten to 2-3 mil for Gen4 and Gen5. Add length compensation in the form of small, symmetric serpentines — never add a jog to one trace only.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Lane-to-lane skew: 15-20 mil, and mind the refclk</h4>
+      <p>Skew between lanes matters less electrically but complicates receiver training if it is large. Keep all lanes of a link within 15-20 mil. The 100 MHz reference clock is a differential pair too — route it with the same discipline and keep it away from high-swing switching signals.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Minimize vias per segment</h4>
+      <p>Each via adds a stub and a discontinuity worth roughly 0.5-1 dB at 16 GHz. Limit PCIe traces to two via transitions (e.g. top to inner, inner to bottom) and backdrill or use via-in-pad for any via on a Gen4+ signal path. Via design options are compared in our <a href="/blog/pcb-via-technology.html">via technology guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>Via Optimization and Backdrilling for Gen4 and Beyond</h2>
+
+  <p>Through-hole vias on high-speed lanes are the classic silent killer. The unused barrel below the signal layer — the stub — resonates and reflects energy back into the channel. At 8 GHz (Gen4) a 30 mil stub already costs measurable loss; at 16 GHz (Gen5) it can push a marginal link over budget.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Backdrill anything on a Gen4+ signal path</h4>
+      <p>Backdrilling removes the unused barrel, leaving a residual stub of typically 5-10 mil depending on drill registration. Specify the target residual stub length and the layer transition points in your fab notes; the fab controls depth with a secondary drill pass. Our <a href="/blog/pcb-backdrilling-guide.html">backdrilling guide</a> covers the process, tolerances, and cost impact.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Via-in-pad with filled vias for BGA escape</h4>
+      <p>For PCIe switch or root-complex BGA breakouts, via-in-pad with conductive fill removes the stub entirely and keeps plating inside the pad. This is a premium process — verify your fab supports it on the layer count you are using. Alternative: microvia transitions (HDI) from the pad to inner layers, which naturally keep stub length near zero.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcie-backdrill.webp" alt="Macro photo of a PCB cross-section showing a plated through-hole via barrel" loading="lazy" style="max-width:80%">
+
+  <h2>Connectors, Breakout, and Component Placement</h2>
+
+  <p>Connector selection and placement are part of the electrical channel — a cheap edge-card connector with long pins can consume 2-3 dB of the budget before the trace starts.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Use the connector's recommended footprint, verbatim</h4>
+      <p>PCIe slot, M.2, OCuLink, and U.2 connectors all publish escape patterns with anti-pad and reference-plane cutouts. Deviating from them shifts the connector impedance away from 85&nbsp;Ω. Keep the trace-to-connector transition short and symmetric. Our <a href="/blog/high-speed-connector-pcb-design.html">high-speed connector guide</a> covers footprint and breakout rules for the common families.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>AC coupling caps: 0.1 µF, close to the transmitter</h4>
+      <p>PCIe requires AC coupling on every lane (typically 75-200 nF, with 0.1 µF the common value). Place the caps within roughly 500 mil of the transmitter side, orient identically on both signals, and route the short differential stubs symmetrically. Staggered placement of caps across lanes is fine; asymmetric cap pads within a pair are not.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Redriver or retimer: decide by budget, not habit</h4>
+      <p>A redriver applies fixed equalization — cheap, no protocol awareness, good for recovering 3-6 dB of loss. A retimer re-times the signal and can recover 10+ dB, which is why Gen5 channels longer than ~30-40 inches of total path almost always need one. Place the device at the point of maximum loss, typically mid-channel, and budget its own power and clocking (often a 100 MHz refclk input). Server-class boards show both approaches — see our <a href="/blog/data-center-server-pcb.html">data center server PCB guide</a> for a real-world architecture.</p>
+    </div>
+  </div>
+
+  <h2>PCIe 6.0: How PAM4 Changes the Rules</h2>
+
+  <p>PCIe 6.0 moves from NRZ to PAM4, sending two bits per symbol at 32 GBaud to reach 64 GT/s. PAM4 has three eye openings instead of one, each roughly one-third the height of an NRZ eye — which is why the loss budget grows to ~42 dB and the material and via requirements tighten further. Design implications: low-loss laminates on every signal layer, backdrill or via-in-pad on all PCIe vias, and receiver DSP equalization becomes mandatory. PAM4 also makes the channel more sensitive to crosstalk, so 3W spacing between aggressive pairs and shield vias at parallel-run boundaries are strongly recommended.</p>
+
+  <h2>What Your PCB Factory Needs From You: The DFM Checklist</h2>
+
+  <p>High-speed designs fail at manufacturing handoff in predictable ways. The board is only as good as the agreement between your stackup drawing and the fab's capability. Send these five items with your Gerbers:</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Explicit stackup with impedance targets per layer pair</h4>
+      <p>State 85&nbsp;Ω ±10% differential and 50&nbsp;Ω single-ended targets, plus the material grades per layer. Ambiguity here produces coupons that miss by 5-8&nbsp;Ω and links that train down.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Impedance coupon placement</h4>
+      <p>Request coupons on each high-speed layer pair, placed near the board edge on the production panel — and specify that measured values be included in the report. Do not rely on a single coupon from one layer.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Backdrill depth and residual stub requirements</h4>
+      <p>Define which nets are backdrilled, the target residual stub (e.g. ≤ 10 mil), and which layer transitions apply. Confirm the fab's depth-control tolerance before approving the quote.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Via-in-pad / HDI confirmation</h4>
+      <p>If you use via-in-pad or microvia escape, confirm the process on the specific layer count and board thickness — some combinations require sequential lamination. HDI capability details are in our <a href="/blog/hdi-technology.html">HDI technology guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Test requirements beyond flying probe</h4>
+      <p>For Gen4+ boards, ask about TDR verification of impedance and, where feasible, loss measurement on a test coupon. Standard electrical test verifies connectivity, not signal quality — the distinction is covered in our <a href="/blog/pcb-testing-methods.html">testing methods guide</a>.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcie-test.webp" alt="Engineer placing a high-frequency test probe on a server PCB in a lab" loading="lazy" style="max-width:80%">
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> PCIe Gen4/Gen5 success is decided at the intersection of design and fabrication: laminate class, foil roughness, via strategy, and impedance verification. Write the stackup and DFM requirements down before quoting, and make the fab's measured coupons part of the acceptance criteria.</p>
+  </div>
+
+  <h2>Summary: The PCIe Design Checklist</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Budget first</h4>
+      <p>Compute the channel loss budget for your generation; keep board trace loss under ~10 dB (Gen4) or ~8 dB (Gen5).</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>85&nbsp;Ω everywhere</h4>
+      <p>Differential pairs at 85&nbsp;Ω ±10%, continuous ground reference, matched to 2-5 mil within the pair.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Material matched to speed</h4>
+      <p>Mid-loss for Gen4, low-loss for Gen5/6, smooth foil on high-speed layers, hybrid stackup to control cost.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Vias: backdrill or fill</h4>
+      <p>Backdrill all Gen4+ signal vias to ≤10 mil residual stub; via-in-pad for BGA escape.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Verify at the fab</h4>
+      <p>Impedance coupons per layer pair, TDR where available, DFM review before production.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, we build high-speed boards up to 32 layers with ±5% impedance control, low-loss laminates, backdrilling, and via-in-pad processes — and we report measured coupon values with every batch. Send us your stackup and Gerbers for a free DFM review that checks impedance targets, via strategy, and manufacturability before you commit to production. <a href="/contact/">Contact our engineering team</a> or read our <a href="/blog/pcb-signal-integrity.html">signal integrity guide</a> to go deeper on the electrical side.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/impedance-control.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Understanding PCB Impedance Control</a></li>
+    <li><a href="/blog/pcb-signal-integrity.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Signal Integrity Guide</a></li>
+    <li><a href="/blog/pcb-backdrilling-guide.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Back Drilling Guide</a></li>
+    <li><a href="/blog/pcb-stackup-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Stackup Design Guide</a></li>
+    <li><a href="/blog/high-speed-connector-pcb-design.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">High-Speed Connector PCB Design</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-pcie.webp)">
+      <h2>Building a Gen4 or Gen5 Board?</h2>
+      <p>Send your stackup and Gerbers — get a free DFM review covering impedance targets, via strategy, and laminate selection within 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>

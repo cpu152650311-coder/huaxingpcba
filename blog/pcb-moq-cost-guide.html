@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCB Minimum Order Quantity — How MOQ, Panelization &amp; NRE Drive Your Real Cost | Huaxing PCBA</title>
+<meta name="description" content="PCB MOQ explained — fabrication vs assembly vs component minimums, panel math, NRE tooling, and six strategies to lower your effective MOQ when sourcing PCBs from China.">
+<meta property="og:title" content="PCB Minimum Order Quantity — How MOQ, Panelization &amp; NRE Drive Your Real Cost">
+<meta property="og:description" content="Three different MOQs hide inside every PCB quote. Learn the panel math, the reel problem, and six ways to lower your effective minimum order quantity.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huaxingpcba.com/blog/pcb-moq-cost-guide.html">
+<meta property="og:image" content="https://huaxingpcba.com/generated/blog-cover-pcb-moq.webp">
+<link rel="canonical" href="https://huaxingpcba.com/blog/pcb-moq-cost-guide.html">
+<link rel="preconnect" href="https://inquiry-proxy.workers.dev">
+<link rel="stylesheet" href="/design-tokens.css?v=30">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png">
+<link rel="stylesheet" href="/blog.css?v=3">
+<style>
+  .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .article a:hover { color: #d4a843; }
+  .spec-table{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin:var(--space-lg) 0}
+  .spec-table th,.spec-table td{padding:var(--space-sm);border-bottom:1px solid var(--border);text-align:left}
+  .spec-table th{color:var(--text-muted);font-weight:400;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em}
+  .spec-table td{color:var(--text-secondary)}
+  .spec-table tr:nth-child(even){background:var(--bg-secondary)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PCB Minimum Order Quantity — How MOQ, Panelization & NRE Drive Your Real Cost",
+  "description": "PCB MOQ explained — fabrication vs assembly vs component minimums, panel math, NRE tooling, and six strategies to lower your effective MOQ when sourcing PCBs from China.",
+  "datePublished": "2026-08-08",
+  "dateModified": "2026-08-08",
+  "image": "https://huaxingpcba.com/generated/blog-cover-pcb-moq.webp",
+  "url": "https://huaxingpcba.com/blog/pcb-moq-cost-guide.html",
+  "author": { "@type": "Organization", "name": "Huaxing PCBA" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Huaxing PCBA",
+    "url": "https://huaxingpcba.com",
+    "logo": { "@type": "ImageObject", "url": "https://huaxingpcba.com/images/logo.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://huaxingpcba.com/blog/pcb-moq-cost-guide.html" }
+}
+</script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></symbol>
+</svg>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a>
+    <nav class="nav-links" id="navLinks">
+    </nav>
+    <script src="/nav.js?v=23" defer></script>
+    <div class="mobile-menu-btn" id="mobileBtn" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="sub-hero">
+  <div class="sub-hero-bg">
+    <img src="/generated/blog-cover-pcb-moq.webp" alt="" loading="eager" width="1920" height="600">
+  </div>
+  <div class="sub-hero-overlay"></div>
+  <div class="sub-hero-content">
+    <div class="container">
+      <p class="section-label reveal">Procurement Guide</p>
+      <h1 class="reveal">PCB Minimum Order Quantity:<br><em>How MOQ, Panelization &amp; NRE Drive Your Real Cost</em></h1>
+      <p class="reveal">Three different MOQs hide inside every PCB quote — here is how each one works, and how to lower your effective minimum without paying more per board.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article reveal">
+  <div class="breadcrumb"><a href="/blog/">Blog</a> / <span>PCB MOQ Guide</span></div>
+
+  <p>"What is your MOQ?" is usually the first question a buyer asks a PCB supplier — and it is the wrong question, because there is no single MOQ. A complete PCB order passes through three stages — fabrication, assembly, and component sourcing — and each one has its own minimum quantity logic. A factory that quotes "no MOQ" on bare boards may still hit you with component reel minimums that make a 50-piece assembly run expensive per unit.</p>
+
+  <p>This guide breaks down the three MOQs, shows the panel math that decides fabrication minimums, explains where NRE tooling costs hide, and gives six concrete strategies to lower your effective minimum order quantity. We run low-volume and prototype programs daily at Huaxing PCBA — <span class="data-point">1 piece</span> MOQ on both PCB and PCBA, with no minimum order value — so the numbers and levers below are the ones we use in real quotes. For the cost side of the same picture, pair this with our <a href="/blog/pcb-cost-factors.html">PCB cost drivers guide</a>.</p>
+
+  <img class="article-img" src="/generated/blog-pcb-moq-panel.webp" alt="A PCB fabrication panel containing multiple identical circuit boards arranged in a grid before depaneling" loading="lazy" style="max-width:80%">
+
+  <h2>The Three MOQs You're Actually Dealing With</h2>
+
+  <p>Each production stage has an independent minimum, and quotes often only state one of them. Know which one you are being quoted:</p>
+
+  <table class="spec-table">
+    <tr><th>Stage</th><th>MOQ Logic</th><th>Typical Minimum</th><th>What Drives It</th></tr>
+    <tr><td>PCB fabrication</td><td>Panel-based</td><td>1 panel (5-40 boards)</td><td>Panel size, board size, layer count</td></tr>
+    <tr><td>PCB assembly</td><td>Setup-based</td><td>1-5 boards (low-MOQ lines)</td><td>Stencil, programming, line setup</td></tr>
+    <tr><td>Component sourcing</td><td>Reel/tape-based</td><td>1 reel (3,000-10,000 pcs)</td><td>Reel quantities, exotic parts</td></tr>
+  </table>
+
+  <p>The fabrication minimum is nearly always the friendliest — a standard 500×600 mm panel holds a lot of small boards. The assembly minimum depends on whether the factory runs a dedicated low-volume line. The component minimum is where small-batch projects actually get expensive, because a microcontroller on a 5,000-piece reel costs the same whether you use 50 or 4,000 of them. How these three interact with setup charges is the subject of our <a href="/blog/pcb-nre-tooling-costs.html">NRE and tooling guide</a>.</p>
+
+  <h2>The Panel Math: Why Fabrication MOQ Is Measured in Panels, Not Boards</h2>
+
+  <p>PCB fabrication is a panel process. The factory exposes, etches, and drills a large panel — commonly 500×600 mm (about 21×24 inches) — and cuts individual boards from it. So the fabrication MOQ is "one panel," and the number of boards you get from that panel depends on your board's footprint and how efficiently it nests.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Calculate boards per panel before you ask about MOQ</h4>
+      <p>A 100×100 mm board fits roughly 12-15 copies on a 500×600 mm panel with tooling rails and spacing. A 50×50 mm board fits 60+. So "one panel" might mean 12 boards or 60 boards depending on your design — the MOQ in boards is a consequence of panelization, not a business decision. Panel layout rules that maximize this count are covered in our <a href="/blog/pcb-panelization-cost-optimization.html">panelization guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Odd quantities cost more than the extra boards</h4>
+      <p>Ordering 17 boards when the panel holds 15 means two panels, two setups, and twice the tooling touch time. Rounding up to a full panel is usually cheaper per board than asking for an exact count. This is the single most common misunderstanding in small-quantity quoting.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Multi-board designs share the panel for free</h4>
+      <p>If you have several board variants for one product, putting them on a single panel — sometimes called a multi-up panel — spreads the panel cost across all variants and can drop each variant's effective MOQ. It also saves assembly setup if the variants share a process. Our <a href="/blog/prototype-vs-production.html">prototype vs production breakdown</a> shows how this shifts unit economics.</p>
+    </div>
+  </div>
+
+  <h2>Component MOQs: Where Reels Make Small Batches Expensive</h2>
+
+  <p>The quiet killer of small-batch PCBA economics is components, not boards. Surface-mount parts are supplied on reels and tape: common passives come on reels of 5,000-10,000, many ICs on 3,000-4,000, and specialty parts on shorter reels or tubes. When you order 50 assembled boards, your CM either buys full reels (and carries the surplus) or sources partial reels at a premium.</p>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Turnkey assembly shifts reel risk to the CM</h4>
+      <p>In a turnkey arrangement, the CM owns the component inventory. A factory that does high assembly volume carries reels of common parts continuously, so your 50-board order consumes from existing stock — the reel minimum never hits you directly. This is the strongest argument for <a href="/blog/turnkey-pcb-assembly.html">turnkey assembly</a> at low volume, and it is why consignment (buyer-supplied parts) can end up more expensive than it looks.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Exotic and long-lead parts are the real MOQ problem</h4>
+      <p>A 1% precision resistor or a niche connector may only come in minimum buys far above your needs, with 8-16 week lead times. If your BOM has several such parts, they — not the PCB — set your effective minimum quantity. Component lifecycle and obsolescence planning is covered in our <a href="/blog/component-obsolescence-management.html">obsolescence management guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Standardize your BOM to shrink component minimums</h4>
+      <p>Every unique value in your BOM is a separate reel or cut-tape purchase. Consolidating resistor values, using the same bypass cap across designs, and choosing distributor-stocked parts reduces the number of minimum buys. Designers who treat BOM standardization as a cost lever routinely cut small-batch unit cost by 10-20%.</p>
+    </div>
+  </div>
+
+  <img class="article-img" src="/generated/blog-pcb-moq-reels.webp" alt="Rows of SMT component reels stored on racks in an electronics factory" loading="lazy" style="max-width:80%">
+
+  <h2>NRE and Tooling: The Fixed Cost Layer</h2>
+
+  <p>Beyond MOQ, every order carries one-time engineering costs (NRE) that are amortized across the quantity you buy. At low volumes, NRE per unit dominates; at high volumes, it vanishes. The three main NRE items for PCBA are stencils (typically $50-150 per board design), test fixtures (from a few hundred dollars for simple fixtures to several thousand for functional test rigs), and programming/line setup. The full breakdown, including which NRE charges are legitimate and which are padding, is in our <a href="/blog/pcb-nre-tooling-costs.html">NRE guide</a>.</p>
+
+  <p>The interaction matters: a factory with a low MOQ but high NRE can cost you more at 100 units than a factory with a moderate MOQ and low NRE. Always compare <em>total cost at your quantity</em>, not MOQ alone. Our <a href="/blog/pcb-quote-comparison-guide.html">quote comparison guide</a> shows how to normalize quotes for apples-to-apples pricing.</p>
+
+  <h2>Six Ways to Lower Your Effective MOQ</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Panel sharing and multi-up panels</h4>
+      <p>Combine multiple board variants on one panel so the fabrication minimum covers several designs at once. Especially effective when the variants share layer count and finish.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Blanket orders with staggered releases</h4>
+      <p>Commit to an annual volume (e.g. 1,000 units) with monthly releases of 50-100. The factory prices against the committed volume while you only take delivery of what you need — effectively splitting one large MOQ into manageable batches. The mechanics are in our <a href="/blog/pcb-blanket-order-vs-spot-buy.html">blanket order vs spot buy guide</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>VMI and consignment stock</h4>
+      <p>Let the CM hold your finished goods or components under a vendor-managed inventory program. You pay as you draw stock, which converts a large one-time MOQ into a rolling drawdown. Our <a href="/blog/pcb-vmi-consignment-stock.html">VMI guide</a> covers the setup and the risks.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Standard parts, standard values</h4>
+      <p>Design with distributor-stocked, reel-friendly components. Every exotic value you remove from the BOM removes a minimum-buy problem.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Prototype-to-production bridge at one factory</h4>
+      <p>Running prototypes and volume at the same factory avoids re-qualification and lets the CM roll prototype learnings into the production setup — the fixed costs are paid once, not twice. The real cost gap between prototype and production runs is quantified in our <a href="/blog/prototype-vs-production.html">cost breakdown</a>.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">6</div>
+    <div class="checklist-content">
+      <h4>Negotiate the <em>effective</em> MOQ, not the stated one</h4>
+      <p>Ask what quantity makes the setup cost per board acceptable — factories with flexible low-volume lines can often meet you at 50-100 units with a modest setup surcharge instead of a hard minimum. The negotiation tactics that work with Chinese manufacturers are covered in our <a href="/blog/pcb-price-negotiation.html">price negotiation guide</a>.</p>
+    </div>
+  </div>
+
+  <h2>When MOQ Shouldn't Matter: What a Low-MOQ Factory Looks Like</h2>
+
+  <p>A factory that genuinely serves low-volume buyers is structurally different from one that merely tolerates small orders. Three signals: a dedicated low-volume or prototype line (so your 50 boards don't compete with a 50,000-board production run for machine time), component inventory depth (so reel minimums don't leak into your quote), and transparent NRE pricing (so fixed costs are visible, not buried in per-board price). Our <a href="/blog/low-volume-pcb-assembly.html">low-volume PCB assembly guide</a> explains how to verify these signals on an audit.</p>
+
+  <img class="article-img" src="/generated/blog-pcb-moq-line.webp" alt="Modern SMT assembly line with pick-and-place machines and feeder banks" loading="lazy" style="max-width:80%">
+
+  <p>At Huaxing PCBA, the policy is simple: PCB and PCBA both start at <span class="data-point">1 piece</span>, there is no minimum order value, and first-time customers get free samples. Our 8 SMT lines include dedicated low-volume setups, and our component warehouse carries thousands of common parts on reels — so a 50-board turnkey order is a normal day, not a special case. That is the structural answer to MOQ: you don't need a factory that "waives" its MOQ for you; you need one whose economics don't require one.</p>
+
+  <h2>The MOQ Negotiation Checklist</h2>
+
+  <p>Before you sign a quote, get these five answers in writing:</p>
+
+  <table class="spec-table">
+    <tr><th>Question</th><th>Why It Matters</th></tr>
+    <tr><td>What is the fabrication MOQ in panels, and how many boards per panel for my design?</td><td>Converts panel minimum into board quantity you can plan against</td></tr>
+    <tr><td>Which BOM items have reel minimums, and who carries the surplus?</td><td>Reveals hidden component MOQs and inventory risk</td></tr>
+    <tr><td>What NRE line items apply at my quantity?</td><td>Separates fixed costs from per-board price</td></tr>
+    <tr><td>Is there a dedicated low-volume line, or does my order share capacity with production?</td><td>Predicts lead time stability and setup behavior</td></tr>
+    <tr><td>Can a blanket order or VMI lower my effective minimum?</td><td>Unlocks quantity pricing without taking full delivery</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Key Takeaway:</strong> MOQ is three different numbers hiding behind one word. Break quotes into fabrication panels, assembly setup, and component reels — then use panel sharing, blanket orders, and BOM standardization to shrink the effective minimum instead of hunting for a factory that claims to have none.</p>
+  </div>
+
+  <h2>Summary: Your MOQ Action Plan</h2>
+
+  <div class="checklist-item">
+    <div class="checklist-num">1</div>
+    <div class="checklist-content">
+      <h4>Compute boards per panel before quoting</h4>
+      <p>Know what "one panel" means for your specific board size.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">2</div>
+    <div class="checklist-content">
+      <h4>Audit the BOM for reel and exotic-part minimums</h4>
+      <p>These set your real floor, not the fabrication MOQ.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">3</div>
+    <div class="checklist-content">
+      <h4>Compare total cost at your quantity, not MOQ</h4>
+      <p>Low MOQ + high NRE can lose to moderate MOQ + low NRE.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">4</div>
+    <div class="checklist-content">
+      <h4>Use blanket orders, VMI, and panel sharing</h4>
+      <p>Structure the relationship to shrink the effective minimum.</p>
+    </div>
+  </div>
+
+  <div class="checklist-item">
+    <div class="checklist-num">5</div>
+    <div class="checklist-content">
+      <h4>Verify the factory's low-volume structure</h4>
+      <p>Dedicated lines and component inventory make MOQ a non-issue.</p>
+    </div>
+  </div>
+
+  <p>At Huaxing PCBA, we quote 1-piece MOQ with free first-time samples, transparent NRE, and dedicated low-volume SMT lines — because the right answer to "what is your MOQ" is "what do you need to build?" Send your Gerbers and BOM for a quote, or read our <a href="/blog/pcb-cost-factors.html">cost drivers guide</a> to understand where every line on the quote comes from. <a href="/contact/">Contact our team</a> to start.</p>
+
+</article>
+
+<!-- ── Related Reading ── -->
+<div class="related-reading" style="max-width:800px;margin:var(--space-2xl) auto 0;padding:var(--space-lg);background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg)">
+  <h3 style="font-weight:300;color:var(--accent);margin-bottom:var(--space-md);font-size:var(--text-lg)">📚 Continue Reading</h3>
+  <ul style="display:grid;grid-template-columns:1fr 1fr;gap:6px var(--space-lg);padding-left:1.2rem;list-style-type:square;color:var(--accent)">
+    <li><a href="/blog/low-volume-pcb-assembly.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Low-Volume PCB Assembly Guide</a></li>
+    <li><a href="/blog/pcb-nre-tooling-costs.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB NRE &amp; Tooling Costs Explained</a></li>
+    <li><a href="/blog/pcb-panelization-cost-optimization.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Panelization Guide</a></li>
+    <li><a href="/blog/pcb-blanket-order-vs-spot-buy.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Blanket Orders vs Spot Buys</a></li>
+    <li><a href="/blog/prototype-vs-production.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">PCB Prototype vs Mass Production Cost</a></li>
+  </ul>
+</div>
+
+<section class="section" style="background:var(--bg-secondary)">
+  <div class="container">
+    <div class="cta-card reveal" style="--cta-bg:url(/generated/blog-cta-pcb-moq.webp)">
+      <h2>Need 50 Boards or 50,000?</h2>
+      <p>Both get the same DFM review and engineering support. Send your Gerbers and BOM — get a transparent quote with every cost line item in 24 hours.</p>
+      <button class="btn btn-primary btn-lg" onclick="openModal()">Get Your Quote <svg width="16" height="16"><use href="#icon-arrow-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="/" class="logo"><img src="/images/logo.webp" alt="HUAXING PCBA" width="126" height="36"></a><p>Premium PCB &amp; PCBA manufacturing from Shenzhen, China. IATF 16949, ISO 9001 certified. Serving 30+ countries worldwide.</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="/capabilities/">PCB Fabrication</a><a href="/capabilities/">SMT Assembly</a><a href="/capabilities/">Box-Build</a><a href="/quote/">Quick Quote</a></div>
+      <div class="footer-col"><h4>Industries</h4><a href="/industries/automotive/">Automotive</a><a href="/industries/medical/">Medical</a><a href="/industries/industrial/">Industrial</a><a href="/industries/iot/">IoT</a><a href="/industries/telecom/">Telecom &amp; 5G</a><a href="/industries/energy/">New Energy</a><a href="/industries/consumer/">Consumer</a><a href="/industries/aerospace/">Aerospace &amp; Defense</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about/">About Us</a><a href="/about/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Huaxing PCBA. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="inquiryModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-dialog">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-image-panel">
+      <img src="/generated/modal-pcba-showcase.webp" alt="Huaxing PCBA manufacturing showcase">
+      <div class="modal-image-overlay"></div>
+      <div class="modal-image-top">
+        <h2 class="mi-heading">Start Your Project</h2>
+        <p class="mi-subtitle">Upload Gerber + BOM — 24h quote with free DFM review.</p>
+      </div>
+      <div class="modal-image-text">
+        <div class="mi-label">HUAXING PCBA</div>
+        <div class="mi-value">8 SMT Lines · 32 Layers · <strong>ISO 9001 &amp; UL</strong></div>
+      </div>
+    </div>
+    <div class="modal-form-panel">
+      <form onsubmit="return handleInquiry(event)" novalidate>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name"></div>
+        <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your project — PCB specs, quantity, timeline..."></textarea></div>
+        <div class="form-group"><label>Attach Files <span style="color:var(--text-muted);font-weight:300;text-transform:none;letter-spacing:0">— optional</span></label><input type="file" name="attachment" multiple></div>
+        <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/reveal.js"></script>
+<script>
+function openModal(){document.getElementById('inquiryModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('inquiryModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+<script src="/inquiry-handler.js"></script></body>
+</html>
